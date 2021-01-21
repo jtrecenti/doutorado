@@ -1,0 +1,47 @@
+---
+title: "agradecimentos"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{patrocinadores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Agradecimentos
+
+listar todas as pessoas...
+
+# Apoio
+
+<style>
+.patrocinador {
+  width: 250px;
+  height: auto;
+  padding-bottom: 40px;
+}
+</style>
+
+O meu doutorado não seria possível sem o apoio das empresas:
+
+<div class="row">
+
+<div class="col-md-6">
+  <a href="https://abj.org.br" target="_blank"><img class="patrocinador" src="images/abj.png"></a>
+  <a href="https://trnv.com.br" target="_blank"><img class="patrocinador" src="images/trnv.png"></a>
+</div>
+<div class="col-md-6">
+  <a href="https://curso-r.com" target="_blank"><img class="patrocinador" src="images/curso-r.png"></a>
+</div>
+
+</div>
+
+
+
+

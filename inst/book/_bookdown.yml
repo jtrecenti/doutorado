@@ -1,0 +1,11 @@
+book_filename: tese
+output_dir: relatorio
+clean: [bookdown.bbl]
+delete_merged_file: true
+language:
+  label:
+    fig: "Figura "
+    tab: "Tabela "
+  ui:
+    edit: "Edit"
+    chapter_name: "Capítulo "

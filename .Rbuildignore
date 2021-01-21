@@ -1,2 +1,7 @@
 ^doutorado\.Rproj$
 ^\.Rproj\.user$
+^.github$
+^LICENSE.md$
+^README.Rmd$
+^_pkgdown.yml$
+^data-raw$

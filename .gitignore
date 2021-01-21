@@ -3,3 +3,6 @@
 .Rdata
 .httr-oauth
 .DS_Store
+inst/book/relatorio
+inst/book/tese.html
+docs

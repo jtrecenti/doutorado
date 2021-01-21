@@ -1,0 +1,7 @@
+name: decryptr
+remote_url: 'https://rseis.shinyapps.io/decryptr'
+auth0_config:
+  api_url: "https://decryptr.us.auth0.com"
+  credentials:
+    key: !expr Sys.getenv("AUTH0_KEY")
+    secret: !expr Sys.getenv("AUTH0_SECRET")

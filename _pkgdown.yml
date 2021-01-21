@@ -1,0 +1,47 @@
+destination: docs
+
+template:
+  params:
+    bootswatch: simplex
+    ganalytics: UA-182605574-1
+  path: inst/templates
+
+authors:
+  Julio Trecenti:
+    html: "<img src='https://d33wubrfki0l68.cloudfront.net/295643c6243701ae6a9bac3fb8ad467ff0ce3c84/d1785/img/logo/cursor1-41.png' style='max-width: 100px'/>"
+    href: https://curso-r.com
+
+development:
+  mode: release
+
+navbar:
+  structure:
+    left:  [home, relatorio, app, apresentacoes, articles, reference]
+    right: [twitter,linkedin,github]
+  components:
+    apresentacoes:
+      text: Apresentações
+      menu:
+        - text: "Planejamento 2021"
+          href: pres/planejamento/index.html
+    relatorio:
+      text: Tese
+      href: relatorio/index.html
+    app:
+      text: Aplicativo
+      href: https://rseis.shinyapps.io/decryptr
+    articles:
+      text: Apoio
+      href: articles/agradecimentos.html
+    reference:
+      text:
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/jtrecenti
+    linkedin:
+      icon: "fab fa-linkedin fa-lg"
+      href: https://www.linkedin.com/in/jtrecenti/
+    github:
+      icon: "fab fa-github fa-lg"
+      href: https://github.com/jtrecenti
+
