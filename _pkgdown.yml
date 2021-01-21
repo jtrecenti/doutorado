@@ -23,7 +23,7 @@ navbar:
       text: Apresentações
       menu:
         - text: "Planejamento 2021"
-          href: pres/planejamento/index.html
+          href: pres/20210121/index.html
     relatorio:
       text: Tese
       href: relatorio/index.html
