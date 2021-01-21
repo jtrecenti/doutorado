@@ -20,14 +20,15 @@ output:
 
 - 12+ captchas
 - Classificador shiny
+- site
 
 ---
 
 # O que estou fazendo
 
 - Mudando infraestrutura de keras para torch
+- Implementando preprocessamento
 - Mais captchas
-- Implementando transfer learning e preprocessamento
 
 ---
 
@@ -43,3 +44,4 @@ output:
 - Focar na parte computacional
 - Escrever muito sobre o decryptr na tese
 - Reunião semanal
+

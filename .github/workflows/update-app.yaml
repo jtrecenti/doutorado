@@ -33,6 +33,8 @@ jobs:
           GITHUB_PAT: ${{ secrets.PAT }}
           SHINYAPPS_TOKEN: ${{ secrets.SAT }}
           SHINYAPPS_SECRET: ${{ secrets.SAS }}
+          AUTH0_KEY: ${{ secrets.A0K }}
+          AUTH0_SECRET: ${{ secrets.A0S }}
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
