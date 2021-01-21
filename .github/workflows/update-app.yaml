@@ -25,6 +25,7 @@ jobs:
             "remotes", "rsconnect", "pkgdown", "pkgload", "xaringan",
             "bookdown", "pagedown"
           ))
+          remotes::install_github("gadenbuie/xaringanExtra")
           remotes::install_github("jtrecenti/doutorado")
         shell: Rscript {0}
       - name: Execute Script
