@@ -22,7 +22,7 @@ jobs:
           options(repos = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest")
           install.packages(c(
             "remotes", "rsconnect", "pkgdown", "pkgload", "xaringan",
-            "bookdown", "pagedown"
+            "bookdown", "pagedown", "stringi"
           ))
           remotes::install_github("jtrecenti/doutorado")
         shell: Rscript {0}
