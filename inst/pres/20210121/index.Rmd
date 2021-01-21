@@ -18,10 +18,28 @@ output:
 
 # O que já temos
 
+- 12+ captchas
+- Classificador shiny
+
 ---
 
 # O que estou fazendo
 
+- Mudando infraestrutura de keras para torch
+- Mais captchas
+- Implementando transfer learning e preprocessamento
+
 ---
 
 # O que está me travando
+
+- Modelo de oráculo
+- Revisão bibliográfica
+
+---
+
+# Próximos passos
+
+- Focar na parte computacional
+- Escrever muito sobre o decryptr na tese
+- Reunião semanal
