@@ -1,0 +1,27 @@
+---
+title: "Planejamento 2021"
+author: "Doutorado Julio"
+date: "2021-01-21"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "css/custom-intro.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r, child="00-preamble.Rmd"}
+
+```
+
+# O que já temos
+
+---
+
+# O que estou fazendo
+
+---
+
+# O que está me travando
