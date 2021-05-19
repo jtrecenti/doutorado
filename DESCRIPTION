@@ -36,9 +36,11 @@ Imports:
     shinyWidgets,
     shinyalert,
     viridis,
-    svglite
+    svglite,
+    xaringanExtra
 Remotes:
-  jtrecenti/bs4Dash
+  jtrecenti/bs4Dash,
+  gadenbuie/xaringanExtra
 Suggests: 
     knitr,
     rmarkdown

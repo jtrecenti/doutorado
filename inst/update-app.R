@@ -40,11 +40,11 @@ deploy_to_branch_book <- function(pkg = ".",
 
   pkgdown:::build_site(pkg, devel = FALSE, preview = FALSE, install = FALSE, new_process = FALSE)
   rmarkdown::render_site("inst/book")
-  # pagedown::chrome_print(
-  #   "inst/book/tese.html",
-  #   output = "inst/book/relatorio/tese.pdf",
-  #   extra_args = c("--disable-gpu", "--no-sandbox")
-  # )
+  pagedown::chrome_print(
+    "inst/book/tese.html",
+    output = "inst/book/relatorio/tese.pdf",
+    extra_args = c("--disable-gpu", "--no-sandbox")
+  )
   fs::dir_copy("inst/book/relatorio", paste0(dest_dir, "/relatorio"), overwrite = TRUE)
 
   apresentacoes <- fs::dir_ls("inst/pres")
