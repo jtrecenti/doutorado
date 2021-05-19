@@ -25,7 +25,7 @@ Imports:
     golem,
     shiny,
     auth0,
-    bs4Dash, 
+    bs4Dash,
     config,
     fresh,
     highcharter,
@@ -35,7 +35,8 @@ Imports:
     scales,
     shinyWidgets,
     shinyalert,
-    viridis
+    viridis,
+    svglite
 Remotes:
   jtrecenti/bs4Dash
 Suggests: 
