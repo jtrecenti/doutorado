@@ -1,0 +1,11 @@
+# Dados {#dados}
+
+> Critérios para entrar ou sair da base
+
+> Lista e caracterização dos captchas
+
+> Repositório de dados
+
+> Contribuições da comunidade
+
+> App {ancaptcha}

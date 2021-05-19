@@ -1,0 +1,25 @@
+# Introdução {#introducao}
+
+## Objetivos {#objetivos}
+
+> Construir um repositório de dados e um app de anotação
+
+> Propor uma solução inovadora usando oráculos
+
+> Desenvolver um pacote computacional aberto
+
+## Justificativa
+
+> Citar as notícias do Serpro, STF, TJRS
+
+> argumentar que os captchas baseados em texto são um risco e devem deixar de existir
+
+> concluir que o futuro será de recaptchas avançados e impossíveis ou de dados abertos
+
+> (essa parte é importante pois é a justificativa do projeto)
+
+## Hipóteses
+
+> Oráculo pode ajudar, e abrir isso em sub hipóteses
+
+## Organização do trabalho

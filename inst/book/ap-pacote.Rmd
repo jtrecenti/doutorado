@@ -1,0 +1,10 @@
+# (APPENDIX) Apêndice {-} 
+
+# Pacote {captcha}
+
+> Citar versão anterior {decryptr}
+
+> Funções do {captcha}
+
+> Print screens do {ancaptcha}
+

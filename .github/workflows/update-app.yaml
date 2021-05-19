@@ -6,27 +6,39 @@ name: deploy
 jobs:
   render:
     name: update-shinyapp-book-pkg
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    env:
+      GITHUB_PAT: ${{ secrets.PAT }}
+      RENV_PATHS_ROOT: ~/.local/share/renv
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: install deps
+        run: sudo apt install libharfbuzz-dev libfribidi-dev libproj-dev libcurl4-openssl-dev libudunits2-dev libgdal-dev libgeos-dev
+      - name: Cache packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: "4.0.2"
       - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install remotes, and the updated package
+      - name: Restore packages
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          options(renv.config.repos.override = c("https://packagemanager.rstudio.com/all/__linux__/bionic/1750752", "https://cloud.r-project.org"))
+          renv::restore()
+        shell: Rscript {0}
+      - name: Install remotes, and the local package
         env:
           GITHUB_PAT: ${{ secrets.PAT }}
         run: |
-          install.packages("stringi")
-          options(repos = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest")
-          install.packages(c(
-            "remotes", "rsconnect", "pkgdown", "pkgload", "xaringan",
-            "bookdown", "pagedown"
-          ))
-          remotes::install_github("gadenbuie/xaringanExtra")
-          remotes::install_github("jtrecenti/doutorado")
+          options(repos = "https://packagemanager.rstudio.com/all/__linux__/bionic/1750752")
+          remotes::install_github("jtrecenti/doutorado", force = TRUE)
         shell: Rscript {0}
       - name: Execute Script
         env:

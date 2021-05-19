@@ -75,4 +75,4 @@ rsconnect::setAccountInfo(
   secret = Sys.getenv('SHINYAPPS_SECRET')
 )
 
-rsconnect::deployApp('inst/app', appName = "decryptr")
+rsconnect::deployApp('inst/app', appName = "ancaptcha")

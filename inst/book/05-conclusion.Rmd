@@ -1,0 +1,8 @@
+# Conclusões {#conclusao}
+
+> Concluir sobre a parte mais política (captchas e dados abertos etc)
+
+> Concluir sobre o avanço científico na modelagem estatística
+
+> Reforçar a contribuição técnica para a comunidade com o pacote e o app
+

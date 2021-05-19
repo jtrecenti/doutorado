@@ -1,0 +1,12 @@
+# Captchas
+
+> contar a história dos captchas como uma luta de classes: geradores e classificadores
+
+> na história, ir citando os papers que vão aparecendo
+
+> o advento do recaptcha
+
+> quando surgir o primeiro classificador com convnets, definir de forma mais detalhada
+
+> quando surgir o primeiro classificador com GAN, definir de forma mais detalhada
+
