@@ -37,7 +37,8 @@ Imports:
     shinyalert,
     viridis,
     svglite,
-    xaringanExtra
+    xaringanExtra,
+    pagedown
 Remotes:
   jtrecenti/bs4Dash,
   gadenbuie/xaringanExtra
