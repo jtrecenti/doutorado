@@ -273,6 +273,19 @@
       "Repository": "CRAN",
       "Hash": "95d780d9cf3384d97579fc324a8d4c31"
     },
+    "doutorado": {
+      "Package": "doutorado",
+      "Version": "0.2.0",
+      "Source": "GitHub",
+      "Remotes": "jtrecenti/bs4Dash, gadenbuie/xaringanExtra",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "doutorado",
+      "RemoteUsername": "jtrecenti",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "193f78558cc592c6fc17f670d0c088fe6bafa643",
+      "Hash": "4d5201a3a04266676956cbcf249d32bc"
+    },
     "downlit": {
       "Package": "downlit",
       "Version": "0.2.1",
