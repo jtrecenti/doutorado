@@ -38,7 +38,12 @@ Imports:
     viridis,
     svglite,
     xaringanExtra,
-    pagedown
+    pagedown,
+    xaringan,
+    bookdown,
+    rsconnect,
+    pkgdown,
+    pkgload
 Remotes:
   jtrecenti/bs4Dash,
   gadenbuie/xaringanExtra

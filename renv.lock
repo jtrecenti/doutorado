@@ -987,6 +987,13 @@
       "Repository": "CRAN",
       "Hash": "ad03909b44677f930fa156d47d7a3aeb"
     },
+    "xaringan": {
+      "Package": "xaringan",
+      "Version": "0.21",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "dc0f5dfeb019f08b0f1b912e6385ad0c"
+    },
     "xaringanExtra": {
       "Package": "xaringanExtra",
       "Version": "0.4.0",
