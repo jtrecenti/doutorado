@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Modelagem | Doutorado</title>
+  <meta name="description" content="Template de relatório." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Modelagem | Doutorado" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Template de relatório." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Modelagem | Doutorado" />
+  
+  <meta name="twitter:description" content="Template de relatório." />
+  
+
+<meta name="author" content="Julio Trecenti" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="dados.html"/>
+<link rel="next" href="conclusao.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="assets/css/bookdown.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tese</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Sobre este documento</a></li>
+<li class="chapter" data-level="2" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i><b>2</b> Introdução</a><ul>
+<li class="chapter" data-level="2.1" data-path="introducao.html"><a href="introducao.html#objetivos"><i class="fa fa-check"></i><b>2.1</b> Objetivos</a></li>
+<li class="chapter" data-level="2.2" data-path="introducao.html"><a href="introducao.html#justificativa"><i class="fa fa-check"></i><b>2.2</b> Justificativa</a></li>
+<li class="chapter" data-level="2.3" data-path="introducao.html"><a href="introducao.html#hipóteses"><i class="fa fa-check"></i><b>2.3</b> Hipóteses</a></li>
+<li class="chapter" data-level="2.4" data-path="introducao.html"><a href="introducao.html#organização-do-trabalho"><i class="fa fa-check"></i><b>2.4</b> Organização do trabalho</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="captchas.html"><a href="captchas.html"><i class="fa fa-check"></i><b>3</b> Captchas</a></li>
+<li class="chapter" data-level="4" data-path="dados.html"><a href="dados.html"><i class="fa fa-check"></i><b>4</b> Dados</a></li>
+<li class="chapter" data-level="5" data-path="modelo.html"><a href="modelo.html"><i class="fa fa-check"></i><b>5</b> Modelagem</a><ul>
+<li class="chapter" data-level="5.1" data-path="modelo.html"><a href="modelo.html#construcao"><i class="fa fa-check"></i><b>5.1</b> Construção dos dados</a></li>
+<li class="chapter" data-level="5.2" data-path="modelo.html"><a href="modelo.html#heuristica"><i class="fa fa-check"></i><b>5.2</b> Modelagem usando heurísticas</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="modelo.html"><a href="modelo.html#propriedades-da-estratégia"><i class="fa fa-check"></i><b>5.2.1</b> Propriedades da estratégia</a></li>
+<li class="chapter" data-level="5.2.2" data-path="modelo.html"><a href="modelo.html#resultados-empíricos"><i class="fa fa-check"></i><b>5.2.2</b> Resultados empíricos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="modelo.html"><a href="modelo.html#veross"><i class="fa fa-check"></i><b>5.3</b> Modelagem usando verossimilhança</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="modelo.html"><a href="modelo.html#resultados-empíricos-1"><i class="fa fa-check"></i><b>5.3.1</b> Resultados empíricos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="modelo.html"><a href="modelo.html#implementação"><i class="fa fa-check"></i><b>5.4</b> Implementação</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusao.html"><a href="conclusao.html"><i class="fa fa-check"></i><b>6</b> Conclusões</a></li>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="pacote-captcha.html"><a href="pacote-captcha.html"><i class="fa fa-check"></i><b>A</b> Pacote {captcha}</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Doutorado</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modelo" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Modelagem</h1>
+<p>Para este trabalho, desenvolvemos uma técnica inovadora para resolver Captchas sem a necessidade de <em>feedback</em> humano. A solução envolve avanços em duas direções: engenharia e modelagem.</p>
+<div id="construcao" class="section level2">
+<h2><span class="header-section-number">5.1</span> Construção dos dados</h2>
+<p>Na parte de engenharia, desenvolvemos uma técnica para capturar e anotar feedbacks automatizados do oráculo no preenchimento de Captchas. A técnica consiste em três passos:</p>
+<ol style="list-style-type: decimal">
+<li>Desenvolver um robô que acessa o site desejado e tenta acessar uma informação que exige preenchimento de Captcha.</li>
+<li>A partir de um modelo estatístico inicial, o robô tenta preencher o Captcha automaticamente, submetendo para avaliação do site.</li>
+<li>Se o Captcha for verificado pelo site como correto, anotamos o caminho da imagem com o valor “1”. Se estiver incorreto, anotamos o caminho da imagem com o valor “0”.</li>
+</ol>
+<p>O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa que podemos criar uma base de dados virtualmente infinita de Captchas rotulados, com a informação adicional do rótulo estar correto ou incorreto. Fizemos isso para todos os Captchas presentes em nossa base de dados.</p>
+<p>Um problema prático do oráculo é sua propriedade de <strong>memória</strong>. Em problemas reais, não é possível testar diferentes rótulos para a mesma imagem, o que inviabiliza o uso de técnicas de força bruta na resolução de Captchas.</p>
+<p>Outro problema é que a informação adicional recebida quando o modelo erra é <strong>incompleta</strong>. A única informação nova que temos é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como temos uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, o <em>feedback</em> do oráculo pode ser considerado fraco.</p>
+<p>Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros.</p>
+<p>Fizemos isso de duas formas.</p>
+</div>
+<div id="heuristica" class="section level2">
+<h2><span class="header-section-number">5.2</span> Modelagem usando heurísticas</h2>
+<p>O fato da informação ser incompleta e fraca não significa que ela é inútil. Os Captchas que estamos trabalhando possuem várias letras geradas de forma independente, fazendo com que um classificador <span class="math inline">\(g\)</span> seja na verdade um classificador multivariado:</p>
+<p><span class="math display">\[\begin{align*}
+g(\X) = (g(\X)_1, g(\X)_2, \dots, g(\X)_k),
+\end{align*}\]</span></p>
+<p>sendo <span class="math inline">\(k\)</span> o número de letras do Captcha. Supondo que o classificador é igualmente poderoso para todas as posições das letras, temos que</p>
+<p><span class="math display">\[\begin{align*}
+p = \P(g(\X) = Y) = \P(g(\X)_1 = Y_1)^k = p_{1}^k
+\end{align*}.\]</span></p>
+<p>Seja <span class="math inline">\(N\)</span> a quantidade de acertos de <span class="math inline">\(g(\X)\)</span>. Sabemos que <span class="math inline">\(N\sim \text{Bin}(k, p_{1})\)</span>. Então, quando o oráculo acusa que o modelo errou, a probabilidade do modelo ter errado somente uma letra é</p>
+<p><span class="math display">\[\begin{align*}
+\P(\text{errei uma letra}\;|\;\text{errei}) &amp;= \P(N=k-1|N\neq k) \\
+&amp;= \frac{(k-1) p_{1}^{k-1} (1-p_{1})}{1-p_1^k}
+\end{align*}\]</span></p>
+<p>A Figura <a href="modelo.html#fig:probabilidades">5.1</a> mostra as probabilidades da equação acima graficamente, considerando <span class="math inline">\(k=5\)</span>. Como vimos, é razoável admitir que um modelo inicial teria pelo menos 80% de acurácia para uma letra específica. Nessas condições, quando o oráculo dá um feedback negativo, a probabilidade do modelo ter errado somente uma letra do Captcha é próxima a 50%.</p>
+<div class="figure"><span id="fig:probabilidades"></span>
+<img src="tese_files/figure-html/probabilidades-1.svg" alt="Probabilidade do modelo ter errado somente uma letra, a partir de um feedback negativo do oráculo. Considerando um captcha de 5 letras." width="672" />
+<p class="caption">
+Figura 5.1: Probabilidade do modelo ter errado somente uma letra, a partir de um feedback negativo do oráculo. Considerando um captcha de 5 letras.
+</p>
+</div>
+<p>As intuições apresentadas sugerem duas possibilidades. Por um lado, podemos pensar em uma estratégia para corrigir os dados a partir do feedback do usuário e das probabilidades reportadas pelo modelo de classificação. Chamaremos uma estratégia desse tipo de <em>heurística</em>.</p>
+<blockquote>
+<p>Definir as heurísticas possíveis</p>
+</blockquote>
+<div id="propriedades-da-estratégia" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Propriedades da estratégia</h3>
+<blockquote>
+<p>demonstração izbicki</p>
+</blockquote>
+</div>
+<div id="resultados-empíricos" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Resultados empíricos</h3>
+<blockquote>
+<p>resultados dos modelos aplicados nos dados</p>
+</blockquote>
+</div>
+</div>
+<div id="veross" class="section level2">
+<h2><span class="header-section-number">5.3</span> Modelagem usando verossimilhança</h2>
+<p>Assim como na área de análise de sobrevivência, podemos pensar a informação do oráculo como um problema de dados censurados. Quando o modelo acerta, temos uma observação completa. Quando o modelo erra, temos a informação de que o rótulo testado está incorreto.</p>
+<p>Seja <span class="math inline">\(z_i\)</span> o indicador fornecido pelo oráculo de que o rótulo está correto. A verossimilhança do modelo é dada por</p>
+<p><span class="math display">\[
+\mathcal L(\tt;\mathbf y,\mathbf z)=\prod_i \P(Y=y|\tt)^{z_i}\P(Y\neq y|\tt)^{1-z_i}.
+\]</span></p>
+<p>A partir da construção da base definida na Seção <a href="modelo.html#construcao">5.1</a>, podemos ajustar um novo modelo com a base completa, modificando a função de perda para acomodar os dados censurados.</p>
+<p>A vantagem da modelagem usando a verossimilhança com dados censurados é que ela considera exatamente a informação que é dada pelo oráculo. Isso evita os potenciais problemas na abordagem via heurísticas, já que em nenhum momento o modelo receberá dados com erros de medição.</p>
+<p>A técnica, no entanto, apresenta duas desvantagens.</p>
+<p>A primeira é que não existem garantias teóricas de que a técnica produz um classificador melhor que a versão inicial. Diferentemente das suposições comuns em análise de sobrevivência, o mecanismo gerador da censura no nosso caso não é aleatório, já que o gerador de observações censuradas é a função de predição do modelo. Assim, não podemos importar os resultados da área de análise de sobrevivência diretamente.</p>
+<p>A segunda é de ordem prática. Como a solução envolve modificações na função de perda, ele não é diretamente adaptável a qualquer modelo estatístico para ajustar os dados de Captchas, precisando ser implementado caso a caso.</p>
+<div id="resultados-empíricos-1" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Resultados empíricos</h3>
+<blockquote>
+<p>resultados dos modelos aplicados nos dados</p>
+</blockquote>
+</div>
+</div>
+<div id="implementação" class="section level2">
+<h2><span class="header-section-number">5.4</span> Implementação</h2>
+<blockquote>
+<p>Conclusão sobre quais são os melhores métodos</p>
+<p>comentários adicionais sobre como utilizar</p>
+<p>descrição do pacote</p>
+<p>a documentação completa do pacote será um apêndice</p>
+</blockquote>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="dados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["tese.pdf"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
