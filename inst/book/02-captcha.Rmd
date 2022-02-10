@@ -8,5 +8,498 @@
 
 > quando surgir o primeiro classificador com convnets, definir de forma mais detalhada
 
+A resolução de Captchas pode ser entendida como um problema de classificação de imagens. Especificamente, nosso interesse é criar uma função $g$ que recebe uma imagem $\mathbf X = \{x_{nmr} \in [0,1]\}_{N\times M \times R}$ e retorna um vetor de índices $\mathbf y$. Cada índice $y_j$ indica a presença de um caractere $c_j$, $j = 1, \dots, L$, onde $L$ é o número de caracteres contidos na imagem. Chamaremos $L$ de *comprimento* do Captcha, com $L \in  \mathbb{Z}_+$.
+
+O problema pode ser detalhado em três itens, listados abaixo:
+
+1. Nossa variável **explicativa**, a imagem, é uma matriz $\mathbf X = \{x_{ijk}\}_{N\times M \times R}$, em que $N$ é o número de linhas, $M$ é o número de colunas e $R$ é o número de *cores*, ou *canais*. 
+
+O elemento $x_{nm\cdot}$ é denominado *pixel*. Um pixel representa a menor unidade possível da imagem. Em uma imagem colorida, por exemplo, temos $R=3$. Nesse caso, um pixel é um vetor de três dimensões com valores entre zero e um, representando a intensidade de vermelho, verde e azul da coordenada $(n, m)$ da imagem. Numa imagem em escala de cinza, por exemplo, temos $R=1$ e o pixel, de uma dimensão, representa a intensidade do cinza, sendo 1 o equivalente da cor branca e 0 o preto.
+
+2. O objeto $C \in \mathcal A^L$ é um vetor de itens de um alfabeto $\mathcal A$, de cardinalidade $|\mathcal A|$, finito e conhecido. Esse alfabeto contém todos os possíveis caracteres que podem aparecer na imagem.
+
+3. Nossa **resposta** $\mathbf y \in \mathbb \{1, \dots, |\mathcal A|\}^L$ é um vetor de índices de tamanho fixo. Cada elemento de $\mathbf y$ representa um elemento do alfabeto $\mathcal A$.
+
+A obtenção de uma função $g$ capaz de mapear $\mathbf y$ a partir de uma nova imagem $\mathbf X$ depende de uma amostra de imagens $\mathbf X_1, \dots, \mathbf X_S$, corretamente classificadas 
+através do vetor $\mathbf y_1, \dots, \mathbf y_S$. A tarefa é, portanto, obter uma estimativa $\hat g$ para a função $g$ que minimiza
+
+$$
+L(\hat g(\mathbf X), \mathbf y) = \mathbb I(g(\mathbf X) \neq \mathbf y)
+$$
+
+em que $\mathbb I(g(\mathbf X) \neq \mathbf y)$ indica se $g(\mathbf X)$ difere 
+do que é observado em $\mathbf y$. Isto é, pretende-se encontrar uma função que minimize a taxa de classificação incorreta das imagens que descrevem os textos dos Captchas.  
+
+
+--------------------
+
+Um problema de resolver o CAPTCHA diretamente é que a variável resposta $\mathbf y$ tem um número exponencial de combinações. Na formulação do capítulo anterior, nossa resposta é uma palavra de $L$ caracteres, sendo que cada caractere $c_j$ pode ter $|\mathcal A|$ valores. Nessa construção, o total de combinações é $|\mathcal A|^L$.
+
+Por exemplo, um CAPTCHA com $L=6$ letras e $|\mathcal A| = 36$ possibilidades em cada letra (26 letras do alfabeto e 10 algarismos), possui um total de 2.176.782.336 (> 2 bilhões) combinações. Modelar essas imagens diretamente através de uma única variável resposta categórica é inviável.
+
+Por isso, uma forma de resolver CAPTCHAs é separando o problema em duas tarefas: segmentar e classificar. A tarefa de segmentação consiste em receber uma imagem com várias letras e detectar pontos de corte, separando-a em várias imagens de uma letra. Já a classificação consiste em receber uma imagem com uma letra e identificar o caractere correspondente. Nesse caso, a resposta é reduzida para $|\mathcal A|$ categorias, que cresce linearmente e, portanto, tratável.
+
+A literatura mostra através de estudos empíricos que a tarefa de segmentar é mais difícil do que a tarefa de classificar [@bursztein2014end]. Isso acontece porque o problema de classificação de letras segmentadas é similar ao problema de reconhecimento de caracteres (*Optical Character Recognition*, OCR), que é amplamente estudado e pode ser considerado resolvido. A segmentação, no entanto, é um problema em aberto e faz parte da literatura de oclusão de objetos em visão computacional. 
+
+Por esse motivo, os desenvolvedores de CAPTCHAs de imagens baseadas em texto têm explorado métodos de dificultar a segmentação. As principais formas são i) colar os caracteres e ii) adicionar linhas ligando os dígitos. Essas técnicas são combinadas com a adição de ruído e distorção de caracteres para compor a imagem final.
+
+Vamos usar como exemplo o CAPTCHA do Tribunal de Justiça de Minas Gerais (TJMG). Nesse caso, temos $L=4$ e $|\mathcal A|=10$, apenas os dez algarismos.
+
+```{r dlimg1, eval=FALSE, echo=FALSE}
+arq_captcha <- decryptr::download_captcha("tjmg", n = 1, path = 'assets/img/captcha')
+```
+
+A Figura \@ref(fig:tjmg1) mostra um exemplo do captcha do TJMG. Podemos notar a utilização de distorção de catacteres e adição de linhas ligando os dígitos como formas de evitar a resolução automática.
+
+```{r tjmg1, fig.height=1.5, fig.width=4, fig.cap='CAPTCHA do TJMG.', eval=FALSE, echo=FALSE}
+library(decryptr)
+arq_captcha <- "assets/img/captcha/captcha28485fae0376.jpeg"
+arq_captcha  %>% 
+  read_captcha() %>% 
+  dplyr::first() %>% 
+  plot()
+```
+
+Nesse caso, podemos resolver o problema da segmentação realizando cortes fixos na imagem. Podemos também limitar os eixos `x`, tirando os espaços vazios à esquerda e à direita e `y`, removendo espaços superiores e inferiores. Por último, transformamos a imagem em escala de cinza. O resultado dessas operações de pré-processamento estão na Figura \@ref(fig:tjmg2).
+
+```{r tjmg2, fig.height=1.5, fig.width=4, fig.cap='CAPTCHA do TJMG após segmentação.', echo=FALSE, eval=FALSE}
+op <- graphics::par(mar = rep(0, 4))
+arq_captcha %>% 
+  read_captcha() %>% 
+  dplyr::first() %>% 
+  with(x) %>% 
+  magrittr::extract(-c(1:7, 34:dim(.)[1]), -c(1:06, 107:dim(.)[2]), TRUE) %>%
+  grDevices::as.raster() %>% 
+  graphics::plot()
+abline(v = 20 * 1:4, col = 'red')
+abline(h = c(0, 26), col = 'blue')
+```
+
+O resultado são cinco imagens de dimensões `26x20`, associadas a cada caractere. O próximo passo é transformar o banco de dados num formato tratável por modelos tradicionais de regressão. Para isso, colocamos cada pixel em uma coluna da nossa base de dados. No caso do TJMG, cada CAPTCHA gera uma tabela de 5 linhas e 520 (`26 * 20`) colunas. A Tabela \@ref(tab:imgsep) mostra as primeiras seis colunas dessa base. 
+
+```{r imgsep, echo=FALSE, eval=FALSE}
+arq_captcha %>% 
+  read_captcha() %>% 
+  dplyr::first() %>% 
+  with(x) %>% 
+  magrittr::extract(-c(1:7, 34:dim(.)[1]), -c(1:06, 107:dim(.)[2]), TRUE) %>%
+  tibble::as_tibble() %>% 
+  tibble::rownames_to_column('y') %>% 
+  tidyr::gather(x, value, -y) %>% 
+  dplyr::mutate_at(dplyr::vars(x, y), dplyr::funs(readr::parse_number)) %>% 
+  dplyr::mutate(letra = (x - 1) %/% 20 + 1, x = x - (letra - 1) * 20) %>% 
+  dplyr::mutate_at(dplyr::vars(x, y), dplyr::funs(sprintf('%02d', .))) %>% 
+  tidyr::unite(xy, x, y) %>% 
+  tidyr::spread(xy, value, sep = '') %>% 
+  dplyr::mutate(y = c('7', '3', '2', '4', '6')) %>% 
+  dplyr::select(y, dplyr::everything(), -letra) %>% 
+  dplyr::select(1:7) %>%
+  dplyr::mutate_at(dplyr::vars(-y), dplyr::funs(round(., 3))) %>% 
+  knitr::kable(caption = "Base de dados montada a partir de imagem segmentada.")
+```
+
+Agora basta rodar o mesmo para toda a base de treino e rodar um modelo. Nesse exemplo, utilizamos uma base de 1500 CAPTCHAs classificados. O resultado após o pré-processamento é uma base com 7500 linhas e 520 colunas. Escolhemos manter 6000 linhas para treino e as 1500 restantes para teste. Utilizamos um modelo de florestas aleatórias para o exemplo [@breiman2001random].
+
+```{r carregabd, message=FALSE, warning=FALSE, eval=FALSE, echo=FALSE}
+dados <- readRDS('data/dados_segment.rds') %>% 
+  dplyr::mutate(y = factor(y))
+# monta bases de treino e teste
+set.seed(4747) # reprodutibilidade
+ids_treino <- sample(seq_len(nrow(dados)), 6000, replace = FALSE)
+d_train <- dados[ids_treino, ]
+d_test <- dados[-ids_treino, ]
+model_rf <- randomForest::randomForest(y ~ . - captcha_id, data = d_train) 
+```
+
+O resultado do modelo pode ser verificado na Tabela \@ref(tab:errosTJMG), que mostra os observados *versus* preditos na base de teste. O acerto foi de 99.6% em cada caractere. Assumindo que o erro não depende da posição do caractere no CAPTCHA, o acerto para a imagem completa é de aproximadamente 98%.
+
+```{r errosTJMG, eval=TRUE, echo=FALSE}
+library(randomForest)
+dados <- readRDS('data/dados_segment.rds') %>% 
+  dplyr::mutate(y = factor(y))
+# monta bases de treino e teste
+set.seed(4747) # reprodutibilidade
+ids_treino <- sample(seq_len(nrow(dados)), 6000, replace = FALSE)
+d_train <- dados[ids_treino, ]
+d_test <- dados[-ids_treino, ]
+model_rf <- readRDS("data/model_rf.rds")
+d_test %>% 
+  dplyr::mutate(pred = predict(model_rf, newdata = .)) %>% 
+  dplyr::count(y, pred) %>% 
+  tidyr::spread(pred, n, fill = '.') %>% 
+  tibble::remove_rownames() %>% 
+  knitr::kable(caption = 'Tabela de acertos e erros.')
+```
+
+O resultado para o TJMG é bastante satisfatório, mas não generaliza para outros CAPTCHAs. Tome por exemplo o CAPTCHA da Receita Federal (RFB) da Figura \@ref(fig:generalize). Nesse caso, a posição dos caracteres muda significativamente de imagem para imagem, e assim fica difícil cortar em pedaços.
+
+```{r generalize, echo=FALSE, out.width = '32%', fig.cap="CAPTCHA Receita Federal", fig.align="center", eval=FALSE}
+fs::dir_ls('assets/img/captcha/rfb')[1] %>% 
+  decryptr::read_captcha() %>% 
+  purrr::walk(plot)
+```
+
+A mesma técnica aplicada ao CAPTCHA RFB apresentou acerto de 78.8% do caractere, o que equivale a apenas 23.8% de acerto para toda a imagem. Claro que seria possível melhorar o poder preditivo com ajustes nos hipeparâmetros do modelo, mas o problema essencial nesse caso está na qualidade segmentação, e não na classificação dos caracteres.
+
+Outro problema dessa técnica é que ela é incapaz de trabalhar com CAPTCHAs de comprimento variável. Nesse caso, seria necessário construir um modelo não supervisionado para identificar a posição das letras, o que adiciona um grau a mais de complexidade na resolução do CAPTCHA.
+
+Por isso, faz-se necessária uma abordagem que trabalha com problema completo, sem passar explicitamente pela fase de segmentação. Ao invés de cortar a imagem, vamos extrair detalhes da imagem completa automaticamente e utilizar essas características como variáveis preditoras num modelo de regressão. Chamaremos essa abordagem de *força bruta*.
+
+## Força-bruta
+
+A abordagem de força bruta utiliza redes neurais convolucionais. Para explicar o funcionamento dessa técnica, vamos primeiro apresentar definições para redes neurais e para a operação de convolução. Em seguida, vamos juntar os dois conceitos para construir o modelo utilizado nos CAPTCHAs.
+
+### Redes neurais
+
+Uma rede neural pode ser entendida como uma extensão de modelos lineares generalizados com a adição de uma arquitetura aos componentes do modelo. Para mostrar esse conceito, vamos partir da definição de um modelo regressão logística até construir uma rede neural com camadas ocultas.
+
+#### Regressão logística
+
+O modelo linear generalizado é composto por três elementos: componente aleatório, componente sistemático e função de ligação. 
+
+O componente aleatório é uma variável aleatória com distribuição pertencente à família exponencial, que dá origem à verossimilhança do modelo. O componente sistemático é uma combinação linear das variáveis preditoras com um vetor de parâmetros. A função de ligação é uma operação que leva a componente sistemática no valor esperado da componente aleatória. Uma forma comum de definir a ligação é propondo uma função com domínio nos números reais e contradomínio igual ao suporte do componente aleatório. Dessa forma, não é necessário impor restrições aos parâmetros da componente sistemática para que os valores ajustados variem na mesma faixa que o componente aletório.
+
+```{r echo=FALSE, out.width="40%", fig.align="center"}
+knitr::include_graphics("assets/img/glm.png")
+```
+
+No exemplo da regressão logística, o componente aleatório tem distribuição Bernoulli com média $\mu$. O componente sistemático é a combinação linear $\mathbf X \boldsymbol \beta$ e a função de ligação é a inversa de
+
+$$
+g(\mu) = \log\left(\frac{\mu}{1-\mu}\right)
+$$
+
+A partir de uma amostra $y_1, \dots, y_n$ e observando que $\mu_i = g^{-1}(\mathbf X_i\boldsymbol\beta)$, a verossimilhança do modelo é dada por
+
+$$
+\mathcal L(\boldsymbol \beta|\mathbf y) = \prod_{i=1}^n f(y_i|\boldsymbol\beta) = \prod_{i=1}^n\mu_i^{y_i}(1-\mu_i)^{1-y_i}
+$$
+
+A log-verossimilhança é dada por
+
+$$
+l(\boldsymbol \beta|\mathbf y) = \sum_{i=1}^n y_i\log(\mu_i) + (1-y_i)\log(1-\mu_i)
+$$
+
+Uma forma útil de olhar para a verossimilhança é a partir da *função desvio*, dada por
+
+$$
+D(\mathbf y|\boldsymbol \beta) = l(\mathbf y|\mathbf y) - l(\boldsymbol \beta|\mathbf y),
+$$
+
+onde $l(\mathbf y|\mathbf y)$ é a verossimilhança do modelo saturado, ou seja, calculada com $\mathbf y$ no lugar de $\boldsymbol \mu$. A partir de um modelo ajustado, a função desvio pode ser interpretada como a distância entre a verossimilhança do modelo ajustado e a verossimilhança do modelo com um parâmetro para cada observação.
+
+Uma propriedade interessante da função desvio é que ela equivale à divergência de Kullback-Leibler. Por exemplo, para duas variáveis aleatórias com distribuição Bernoulli de parâmetros $p$ e $q$, respectivamente, a divergência de Kullback-Leibler é dada por
+
+$$
+D_{KL}(p||q) = p\log\left(\frac p q\right) + (1-p)\log\left(\frac{1-p}{1-q}\right)
+$$
+
+É fácil ver que
+
+$$
+\begin{aligned}
+D(\mathbf y|{ \boldsymbol \beta}) &= \sum_{i=1}^n y_i\log(y_i) + (1-y_i)\log(1-y_i) - \sum_{i=1}^n y_i\log(\mu_i) + (1-y_i)\log(1-\mu_i) \\
+&=\sum_{i=1}^ny_i\log\left(\frac{y_i}{\mu_i}\right) + (1-y_i)\log\left(\frac{1-y_i}{1-\mu_i}\right) \\
+&= \sum_{i=1}^n D_{KL}(y_i||\mu_i) \\
+&= D_{KL}(\mathbf y||{\boldsymbol\mu}).
+\end{aligned}
+$$
+
+Outra propriedade interessante é que o desvio identifica unicamente a verossimilhança do modelo. De fato, podemos reformular a definição do modelo linear generalizado a partir da especificação do desvio ou da divergência de Kullback-Leibler no lugar do componente aleatório. Essa propriedade será útil na comparação com redes neurais.
+
+Os estimadores de máxima verossimilhança de $\boldsymbol \beta$ são os mesmos que minimizam a função desvio. Graças à concavidade da divergência de Kullback-Leibler, Isso pode ser feito igualando os componentes do gradiente do desvio a zero e isolando os valores de $\boldsymbol \beta$:
+
+$$
+\nabla_{\boldsymbol \beta} D(\mathbf y|{ \boldsymbol \beta}) = \mathbf 0
+$$
+
+Como não é possível realizar essa operação analiticamente, utilizamos métodos iterativos. Existem dois principais métodos iterativos concorrentes: a descida de gradiente e o método de Newton-Raphson. No paradigma de modelos lineares generalizados, o método de Newton-Raphson é mais comum pois i) ele utiliza a segunda derivada e converge mais rápido que o método da descida de gradiente, que utiliza somente a primeira e ii) é possível demonstrar que ele equivale à aplicação iterada de *mínimos quadrados ponderados*, o que facilita significativamente a implementação da solução. No paradigma de redes neurais, a descida de gradiente é mais comum por conta das vantagens *backpropagation*, que veremos na próxima subseção.
+
+Em resumo, podemos concluir que
+
+1. Um modelo linear generalizado pode ser definido por três componentes: a divergência de Kullback-Leibler, o preditor linear e a função de ligação.
+2. A estimação dos parâmetros do modelo é realizada via descida de gradiente ou Newton-Raphson.
+
+Em seguida, veremos que a rede neural aparece quando utilizamos o componente sistemático e a função de ligação várias vezes.
+
+#### Extensão para redes neurais
+
+Uma forma de estender o modelo linear generalizado é considerando que o resultado da função de ligação aplicada ao componente sistemático é uma nova covariável $z$. Assim, temos
+
+$$
+\begin{aligned}
+\mathbf z &= g^{-1}(\mathbf X \boldsymbol \beta)\\
+\boldsymbol\mu &= g^{-1}(\alpha_2\mathbf 1 + \beta_2 \mathbf z) = g^{-1}([\mathbf 1\;\mathbf z]\boldsymbol\beta_2),
+\end{aligned}
+$$
+
+em que $\boldsymbol\beta_2 = [\alpha_2\;\beta_2]^{\top}$. Agora, podemos aumentar o número de covariáveis $\mathbf z$ para $k$ covariáveis, de modo que
+
+$$
+\begin{aligned}
+\mathbf z_j &= g^{-1}(\mathbf X \boldsymbol \beta_1^j)\\
+\boldsymbol\mu &= g^{-1}(\mathbf Z\boldsymbol\beta_2),
+\end{aligned}
+$$
+
+onde $\mathbf Z = [\mathbf 1\;\mathbf z_1\;\dots\;\mathbf z_k]$. O modelo espeficiado dessa forma também é chamado de *multilayer perceptron*, ou MLP. 
+
+Mesmo com essa mudança, função desvio permanece a mesma, já que construída a partir de $\boldsymbol \mu$. A única diferença é que agora ela é uma função de $\boldsymbol \beta_1^j$, $j=1,\dots,k$ e $\beta_2$. O ajuste do modelo é realizado da mesma forma:
+
+$$
+\nabla_{\{\boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2\}} D(\mathbf y|{ \boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2}) = \mathbf 0
+$$
+
+A vantagem dessa extensão é que adicionamos não linearidade ao modelo. Isso nos permite modelar relações mais complexas entre as preditoras e a resposta, o que pode resultar em melhores predições. De fato, é possível demonstrar que uma rede neural com uma camada oculta pode estima qualquer função contínua entre $\mathbf X$ e $\mathbf y$. A desvantagem é que a estimação via Newton-Raphson é complicada de calcular.
+
+É nesse momento que aparecem as vantagens da descida de gradiente. Primeiro, defina $\boldsymbol \beta = \{\boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2\}$. Utilizando a regra da cadeia, a derivada parcial da função desvio em relação a $\beta_{1,l}^{j}$ é dado por
+
+$$
+\frac{\partial D(\mathbf y|\boldsymbol\beta)}{\partial \beta_{1,l}^{j}} = \sum_{i=1}^n\frac{\partial D(\mathbf y|\boldsymbol\beta)}{\partial z_{j,i}} \frac{\partial z_{j,i}}{\partial \beta_{1,l}^{j}} .
+$$
+
+As derivadas em relação aos elementos de $\boldsymbol \beta_2$ ocorrem diretamente, como na especificação em apenas um nível. Todas essas derivadas são fáceis de calcular e têm forma analítica definida. A aplicação da regra da cadeia de forma iterada nesse contexto é chamada de *backpropagation*.
+
+#### Sinônimos e generalizações
+
+A literatura de redes neurais costuma trocar o nome função de ligação por *ativação*. Isso ocorre por motivos históricos, já que as redes neurais foram inicialmente inspiradas na ativação de sinapses de neurônios. No contexto de redes neurais, o objetivo da função de ativação não é, necessariamente, modificar a faixa de variação do contradomínio, pois o resultado após a função pode ser uma nova covariável. Isso sugere a existência de certa liberdade na escolha de ativações. A única restrição é que a função de ativação deve ser não linear, pois, se fosse linear, a aplicação de várias camadas de funções resultaria numa única combinação linear. As ativações mais populares são aquelas que têm derivadas simples.
+
+Já a verossimilhança ou o desvio são substituídos por uma *função de perda*. A natureza probabilística do modelo é considerada indiretamente através da função desvio, como vimos anteriormente. No entanto, ao invés de trabalhar com o desvio, os pesquisadores de redes neurais definem genericamente uma função de perda que mensura uma discrepância entre os valores observados e estimados. Uma escolha razoável de função de perda é a própria divergência de Kullback-Leibler, calculada com base no suporte da variável resposta, gerando a função desvio. No entanto, dependendo da aplicação, podemos escolher outras perdas, que podem gerar distribuições de probabilidades sem formato analítico específico. 
+
+Por último, a aplicação de camadas de não-linearidades podem ser representadas através de um grafo direcionado acíclico. Essa representação é vantajosa por dois motivos. O primeiro é que a aplicação facilita a especificação e entendimento do modelo e seus parâmetros, que podem ficar com notação carregada na especificação por fórmulas matemáticas. A segunda é que é possível utilizar conhecimentos de teoria dos grafos para aumentar a eficiência dos algoritmos. Por exemplo, é possível aproveitar parte dos cálculos do *backpropagation* na obtenção das derivadas parciais da função de perda [@abadi2016tensorflow].
+
+Em resumo, podemos concluir que
+
+1. Uma rede neural é uma extensão de modelos lineares generalizados que aplica combinações lineares e funções de ligação de forma iterada.
+2. A estimação dos parâmetros é realizada por descida de gradiente, explorando as vantagens do backpropagation.
+3. Funções de ligação são chamadas de funções de ativação.
+4. A função desvio é substituída por funções de perda mais gerais.
+5. A aplicação iterada de operações pode ser representada por um grafo direcionado acíclico.
+
+Existem diversas formas de definir, desenhar e apresentar os conceitos básicos de redes neurais e a descida de gradiente. As melhores são apresentadas em blogs, vídeos e aplicativos, onde as operações são apresentadas de forma interativa. O racional apresentado nesse texto buscou mostrar a relação intrínseca entre a regressão logística e as redes neurais.
+
+### A operação de convolução
+
+Convolução em imagens é uma operação usada nas áreas de *visão computacional* e *processamento de sinais*. Ela é utilizada para detectar padrões e aplicar filtros em imagens. Na prática, o que ela faz é calcular um novo valor para um pixel na posição $(i,j)$ de uma imagem com base nos valores dos pixels da vizinhança.
+
+Uma forma organizada de fazer essa soma ponderada é criando uma matriz de pesos. Com ela, não é necessário procurar os pontos da vizinhança. Para cada ponto $(i,j)$, obtemos a matriz de vizinhança, multiplicamos pontualmente pela matriz de pesos e somamos os valores resultantes. Chamaremos essa matriz de pesos de **kernel**.
+
+Considere
+
+$$
+K = \left[\begin{array}{rrr}-1&-1&-1\\0&0&0\\1&1&1\end{array}\right]
+$$
+
+e a seguinte imagem:
+
+```{r, out.width="30%", echo=FALSE, no.mar=TRUE, eval=TRUE, fig.align="center"}
+library(magrittr)
+"assets/img/emoji3.png" %>% 
+  magick::image_read() %>% 
+  plot()
+```
+
+Tome por exemplo o ponto $(i,j) = (12,16)$. A vizinhança 3x3 em torno desse ponto é dada por
+
+$$
+P_{i,j} = \left[\begin{array}{rrr}
+0.98 & 0.53 & 0.79 \\ 
+0.97 & 0.99 & 1.00 \\ 
+0.98 & 1.00 & 1.00 
+\end{array}\right]
+$$
+
+
+A operação de convolução é feita da seguinte forma:
+
+$$
+\begin{aligned}
+(P_{12,16} *K )_{12,16}
+&= k_{1,1}p_{11,15} + k_{1,2}p_{11,16} + k_{1,3}p_{11,17} + \\
+&+ k_{2,1}p_{12,15} + k_{2,2}p_{12,16} + k_{2,3}p_{12,17} + \\
+&+ k_{3,1}p_{13,15} + k_{3,2}p_{13,16} + k_{3,3}p_{13,17}
+\end{aligned}
+$$
+
+Esse é o valor a ser colocado no ponto $(i,j)$. Isso funciona em todos os pontos que não estão na borda da imagem.
+
+Existem duas formas de trabalhar com as bordas da imagem. A primeira é preenchendo as bordas com zeros, de forma a considerar apenas os pontos da imagem. A segunda é descartar os pontos da borda e retornar uma imagem menor, contendo somente os pixels em que foi possível aplicar todo o kernel.
+
+No nosso caso, o resultado da convolução fica como na Figura \@ref(fig:emoji-horiz). Essa matriz não foi escolhida por acaso. Ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada `-1`s e a última é formada por `1`s, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca (`grande * 1 + pequeno * (-1)`). A parte destacada da imagem acabou sendo os olhos (pois temos maior concentração de pixels pretos ali), além das extremidades superior e inferior do rosto.
+
+```{r emoji-horiz, no.mar=TRUE, out.width="30%", fig.cap="Figura após aplicação de convolução.", echo=FALSE, eval=FALSE, fig.align="center"}
+kern_horizontal <- matrix(c(-1,-1,-1,0,0,0,1,1,1), ncol = 3, byrow = TRUE)
+convolve <- function(img, kern) {
+  # monta a bordinha na imagem. A borda deve ter (tamanho kernel) / 2,
+  # de tamanho, arredondando para baixo
+  pad <- floor(dim(kern)[1] / 2)
+  img_pad <- matrix(0, nrow = nrow(img) + 2 * pad, ncol = ncol(img) + 2 * pad)
+  img_pad[pad + 1:nrow(img), pad + 1:ncol(img)] <- img[,,1]
+  # aplica a convolução nos pontos da imagem
+  for (i in seq_len(nrow(img))) {
+    for (j in seq_len(ncol(img))) {
+      img[i, j, 1] <- sum(img_pad[i + 0:(2 * pad), j + 0:(2 * pad)] * kern)
+    }
+  }
+  img[,,2] <- img[,,3] <- img[,,1]
+  img
+}
+"assets/img/emoji3.png" %>% 
+  decryptr:::load_image() %>% 
+  convolve(kern_horizontal) %>% 
+  magick::image_read() %>% 
+  plot()
+```
+
+Aplicando o kernel vertical
+
+$$
+K = \left[\begin{array}{rrr}-1&0&1\\-1&0&1\\-1&0&1\end{array}\right],
+$$
+
+
+a parte destacada do rosto são as extremidades dos lados:
+
+```{r, no.mar=TRUE, out.width="30%", echo=FALSE, eval=FALSE, fig.align="center"}
+kern_vertical <- rbind(c(-1, 0, 1),
+                       c(-1, 0, 1),
+                       c(-1, 0, 1))
+"assets/img/emoji3.png" %>% 
+  decryptr:::load_image() %>% 
+  convolve(kern_vertical) %>% 
+  magick::image_read() %>% 
+  plot()
+```
+
+A aplicação de convoluções em CAPTCHAs é direta. Nesse caso, vamos adicionar uma constante numérica ao resuldado da convolução. Isso pode auxiliar na visualização, pois controlamos os valores que ficam dentro do intervalo $[0,1]$. Mais adiante veremos que esse será o intercepto da regressão.
+
+Vamos partir do CAPTCHA da RFB abaixo
+
+```{r, fig.height=1, fig.width=3.6, no.mar=TRUE, echo=FALSE, eval=FALSE, fig.align="center"}
+arq <- "assets/img/captcha41367a06c5a.png"
+op <- graphics::par(mar = rep(0, 4))
+arq %>% 
+  decryptr:::load_image() %>% 
+  magick::image_read() %>% 
+  plot()
+```
+
+
+```{r, echo=FALSE}
+add_bias <- function (x, b) x + b
+```
+
+Esse é o resultado de adicionar o kernel vertical e bias de `0.6`.
+
+```{r, fig.height=1, fig.width=3.6, no.mar=TRUE, echo=FALSE, eval=FALSE, fig.align="center"}
+op <- graphics::par(mar = rep(0, 4))
+arq %>% 
+  decryptr:::load_image() %>% 
+  convolve(kern_vertical) %>% 
+  add_bias(.6) %>% 
+  magick::image_read() %>% 
+  plot()
+```
+
+Em seguida observamos o kernel horizontal. Note que identificamos padrões das linhas horizontais que tentam atrapalhar a visão das letras.
+
+```{r, fig.height=1, fig.width=3.6, no.mar=TRUE, echo=FALSE, eval=FALSE, fig.align="center"}
+op <- graphics::par(mar = rep(0, 4))
+arq %>% 
+  decryptr:::load_image() %>% 
+  convolve(kern_horizontal) %>% 
+  add_bias(.6) %>% 
+  magick::image_read() %>% 
+  plot()
+```
+
+Também vamos introduzir uma função chamada **ReLu**. ReLu significa *Restricted Linear Unit* e é uma função que zera tudo o que é negativo e mantém tudo aquilo que é positivo inalterado. Ou seja,
+
+$$
+ReLu(x) = \frac{x + |x|}{2}
+$$
+
+ReLu não é útil para visualização da imagem, pois a substituição de valores negativos por zero já é feita automaticamente. No entanto, podemos aplicar várias convoluções iteradamente e separá-las por aplicações da função ReLu. Como a função ReLu é não linear, essa iteração gera resultados que não seriam possíveis de obter somente com aplicações da operação convolução.
+
+Na prática, o que queremos é treinar os valores do kernel aplicado, buscando obter imagens transformadas que aumentem o poder preditivo. Nesse sentido, a aplicação de convoluções, soma de constantes e ReLu são as operações que substituem a multiplicação de matrizes, adição de intercepto e aplicação da função de ligação na regressão logística, respectivamente. Ou seja, uma rede neural convolucional é apenas uma forma diferente de implementar os conceitos.
+
+### Redes neurais convolucionais
+
+Considere uma observação de uma imagem com 2x2 pixels abaixo. Note que se o interesse for utilizar essa matriz numa regressão logística, teríamos uma linha de nossa base de dados, com nove colunas. Ou seja, a regressão teria nove parâmetros associados.
+
+$$
+P = \left[\begin{array}{rrr}
+p_{11} & p_{12} & p_{13} \\ 
+p_{21} & p_{22} & p_{23} \\
+p_{31} & p_{32} & p_{33}
+\end{array}\right]
+$$
+
+
+Considere agora o kernel $W$, também 3x3:
+
+
+$$
+K = \left[\begin{array}{rrr}
+k_{11} & k_{12} & k_{13} \\ 
+k_{21} & k_{22} & k_{23} \\
+k_{31} & k_{32} & k_{33}
+\end{array}\right]
+$$
+
+A operação convolução resulta numa nova matriz 3x3, em que cada elemento é uma combinação linear de elementos de $P$ e $K$. De fato, é possível mostrar que o resultado da convolução é o resultado de uma multiplicação de matrizes obtida através da *matriz circulante* de $K$ [@gray2006toeplitz]. Ou seja, nesse caso, estamos fazendo uma nova regressão logística, mas com os valores dos dados modificados. 
+
+Se, ao invés disso, considerarmos a matriz 2x2,
+
+$$
+K = \left[\begin{array}{rr}
+k_{11} & k_{12}\\ 
+k_{21} & k_{22}
+\end{array}\right]
+$$
+
+estamos na prática reduzindo o problema de regressão logística para apenas quatro parâmetros. 
+
+O modelo força-bruta é uma adaptação do clássico modelo LeNet-5 [@lecun2015lenet]. Esse modelo aplica convolução 3 vezes consecutivas, adicionando o viés e a função ReLu em cada nível. Após cada convolução, também aplicamos uma operação chamada *max pooling*, que reduz a resolução da imagem, tomando o valor máximo da vizinhança de cada ponto. Após a aplicação das convoluções, as imagens são remodeladas no formato retangular padrão (uma linha por imagem) e aplicamos duas camadas de redes neurais comuns, como vimos anteriormente. 
+
+Após a realização de todas as operações, os números resultantes não estão entre zero e um. Por isso, aplicamos a ativação *softmax*, que é a generalização da ativação logística, mas para uma resposta com vários resultados possíveis
+
+$$
+softmax(x_i) = \frac{e^{x_i}}{\sum_ie^{x_i}}
+$$
+
+Em resumo, as operações que realizamos na rede neural convolucional são
+
+1. Tomar o input inicial (imagem).
+1. Multiplicar (convoluir) por matrizes de pesos $W$.
+1. Adicionar um viés (ou intercepto) $b$.
+1. Aplicar uma função de ligação (ou ativação), por exemplo ReLu.
+1. Reduzir a resolução do resultado.
+1. Voltar para 2 várias vezes.
+1. Tomar os pesos finais e normalizar (usando a operação *softmax*) para obter probabilidades dos resultados.
+
+### Resultados
+
+Até o momento, aplicamos os modelos de redes neurais convolucionais para cinco CAPTCHAs distintos. Os modelos foram treinados a partir de bases de treino com aproximadamente dez mil exemplos para cada CAPTCHA. Os resultados da aplicação dos modelos estão na Tabela \@ref(tab:resultados). Essas taxas foram calculadas com base em 100 novos CAPTCHAs baixados da internet após o ajuste do modelo. Podemos observar que as taxas de acerto são todas muito próximas de 100%. No mínimo essas taxas estão muito próximas do que seres humanos conseguiriam acertar.
+
+```{r resultados}
+tibble::tibble(
+  Imagem = c(knitr::include_graphics("assets/img/rfb.png"), 
+             "![](assets/img/trt.png)", 
+             "![](assets/img/tjmg.jpeg)", 
+             "![](assets/img/rsc.png)",
+             "![](assets/img/cadesp.png)"), 
+  Nome = c("RFB", "TRT", "TJMG", "RSC", "CADESP"), 
+  `Taxa de acerto` = c("98%", "98%", "100%", "99%", "98%"), 
+) %>% 
+  knitr::kable(caption = "Resultados da aplicação dos modelos.")
+```
+
+Os resultados positivos da aplicação dos modelos força-bruta pode motivar a pergunta: o problema está completamente resolvido? De fato, podemos dizer que CAPTCHAs de imagem baseados em textos são problemas resolvidos, desde que exista uma base de dados classificada. No entanto, esses modelos não funcionam para novos CAPTCHAs e também erram se fizermos pequenas alterações nas imagens. Veremos mais detalhes desse problema no próximo capítulo.
+
+
+
+
 > quando surgir o primeiro classificador com GAN, definir de forma mais detalhada
 

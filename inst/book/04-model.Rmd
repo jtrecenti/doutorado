@@ -22,6 +22,7 @@ Na parte de engenharia, desenvolvemos uma técnica para capturar e anotar feedba
 
 O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa que podemos criar uma base de dados virtualmente infinita de Captchas rotulados, com a informação adicional do rótulo estar correto ou incorreto. Fizemos isso para todos os Captchas presentes em nossa base de dados.
 
+<!-- TODO na verdade tem bastante que da pra testar diferentes -->
 Um problema prático do oráculo é sua propriedade de **memória**. Em problemas reais, não é possível testar diferentes rótulos para a mesma imagem, o que inviabiliza o uso de técnicas de força bruta na resolução de Captchas.
 
 Outro problema é que a informação adicional recebida quando o modelo erra é **incompleta**. A única informação nova que temos é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como temos uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, o *feedback* do oráculo pode ser considerado fraco.
@@ -71,7 +72,42 @@ ggplot2::qplot(p, prob, geom = "line") +
 
 As intuições apresentadas sugerem duas possibilidades. Por um lado, podemos pensar em uma estratégia para corrigir os dados a partir do feedback do usuário e das probabilidades reportadas pelo modelo de classificação. Chamaremos uma estratégia desse tipo de *heurística*.
 
-> Definir as heurísticas possíveis
+### Heurística 1: substituição da pior predição
+
+Uma possível estratégia é substituir a letra com maior incerteza na predição, seguindo os passos abaixo.
+
+1. Dentre todas as letras, selecionamos a que tem a menor probabilidade máxima
+
+$$i_{\text{mudar}}={\arg \min}_{i=1,\dots,k} \max_j \hat p_{ij},$$
+
+em que $\hat p_{ij}$ é a probabilidade estimada da letra $j$ na posição $i$.
+
+2. Substituímos a predição da letra $i_{\text{mudar}}$ pela segunda colocada no vetor $p_{i_{\text{mudar}}\cdot}$.
+
+### Heurística 2: substituição da predição com menor diferença para segunda candidata
+
+A segunda estratégia sugerida é substituir a letra que tem a maior probabilidade mais próxima da segunda maior.
+
+1. Dentre todas as letras, selecionamos a que tem a menor probabilidade máxima.
+
+Primeiro ordenamos as probabilidades dentro de cada letra 
+
+$$\hat p_{i \text{ ord}} = (p_{i\{1\}}, p_{i\{2\}}, \dots, p_{i\{n\}})$$
+
+$$i_{\text{mudar}}={\arg \max}_{i=1,\dots,k} |p_{i\{1\}} - p_{i\{2\}}|$$
+
+2. Substituímos a predição da letra $p_{i\{1\}}$ pela letra com probabilidade $p_{i\{2\}}$.
+
+### Heurística 3: substituição da predição que tem maior entropia no vetor de predições
+
+A terceira estratégia é substituir a letra cujo vetor de predições tem maior entropia.
+
+1. Dentre todas as letras, selecionamos a que tem a maior entropia
+
+$$i_{\text{mudar}}={\arg \max}_{i=1,\dots,k} -\sum_j p_{ij}\log(p_{ij}),$$
+
+2. Substituímos a predição da letra $i_{\text{mudar}}$ pela segunda colocada no vetor $p_{i_{\text{mudar}}\cdot}$.
+
 
 ### Propriedades da estratégia
 
@@ -79,7 +115,26 @@ As intuições apresentadas sugerem duas possibilidades. Por um lado, podemos pe
 
 ### Resultados empíricos
 
-> resultados dos modelos aplicados nos dados
+Os resultados empíricos foram divididos em dois testes. Primeiro, separamos uma amostra rotulada para verificar o quanto a heurística recuperava os valores corretos, a partir da predição de um modelo inicial. Depois, verificamos o ganho efetivo na acurácia do modelo alimentado com a base de dados aumentada.
+
+Para o primeiro teste, adotamos o seguinte procedimento. Para cada Captcha, selecionamos bases de treino iniciais que resultaram em acurácias de 40%, 60% e 80% após o ajuste do modelo de redes neurais convolucionais. Em seguida, aplicamos a heurística nos casos da base de teste em que o modelo errou. Finalmente, calculamos o percentual de recuperação dos resultados pela heurística.
+
+A parte do ajuste do modelo de redes neurais convolucionais merece alguns comentários adicionais. Por um lado, é importante que o modelo esteja bem ajustado, para que o erro do modelo seja fruto somente da quantidade de observações e não um problema de sub ajuste. Por outro lado, cada tamanho de base pode estar ligada a diferentes hiperparâmetros, e não existe uma forma de garantir que os melhores hiperparâmetros foram selecionados. 
+
+@goodfellow2014 menciona que, para realizar comparações de modelos, as técnicas de regularização, especialmente aumentação de dados, devem ser padronizadas. Por isso, optamos por manter a mesma grade de hiperparâmetros em todos os modelos. Especificamente, consideramos na grade as quantidades:
+
+- Multiplicador da quantidade de filtros convolucionais. 
+- Quantidade de filtros na primeira camada densa.
+- Dropout.
+
+Para diferentes modelos, como AC-GAN, o procedimento seria o mesmo. Bastaria fixar os hiperparâmetros e rodar todos os modelos.
+
+A Tabela \@ref(tab:) mostra os resultados da análise. É possível verificar que a heurística X apresenta os melhores resultados, independentemente do Captcha ou da capacidade do modelo inicial.
+
+A Figura \@ref(fig:) mostra os mesmos resultados de forma visual e resumida. É possível notar que a proporção de casos recuperados não aumenta linearmente
+
+Em seguida, passamos para a segunda etapa do procedimento. Nesta etapa, adicionamos a base construída pelo oráculo e modificada pela heurística à base de treino inicial. Como base de teste, utilizamos um conjunto de dados novo, que não foi utilizado em nenhum procedimento anterior, para garantir que não há contaminação
+
 
 ## Modelagem usando verossimilhança {#veross}
 
