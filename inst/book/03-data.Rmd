@@ -1,10 +1,86 @@
 # Dados {#dados}
 
-> Critérios para entrar ou sair da base
+Neste capítulo, descrevemos em detalhes como foi a obtenção dos dados para a realização da pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para obtenção dos achados.
+
+No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/02/2022, para verificar se ainda estavam ativos.
+
+Para selecionar os Captchas, adotamos alguns critérios objetivos. Os critérios foram:
+
+1. O site acessado é de um serviço público (governo federal, tribunais, etc).
+1. Trata-se de um Captcha contendo letras (A a Z) e números (0 a 9) em uma imagem com extensão jpeg ou png.
+1. O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma origem devem ter sempre o mesmo comprimento.
+
+A primeira restrição para escolha dos Captchas é de ordem principiológica. Um serviço público não deveria restringir o acesso aos dados para robôs. Como já discutido anteriormente, nesses casos, a existência do Captcha não tem como finalidade dar maior segurança ao serviço prestado, mas sim limitar o acesso aos servidores por robôs.
+
+As restrições 2 e 3 foram escolhidas com o objetivo de facilitar as simulações para obtenção dos resultados. Em princípio, nada impede que os modelos desenvolvidos trabalhem com outros tipos de rótulos, desde que exista uma lista prévia de rótulos. Além disso, é possível realizar adaptações no pré-processamento base de dados para lidar com diferentes comprimentos de Captchas.
+
+A Tabela \@ref(tab:lista-captcha) mostra os Captchas trabalhados. A informação de limite de chutes é importante para a implementação do oráculo, detalhado a seguir.
+
+O oráculo é o nome que escolhemos para a possibilidade de checar, de forma automática, se uma predição do modelo foi bem ou mal sucedida. Como um Captcha é um teste de Turing inverso, por definição ele é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.
+
+Para implementar um oráculo em uma linguagem de programação, é necessário seguir os seguintes passos:
+
+1. Acessar a página do site de interesse
+1. Preencher o formulário de pesquisa com a informação a ser consultada. Por exemplo, no site da RFB, a informação é o CNPJ da empresa a ser consultada. Em um site de tribunal, a informação é um número identificador de processo.
+1. Baixar o Captcha da busca.
+1. Aplicar o modelo no Captcha baixado (ou classificar a imagem manualmente) para obter a predição.
+1. Submeter a consulta no site, informando a predição.
+1. Verificar o resultado. Se acessou a página desejada, a predição está correta. Caso contrário, a predição está incorreta.
+
+Outra oportunidade que o oráculo permite em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa caracteística permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na Tabela \@ref(2tab:lista-captcha), dos 10 Captchas trabalhados, 7 permitem a realização desses testes.
+
+Em teoria, a possibilidade de testar vários rótulos para o mesmo Captcha implica na possibilidade teórica de resolver um Captcha por força bruta. Bastaria testar todos os rótulos possíveis para acessar a página de interesse. Na prática, no entanto, essa estratégia não funciona, já que a quantidade de rótulos possíveis é muito grande para testar no site, seja por demorar muito tempo ou pelo site forçar a troca de Captcha após a passagem de determinado tempo ou quantidade de tentativas.
 
 > Lista e caracterização dos captchas
 
+
+Além dos Captchas de sites, também consideramos imagens geradas artificialmente para rodar os modelos. O motivo de criar Captchas artificiais é a facilidade de rodar modelos e simulações, já que nos casos reais é necessário ter acesso à internet e também construir bases de dados de cada Captcha.
+
+Existem duas alternativas ao Captcha gerado. O primeiro, chamado MNIST-Captcha, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.
+
+A Figura \@ref(fig:captcha-mnist) mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.
+
+```{r captcha-mnist, fig.cap="Exemplo de MNIST-Captcha"}
+
+path_mnist <- "~/Documents/jtrecenti/captchaDownload/data-raw/mnist/img_individual"
+x <- captchaDownload:::captcha_generate_mnist(".", path_mnist)
+plot(captcha::read_captcha(x))
+
+```
+
+O problema do MNIST-Captcha é que a base de dados original é finita. Apesar de possuir por volta de 60 mil observações e de um Captcha crescer em ordem exponencial, o MNIST-Captcha pode gerar Captchas repetidos. Além disso, é necessário tomar cuidado com as bases de treino e teste, já que os elementos de teste não poderiam fazer parte de nenhuma observação de treino.
+
+Por esse motivo, criamos um Captcha interamente gerado por programação, chamado R-Captcha. O Captcha é gerado utilizando a ferramenta ImageMagick, com a possibilidade de customizar diversos parâmetros, como
+
+- Quais caracteres usar na imagem
+- O comprimento do Captcha
+- Dimensões da imagem
+- Probabilidade de rotação da imagem
+- Probabilidade de adicionar um risco entre as letras
+- Probabilidade de adicionar uma borda nas letras
+- Probabilidade de adicionar uma caixa (retângulo) em torno das letras
+- Probabilidade de adicionar um ruído branco no fundo da imagem
+- Probabilidade de adicionar efeitos de tinta óleo e implosão
+
+```{r, captcha-r}
+plot(captcha::captcha_generate()$image)
+```
+
+Por ser uma versão mais flexível e completa, optamos por trabalhar principalmente com o R-Captcha nas simulações. O MNIST-Captcha foi tratado com um Captcha comum, como aqueles que vieram da internet.
+
 > Repositório de dados
+
+Os Captchas foram classificados com o procedimento que chamamos de semi-automático, definido a seguir. No pacote `{captchaDownload}`, foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas. 
+
+Cada Captcha teve as primeiras 100 observações classificadas manualmente. Isso foi feito a partir do próprio RStudio, utilizando a ferramenta de classificação manual do pacote `{captcha}`. 
+
+A partir das classificações iniciais, um modelo foi ajustado com a quantidade de observações disponível. Esse passo também foi feito a partir do pacote `{captcha}`, que cria um projeto de classificação para um Captcha específico.
+
+O modelo, então, foi utilizado como uma ferramenta para otimizar a classificação manual, funcionando da seguinte forma. Primeiro, o modelo tenta realizar a predição automaticamente e o oráculo avisa se a predição está correta ou não. Se estiver incorreto, e o site aceitar várias tentativas, o modelo tenta novamente, mas com uma segunda alternativa de predição, definida por uma heurística, definida no Capítulo \@ref(modelo). Caso o site não aceite várias tentativas ou o modelo não consiga acertar o Captcha em $N$ tentativas (que arbitramos como dez), a imagem do Captcha aparecerá para classificação manual. 
+
+Com o procedimento destacado acima, é criada uma nova base de dados, que por sua vez é utilizada para ajustar um novo modelo. O modelo, atualizado, é utilizado para classificar novos Captchas, e assim por diante, até que o modelo ajustado alcance uma acurácia razoável, que arbitramos em 90%. Com isso, finalizamos o procedimento de classificação.
+
+O único problema do procedimento de classificação diz respeito aos Captchas que não aceitam várias tentativas. Nesses casos, não é possível verificar com certeza absoluta que um caso classificado manualmente (após a tentativa do modelo) foi classificado corretamente, já que a classificação manual seria a segunda tentativa. No entanto, esse problema aparece somente em três Captchas (`cadesp`, `jucesp` e `trf5`). A classificação manual dos 100 primeiros Captchas, no entanto, mostrou que pelo menos 95% dos Captchas foram classificados corretamente quando classificados manualmente. Supomos que a proporção máxima de 5% de erro é negligenciável considerando que a maior parte das bases de dados foi construída com verificação do oráculo.
 
 > Contribuições da comunidade
 
