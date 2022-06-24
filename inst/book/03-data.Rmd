@@ -27,12 +27,11 @@ Para implementar um oráculo em uma linguagem de programação, é necessário s
 1. Submeter a consulta no site, informando a predição.
 1. Verificar o resultado. Se acessou a página desejada, a predição está correta. Caso contrário, a predição está incorreta.
 
-Outra oportunidade que o oráculo permite em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa caracteística permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na Tabela \@ref(2tab:lista-captcha), dos 10 Captchas trabalhados, 7 permitem a realização desses testes.
+Outra oportunidade que o oráculo permite em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa caracteística permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na Tabela \@ref(tab:lista-captcha), dos 10 Captchas trabalhados, 7 permitem a realização desses testes.
 
 Em teoria, a possibilidade de testar vários rótulos para o mesmo Captcha implica na possibilidade teórica de resolver um Captcha por força bruta. Bastaria testar todos os rótulos possíveis para acessar a página de interesse. Na prática, no entanto, essa estratégia não funciona, já que a quantidade de rótulos possíveis é muito grande para testar no site, seja por demorar muito tempo ou pelo site forçar a troca de Captcha após a passagem de determinado tempo ou quantidade de tentativas.
 
 > Lista e caracterização dos captchas
-
 
 Além dos Captchas de sites, também consideramos imagens geradas artificialmente para rodar os modelos. O motivo de criar Captchas artificiais é a facilidade de rodar modelos e simulações, já que nos casos reais é necessário ter acesso à internet e também construir bases de dados de cada Captcha.
 
@@ -40,7 +39,7 @@ Existem duas alternativas ao Captcha gerado. O primeiro, chamado MNIST-Captcha, 
 
 A Figura \@ref(fig:captcha-mnist) mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.
 
-```{r captcha-mnist, fig.cap="Exemplo de MNIST-Captcha"}
+```{r captcha-mnist, fig.cap="Exemplo de MNIST-Captcha", eval=FALSE}
 
 path_mnist <- "~/Documents/jtrecenti/captchaDownload/data-raw/mnist/img_individual"
 x <- captchaDownload:::captcha_generate_mnist(".", path_mnist)
@@ -66,7 +65,7 @@ Por esse motivo, criamos um Captcha interamente gerado por programação, chamad
 plot(captcha::captcha_generate()$image)
 ```
 
-Por ser uma versão mais flexível e completa, optamos por trabalhar principalmente com o R-Captcha nas simulações. O MNIST-Captcha foi tratado com um Captcha comum, como aqueles que vieram da internet.
+Por ser uma versão mais flexível e completa, optamos por trabalhar principalmente com o R-Captcha nas simulações. O MNIST-Captcha foi implementado mas não foi utilizado nas simulações.
 
 > Repositório de dados
 
@@ -78,10 +77,73 @@ A partir das classificações iniciais, um modelo foi ajustado com a quantidade 
 
 O modelo, então, foi utilizado como uma ferramenta para otimizar a classificação manual, funcionando da seguinte forma. Primeiro, o modelo tenta realizar a predição automaticamente e o oráculo avisa se a predição está correta ou não. Se estiver incorreto, e o site aceitar várias tentativas, o modelo tenta novamente, mas com uma segunda alternativa de predição, definida por uma heurística, definida no Capítulo \@ref(modelo). Caso o site não aceite várias tentativas ou o modelo não consiga acertar o Captcha em $N$ tentativas (que arbitramos como dez), a imagem do Captcha aparecerá para classificação manual. 
 
-Com o procedimento destacado acima, é criada uma nova base de dados, que por sua vez é utilizada para ajustar um novo modelo. O modelo, atualizado, é utilizado para classificar novos Captchas, e assim por diante, até que o modelo ajustado alcance uma acurácia razoável, que arbitramos em 90%. Com isso, finalizamos o procedimento de classificação.
+Com o procedimento destacado acima, é criada uma nova base de dados, que por sua vez é utilizada para ajustar um novo modelo. O modelo, atualizado, é utilizado para classificar novos Captchas, e assim por diante, até que o modelo ajustado alcance uma acurácia razoável, que arbitramos em 80%. Com isso, finalizamos o procedimento de classificação.
 
 O único problema do procedimento de classificação diz respeito aos Captchas que não aceitam várias tentativas. Nesses casos, não é possível verificar com certeza absoluta que um caso classificado manualmente (após a tentativa do modelo) foi classificado corretamente, já que a classificação manual seria a segunda tentativa. No entanto, esse problema aparece somente em três Captchas (`cadesp`, `jucesp` e `trf5`). A classificação manual dos 100 primeiros Captchas, no entanto, mostrou que pelo menos 95% dos Captchas foram classificados corretamente quando classificados manualmente. Supomos que a proporção máxima de 5% de erro é negligenciável considerando que a maior parte das bases de dados foi construída com verificação do oráculo.
+
+## Simulações
+
+Para verificar o poder do uso do oráculo para o aprendizado do modelo, recorremos a uma série de simulações. As simulações foram organizadas em três passos: modelo inicial, dados e modelo final. Os passos foram descritos em maior detalhe a seguir.
+
+### Primeiro passo: modelo inicial
+
+A simulação do modelo inicial teve como objetivo obter modelos preditivos de Captchas com acurácias distintas. O modelo inicial seria usado, então, para baixar dados diretamente do site usando o oráculo e, por fim, ajustar um modelo final com os novos dados provenientes do oráculo.
+
+Construímos os modelos iniciais em dois passos. O primeiro foi montar a base de dados completa, suficiente para ajustar um modelo com alta acurácia, que arbitramos em 80%, como descrito anteriormente. Depois, montamos 10 amostras de dados com subconjuntos das bases completas, cada uma contendo 10%, 20%, e assim por diante, até a base completa. Por exemplo: no Captcha da Jucesp, obtivemos um modelo com acurácia maior que 80% com 4000 Captchas. Fizemos então uma partição dos dados com 400 imagens (10% do total), 800 imagens (20% do total) e assim por diante, até o modelo com 4000 Captchas.
+
+Para cada tamanho de amostra $A$, rodamos uma bateria de 27 modelos. Fizemos isso porque para diferentes quantidades de amostra, a configuração dos hiperparâmetros que resulta no melhor modelo pode ser diferente. Fizemos uma grade de hiperparâmetros considerando três informações:
+
+- A quantidade de unidades computacionais na primeira camada densa após as camadas convolucionais: consideramos os valores de 100, 200 e 300.
+- O valor do *dropout* aplicado às camadas densas: consideramos os valores de 10%, 30% e 50%.
+- O fator de decaimento na taxa de aprendizado a cada época: consideramos os valores de 1%, 2% e 3%.
+
+Combinando os três valores dos três hiperparâmetros, temos um total de $27=3^3$ hiperparâmetros. Com isso, foi possível identificar, para cada tamanho de amostra $A$, o classificador $C_A$ com a melhor acurácia dentre os modelos ajustados.
+
+No final do primeiro passo, portanto, consideramos apenas o melhor modelo para cada tamanho de amostra. É claro que os modelos encontrados por essa técnica não são, necessariamente, os melhor modelo possíveis. No entanto, como a técnica é a mesma para todos os Captchas, ganhamos a possibilidade de fazer comparações e temos uma metodologia mais transparente.
+
+### Segundo passo: dados
+
+O segundo passo teve como objetivo construir as bases de dados utilizando o oráculo. Primeiro, foi necessário decidir quais modelos, dentre os 10 ajustados para cada Captcha, seriam utilizados para construir novas bases. Não faria sentido, por exemplo, considerar um modelo com acurácia de 0%, já que ele não produziria nenhuma observação comparado com um modelo que chuta aleatoriamente. Também não faria sentido considerar um classificador com acurácia de 100%, já que nesse caso não há o que testar com a técnica do oráculo.
+
+Decidimos que seria necessário considerar somente os modelos que resultaram em acurácias maiores de 1% e menores de 50%. O valor máximo foi decidido após realizar alguns testes empíricos e verificar, informalmente, que a técnica do oráculo realmente resultava em ganhos expressivos, mesmo com modelos de baixa acurácia. Concluímos então que não seria necessário testar a eficácia da técnica para classificadores com alta acurácia. Já o valor mínimo foi decidido de forma arbitrária, retirando-se os classificadores com acurácia muito baixa.
+
+A segunda decisão a ser tomada para construção dos dados foi a quantidade de imagens que seria baixada para cada Captcha. Como temos Captchas de diferentes dificuldades, a quantidade de dados seria diferente. Optamos por baixar a quantidade de dados de forma a montar uma base de treino que contém a quantidade de observações igual ao melhor modelo daquele Captcha. Por exemplo, no TJRS, um modelo com acurácia próxima de 100% foi identificado com 2000 observações. O melhor modelo com 300 imagens (240 para treino, 60 para teste) resultou em uma acurácia de 35%. Foram, então, baixadas 1760 observações para compor o total de 2000 na base de treino. As imagens de teste do modelo inicial poderiam até ser utilizadas, mas optamos por descartar para garantir que o modelo não ficasse sobreajustado para a primeira base.
+
+O motivo de baixar a mesma quantidade de observações que o melhor modelo inicial foi feita por dois motivos. O primeiro é que temos evidências de que é possível construir um bom modelo com essa quantidade de imagens, ainda que em um caso tenhamos informações completas, e no outro incompletas. O segundo é que isso nos permite comparar o resultado do modelo completamente anotado contra o modelo que é parcialmente anotado e com anotações incompletas provenientes do oráculo.
+
+A terceira e última decisão tomada para baixar os dados foi a quantidade de chutes que o modelo poderia fazer, nos casos em que isso é permitido pelo site. Optamos, de forma arbitrária, por três valores: 1, que é equivalente a um site que não permite múltiplos chutes, 5 chutes e 10 chutes.
+
+Portanto, o procedimento de coleta dos dados foi feito, para cada Captcha, da seguinte forma:
+
+1. Listamos todos os melhores modelos ajustados para cada tamanho de amostra.
+2. Filtramos os modelos para os que apresentavam acurácia de 5% até 50%
+3. Definimos o tamanho da base a ser obtida, com base no tamanho da base de treino utilizada no modelo e a quantidade total que se objetivou obter.
+4. Para cada quantidade de tentativas disponível (1, 5 e 10), baixamos as imagens, classificando com o valor "1" se o Captcha fosse classificado corretamente em alguma das tentativas, e com o valor "0" caso contrário.
+5. Nos casos com erros, armazenamos um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final.
+
+No final, obtivemos bases de dados de treino para todos os Captchas analisados, com quantidades de imagens variadas de acordo com os parâmetros definidos anteriormente, variando também pela quantidade de tentativas. A quantidade total de bases de dados geradas foi 65.
+
+Além das bases de treino, construímos, para cada Captcha, uma base de teste. As bases de teste foram construídas completamente do zero, sem utilizar informações de bases anteriores. Para construir as bases, utilizamos a mesma técnica semi-automática definida anteriormente, usando o melhor modelo disponível para classificar a maioria das imagens e classificando manualmente em caso de falha. Em alguns casos, como TJMG e TJRS, a classificação humana quase não foi necessária, pois os classificadores obtidos apresentaram acurácia próxima de 100%. 
+
+Como o único objetivo da base de teste foi o de estimar a acurácia dos modelos finais, a quantidade de observações poderia ser arbitrada. O tamanho das bases de teste foi, então, arbitrado em 1000 imagens para todos os Captchas. 
+
+### Terceiro passo: modelo final
+
+O modelo final foi ajustado para cada uma das 65 bases de treino disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizamos o modelo proposto, que considera os erros na verossimilhança do modelo. Caso a imagem tenha sido corretamente classificada, a função de perda é calculada normalmente. Caso ela tenha sido classificada incorretamente, consideramos na verossimilhança a probabilidade de não observar nenhum dos chutes. 
+
+Exemplo. Considere um Captcha com letras e números como vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo (correto) "zab2". O classificador do passo inicial tentou as seguintes configurações: "zab5", "sab2", "sab5", "zob2", "zob5", todas erradas. A probabilidade considerada na verossimilhança para essa imagem é, portanto:
+
+$$
+P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{zob5})
+$$
+
+Além de modificar a forma de calcular a função de perda do modelo, foi necessário testar os hiperparâmetros. Optamos por utilizar os mesmos hiperparâmetros dos modelos iniciais para manter a consistência. O único detalhe nesse ponto é que, como partimos dos parâmetros do modelo inicial, optamos por não modificar a quantidade de unidades na camada densa, variando somente os valores de *dropout* e de decaimento na taxa de aprendizado. Portanto, ajustamos 9 e não 27 modelos para cada base de dados.
+
+No final, assim como no primeiro passo, selecionamos classificador com melhor acurácia para cada modelo. Ficamos, então, com 65 modelos no final para comparar com os modelos iniciais e estimar a efetividade do oráculo. As comparações foram feitas através de gráficos de barras, explorando o efeito do uso do oráculo para diferentes Captchas, diferentes modelos iniciais e diferentes quantidades de chutes, além de um gráfico de dispersão para relacionar as acurácias iniciais e finais.
+
+Além do terceiro passo, fizemos alguns experimentos para verificar se, ao aplicar a técnica do oráculo iterativamente, poderíamos obter melhores resultados. Ou seja, podemos considerar os modelos obtidos no passo 3 como os modelos iniciais do passo 1, aplicar novamente o passo 2 (baixar dados) e o passo 3 (rodar modelo com os novos dados). Isso foi feito para apenas um conjunto selecionado de Captchas para verificar essa possibilidade, não fazendo parte das simulações principais deste estudo. 
 
 > Contribuições da comunidade
 
 > App {ancaptcha}
+
