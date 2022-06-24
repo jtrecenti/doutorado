@@ -169,3 +169,6 @@ A segunda é de ordem prática. Como a solução envolve modificações na funç
 > descrição do pacote
 >
 > a documentação completa do pacote será um apêndice
+
+
+A implementação da simulação foi feita em três etapas. A primeira etapa 
