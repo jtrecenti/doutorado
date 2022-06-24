@@ -1,12 +1,3 @@
-$$\newcommand{\x}{\mathbf{x}}
-\newcommand{\X}{\mathbf{X}}
-\renewcommand{\s}{\mathbf{s}}
-\renewcommand{\S}{\mathbf{S}}
-\renewcommand{\Z}{\mathbf{Z}}
-\renewcommand{\z}{\mathbf{z}}
-\newcommand{\w}{\mathbf{w}}
-\renewcommand{\P}{\mathbb{P}}
-\renewcommand{\tt}{\boldsymbol{\theta}}$$
 
 # Modelagem {#modelo}
 
@@ -33,80 +24,7 @@ Fizemos isso de duas formas.
 
 ## Modelagem usando heurísticas {#heuristica}
 
-O fato da informação ser incompleta e fraca não significa que ela é inútil. Os Captchas que estamos trabalhando possuem várias letras geradas de forma independente, fazendo com que um classificador $g$ seja na verdade um classificador multivariado:
-
-$$\begin{align*}
-g(\X) = (g(\X)_1, g(\X)_2, \dots, g(\X)_k),
-\end{align*}$$
-
-sendo $k$ o número de letras do Captcha. Supondo que o classificador é igualmente poderoso para todas as posições das letras, temos que
-
-$$\begin{align*}
-p = \P(g(\X) = Y) = \P(g(\X)_1 = Y_1)^k = p_{1}^k
-\end{align*}.$$
-
-Seja $N$ a quantidade de acertos de $g(\X)$. Sabemos que $N\sim \text{Bin}(k, p_{1})$. Então, quando o oráculo acusa que o modelo errou, a probabilidade do modelo ter errado somente uma letra é
-
-$$\begin{align*}
-\P(\text{errei uma letra}\;|\;\text{errei}) &= \P(N=k-1|N\neq k) \\
-&= \frac{(k-1) p_{1}^{k-1} (1-p_{1})}{1-p_1^k}
-\end{align*}$$
-
-A Figura \@ref(fig:probabilidades) mostra as probabilidades da equação acima graficamente, considerando $k=5$. Como vimos, é razoável admitir que um modelo inicial teria pelo menos 80% de acurácia para uma letra específica. Nessas condições, quando o oráculo dá um feedback negativo, a probabilidade do modelo ter errado somente uma letra do Captcha é próxima a 50%.
-
-```{r probabilidades, fig.height=4, fig.width=7, fig.cap="Probabilidade do modelo ter errado somente uma letra, a partir de um feedback negativo do oráculo. Considerando um captcha de 5 letras."}
-k <- 5
-p <- seq(.5, .999, .001)
-prob <- (k-1) * p^(k-1) * (1-p) / (1-p^k)
-ggplot2::qplot(p, prob, geom = "line") +
-  ggplot2::theme_minimal(12) +
-  ggplot2::scale_x_continuous(labels = scales::percent) +
-  ggplot2::scale_y_continuous(labels = scales::percent) +
-  ggplot2::geom_hline(yintercept = 1-1/k, linetype = 2, colour = 2) +
-  ggplot2::annotate("text", x = .5, y = 1-1/k, label = "Limite teórico = 1-1/k", vjust = 1.4, hjust = 0, size = 3, colour = 2) +
-  ggplot2::labs(
-    x = "Probabilidade do modelo acertar uma letra",
-    y = "Probabilidade de ter errado somente uma letra\ndado o feedback negativo do oráculo"
-  )
-```
-
-As intuições apresentadas sugerem duas possibilidades. Por um lado, podemos pensar em uma estratégia para corrigir os dados a partir do feedback do usuário e das probabilidades reportadas pelo modelo de classificação. Chamaremos uma estratégia desse tipo de *heurística*.
-
-### Heurística 1: substituição da pior predição
-
-Uma possível estratégia é substituir a letra com maior incerteza na predição, seguindo os passos abaixo.
-
-1. Dentre todas as letras, selecionamos a que tem a menor probabilidade máxima
-
-$$i_{\text{mudar}}={\arg \min}_{i=1,\dots,k} \max_j \hat p_{ij},$$
-
-em que $\hat p_{ij}$ é a probabilidade estimada da letra $j$ na posição $i$.
-
-2. Substituímos a predição da letra $i_{\text{mudar}}$ pela segunda colocada no vetor $p_{i_{\text{mudar}}\cdot}$.
-
-### Heurística 2: substituição da predição com menor diferença para segunda candidata
-
-A segunda estratégia sugerida é substituir a letra que tem a maior probabilidade mais próxima da segunda maior.
-
-1. Dentre todas as letras, selecionamos a que tem a menor probabilidade máxima.
-
-Primeiro ordenamos as probabilidades dentro de cada letra 
-
-$$\hat p_{i \text{ ord}} = (p_{i\{1\}}, p_{i\{2\}}, \dots, p_{i\{n\}})$$
-
-$$i_{\text{mudar}}={\arg \max}_{i=1,\dots,k} |p_{i\{1\}} - p_{i\{2\}}|$$
-
-2. Substituímos a predição da letra $p_{i\{1\}}$ pela letra com probabilidade $p_{i\{2\}}$.
-
-### Heurística 3: substituição da predição que tem maior entropia no vetor de predições
-
-A terceira estratégia é substituir a letra cujo vetor de predições tem maior entropia.
-
-1. Dentre todas as letras, selecionamos a que tem a maior entropia
-
-$$i_{\text{mudar}}={\arg \max}_{i=1,\dots,k} -\sum_j p_{ij}\log(p_{ij}),$$
-
-2. Substituímos a predição da letra $i_{\text{mudar}}$ pela segunda colocada no vetor $p_{i_{\text{mudar}}\cdot}$.
+O fato da informação ser incompleta e fraca não significa que ela é inútil. 
 
 
 ### Propriedades da estratégia
