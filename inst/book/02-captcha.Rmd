@@ -113,7 +113,7 @@ model_rf <- randomForest::randomForest(y ~ . - captcha_id, data = d_train)
 
 O resultado do modelo pode ser verificado na Tabela \@ref(tab:errosTJMG), que mostra os observados *versus* preditos na base de teste. O acerto foi de 99.6% em cada caractere. Assumindo que o erro não depende da posição do caractere no CAPTCHA, o acerto para a imagem completa é de aproximadamente 98%.
 
-```{r errosTJMG, eval=TRUE, echo=FALSE}
+```{r errosTJMG, eval=FALSE, echo=FALSE}
 library(randomForest)
 dados <- readRDS('data/dados_segment.rds') %>% 
   dplyr::mutate(y = factor(y))
@@ -159,7 +159,7 @@ O modelo linear generalizado é composto por três elementos: componente aleató
 
 O componente aleatório é uma variável aleatória com distribuição pertencente à família exponencial, que dá origem à verossimilhança do modelo. O componente sistemático é uma combinação linear das variáveis preditoras com um vetor de parâmetros. A função de ligação é uma operação que leva a componente sistemática no valor esperado da componente aleatória. Uma forma comum de definir a ligação é propondo uma função com domínio nos números reais e contradomínio igual ao suporte do componente aleatório. Dessa forma, não é necessário impor restrições aos parâmetros da componente sistemática para que os valores ajustados variem na mesma faixa que o componente aletório.
 
-```{r echo=FALSE, out.width="40%", fig.align="center"}
+```{r echo=FALSE, out.width="40%", fig.align="center", eval=FALSE}
 knitr::include_graphics("assets/img/glm.png")
 ```
 
@@ -293,7 +293,7 @@ $$
 
 e a seguinte imagem:
 
-```{r, out.width="30%", echo=FALSE, no.mar=TRUE, eval=TRUE, fig.align="center"}
+```{r, out.width="30%", echo=FALSE, no.mar=TRUE, eval=FALSE, fig.align="center"}
 library(magrittr)
 "assets/img/emoji3.png" %>% 
   magick::image_read() %>% 
@@ -483,7 +483,7 @@ Em resumo, as operações que realizamos na rede neural convolucional são
 
 Até o momento, aplicamos os modelos de redes neurais convolucionais para cinco CAPTCHAs distintos. Os modelos foram treinados a partir de bases de treino com aproximadamente dez mil exemplos para cada CAPTCHA. Os resultados da aplicação dos modelos estão na Tabela \@ref(tab:resultados). Essas taxas foram calculadas com base em 100 novos CAPTCHAs baixados da internet após o ajuste do modelo. Podemos observar que as taxas de acerto são todas muito próximas de 100%. No mínimo essas taxas estão muito próximas do que seres humanos conseguiriam acertar.
 
-```{r resultados}
+```{r resultados, eval=FALSE}
 tibble::tibble(
   Imagem = c(knitr::include_graphics("assets/img/rfb.png"), 
              "![](assets/img/trt.png)", 
