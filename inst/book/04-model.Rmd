@@ -1,58 +1,6 @@
+# Modelagem {#model}
 
-# Modelagem {#modelo}
-
-Para este trabalho, desenvolvemos uma técnica inovadora para resolver Captchas sem a necessidade de *feedback* humano. A solução envolve avanços em duas direções: engenharia e modelagem.
-
-## Construção dos dados {#construcao}
-
-Na parte de engenharia, desenvolvemos uma técnica para capturar e anotar feedbacks automatizados do oráculo no preenchimento de Captchas. A técnica consiste em três passos:
-
-1.  Desenvolver um robô que acessa o site desejado e tenta acessar uma informação que exige preenchimento de Captcha.
-2.  A partir de um modelo estatístico inicial, o robô tenta preencher o Captcha automaticamente, submetendo para avaliação do site.
-3.  Se o Captcha for verificado pelo site como correto, anotamos o caminho da imagem com o valor "1". Se estiver incorreto, anotamos o caminho da imagem com o valor "0".
-
-O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa que podemos criar uma base de dados virtualmente infinita de Captchas rotulados, com a informação adicional do rótulo estar correto ou incorreto. Fizemos isso para todos os Captchas presentes em nossa base de dados.
-
-<!-- TODO na verdade tem bastante que da pra testar diferentes -->
-Um problema prático do oráculo é sua propriedade de **memória**. Em problemas reais, não é possível testar diferentes rótulos para a mesma imagem, o que inviabiliza o uso de técnicas de força bruta na resolução de Captchas.
-
-Outro problema é que a informação adicional recebida quando o modelo erra é **incompleta**. A única informação nova que temos é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como temos uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, o *feedback* do oráculo pode ser considerado fraco.
-
-Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros.
-
-Fizemos isso de duas formas.
-
-## Modelagem usando heurísticas {#heuristica}
-
-O fato da informação ser incompleta e fraca não significa que ela é inútil. 
-
-
-### Propriedades da estratégia
-
-> demonstração izbicki
-
-### Resultados empíricos
-
-Os resultados empíricos foram divididos em dois testes. Primeiro, separamos uma amostra rotulada para verificar o quanto a heurística recuperava os valores corretos, a partir da predição de um modelo inicial. Depois, verificamos o ganho efetivo na acurácia do modelo alimentado com a base de dados aumentada.
-
-Para o primeiro teste, adotamos o seguinte procedimento. Para cada Captcha, selecionamos bases de treino iniciais que resultaram em acurácias de 40%, 60% e 80% após o ajuste do modelo de redes neurais convolucionais. Em seguida, aplicamos a heurística nos casos da base de teste em que o modelo errou. Finalmente, calculamos o percentual de recuperação dos resultados pela heurística.
-
-A parte do ajuste do modelo de redes neurais convolucionais merece alguns comentários adicionais. Por um lado, é importante que o modelo esteja bem ajustado, para que o erro do modelo seja fruto somente da quantidade de observações e não um problema de sub ajuste. Por outro lado, cada tamanho de base pode estar ligada a diferentes hiperparâmetros, e não existe uma forma de garantir que os melhores hiperparâmetros foram selecionados. 
-
-@goodfellow2014 menciona que, para realizar comparações de modelos, as técnicas de regularização, especialmente aumentação de dados, devem ser padronizadas. Por isso, optamos por manter a mesma grade de hiperparâmetros em todos os modelos. Especificamente, consideramos na grade as quantidades:
-
-- Multiplicador da quantidade de filtros convolucionais. 
-- Quantidade de filtros na primeira camada densa.
-- Dropout.
-
-Para diferentes modelos, como AC-GAN, o procedimento seria o mesmo. Bastaria fixar os hiperparâmetros e rodar todos os modelos.
-
-A Tabela \@ref(tab:) mostra os resultados da análise. É possível verificar que a heurística X apresenta os melhores resultados, independentemente do Captcha ou da capacidade do modelo inicial.
-
-A Figura \@ref(fig:) mostra os mesmos resultados de forma visual e resumida. É possível notar que a proporção de casos recuperados não aumenta linearmente
-
-Em seguida, passamos para a segunda etapa do procedimento. Nesta etapa, adicionamos a base construída pelo oráculo e modificada pela heurística à base de treino inicial. Como base de teste, utilizamos um conjunto de dados novo, que não foi utilizado em nenhum procedimento anterior, para garantir que não há contaminação
-
+O fato da informação ser incompleta e fraca não significa que ela é inútil. Neste capítulo, discutimos como a informação do oráculo é usada pelos modelos e demonstramos, através das simulações descritas no capítulo anterior, que os resultados são positivos e consistentes.
 
 ## Modelagem usando verossimilhança {#veross}
 
@@ -66,19 +14,28 @@ $$
 
 A partir da construção da base definida na Seção \@ref(construcao), podemos ajustar um novo modelo com a base completa, modificando a função de perda para acomodar os dados censurados.
 
-A vantagem da modelagem usando a verossimilhança com dados censurados é que ela considera exatamente a informação que é dada pelo oráculo. Isso evita os potenciais problemas na abordagem via heurísticas, já que em nenhum momento o modelo receberá dados com erros de medição.
+A vantagem da modelagem usando a verossimilhança com dados censurados é que ela considera exatamente a informação que é dada pelo oráculo. Isso é interessante pois, em nenhum momento, o modelo receberá dados com erros de medição.
 
-A técnica, no entanto, apresenta duas desvantagens.
+A técnica também é generalizável para quando o site aceita múltiplos testes. Caso o modelo erre várias vezes, basta inserir, na verossimilhança, a informação de que todos os rótulos testados estavam incorretos.
 
-A primeira é que não existem garantias teóricas de que a técnica produz um classificador melhor que a versão inicial. Diferentemente das suposições comuns em análise de sobrevivência, o mecanismo gerador da censura no nosso caso não é aleatório, já que o gerador de observações censuradas é a função de predição do modelo. Assim, não podemos importar os resultados da área de análise de sobrevivência diretamente.
+A técnica, no entanto, pode apresentar duas desvantagens.
 
-A segunda é de ordem prática. Como a solução envolve modificações na função de perda, ele não é diretamente adaptável a qualquer modelo estatístico para ajustar os dados de Captchas, precisando ser implementado caso a caso.
+A primeira é que, a princípio, não existem garantias teóricas de que a técnica produz um classificador melhor que a versão inicial. Diferentemente das suposições comuns em análise de sobrevivência, o mecanismo gerador da censura no nosso caso não é aleatório, já que o gerador de observações censuradas é a função de predição do modelo. Assim, não podemos importar os resultados da área de análise de sobrevivência diretamente.
 
-### Resultados empíricos
+A segunda é de ordem prática. Como a solução envolve modificações na função de perda, ele não é diretamente adaptável a qualquer modelo estatístico para ajustar os dados de Captchas, precisando ser revisado caso a caso. Esse problema, no entanto, é pequeno, pois não há modificações na arquitetura da rede neural, apenas na função de perda, já que a operação *feed-forward* considera apenas os dados do input.
+
+## Resultados teóricos
+
+Nesta seção, buscamos demonstrar que o uso de oráculos com a função de perda baseada nas informações censuradas i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, temos de passar por uma série de definições.
+
+
+
+
+## Resultados empíricos {#resultados}
 
 > resultados dos modelos aplicados nos dados
 
-## Implementação
+## Implementação {#implementacao}
 
 > Conclusão sobre quais são os melhores métodos
 >
@@ -87,6 +44,3 @@ A segunda é de ordem prática. Como a solução envolve modificações na funç
 > descrição do pacote
 >
 > a documentação completa do pacote será um apêndice
-
-
-A implementação da simulação foi feita em três etapas. A primeira etapa 
