@@ -4,6 +4,8 @@ Neste capítulo, descrevemos em detalhes como foi a obtenção dos dados para a 
 
 No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/02/2022, para verificar se ainda estavam ativos.
 
+## Escolha dos Captchas analisados {#lista}
+
 Para selecionar os Captchas, adotamos alguns critérios objetivos. Os critérios foram:
 
 1. O site acessado é de um serviço público (governo federal, tribunais, etc).
@@ -14,7 +16,17 @@ A primeira restrição para escolha dos Captchas é de ordem principiológica. U
 
 As restrições 2 e 3 foram escolhidas com o objetivo de facilitar as simulações para obtenção dos resultados. Em princípio, nada impede que os modelos desenvolvidos trabalhem com outros tipos de rótulos, desde que exista uma lista prévia de rótulos. Além disso, é possível realizar adaptações no pré-processamento base de dados para lidar com diferentes comprimentos de Captchas.
 
+
 A Tabela \@ref(tab:lista-captcha) mostra os Captchas trabalhados. A informação de limite de chutes é importante para a implementação do oráculo, detalhado a seguir.
+
+```{r lista-captcha}
+
+head(cars) |> 
+  knitr::kable(
+    caption = "Lista de captchas analisados."
+  )
+
+```
 
 O oráculo é o nome que escolhemos para a possibilidade de checar, de forma automática, se uma predição do modelo foi bem ou mal sucedida. Como um Captcha é um teste de Turing inverso, por definição ele é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.
 
@@ -35,7 +47,7 @@ Em teoria, a possibilidade de testar vários rótulos para o mesmo Captcha impli
 
 Além dos Captchas de sites, também consideramos imagens geradas artificialmente para rodar os modelos. O motivo de criar Captchas artificiais é a facilidade de rodar modelos e simulações, já que nos casos reais é necessário ter acesso à internet e também construir bases de dados de cada Captcha.
 
-Existem duas alternativas ao Captcha gerado. O primeiro, chamado MNIST-Captcha, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.
+Desenvolvemos duas alternativas para o Captcha gerado. O primeiro, chamado MNIST-Captcha, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.
 
 A Figura \@ref(fig:captcha-mnist) mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.
 
@@ -81,7 +93,46 @@ Com o procedimento destacado acima, é criada uma nova base de dados, que por su
 
 O único problema do procedimento de classificação diz respeito aos Captchas que não aceitam várias tentativas. Nesses casos, não é possível verificar com certeza absoluta que um caso classificado manualmente (após a tentativa do modelo) foi classificado corretamente, já que a classificação manual seria a segunda tentativa. No entanto, esse problema aparece somente em três Captchas (`cadesp`, `jucesp` e `trf5`). A classificação manual dos 100 primeiros Captchas, no entanto, mostrou que pelo menos 95% dos Captchas foram classificados corretamente quando classificados manualmente. Supomos que a proporção máxima de 5% de erro é negligenciável considerando que a maior parte das bases de dados foi construída com verificação do oráculo.
 
-## Simulações
+
+Para este trabalho, desenvolvemos uma técnica inovadora para resolver Captchas sem a necessidade de *feedback* humano. A solução envolve avanços em duas direções: engenharia e modelagem.
+
+## Construção dos dados {#construcao}
+
+Na parte de engenharia, desenvolvemos uma técnica para capturar e anotar feedbacks automatizados do oráculo no preenchimento de Captchas. A técnica consiste em três passos:
+
+1.  Desenvolver um robô que acessa o site desejado e tenta acessar uma informação que exige preenchimento de Captcha.
+2.  A partir de um modelo estatístico inicial, o robô tenta preencher o Captcha automaticamente, submetendo para avaliação do site.
+3.  Se o Captcha for verificado pelo site como correto, anotamos o caminho da imagem com o valor "1". Se estiver incorreto, anotamos o caminho da imagem com o valor "0".
+
+O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa que podemos criar uma base de dados virtualmente infinita de Captchas rotulados, com a informação adicional do rótulo estar correto ou incorreto. Fizemos isso para todos os Captchas presentes em nossa base de dados.
+
+O problema do uso de oráculos é que a informação adicional recebida quando o modelo erra é **incompleta**. A única informação nova que temos é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como temos uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, o *feedback* do oráculo pode ser considerado fraco.
+
+Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros.
+
+## Análise descritiva
+
+Os resultados empíricos foram divididos em dois testes. Primeiro, separamos uma amostra rotulada para verificar o quanto a heurística recuperava os valores corretos, a partir da predição de um modelo inicial. Depois, verificamos o ganho efetivo na acurácia do modelo alimentado com a base de dados aumentada, descrita na Seção \@ref(simulacoes).
+
+Para o primeiro teste, adotamos o seguinte procedimento. Para cada Captcha, selecionamos bases de treino iniciais que resultaram em acurácias de 40%, 60% e 80% após o ajuste do modelo de redes neurais convolucionais. Em seguida, aplicamos a heurística nos casos da base de teste em que o modelo errou. Finalmente, calculamos o percentual de recuperação dos resultados pela heurística.
+
+A parte do ajuste do modelo de redes neurais convolucionais merece alguns comentários adicionais. Por um lado, é importante que o modelo esteja bem ajustado, para que o erro do modelo seja fruto somente da quantidade de observações e não um problema de sub ajuste. Por outro lado, cada tamanho de base pode estar ligada a diferentes hiperparâmetros, e não existe uma forma de garantir que os melhores hiperparâmetros foram selecionados. 
+
+@goodfellow2014 menciona que, para realizar comparações de modelos, as técnicas de regularização, especialmente aumentação de dados, devem ser padronizadas. Por isso, optamos por manter a mesma grade de hiperparâmetros em todos os modelos. Especificamente, consideramos na grade as quantidades:
+
+- Multiplicador da quantidade de filtros convolucionais. 
+- Quantidade de filtros na primeira camada densa.
+- Dropout.
+
+Para diferentes modelos, como AC-GAN, o procedimento seria o mesmo. Bastaria fixar os hiperparâmetros e rodar todos os modelos.
+
+A Tabela \@ref(tab:) mostra os resultados da análise. É possível verificar que a heurística X apresenta os melhores resultados, independentemente do Captcha ou da capacidade do modelo inicial.
+
+A Figura \@ref(fig:) mostra os mesmos resultados de forma visual e resumida. É possível notar que a proporção de casos recuperados não aumenta linearmente
+
+Em seguida, passamos para a segunda etapa do procedimento. Nesta etapa, adicionamos a base construída pelo oráculo e modificada pela heurística à base de treino inicial. Como base de teste, utilizamos um conjunto de dados novo, que não foi utilizado em nenhum procedimento anterior, para garantir que não há contaminação.
+
+## Simulações {#simulacoes}
 
 Para verificar o poder do uso do oráculo para o aprendizado do modelo, recorremos a uma série de simulações. As simulações foram organizadas em três passos: modelo inicial, dados e modelo final. Os passos foram descritos em maior detalhe a seguir.
 
