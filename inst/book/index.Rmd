@@ -26,12 +26,4 @@ knitr::opts_chunk$set(echo = FALSE,
 
 # Sobre este documento
 
-$$\newcommand{\x}{\mathbf{x}}
-\newcommand{\X}{\mathbf{X}}
-\renewcommand{\s}{\mathbf{s}}
-\renewcommand{\S}{\mathbf{S}}
-\renewcommand{\Z}{\mathbf{Z}}
-\renewcommand{\z}{\mathbf{z}}
-\newcommand{\w}{\mathbf{w}}
-\renewcommand{\P}{\mathbb{P}}
-\renewcommand{\tt}{\boldsymbol{\theta}}$$
+Blabla, RMarkdown...

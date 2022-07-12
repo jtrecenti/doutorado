@@ -198,3 +198,25 @@ Além do terceiro passo, fizemos alguns experimentos para verificar se, ao aplic
 
 > App {ancaptcha}
 
+
+## Modelagem usando verossimilhança {#veross}
+
+Assim como na área de análise de sobrevivência, podemos pensar a informação do oráculo como um problema de dados censurados. Quando o modelo acerta, temos uma observação completa. Quando o modelo erra, temos a informação de que o rótulo testado está incorreto.
+
+Seja $z_i$ o indicador fornecido pelo oráculo de que o rótulo está correto. A verossimilhança do modelo é dada por
+
+$$
+\mathcal L(\tt;\mathbf y,\mathbf z)=\prod_i \P(Y=y|\tt)^{z_i}\P(Y\neq y|\tt)^{1-z_i}.
+$$
+
+A partir da construção da base definida na Seção \@ref(construcao), podemos ajustar um novo modelo com a base completa, modificando a função de perda para acomodar os dados censurados.
+
+A vantagem da modelagem usando a verossimilhança com dados censurados é que ela considera exatamente a informação que é dada pelo oráculo. Isso é interessante pois, em nenhum momento, o modelo receberá dados com erros de medição.
+
+A técnica também é generalizável para quando o site aceita múltiplos testes. Caso o modelo erre várias vezes, basta inserir, na verossimilhança, a informação de que todos os rótulos testados estavam incorretos.
+
+A técnica, no entanto, pode apresentar duas desvantagens.
+
+A primeira é que, a princípio, não existem garantias teóricas de que a técnica produz um classificador melhor que a versão inicial. Diferentemente das suposições comuns em análise de sobrevivência, o mecanismo gerador da censura no nosso caso não é aleatório, já que o gerador de observações censuradas é a função de predição do modelo. Assim, não podemos importar os resultados da área de análise de sobrevivência diretamente.
+
+A segunda é de ordem prática. Como a solução envolve modificações na função de perda, ele não é diretamente adaptável a qualquer modelo estatístico para ajustar os dados de Captchas, precisando ser revisado caso a caso. Esse problema, no entanto, é pequeno, pois não há modificações na arquitetura da rede neural, apenas na função de perda, já que a operação *feed-forward* considera apenas os dados do input.
