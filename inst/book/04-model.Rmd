@@ -1,46 +1,444 @@
 # Modelagem {#model}
 
-O fato da informação ser incompleta e fraca não significa que ela é inútil. Neste capítulo, discutimos como a informação do oráculo é usada pelos modelos e demonstramos, através das simulações descritas no capítulo anterior, que os resultados são positivos e consistentes.
+O fato da informação ser incompleta e fraca não significa que ela é inútil. Neste capítulo, discutimos como a informação do oráculo é usada pelos modelos e mostramos, tanto através de demonstrações matemáticas quanto com simulações que os resultados são positivos e consistentes.
 
-## Modelagem usando verossimilhança {#veross}
+O capítulo foi organizado duas seções. Na Seção \@ref(result-theory), mostramos as propriedades matemáticas e probabilísticas da estratégia adotada. Na Seção \@ref(result-sim), mostramos os resultados empíricos obtidos das simulações.
 
-Assim como na área de análise de sobrevivência, podemos pensar a informação do oráculo como um problema de dados censurados. Quando o modelo acerta, temos uma observação completa. Quando o modelo erra, temos a informação de que o rótulo testado está incorreto.
 
-Seja $z_i$ o indicador fornecido pelo oráculo de que o rótulo está correto. A verossimilhança do modelo é dada por
-
-$$
-\mathcal L(\tt;\mathbf y,\mathbf z)=\prod_i \P(Y=y|\tt)^{z_i}\P(Y\neq y|\tt)^{1-z_i}.
-$$
-
-A partir da construção da base definida na Seção \@ref(construcao), podemos ajustar um novo modelo com a base completa, modificando a função de perda para acomodar os dados censurados.
-
-A vantagem da modelagem usando a verossimilhança com dados censurados é que ela considera exatamente a informação que é dada pelo oráculo. Isso é interessante pois, em nenhum momento, o modelo receberá dados com erros de medição.
-
-A técnica também é generalizável para quando o site aceita múltiplos testes. Caso o modelo erre várias vezes, basta inserir, na verossimilhança, a informação de que todos os rótulos testados estavam incorretos.
-
-A técnica, no entanto, pode apresentar duas desvantagens.
-
-A primeira é que, a princípio, não existem garantias teóricas de que a técnica produz um classificador melhor que a versão inicial. Diferentemente das suposições comuns em análise de sobrevivência, o mecanismo gerador da censura no nosso caso não é aleatório, já que o gerador de observações censuradas é a função de predição do modelo. Assim, não podemos importar os resultados da área de análise de sobrevivência diretamente.
-
-A segunda é de ordem prática. Como a solução envolve modificações na função de perda, ele não é diretamente adaptável a qualquer modelo estatístico para ajustar os dados de Captchas, precisando ser revisado caso a caso. Esse problema, no entanto, é pequeno, pois não há modificações na arquitetura da rede neural, apenas na função de perda, já que a operação *feed-forward* considera apenas os dados do input.
-
-## Resultados teóricos
+## Resultados teóricos {#result-theory}
 
 Nesta seção, buscamos demonstrar que o uso de oráculos com a função de perda baseada nas informações censuradas i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, temos de passar por uma série de definições.
 
 
+## Resultados empíricos {#result-sim}
+
+```{r}
+total_sim <- doutorado::da_results_simulacao |> 
+  dplyr::distinct(captcha, n, ntry) |> 
+  nrow()
+
+ganho_medio <- doutorado::da_results_simulacao |> 
+  dplyr::select(-model) |> 
+  tidyr::pivot_wider(names_from = fase, values_from = acc) |> 
+  with(mean(oraculo / inicial)) |> 
+  scales::percent()
+
+ganho_absoluto <- doutorado::da_results_simulacao |> 
+  dplyr::select(-model) |> 
+  tidyr::pivot_wider(names_from = fase, values_from = acc) |> 
+  with(mean(oraculo - inicial)) |> 
+  scales::percent()
+```
+
+Nesta seção mostramos os resultados das simulações realizadas. Como comentado no capítulo anterior, foram realizadas `r total_sim` simulações no total, variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade de tentativas no oráculo.
+
+Para realizar os cálculos, montamos uma base de dados com os resultados das simulações. A base está disponível publicamente no [repositório da tese](https://github.com/jtrecenti/doutorado) e contém colunas para o Captcha ajustado (`captcha`), a quantidade de observações do modelo inicial (`n`), a quantidade de tentativas do oráculo (`ntry`), a etapa da simulação (`fase`, inicial ou oráculo), o caminho do modelo ajustado (`model`) e a acurácia obtida (`acc`).
+
+Em média, foi observado o ganho de `r ganho_medio` na acurácia após a aplicação da técnica do oráculo. Ou seja, em média a acurácia do modelo com aplicação do oráculo foi de mais de três vezes a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de `r ganho_absoluto`, ou seja, depois da aplicação do oráculo os modelos ganharam, em média, `r ganho_absoluto` na acurácia.
+
+```{r}
+tab_stats <- doutorado::da_results_simulacao |> 
+  dplyr::select(-model) |> 
+  dplyr::filter(ntry != "03") |> 
+  dplyr::filter(captcha != "rcaptcha4") |> # tirar depois
+  tidyr::pivot_wider(names_from = fase, values_from = acc) |> 
+  dplyr::mutate(
+    razao = oraculo / inicial, 
+    dif = oraculo - inicial,
+    ntry = factor(as.numeric(ntry))
+  ) |> 
+  tidyr::pivot_longer(c(razao, dif)) |> 
+  dplyr::mutate(name = dplyr::if_else(
+    name == "razao", "Percentual", "Absoluto"
+  ))
+
+tab_lines <- tibble::tibble(
+  name = c("Absoluto", "Percentual"),
+  ii = c(0, 1),
+  label = c("Melhorou\nPiorou")
+)
+```
+
+Separando os resultados gerais por quantidade de tentativas, observa-se os ganhos relativos e absolutos nas Figuras \@ref(fig:simulacao-geral-ntry-relativo) e \@ref(fig:simulacao-geral-ntry-absoluto). Cada ponto é uma simulação e o ponto em destaque é o valor médio, acompanhado de intervalo $m \mp 2*s/\sqrt(n)$, com $m$ sendo a média, $s$ o desvio padrão e $n$ a quantidade de dados. A linha pontilhada indica se a acurácia aumentou ou diminuiu após a aplicação da técnica. 
+
+Na Figura \@ref(fig:simulacao-geral-ntry-relativo) é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante e que não há necessidade de fazer tantos chutes para aproveitar essa oportunidade.
+
+```{r simulacao-geral-ntry-relativo, fig.width=5, fig.height=4, fig.cap="Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."}
+tab_stats  |> 
+  dplyr::filter(name == "Percentual") |> 
+  dplyr::group_by(ntry, name) |> 
+  dplyr::summarise(
+    m = mean(value),
+    sd = sd(value),
+    upper = m + 2*sd/sqrt(dplyr::n()),
+    lower = m - 2*sd/sqrt(dplyr::n()),
+    .groups = "drop"
+  ) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(x = ntry, y = m) +
+  ggplot2::geom_jitter(
+    ggplot2::aes(y = value),
+    data = tab_stats |> dplyr::filter(name == "Percentual"),
+    colour = "#BBBBBBFF",
+    width = .1, size = 1
+  ) +
+  ggplot2::geom_errorbar(
+    ggplot2::aes(ymin = lower, ymax = upper),
+    colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
+    width = .2,
+    size = 1
+  ) +
+  ggplot2::geom_point(
+    colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
+    size = 4
+  ) +
+  ggplot2::geom_hline(
+    ggplot2::aes(yintercept = ii),
+    data = tab_lines |> dplyr::filter(name == "Percentual"),
+    linetype = 2
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(label = label, x = 3.5, y = ii),
+    vjust = .4,
+    hjust = "right",
+    size = 3,
+    data = tab_lines |> dplyr::filter(name == "Percentual")
+  ) +
+  # ggplot2::facet_wrap(~name, scales = "free_y") +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::labs(
+    x = "Quantidade de tentativas",
+    y = "Ganho relativo"
+  )
+```
+
+A Figura \@ref(fig: simulacao-geral-ntry-absoluto), com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em Captchas mais de um chute girou em torno de 40%, enquanto que o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do modelo (e pouco) em casos que com apenas um chute, mostrando que a técnica é consistentemente efetiva.
+
+```{r simulacao-geral-ntry-absoluto, fig.width=5, fig.height=4, fig.cap="Ganhos absolutos ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."}
+tab_stats  |> 
+  dplyr::filter(name == "Absoluto") |> 
+  dplyr::group_by(ntry, name) |> 
+  dplyr::summarise(
+    m = mean(value),
+    sd = sd(value),
+    upper = m + 2*sd/sqrt(dplyr::n()),
+    lower = m - 2*sd/sqrt(dplyr::n()),
+    .groups = "drop"
+  ) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(x = ntry, y = m) +
+  ggplot2::geom_jitter(
+    ggplot2::aes(y = value),
+    data = tab_stats |> dplyr::filter(name == "Absoluto"),
+    colour = "#BBBBBBFF",
+    width = .1, size = 1
+  ) +
+  ggplot2::geom_errorbar(
+    ggplot2::aes(ymin = lower, ymax = upper),
+    colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
+    width = .2,
+    size = 1
+  ) +
+  ggplot2::geom_point(
+    colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
+    size = 4
+  ) +
+  ggplot2::geom_hline(
+    ggplot2::aes(yintercept = ii),
+    data = tab_lines |> 
+  dplyr::filter(name == "Absoluto"),
+    linetype = 2
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(label = label, x = 3.5, y = ii),
+    vjust = .4,
+    hjust = "right",
+    size = 3,
+    data = tab_lines |> 
+  dplyr::filter(name == "Absoluto")
+  ) +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::labs(
+    x = "Quantidade de tentativas",
+    y = "Ganho absoluto"
+  )
+```
+
+```{r}
+tab_lines_inicial <- tibble::tibble(
+  name = c("Absoluto", "Absoluto (ajustado)", "Percentual"),
+  ii = c(0, 0, 1),
+  label = c("Melhorou\nPiorou")
+)
+tab_stats_inicial <- doutorado::da_results_simulacao |> 
+  dplyr::filter(captcha != "rcaptcha4") |> # retirar depois
+  dplyr::select(-model) |> 
+  tidyr::pivot_wider(names_from = fase, values_from = acc) |> 
+  dplyr::mutate(inicial_cut = cut(
+    inicial, c(0, .1, .35, .6),
+    labels = c("Até 10%", "Entre 10% e 35%", "Mais de 35%")
+  )) |> 
+  dplyr::mutate(
+    razao = oraculo / inicial, 
+    dif = oraculo - inicial,
+    dif_adj = (oraculo - inicial) / (1 - inicial)
+  ) |> 
+  tidyr::pivot_longer(c(razao, dif, dif_adj)) |> 
+  dplyr::mutate(name = dplyr::case_when(
+    name == "razao" ~ "Percentual",
+    name == "dif" ~ "Absoluto",
+    name == "dif_adj" ~ "Absoluto (ajustado)"
+  ))
+```
+
+As Figuras \@ref(fig:simulacao-geral-inicial-relativo) e \@ref(fig:simulacao-geral-inicial-absoluto) apresentam os resultados gerais separando por acurácia inicial do modelo. A estrutura do gráfico é similar às visualizações separando por quantidade de tentativas. As categorias escolhidas foram de até 10%, mais de 10% até 35% e mais de 35% de acurácia no modelo inicial. A escolha dos intervalos se deram pela quantidade de observações em cada categoria
 
 
-## Resultados empíricos {#resultados}
+A Figura \@ref(fig:simulacao-geral-inicial-relativo) mostra os ganhos relativos. É possível notar uma tendência de queda no ganho de acurácia com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse resultado é esperado, pois, como a acurácia é um número entre zero e um, um modelo que já possui alta acurácia não tem a possibilidade de aumentar tanto.
 
-> resultados dos modelos aplicados nos dados
+```{r simulacao-geral-inicial-relativo, fig.width=5, fig.height=4, fig.cap="Ganho percentual ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."}
+tab_stats_inicial  |> 
+  dplyr::filter(name == "Percentual") |> 
+  dplyr::group_by(inicial_cut, name) |> 
+  dplyr::summarise(
+    m = mean(value),
+    sd = sd(value),
+    upper = m + 2*sd/sqrt(dplyr::n()),
+    lower = m - 2*sd/sqrt(dplyr::n()),
+    .groups = "drop"
+  ) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(x = inicial_cut, y = m) +
+  ggplot2::geom_jitter(
+    ggplot2::aes(y = value),
+    data = tab_stats_inicial |> dplyr::filter(name == "Percentual"),
+    colour = "#BBBBBBFF",
+    width = .1, size = 1
+  ) +
+  ggplot2::geom_errorbar(
+    ggplot2::aes(ymin = lower, ymax = upper),
+    colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
+    width = .2,
+    size = 1
+  ) +
+  ggplot2::geom_point(
+    colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
+    size = 4
+  ) +
+  ggplot2::geom_hline(
+    ggplot2::aes(yintercept = ii),
+    data = tab_lines_inicial |> dplyr::filter(name == "Percentual"),
+    linetype = 2
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(label = label, x = 3.5, y = ii),
+    vjust = .4,
+    hjust = "right",
+    size = 3,
+    data = tab_lines_inicial |> dplyr::filter(name == "Percentual")
+  ) +
+  # ggplot2::facet_wrap(~name, scales = "free_y") +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::labs(
+    x = "Acurácia do modelo inicial",
+    y = "Ganho relativo"
+  )
+```
 
-## Implementação {#implementacao}
 
-> Conclusão sobre quais são os melhores métodos
->
-> comentários adicionais sobre como utilizar
->
-> descrição do pacote
->
-> a documentação completa do pacote será um apêndice
+A Figura \@ref(fig:simulacao-geral-inicial-absoluto) mostra os ganhos absolutos. O gráfico apresenta o mesmo problema que o anterior, já que o ganho máximo depende da acurácia inicial do modelo. Mesmo assim, é possível notar que, em termos absolutos, modelos com acurácia inicial entre 10% e 35% apresentaram um ganho maior que modelos com acurácia inicial de até 10%.
+
+```{r simulacao-geral-inicial-absoluto, fig.width=5, fig.height=4, fig.cap="Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."}
+tab_stats_inicial  |> 
+  dplyr::filter(name == "Absoluto") |> 
+  dplyr::group_by(inicial_cut, name) |> 
+  dplyr::summarise(
+    m = mean(value),
+    sd = sd(value),
+    upper = m + 2*sd/sqrt(dplyr::n()),
+    lower = m - 2*sd/sqrt(dplyr::n()),
+    .groups = "drop"
+  ) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(x = inicial_cut, y = m) +
+  ggplot2::geom_jitter(
+    ggplot2::aes(y = value),
+    data = tab_stats_inicial |> dplyr::filter(name == "Absoluto"),
+    colour = "#BBBBBBFF",
+    width = .1, size = 1
+  ) +
+  ggplot2::geom_errorbar(
+    ggplot2::aes(ymin = lower, ymax = upper),
+    colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
+    width = .2,
+    size = 1
+  ) +
+  ggplot2::geom_point(
+    colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
+    size = 4
+  ) +
+  ggplot2::geom_hline(
+    ggplot2::aes(yintercept = ii),
+    data = tab_lines |> dplyr::filter(name == "Absoluto"),
+    linetype = 2
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(label = label, x = 3.5, y = ii),
+    vjust = .4,
+    hjust = "right",
+    size = 3,
+    data = tab_lines |> dplyr::filter(name == "Absoluto")
+  ) +
+  # ggplot2::facet_wrap(~name, scales = "free_y") +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::labs(
+    x = "Acurácia do modelo inicial",
+    y = "Ganho absoluto"
+  )
+```
+
+Para lidar com o fato da acurácia ser um número limitado, fizemos o mesmo gráficos de antes, mas ajustado pelo máximo possível que a técnica do oráculo poderia proporcionar. O ganho absoluto ajustado de uma simulação é dado por
+
+$$
+\text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
+$$
+
+A Figura \@ref(fig:simulacao-geral-inicial-absoluto-ajustado) mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica do oráculo para modelos iniciais com mais do que 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para uma acurácia maior, de onde poderíamos aplicar a técnica novamente para obter resultads ainda mais expressivos.
+
+```{r simulacao-geral-inicial-absoluto-ajustado, fig.width=5, fig.height=4, fig.cap="Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."}
+tab_stats_inicial  |> 
+  dplyr::filter(name == "Absoluto (ajustado)") |> 
+  dplyr::group_by(inicial_cut, name) |> 
+  dplyr::summarise(
+    m = mean(value),
+    sd = sd(value),
+    upper = m + 2*sd/sqrt(dplyr::n()),
+    lower = m - 2*sd/sqrt(dplyr::n()),
+    .groups = "drop"
+  ) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(x = inicial_cut, y = m) +
+  ggplot2::geom_jitter(
+    ggplot2::aes(y = value),
+    data = tab_stats_inicial |> dplyr::filter(name == "Absoluto (ajustado)"),
+    colour = "#BBBBBBFF",
+    width = .1, size = 1
+  ) +
+  ggplot2::geom_errorbar(
+    ggplot2::aes(ymin = lower, ymax = upper),
+    colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
+    width = .2,
+    size = 1
+  ) +
+  ggplot2::geom_point(
+    colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
+    size = 4
+  ) +
+  ggplot2::geom_hline(
+    ggplot2::aes(yintercept = ii),
+    data = tab_lines_inicial |> dplyr::filter(name == "Absoluto (ajustado)"),
+    linetype = 2
+  ) +
+  ggplot2::geom_text(
+    ggplot2::aes(label = label, x = 3.5, y = ii),
+    vjust = .4,
+    hjust = "right",
+    size = 3,
+    data = tab_lines_inicial |> dplyr::filter(name == "Absoluto (ajustado)")
+  ) +
+  # ggplot2::facet_wrap(~name, scales = "free_y") +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::labs(
+    x = "Acurácia do modelo inicial",
+    y = "Ganho absoluto (ajustado)"
+  )
+```
+
+Na Figura \@ref(fig:simulacao-captcha), mostramos os resultados separando por Captcha. Cada linha é uma combinação de Captcha, quantidade de tentativas e acurácia modelo inicial, que foi classificado em três categorias. As linhas pontilhadas indicam modelos ajustados com mais de uma tentativa, enquanto as linhas contínuas mostram modelos ajustados com apenas uma tentativa. A primeira extremidade de cada linha, do lado esquerdo, indica a acurácia do modelo inicial e a segunda extremidade, do lado direito, a acurácia do modelo usando a técnica do oráculo.
+
+```{r simulacao-captcha, fig.width=8, fig.height=5, fig.cap="Resultados da simulação por captcha, quantidade de tentativas e modelo inicial."}
+doutorado::da_results_simulacao |>
+  dplyr::select(-model) |>
+  dplyr::mutate(ntry2 = dplyr::case_when(
+    ntry == "01" ~ "Apenas 1",
+    TRUE ~ "Mais de 1"
+  )) |>
+  tidyr::pivot_wider(names_from = fase, values_from = acc) |> 
+  dplyr::group_by(captcha, ntry) |> 
+  dplyr::mutate(inicial_cut = cut(
+    inicial, c(0, .1, .35, .6),
+    labels = c("Até 10%", "Entre 10% e 35%", "Mais de 35%")
+  )) |> 
+  tidyr::pivot_longer(c(inicial, oraculo), names_to = "fase", values_to = "acc") |> 
+  ggplot2::ggplot(ggplot2::aes(
+    x = fase, y = acc,
+    colour = inicial_cut,
+    linetype = ntry2,
+    group = paste(captcha, n, ntry))
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line() +
+  ggplot2::scale_colour_viridis_d(begin = .2, end = .8, option = "A") +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::facet_wrap(~captcha) +
+  ggplot2::theme_bw() +
+  ggplot2::labs(
+    x = "Técnica",
+    y = "Acurácia",
+    colour = "Modelo inicial",
+    linetype = "# Tentativas"
+  )
+```
+
+Pelo gráfico, é possível identificar duas informações relevantes. Como já verificado anteriormente, os modelos ajustados com mais de uma tentativa apresentam maiores ganhos do que os modelos ajustados com apenas uma tentativa. Verifica-se também que modelos com acurácia inicial menores não necessariamente apresentam ganhos menores quando separados por Captcha. 
+
+Pelas análises das simulações, é possível concluir que a técnica do oráculo foi bastante bem sucedida. Primeiro, ela apresenta resultados expressivos e de forma consistente, mesmo dando apenas um passo de obtenção de dados e ajuste de novo modelo. Além disso, a técnica é capaz de se aproveitar de sites que permitem a verificação do oráculo múltiplas vezes para o mesmo Captcha. Por último, a técnica apresenta ganhos mesmo para modelos iniciais muito fracos (com acurácias de até 10%), indicando que sua aplicação é indicada para qualquer modelo inicial com mais de 5% de acurácia, o que é bastante factível de atingir com bases pequenas ou com modelos genéricos.
+
+### Aplicação iterada
+
+Um possível problema em aplicar a técnica do oráculo é que a técnica pode introduzir viés no modelo, o que impediria de ser aprimorado indefinidamente. Mesmo que os teoremas dêem uma boa base para acreditar que isso não seja verdade, foi feito um teste empírico, com apenas um Captcha, para verificar se a aplicação da técnica múltiplas vezes apresenta bons resultados.
+
+O Captcha escolhido para a simulação foi o `trf5`, por ser um Captcha que não aceita múltiplos chutes, em uma tentativa de obter um pior caso. Para esse Captcha, o melhor modelo obtido com a técnica do oráculo foi considerado como modelo inicial e usado para baixar novos dados do site do Tribunal. Os novos dados foram adicionados à base de treino, ajustando-se um novo modelo.
+
+A Figura \@ref(fig:aplicacao-iterada) mostra os resultados da aplicação iterada. A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.
+
+```{r aplicacao-iterada, fig.cap="Resultados da aplicação iterada da técnica.", fig.width=7, fig.height=4}
+
+dados_iteracao_trf5 <- tibble::tribble(
+  ~n, ~ntry,         ~tempo,              ~acc,
+  "00101",  "01",    "acc_antes", 0.238095238095238,
+  "00101",  "01", "acc_oraculo1",             0.705,
+  "00101",  "01", "acc_oraculo2",                 1
+)
+
+
+dados_iteracao_trf5 |> 
+  ggplot2::ggplot(ggplot2::aes(x = tempo, y = acc)) +
+  ggplot2::geom_col(fill = viridis::viridis(2,.8,.3,.7,1,"A")[1]) +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
+  ggplot2::scale_x_discrete(
+    labels = c(
+      "Modelo Inicial\n(n=100)", 
+      "Primeira aplicação\ndo oráculo\n(n=1000)", 
+      "Segunda aplicação\ndo oráculo\n(n=2000)"
+    )
+  ) +
+  ggplot2::labs(
+    x = "",
+    y = "Acurácia"
+  ) +
+  ggplot2::theme_minimal(14)
+
+```
+
+O resultado sugere que a técnica pode sim ser utilizada indefinidamente para auxiliar no aprendizado do modelo. Ela sugere, ainda, que uma técnica de aprendizado ativo com *feedback* automático do oráculo pode dar bons resultados, já que a forma de obter os dados não introduz viés no ajuste do modelo.
+
+### Aprendizado ativo (TODO)
+
+> Aqui a ideia é mostrar os resultados do aprendizado ativo, se der tempo de fazer.
+
