@@ -2,6 +2,7 @@ book_filename: tese
 output_dir: relatorio
 clean: [bookdown.bbl]
 delete_merged_file: true
+rmd_files: ["index.Rmd", "04-model.Rmd"]
 language:
   label:
     fig: "Figura "
