@@ -9,8 +9,6 @@ biblio-style: apalike
 link-citations: yes
 fontsize: '12pt'
 colorlinks: yes 
-lot: yes
-lof: yes
 site: bookdown::bookdown_site
 description: "Template de relatório."
 ---

@@ -15,9 +15,11 @@
 #     download: ["pdf"]
 
 pagedown::thesis_paged:
-  toc: true
-  lof-title: "Lista de Figuras"
-  lot-title: "Lista de Tabelas"
+  toc: false
+  lof: false
+  lot: false
+  # lof-title: "Lista de Figuras"
+  # lot-title: "Lista de Tabelas"
   css: ["thesis", "assets/css/pagedown.css"]
   template: "assets/template.html"
   self_contained: true
