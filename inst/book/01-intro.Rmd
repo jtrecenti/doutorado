@@ -1,5 +1,22 @@
 # Introdução {#introducao}
 
+> contar a história dos captchas como uma luta de classes: geradores e classificadores
+
+> na história, ir citando os papers que vão aparecendo
+
+> o advento do recaptcha
+
+> quando surgir o primeiro classificador com convnets, definir de forma mais detalhada
+
+## Captchas
+
+### Uma luta de geradores e resolvedores
+
+### Captchas em serviços públicos
+
+### Oráculo
+
+
 ## Objetivos {#objetivos}
 
 > Construir um repositório de dados e um app de anotação
@@ -23,3 +40,4 @@
 > Oráculo pode ajudar, e abrir isso em sub hipóteses
 
 ## Organização do trabalho
+

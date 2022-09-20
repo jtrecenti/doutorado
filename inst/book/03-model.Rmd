@@ -64,7 +64,8 @@ Separando os resultados gerais por quantidade de tentativas, observa-se os ganho
 Na Figura \@ref(fig:simulacao-geral-ntry-relativo) é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante e que não há necessidade de fazer tantos chutes para aproveitar essa oportunidade.
 
 ```{r simulacao-geral-ntry-relativo, fig.width=5, fig.height=4, fig.cap="Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."}
-tab_stats  |> 
+
+tab_stats_correta <- tab_stats  |> 
   dplyr::filter(name == "Percentual") |> 
   dplyr::group_by(ntry, name) |> 
   dplyr::summarise(
@@ -73,7 +74,9 @@ tab_stats  |>
     upper = m + 2*sd/sqrt(dplyr::n()),
     lower = m - 2*sd/sqrt(dplyr::n()),
     .groups = "drop"
-  ) |> 
+  )
+
+tab_stats_correta |> 
   ggplot2::ggplot() +
   ggplot2::aes(x = ntry, y = m) +
   ggplot2::geom_jitter(
