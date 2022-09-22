@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Captchas | Doutorado</title>
+  <meta name="description" content="Template de relatório." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Captchas | Doutorado" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Template de relatório." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Captchas | Doutorado" />
+  
+  <meta name="twitter:description" content="Template de relatório." />
+  
+
+<meta name="author" content="Julio Trecenti" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introducao.html"/>
+<link rel="next" href="dados.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="assets/css/bookdown.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tese</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Sobre este documento</a></li>
+<li class="chapter" data-level="2" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i><b>2</b> Introdução</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducao.html"><a href="introducao.html#objetivos"><i class="fa fa-check"></i><b>2.1</b> Objetivos</a></li>
+<li class="chapter" data-level="2.2" data-path="introducao.html"><a href="introducao.html#justificativa"><i class="fa fa-check"></i><b>2.2</b> Justificativa</a></li>
+<li class="chapter" data-level="2.3" data-path="introducao.html"><a href="introducao.html#hipóteses"><i class="fa fa-check"></i><b>2.3</b> Hipóteses</a></li>
+<li class="chapter" data-level="2.4" data-path="introducao.html"><a href="introducao.html#organização-do-trabalho"><i class="fa fa-check"></i><b>2.4</b> Organização do trabalho</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="captchas.html"><a href="captchas.html"><i class="fa fa-check"></i><b>3</b> Captchas</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="captchas.html"><a href="captchas.html#força-bruta"><i class="fa fa-check"></i><b>3.1</b> Força-bruta</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="captchas.html"><a href="captchas.html#redes-neurais"><i class="fa fa-check"></i><b>3.1.1</b> Redes neurais</a></li>
+<li class="chapter" data-level="3.1.2" data-path="captchas.html"><a href="captchas.html#a-operação-de-convolução"><i class="fa fa-check"></i><b>3.1.2</b> A operação de convolução</a></li>
+<li class="chapter" data-level="3.1.3" data-path="captchas.html"><a href="captchas.html#redes-neurais-convolucionais"><i class="fa fa-check"></i><b>3.1.3</b> Redes neurais convolucionais</a></li>
+<li class="chapter" data-level="3.1.4" data-path="captchas.html"><a href="captchas.html#resultados"><i class="fa fa-check"></i><b>3.1.4</b> Resultados</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dados.html"><a href="dados.html"><i class="fa fa-check"></i><b>4</b> Dados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dados.html"><a href="dados.html#simulações"><i class="fa fa-check"></i><b>4.1</b> Simulações</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dados.html"><a href="dados.html#primeiro-passo-modelo-inicial"><i class="fa fa-check"></i><b>4.1.1</b> Primeiro passo: modelo inicial</a></li>
+<li class="chapter" data-level="4.1.2" data-path="dados.html"><a href="dados.html#segundo-passo-dados"><i class="fa fa-check"></i><b>4.1.2</b> Segundo passo: dados</a></li>
+<li class="chapter" data-level="4.1.3" data-path="dados.html"><a href="dados.html#terceiro-passo-modelo-final"><i class="fa fa-check"></i><b>4.1.3</b> Terceiro passo: modelo final</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelo.html"><a href="modelo.html"><i class="fa fa-check"></i><b>5</b> Modelagem</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modelo.html"><a href="modelo.html#construcao"><i class="fa fa-check"></i><b>5.1</b> Construção dos dados</a></li>
+<li class="chapter" data-level="5.2" data-path="modelo.html"><a href="modelo.html#heuristica"><i class="fa fa-check"></i><b>5.2</b> Modelagem usando heurísticas</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="modelo.html"><a href="modelo.html#heurística-1-substituição-da-pior-predição"><i class="fa fa-check"></i><b>5.2.1</b> Heurística 1: substituição da pior predição</a></li>
+<li class="chapter" data-level="5.2.2" data-path="modelo.html"><a href="modelo.html#heurística-2-substituição-da-predição-com-menor-diferença-para-segunda-candidata"><i class="fa fa-check"></i><b>5.2.2</b> Heurística 2: substituição da predição com menor diferença para segunda candidata</a></li>
+<li class="chapter" data-level="5.2.3" data-path="modelo.html"><a href="modelo.html#heurística-3-substituição-da-predição-que-tem-maior-entropia-no-vetor-de-predições"><i class="fa fa-check"></i><b>5.2.3</b> Heurística 3: substituição da predição que tem maior entropia no vetor de predições</a></li>
+<li class="chapter" data-level="5.2.4" data-path="modelo.html"><a href="modelo.html#propriedades-da-estratégia"><i class="fa fa-check"></i><b>5.2.4</b> Propriedades da estratégia</a></li>
+<li class="chapter" data-level="5.2.5" data-path="modelo.html"><a href="modelo.html#resultados-empíricos"><i class="fa fa-check"></i><b>5.2.5</b> Resultados empíricos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="modelo.html"><a href="modelo.html#veross"><i class="fa fa-check"></i><b>5.3</b> Modelagem usando verossimilhança</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="modelo.html"><a href="modelo.html#resultados-empíricos-1"><i class="fa fa-check"></i><b>5.3.1</b> Resultados empíricos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="modelo.html"><a href="modelo.html#implementação"><i class="fa fa-check"></i><b>5.4</b> Implementação</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusao.html"><a href="conclusao.html"><i class="fa fa-check"></i><b>6</b> Conclusões</a></li>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="pacote-captcha.html"><a href="pacote-captcha.html"><i class="fa fa-check"></i><b>A</b> Pacote {captcha}</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Doutorado</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="captchas" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Captchas<a href="captchas.html#captchas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<blockquote>
+<p>contar a história dos captchas como uma luta de classes: geradores e classificadores</p>
+</blockquote>
+<blockquote>
+<p>na história, ir citando os papers que vão aparecendo</p>
+</blockquote>
+<blockquote>
+<p>o advento do recaptcha</p>
+</blockquote>
+<blockquote>
+<p>quando surgir o primeiro classificador com convnets, definir de forma mais detalhada</p>
+</blockquote>
+<p>A resolução de Captchas pode ser entendida como um problema de classificação de imagens. Especificamente, nosso interesse é criar uma função <span class="math inline">\(g\)</span> que recebe uma imagem <span class="math inline">\(\mathbf X = \{x_{nmr} \in [0,1]\}_{N\times M \times R}\)</span> e retorna um vetor de índices <span class="math inline">\(\mathbf y\)</span>. Cada índice <span class="math inline">\(y_j\)</span> indica a presença de um caractere <span class="math inline">\(c_j\)</span>, <span class="math inline">\(j = 1, \dots, L\)</span>, onde <span class="math inline">\(L\)</span> é o número de caracteres contidos na imagem. Chamaremos <span class="math inline">\(L\)</span> de <em>comprimento</em> do Captcha, com <span class="math inline">\(L \in \mathbb{Z}_+\)</span>.</p>
+<p>O problema pode ser detalhado em três itens, listados abaixo:</p>
+<ol style="list-style-type: decimal">
+<li>Nossa variável <strong>explicativa</strong>, a imagem, é uma matriz <span class="math inline">\(\mathbf X = \{x_{ijk}\}_{N\times M \times R}\)</span>, em que <span class="math inline">\(N\)</span> é o número de linhas, <span class="math inline">\(M\)</span> é o número de colunas e <span class="math inline">\(R\)</span> é o número de <em>cores</em>, ou <em>canais</em>.</li>
+</ol>
+<p>O elemento <span class="math inline">\(x_{nm\cdot}\)</span> é denominado <em>pixel</em>. Um pixel representa a menor unidade possível da imagem. Em uma imagem colorida, por exemplo, temos <span class="math inline">\(R=3\)</span>. Nesse caso, um pixel é um vetor de três dimensões com valores entre zero e um, representando a intensidade de vermelho, verde e azul da coordenada <span class="math inline">\((n, m)\)</span> da imagem. Numa imagem em escala de cinza, por exemplo, temos <span class="math inline">\(R=1\)</span> e o pixel, de uma dimensão, representa a intensidade do cinza, sendo 1 o equivalente da cor branca e 0 o preto.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>O objeto <span class="math inline">\(C \in \mathcal A^L\)</span> é um vetor de itens de um alfabeto <span class="math inline">\(\mathcal A\)</span>, de cardinalidade <span class="math inline">\(|\mathcal A|\)</span>, finito e conhecido. Esse alfabeto contém todos os possíveis caracteres que podem aparecer na imagem.</p></li>
+<li><p>Nossa <strong>resposta</strong> <span class="math inline">\(\mathbf y \in \mathbb \{1, \dots, |\mathcal A|\}^L\)</span> é um vetor de índices de tamanho fixo. Cada elemento de <span class="math inline">\(\mathbf y\)</span> representa um elemento do alfabeto <span class="math inline">\(\mathcal A\)</span>.</p></li>
+</ol>
+<p>A obtenção de uma função <span class="math inline">\(g\)</span> capaz de mapear <span class="math inline">\(\mathbf y\)</span> a partir de uma nova imagem <span class="math inline">\(\mathbf X\)</span> depende de uma amostra de imagens <span class="math inline">\(\mathbf X_1, \dots, \mathbf X_S\)</span>, corretamente classificadas
+através do vetor <span class="math inline">\(\mathbf y_1, \dots, \mathbf y_S\)</span>. A tarefa é, portanto, obter uma estimativa <span class="math inline">\(\hat g\)</span> para a função <span class="math inline">\(g\)</span> que minimiza</p>
+<p><span class="math display">\[
+L(\hat g(\mathbf X), \mathbf y) = \mathbb I(g(\mathbf X) \neq \mathbf y)
+\]</span></p>
+<p>em que <span class="math inline">\(\mathbb I(g(\mathbf X) \neq \mathbf y)\)</span> indica se <span class="math inline">\(g(\mathbf X)\)</span> difere
+do que é observado em <span class="math inline">\(\mathbf y\)</span>. Isto é, pretende-se encontrar uma função que minimize a taxa de classificação incorreta das imagens que descrevem os textos dos Captchas.</p>
+<hr />
+<p>Um problema de resolver o CAPTCHA diretamente é que a variável resposta <span class="math inline">\(\mathbf y\)</span> tem um número exponencial de combinações. Na formulação do capítulo anterior, nossa resposta é uma palavra de <span class="math inline">\(L\)</span> caracteres, sendo que cada caractere <span class="math inline">\(c_j\)</span> pode ter <span class="math inline">\(|\mathcal A|\)</span> valores. Nessa construção, o total de combinações é <span class="math inline">\(|\mathcal A|^L\)</span>.</p>
+<p>Por exemplo, um CAPTCHA com <span class="math inline">\(L=6\)</span> letras e <span class="math inline">\(|\mathcal A| = 36\)</span> possibilidades em cada letra (26 letras do alfabeto e 10 algarismos), possui um total de 2.176.782.336 (&gt; 2 bilhões) combinações. Modelar essas imagens diretamente através de uma única variável resposta categórica é inviável.</p>
+<p>Por isso, uma forma de resolver CAPTCHAs é separando o problema em duas tarefas: segmentar e classificar. A tarefa de segmentação consiste em receber uma imagem com várias letras e detectar pontos de corte, separando-a em várias imagens de uma letra. Já a classificação consiste em receber uma imagem com uma letra e identificar o caractere correspondente. Nesse caso, a resposta é reduzida para <span class="math inline">\(|\mathcal A|\)</span> categorias, que cresce linearmente e, portanto, tratável.</p>
+<p>A literatura mostra através de estudos empíricos que a tarefa de segmentar é mais difícil do que a tarefa de classificar <span class="citation">(<a href="#ref-bursztein2014end" role="doc-biblioref"><strong>bursztein2014end?</strong></a>)</span>. Isso acontece porque o problema de classificação de letras segmentadas é similar ao problema de reconhecimento de caracteres (<em>Optical Character Recognition</em>, OCR), que é amplamente estudado e pode ser considerado resolvido. A segmentação, no entanto, é um problema em aberto e faz parte da literatura de oclusão de objetos em visão computacional.</p>
+<p>Por esse motivo, os desenvolvedores de CAPTCHAs de imagens baseadas em texto têm explorado métodos de dificultar a segmentação. As principais formas são i) colar os caracteres e ii) adicionar linhas ligando os dígitos. Essas técnicas são combinadas com a adição de ruído e distorção de caracteres para compor a imagem final.</p>
+<p>Vamos usar como exemplo o CAPTCHA do Tribunal de Justiça de Minas Gerais (TJMG). Nesse caso, temos <span class="math inline">\(L=4\)</span> e <span class="math inline">\(|\mathcal A|=10\)</span>, apenas os dez algarismos.</p>
+<p>A Figura <a href="#fig:tjmg1"><strong>??</strong></a> mostra um exemplo do captcha do TJMG. Podemos notar a utilização de distorção de catacteres e adição de linhas ligando os dígitos como formas de evitar a resolução automática.</p>
+<p>Nesse caso, podemos resolver o problema da segmentação realizando cortes fixos na imagem. Podemos também limitar os eixos <code>x</code>, tirando os espaços vazios à esquerda e à direita e <code>y</code>, removendo espaços superiores e inferiores. Por último, transformamos a imagem em escala de cinza. O resultado dessas operações de pré-processamento estão na Figura <a href="#fig:tjmg2"><strong>??</strong></a>.</p>
+<p>O resultado são cinco imagens de dimensões <code>26x20</code>, associadas a cada caractere. O próximo passo é transformar o banco de dados num formato tratável por modelos tradicionais de regressão. Para isso, colocamos cada pixel em uma coluna da nossa base de dados. No caso do TJMG, cada CAPTCHA gera uma tabela de 5 linhas e 520 (<code>26 * 20</code>) colunas. A Tabela <a href="#tab:imgsep"><strong>??</strong></a> mostra as primeiras seis colunas dessa base.</p>
+<p>Agora basta rodar o mesmo para toda a base de treino e rodar um modelo. Nesse exemplo, utilizamos uma base de 1500 CAPTCHAs classificados. O resultado após o pré-processamento é uma base com 7500 linhas e 520 colunas. Escolhemos manter 6000 linhas para treino e as 1500 restantes para teste. Utilizamos um modelo de florestas aleatórias para o exemplo <span class="citation">(<a href="#ref-breiman2001random" role="doc-biblioref"><strong>breiman2001random?</strong></a>)</span>.</p>
+<p>O resultado do modelo pode ser verificado na Tabela <a href="#tab:errosTJMG"><strong>??</strong></a>, que mostra os observados <em>versus</em> preditos na base de teste. O acerto foi de 99.6% em cada caractere. Assumindo que o erro não depende da posição do caractere no CAPTCHA, o acerto para a imagem completa é de aproximadamente 98%.</p>
+<p>O resultado para o TJMG é bastante satisfatório, mas não generaliza para outros CAPTCHAs. Tome por exemplo o CAPTCHA da Receita Federal (RFB) da Figura <a href="#fig:generalize"><strong>??</strong></a>. Nesse caso, a posição dos caracteres muda significativamente de imagem para imagem, e assim fica difícil cortar em pedaços.</p>
+<p>A mesma técnica aplicada ao CAPTCHA RFB apresentou acerto de 78.8% do caractere, o que equivale a apenas 23.8% de acerto para toda a imagem. Claro que seria possível melhorar o poder preditivo com ajustes nos hipeparâmetros do modelo, mas o problema essencial nesse caso está na qualidade segmentação, e não na classificação dos caracteres.</p>
+<p>Outro problema dessa técnica é que ela é incapaz de trabalhar com CAPTCHAs de comprimento variável. Nesse caso, seria necessário construir um modelo não supervisionado para identificar a posição das letras, o que adiciona um grau a mais de complexidade na resolução do CAPTCHA.</p>
+<p>Por isso, faz-se necessária uma abordagem que trabalha com problema completo, sem passar explicitamente pela fase de segmentação. Ao invés de cortar a imagem, vamos extrair detalhes da imagem completa automaticamente e utilizar essas características como variáveis preditoras num modelo de regressão. Chamaremos essa abordagem de <em>força bruta</em>.</p>
+<div id="força-bruta" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Força-bruta<a href="captchas.html#força-bruta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A abordagem de força bruta utiliza redes neurais convolucionais. Para explicar o funcionamento dessa técnica, vamos primeiro apresentar definições para redes neurais e para a operação de convolução. Em seguida, vamos juntar os dois conceitos para construir o modelo utilizado nos CAPTCHAs.</p>
+<div id="redes-neurais" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Redes neurais<a href="captchas.html#redes-neurais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Uma rede neural pode ser entendida como uma extensão de modelos lineares generalizados com a adição de uma arquitetura aos componentes do modelo. Para mostrar esse conceito, vamos partir da definição de um modelo regressão logística até construir uma rede neural com camadas ocultas.</p>
+<div id="regressão-logística" class="section level4 hasAnchor" number="3.1.1.1">
+<h4><span class="header-section-number">3.1.1.1</span> Regressão logística<a href="captchas.html#regressão-logística" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>O modelo linear generalizado é composto por três elementos: componente aleatório, componente sistemático e função de ligação.</p>
+<p>O componente aleatório é uma variável aleatória com distribuição pertencente à família exponencial, que dá origem à verossimilhança do modelo. O componente sistemático é uma combinação linear das variáveis preditoras com um vetor de parâmetros. A função de ligação é uma operação que leva a componente sistemática no valor esperado da componente aleatória. Uma forma comum de definir a ligação é propondo uma função com domínio nos números reais e contradomínio igual ao suporte do componente aleatório. Dessa forma, não é necessário impor restrições aos parâmetros da componente sistemática para que os valores ajustados variem na mesma faixa que o componente aletório.</p>
+<p>No exemplo da regressão logística, o componente aleatório tem distribuição Bernoulli com média <span class="math inline">\(\mu\)</span>. O componente sistemático é a combinação linear <span class="math inline">\(\mathbf X \boldsymbol \beta\)</span> e a função de ligação é a inversa de</p>
+<p><span class="math display">\[
+g(\mu) = \log\left(\frac{\mu}{1-\mu}\right)
+\]</span></p>
+<p>A partir de uma amostra <span class="math inline">\(y_1, \dots, y_n\)</span> e observando que <span class="math inline">\(\mu_i = g^{-1}(\mathbf X_i\boldsymbol\beta)\)</span>, a verossimilhança do modelo é dada por</p>
+<p><span class="math display">\[
+\mathcal L(\boldsymbol \beta|\mathbf y) = \prod_{i=1}^n f(y_i|\boldsymbol\beta) = \prod_{i=1}^n\mu_i^{y_i}(1-\mu_i)^{1-y_i}
+\]</span></p>
+<p>A log-verossimilhança é dada por</p>
+<p><span class="math display">\[
+l(\boldsymbol \beta|\mathbf y) = \sum_{i=1}^n y_i\log(\mu_i) + (1-y_i)\log(1-\mu_i)
+\]</span></p>
+<p>Uma forma útil de olhar para a verossimilhança é a partir da <em>função desvio</em>, dada por</p>
+<p><span class="math display">\[
+D(\mathbf y|\boldsymbol \beta) = l(\mathbf y|\mathbf y) - l(\boldsymbol \beta|\mathbf y),
+\]</span></p>
+<p>onde <span class="math inline">\(l(\mathbf y|\mathbf y)\)</span> é a verossimilhança do modelo saturado, ou seja, calculada com <span class="math inline">\(\mathbf y\)</span> no lugar de <span class="math inline">\(\boldsymbol \mu\)</span>. A partir de um modelo ajustado, a função desvio pode ser interpretada como a distância entre a verossimilhança do modelo ajustado e a verossimilhança do modelo com um parâmetro para cada observação.</p>
+<p>Uma propriedade interessante da função desvio é que ela equivale à divergência de Kullback-Leibler. Por exemplo, para duas variáveis aleatórias com distribuição Bernoulli de parâmetros <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>, respectivamente, a divergência de Kullback-Leibler é dada por</p>
+<p><span class="math display">\[
+D_{KL}(p||q) = p\log\left(\frac p q\right) + (1-p)\log\left(\frac{1-p}{1-q}\right)
+\]</span></p>
+<p>É fácil ver que</p>
+<p><span class="math display">\[
+\begin{aligned}
+D(\mathbf y|{ \boldsymbol \beta}) &amp;= \sum_{i=1}^n y_i\log(y_i) + (1-y_i)\log(1-y_i) - \sum_{i=1}^n y_i\log(\mu_i) + (1-y_i)\log(1-\mu_i) \\
+&amp;=\sum_{i=1}^ny_i\log\left(\frac{y_i}{\mu_i}\right) + (1-y_i)\log\left(\frac{1-y_i}{1-\mu_i}\right) \\
+&amp;= \sum_{i=1}^n D_{KL}(y_i||\mu_i) \\
+&amp;= D_{KL}(\mathbf y||{\boldsymbol\mu}).
+\end{aligned}
+\]</span></p>
+<p>Outra propriedade interessante é que o desvio identifica unicamente a verossimilhança do modelo. De fato, podemos reformular a definição do modelo linear generalizado a partir da especificação do desvio ou da divergência de Kullback-Leibler no lugar do componente aleatório. Essa propriedade será útil na comparação com redes neurais.</p>
+<p>Os estimadores de máxima verossimilhança de <span class="math inline">\(\boldsymbol \beta\)</span> são os mesmos que minimizam a função desvio. Graças à concavidade da divergência de Kullback-Leibler, Isso pode ser feito igualando os componentes do gradiente do desvio a zero e isolando os valores de <span class="math inline">\(\boldsymbol \beta\)</span>:</p>
+<p><span class="math display">\[
+\nabla_{\boldsymbol \beta} D(\mathbf y|{ \boldsymbol \beta}) = \mathbf 0
+\]</span></p>
+<p>Como não é possível realizar essa operação analiticamente, utilizamos métodos iterativos. Existem dois principais métodos iterativos concorrentes: a descida de gradiente e o método de Newton-Raphson. No paradigma de modelos lineares generalizados, o método de Newton-Raphson é mais comum pois i) ele utiliza a segunda derivada e converge mais rápido que o método da descida de gradiente, que utiliza somente a primeira e ii) é possível demonstrar que ele equivale à aplicação iterada de <em>mínimos quadrados ponderados</em>, o que facilita significativamente a implementação da solução. No paradigma de redes neurais, a descida de gradiente é mais comum por conta das vantagens <em>backpropagation</em>, que veremos na próxima subseção.</p>
+<p>Em resumo, podemos concluir que</p>
+<ol style="list-style-type: decimal">
+<li>Um modelo linear generalizado pode ser definido por três componentes: a divergência de Kullback-Leibler, o preditor linear e a função de ligação.</li>
+<li>A estimação dos parâmetros do modelo é realizada via descida de gradiente ou Newton-Raphson.</li>
+</ol>
+<p>Em seguida, veremos que a rede neural aparece quando utilizamos o componente sistemático e a função de ligação várias vezes.</p>
+</div>
+<div id="extensão-para-redes-neurais" class="section level4 hasAnchor" number="3.1.1.2">
+<h4><span class="header-section-number">3.1.1.2</span> Extensão para redes neurais<a href="captchas.html#extensão-para-redes-neurais" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Uma forma de estender o modelo linear generalizado é considerando que o resultado da função de ligação aplicada ao componente sistemático é uma nova covariável <span class="math inline">\(z\)</span>. Assim, temos</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf z &amp;= g^{-1}(\mathbf X \boldsymbol \beta)\\
+\boldsymbol\mu &amp;= g^{-1}(\alpha_2\mathbf 1 + \beta_2 \mathbf z) = g^{-1}([\mathbf 1\;\mathbf z]\boldsymbol\beta_2),
+\end{aligned}
+\]</span></p>
+<p>em que <span class="math inline">\(\boldsymbol\beta_2 = [\alpha_2\;\beta_2]^{\top}\)</span>. Agora, podemos aumentar o número de covariáveis <span class="math inline">\(\mathbf z\)</span> para <span class="math inline">\(k\)</span> covariáveis, de modo que</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf z_j &amp;= g^{-1}(\mathbf X \boldsymbol \beta_1^j)\\
+\boldsymbol\mu &amp;= g^{-1}(\mathbf Z\boldsymbol\beta_2),
+\end{aligned}
+\]</span></p>
+<p>onde <span class="math inline">\(\mathbf Z = [\mathbf 1\;\mathbf z_1\;\dots\;\mathbf z_k]\)</span>. O modelo espeficiado dessa forma também é chamado de <em>multilayer perceptron</em>, ou MLP.</p>
+<p>Mesmo com essa mudança, função desvio permanece a mesma, já que construída a partir de <span class="math inline">\(\boldsymbol \mu\)</span>. A única diferença é que agora ela é uma função de <span class="math inline">\(\boldsymbol \beta_1^j\)</span>, <span class="math inline">\(j=1,\dots,k\)</span> e <span class="math inline">\(\beta_2\)</span>. O ajuste do modelo é realizado da mesma forma:</p>
+<p><span class="math display">\[
+\nabla_{\{\boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2\}} D(\mathbf y|{ \boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2}) = \mathbf 0
+\]</span></p>
+<p>A vantagem dessa extensão é que adicionamos não linearidade ao modelo. Isso nos permite modelar relações mais complexas entre as preditoras e a resposta, o que pode resultar em melhores predições. De fato, é possível demonstrar que uma rede neural com uma camada oculta pode estima qualquer função contínua entre <span class="math inline">\(\mathbf X\)</span> e <span class="math inline">\(\mathbf y\)</span>. A desvantagem é que a estimação via Newton-Raphson é complicada de calcular.</p>
+<p>É nesse momento que aparecem as vantagens da descida de gradiente. Primeiro, defina <span class="math inline">\(\boldsymbol \beta = \{\boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2\}\)</span>. Utilizando a regra da cadeia, a derivada parcial da função desvio em relação a <span class="math inline">\(\beta_{1,l}^{j}\)</span> é dado por</p>
+<p><span class="math display">\[
+\frac{\partial D(\mathbf y|\boldsymbol\beta)}{\partial \beta_{1,l}^{j}} = \sum_{i=1}^n\frac{\partial D(\mathbf y|\boldsymbol\beta)}{\partial z_{j,i}} \frac{\partial z_{j,i}}{\partial \beta_{1,l}^{j}} .
+\]</span></p>
+<p>As derivadas em relação aos elementos de <span class="math inline">\(\boldsymbol \beta_2\)</span> ocorrem diretamente, como na especificação em apenas um nível. Todas essas derivadas são fáceis de calcular e têm forma analítica definida. A aplicação da regra da cadeia de forma iterada nesse contexto é chamada de <em>backpropagation</em>.</p>
+</div>
+<div id="sinônimos-e-generalizações" class="section level4 hasAnchor" number="3.1.1.3">
+<h4><span class="header-section-number">3.1.1.3</span> Sinônimos e generalizações<a href="captchas.html#sinônimos-e-generalizações" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A literatura de redes neurais costuma trocar o nome função de ligação por <em>ativação</em>. Isso ocorre por motivos históricos, já que as redes neurais foram inicialmente inspiradas na ativação de sinapses de neurônios. No contexto de redes neurais, o objetivo da função de ativação não é, necessariamente, modificar a faixa de variação do contradomínio, pois o resultado após a função pode ser uma nova covariável. Isso sugere a existência de certa liberdade na escolha de ativações. A única restrição é que a função de ativação deve ser não linear, pois, se fosse linear, a aplicação de várias camadas de funções resultaria numa única combinação linear. As ativações mais populares são aquelas que têm derivadas simples.</p>
+<p>Já a verossimilhança ou o desvio são substituídos por uma <em>função de perda</em>. A natureza probabilística do modelo é considerada indiretamente através da função desvio, como vimos anteriormente. No entanto, ao invés de trabalhar com o desvio, os pesquisadores de redes neurais definem genericamente uma função de perda que mensura uma discrepância entre os valores observados e estimados. Uma escolha razoável de função de perda é a própria divergência de Kullback-Leibler, calculada com base no suporte da variável resposta, gerando a função desvio. No entanto, dependendo da aplicação, podemos escolher outras perdas, que podem gerar distribuições de probabilidades sem formato analítico específico.</p>
+<p>Por último, a aplicação de camadas de não-linearidades podem ser representadas através de um grafo direcionado acíclico. Essa representação é vantajosa por dois motivos. O primeiro é que a aplicação facilita a especificação e entendimento do modelo e seus parâmetros, que podem ficar com notação carregada na especificação por fórmulas matemáticas. A segunda é que é possível utilizar conhecimentos de teoria dos grafos para aumentar a eficiência dos algoritmos. Por exemplo, é possível aproveitar parte dos cálculos do <em>backpropagation</em> na obtenção das derivadas parciais da função de perda <span class="citation">(<a href="#ref-abadi2016tensorflow" role="doc-biblioref"><strong>abadi2016tensorflow?</strong></a>)</span>.</p>
+<p>Em resumo, podemos concluir que</p>
+<ol style="list-style-type: decimal">
+<li>Uma rede neural é uma extensão de modelos lineares generalizados que aplica combinações lineares e funções de ligação de forma iterada.</li>
+<li>A estimação dos parâmetros é realizada por descida de gradiente, explorando as vantagens do backpropagation.</li>
+<li>Funções de ligação são chamadas de funções de ativação.</li>
+<li>A função desvio é substituída por funções de perda mais gerais.</li>
+<li>A aplicação iterada de operações pode ser representada por um grafo direcionado acíclico.</li>
+</ol>
+<p>Existem diversas formas de definir, desenhar e apresentar os conceitos básicos de redes neurais e a descida de gradiente. As melhores são apresentadas em blogs, vídeos e aplicativos, onde as operações são apresentadas de forma interativa. O racional apresentado nesse texto buscou mostrar a relação intrínseca entre a regressão logística e as redes neurais.</p>
+</div>
+</div>
+<div id="a-operação-de-convolução" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> A operação de convolução<a href="captchas.html#a-operação-de-convolução" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Convolução em imagens é uma operação usada nas áreas de <em>visão computacional</em> e <em>processamento de sinais</em>. Ela é utilizada para detectar padrões e aplicar filtros em imagens. Na prática, o que ela faz é calcular um novo valor para um pixel na posição <span class="math inline">\((i,j)\)</span> de uma imagem com base nos valores dos pixels da vizinhança.</p>
+<p>Uma forma organizada de fazer essa soma ponderada é criando uma matriz de pesos. Com ela, não é necessário procurar os pontos da vizinhança. Para cada ponto <span class="math inline">\((i,j)\)</span>, obtemos a matriz de vizinhança, multiplicamos pontualmente pela matriz de pesos e somamos os valores resultantes. Chamaremos essa matriz de pesos de <strong>kernel</strong>.</p>
+<p>Considere</p>
+<p><span class="math display">\[
+K = \left[\begin{array}{rrr}-1&amp;-1&amp;-1\\0&amp;0&amp;0\\1&amp;1&amp;1\end{array}\right]
+\]</span></p>
+<p>e a seguinte imagem:</p>
+<p>Tome por exemplo o ponto <span class="math inline">\((i,j) = (12,16)\)</span>. A vizinhança 3x3 em torno desse ponto é dada por</p>
+<p><span class="math display">\[
+P_{i,j} = \left[\begin{array}{rrr}
+0.98 &amp; 0.53 &amp; 0.79 \\
+0.97 &amp; 0.99 &amp; 1.00 \\
+0.98 &amp; 1.00 &amp; 1.00
+\end{array}\right]
+\]</span></p>
+<p>A operação de convolução é feita da seguinte forma:</p>
+<p><span class="math display">\[
+\begin{aligned}
+(P_{12,16} *K )_{12,16}
+&amp;= k_{1,1}p_{11,15} + k_{1,2}p_{11,16} + k_{1,3}p_{11,17} + \\
+&amp;+ k_{2,1}p_{12,15} + k_{2,2}p_{12,16} + k_{2,3}p_{12,17} + \\
+&amp;+ k_{3,1}p_{13,15} + k_{3,2}p_{13,16} + k_{3,3}p_{13,17}
+\end{aligned}
+\]</span></p>
+<p>Esse é o valor a ser colocado no ponto <span class="math inline">\((i,j)\)</span>. Isso funciona em todos os pontos que não estão na borda da imagem.</p>
+<p>Existem duas formas de trabalhar com as bordas da imagem. A primeira é preenchendo as bordas com zeros, de forma a considerar apenas os pontos da imagem. A segunda é descartar os pontos da borda e retornar uma imagem menor, contendo somente os pixels em que foi possível aplicar todo o kernel.</p>
+<p>No nosso caso, o resultado da convolução fica como na Figura <a href="#fig:emoji-horiz"><strong>??</strong></a>. Essa matriz não foi escolhida por acaso. Ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada <code>-1</code>s e a última é formada por <code>1</code>s, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca (<code>grande * 1 + pequeno * (-1)</code>). A parte destacada da imagem acabou sendo os olhos (pois temos maior concentração de pixels pretos ali), além das extremidades superior e inferior do rosto.</p>
+<p>Aplicando o kernel vertical</p>
+<p><span class="math display">\[
+K = \left[\begin{array}{rrr}-1&amp;0&amp;1\\-1&amp;0&amp;1\\-1&amp;0&amp;1\end{array}\right],
+\]</span></p>
+<p>a parte destacada do rosto são as extremidades dos lados:</p>
+<p>A aplicação de convoluções em CAPTCHAs é direta. Nesse caso, vamos adicionar uma constante numérica ao resuldado da convolução. Isso pode auxiliar na visualização, pois controlamos os valores que ficam dentro do intervalo <span class="math inline">\([0,1]\)</span>. Mais adiante veremos que esse será o intercepto da regressão.</p>
+<p>Vamos partir do CAPTCHA da RFB abaixo</p>
+<p>Esse é o resultado de adicionar o kernel vertical e bias de <code>0.6</code>.</p>
+<p>Em seguida observamos o kernel horizontal. Note que identificamos padrões das linhas horizontais que tentam atrapalhar a visão das letras.</p>
+<p>Também vamos introduzir uma função chamada <strong>ReLu</strong>. ReLu significa <em>Restricted Linear Unit</em> e é uma função que zera tudo o que é negativo e mantém tudo aquilo que é positivo inalterado. Ou seja,</p>
+<p><span class="math display">\[
+ReLu(x) = \frac{x + |x|}{2}
+\]</span></p>
+<p>ReLu não é útil para visualização da imagem, pois a substituição de valores negativos por zero já é feita automaticamente. No entanto, podemos aplicar várias convoluções iteradamente e separá-las por aplicações da função ReLu. Como a função ReLu é não linear, essa iteração gera resultados que não seriam possíveis de obter somente com aplicações da operação convolução.</p>
+<p>Na prática, o que queremos é treinar os valores do kernel aplicado, buscando obter imagens transformadas que aumentem o poder preditivo. Nesse sentido, a aplicação de convoluções, soma de constantes e ReLu são as operações que substituem a multiplicação de matrizes, adição de intercepto e aplicação da função de ligação na regressão logística, respectivamente. Ou seja, uma rede neural convolucional é apenas uma forma diferente de implementar os conceitos.</p>
+</div>
+<div id="redes-neurais-convolucionais" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Redes neurais convolucionais<a href="captchas.html#redes-neurais-convolucionais" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Considere uma observação de uma imagem com 2x2 pixels abaixo. Note que se o interesse for utilizar essa matriz numa regressão logística, teríamos uma linha de nossa base de dados, com nove colunas. Ou seja, a regressão teria nove parâmetros associados.</p>
+<p><span class="math display">\[
+P = \left[\begin{array}{rrr}
+p_{11} &amp; p_{12} &amp; p_{13} \\
+p_{21} &amp; p_{22} &amp; p_{23} \\
+p_{31} &amp; p_{32} &amp; p_{33}
+\end{array}\right]
+\]</span></p>
+<p>Considere agora o kernel <span class="math inline">\(W\)</span>, também 3x3:</p>
+<p><span class="math display">\[
+K = \left[\begin{array}{rrr}
+k_{11} &amp; k_{12} &amp; k_{13} \\
+k_{21} &amp; k_{22} &amp; k_{23} \\
+k_{31} &amp; k_{32} &amp; k_{33}
+\end{array}\right]
+\]</span></p>
+<p>A operação convolução resulta numa nova matriz 3x3, em que cada elemento é uma combinação linear de elementos de <span class="math inline">\(P\)</span> e <span class="math inline">\(K\)</span>. De fato, é possível mostrar que o resultado da convolução é o resultado de uma multiplicação de matrizes obtida através da <em>matriz circulante</em> de <span class="math inline">\(K\)</span> <span class="citation">(<a href="#ref-gray2006toeplitz" role="doc-biblioref"><strong>gray2006toeplitz?</strong></a>)</span>. Ou seja, nesse caso, estamos fazendo uma nova regressão logística, mas com os valores dos dados modificados.</p>
+<p>Se, ao invés disso, considerarmos a matriz 2x2,</p>
+<p><span class="math display">\[
+K = \left[\begin{array}{rr}
+k_{11} &amp; k_{12}\\
+k_{21} &amp; k_{22}
+\end{array}\right]
+\]</span></p>
+<p>estamos na prática reduzindo o problema de regressão logística para apenas quatro parâmetros.</p>
+<p>O modelo força-bruta é uma adaptação do clássico modelo LeNet-5 <span class="citation">(<a href="#ref-lecun2015lenet" role="doc-biblioref"><strong>lecun2015lenet?</strong></a>)</span>. Esse modelo aplica convolução 3 vezes consecutivas, adicionando o viés e a função ReLu em cada nível. Após cada convolução, também aplicamos uma operação chamada <em>max pooling</em>, que reduz a resolução da imagem, tomando o valor máximo da vizinhança de cada ponto. Após a aplicação das convoluções, as imagens são remodeladas no formato retangular padrão (uma linha por imagem) e aplicamos duas camadas de redes neurais comuns, como vimos anteriormente.</p>
+<p>Após a realização de todas as operações, os números resultantes não estão entre zero e um. Por isso, aplicamos a ativação <em>softmax</em>, que é a generalização da ativação logística, mas para uma resposta com vários resultados possíveis</p>
+<p><span class="math display">\[
+softmax(x_i) = \frac{e^{x_i}}{\sum_ie^{x_i}}
+\]</span></p>
+<p>Em resumo, as operações que realizamos na rede neural convolucional são</p>
+<ol style="list-style-type: decimal">
+<li>Tomar o input inicial (imagem).</li>
+<li>Multiplicar (convoluir) por matrizes de pesos <span class="math inline">\(W\)</span>.</li>
+<li>Adicionar um viés (ou intercepto) <span class="math inline">\(b\)</span>.</li>
+<li>Aplicar uma função de ligação (ou ativação), por exemplo ReLu.</li>
+<li>Reduzir a resolução do resultado.</li>
+<li>Voltar para 2 várias vezes.</li>
+<li>Tomar os pesos finais e normalizar (usando a operação <em>softmax</em>) para obter probabilidades dos resultados.</li>
+</ol>
+</div>
+<div id="resultados" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> Resultados<a href="captchas.html#resultados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Até o momento, aplicamos os modelos de redes neurais convolucionais para cinco CAPTCHAs distintos. Os modelos foram treinados a partir de bases de treino com aproximadamente dez mil exemplos para cada CAPTCHA. Os resultados da aplicação dos modelos estão na Tabela <a href="#tab:resultados"><strong>??</strong></a>. Essas taxas foram calculadas com base em 100 novos CAPTCHAs baixados da internet após o ajuste do modelo. Podemos observar que as taxas de acerto são todas muito próximas de 100%. No mínimo essas taxas estão muito próximas do que seres humanos conseguiriam acertar.</p>
+<p>Os resultados positivos da aplicação dos modelos força-bruta pode motivar a pergunta: o problema está completamente resolvido? De fato, podemos dizer que CAPTCHAs de imagem baseados em textos são problemas resolvidos, desde que exista uma base de dados classificada. No entanto, esses modelos não funcionam para novos CAPTCHAs e também erram se fizermos pequenas alterações nas imagens. Veremos mais detalhes desse problema no próximo capítulo.</p>
+<blockquote>
+<p>quando surgir o primeiro classificador com GAN, definir de forma mais detalhada</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introducao.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["tese.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

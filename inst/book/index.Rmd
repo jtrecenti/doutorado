@@ -19,7 +19,9 @@ knitr::opts_chunk$set(echo = FALSE,
                       comment = FALSE, 
                       warning = FALSE, 
                       fig.height = 6, 
-                      fig.width = 9)
+                      fig.width = 9,
+                      out.width = "80%",
+                      fig.align = "center")
 ```
 
 # Sobre este documento

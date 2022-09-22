@@ -1,15 +1,3 @@
----
-output: pdf_document
----
-
-```{r setup, include=FALSE}
-devtools::load_all()
-knitr::opts_chunk$set(
-  echo=FALSE, message=FALSE, warning=FALSE
-)
-```
-
-
 # Metodologia
 
 <!-- ----------------------------------------------------------- -->
@@ -59,7 +47,7 @@ O fluxo completo de um Captcha envolve cinco componentes: um *rótulo*, um *gera
 A Figura \@ref(fig:esquema-captcha) esquematiza o fluxo do Captcha.
 
 ```{r}
-#| esquema-captcha
+#| label: esquema-captcha
 #| fig.cap: "Fluxo do Captcha"
 knitr::include_graphics("assets/img/esquema-captcha.png")
 ```
@@ -77,7 +65,7 @@ O elemento da matriz $x_{nm\cdot}$ é denominado *pixel*. Um pixel representa a 
 A Figura \@ref(fig:exemplo-tjmg) mostra um exemplo Captcha do Tribunal de Justiça de Minas Gerais (TJMG). Nesse caso, tem-se $L=5$ e $|\mathcal A|=10$, apenas os dez algarismos arábicos. A imagem tem dimensões $N=110$, $M=40$ e $R=3$. O rótulo da imagem é $[5,2,4,3,2]^\top$.
 
 ```{r}
-#| exemplo-tjmg 
+#| label: exemplo-tjmg 
 #| fig.cap: "Exemplo de Captcha no TJMG."
 #| fig.align: center
 knitr::include_graphics("assets/img/tjmg16283c1e6d06.jpeg")
@@ -151,7 +139,7 @@ Explicando a função: quando a função $g$ acerta o rótulo, o oráculo retorn
 A Figura \@ref(fig:esquema-oraculo) mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.
 
 ```{r}
-#| esquema-oraculo
+#| label: esquema-oraculo
 #| fig.cap: "Esquema mostrando o funcionamento do oráculo."
 knitr::include_graphics("assets/img/esquema-oraculo.png")
 ```
@@ -198,7 +186,7 @@ Como uma rede neural possui muitos componentes e subcomponentes, é usual aprese
 A Figura \@ref(fig:diagrama-modelo-cnn) mostra, de forma esquemática, os componentes (retângulos tracejados) e subcomponentes (partes internas dos componentes) do modelo utilizado.
 
 ```{r}
-#| diagrama-modelo-cnn
+#| label: diagrama-modelo-cnn
 #| fig.cap: "Diagrama representando o modelo utilizado de forma genérica, com todos os componentes e subcomponentes apresentados de forma esquemática. As partes de fora dos componentes são entradas de dados ou decisões de parada do ajuste."
 knitr::include_graphics("assets/img/diagrama-modelo-cnn.png")
 ```
@@ -228,7 +216,7 @@ $$
 e a imagem da Figura \@ref(fig:tjmg-exemplo-conv). Como visto anteriormente, trata-de de uma matriz de dimensão $40\times110\times3$.
 
 ```{r}
-#| tjmg-exemplo-conv
+#| label: tjmg-exemplo-conv
 #| fig.cap: "Imagem de Captcha utilizado em exemplos anteriores."
 knitr::include_graphics("assets/img/tjmg16283c1e6d06.jpeg")
 ```
@@ -236,7 +224,7 @@ knitr::include_graphics("assets/img/tjmg16283c1e6d06.jpeg")
 Tome por exemplo a primeira dimensão do pixel $(i,j,k) = (12,16,1)$. A vizinhança 3x3 em torno desse ponto é dada por
 
 ```{r}
-#| tjmg-exemplo-conv-pixel
+#| label: tjmg-exemplo-conv-pixel
 #| eval: FALSE
 
 "assets/img/tjmg16283c1e6d06.jpeg" |> 
@@ -272,7 +260,7 @@ Existem duas formas de trabalhar com as bordas da imagem. A primeira é preenche
 No caso do exemplo, o resultado da convolução fica como na Figura \@ref(fig:tjmg-exemplo-conv-horizontal). A matriz não foi escolhida por acaso: ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada por $-1$ e a última é formada por $1$, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca ($\text{grande} * 1 + \text{pequeno} * (-1)$). A parte destacada da imagem acabou sendo a parte de baixo dos números e, principalmente, a linha que une os números.
 
 ```{r}
-#| conv-aplicacao-exemplo
+#| label: conv-aplicacao-exemplo
 #| eval: FALSE
 kern_horizontal <- rbind(
   c(-1,-1,-1),
@@ -307,7 +295,7 @@ convolve(img, kern_vertical) |>
 
 
 ```{r}
-#| tjmg-exemplo-conv-horizontal
+#| label: tjmg-exemplo-conv-horizontal
 #| fig.cap: Aplicação de uma convolução com kernel horizontal.
 knitr::include_graphics("assets/img/tjmg_conv_horizontal.jpeg")
 ```
@@ -321,7 +309,7 @@ $$
 as partes destacadas são as laterais dos números, conforme Figura \@ref(fig:tjmg-exemplo-conv-vertical).
 
 ```{r}
-#| tjmg-exemplo-conv-vertical
+#| label: tjmg-exemplo-conv-vertical
 #| fig.cap: Aplicação de uma convolução com kernel horizontal. 
 knitr::include_graphics("assets/img/tjmg_conv_vertical.jpeg")
 ```
@@ -334,7 +322,7 @@ Uma característica das imagens mostradas acima é que elas ficaram escuras, ou 
 A Figura \@ref(fig:tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
 
 ```{r}
-#| tjmg-exemplo-conv-vertical-bias
+#| label: tjmg-exemplo-conv-vertical-bias
 #| fig.cap: Aplicação de uma convolução com kernel horizontal. 
 knitr::include_graphics("assets/img/tjmg_conv_vertical_bias.jpeg")
 ```
@@ -346,7 +334,7 @@ Uma __camada convolucional__ envolve a aplicação de convoluções com $d$ *ker
 A Figura \@ref(fig:tjmg-exemplo-camada-conv) mostra um exemplo de aplicação de camada convolucional para a imagem utilizada nos exemplos anteriores. Os *kernels* foram escolhidos com base em um modelo que já foi ajustado para o Captcha. Note que os canais capturam a informação dos números e dos ruídos, focando em detalhes diferentes.
 
 ```{r}
-#| tjmg-exemplo-camada-conv-aplicacao
+#| label: tjmg-exemplo-camada-conv-aplicacao
 #| eval: FALSE
 modelo_exemplo <- luz::luz_load("assets/model_example.pt")
 transformed <- modelo_exemplo$model$transform("assets/img/tjmg16283c1e6d06.jpeg")
@@ -399,7 +387,7 @@ softm
 
 
 ```{r}
-#| tjmg-exemplo-camada-conv
+#| label: tjmg-exemplo-camada-conv
 #| fig.cap: "Resultado da aplicação da primeira convolução à imagem."
 knitr::include_graphics("assets/img/tjmg_conv1_modelo.jpeg")
 ```
@@ -530,6 +518,9 @@ O aprendizado fracamente supervisionado pode ser dividido em três tipos princip
 
 Formalmente, o aprendizado fracamente supervisionado é definido como uma generalização do aprendizado totalmente supervisionado, como mostrado em seguida.
 
+## Método mucho loko
+
+(TODO)
 
 <!-- ---------------------------------------------------------------------- -->
 
