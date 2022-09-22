@@ -41,3 +41,218 @@
 
 ## Organização do trabalho
 
+
+----------------------------------------------------
+
+
+#### Regressão logística
+
+O modelo linear generalizado é composto por três elementos: __componente aleatório__, __componente sistemático__ e a __função de ligação__.
+
+O componente aleatório é uma variável aleatória $Y$ com distribuição pertencente à família exponencial (XXX), que dá origem à verossimilhança do modelo. O componente sistemático é uma combinação linear matriz de planejamento $\mathbf X$[^planejamento] com um vetor de parâmetros $\boldsymbol \beta$. A função de ligação é uma operação que leva a componente sistemática no valor esperado da componente aleatória. Uma forma comum de definir a ligação é propondo uma função com domínio nos números reais e contradomínio igual ao suporte do componente aleatório. Dessa forma, não é necessário impor restrições aos parâmetros da componente sistemática para que os valores ajustados variem na mesma faixa que o componente aleatório.
+
+[^planejamento]: a matriz de planejamento é uma matriz gerada pelas variáveis preditoras. Usualmente tem a primeira coluna preenchida com o valor 1 (para gerar o intercepto) e as outras colunas relacionadas às variáveis preditoras, que podem ou não passar por 
+
+Na regressão logística, o componente aleatório tem distribuição Bernoulli com média $\mu$. O componente sistemático é a combinação linear $\mathbf X \boldsymbol \beta$ e a função de ligação é a inversa da função sigmoide:
+
+$$
+g(\mu) = \log\left(\frac{\mu}{1-\mu}\right).
+$$
+
+A partir de uma amostra $y_1, \dots, y_n$ e observando que $\mu_i = g^{-1}(\mathbf X_i\boldsymbol\beta)$, a verossimilhança do modelo é dada por
+
+$$
+\mathcal L(\boldsymbol \beta|\mathbf y) = \prod_{i=1}^n f(y_i|\boldsymbol\beta) = \prod_{i=1}^n\mu_i^{y_i}(1-\mu_i)^{1-y_i}
+$$
+
+A log-verossimilhança é dada por
+
+$$
+l(\boldsymbol \beta|\mathbf y) = \sum_{i=1}^n y_i\log(\mu_i) + (1-y_i)\log(1-\mu_i)
+$$
+
+Uma forma útil de olhar para a verossimilhança é a partir da *função desvio*, dada por
+
+$$
+D(\mathbf y|\boldsymbol \beta) = l(\mathbf y|\mathbf y) - l(\boldsymbol \beta|\mathbf y),
+$$
+
+onde $l(\mathbf y|\mathbf y)$ é a verossimilhança do modelo saturado, ou seja, calculada com $\mathbf y$ no lugar de $\boldsymbol \mu$. A partir de um modelo ajustado, a função desvio pode ser interpretada como a diferença entre a verossimilhança do modelo ajustado e a verossimilhança do modelo com um parâmetro para cada observação, chamado também de modelo *saturado* (XXX).
+
+Uma propriedade interessante da função desvio é que ela equivale à divergência de Kullback-Leibler (XXX). Por exemplo, para duas variáveis aleatórias com distribuição Bernoulli de parâmetros $p$ e $q$, respectivamente, a divergência de Kullback-Leibler é dada por
+
+$$
+D_{KL}(p||q) = p\log\left(\frac p q\right) + (1-p)\log\left(\frac{1-p}{1-q}\right)
+$$
+
+É fácil ver que
+
+$$
+\begin{aligned}
+D(\mathbf y|{ \boldsymbol \beta}) &= \sum_{i=1}^n y_i\log(y_i) + (1-y_i)\log(1-y_i) - \sum_{i=1}^n y_i\log(\mu_i) + (1-y_i)\log(1-\mu_i) \\
+&=\sum_{i=1}^ny_i\log\left(\frac{y_i}{\mu_i}\right) + (1-y_i)\log\left(\frac{1-y_i}{1-\mu_i}\right) \\
+&= \sum_{i=1}^n D_{KL}(y_i||\mu_i) \\
+&= D_{KL}(\mathbf y||{\boldsymbol\mu}).
+\end{aligned}
+$$
+
+Outra propriedade interessante é que o desvio identifica unicamente a verossimilhança do modelo (XXX tweedie?). De fato, podemos reformular a definição do modelo linear generalizado a partir da especificação do desvio ou da divergência de Kullback-Leibler no lugar do componente aleatório (XXX hastie). Essa propriedade será útil na comparação com redes neurais.
+
+Os estimadores de máxima verossimilhança de $\boldsymbol \beta$ são os mesmos que minimizam a função desvio. Graças à concavidade da divergência de Kullback-Leibler (XXX), Isso pode ser feito igualando os componentes do gradiente do desvio a zero e isolando os valores de $\boldsymbol \beta$:
+
+$$
+\nabla_{\boldsymbol \beta} D(\mathbf y|{ \boldsymbol \beta}) = \mathbf 0
+$$
+
+Como não é possível realizar essa operação analiticamente, utiliza-se métodos iterativos. Existem dois principais métodos iterativos concorrentes nesse contexto: a descida de gradiente (XXX) e o método de Newton-Raphson (XXX). No paradigma de modelos lineares generalizados, o método de Newton-Raphson é mais comum pois i) ele utiliza a segunda derivada e converge mais rápido que o método da descida de gradiente, que utiliza somente a primeira derivada e ii) é possível demonstrar que ele equivale à aplicação iterada de *mínimos quadrados ponderados* (XXX), o que facilita significativamente a implementação da solução no computador. No paradigma de redes neurais, a descida de gradiente é mais comum por conta da quantidade de computações necessárias para se obter a derivada, como será visto na próxima subseção.
+
+Em resumo:
+
+- Um modelo linear generalizado pode ser definido por três componentes: a divergência de Kullback-Leibler, o preditor linear e a função de ligação.
+- A estimação dos parâmetros do modelo pode ser realizada via descida de gradiente ou Newton-Raphson.
+
+Em seguida, será possível verificar que a rede neural aparece quando utilizamos o componente sistemático e a função de ligação de forma iterada.
+
+#### Extensão para redes neurais
+
+Uma forma de estender o modelo linear generalizado é considerando que o resultado da função de ligação aplicada ao componente sistemático é uma nova covariável $z$. Essa nova covariável, por sua vez, é utilizada em uma nova combinação linear. Assim, tem-se
+
+$$
+\begin{aligned}
+\mathbf z &= g^{-1}(\mathbf X \boldsymbol \beta)\\
+\boldsymbol\mu &= g^{-1}(\alpha_2\mathbf 1 + \beta_2 \mathbf z) = g^{-1}([\mathbf 1\;\mathbf z]\boldsymbol\beta_2),
+\end{aligned}
+$$
+
+em que $\boldsymbol\beta_2 = [\alpha_2\;\beta_2]^{\top}$. Agora, podemos aumentar o número de covariáveis $\mathbf z$ para $k$ covariáveis, de modo que
+
+$$
+\begin{aligned}
+\mathbf z_j &= g^{-1}(\mathbf X \boldsymbol \beta_1^j)\\
+\boldsymbol\mu &= g^{-1}(\mathbf Z\boldsymbol\beta_2),
+\end{aligned}
+$$
+
+onde $\mathbf Z = [\mathbf 1\;\mathbf z_1\;\dots\;\mathbf z_k]$. O modelo especificado dessa forma também é chamado de *multilayer perceptron*, ou MLP.
+
+Mesmo com essa mudança, função desvio permanece a mesma, já que construída a partir de $\boldsymbol \mu$. A única diferença é que agora ela é uma função de $\boldsymbol \beta_1^j$, $j=1,\dots,k$ e $\beta_2$. O ajuste do modelo é realizado da mesma forma:
+
+$$
+\nabla_{\{\boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2\}} D(\mathbf y|{ \boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2}) = \mathbf 0
+$$
+
+A vantagem dessa extensão é que adicionamos não linearidade ao modelo. Isso nos permite modelar relações mais complexas entre as preditoras e a resposta, o que pode resultar em melhores predições. De fato, é possível demonstrar que uma rede neural com uma camada oculta pode estima qualquer função contínua entre $\mathbf X$ e $\mathbf y$ (XXX). A desvantagem é que a estimação via Newton-Raphson é complicada de calcular.
+
+É nesse momento que aparecem as vantagens da descida de gradiente. Primeiro, defina $\boldsymbol \beta = \{\boldsymbol \beta_1^1, \dots,\boldsymbol \beta_1^k,\boldsymbol \beta_2\}$. Utilizando a regra da cadeia, a derivada parcial da função desvio em relação a $\beta_{1,l}^{j}$ é dado por
+
+$$
+\frac{\partial D(\mathbf y|\boldsymbol\beta)}{\partial \beta_{1,l}^{j}} = \sum_{i=1}^n\frac{\partial D(\mathbf y|\boldsymbol\beta)}{\partial z_{j,i}} \frac{\partial z_{j,i}}{\partial \beta_{1,l}^{j}} .
+$$
+
+As derivadas em relação aos elementos de $\boldsymbol \beta_2$ ocorrem diretamente, como na especificação em apenas um nível. Todas essas derivadas são fáceis de calcular e têm forma analítica definida. A aplicação da regra da cadeia de forma iterada nesse contexto é chamada de \textit{backpropagation}.
+
+#### Sinônimos e generalizações
+
+A literatura de redes neurais costuma trocar o nome função de ligação por *ativação*. Isso ocorre por motivos históricos, já que as redes neurais foram inicialmente inspiradas na ativação de sinapses de neurônios. No contexto de redes neurais, o objetivo da função de ativação não é, necessariamente, modificar a faixa de variação do contradomínio, pois o resultado após a função pode ser uma nova covariável. Isso sugere a existência de certa liberdade na escolha de ativações. A única restrição é que a função de ativação deve ser não linear, pois, se fosse linear, a aplicação de várias camadas de funções resultaria numa única combinação linear. As ativações mais populares são aquelas que têm derivadas simples.
+
+Já a verossimilhança ou o desvio são substituídos por uma *função de perda*. A natureza probabilística do modelo é considerada indiretamente através da função desvio, como apresentado anteriormente. No entanto, ao invés de trabalhar com o desvio, é definida uma função de perda que mensura uma discrepância entre os valores observados e estimados. Uma escolha comum de função de perda é a própria divergência de Kullback-Leibler, calculada com base no suporte da variável resposta, gerando a função desvio. No entanto, dependendo da aplicação, é possível escolher outras perdas, que podem gerar distribuições de probabilidades sem formato analítico específico.
+
+Por último, a aplicação de camadas de não-linearidades pode ser representada através de um grafo direcionado acíclico. Essa representação é vantajosa por dois motivos. O primeiro é que a aplicação facilita a especificação e entendimento do modelo e seus parâmetros, que podem ficar com notação carregada na especificação por fórmulas matemáticas. A segunda é que é possível utilizar conhecimentos de teoria dos grafos para aumentar a eficiência dos algoritmos. Por exemplo, é possível aproveitar parte dos cálculos do \textit{backpropagation} na obtenção das derivadas parciais da função de perda abadi2016tensorflow (XXX).
+
+Em resumo, podemos concluir que
+
+```{=tex}
+\begin{enumerate}
+    \item Uma rede neural é uma extensão de modelos lineares generalizados que aplica combinações lineares e funções de ligação de forma iterada.
+    \item A estimação dos parâmetros é realizada por descida de gradiente, explorando as vantagens do \textit{backpropagation}.
+    \item Funções de ligação são chamadas de funções de ativação.
+    \item A função desvio é substituída por funções de perda mais gerais.
+    \item A aplicação iterada de operações pode ser representada por um grafo direcionado acíclico.
+\end{enumerate}
+```
+Existem diversas formas de definir, desenhar e apresentar os conceitos básicos de redes neurais e a descida de gradiente. As melhores são apresentadas em blogs, vídeos e aplicativos, onde as operações são apresentadas de forma interativa. O racional apresentado nesse texto buscou mostrar a relação intrínseca entre a regressão logística e as redes neurais.
+
+#### A operação de convolução
+
+
+
+#### Redes neurais convolucionais
+
+Considere uma observação de uma imagem com 2x2 pixels abaixo. Note que se o interesse for utilizar essa matriz numa regressão logística, teríamos uma linha de nossa base de dados, com nove colunas. Ou seja, a regressão teria nove parâmetros associados.
+
+$$
+P = \left[\begin{array}{rrr}
+p_{11} & p_{12} & p_{13} \\ 
+p_{21} & p_{22} & p_{23} \\
+p_{31} & p_{32} & p_{33}
+\end{array}\right]
+$$
+
+Considere agora o kernel $W$, também 3x3:
+
+$$
+K = \left[\begin{array}{rrr}
+k_{11} & k_{12} & k_{13} \\ 
+k_{21} & k_{22} & k_{23} \\
+k_{31} & k_{32} & k_{33}
+\end{array}\right]
+$$
+
+A operação convolução resulta numa nova matriz 3x3, em que cada elemento é uma combinação linear de elementos de $P$ e $K$. De fato, é possível mostrar que o resultado da convolução é o resultado de uma multiplicação de matrizes obtida através da \textit{matriz circulante} de $K$ gray2006toeplitz (XXX). Ou seja, nesse caso, estamos fazendo uma nova regressão logística, mas com os valores dos dados modificados.
+
+Se, ao invés disso, considerarmos a matriz 2x2,
+
+$$
+K = \left[\begin{array}{rr}
+k_{11} & k_{12}\\ 
+k_{21} & k_{22}
+\end{array}\right]
+$$
+
+estamos na prática reduzindo o problema de regressão logística para apenas quatro parâmetros.
+
+Também vamos introduzir uma função chamada \textbf{ReLu}. ReLu significa \textit{Restricted Linear Unit} e é uma função que zera tudo o que é negativo e mantém tudo aquilo que é positivo inalterado. Ou seja,
+
+$$
+ReLu(x) = \frac{x + |x|}{2}
+$$
+
+ReLu não é útil para visualização da imagem, pois a substituição de valores negativos por zero já é feita automaticamente. No entanto, podemos aplicar várias convoluções iteradamente e separá-las por aplicações da função ReLu. Como a função ReLu é não linear, essa iteração gera resultados que não seriam possíveis de obter somente com aplicações da operação convolução.
+
+Na prática, o que queremos é treinar os valores do kernel aplicado, buscando obter imagens transformadas que aumentem o poder preditivo. Nesse sentido, a aplicação de convoluções, soma de constantes e ReLu são as operações que substituem a multiplicação de matrizes, adição de intercepto e aplicação da função de ligação na regressão logística, respectivamente. Ou seja, uma rede neural convolucional é apenas uma forma diferente de implementar os conceitos.
+
+O modelo força-bruta é uma adaptação do clássico modelo LeNet-5 lecun2015lenet (XXX). Esse modelo aplica convolução 3 vezes consecutivas, adicionando o viés e a função ReLu em cada nível. Após cada convolução, também aplicamos uma operação chamada \textit{max pooling}, que reduz a resolução da imagem, tomando o valor máximo da vizinhança de cada ponto. Após a aplicação das convoluções, as imagens são remodeladas no formato retangular padrão (uma linha por imagem) e aplicamos duas camadas de redes neurais comuns, como vimos anteriormente.
+
+Após a realização de todas as operações, os números resultantes não estão entre zero e um. Por isso, aplicamos a ativação \textit{softmax}, que é a generalização da ativação logística, mas para uma resposta com vários resultados possíveis
+
+$$
+softmax(x_i) = \frac{e^{x_i}}{\sum_ie^{x_i}}
+$$
+
+Em resumo, as operações que realizamos na rede neural convolucional são
+
+```{=tex}
+\begin{enumerate}
+    \item Tomar o input inicial (imagem).
+    \item Multiplicar (convoluir) por matrizes de pesos $W$.
+    \item Adicionar um viés (ou intercepto) $b$.
+    \item Aplicar uma função de ligação (ou ativação), por exemplo ReLu.
+    \item Reduzir a resolução do resultado.
+    \item Voltar para 2 várias vezes.
+    \item Tomar os pesos finais e normalizar (usando a operação \textit{softmax}) para obter probabilidades dos resultados.
+\end{enumerate}
+```
+#### Arquitetura de redes neurais
+
+### Ligando os conceitos
+
+<!-- Obs: talvez essa seção não seja necessária -->
+
+A obtenção de uma função $g$ capaz de mapear $\mathbf y$ a partir de uma nova imagem $\mathbf X$ depende de uma amostra de imagens $\mathbf X_1, \dots, \mathbf X_S$, corretamente classificadas através do vetor $\mathbf y_1, \dots, \mathbf y_S$. A tarefa é, portanto, obter uma estimativa $\hat g$ para a função $g$ que minimiza
+
+$$
+L(\hat g(\mathbf X), \mathbf y) = \mathbb I(g(\mathbf X) \neq \mathbf y)
+$$
+
+em que $\mathbb I(g(\mathbf X) \neq \mathbf y)$ indica se $g(\mathbf X)$ difere do que é observado em $\mathbf y$. Isto é, pretende-se encontrar uma função que minimize a taxa de classificação incorreta das imagens que descrevem os textos dos Captchas.
+
