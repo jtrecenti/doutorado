@@ -12,3 +12,18 @@
 #'   \item{acc}{acurácia do modelo}
 #' }
 "da_results_simulacao"
+
+#' Lista de captchas
+#'
+#' Base com as informações da base
+#'
+#' @format A data frame containing 10 rows and 5 columns
+#'
+#' \describe{
+#'   \item{site}{Site do captcha}
+#'   \item{exemplo}{Exemplo de captcha}
+#'   \item{descricao}{Descrição do Captcha}
+#'   \item{chutes}{Aceita múltiplos chutes}
+#'   \item{n}{Quandidade de casos classificados}
+#' }
+"da_captchas"
