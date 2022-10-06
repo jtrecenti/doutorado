@@ -518,9 +518,39 @@ O aprendizado fracamente supervisionado pode ser dividido em três tipos princip
 
 Formalmente, o aprendizado fracamente supervisionado é definido como uma generalização do aprendizado totalmente supervisionado, como mostrado em seguida.
 
-## Método WL
+## Método WAWL
 
-O método WL (*web learning*) é a solução proposta na pesquisa.
+O método WAWL (*Web Automatic Weak Learning*) é a solução proposta na pesquisa. Trata-se da técnica baixar dados da web para compor parte da amostra que é utilizada no ajuste do modelo.
+
+O método WAWL é inovador por dois motivos. Primeiro, porque o método faz a ponte entre áreas que até o momento eram partes separadas do ciclo da ciência de dados: a raspagem de dados e o aprendizado estatístico. Além disso, o método é uma nova alternativa para resolver Captchas com pouca ou nenhuma intervenção humana.
+
+Existem duas formas principais de aplicar o método WAWL. A primeira criando novas bases de treino a partir de um modelo inicial e atualizando os modelos com os dados baixados. A segunda é baixando os dados dentro do próprio ciclo de ajuste do modelo, acessando a web no momento de construção de um *minibatch*.
+
+A arquitetura do modelo WAWL pode ser a mesma de um modelo ajustado com uma base completamente anotada. O modelo pode, inclusive, aproveitar os parâmetros já ajustados em uma eventual versão inicial do modelo para acelerar o aprendizado. Nada impede, no entanto, que uma arquitetura diferente seja utilizada, desde que a entrada seja uma imagem e a saída seja uma matriz com as dimensões da variável resposta. O WAWL é agnóstico à arquitetura do modelo.
+
+Já a função de perda deve ser adaptada para considerar a informação limitada fornecida pelo oráculo. Quando o rótulo fornecido pelo modelo está correto, a informação é considerada normalmente, através da função de perda da regressão multinomial multivariada. Já quando o rótulo fornecido pelo modelo é incorreto, a função de perda é calculada com base na probabilidade do rótulo estar incorreto:
+
+$$
+1 - \mathbb P(\hat{\mathbf y}|\boldsymbol \theta)
+$$
+
+Para ficar na mesma escala da função de perda dos casos corretos, calcula-se o logaritmo, obtendo a log-verossimilhança:
+
+$$
+l_i = -\log(1 - \mathbb P(\hat{\mathbf y}|\boldsymbol \theta))
+$$
+
+Quando o Captcha aceita múltiplos chutes, a mesma conta é válida, bastando subtrair as probabilidades de todos os rótulos incorretos:
+
+$$
+l_i = -\log(1 - \mathbb P(\hat{\mathbf y}_1|\boldsymbol \theta)-\mathbb P(\hat{\mathbf y}_2|\boldsymbol \theta)-\dots-\mathbb P(\hat{\mathbf y}_k|\boldsymbol \theta))
+$$
+
+No final, o valor que é passado para a função de perda é a soma das perdas para todas as observações do *minibatch*. A soma considera tanto as perdas calculadas com base nos rótulos corretos quanto as perdas calculadas com base nos rótulos incorretos.
+
+O otimizador que obtém novas estimativas dos parâmetros também não precisa ser modificado. Basta aplicar a mesma técnica utilizada na modelagem usual, como descida de gradiente estocástica ou métodos adaptativos, como *RMSProp* ou *Adam*.
+
+Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow*, basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando a placa de vídeo do computador, que usualmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização de placa de vídeo, sendo uma melhoria sugerida para futuros trabalhos.
 
 <!-- ---------------------------------------------------------------------- -->
 
