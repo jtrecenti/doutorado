@@ -7,7 +7,7 @@
 <title>Capítulo 2 Metodologia | Doutorado</title>
 <meta name="author" content="Julio Trecenti">
 <meta name="description" content="Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do...">
-<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="Capítulo 2 Metodologia | Doutorado">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do...">
@@ -412,56 +412,112 @@ x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
 <h2>
 <span class="header-section-number">2.3</span> Dados<a class="anchor" aria-label="anchor" href="#dados"><i class="fas fa-link"></i></a>
 </h2>
-<p>Neste capítulo, descrevemos em detalhes como foi a obtenção dos dados para a realização da pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para obtenção dos achados.</p>
+<p>Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para a realização da pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para obtenção dos achados.</p>
 <p>No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/02/2022, para verificar se ainda estavam ativos.</p>
 <div id="escolha-dos-captchas-analisados" class="section level3" number="2.3.1">
 <h3>
-<span class="header-section-number">2.3.1</span> Escolha dos captchas analisados<a class="anchor" aria-label="anchor" href="#escolha-dos-captchas-analisados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.1</span> Escolha dos Captchas analisados<a class="anchor" aria-label="anchor" href="#escolha-dos-captchas-analisados"><i class="fas fa-link"></i></a>
 </h3>
-<p>Para selecionar os Captchas, adotamos alguns critérios objetivos. Os critérios foram:</p>
+<p>Para selecionar os Captchas, foram adotados alguns critérios objetivos. Os critérios foram:</p>
 <ol style="list-style-type: decimal">
-<li>O site acessado é de um serviço público (governo federal, tribunais, etc).</li>
-<li>Trata-se de um Captcha contendo letras (A a Z) e números (0 a 9) em uma imagem com extensão jpeg ou png.</li>
+<li>O site acessado é de um serviço público (governo federal, tribunal, etc).</li>
+<li>O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com extensão jpeg ou png.</li>
 <li>O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma origem devem ter sempre o mesmo comprimento.</li>
 </ol>
 <p>A primeira restrição para escolha dos Captchas é de ordem principiológica. Um serviço público não deveria restringir o acesso aos dados para robôs. Como já discutido anteriormente, nesses casos, a existência do Captcha não tem como finalidade dar maior segurança ao serviço prestado, mas sim limitar o acesso aos servidores por robôs.</p>
 <p>As restrições 2 e 3 foram escolhidas com o objetivo de facilitar as simulações para obtenção dos resultados. Em princípio, nada impede que os modelos desenvolvidos trabalhem com outros tipos de rótulos, desde que exista uma lista prévia de rótulos. Além disso, é possível realizar adaptações no pré-processamento base de dados para lidar com diferentes comprimentos de Captchas.</p>
 <p>A Tabela <a href="metodologia.html#tab:lista-captcha">2.1</a> mostra os Captchas trabalhados. A informação de limite de chutes é importante para a implementação do oráculo, detalhado a seguir.</p>
-<div class="inline-table"><table class="table table-sm">
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
 <caption>
 <span id="tab:lista-captcha">Tabela 2.1: </span>Lista de captchas analisados.</caption>
+<colgroup>
+<col width="37%">
+<col width="21%">
+<col width="27%">
+<col width="7%">
+<col width="6%">
+</colgroup>
 <thead><tr class="header">
-<th align="right">speed</th>
-<th align="right">dist</th>
+<th align="left">Captcha</th>
+<th align="left">Exemplo</th>
+<th align="left">Descrição</th>
+<th align="left">Vários chutes</th>
+<th align="right"># rotulados</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">4</td>
-<td align="right">2</td>
+<td align="left"><a href="https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam">trf5</a></td>
+<td align="left"><img src="assets/img/dados_trf5.jpg" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Tribunal Regional Federal 5</td>
+<td align="left">Não</td>
+<td align="right">1000</td>
 </tr>
 <tr class="even">
-<td align="right">4</td>
-<td align="right">10</td>
+<td align="left"><a href="https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&amp;numero=1&amp;listaProcessos=50718889720218130024&amp;btn_pesquisar=Pesquisar">tjmg</a></td>
+<td align="left"><img src="assets/img/dados_tjmg.jpeg" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Tribunal de Justiça de Minas Gerais</td>
+<td align="left">Sim</td>
+<td align="right">2000</td>
 </tr>
 <tr class="odd">
-<td align="right">7</td>
-<td align="right">4</td>
+<td align="left"><a href="https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879">trt</a></td>
+<td align="left"><img src="assets/img/dados_trt.jpeg" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Tribunal Regional do Trabalho 3</td>
+<td align="left">Sim</td>
+<td align="right">3000</td>
 </tr>
 <tr class="even">
-<td align="right">7</td>
-<td align="right">22</td>
+<td align="left"><a href="http://esaj.tjba.jus.br/cpopg/open.do">esaj</a></td>
+<td align="left"><img src="assets/img/dados_esaj.png" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Tribunal de Justiça da Bahia</td>
+<td align="left">Sim</td>
+<td align="right">3000</td>
 </tr>
 <tr class="odd">
-<td align="right">8</td>
-<td align="right">16</td>
+<td align="left"><a href="https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx">jucesp</a></td>
+<td align="left"><img src="assets/img/dados_jucesp.jpg" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Junta Comercial de São Paulo</td>
+<td align="left">Não</td>
+<td align="right">4000</td>
 </tr>
 <tr class="even">
-<td align="right">9</td>
-<td align="right">10</td>
+<td align="left"><a href="https://srv01.tjpe.jus.br/consultaprocessualunificada/">tjpe</a></td>
+<td align="left"><img src="assets/img/dados_tjpe.png" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Tribunal de Justiça de Pernambuco</td>
+<td align="left">Sim</td>
+<td align="right">4000</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://www.tjrs.jus.br/site_php/consulta/verificador.php">tjrs</a></td>
+<td align="left"><img src="assets/img/dados_tjrs.jpg" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Tribunal de Justiça do Rio Grande do Sul</td>
+<td align="left">Sim</td>
+<td align="right">4594</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx">cadesp</a></td>
+<td align="left"><img src="assets/img/dados_cadesp.jpg" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Centro de Apoio ao Desenvolvimento da Saúde Pública</td>
+<td align="left">Não</td>
+<td align="right">5820</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&amp;acao_origem_externa=protocolo_pesquisar&amp;id_orgao_acesso_externo=0">sei</a></td>
+<td align="left"><img src="assets/img/dados_sei.png" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Sistema Eletrônico de Informações - ME</td>
+<td align="left">Sim</td>
+<td align="right">10000</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp">rfb</a></td>
+<td align="left"><img src="assets/img/dados_rfb.png" alt="exemplo de Captcha da lista apresentada."></td>
+<td align="left">Receita Federal</td>
+<td align="left">Sim</td>
+<td align="right">13712</td>
 </tr>
 </tbody>
 </table></div>
-<p>O oráculo é o nome que escolhemos para a possibilidade de checar, de forma automática, se uma predição do modelo foi bem ou mal sucedida. Como um Captcha é um teste de Turing inverso, por definição ele é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.</p>
+<p>Oráculo foi o nome escolhido para a possibilidade de checar, de forma automática, se uma predição do modelo foi bem ou mal sucedida. Como um Captcha é um teste de Turing inverso, por definição ele é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.</p>
 <p>Para implementar um oráculo em uma linguagem de programação, é necessário seguir os seguintes passos:</p>
 <ol style="list-style-type: decimal">
 <li>Acessar a página do site de interesse</li>
@@ -620,7 +676,7 @@ P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{
 <li><a class="nav-link" href="#m%C3%A9todo-mucho-loko"><span class="header-section-number">2.2</span> Método mucho loko</a></li>
 <li>
 <a class="nav-link" href="#dados"><span class="header-section-number">2.3</span> Dados</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#escolha-dos-captchas-analisados"><span class="header-section-number">2.3.1</span> Escolha dos captchas analisados</a></li>
+<li><a class="nav-link" href="#escolha-dos-captchas-analisados"><span class="header-section-number">2.3.1</span> Escolha dos Captchas analisados</a></li>
 <li><a class="nav-link" href="#constru%C3%A7%C3%A3o-dos-dados"><span class="header-section-number">2.3.2</span> Construção dos dados</a></li>
 <li><a class="nav-link" href="#an%C3%A1lise-descritiva"><span class="header-section-number">2.3.3</span> Análise descritiva</a></li>
 </ul>
@@ -648,7 +704,7 @@ P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Doutorado</strong>" was written by Julio Trecenti. It was last built on 22 de setembro de 2022.</p>
+    <p>"<strong>Doutorado</strong>" was written by Julio Trecenti. It was last built on 25 de setembro de 2022.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

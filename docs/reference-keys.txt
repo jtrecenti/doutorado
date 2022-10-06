@@ -1,14 +1,3 @@
-fig:esquema-captcha
-fig:exemplo-tjmg
-fig:captcha-r-exemplo
-fig:esquema-oraculo
-fig:diagrama-modelo-cnn
-fig:tjmg-exemplo-conv
-fig:tjmg-exemplo-conv-horizontal
-fig:tjmg-exemplo-conv-vertical
-fig:tjmg-exemplo-conv-vertical-bias
-fig:tjmg-exemplo-camada-conv
-tab:lista-captcha
 sobre-este-documento
 metodologia
 definição-do-problema
@@ -24,11 +13,10 @@ otimizador
 aprendizado-estatístico
 aprendizado-supervisionado
 aprendizado-fracamente-supervisionado
-método-mucho-loko
+método-wawl
 dados
 escolha-dos-captchas-analisados
 construção-dos-dados
-análise-descritiva
 simulacoes
 primeiro-passo-modelo-inicial
 segundo-passo-dados
