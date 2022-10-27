@@ -1,257 +1,469 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 2 Introdução | Doutorado</title>
-  <meta name="description" content="Template de relatório." />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.219">
 
-  <meta property="og:title" content="Capítulo 2 Introdução | Doutorado" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="Template de relatório." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 2 Introdução | Doutorado" />
-  
-  <meta name="twitter:description" content="Template de relatório." />
-  
-
-<meta name="author" content="Julio Trecenti" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="index.html"/>
-<link rel="next" href="captchas.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<title>Captchas - 2&nbsp; Introdução</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
 
 
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./metodologia.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
 
 
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-
-
-<link rel="stylesheet" href="assets/css/bookdown.css" type="text/css" />
 </head>
 
-<body>
+<body class="nav-sidebar floating nav-fixed">
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Tese</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Sobre este documento</a></li>
-<li class="chapter" data-level="2" data-path="introducao.html"><a href="introducao.html"><i class="fa fa-check"></i><b>2</b> Introdução</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="introducao.html"><a href="introducao.html#objetivos"><i class="fa fa-check"></i><b>2.1</b> Objetivos</a></li>
-<li class="chapter" data-level="2.2" data-path="introducao.html"><a href="introducao.html#justificativa"><i class="fa fa-check"></i><b>2.2</b> Justificativa</a></li>
-<li class="chapter" data-level="2.3" data-path="introducao.html"><a href="introducao.html#hipóteses"><i class="fa fa-check"></i><b>2.3</b> Hipóteses</a></li>
-<li class="chapter" data-level="2.4" data-path="introducao.html"><a href="introducao.html#organização-do-trabalho"><i class="fa fa-check"></i><b>2.4</b> Organização do trabalho</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="captchas.html"><a href="captchas.html"><i class="fa fa-check"></i><b>3</b> Captchas</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="captchas.html"><a href="captchas.html#força-bruta"><i class="fa fa-check"></i><b>3.1</b> Força-bruta</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="captchas.html"><a href="captchas.html#redes-neurais"><i class="fa fa-check"></i><b>3.1.1</b> Redes neurais</a></li>
-<li class="chapter" data-level="3.1.2" data-path="captchas.html"><a href="captchas.html#a-operação-de-convolução"><i class="fa fa-check"></i><b>3.1.2</b> A operação de convolução</a></li>
-<li class="chapter" data-level="3.1.3" data-path="captchas.html"><a href="captchas.html#redes-neurais-convolucionais"><i class="fa fa-check"></i><b>3.1.3</b> Redes neurais convolucionais</a></li>
-<li class="chapter" data-level="3.1.4" data-path="captchas.html"><a href="captchas.html#resultados"><i class="fa fa-check"></i><b>3.1.4</b> Resultados</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="dados.html"><a href="dados.html"><i class="fa fa-check"></i><b>4</b> Dados</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="dados.html"><a href="dados.html#simulações"><i class="fa fa-check"></i><b>4.1</b> Simulações</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="dados.html"><a href="dados.html#primeiro-passo-modelo-inicial"><i class="fa fa-check"></i><b>4.1.1</b> Primeiro passo: modelo inicial</a></li>
-<li class="chapter" data-level="4.1.2" data-path="dados.html"><a href="dados.html#segundo-passo-dados"><i class="fa fa-check"></i><b>4.1.2</b> Segundo passo: dados</a></li>
-<li class="chapter" data-level="4.1.3" data-path="dados.html"><a href="dados.html#terceiro-passo-modelo-final"><i class="fa fa-check"></i><b>4.1.3</b> Terceiro passo: modelo final</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="modelo.html"><a href="modelo.html"><i class="fa fa-check"></i><b>5</b> Modelagem</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="modelo.html"><a href="modelo.html#construcao"><i class="fa fa-check"></i><b>5.1</b> Construção dos dados</a></li>
-<li class="chapter" data-level="5.2" data-path="modelo.html"><a href="modelo.html#heuristica"><i class="fa fa-check"></i><b>5.2</b> Modelagem usando heurísticas</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="modelo.html"><a href="modelo.html#heurística-1-substituição-da-pior-predição"><i class="fa fa-check"></i><b>5.2.1</b> Heurística 1: substituição da pior predição</a></li>
-<li class="chapter" data-level="5.2.2" data-path="modelo.html"><a href="modelo.html#heurística-2-substituição-da-predição-com-menor-diferença-para-segunda-candidata"><i class="fa fa-check"></i><b>5.2.2</b> Heurística 2: substituição da predição com menor diferença para segunda candidata</a></li>
-<li class="chapter" data-level="5.2.3" data-path="modelo.html"><a href="modelo.html#heurística-3-substituição-da-predição-que-tem-maior-entropia-no-vetor-de-predições"><i class="fa fa-check"></i><b>5.2.3</b> Heurística 3: substituição da predição que tem maior entropia no vetor de predições</a></li>
-<li class="chapter" data-level="5.2.4" data-path="modelo.html"><a href="modelo.html#propriedades-da-estratégia"><i class="fa fa-check"></i><b>5.2.4</b> Propriedades da estratégia</a></li>
-<li class="chapter" data-level="5.2.5" data-path="modelo.html"><a href="modelo.html#resultados-empíricos"><i class="fa fa-check"></i><b>5.2.5</b> Resultados empíricos</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="modelo.html"><a href="modelo.html#veross"><i class="fa fa-check"></i><b>5.3</b> Modelagem usando verossimilhança</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="modelo.html"><a href="modelo.html#resultados-empíricos-1"><i class="fa fa-check"></i><b>5.3.1</b> Resultados empíricos</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="modelo.html"><a href="modelo.html#implementação"><i class="fa fa-check"></i><b>5.4</b> Implementação</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="conclusao.html"><a href="conclusao.html"><i class="fa fa-check"></i><b>6</b> Conclusões</a></li>
-<li class="appendix"><span><b>Apêndice</b></span></li>
-<li class="chapter" data-level="A" data-path="pacote-captcha.html"><a href="pacote-captcha.html"><i class="fa fa-check"></i><b>A</b> Pacote {captcha}</a></li>
-<li class="divider"></li>
-<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Captchas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jtrecenti/doutorado"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="./Captchas.pdf"><i class="bi bi-file-pdf" role="img" aria-label="Download PDF">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
 </ul>
-
-      </nav>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
     </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Doutorado</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="introducao" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Capítulo 2</span> Introdução<a href="introducao.html#introducao" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="objetivos" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Objetivos<a href="introducao.html#objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>Construir um repositório de dados e um app de anotação</p>
-</blockquote>
-<blockquote>
-<p>Propor uma solução inovadora usando oráculos</p>
-</blockquote>
-<blockquote>
-<p>Desenvolver um pacote computacional aberto</p>
-</blockquote>
-</div>
-<div id="justificativa" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Justificativa<a href="introducao.html#justificativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>Citar as notícias do Serpro, STF, TJRS</p>
-</blockquote>
-<blockquote>
-<p>argumentar que os captchas baseados em texto são um risco e devem deixar de existir</p>
-</blockquote>
-<blockquote>
-<p>concluir que o futuro será de recaptchas avançados e impossíveis ou de dados abertos</p>
-</blockquote>
-<blockquote>
-<p>(essa parte é importante pois é a justificativa do projeto)</p>
-</blockquote>
-</div>
-<div id="hipóteses" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Hipóteses<a href="introducao.html#hipóteses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>Oráculo pode ajudar, e abrir isso em sub hipóteses</p>
-</blockquote>
-</div>
-<div id="organização-do-trabalho" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Organização do trabalho<a href="introducao.html#organização-do-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-
-</div>
-</div>
-            </section>
-
-          </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="captchas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Sobre este documento</span></a>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["tese.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "none"
-}
-});
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introducao.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./metodologia.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metodologia</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resultados.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelagem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conclusoes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusões</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Apêndices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pacote.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Pacote</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#captchas-em-serviços-públicos" id="toc-captchas-em-serviços-públicos" class="nav-link active" data-scroll-target="#captchas-em-serviços-públicos">Captchas em serviços públicos</a>
+  <ul class="collapse">
+  <li><a href="#uma-luta-de-geradores-e-resolvedores" id="toc-uma-luta-de-geradores-e-resolvedores" class="nav-link" data-scroll-target="#uma-luta-de-geradores-e-resolvedores">Uma luta de geradores e resolvedores</a></li>
+  <li><a href="#oráculo" id="toc-oráculo" class="nav-link" data-scroll-target="#oráculo">Oráculo</a></li>
+  </ul></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos">Objetivos</a></li>
+  <li><a href="#justificativa" id="toc-justificativa" class="nav-link" data-scroll-target="#justificativa">Justificativa</a></li>
+  <li><a href="#hipóteses" id="toc-hipóteses" class="nav-link" data-scroll-target="#hipóteses">Hipóteses</a></li>
+  <li><a href="#organização-do-trabalho" id="toc-organização-do-trabalho" class="nav-link" data-scroll-target="#organização-do-trabalho">Organização do trabalho</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="introducao" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Captcha (<em>Completely Automated Public Turing test to tell Computers and Humans Apart</em>) é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas.</p>
+<p>A <a href="#fig-teste">Figura&nbsp;<span>2.1</span></a> é um teste para configurar imagens.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-teste" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="assets/img/cycle.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;2.1: Uma caption</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Captchas estão presentes em toda a internet. Inicialmente criados para prevenir <em>spam</em> (<em>Sending and Posting Advertisement in Mass</em>), os desafios se tornaram populares rapidamente (XXX), sendo utilizados como forma de evitar evitar o uso indevido de aplicações da <em>web</em>. Algumas ações que os desafios podem ajudar a evitar são:</p>
+<ul>
+<li>Criação de contas falsas nos sites.</li>
+<li>Envio automático de mensagens, via <em>email</em> ou formulários de contato.</li>
+<li>Operações automatizadas, como compra de ingressos para eventos e voto automático em sites de votação.</li>
+<li>Voto automático em ferramentas de votação na internet.</li>
+<li>Consulta automatizada em sites para obtenção de dados.</li>
+</ul>
+<p>O uso de Captchas tem, por princípio, o objetivo de aumentar a segurança das pessoas que acessam a internet e proteger os sistemas <em>web</em> de uso abusivo. Para pessoas que acessam os sites pontualmente, a presença de Captchas representa um mero dissabor; para quem realiza acessos massivos, uma grande dificuldade.</p>
+<p>No entanto, o uso de Captchas não é adequado em todas as situações. Um exemplo são os sites de vendas: o uso dos desafios aborrece o usuário, alterando a qualidade da sua experiência. Os sites devem levar esse fator de aborrecimento em conta para não reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar outros mecanismos de prevenção à fraude, como monitoramento da sessão do usuário (XXX).</p>
+<p>Também existem casos em que o uso de Captchas é prejudicial. Sua utilização em serviços públicos do Brasil, por exemplo, é problemática, como discutido na próxima seção.</p>
+<section id="captchas-em-serviços-públicos" class="level2">
+<h2 class="anchored" data-anchor-id="captchas-em-serviços-públicos">Captchas em serviços públicos</h2>
+<p>A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º, previsão que “todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à segurança da sociedade e do Estado;”. Essa previsão é implementada pela Lei de Acesso à Informação (Lei 12.527/2011; LAI), que é aplicada “aos órgãos públicos integrantes da administração direta dos Poderes Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério Público”, bem como “as autarquias, as fundações públicas, as empresas públicas, as sociedades de economia mista e demais entidades controladas direta ou indiretamente pela União, Estados, Distrito Federal e Municípios” (Art. 1º).</p>
+<p>A LAI, apesar de trazer diversos benefícios à sociedade, tem dois problemas. A primeira é o <strong>esforço</strong>: tanto a pessoa/órgão que solicita os dados, quanto o órgão que retorna os dados precisam trabalhar para disponibilizar as informações, sendo necessário deslocar equipes para realizar os levantamentos pedidos. A segunda é o <strong>formato</strong>: os dados enviados como resultado de pedidos de LAI podem chegar em formatos inadequados para consumo da solicitante, muitas vezes em <em>Portable Document Format</em> (PDF), que dificulta a leitura e análise dos dados (XXX); além disso, como o levantamento é realizado de forma individualizada, o mesmo pedido feito em diferentes períodos (e.g.&nbsp;uma atualização mensal dos dados) pode vir em formatos diferentes, dificultando a leitura e arrumação dos dados.</p>
+<p>Uma forma de evitar os problemas de esforço e formato em pedidos de LAI é disponibilizar os dados de <strong>forma aberta</strong>. Como definido pela <em>Open Knowledge Foundation</em> (OKFN), a base de dados “deve ser fornecida em uma forma conveniente e modificável isento de obstáculos tecnológicos desnecessários para a realização dos direitos licenciados. Especificamente, os dados devem ser legíveis-por-máquina, disponíveis todo o seu volume, e fornecidos em um formato aberto (ou seja, um formato com sua especificação livremente disponível, e publicada sem qualquer restrições, monetárias ou não, da sua utilização) ou, no mínimo, podem ser processados com pelo menos uma ferramenta de software livre e gratuita.”</p>
+<p>As vantagens ao disponibilizar dados públicos de forma aberta para a sociedade é um tema pacífico na comunidade científica (XXX). Infelizmente, existem diversos dados públicos que não estão disponíveis de forma aberta, em plataformas como o <a href="https://dados.gov.br">dados.gov.br</a>.</p>
+<p>A dificuldade de acesso é particularmente evidente no Poder Judiciário, que além de não disponibilizar um portal de dados abertos, impõe barreiras aos pedidos de acesso à informação por utilizar diversos sistemas para armazenar os dados. Por exemplo, para pedir uma lista de todos os processos judiciais relacionados a recuperação judicial de empresas, as únicas alternativas são i) pedir os dados ao Conselho Nacional de Justiça (CNJ), que não possui informações suficientes para obter a lista (XXX) ou ii) expedir ofícios aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções e critérios de acesso aos dados, diferentes prazos para atendimento e diferentes formatos, podendo, inclusive, negar o pedido de acesso.</p>
+<p>A dificuldade para acessar os dados do judiciário é a principal barreira para realização de pesquisas pela Associação Brasileira de Jurimetria (ABJ), empresa na qual o autor desta tese trabalha. A entidade tem como missão principal a realização de estudos para implementar políticas públicas utilizando dados do judiciário.</p>
+<p>Dos 16 projetos disponibilizados na <a href="https://abj.org.br/pesquisas/">página de pesquisas no site da ABJ</a>, pelo menos 12 (75%) apresentaram dificuldades na obtenção dos dados via pedidos de acesso aos órgãos. Três exemplos icônicos são o da pesquisa sobre Tempo dos processos relacionados à adoção no Brasil (XXX), o Observatório da Insolvência: Rio de Janeiro (XXX) e o Diagnóstico do Contencioso Tributário Administrativo (XXX). No primeiro caso, dois tribunais enviaram os dados em arquivos em papel, sendo que um deles ultrapassou mil páginas com números de processos impressos. No segundo caso, o pedido foi respondido com uma planilha de contagens ao invés da lista de processos. No último caso, até mesmo órgãos que faziam parte do grupo de trabalho da pesquisa negaram pedido de acesso a dados de processos tributários em primeira instância, com argumentos que variavam desde a dificuldade técnica de levantar os dados até a Lei Geral de Proteção de Dados (LGPD).</p>
+<p>Em muitas situações, portanto, a única alternativa para realizar as pesquisas é acessando os dados via coleta automatizada nos sites. Todos os tribunais possuem ferramentas de consulta individualizadas de processos, por conta do que está previsto na CF. A solução, portanto, passa a ser construir uma ferramenta que obtém todos os dados automaticamente. Tal conceito é conhecido como <em>raspagem de dados</em> (XXX) e será desenvolvido com maiores detalhes no Capítulo <span class="quarto-unresolved-ref">?sec-metodologia</span>.</p>
+<p>Os Captchas se tornam prejudiciais à sociedade quando o acesso automatizado é necessário para realizar pesquisas científicas. Infelizmente, XX dos 91 tribunais utilizam a barreira do Captcha. Alguns tribunais, inclusive, têm o entendimento de que o acesso automatizado é prejudicial, como o TJRS, que emitiu um <a href="https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/">comunicado</a> sobre o tema.</p>
+<p>Uma justificativa comum para implementar Captchas em consultas públicas é a estabilidade dos sistemas. Ao realizar muitas consultas de forma automática, um robô pode tornar o sistema instável e, em algumas situações, até mesmo derrubar o servidor que disponibiliza as consultas.</p>
+<p>O problema é que utilizar Captchas não impede o acesso automatizado. As empresas que fazem acesso automatizado em tribunais podem construir ferramentas ou utilizar serviços externos de resolução de Captchas. Ou seja, ao utilizar Captchas, o acesso não é impedido, e sim especializado.</p>
+<p>Além disso, utilizar Captchas é uma solução ineficiente. Do ponto de vista técnico, a solução mais eficiente para disponibilizar os dados é através de ferramentas de dados abertos como o <em>Comprehensive Knowledge Archive Network</em> (CKAN). Ao disponibilizar os dados de forma aberta, as consultas automatizadas ficariam isoladas dos sites de consulta pública, o que garantiria o acesso das pessoas sem problemas de indisponibilidade.</p>
+<p>Não é só para as pessoas que fazem pesquisa com dados públicos que o uso de Captchas pode ser prejudicial. No mercado, existem serviços de resolução de Captcha que utilizam mão de obra humana, em regimes que pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um exemplo é o <a href="https://2captcha.com/make-money-online">2Captcha</a>, que funciona como um Uber dos Captchas: o algoritmo automatizado envia o Captcha para a plataforma, que é acessado e resolvido por uma pessoa, retornando a solução para o algoritmo.</p>
+<p>Segundo o site, o valor pago pelo 2Captcha é de US$ 0.5 para 1 a 2 horas de trabalho. No regime da Consolidação das Leis do Trabalho (Decreto-Lei 5.452/1943, CLT) as horas mensais de trabalho são 220. Trabalhando continuamente no 2Captcha, isso daria um salário de 55 a 110 dólares por mês, valor bem abaixo do salário mínimo, que no ano de 2022 era de R$ 1.100,00 (XXX). Ou seja, os serviços públicos acabam, indiretamente, incentivando um mercado que paga abaixo do salário mínimo.</p>
+<p>A solução definitiva para os problemas gerado pelos Captchas é a disponibilização dos dados públicos de forma aberta. Na ausência dessa solução, seja por falta de interesse ou iniciativa dos órgãos públicos, a alternativa é desenvolver uma solução para resolver Captchas que seja gratuita e aberta. Tal solução desincentivaria economicamente o uso de sistemas como o 2Captcha, protegendo as pessoas que fazem as resoluções e permitindo que as pessoas pesquisadoras realizem seus levantamentos.</p>
+<p>O presente trabalho busca avançar nesse sentido. A solução desenvolvida envolve um modelo que resolve alguns Captchas automaticamente, reduzindo significativamente a necessidade de rotulação manual.</p>
+<p>Para compreender completamente o avanço que a tese representa, no entanto, é necessário apresentar o histórico de desenvolvimento dos Captchas. O histórico é apresentado na próxima Seção, através da luta de geradores e resolvedores de Captchas, que pode ser dada como encerrada no ano de 2018, com o advento do <em>reCaptcha v3</em>.</p>
+<section id="uma-luta-de-geradores-e-resolvedores" class="level3">
+<h3 class="anchored" data-anchor-id="uma-luta-de-geradores-e-resolvedores">Uma luta de geradores e resolvedores</h3>
+<blockquote class="blockquote">
+<p>contar a história dos captchas como uma luta de classes: geradores e classificadores</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>na história, ir citando os papers que vão aparecendo</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>o advento do recaptcha</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>quando surgir o primeiro classificador com convnets, definir de forma mais detalhada</p>
+</blockquote>
+<p>Quem venceu a luta de geradores e resolvedores? Na verdade, nenhuma das duas (XXX). O que ocorreu com o reCaptcha v3 e seus sucessores foi, no fundo, uma mudança de perspectiva: o Captcha deixou de ser um sistema <strong>passivo</strong> e passou a ser um sistema <strong>ativo</strong> de verificação. Ao invés de criar uma tarefa difícil de resolver por robôs e fácil de resolver por pessoas, os sistemas criaram uma camada de verificação da sessão de acesso do usuário, incluindo análises do navegador, dos <em>cookies</em> e dos padrões de cliques. Antes mesmo de chegar no desafio do Captcha, portanto, o algoritmo de acesso precisa enganar os verificadores. Essa tarefa é muito mais parecida com um problema de <em>cyberataque</em> do que uma tarefa de inteligência artificial (XXX).</p>
+<p>A luta continua, mas não é mais entre geradores e resolvedores.</p>
+<p>De qualquer forma, os Captchas baseados textos em imagens continuam sendo os mais populares. Isso é especialmente evidente nos serviços públicos que são objeto da presente pesquisa, já que os serviços raramente são atualizados com ferramentas mais recentes. Ainda não foi encontrado um resolvedor geral para imagens e também não existem desafios comprovadamente impossíveis de resolver por inteligência artificial.</p>
+<p>A investigação foco da tese será na busca de um resolvedor universal de Captchas de textos em imagens. O objetivo será atingido de forma parcial, explorando o potencial de uso do <strong>oráculo</strong>, apresentado na próxima seção.</p>
+</section>
+<section id="oráculo" class="level3">
+<h3 class="anchored" data-anchor-id="oráculo">Oráculo</h3>
+<p>Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado, são muito sensíveis a perturbações pequenas nas imagens (XXX). Por isso, se o site de um tribunal, por exemplo, mudar o Captcha utilizado, seria necessário baixar e anotar uma nova base de dados para treinar o modelo. Os avanços em técnicas de regularização fazem com que o modelo seja menos afetado por mudanças nos desafios gerados. Uma técnica de regularização que ajuda na capacidade de generalização é a aumentação de dados com adição de ruídos (XXX). No entanto, nenhuma técnica garante que o modelo terá excelentes resultados em novos desafios.</p>
+<p>Outra alternativa é desenvolver modelos que aprendem com poucos dados anotados. Avanços recentes indicam que modelos generativos adversariais (GAN) e modelos relacionados podem apresentar bons resultados na resolução de tarefas de imagens, mesmo com uma base de dados anotada pequena (XXX). Nesse sentido, ainda que um site mude seu Captcha, é possível ajustar um modelo que resolve esse Captcha sem a necessidade de anotar muitos exemplos para construir uma nova base de treino.</p>
+<p>Nessa tese, apresenta-se uma nova técnica para resolver Captchas com poucos dados anotados. A técnica consiste em aproveitar o fato de que o Captcha aplica um teste de Turing reverso para gerar bases de dados automaticamente. Ou seja, a técnica resolve o problema não com modelos mais sofisticados, mas com a utilização eficiente dos recursos disponíveis. Essa é a técnica do oráculo.</p>
+<p>Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado está correto. Eles estão disponíveis em todos os sites, já que, por definição, o Captcha precisa apresentar o resultado do teste para o usuário. O nome “oráculo” vem do fato de que o site já possui a informação correta, como um deus. O site, no entanto, se comunica com o usuário através de um intermediário (o oráculo) que apresenta a resposta de forma limitada.</p>
+<p>Oráculos se manifestam de diversas formas nos sites com Captchas. Por exemplo, pode dar a possibilidade de realizar apenas um teste por imagem, vários testes por imagem, ou ainda retornar informações ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode retornar com um “bom o suficiente” quando o rótulo não está totalmente correto (XXX).</p>
+<p>O oráculo é uma forma de obter uma base virtualmente infinita. Do ponto de vista de modelagem, é similar a um problema de aprendizado por reforço (XXX), mas com uma resposta limitada (acertou ou errou).</p>
+<p>A técnica consiste em utilizar um modelo inicial, possivelmente fraco. Em seguida, o site é acessado múltiplas vezes, gerando uma nova base de dados virtualmente infinita, que é completamente anotada nos casos de acerto e que apresenta o histórico de erros no caso de erro. O modelo inicial poderia ser ajustado com as técnicas usuais de modelagem, ou utilizando um modelo mais sofisticado como GAN.</p>
+<p>Utilizar somente os casos classificados corretamente, obtidos dos acertos no teste do oráculo, induz viés de seleção na amostra (XXX). Como o modelo só tem acesso aos casos em que já funciona bem, a informação obtida não é tão relevante. O desafio de modelagem da tese reside em como considerar a informação fornecida pelo oráculo nos casos em que o modelo inicial erra.</p>
+<p>Do ponto de vista estatístico, a informação produzida pelo oráculo pode ser entendida como uma informação censurada (XXX). Isso acontece pois a informação existe e é correta, mas não está completa. No entanto, como a informação é resultado do teste de um rótulo produzido por um modelo, faz sentido afirmar que a censura não é gerada por acaso (XXX).</p>
+<p>Na área de aprendizado de máquinas (XXX), um modelo apresenta resposta censurada ou incompleta é colocado na classe de problemas do aprendizado fracamente supervisionado (XXX). Trata-se de uma área ainda pouco investigada estudada na literatura (XXX) e bastante ampla, englobando não só os métodos supervisionados (XXX) como também os métodos semi-supervisionados (XXX). A tese apresentará os conceitos de aprendizado fracamente supervisionado, com foco na classe de problemas que a modelagem utilizando Captchas representa.</p>
+<p>Para criar uma base de dados usando o oráculo, é necessário utilizar técnicas de raspagem de dados, imitando repetidamente o que um usuário faria para acessar o site. Por isso, a raspagem de dados se torna fundamental para a construção do modelo, tornando-se um dos objetivos da pesquisa.</p>
+</section>
+</section>
+<section id="objetivos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
+<p>O objetivo geral da tese é desenvolver uma solução inovadora, chamada WAWL (<em>Web Automatic Weak Learning</em>) para resolver Captchas, misturando técnicas de aprendizado profundo com raspagem de dados.</p>
+<p>Especificamente, a pesquisa tem como objetivos:</p>
+<ol type="1">
+<li>Descrever o modelo proposto e estudar suas propriedades.</li>
+<li>Construir e disponibilizar um repositório de dados para realização de mais pesquisas no ramo.</li>
+<li>Ajustar e testar a eficácia do modelo proposto.</li>
+<li>Disponibilizar um pacote computacional aberto, possibilitando a resolução de Captchas presentes em serviços públicos.</li>
+</ol>
+</section>
+<section id="justificativa" class="level2">
+<h2 class="anchored" data-anchor-id="justificativa">Justificativa</h2>
+<p>O presente trabalho é relevante para a ciência por conta de sua importância prática, importância teórica e viabilidade técnica. Os pontos são explicados abaixo.</p>
+<p>Captchas em serviços públicos causam desequilíbrio de mercado e incentivam o uso de serviços com formas de remuneração duvidosas. O objetivo 4 vai de encontro direto com esse problema, disponibilizando uma ferramenta gratuita e aberta para resolução de Captchas que, pelo menos até a escrita da tese, pode ser utilizada em dezenas de serviços públicos.</p>
+<p>Do ponto de vista teórico, a tese é importante por apresentar uma aplicação muito elegante do aprendizado fracamente supervisionado. No caso do Captcha, como a base de dados fracamente supervisionada é virtualmente infinita, trata-se de uma excelente oportunidade para testar novas técnicas e como elas se comportam empiricamente. Os objetivos 1 e 2 estão relacionadas a essa justificativa.</p>
+<p>Finalmente, com relação à viabilidade técnica, o trabalho parte de uma lista de Captchas que já foram resolvidos utilizando aprendizado profundo. Como os Captchas já estão resolvidos, mesmo que a WAWL não apresentasse bons resultados – e apresenta – o projeto ainda teria como subprodutos as bases de dados e o pacote computacional disponibilizados abertamente. O objetivo 3 é o que torna a proposta tecnicamente viável.</p>
+</section>
+<section id="hipóteses" class="level2">
+<h2 class="anchored" data-anchor-id="hipóteses">Hipóteses</h2>
+<!-- REVISAR DEPOIS DE TERMINAR O PROJETO -->
+<p>O projeto foi desenvolvido em torno de duas hipóteses principais. Tais hipóteses são oriundas tanto do levantamento bibliográfico realizado para desenvolver a pesquisa, quanto da experiência pessoal do autor em projetos de pesquisa aplicados.</p>
+<ol type="1">
+<li>A utilização de aprendizado fracamente supervisionado com oráculo permite a criação de modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.
+<ol type="a">
+<li>Sub-hipótese: É possível criar um modelo genérico que funciona bem e se adapta com o uso do oráculo.</li>
+<li>Sub-hipótese: Com a teoria de aprendizado fracamente supervisionado, é possível demonstrar que modelos criados dessa forma apresentam desempenho análogo ao que seria obtido com bases totalmente supervisionadas.</li>
+</ol></li>
+<li>É possível aliar a área de raspagem de dados com a área de modelagem estatística
+<ol type="a">
+<li>Sub-hipótese: O uso de raspagem de dados como passo intermediário do processo de modelagem apresenta resultados positivos no poder preditivo dos Captchas.</li>
+<li>Sub-hipótese: É possível criar um modelo com aprendizado ativo, que melhora continuamente conforme é utilizado nos sites.</li>
+</ol></li>
+</ol>
+</section>
+<section id="organização-do-trabalho" class="level2">
+<h2 class="anchored" data-anchor-id="organização-do-trabalho">Organização do trabalho</h2>
+<p>O segundo capítulo, “metodologia” contém todos os passos dados para construção da tese, tanto do ponto de vista teórico como prático. Parte-se da definição técnica dos Captchas, chegando até as redes neurais e a classe problema trabalhada de forma ampla. Em seguida, apresenta-se o método WAWL e suas características. Depois, a base de dados é descrita, mostrando as fontes de dados consideradas e as técnicas de raspagem de dados utilizadas. Por último, descreve-se, com detalhes, as simulações realizadas para obtenção dos resultados empíricos.</p>
+<p>O terceiro capítulo, “resultados”, apresenta os resultados da pesquisa. Do ponto de vista teórico, são apresentadas as demonstrações das propriedades do modelo. Do ponto de vista empírico, são apresentados os resultados das simulações e outros experimentos realizados com a técnica WAWL.</p>
+<p>No quarto e último capítulo, “conclusion”, a pesquisa é concluída, com apresentação das considerações finais e próximos passos. Também foi incluído um apêndice descrevendo e documentando o pacote <code>{captcha}</code>, criado atingir o objetivo 4 da pesquisa.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Sobre este documento</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./metodologia.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metodologia</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
 
-</html>
+
+</body></html>

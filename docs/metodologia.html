@@ -1,61 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Capítulo 2 Metodologia | Doutorado</title>
-<meta name="author" content="Julio Trecenti">
-<meta name="description" content="Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do...">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
-<meta property="og:title" content="Capítulo 2 Metodologia | Doutorado">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Capítulo 2 Metodologia | Doutorado">
-<meta name="twitter:description" content="Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0.9000/transition.js"></script><script src="libs/bs3compat-0.4.0.9000/tabs.js"></script><script src="libs/bs3compat-0.4.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<link rel="stylesheet" href="assets/css/bookdown.css">
+<meta name="generator" content="quarto-1.2.219">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Captchas - 3&nbsp; Metodologia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./resultados.html" rel="next">
+<link href="./introducao.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body class="nav-sidebar floating nav-fixed">
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Doutorado</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Sobre este documento</a></li>
-<li><a class="active" href="metodologia.html"><span class="header-section-number">2</span> Metodologia</a></li>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Captchas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jtrecenti/doutorado"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="./Captchas.pdf"><i class="bi bi-file-pdf" role="img" aria-label="Download PDF">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
 </ul>
-
-        <div class="book-extra">
-          
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metodologia</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </nav>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Sobre este documento</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introducao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./metodologia.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metodologia</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resultados.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelagem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conclusoes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusões</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Apêndices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pacote.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Pacote</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#definição-do-problema" id="toc-definição-do-problema" class="nav-link active" data-scroll-target="#definição-do-problema">Definição do problema</a>
+  <ul class="collapse">
+  <li><a href="#captcha" id="toc-captcha" class="nav-link" data-scroll-target="#captcha">Captcha</a></li>
+  <li><a href="#redes-neurais" id="toc-redes-neurais" class="nav-link" data-scroll-target="#redes-neurais">Redes neurais</a></li>
+  <li><a href="#aprendizado-estatístico" id="toc-aprendizado-estatístico" class="nav-link" data-scroll-target="#aprendizado-estatístico">Aprendizado estatístico</a></li>
+  </ul></li>
+  <li><a href="#método-wawl" id="toc-método-wawl" class="nav-link" data-scroll-target="#método-wawl">Método WAWL</a></li>
+  <li><a href="#dados" id="toc-dados" class="nav-link" data-scroll-target="#dados">Dados</a>
+  <ul class="collapse">
+  <li><a href="#escolha-dos-captchas-analisados" id="toc-escolha-dos-captchas-analisados" class="nav-link" data-scroll-target="#escolha-dos-captchas-analisados">Escolha dos Captchas analisados</a></li>
+  <li><a href="#construção-dos-dados" id="toc-construção-dos-dados" class="nav-link" data-scroll-target="#construção-dos-dados">Construção dos dados</a></li>
+  </ul></li>
+  <li><a href="#simulacoes" id="toc-simulacoes" class="nav-link" data-scroll-target="#simulacoes">Simulações</a>
+  <ul class="collapse">
+  <li><a href="#primeiro-passo-modelo-inicial" id="toc-primeiro-passo-modelo-inicial" class="nav-link" data-scroll-target="#primeiro-passo-modelo-inicial">Primeiro passo: modelo inicial</a></li>
+  <li><a href="#segundo-passo-dados" id="toc-segundo-passo-dados" class="nav-link" data-scroll-target="#segundo-passo-dados">Segundo passo: dados</a></li>
+  <li><a href="#terceiro-passo-modelo-final" id="toc-terceiro-passo-modelo-final" class="nav-link" data-scroll-target="#terceiro-passo-modelo-final">Terceiro passo: modelo final</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="metodologia" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metodologia</span></span></h1>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="metodologia" class="section level1" number="2">
-<h1>
-<span class="header-section-number">Capítulo 2</span> Metodologia<a class="anchor" aria-label="anchor" href="#metodologia"><i class="fas fa-link"></i></a>
-</h1>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <!-- ----------------------------------------------------------- -->
 <p>Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do trabalho, pois, mais do que simplesmente apresentar o código utilizado, mostra o passo a passo, as dores e as decisões difíceis que tiveram de ser tomadas para concluir o projeto.</p>
 <p>O capítulo está organizado em três seções: definição do problema, dados e simulações. A primeira mostra a base matemática do problema estudado e as escolhas de sintaxe e terminologias. A segunda descreve as fontes de dados e o processo de coleta, já que a base foi construída totalmente do zero. A terceira mostra como foram planejadas as simulações para verificar se a solução proposta funciona bem empiricamente.</p>
@@ -64,56 +214,58 @@
 <p>Na seção de dados, procurou-se apresentar a metodologia de coleta em detalhes. Isso foi feito porque a área de raspagem de dados não é comum para estudantes de estatística, existindo até uma percepção entre acadêmicos de que trata-se de uma área separada da estatística. Uma das hipóteses de pesquisa, bem como a solução técnica apresentada neste trabalho é justamente uma ponte entre as duas áreas, justificando um detalhamento maior dos conceitos.</p>
 <p>Implementações de raspagem de dados, no entanto, são inconstantes. Um site de interesse pode mudar sua estrutura ou simplesmente trocar o Captcha para um reCaptcha da noite para o dia, alterando completamente o fluxo de coleta. Isso aconteceu, inclusive, com um dos sites mais importantes dentro do contexto da jurimetria: em 2018, o Tribunal de Justiça de São Paulo (TJSP) passou a utilizar o reCaptcha para bloquear ferramentas automatizadas. Qualquer código ou fluxo para acessar as fontes de dados consideradas no trabalho, portanto, estariam datadas no momento da publicação. Por isso, optou-se por apresentar essa parte de forma genérica e deixar as atualizações para os códigos, que estão disponíveis publicamente e serão mantidos com contribuições da comunidade.</p>
 <p>Na seção de simulações, procurou-se descrever os passos dados em detalhe. Nesse caso, a escolha do detalhamento se deu por motivos puramente científicos, para que qualquer pessoa possa reproduzir os passos dados. Dessa forma, pessoas interessadas na área podem replicar os resultados em outros exemplos com alterações mínimas no fluxo, além de sugerir melhorias.</p>
-<div id="definição-do-problema" class="section level2" number="2.1">
-<h2>
-<span class="header-section-number">2.1</span> Definição do problema<a class="anchor" aria-label="anchor" href="#defini%C3%A7%C3%A3o-do-problema"><i class="fas fa-link"></i></a>
-</h2>
+<section id="definição-do-problema" class="level2">
+<h2 class="anchored" data-anchor-id="definição-do-problema">Definição do problema</h2>
 <!-- Nesta seção, buscou-se definir o problema trabalhado de forma precisa. Escolheu-se fazer isso de baixo para cima, a partir da estrutura de dados dos Captchas e depois do problema estatístico. Cabe, no entanto, um adiantamento do que vem pela frente para facilitar a leitura. -->
 <p>O problema a ser trabalhado é um caso de <em>aprendizado fracamente supervisionado</em>. Trata-se de uma generalização do aprendizado supervisionado e também do aprendizado <em>semi-supervisionado</em>. Usualmente, a área de aprendizado estatístico (ou aprendizado de máquinas) se concentra em dois tipos de problemas principais: o aprendizado supervisionado e o aprendizado não supervisionado. É possível observar essa classificação em diversos livros-texto da área (XXX). Isso ocorre principalmente por fins didáticos, pois é mais fácil passar os modelos que fazem parte de cada área.</p>
 <p>No entanto, a estatística evolui com os problemas que ocorrem no mundo. E, no mundo, os problemas nem sempre recaem em uma ou outra categoria. O que temos, na verdade, é que os problemas não supervisionados e supervisionados estão conectados, desde que o objetivo de uma pesquisa seja o de predizer valores (regressão) ou categorias (classificação).</p>
 <p>Nesse sentido, uma área que ficou popular nos últimos anos, até por conta dos avanços na área de Deep Learning, é o <em>aprendizado semi-supervisionado</em>. Trata-se de uma classe de problemas contendo uma amostra completamente anotada e uma amostra sem anotações. A amostra sem anotações é usada para compreender como os dados foram gerados, e os parâmetros podem ser compartilhados com a parte supervisionada do modelo. Isso poderia indicar que existem três classes de problemas: o não supervisionado, o supervisionado e o semi-supervisionado.</p>
 <p>Mas isso também não representa todas as classes de problemas. Em muitas aplicações reais, obter uma anotação completa e correta pode ser custoso ou até impraticável. Além disso por envolver trabalho humano, é comum que classificações contenham erros. Para lidar com esses casos existe uma área, que generaliza as anteriores, que é o aprendizado fracamente supervisionado.</p>
 <p>O problema fracamente supervisionado será o final da jornada. Ela começa de onde deve começar, com aqueles que são objeto de análise deste trabalho: os Captchas.</p>
-<div id="captcha" class="section level3" number="2.1.1">
-<h3>
-<span class="header-section-number">2.1.1</span> Captcha<a class="anchor" aria-label="anchor" href="#captcha"><i class="fas fa-link"></i></a>
-</h3>
+<section id="captcha" class="level3">
+<h3 class="anchored" data-anchor-id="captcha">Captcha</h3>
 <p>Captcha é um <em>desafio</em> do tipo <em>desafio-resposta</em> usado para determinar se a usuário do sistema é um humano. Existem diversos tipos de Captcha diferentes, que envolvem desde identificar textos em imagens até resolver expressões matemáticas complexas.</p>
 <p>O foco deste trabalho reside nos Captchas baseados em imagens rotuladas, que é o tipo mais comum. Em seguida, a menos que se mencione ao contrário, todos os Captchas apresentados são desse tipo.</p>
 <p>O fluxo completo de um Captcha envolve cinco componentes: um <em>rótulo</em>, um <em>gerador</em>, uma <em>imagem</em>, um agente e um <em>oráculo</em>. Um ciclo do Captcha é completado ao seguir os passos:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>O rótulo é definido, usualmente com algum procedimento aleatório, ocultado do agente.</li>
 <li>A imagem é gerada a partir do rótulo e apresentada para o agente.</li>
 <li>O agente preenche sua resposta a partir da imagem (que pode estar certo ou errado)</li>
 <li>O oráculo verifica se a resposta está correta.</li>
 <li>Dependendo da resposta, o agente é direcionado para a página autenticada ou para uma página de erro.</li>
 </ol>
-<p>A Figura <a href="metodologia.html#fig:esquema-captcha">2.1</a> esquematiza o fluxo do Captcha.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:esquema-captcha"></span>
-<img src="assets/img/esquema-captcha.png" alt="Fluxo do Captcha" width="80%"><p class="caption">
-Figura 2.1: Fluxo do Captcha
-</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-esquema-captcha</span> esquematiza o fluxo do Captcha.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/esquema-captcha.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Fluxo do Captcha</figcaption><p></p>
+</figure>
 </div>
-<div id="imagem-rótulo-e-variável-resposta" class="section level4" number="2.1.1.1">
-<h4>
-<span class="header-section-number">2.1.1.1</span> Imagem, rótulo e variável resposta<a class="anchor" aria-label="anchor" href="#imagem-r%C3%B3tulo-e-vari%C3%A1vel-resposta"><i class="fas fa-link"></i></a>
-</h4>
+</div>
+</div>
+<section id="imagem-rótulo-e-variável-resposta" class="level4">
+<h4 class="anchored" data-anchor-id="imagem-rótulo-e-variável-resposta">Imagem, rótulo e variável resposta</h4>
 <p>A imagem é uma matriz <span class="math inline">\(\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}\)</span>, contendo padrões que, a partir da análise humana, levam ao rótulo do Captcha. O <em>rótulo</em> dado por um vetor de caracteres <span class="math inline">\(\mathbf c = [c_1,\dots,c_L]^\top\)</span>. O comprimento <span class="math inline">\(L\)</span> pode ser fixo ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir com comprimentos diferentes. Nas definições que seguem vamos considerar <span class="math inline">\(L\)</span> como fixo, por simplicidade.</p>
-<p>Os elementos do vetor <span class="math inline">\(\mathbf c\)</span> fazem parte de um alfabeto <span class="math inline">\(\mathcal A\)</span>, com cardinalidade <span class="math inline">\(|\mathcal A|\)</span>, finito e conhecido. O alfabeto contém todos os possíveis caracteres que podem aparecer na imagem. Na maioria dos casos, <span class="math inline">\(\mathcal A\)</span> corresponde a uma combinação de algarismos arábicos (0-9) e letras do alfabeto latino (a-z), podendo diferenciar ou não as letras maiúsculas e minúsculas<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;existem exemplos de Captchas baseados em imagens que não são limitados a letras e números para constituir o rótulo (XXX). Como esses casos não aparecem nas aplicações práticas de interesse, estão fora do escopo do trabalho.&lt;/p&gt;"><sup>1</sup></a>.</p>
+<p>Os elementos do vetor <span class="math inline">\(\mathbf c\)</span> fazem parte de um alfabeto <span class="math inline">\(\mathcal A\)</span>, com cardinalidade <span class="math inline">\(|\mathcal A|\)</span>, finito e conhecido. O alfabeto contém todos os possíveis caracteres que podem aparecer na imagem. Na maioria dos casos, <span class="math inline">\(\mathcal A\)</span> corresponde a uma combinação de algarismos arábicos (0-9) e letras do alfabeto latino (a-z), podendo diferenciar ou não as letras maiúsculas e minúsculas<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>O elemento da matriz <span class="math inline">\(x_{nm\cdot}\)</span> é denominado <em>pixel</em>. Um pixel representa a menor unidade possível da imagem. Em uma imagem colorida, por exemplo, <span class="math inline">\(R=3\)</span>. Nesse caso, um pixel é um vetor de três dimensões com valores entre zero e um, representando a intensidade de vermelho, verde e azul da coordenada <span class="math inline">\((n, m)\)</span> da imagem. Em imagens em escala de cinza, <span class="math inline">\(R=1\)</span> e o pixel, de uma dimensão, representa a intensidade do cinza, sendo 1 o equivalente da cor branca e 0 da cor preta.</p>
-<p>A Figura <a href="metodologia.html#fig:exemplo-tjmg">2.2</a> mostra um exemplo Captcha do Tribunal de Justiça de Minas Gerais (TJMG). Nesse caso, tem-se <span class="math inline">\(L=5\)</span> e <span class="math inline">\(|\mathcal A|=10\)</span>, apenas os dez algarismos arábicos. A imagem tem dimensões <span class="math inline">\(N=110\)</span>, <span class="math inline">\(M=40\)</span> e <span class="math inline">\(R=3\)</span>. O rótulo da imagem é <span class="math inline">\([5,2,4,3,2]^\top\)</span>.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:exemplo-tjmg"></span>
-<img src="assets/img/tjmg16283c1e6d06.jpeg" alt="Exemplo de Captcha no TJMG." width="80%"><p class="caption">
-Figura 2.2: Exemplo de Captcha no TJMG.
-</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-exemplo-tjmg</span> mostra um exemplo Captcha do Tribunal de Justiça de Minas Gerais (TJMG). Nesse caso, tem-se <span class="math inline">\(L=5\)</span> e <span class="math inline">\(|\mathcal A|=10\)</span>, apenas os dez algarismos arábicos. A imagem tem dimensões <span class="math inline">\(N=110\)</span>, <span class="math inline">\(M=40\)</span> e <span class="math inline">\(R=3\)</span>. O rótulo da imagem é <span class="math inline">\([5,2,4,3,2]^\top\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/tjmg16283c1e6d06.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Exemplo de Captcha no TJMG.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>A <strong>variável resposta</strong> é uma matriz binária <span class="math inline">\(\mathbf y_{L \times |\mathcal A|}\)</span>, em que cada linha representa um dos valores do vetor <span class="math inline">\(\mathbf c\)</span>, enquanto as colunas possuem um representante para cada elemento de <span class="math inline">\(\mathcal A\)</span>. Um elemento <span class="math inline">\(y_{ij}\)</span> vale 1 se o elemento <span class="math inline">\(i\)</span> do rótulo <span class="math inline">\(\mathbf c\)</span> corresponde ao elemento <span class="math inline">\(j\)</span> do alfabeto <span class="math inline">\(\mathcal A\)</span>, valendo zero caso contrário. A variável resposta pode ser pensada também como o <em>one-hot encoding</em> do rótulo.</p>
 <p>Uma maneira alternativa de definir a variável resposta seria com um vetor de índices representando cada elemento do alfabeto em um vetor. O problema de trabalhar dessa forma é que a variável resposta <span class="math inline">\(\mathbf y\)</span> tem um número exponencial de combinações: o rótulo possui <span class="math inline">\(L\)</span> caracteres, sendo que cada caractere pode ter <span class="math inline">\(|\mathcal A|\)</span> valores, totalizando <span class="math inline">\(|\mathcal A|^L\)</span> combinações.</p>
 <p>Por exemplo, um Captcha com <span class="math inline">\(L=6\)</span> letras e <span class="math inline">\(|\mathcal A| = 36\)</span> possibilidades em cada letra (26 letras do alfabeto latino e 10 algarismos arábicos), possui um total de 2.176.782.336 (<span class="math inline">\(&gt;\)</span> 2 bilhões) combinações. Por isso, modelar as imagens diretamente através de uma única variável resposta categórica é tecnicamente inviável.</p>
 <p>A forma <em>one-hot</em> da resposta pode ser entendida como uma <strong>multinomial</strong> <strong>multivariada</strong> (XXX). A resposta é multivariada porque temos <span class="math inline">\(L\)</span> caracteres na imagem e multinomial porque temos <span class="math inline">\(|\mathcal A|\)</span> possíveis caracteres em cada posição. Dessa forma, podemos pensar que um modelo que resolve o Captcha envolve <span class="math inline">\(L\)</span> classificadores com resposta multinomial, cada um dando conta de um dos caracteres. Os classificadores podem ser independentes e podem até contar com etapas de pré-processamento separadas.</p>
-<p>Seguindo o exemplo da Figura <a href="metodologia.html#fig:exemplo-tjmg">2.2</a>, é possível representar o rótulo da seguinte forma:</p>
+<p>Seguindo o exemplo da Figura <span class="quarto-unresolved-ref">?fig-exemplo-tjmg</span>, é possível representar o rótulo da seguinte forma:</p>
 <p><span class="math display">\[
 \mathbf c = \left[\begin{array}{c}
      5  \\
@@ -130,21 +282,23 @@ Figura 2.2: Exemplo de Captcha no TJMG.
 \end{array}\right]
 \]</span></p>
 <p>A forma <em>dummy</em> da resposta facilita os trabalhos que seguem. Como será visto mais adiante, o modelo de rede neural gerará uma matriz de probabilidades que somam <span class="math inline">\(1\)</span> em cada linha, com as probabilidades de cada caractere em cada posição.</p>
-</div>
-<div id="gerador" class="section level4" number="2.1.1.2">
-<h4>
-<span class="header-section-number">2.1.1.2</span> Gerador<a class="anchor" aria-label="anchor" href="#gerador"><i class="fas fa-link"></i></a>
-</h4>
+</section>
+<section id="gerador" class="level4">
+<h4 class="anchored" data-anchor-id="gerador">Gerador</h4>
 <p>O <strong>gerador</strong> é uma função <span class="math inline">\(g\)</span> que recebe um rótulo como entrada e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de gerar uma imagem fácil de interpretar por humanos, mas difícil de se resolver por máquinas.</p>
-<p>Um exemplo de gerador é a função criada no pacote <a href="https://github.com/decryptr/captcha">captcha</a>. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote <a href="https://docs.ropensci.org/magick/">magick</a> (XXX), que utiliza o software ImageMagick. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da Figura <a href="metodologia.html#fig:captcha-r-exemplo">2.3</a>.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:captcha-r-exemplo"></span>
-<img src="tese_files/figure-html/captcha-r-exemplo-1.svg" alt="Exemplo de captcha gerado pela função captcha::captcha_generate()" width="80%"><p class="caption">
-Figura 2.3: Exemplo de captcha gerado pela função captcha::captcha_generate()
-</p>
+<p>Um exemplo de gerador é a função criada no pacote <code>{captcha}</code>. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote <code>{magick}</code> (XXX), que utiliza o software ImageMagick. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da Figura <span class="quarto-unresolved-ref">?fig-captcha-r-exemplo</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="metodologia_files/figure-html/captcha-r-exemplo-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Exemplo de captcha gerado pela função captcha::captcha_generate()</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>O gerador segue os passos abaixo, a partir do momento em que um rótulo <span class="math inline">\(\mathbf c\)</span> existe:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>É criada uma matriz <span class="math inline">\(N\times M \times R\)</span>, com valores entre zero e um gerados por simulações de uma <span class="math inline">\(\mathcal U(0,1)\)</span>.</li>
 <li>É adicionada uma cor base ao ruído, definida de forma aleatória.</li>
 <li>A matriz é transformada em um objeto do tipo <code>magick-image</code>.</li>
@@ -152,11 +306,9 @@ Figura 2.3: Exemplo de captcha gerado pela função captcha::captcha_generate()
 <li>A imagem recebe outros tipos de distorções, como adição de ruído, alteração de cores e outros efeitos.</li>
 </ol>
 <p>No final, o gerador retorna a imagem, que é a única informação enviada ao agente. O rótulo fica escondido para verificação do oráculo.</p>
-</div>
-<div id="oráculo" class="section level4" number="2.1.1.3">
-<h4>
-<span class="header-section-number">2.1.1.3</span> Oráculo<a class="anchor" aria-label="anchor" href="#or%C3%A1culo"><i class="fas fa-link"></i></a>
-</h4>
+</section>
+<section id="oráculo" class="level4">
+<h4 class="anchored" data-anchor-id="oráculo">Oráculo</h4>
 <p>Para definir o oráculo, utilizou-se uma terminologia que é facilmente encaixada com a teoria de aprendizado fracamente supervisionado. Seja <span class="math inline">\(g\)</span> um modelo utilizado para predizer o valor de uma imagem e seja <span class="math inline">\(\mathbf x_{n+1}\)</span> uma nova imagem que é observada, com sua resposta <span class="math inline">\(\mathbf y_{n+1}\)</span>, desconhecida. A operação <span class="math inline">\(g(\mathbf x_{n+1}) = \hat {\mathbf y}_{n+1}\)</span> retorna um candidato para <span class="math inline">\(\mathbf y_{n+1}\)</span>, que pode estar correto ou errado.</p>
 <p>O oráculo é uma função <span class="math inline">\(\mathcal O: \mathcal Y \rightarrow 2^{\mathcal Y}\)</span>, ou seja, uma função que recebe um elemento do domínio da resposta <span class="math inline">\(\mathcal Y\)</span> (ou seja, do conjunto de todas as combinações de rótulos) para o conjunto de subconjuntos (as partes) de <span class="math inline">\(\mathcal Y\)</span>. Ou seja, a função retorna uma lista de possíveis valores de <span class="math inline">\({\mathbf y}_{n+1}\)</span>. O oráculo funciona da seguinte forma:</p>
 <p><span class="math display">\[
@@ -166,12 +318,16 @@ Figura 2.3: Exemplo de captcha gerado pela função captcha::captcha_generate()
 \end{array}\right.
 \]</span></p>
 <p>Explicando a função: quando a função <span class="math inline">\(g\)</span> acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Quando a função <span class="math inline">\(g\)</span> retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos para <span class="math inline">\(\mathbf x_{n+1}\)</span>, o que inclui o próprio <span class="math inline">\(\mathbf y_{n+1}\)</span>. É importante notar que a lista retornada pelo oráculo sempre contém a resposta <span class="math inline">\(\mathbf y_{n+1}\)</span>.</p>
-<p>A Figura <a href="metodologia.html#fig:esquema-oraculo">2.4</a> mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:esquema-oraculo"></span>
-<img src="assets/img/esquema-oraculo.png" alt="Esquema mostrando o funcionamento do oráculo." width="80%"><p class="caption">
-Figura 2.4: Esquema mostrando o funcionamento do oráculo.
-</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-esquema-oraculo</span> mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/esquema-oraculo.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Esquema mostrando o funcionamento do oráculo.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>É possível generalizar naturalmente o oráculo para múltiplos chutes mudando a definição da função que faz predições. Seja <span class="math inline">\(h\)</span> uma função que retorna um conjunto de <span class="math inline">\(k\)</span> respostas possíveis, <span class="math inline">\(k\in \mathbb N\)</span>, <span class="math inline">\(k\geq 1\)</span>, com <span class="math inline">\(\mathbf x_{n+1}\)</span> e <span class="math inline">\(\mathbf y_{n+1}\)</span> iguais aos definidos definidos anteriormente. Então o oráculo tem o funcionamento definido abaixo:</p>
 <p><span class="math display">\[
@@ -182,39 +338,37 @@ Figura 2.4: Esquema mostrando o funcionamento do oráculo.
 \]</span></p>
 <p>Nesse caso, o oráculo também retorna uma lista com a resposta <span class="math inline">\(\mathbf y_{n+1}\)</span>. A única diferença é que, quando o Captcha aceita múltiplos chutes, a lista retornada em caso de erro tem um comprimento menor.</p>
 <p>O oráculo tem um papel fundamental na solução proposta. O fato do oráculo sempre retornar a resposta correta na lista de opções faz com que ela necessariamente reduza o espaço de respostas a serem buscadas em uma tentativa futura. Esse fato será explorado a partir de um método iterativo para encontrar o valor real do rótulo.</p>
-</div>
-<div id="fatos-estilizados" class="section level4" number="2.1.1.4">
-<h4>
-<span class="header-section-number">2.1.1.4</span> Fatos estilizados<a class="anchor" aria-label="anchor" href="#fatos-estilizados"><i class="fas fa-link"></i></a>
-</h4>
+</section>
+<section id="fatos-estilizados" class="level4">
+<h4 class="anchored" data-anchor-id="fatos-estilizados">Fatos estilizados</h4>
 <p>Captchas costumam ter dimensões relativamente pequenas, com a altura <span class="math inline">\(N\)</span> variando entre 30 e 200 <em>pixels</em> e a largura <span class="math inline">\(M\)</span> variando entre 100 e 300 . As imagens costumam ser retangulares para comportar várias letras lado a lado, ou seja, geralmente <span class="math inline">\(M &gt; N\)</span>. O valor de <span class="math inline">\(R\)</span> é 1 para imagens em escala de cinza e 3 para imagens coloridas.</p>
 <p>Historicamente, uma alternativa para resolver Captchas é separando o problema em duas tarefas: segmentar e classificar. A tarefa de segmentação consiste em receber uma imagem com várias letras e detectar pontos de corte, separando-a em várias imagens de uma letra. Já a classificação consiste em receber uma imagem com uma letra e identificar o caractere correspondente. Nesse caso, a resposta é reduzida para <span class="math inline">\(|\mathcal A|\)</span> categorias, que cresce linearmente e, portanto, tratável.</p>
 <p>A tarefa de resolver Captchas também poderia ser vista como um problema de reconhecimento óptico de caracteres (<em>Optical Character Recognition</em>, OCR). No entanto, as distorções encontradas em Captchas são bem diferentes das distorções encontradas em textos escaneados, que são o objeto de aplicação de ferramentas de OCR. Por esse motivo, as ferramentas usuais de OCR apresentam resultados pouco satisfatórios em vários Captchas.</p>
 <p>As distorções encontradas em Captchas podem ser agrupadas em distorções para dificultar a segmentação e distorções para dificultar a classificação. Na parte de classificação, as principais formas de dificultar o trabalho dos modelos são i) mudar as fontes (serifa ou sem serifa ou negrito/itálico, por exemplo), ii) mudar letras minúsculas para maiúsculas e iii) adicionar distorções nos caracteres. Já na parte de segmentação, as principais formas são i) colar os caracteres e ii) adicionar linhas ligando os dígitos. Essas técnicas são combinadas com a adição de ruído e distorção nas imagens completas para compor a imagem final.</p>
 <p>TODO</p>
-</div>
-</div>
-<div id="redes-neurais" class="section level3" number="2.1.2">
-<h3>
-<span class="header-section-number">2.1.2</span> Redes neurais<a class="anchor" aria-label="anchor" href="#redes-neurais"><i class="fas fa-link"></i></a>
-</h3>
+</section>
+</section>
+<section id="redes-neurais" class="level3">
+<h3 class="anchored" data-anchor-id="redes-neurais">Redes neurais</h3>
 <p>A abordagem discutida ao longo da tese utiliza redes neurais convolucionais. Para explicar o funcionamento dessa técnica, apresenta-se as definições para redes neurais e para a operação de convolução no contexto de Captchas, construindo o modelo utilizado nas simulações do modelo proposto.</p>
 <!-- Uma rede neural neste contexto pode ser entendida como uma extensão de modelos lineares generalizados com a alteração da arquitetura dos componentes do modelo. Para mostrar esse conceito, parte-se da definição de um modelo regressão logística até construir uma rede neural com camadas ocultas. -->
 <p>A ideia abaixo é apresentar como funcionam as redes neurais no contexto de Captchas. O modelo apresentado é o que foi utilizado nas simulações, que é um modelo de redes neurais convolucionais simples, similar ao LeNet, com três camadas convolucionais e duas camadas densas (XXX).</p>
 <p>A técnica proposta pela tese pode utilizar diversas arquiteturas de redes neurais. A escolha de uma arquitetura mais simples foi feita para demonstrar a eficácia do procedimento de forma mais contundente. Outras arquiteturas mais rebuscadas, como as apresentadas no referencial teórico (XXX) podem melhorar a aplicação do modelo. A única restrição é que ela possa receber uma função de perda modificada, como será mostrado a seguir.</p>
 <p>É possível organizar a estrutura de uma rede neural em três componentes: a <strong>arquitetura da rede</strong>, a <strong>função de perda</strong> e o <strong>otimizador</strong>. Os componentes são detalhados nas próximas subseções.</p>
 <p>Como uma rede neural possui muitos componentes e subcomponentes, é usual apresentar sua estrutura na forma de um diagrama. Redes neurais costumam ser fáceis de representar através de grafos, que podem ser utilizados de forma mais ou menos detalhada, dependento do interesse.</p>
-<p>A Figura <a href="metodologia.html#fig:diagrama-modelo-cnn">2.5</a> mostra, de forma esquemática, os componentes (retângulos tracejados) e subcomponentes (partes internas dos componentes) do modelo utilizado.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:diagrama-modelo-cnn"></span>
-<img src="assets/img/diagrama-modelo-cnn.png" alt="Diagrama representando o modelo utilizado de forma genérica, com todos os componentes e subcomponentes apresentados de forma esquemática. As partes de fora dos componentes são entradas de dados ou decisões de parada do ajuste." width="80%"><p class="caption">
-Figura 2.5: Diagrama representando o modelo utilizado de forma genérica, com todos os componentes e subcomponentes apresentados de forma esquemática. As partes de fora dos componentes são entradas de dados ou decisões de parada do ajuste.
-</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-diagrama-modelo-cnn</span> mostra, de forma esquemática, os componentes (retângulos tracejados) e subcomponentes (partes internas dos componentes) do modelo utilizado.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/diagrama-modelo-cnn.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Diagrama representando o modelo utilizado de forma genérica, com todos os componentes e subcomponentes apresentados de forma esquemática. As partes de fora dos componentes são entradas de dados ou decisões de parada do ajuste.</figcaption><p></p>
+</figure>
 </div>
-<div id="arquitetura-da-rede" class="section level4" number="2.1.2.1">
-<h4>
-<span class="header-section-number">2.1.2.1</span> Arquitetura da rede<a class="anchor" aria-label="anchor" href="#arquitetura-da-rede"><i class="fas fa-link"></i></a>
-</h4>
+</div>
+</div>
+<section id="arquitetura-da-rede" class="level4">
+<h4 class="anchored" data-anchor-id="arquitetura-da-rede">Arquitetura da rede</h4>
 <p>A arquitetura da rede é uma função que leva os dados de entrada na estrutura de dados da variável resposta. A arquitetura tem papel similar ao exercido pelo componente sistemático em um modelo linear generalizado (XXX). Trata-se da parte mais complexa da rede neural, carregando todos os parâmetros que serão otimizados.</p>
 <p>A arquitetura da rede possui três componentes principais, separados em dois itens cada:</p>
 <ul>
@@ -228,15 +382,21 @@ Figura 2.5: Diagrama representando o modelo utilizado de forma genérica, com to
 <p>Considere</p>
 <p><span class="math display">\[
 K = \left[\begin{array}{rrr}-1&amp;-1&amp;-1\\0&amp;0&amp;0\\1&amp;1&amp;1\end{array}\right]
-\]</span>
-e a imagem da Figura <a href="metodologia.html#fig:tjmg-exemplo-conv">2.6</a>. Como visto anteriormente, trata-de de uma matriz de dimensão <span class="math inline">\(40\times110\times3\)</span>.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:tjmg-exemplo-conv"></span>
-<img src="assets/img/tjmg16283c1e6d06.jpeg" alt="Imagem de Captcha utilizado em exemplos anteriores." width="80%"><p class="caption">
-Figura 2.6: Imagem de Captcha utilizado em exemplos anteriores.
-</p>
+\]</span> e a imagem da Figura <span class="quarto-unresolved-ref">?fig-tjmg-exemplo-conv</span>. Como visto anteriormente, trata-de de uma matriz de dimensão <span class="math inline">\(40\times110\times3\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/tjmg16283c1e6d06.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Imagem de Captcha utilizado em exemplos anteriores.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Tome por exemplo a primeira dimensão do pixel <span class="math inline">\((i,j,k) = (12,16,1)\)</span>. A vizinhança 3x3 em torno desse ponto é dada por</p>
+<div class="cell">
+
+</div>
 <p><span class="math display">\[
 P_{i,j,k} = \left[\begin{array}{rrr}
 0.094 &amp; 0.412 &amp; 0.686 \\
@@ -255,41 +415,63 @@ P_{i,j,k} = \left[\begin{array}{rrr}
 \]</span></p>
 <p>Esse é o valor a ser colocado no ponto <span class="math inline">\((i,j,k)\)</span>. Isso funciona em todos os pontos que não estão na borda da imagem.</p>
 <p>Existem duas formas de trabalhar com as bordas da imagem. A primeira é preenchendo as bordas com zeros, de forma a considerar apenas os pontos da imagem. A segunda é descartar os pontos da borda e retornar uma imagem menor, contendo somente os pixels em que foi possível aplicar todo o <em>kernel</em>.</p>
-<p>No caso do exemplo, o resultado da convolução fica como na Figura <a href="metodologia.html#fig:tjmg-exemplo-conv-horizontal">2.7</a>. A matriz não foi escolhida por acaso: ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada por <span class="math inline">\(-1\)</span> e a última é formada por <span class="math inline">\(1\)</span>, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca (<span class="math inline">\(\text{grande} * 1 + \text{pequeno} * (-1)\)</span>). A parte destacada da imagem acabou sendo a parte de baixo dos números e, principalmente, a linha que une os números.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:tjmg-exemplo-conv-horizontal"></span>
-<img src="assets/img/tjmg_conv_horizontal.jpeg" alt="Aplicação de uma convolução com kernel horizontal." width="80%"><p class="caption">
-Figura 2.7: Aplicação de uma convolução com kernel horizontal.
-</p>
+<p>No caso do exemplo, o resultado da convolução fica como na Figura <span class="quarto-unresolved-ref">?fig-tjmg-exemplo-conv-horizontal</span>. A matriz não foi escolhida por acaso: ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada por <span class="math inline">\(-1\)</span> e a última é formada por <span class="math inline">\(1\)</span>, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca (<span class="math inline">\(\text{grande} * 1 + \text{pequeno} * (-1)\)</span>). A parte destacada da imagem acabou sendo a parte de baixo dos números e, principalmente, a linha que une os números.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/tjmg_conv_horizontal.jpeg" class="img-fluid figure-img" style="width:20.0%"></p>
+<p></p><figcaption class="figure-caption">Aplicação de uma convolução com kernel horizontal.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Aplicando o kernel vertical abaixo</p>
 <p><span class="math display">\[
 K = \left[\begin{array}{rrr}-1&amp;0&amp;1\\-1&amp;0&amp;1\\-1&amp;0&amp;1\end{array}\right],
 \]</span></p>
-<p>as partes destacadas são as laterais dos números, conforme Figura <a href="metodologia.html#fig:tjmg-exemplo-conv-vertical">2.8</a>.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:tjmg-exemplo-conv-vertical"></span>
-<img src="assets/img/tjmg_conv_vertical.jpeg" alt="Aplicação de uma convolução com kernel horizontal." width="80%"><p class="caption">
-Figura 2.8: Aplicação de uma convolução com kernel horizontal.
-</p>
+<p>as partes destacadas são as laterais dos números, conforme Figura <span class="quarto-unresolved-ref">?fig-tjmg-exemplo-conv-vertical</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/tjmg_conv_vertical.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Aplicação de uma convolução com kernel horizontal.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>O resultado da convolução pode ter números negativos ou maiores que um. Para que seja possível visualizar, as imagens mostradas acima foram normalizadas.</p>
 <p>Uma característica das imagens mostradas acima é que elas ficaram escuras, ou seja, com muitos valores próximos de zero. Uma técnica para modificar a imagem é adicionar uma constante numérica ao resultado da convolução. Esse é o chamado <strong>viés</strong> (<em>bias</em>) da convolução.</p>
-<p>A Figura <a href="metodologia.html#fig:tjmg-exemplo-conv-vertical-bias">2.9</a> mostra o efeito de adicionar um viés de <code>0.6</code> após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:tjmg-exemplo-conv-vertical-bias"></span>
-<img src="assets/img/tjmg_conv_vertical_bias.jpeg" alt="Aplicação de uma convolução com kernel horizontal." width="80%"><p class="caption">
-Figura 2.9: Aplicação de uma convolução com kernel horizontal.
-</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-tjmg-exemplo-conv-vertical-bias</span>) mostra o efeito de adicionar um viés de <code>0.6</code> após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/tjmg_conv_vertical_bias.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Aplicação de uma convolução com kernel horizontal.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Uma <strong>camada convolucional</strong> envolve a aplicação de convoluções com <span class="math inline">\(d\)</span> <em>kernels</em> em uma matriz, além da adição do <em>bias</em>. O resultado da aplicação de uma camada convolucional com preenchimento das bordas é uma matriz com as mesmas dimensões <span class="math inline">\(N\)</span> e <span class="math inline">\(M\)</span> da matriz de entrada, mas com <span class="math inline">\(d\)</span> entradas na dimensão das cores. Como o valor de <span class="math inline">\(d\)</span> pode ser diferente de 1 ou 3, não faz mais sentido tratar essa dimensão como cores, por isso essa dimensão é chamada de <strong>canais</strong> da imagem resultante.</p>
 <p>É importante notar que, nos exemplos apresentados anteriormente, a convolução foi aplicada a apenas um dos canais da imagem: o primeiro. Quando a imagem de entrada possui vários canais, camada convolucional aplica cada <em>kernel</em> em cada canal da imagem e, depois, faz a soma dos valores resultantes.</p>
-<p>A Figura <a href="metodologia.html#fig:tjmg-exemplo-camada-conv">2.10</a> mostra um exemplo de aplicação de camada convolucional para a imagem utilizada nos exemplos anteriores. Os <em>kernels</em> foram escolhidos com base em um modelo que já foi ajustado para o Captcha. Note que os canais capturam a informação dos números e dos ruídos, focando em detalhes diferentes.</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:tjmg-exemplo-camada-conv"></span>
-<img src="assets/img/tjmg_conv1_modelo.jpeg" alt="Resultado da aplicação da primeira convolução à imagem." width="80%"><p class="caption">
-Figura 2.10: Resultado da aplicação da primeira convolução à imagem.
-</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-tjmg-exemplo-camada-conv</span> mostra um exemplo de aplicação de camada convolucional para a imagem utilizada nos exemplos anteriores. Os <em>kernels</em> foram escolhidos com base em um modelo que já foi ajustado para o Captcha. Note que os canais capturam a informação dos números e dos ruídos, focando em detalhes diferentes.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/tjmg_conv1_modelo.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Resultado da aplicação da primeira convolução à imagem.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Antes da aplicação da camada convolucional, a operação de <strong><em>batch normalization</em></strong> foi aplicada. Essa operação nada mas faz do que normalizar os números da matriz de entrada antes da aplicação da convolução, ou seja, retirar a média e dividir pelo desvio padrão.</p>
 <p><span class="math display">\[
@@ -304,24 +486,20 @@ x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
 <p>Em seguida, aplica-se uma operação para reduzir a dimensão da imagem, chamada <strong><em>max pooling</em></strong>. Trata-se de uma operação que recebe a imagem e um <em>kernel</em>, retornando, para cada janela, o maior valor dos pixels. Usualmente, a técnica também utiliza <em>strides</em> fazendo com que cada pixel seja avaliado apenas uma vez. Por exemplo, para uma matriz com dimensões <span class="math inline">\(M_{10\times10}\)</span> e <em>kernel</em> com dimensões <span class="math inline">\(2\times2\)</span>, o resultado é uma matriz <span class="math inline">\(M^p_{5\times5}\)</span> onde cada elemento é o valor máximo da janela correspondente ao pixel.</p>
 <p>A operação <em>max pooling</em> é muito comum no contexto de redes neurais convolucionais. Sua aplicação é importante para que os <em>kernels</em> sejam aplicados em diferentes níveis da imagem de entrada.</p>
 <p>A aplicação das camadas convolucionais é repetida três vezes. Ou seja, as seguintes operações são aplicadas a partir da imagem original:</p>
-<ol style="list-style-type: decimal">
-<li>
-<em>batch normalization</em>: 6 parâmetros</li>
+<ol type="1">
+<li><em>batch normalization</em>: 6 parâmetros</li>
 <li>camada convolucional: 896 parâmetros</li>
 <li>ReLU</li>
 <li><em>max pooling</em></li>
-<li>
-<em>batch normalization</em>: 64 parâmetros</li>
+<li><em>batch normalization</em>: 64 parâmetros</li>
 <li>camada convolucional: 18.496 parâmetros</li>
 <li>ReLU</li>
 <li><em>max pooling</em></li>
-<li>
-<em>batch normalization</em>: 128 parâmetros</li>
+<li><em>batch normalization</em>: 128 parâmetros</li>
 <li>camada convolucional: 36.928 parâmetros</li>
 <li>ReLU</li>
 <li><em>max pooling</em></li>
-<li>
-<em>batch normalization</em>: 128 parâmetros</li>
+<li><em>batch normalization</em>: 128 parâmetros</li>
 </ol>
 <p>A dimensão da imagem de entrada, bem como quantidade de canais gerados por cada camada convolucional foram fixadas. Tais números podem ser considerados como hiperparâmetros do modelo, mas foram fixados para facilitar as simulações, que já contam com diversos hiperparâmetros.</p>
 <p>A imagem de entrada foi fixada na dimensão <span class="math inline">\(32\times192\)</span>. O valor foi definido dessa forma porque um dos Captchas de referência, da Receita Federal do Brasil (RFB), possui 6 letras e <span class="math inline">\(32*6=192\)</span>. Ou seja, é como se a imagem fosse a colagem lado a lado de 6 imagens <span class="math inline">\(32\times32\)</span>.</p>
@@ -359,184 +537,158 @@ x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
 \end{array}\right].
 \]</span></p>
 <p>Vale notar que, dependendo da implementação, nem sempre é necessário aplicar a função <em>softmax</em>. Em alguns pacotes computacionais como o <code>torch</code>, utilizado nesta tese, a normalização pode ser feita diretamente na função de perda, que aproveita a expressão completa para realizar algumas simplificações matemáticas e, com isso, melhorar a precisão das computações. O uso da função de perda ficará claro na próxima subseção.</p>
-</div>
-<div id="perda" class="section level4" number="2.1.2.2">
-<h4>
-<span class="header-section-number">2.1.2.2</span> Perda<a class="anchor" aria-label="anchor" href="#perda"><i class="fas fa-link"></i></a>
-</h4>
+</section>
+<section id="perda" class="level4">
+<h4 class="anchored" data-anchor-id="perda">Perda</h4>
 <p>TODO</p>
-</div>
-<div id="otimizador" class="section level4" number="2.1.2.3">
-<h4>
-<span class="header-section-number">2.1.2.3</span> Otimizador<a class="anchor" aria-label="anchor" href="#otimizador"><i class="fas fa-link"></i></a>
-</h4>
+</section>
+<section id="otimizador" class="level4">
+<h4 class="anchored" data-anchor-id="otimizador">Otimizador</h4>
 <p>TODO</p>
-</div>
-</div>
-<div id="aprendizado-estatístico" class="section level3" number="2.1.3">
-<h3>
-<span class="header-section-number">2.1.3</span> Aprendizado estatístico<a class="anchor" aria-label="anchor" href="#aprendizado-estat%C3%ADstico"><i class="fas fa-link"></i></a>
-</h3>
+</section>
+</section>
+<section id="aprendizado-estatístico" class="level3">
+<h3 class="anchored" data-anchor-id="aprendizado-estatístico">Aprendizado estatístico</h3>
 <p>Apresentados o objeto de estudo, as redes neurais utilizadas e a proposta da pesquisa, passa-se a discutir o significado disso tudo no contexto de aprendizado estatístico. Essa parte foi escrita para proporcionar a base teórica e a notação para apresentar as propriedades do modelo proposto na tese.</p>
-<div id="aprendizado-supervisionado" class="section level4" number="2.1.3.1">
-<h4>
-<span class="header-section-number">2.1.3.1</span> Aprendizado supervisionado<a class="anchor" aria-label="anchor" href="#aprendizado-supervisionado"><i class="fas fa-link"></i></a>
-</h4>
+<section id="aprendizado-supervisionado" class="level4">
+<h4 class="anchored" data-anchor-id="aprendizado-supervisionado">Aprendizado supervisionado</h4>
 <p>TODO</p>
-<p>As definições seguem a mesma terminologia de Cabannes (XXX). Nosso objetivo é obter uma função <span class="math inline">\(f \in \mathcal{Y}^\mathcal{X}\)</span> entre um espaço de entrada <span class="math inline">\(\mathcal X\)</span> e um espaço de saída <span class="math inline">\(\mathcal{Y}\)</span>.</p>
+<p>As definições seguem a mesma terminologia de Cabannes (XXX). Nosso objetivo é obter uma função <span class="math inline">\(f \in \mathcal{Y}^{\mathcal{X}}\)</span> entre um espaço de entrada <span class="math inline">\(\mathcal{X}\)</span> e um espaço de saída <span class="math inline">\(\mathcal{Y}\)</span>.</p>
 <p>Definimos também a função de distribuição conjunta <span class="math inline">\(\rho \in \Delta_{\mathcal X \times \mathcal Y}\)</span> sobre <span class="math inline">\(\mathcal X \times \mathcal Y\)</span>. Essa função nem sempre é apresentada em outros contextos, mas será útil para estudar os modelos fracamente supervisionados.</p>
 <p>Finalmente, definimos uma função de perda <span class="math inline">\(\ell \in \mathbb R^{\mathcal Y \times \mathcal Y}\)</span>, que minimiza o risco</p>
 <p><span class="math display">\[
 \mathcal R(f;\rho) = \mathbb E_{(X,Y)\sim\rho}[\ell(f(X),Y)]
 \]</span></p>
 <p>Ou seja, o risco é a o risco geral, definido como o valor esperado da função de perda sob <span class="math inline">\(\rho\)</span> para os valores possíveis de <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>.</p>
-</div>
-<div id="aprendizado-fracamente-supervisionado" class="section level4" number="2.1.3.2">
-<h4>
-<span class="header-section-number">2.1.3.2</span> Aprendizado fracamente supervisionado<a class="anchor" aria-label="anchor" href="#aprendizado-fracamente-supervisionado"><i class="fas fa-link"></i></a>
-</h4>
+</section>
+<section id="aprendizado-fracamente-supervisionado" class="level4">
+<h4 class="anchored" data-anchor-id="aprendizado-fracamente-supervisionado">Aprendizado fracamente supervisionado</h4>
 <p>TODO</p>
 <p>O aprendizado fracamente supervisionado pode ser dividido em três tipos principais. A supervisão com erros, a supervisão com rótulos incompletos e a supervisão de grupos de observações. O caso do Captcha pode ser entendido como aprendizado fracamente supervisionado com rótulos incompletos, já que uma parte da base pode ser anotada (supomos que sem erros) e uma parte da base é a resposta do oráculo indicando uma lista de rótulos possíveis que incluem o correto.</p>
 <p>Formalmente, o aprendizado fracamente supervisionado é definido como uma generalização do aprendizado totalmente supervisionado, como mostrado em seguida.</p>
-</div>
-</div>
-</div>
-<div id="método-mucho-loko" class="section level2" number="2.2">
-<h2>
-<span class="header-section-number">2.2</span> Método mucho loko<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-mucho-loko"><i class="fas fa-link"></i></a>
-</h2>
-<p>(TODO)</p>
+</section>
+</section>
+</section>
+<section id="método-wawl" class="level2">
+<h2 class="anchored" data-anchor-id="método-wawl">Método WAWL</h2>
+<p>O método WAWL (<em>Web Automatic Weak Learning</em>) é a solução proposta na pesquisa. Trata-se da técnica baixar dados da web para compor parte da amostra que é utilizada no ajuste do modelo.</p>
+<p>O método WAWL é inovador por dois motivos. Primeiro, porque o método faz a ponte entre áreas que até o momento eram partes separadas do ciclo da ciência de dados: a raspagem de dados e o aprendizado estatístico. Além disso, o método é uma nova alternativa para resolver Captchas com pouca ou nenhuma intervenção humana.</p>
+<p>Existem duas formas principais de aplicar o método WAWL. A primeira criando novas bases de treino a partir de um modelo inicial e atualizando os modelos com os dados baixados. A segunda é baixando os dados dentro do próprio ciclo de ajuste do modelo, acessando a web no momento de construção de um <em>minibatch</em>.</p>
+<p>A arquitetura do modelo WAWL pode ser a mesma de um modelo ajustado com uma base completamente anotada. O modelo pode, inclusive, aproveitar os parâmetros já ajustados em uma eventual versão inicial do modelo para acelerar o aprendizado. Nada impede, no entanto, que uma arquitetura diferente seja utilizada, desde que a entrada seja uma imagem e a saída seja uma matriz com as dimensões da variável resposta. O WAWL é agnóstico à arquitetura do modelo.</p>
+<p>Já a função de perda deve ser adaptada para considerar a informação limitada fornecida pelo oráculo. Quando o rótulo fornecido pelo modelo está correto, a informação é considerada normalmente, através da função de perda da regressão multinomial multivariada. Já quando o rótulo fornecido pelo modelo é incorreto, a função de perda é calculada com base na probabilidade do rótulo estar incorreto:</p>
+<p><span class="math display">\[
+1 - \mathbb P(\hat{\mathbf y}|\boldsymbol \theta)
+\]</span></p>
+<p>Para ficar na mesma escala da função de perda dos casos corretos, calcula-se o logaritmo, obtendo a log-verossimilhança:</p>
+<p><span class="math display">\[
+l_i = -\log(1 - \mathbb P(\hat{\mathbf y}|\boldsymbol \theta))
+\]</span></p>
+<p>Quando o Captcha aceita múltiplos chutes, a mesma conta é válida, bastando subtrair as probabilidades de todos os rótulos incorretos:</p>
+<p><span class="math display">\[
+l_i = -\log(1 - \mathbb P(\hat{\mathbf y}_1|\boldsymbol \theta)-\mathbb P(\hat{\mathbf y}_2|\boldsymbol \theta)-\dots-\mathbb P(\hat{\mathbf y}_k|\boldsymbol \theta))
+\]</span></p>
+<p>No final, o valor que é passado para a função de perda é a soma das perdas para todas as observações do <em>minibatch</em>. A soma considera tanto as perdas calculadas com base nos rótulos corretos quanto as perdas calculadas com base nos rótulos incorretos.</p>
+<p>O otimizador que obtém novas estimativas dos parâmetros também não precisa ser modificado. Basta aplicar a mesma técnica utilizada na modelagem usual, como descida de gradiente estocástica ou métodos adaptativos, como <em>RMSProp</em> ou <em>Adam</em>.</p>
+<p>Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o <em>torch</em> e o <em>TensorFlow</em>, basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando a placa de vídeo do computador, que usualmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização de placa de vídeo, sendo uma melhoria sugerida para futuros trabalhos.</p>
 <!-- ---------------------------------------------------------------------- -->
-</div>
-<div id="dados" class="section level2" number="2.3">
-<h2>
-<span class="header-section-number">2.3</span> Dados<a class="anchor" aria-label="anchor" href="#dados"><i class="fas fa-link"></i></a>
-</h2>
-<p>Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para a realização da pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para obtenção dos achados.</p>
-<p>No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/02/2022, para verificar se ainda estavam ativos.</p>
-<div id="escolha-dos-captchas-analisados" class="section level3" number="2.3.1">
-<h3>
-<span class="header-section-number">2.3.1</span> Escolha dos Captchas analisados<a class="anchor" aria-label="anchor" href="#escolha-dos-captchas-analisados"><i class="fas fa-link"></i></a>
-</h3>
+</section>
+<section id="dados" class="level2">
+<h2 class="anchored" data-anchor-id="dados">Dados</h2>
+<p>Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para realizar a pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para chegar nos achados.</p>
+<p>No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/09/2022, para verificar se ainda estavam ativos. Além disso, foram construídas duas bases de dados de Captchas desenvolvidos internamente para fins de teste.</p>
+<p>Parte dos dados foram obtidos como um passo intermediário das simulações. A presente seção descreve como os robôs de coleta foram construídos, bem como a metodologia para obter rótulos via classificação manual. Na subseção de dados da seção de simulação, é possível acessar informações sobre os dados baixados para realizar as simulações.</p>
+<section id="escolha-dos-captchas-analisados" class="level3">
+<h3 class="anchored" data-anchor-id="escolha-dos-captchas-analisados">Escolha dos Captchas analisados</h3>
 <p>Para selecionar os Captchas, foram adotados alguns critérios objetivos. Os critérios foram:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>O site acessado é de um serviço público (governo federal, tribunal, etc).</li>
 <li>O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com extensão jpeg ou png.</li>
 <li>O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma origem devem ter sempre o mesmo comprimento.</li>
 </ol>
 <p>A primeira restrição para escolha dos Captchas é de ordem principiológica. Um serviço público não deveria restringir o acesso aos dados para robôs. Como já discutido anteriormente, nesses casos, a existência do Captcha não tem como finalidade dar maior segurança ao serviço prestado, mas sim limitar o acesso aos servidores por robôs.</p>
 <p>As restrições 2 e 3 foram escolhidas com o objetivo de facilitar as simulações para obtenção dos resultados. Em princípio, nada impede que os modelos desenvolvidos trabalhem com outros tipos de rótulos, desde que exista uma lista prévia de rótulos. Além disso, é possível realizar adaptações no pré-processamento base de dados para lidar com diferentes comprimentos de Captchas.</p>
-<p>A Tabela <a href="metodologia.html#tab:lista-captcha">2.1</a> mostra os Captchas trabalhados. A informação de limite de chutes é importante para a implementação do oráculo, detalhado a seguir.</p>
-<div class="inline-table"><table style="width:100%;" class="table table-sm">
-<caption>
-<span id="tab:lista-captcha">Tabela 2.1: </span>Lista de captchas analisados.</caption>
-<colgroup>
-<col width="37%">
-<col width="21%">
-<col width="27%">
-<col width="7%">
-<col width="6%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">Captcha</th>
-<th align="left">Exemplo</th>
-<th align="left">Descrição</th>
-<th align="left">Vários chutes</th>
-<th align="right"># rotulados</th>
-</tr></thead>
+<p>A Tabela @ref(tab:lista-captcha) mostra os Captchas trabalhados. Dos 10 exemplos trabalhados, 6 têm origem em tribunais, que são conhecidos por não disponibilizarem os dados de forma aberta.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Lista de captchas analisados.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Captcha</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam">trf5</a></td>
-<td align="left"><img src="assets/img/dados_trf5.jpg" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Tribunal Regional Federal 5</td>
-<td align="left">Não</td>
-<td align="right">1000</td>
+<td style="text-align: left;"><a href="https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam">trf5</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_trf5.jpg" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Tribunal Regional Federal 5</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&amp;numero=1&amp;listaProcessos=50718889720218130024&amp;btn_pesquisar=Pesquisar">tjmg</a></td>
-<td align="left"><img src="assets/img/dados_tjmg.jpeg" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Tribunal de Justiça de Minas Gerais</td>
-<td align="left">Sim</td>
-<td align="right">2000</td>
+<td style="text-align: left;"><a href="https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&amp;numero=1&amp;listaProcessos=50718889720218130024&amp;btn_pesquisar=Pesquisar">tjmg</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_tjmg.jpeg" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Tribunal de Justiça de Minas Gerais</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879">trt</a></td>
-<td align="left"><img src="assets/img/dados_trt.jpeg" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Tribunal Regional do Trabalho 3</td>
-<td align="left">Sim</td>
-<td align="right">3000</td>
+<td style="text-align: left;"><a href="https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879">trt</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_trt.jpeg" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Tribunal Regional do Trabalho 3</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="http://esaj.tjba.jus.br/cpopg/open.do">esaj</a></td>
-<td align="left"><img src="assets/img/dados_esaj.png" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Tribunal de Justiça da Bahia</td>
-<td align="left">Sim</td>
-<td align="right">3000</td>
+<td style="text-align: left;"><a href="http://esaj.tjba.jus.br/cpopg/open.do">esaj</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_esaj.png" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Tribunal de Justiça da Bahia</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx">jucesp</a></td>
-<td align="left"><img src="assets/img/dados_jucesp.jpg" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Junta Comercial de São Paulo</td>
-<td align="left">Não</td>
-<td align="right">4000</td>
+<td style="text-align: left;"><a href="https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx">jucesp</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_jucesp.jpg" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Junta Comercial de São Paulo</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://srv01.tjpe.jus.br/consultaprocessualunificada/">tjpe</a></td>
-<td align="left"><img src="assets/img/dados_tjpe.png" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Tribunal de Justiça de Pernambuco</td>
-<td align="left">Sim</td>
-<td align="right">4000</td>
+<td style="text-align: left;"><a href="https://srv01.tjpe.jus.br/consultaprocessualunificada/">tjpe</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_tjpe.png" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Tribunal de Justiça de Pernambuco</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://www.tjrs.jus.br/site_php/consulta/verificador.php">tjrs</a></td>
-<td align="left"><img src="assets/img/dados_tjrs.jpg" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Tribunal de Justiça do Rio Grande do Sul</td>
-<td align="left">Sim</td>
-<td align="right">4594</td>
+<td style="text-align: left;"><a href="https://www.tjrs.jus.br/site_php/consulta/verificador.php">tjrs</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_tjrs.jpg" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Tribunal de Justiça do Rio Grande do Sul</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx">cadesp</a></td>
-<td align="left"><img src="assets/img/dados_cadesp.jpg" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Centro de Apoio ao Desenvolvimento da Saúde Pública</td>
-<td align="left">Não</td>
-<td align="right">5820</td>
+<td style="text-align: left;"><a href="https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx">cadesp</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_cadesp.jpg" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Centro de Apoio ao Desenvolvimento da Saúde Pública</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&amp;acao_origem_externa=protocolo_pesquisar&amp;id_orgao_acesso_externo=0">sei</a></td>
-<td align="left"><img src="assets/img/dados_sei.png" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Sistema Eletrônico de Informações - ME</td>
-<td align="left">Sim</td>
-<td align="right">10000</td>
+<td style="text-align: left;"><a href="https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&amp;acao_origem_externa=protocolo_pesquisar&amp;id_orgao_acesso_externo=0">sei</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_sei.png" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Sistema Eletrônico de Informações - ME</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp">rfb</a></td>
-<td align="left"><img src="assets/img/dados_rfb.png" alt="exemplo de Captcha da lista apresentada."></td>
-<td align="left">Receita Federal</td>
-<td align="left">Sim</td>
-<td align="right">13712</td>
+<td style="text-align: left;"><a href="https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp">rfb</a></td>
+<td style="text-align: left;"><img src="assets/img/dados_rfb.png" class="img-fluid" alt="exemplo de Captcha da lista apresentada."></td>
+<td style="text-align: left;">Receita Federal</td>
 </tr>
 </tbody>
-</table></div>
-<p>Oráculo foi o nome escolhido para a possibilidade de checar, de forma automática, se uma predição do modelo foi bem ou mal sucedida. Como um Captcha é um teste de Turing inverso, por definição ele é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.</p>
-<p>Para implementar um oráculo em uma linguagem de programação, é necessário seguir os seguintes passos:</p>
-<ol style="list-style-type: decimal">
-<li>Acessar a página do site de interesse</li>
-<li>Preencher o formulário de pesquisa com a informação a ser consultada. Por exemplo, no site da RFB, a informação é o CNPJ da empresa a ser consultada. Em um site de tribunal, a informação é um número identificador de processo.</li>
-<li>Baixar o Captcha da busca.</li>
-<li>Aplicar o modelo no Captcha baixado (ou classificar a imagem manualmente) para obter a predição.</li>
-<li>Submeter a consulta no site, informando a predição.</li>
-<li>Verificar o resultado. Se acessou a página desejada, a predição está correta. Caso contrário, a predição está incorreta.</li>
-</ol>
-<p>Outra oportunidade que o oráculo permite em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa caracteística permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na Tabela <a href="metodologia.html#tab:lista-captcha">2.1</a>, dos 10 Captchas trabalhados, 7 permitem a realização desses testes.</p>
-<p>Em teoria, a possibilidade de testar vários rótulos para o mesmo Captcha implica na possibilidade teórica de resolver um Captcha por força bruta. Bastaria testar todos os rótulos possíveis para acessar a página de interesse. Na prática, no entanto, essa estratégia não funciona, já que a quantidade de rótulos possíveis é muito grande para testar no site, seja por demorar muito tempo ou pelo site forçar a troca de Captcha após a passagem de determinado tempo ou quantidade de tentativas.</p>
-<blockquote>
-<p>Lista e caracterização dos captchas</p>
-</blockquote>
-<p>Além dos Captchas de sites, também consideramos imagens geradas artificialmente para rodar os modelos. O motivo de criar Captchas artificiais é a facilidade de rodar modelos e simulações, já que nos casos reais é necessário ter acesso à internet e também construir bases de dados de cada Captcha.</p>
-<p>Desenvolvemos duas alternativas para o Captcha gerado. O primeiro, chamado MNIST-Captcha, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.</p>
-<p>A Figura <a href="#fig:captcha-mnist"><strong>??</strong></a> mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.</p>
+</table>
+</div>
+</div>
+<p>Além dos Captchas de sites, também foram consideradas imagens geradas artificialmente. O motivo de criar Captchas artificiais é a facilidade de rodar modelos e simulações, já que nos casos reais é necessário ter acesso à internet e também construir bases de dados de cada Captcha.</p>
+<p>Foram gerados dois tipos de Captchas artificiais. O primeiro, chamado <strong>MNIST-Captcha</strong>, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-captcha-mnist</span> mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/mnist128c49c36e13_6297.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Exemplo de MNIST-Captcha</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 <p>O problema do MNIST-Captcha é que a base de dados original é finita. Apesar de possuir por volta de 60 mil observações e de um Captcha crescer em ordem exponencial, o MNIST-Captcha pode gerar Captchas repetidos. Além disso, é necessário tomar cuidado com as bases de treino e teste, já que os elementos de teste não poderiam fazer parte de nenhuma observação de treino.</p>
-<p>Por esse motivo, criamos um Captcha interamente gerado por programação, chamado R-Captcha. O Captcha é gerado utilizando a ferramenta ImageMagick, com a possibilidade de customizar diversos parâmetros, como</p>
+<p>Pelos motivos supracitados, também foi criado um Captcha gerado inteiramente por programação, chamado <strong>R-Captcha</strong>. O Captcha é gerado utilizando a ferramenta ImageMagick, com a possibilidade de customizar diversos parâmetros, como</p>
 <ul>
 <li>Quais caracteres usar na imagem</li>
 <li>O comprimento do Captcha</li>
@@ -548,198 +700,419 @@ x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
 <li>Probabilidade de adicionar um ruído branco no fundo da imagem</li>
 <li>Probabilidade de adicionar efeitos de tinta óleo e implosão</li>
 </ul>
-<div class="inline-figure"><img src="tese_files/figure-html/captcha-r-1.svg" width="80%" style="display: block; margin: auto;"></div>
-<p>Por ser uma versão mais flexível e completa, optamos por trabalhar principalmente com o R-Captcha nas simulações. O MNIST-Captcha foi implementado mas não foi utilizado nas simulações.</p>
-<blockquote>
-<p>Repositório de dados</p>
-</blockquote>
-<p>Os Captchas foram classificados com o procedimento que chamamos de semi-automático, definido a seguir. No pacote <a href="https://github.com/jtrecenti/captchaDownload">captchaDownload</a>, foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas.</p>
-<p>Cada Captcha teve as primeiras 100 observações classificadas manualmente. Isso foi feito a partir do próprio RStudio, utilizando a ferramenta de classificação manual do pacote <a href="https://github.com/decryptr/captcha">captcha</a>.</p>
-<p>A partir das classificações iniciais, um modelo foi ajustado com a quantidade de observações disponível. Esse passo também foi feito a partir do pacote <a href="https://github.com/decryptr/captcha">captcha</a>, que cria um projeto de classificação para um Captcha específico.</p>
-<p>O modelo, então, foi utilizado como uma ferramenta para otimizar a classificação manual, funcionando da seguinte forma. Primeiro, o modelo tenta realizar a predição automaticamente e o oráculo avisa se a predição está correta ou não. Se estiver incorreto, e o site aceitar várias tentativas, o modelo tenta novamente, mas com uma segunda alternativa de predição, definida por uma heurística, definida no Capítulo <a href="#modelo"><strong>??</strong></a>. Caso o site não aceite várias tentativas ou o modelo não consiga acertar o Captcha em <span class="math inline">\(N\)</span> tentativas (que arbitramos como dez), a imagem do Captcha aparecerá para classificação manual.</p>
-<p>Com o procedimento destacado acima, é criada uma nova base de dados, que por sua vez é utilizada para ajustar um novo modelo. O modelo, atualizado, é utilizado para classificar novos Captchas, e assim por diante, até que o modelo ajustado alcance uma acurácia razoável, que arbitramos em 80%. Com isso, finalizamos o procedimento de classificação.</p>
-<p>O único problema do procedimento de classificação diz respeito aos Captchas que não aceitam várias tentativas. Nesses casos, não é possível verificar com certeza absoluta que um caso classificado manualmente (após a tentativa do modelo) foi classificado corretamente, já que a classificação manual seria a segunda tentativa. No entanto, esse problema aparece somente em três Captchas (<code>cadesp</code>, <code>jucesp</code> e <code>trf5</code>). A classificação manual dos 100 primeiros Captchas, no entanto, mostrou que pelo menos 95% dos Captchas foram classificados corretamente quando classificados manualmente. Supomos que a proporção máxima de 5% de erro é negligenciável considerando que a maior parte das bases de dados foi construída com verificação do oráculo.</p>
-<p>Para este trabalho, desenvolvemos uma técnica inovadora para resolver Captchas sem a necessidade de <em>feedback</em> humano. A solução envolve avanços em duas direções: engenharia e modelagem.</p>
+<p>A Figura <span class="quarto-unresolved-ref">?fig-captcha-r</span> mostra um exemplo de R-Captcha. O exemplo apresenta uma linha ligando as letras, comprimento 4, dígitos maiúsculos e minúsculos e distorções.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/captcha128c4a9c32e4_boy4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Exemplo de MNIST-Captcha</figcaption><p></p>
+</figure>
 </div>
-<div id="construção-dos-dados" class="section level3" number="2.3.2">
-<h3>
-<span class="header-section-number">2.3.2</span> Construção dos dados<a class="anchor" aria-label="anchor" href="#constru%C3%A7%C3%A3o-dos-dados"><i class="fas fa-link"></i></a>
-</h3>
-<p>Na parte de engenharia, desenvolvemos uma técnica para capturar e anotar feedbacks automatizados do oráculo no preenchimento de Captchas. A técnica consiste em três passos:</p>
-<ol style="list-style-type: decimal">
-<li>Desenvolver um robô que acessa o site desejado e tenta acessar uma informação que exige preenchimento de Captcha.</li>
-<li>A partir de um modelo estatístico inicial, o robô tenta preencher o Captcha automaticamente, submetendo para avaliação do site.</li>
-<li>Se o Captcha for verificado pelo site como correto, anotamos o caminho da imagem com o valor “1”. Se estiver incorreto, anotamos o caminho da imagem com o valor “0”.</li>
+</div>
+</div>
+<p>Por ser uma versão mais flexível e completa, optou-se por trabalhar principalmente com o R-Captcha nas simulações. O MNIST-Captcha foi implementado mas não foi utilizado nas simulações.</p>
+</section>
+<section id="construção-dos-dados" class="level3">
+<h3 class="anchored" data-anchor-id="construção-dos-dados">Construção dos dados</h3>
+<p>Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem de dados (XXX). A raspagem de dados é uma área da ciência da computação responsável por criar rotinas que automatizam a coleta de dados provenientes da web. Trata-se de uma atividade muito comum em pesquisas aplicadas, especialmente as que envolvem análise de dados públicos que não estão disponíveis de forma aberta, como os dados do Judiciário.</p>
+<p>Dentro do ciclo da ciência de dados, pode-se considerar que a raspagem de dados está inserida nas tarefas de coleta e arrumação de dados. De certa forma, é possível comparar a raspagem com uma consulta a um banco de dados remoto, ou mesmo à obtenção de informações através de uma <em>Application Programming Interface</em> (API).</p>
+<p>Para raspar uma página da web, usualmente se segue o fluxo descrito na Figura <span class="quarto-unresolved-ref">?fig-fluxo-web-scraping</span>. Nem todos os passos foram seguidos na obtenção dos dados necessários para realizar as simulações, mas é importante conhecê-los para compreender bem a origem da ideia de utilizar raspagem em conjunto com métodos de aprendizado de máquinas. O exemplo da RFB foi utilizado para dar contexto aos passos.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/cycle.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Ciclo da raspagem de dados. Fonte: <a href="https://curso-r.github.io/main-web-scraping">curso de Web Scraping da Curso-R</a>.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>No caso da RFB, o trabalho é iniciado acessando-se a <a href="http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp">página inicial de busca de CNPJ</a>, como mostrado na Figura <span class="quarto-unresolved-ref">?fig-raspagem-rfb-inicial</span>. É possível notar que o desafio disponível é do tipo hCaptcha, que não é o Captcha de interesse da pesquisa. No entanto, ao clicar em “Captcha Sonoro”, é possível acessar o Captcha de interesse, como mostrado na Figura <span class="quarto-unresolved-ref">?fig-raspagem-rfb-sonoro</span>. O motivo pelo qual o Captcha de texto em imagem foi mantido após a implementação do hCaptcha é desconhecido pelo autor.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/raspagem-rfb-inicial.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Página de busca de CNPJ da RFB.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/raspagem-rfb-sonoro.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Página de busca de CNPJ da RFB, com Captcha de texto.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A segunda tarefa é a de navegar pelo site, registrando as requisições realizadas pelo navegador para realizar a consulta. Isso envolve abrir o inspetor de elementos do navegador, na aba Rede (ou <em>Network</em>, em inglês), anotando as requisições que são realizadas.</p>
+<p>No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas requisições aparecem na aba “Rede”, como mostrado na Figura <span class="quarto-unresolved-ref">?fig-raspagem-rfb-rede</span>. A primeira requisição é do tipo POST<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, responsável por enviar os dados de CNPJ e do rótulo da imagem para o servidor, que retorna com os dados da empresa.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/img/raspagem-rfb-rede.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Resultado da busca por CNPJ, mostrando a aba Rede.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Investigando a requisição POST, na sub-aba “Requisição”, é possível observar os dados da consulta. Trata-se de um conjunto de parâmetros enviados na forma de lista, com as informações abaixo. Para replicar a requisição na linguagem de programação, estes são os dados enviados.</p>
+<pre><code>{
+    "origem": "comprovante",
+    "cnpj": "13.612.840/0001-57",
+    "txtTexto_captcha_serpro_gov_br": "7hkhze",
+    "search_type": "cnpj"
+}</code></pre>
+<p>As etapas de replicar, parsear e validar envolvem baixar e processar os dados na linguagem de programação. No caso do Captcha da RFB, essa tarefa envolve os passos abaixo.</p>
+<ol type="1">
+<li>Acessar a página inicial de <a href="http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp">busca com Captcha sonoro</a>, através de uma requisição GET.</li>
+<li>Baixar a imagem do Captcha com uma requisição GET, usando o <a href="http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/captcha/gerarCaptcha.asp">link gerado</a> ao clicar no botão de atualizar o Captcha.</li>
+<li>Obter o rótulo a partir da imagem do Captcha.</li>
+<li>Realizar a requisição POST com os dados do exemplo e o rótulo correto da imagem, baixando arquivo resultante em um HTML.</li>
+<li>Utilizar técnicas de raspagem de arquivos HTML para obter os dados de interesse (como, por exemplo, a razão social da empresa) e validar os resultados, verificando, por exemplo, se o resultado estava completo e disponível.</li>
 </ol>
-<p>O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa que podemos criar uma base de dados virtualmente infinita de Captchas rotulados, com a informação adicional do rótulo estar correto ou incorreto. Fizemos isso para todos os Captchas presentes em nossa base de dados.</p>
-<p>O problema do uso de oráculos é que a informação adicional recebida quando o modelo erra é <strong>incompleta</strong>. A única informação nova que temos é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como temos uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, o <em>feedback</em> do oráculo pode ser considerado fraco.</p>
+<p>Todos os passos descritos acima devem ser realizados em uma sessão persistente. Isso significa que a biblioteca utilizada para realizar as requisições deve ser capaz de guardar os <em>cookies</em> entre a requisição GET do primeiro passo e a requisição POST do quarto passo, de forma que as requisições sejam interligadas.</p>
+<p>O quinto passo da lista acima descreve a parte de <em>parsear,</em> que é a responsável pelo nome “raspagem” nessa área do conhecimento. O nome é adequado porque usualmente os arquivos baixados estão em um formato bruto, inadequado para realização de análises. Os dados precisam ser então extraídos – raspados – do arquivo HTML, através de ferramentas de transformação de arquivos como a <em>libxml2</em> (XXX), técnicas para acessar pedaços do documento, como o XPath (XXX) e técnicas de manipulação de textos, como expressões regulares (XXX).</p>
+<p>A iteração encerra o fluxo da raspagem de dados. Nessa etapa, as operações de replicar, parsear e validar o resultado são reaplicadas iterativamente, com o fim de baixar dados para compor uma base maior. No exemplo da RFB, isso significaria montar uma base de dados a partir de uma lista de CNPJs.</p>
+<p>No contexto dos Captchas, o interesse está nos passos de Replicar e Validar. Estes são os passos em que a imagem é baixado e o rótulo é anotado e testado no servidor. Esses são os passos relacionados à classificação manual, e também à implementação do oráculo.</p>
+<p>A classificação manual dos Captchas envolve o trabalho de baixar, anotar (manualmente) e verificar se a anotação está correta. Trata-se de um trabalho repetitivo e dispendioso, utilizado para gerar as simulações do trabalho.</p>
+<p>O oráculo envolve a possibilidade de checar, de forma automática, se uma predição do rótulo de uma imagem está correta. Por ser um teste de Turing inverso, o Captcha é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.</p>
+<ol type="1">
+<li>Acessar a página do site de interesse.</li>
+<li>Preencher o formulário de pesquisa com a informação a ser consultada. Por exemplo, no site da RFB, a informação é o CNPJ da empresa a ser consultada. Em um site de tribunal, a informação é um número identificador de processo.</li>
+<li>Baixar a imagem do Captcha da busca.</li>
+<li>Obter o rótulo da imagem, aplicando um modelo na imagem baixada ou classificado manualmente.</li>
+<li>Submeter a consulta no site, informando o rótulo.</li>
+<li>Verificar o resultado. Se acessou a página desejada, o rótulo está correto. Caso contrário, o rótulo está incorreto.</li>
+</ol>
+<p>O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa que é possível criar uma base de dados virtualmente infinita de imagens rotuladas, com a informação adicional do rótulo estar correto ou incorreto. Isso foi feito para gerar os dados utilizados na simulação.</p>
+<p>O problema do uso de oráculos é que a informação adicional recebida quando o modelo erra é <strong>incompleta</strong>. A única informação nova disponível é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como existe uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, a informação que o oráculo fornece é fraca.</p>
 <p>Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros.</p>
+<p>Outra oportunidade que o oráculo oferece em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa característica permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na Tabela @ref(tab:lista-captcha), dos 10 Captchas trabalhados, 7 permitem a realização desses testes.</p>
+<p>Neste momento, cabe uma observação sobre oráculos e força bruta. O poder de testar vários rótulos para o mesmo Captcha implica na possibilidade teórica de resolver um Captcha por força bruta. Bastaria testar todos os rótulos possíveis para acessar a página de interesse. Na prática, no entanto, essa estratégia não funciona, já que a quantidade de rótulos possíveis é muito grande para testar no site, seja por demorar muito tempo ou pelo site forçar a troca do desafio após a passagem de determinado tempo ou quantidade de tentativas.</p>
+<p>Voltando ao ciclo da raspagem, ao longo do procedimento de baixar imagens de Captchas e aplicar o oráculo, pelo menos duas funções devem ser criadas: <strong>acesso</strong> e <strong>teste</strong>. A operação de acesso é responsável por preencher o formulário de busca e baixar o Captcha (passos 1 a 3 da lista acima). A operação de teste é responsável por submeter um rótulo do Captcha e verificar retornar se o rótulo está correto ou incorreto (passos 4 a 6 da lista acima). Em alguns casos, as funções de acesso e teste precisam compartilhar parâmetros que contêm a sessão do usuário, para garantir que o teste envolva o mesmo Captcha da etapa de acesso.</p>
+<p>Os Captchas foram anotados manualmente com o procedimento chamado de semi-automático, definido a seguir. No pacote <code>{captchaDownload}</code>, foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas.</p>
+<p>Cada Captcha teve as primeiras 100 observações classificadas manualmente. Isso foi feito a partir do próprio RStudio, utilizando a ferramenta de classificação manual do pacote <code>{captcha}</code>.</p>
+<p>A partir das classificações iniciais, um modelo foi ajustado com a quantidade de observações disponível. Esse passo também foi feito a partir do pacote <code>{captcha}</code>, que cria um projeto de classificação para um Captcha específico.</p>
+<p>O modelo, então, foi utilizado como uma ferramenta para otimizar a classificação manual, funcionando da seguinte forma. Primeiro, o modelo tenta realizar a predição automaticamente e o oráculo avisa se a predição está correta ou não. Se estiver incorreto e o site aceitar várias tentativas, o modelo tenta novamente, mas com uma segunda alternativa de predição. Caso o site não aceite várias tentativas ou o modelo não consiga acertar o Captcha em <span class="math inline">\(N\)</span> tentativas (abritrado como dez), a imagem do Captcha aparece para classificação manual.</p>
+<p>Com o procedimento destacado acima, é criada uma nova base de dados, que por sua vez é utilizada para ajustar um novo modelo. O modelo, atualizado, é utilizado para classificar novos Captchas, e assim por diante, até que o modelo ajustado alcance uma acurácia razoável, que foi arbitrada em 80%. Com isso o procedimento de anotação é finalizado.</p>
+<p>O único problema do procedimento de classificação diz respeito aos Captchas que não aceitam várias tentativas. Nesses casos, não é possível verificar com certeza absoluta que um caso classificado manualmente (após a tentativa do modelo) foi classificado corretamente, já que a classificação manual seria a segunda tentativa. No entanto, esse problema aparece somente em três Captchas (<code>cadesp</code>, <code>jucesp</code> e <code>trf5</code>). A classificação manual dos 100 primeiros Captchas, no entanto, mostrou que pelo menos 95% dos Captchas foram classificados corretamente quando classificados manualmente. A proporção máxima de 5% de erro é negligenciável considerando que a maior parte das bases de dados foi construída com verificação do oráculo.</p>
+<p>Em alguns casos, os rótulos dos Captchas podem ser obtidos sem intervenção humana, utilizando técnicas de raspagem de dados e processamento de sinais. Um exemplo é o Captcha do SEI, que mostra informações suficientes para resolver o Captcha na própria URL que gera a imagem. Outro exemplo é o TJMG, que libera, além da imagem, um áudio contendo o mesmo rótulo da imagem, sem a adição de ruídos. Como o áudio não tem ruídos, basta ler o áudio, separar os áudios de cada caractere e calcular uma estatística simples (como a soma das amplitudes, ao quadrado). Essa estatística é utilizada para associar um pedaço de áudio a um caractere.</p>
+<p>A Tabela @ref(tab:lista-captcha-carac) caracteriza os Captchas anotados. Todos os Captchas possuem comprimento entre 4 e 6 dígitos e, com exceção do SEI, não são sensíveis a maiúsculas e minúsculas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Lista de captchas analisados.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Site</th>
+<th style="text-align: left;">Aceita vários chutes</th>
+<th style="text-align: left;">Caracteres</th>
+<th style="text-align: right;">Comprimento</th>
+<th style="text-align: left;">Colorido</th>
+<th style="text-align: right;"># rótulos anotados</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam">trf5</a></td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: left;">0:9</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">não</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24&amp;numero=1&amp;listaProcessos=50718889720218130024&amp;btn_pesquisar=Pesquisar">tjmg</a></td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">0:9</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">sim</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879">trt</a></td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">a-z0:9</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">não</td>
+<td style="text-align: right;">1500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="http://esaj.tjba.jus.br/cpopg/open.do">esaj</a></td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">a-z</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">sim</td>
+<td style="text-align: right;">3000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx">jucesp</a></td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: left;">a-z0-9</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">não</td>
+<td style="text-align: right;">4000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://srv01.tjpe.jus.br/consultaprocessualunificada/">tjpe</a></td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">a-z0-9</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">não</td>
+<td style="text-align: right;">4000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.tjrs.jus.br/site_php/consulta/verificador.php">tjrs</a></td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">0-9</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">sim</td>
+<td style="text-align: right;">2000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx">cadesp</a></td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: left;">a-z</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">sim</td>
+<td style="text-align: right;">3000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&amp;acao_origem_externa=protocolo_pesquisar&amp;id_orgao_acesso_externo=0">sei</a></td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">a-zA-Z0-9</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">sim</td>
+<td style="text-align: right;">10000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp">rfb</a></td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">a-z0-9</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">não</td>
+<td style="text-align: right;">4000</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="análise-descritiva" class="section level3" number="2.3.3">
-<h3>
-<span class="header-section-number">2.3.3</span> Análise descritiva<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-descritiva"><i class="fas fa-link"></i></a>
-</h3>
-<p>Os resultados empíricos foram divididos em dois testes. Primeiro, separamos uma amostra rotulada para verificar o quanto a heurística recuperava os valores corretos, a partir da predição de um modelo inicial. Depois, verificamos o ganho efetivo na acurácia do modelo alimentado com a base de dados aumentada, descrita na Seção <a href="metodologia.html#simulacoes">2.4</a>.</p>
-<p>Para o primeiro teste, adotamos o seguinte procedimento. Para cada Captcha, selecionamos bases de treino iniciais que resultaram em acurácias de 40%, 60% e 80% após o ajuste do modelo de redes neurais convolucionais. Em seguida, aplicamos a heurística nos casos da base de teste em que o modelo errou. Finalmente, calculamos o percentual de recuperação dos resultados pela heurística.</p>
-<p>A parte do ajuste do modelo de redes neurais convolucionais merece alguns comentários adicionais. Por um lado, é importante que o modelo esteja bem ajustado, para que o erro do modelo seja fruto somente da quantidade de observações e não um problema de sub ajuste. Por outro lado, cada tamanho de base pode estar ligada a diferentes hiperparâmetros, e não existe uma forma de garantir que os melhores hiperparâmetros foram selecionados.</p>
-<p><span class="citation">(<a href="#ref-goodfellow2014" role="doc-biblioref"><strong>goodfellow2014?</strong></a>)</span> menciona que, para realizar comparações de modelos, as técnicas de regularização, especialmente aumentação de dados, devem ser padronizadas. Por isso, optamos por manter a mesma grade de hiperparâmetros em todos os modelos. Especificamente, consideramos na grade as quantidades:</p>
-<ul>
-<li>Multiplicador da quantidade de filtros convolucionais.</li>
-<li>Quantidade de filtros na primeira camada densa.</li>
-<li>Dropout.</li>
-</ul>
-<p>Para diferentes modelos, como AC-GAN, o procedimento seria o mesmo. Bastaria fixar os hiperparâmetros e rodar todos os modelos.</p>
-<p>A Tabela <a href="#tab:"><strong>??</strong></a> mostra os resultados da análise. É possível verificar que a heurística X apresenta os melhores resultados, independentemente do Captcha ou da capacidade do modelo inicial.</p>
-<p>A Figura <a href="#fig:"><strong>??</strong></a> mostra os mesmos resultados de forma visual e resumida. É possível notar que a proporção de casos recuperados não aumenta linearmente</p>
-<p>Em seguida, passamos para a segunda etapa do procedimento. Nesta etapa, adicionamos a base construída pelo oráculo e modificada pela heurística à base de treino inicial. Como base de teste, utilizamos um conjunto de dados novo, que não foi utilizado em nenhum procedimento anterior, para garantir que não há contaminação.</p>
+</div>
+<p>As bases de dados com imagens anotadas foram disponibilizadas na aba de lançamentos (<em>releases</em>) do <a href="https://github.com/jtrecenti/doutorado/releases">repositório principal do projeto de pesquisa</a>. As bases com imagens e modelos ajustados estão disponíveis para quem tiver interesse em fazer novas pesquisas e utilizar os resultados em suas aplicações, sem restrições de uso.</p>
 <!-- ---------------------------------------------------------------------- -->
-</div>
-</div>
-<div id="simulacoes" class="section level2" number="2.4">
-<h2>
-<span class="header-section-number">2.4</span> Simulações<a class="anchor" aria-label="anchor" href="#simulacoes"><i class="fas fa-link"></i></a>
-</h2>
-<p>Para verificar o poder do uso do oráculo para o aprendizado do modelo, recorremos a uma série de simulações. As simulações foram organizadas em três passos: modelo inicial, dados e modelo final. Os passos foram descritos em maior detalhe a seguir.</p>
-<div id="primeiro-passo-modelo-inicial" class="section level3" number="2.4.1">
-<h3>
-<span class="header-section-number">2.4.1</span> Primeiro passo: modelo inicial<a class="anchor" aria-label="anchor" href="#primeiro-passo-modelo-inicial"><i class="fas fa-link"></i></a>
-</h3>
+</section>
+</section>
+<section id="simulacoes" class="level2">
+<h2 class="anchored" data-anchor-id="simulacoes">Simulações</h2>
+<p>Para verificar o poder do uso do oráculo para o aprendizado do modelo, uma série de simulações foi desenvolvidas. As simulações foram organizadas em três passos: modelo inicial, dados e modelo final. Os passos foram descritos em maior detalhe a seguir.</p>
+<section id="primeiro-passo-modelo-inicial" class="level3">
+<h3 class="anchored" data-anchor-id="primeiro-passo-modelo-inicial">Primeiro passo: modelo inicial</h3>
 <p>A simulação do modelo inicial teve como objetivo obter modelos preditivos de Captchas com acurácias distintas. O modelo inicial seria usado, então, para baixar dados diretamente do site usando o oráculo e, por fim, ajustar um modelo final com os novos dados provenientes do oráculo.</p>
-<p>Construímos os modelos iniciais em dois passos. O primeiro foi montar a base de dados completa, suficiente para ajustar um modelo com alta acurácia, que arbitramos em 80%, como descrito anteriormente. Depois, montamos 10 amostras de dados com subconjuntos das bases completas, cada uma contendo 10%, 20%, e assim por diante, até a base completa. Por exemplo: no Captcha da Jucesp, obtivemos um modelo com acurácia maior que 80% com 4000 Captchas. Fizemos então uma partição dos dados com 400 imagens (10% do total), 800 imagens (20% do total) e assim por diante, até o modelo com 4000 Captchas.</p>
-<p>Para cada tamanho de amostra <span class="math inline">\(A\)</span>, rodamos uma bateria de 27 modelos. Fizemos isso porque para diferentes quantidades de amostra, a configuração dos hiperparâmetros que resulta no melhor modelo pode ser diferente. Fizemos uma grade de hiperparâmetros considerando três informações:</p>
+<p>Os modelos iniciais foram construídos em dois passos. O primeiro foi montar a base de dados completa, suficiente para ajustar um modelo com alta acurácia, que arbitrados em 80%, como descrito anteriormente. Depois, montou-se 10 amostras de dados com subconjuntos das bases completas, cada uma contendo 10%, 20%, e assim por diante, até a base completa. Por exemplo: no Captcha da Jucesp, construiu-se um modelo com acurácia maior que 80% com 4000 Captchas. A partir disso, foi feita uma partição dos dados com 400 imagens (10% do total), 800 imagens (20% do total) e assim por diante, até o modelo com 4000 Captchas.</p>
+<p>Para cada tamanho de amostra <span class="math inline">\(A\)</span>, aplicou-se uma bateria de 27 modelos. Isso foi feito porque para diferentes quantidades de amostra, a configuração dos hiperparâmetros que resulta no melhor modelo pode ser diferente. Os modelos seguiram uma grade de hiperparâmetros considerando três informações:</p>
 <ul>
-<li>A quantidade de unidades computacionais na primeira camada densa após as camadas convolucionais: consideramos os valores de 100, 200 e 300.</li>
-<li>O valor do <em>dropout</em> aplicado às camadas densas: consideramos os valores de 10%, 30% e 50%.</li>
-<li>O fator de decaimento na taxa de aprendizado a cada época: consideramos os valores de 1%, 2% e 3%.</li>
+<li>A quantidade de unidades computacionais na primeira camada densa após as camadas convolucionais, com os valores considerados: 100, 200 e 300.</li>
+<li>O valor do <em>dropout</em> aplicado às camadas densas, com os valores considerados: 10%, 30% e 50%.</li>
+<li>O fator de decaimento na taxa de aprendizado a cada época, com os valores considerados: 1%, 2% e 3%.</li>
 </ul>
-<p>Combinando os três valores dos três hiperparâmetros, temos um total de <span class="math inline">\(27=3^3\)</span> hiperparâmetros. Com isso, foi possível identificar, para cada tamanho de amostra <span class="math inline">\(A\)</span>, o classificador <span class="math inline">\(C_A\)</span> com a melhor acurácia dentre os modelos ajustados.</p>
-<p>No final do primeiro passo, portanto, consideramos apenas o melhor modelo para cada tamanho de amostra. É claro que os modelos encontrados por essa técnica não são, necessariamente, os melhor modelo possíveis. No entanto, como a técnica é a mesma para todos os Captchas, ganhamos a possibilidade de fazer comparações e temos uma metodologia mais transparente.</p>
-</div>
-<div id="segundo-passo-dados" class="section level3" number="2.4.2">
-<h3>
-<span class="header-section-number">2.4.2</span> Segundo passo: dados<a class="anchor" aria-label="anchor" href="#segundo-passo-dados"><i class="fas fa-link"></i></a>
-</h3>
+<p>Combinando os três valores dos três hiperparâmetros, tem-se um total de <span class="math inline">\(27=3^3\)</span> hiperparâmetros. Com isso, foi possível identificar, para cada tamanho de amostra <span class="math inline">\(A\)</span>, o classificador <span class="math inline">\(C_A\)</span> com a melhor acurácia dentre os modelos ajustados.</p>
+<p>No final do primeiro passo, portanto, considera-se apenas o melhor modelo para cada tamanho de amostra, dentre os 27 ajustados. É claro que os modelos encontrados por essa técnica não são, necessariamente, os melhor modelo possíveis. No entanto, como a técnica é a mesma para todos os Captchas, é possível fazer comparações através de uma metodologia mais transparente.</p>
+</section>
+<section id="segundo-passo-dados" class="level3">
+<h3 class="anchored" data-anchor-id="segundo-passo-dados">Segundo passo: dados</h3>
 <p>O segundo passo teve como objetivo construir as bases de dados utilizando o oráculo. Primeiro, foi necessário decidir quais modelos, dentre os 10 ajustados para cada Captcha, seriam utilizados para construir novas bases. Não faria sentido, por exemplo, considerar um modelo com acurácia de 0%, já que ele não produziria nenhuma observação comparado com um modelo que chuta aleatoriamente. Também não faria sentido considerar um classificador com acurácia de 100%, já que nesse caso não há o que testar com a técnica do oráculo.</p>
-<p>Decidimos que seria necessário considerar somente os modelos que resultaram em acurácias maiores de 1% e menores de 50%. O valor máximo foi decidido após realizar alguns testes empíricos e verificar, informalmente, que a técnica do oráculo realmente resultava em ganhos expressivos, mesmo com modelos de baixa acurácia. Concluímos então que não seria necessário testar a eficácia da técnica para classificadores com alta acurácia. Já o valor mínimo foi decidido de forma arbitrária, retirando-se os classificadores com acurácia muito baixa.</p>
-<p>A segunda decisão a ser tomada para construção dos dados foi a quantidade de imagens que seria baixada para cada Captcha. Como temos Captchas de diferentes dificuldades, a quantidade de dados seria diferente. Optamos por baixar a quantidade de dados de forma a montar uma base de treino que contém a quantidade de observações igual ao melhor modelo daquele Captcha. Por exemplo, no TJRS, um modelo com acurácia próxima de 100% foi identificado com 2000 observações. O melhor modelo com 300 imagens (240 para treino, 60 para teste) resultou em uma acurácia de 35%. Foram, então, baixadas 1760 observações para compor o total de 2000 na base de treino. As imagens de teste do modelo inicial poderiam até ser utilizadas, mas optamos por descartar para garantir que o modelo não ficasse sobreajustado para a primeira base.</p>
-<p>O motivo de baixar a mesma quantidade de observações que o melhor modelo inicial foi feita por dois motivos. O primeiro é que temos evidências de que é possível construir um bom modelo com essa quantidade de imagens, ainda que em um caso tenhamos informações completas, e no outro incompletas. O segundo é que isso nos permite comparar o resultado do modelo completamente anotado contra o modelo que é parcialmente anotado e com anotações incompletas provenientes do oráculo.</p>
-<p>A terceira e última decisão tomada para baixar os dados foi a quantidade de chutes que o modelo poderia fazer, nos casos em que isso é permitido pelo site. Optamos, de forma arbitrária, por três valores: 1, que é equivalente a um site que não permite múltiplos chutes, 5 chutes e 10 chutes.</p>
+<p>Decidiu-se que seria necessário considerar somente os modelos que resultaram em acurácias maiores de 1% e menores de 50%. O valor máximo foi decidido após realizar alguns testes empíricos e verificar, informalmente, que a técnica do oráculo realmente resultava em ganhos expressivos, mesmo com modelos de baixa acurácia. Concluiu-se então que não seria necessário testar a eficácia da técnica para classificadores com alta acurácia. Já o valor mínimo foi decidido de forma arbitrária, retirando-se os classificadores com acurácia muito baixa.</p>
+<p>A segunda decisão a ser tomada para construção dos dados foi a quantidade de imagens que seria baixada para cada Captcha. Como são Captchas de diferentes dificuldades, a quantidade de dados seria diferente. Optou-se por baixar a quantidade de dados de forma a montar uma base de treino que contém a quantidade de observações necessária para obter o melhor modelo daquele Captcha. Por exemplo, no TJRS, um modelo com acurácia próxima de 100% foi identificado com 2000 observações. O melhor modelo com 300 imagens (240 para treino, 60 para teste) resultou em uma acurácia de 35%. Foram, então, baixadas 1760 observações para compor o total de 2000 na base de treino. As imagens de teste do modelo inicial poderiam até ser utilizadas, mas optamos por descartar para garantir que o modelo não ficasse sobreajustado para a primeira base.</p>
+<p>O motivo de baixar a mesma quantidade de observações que o melhor modelo inicial foi feita por dois motivos. O primeiro é que existem evidências de que é possível construir um bom modelo com essa quantidade de imagens, ainda que em um caso as informações são completas e, no outro, incompletas. O segundo é que isso permite a comparação do resultado do modelo completamente anotado contra o modelo que é parcialmente anotado e com anotações incompletas provenientes do oráculo.</p>
+<p>A terceira e última decisão tomada para baixar os dados foi a quantidade de chutes que o modelo poderia fazer, nos casos em que isso é permitido pelo site. Optou-se, de forma arbitrária, por três valores: 1, que é equivalente a um site que não permite múltiplos chutes, 5 chutes e 10 chutes.</p>
 <p>Portanto, o procedimento de coleta dos dados foi feito, para cada Captcha, da seguinte forma:</p>
-<ol style="list-style-type: decimal">
-<li>Listamos todos os melhores modelos ajustados para cada tamanho de amostra.</li>
-<li>Filtramos os modelos para os que apresentavam acurácia de 5% até 50%</li>
-<li>Definimos o tamanho da base a ser obtida, com base no tamanho da base de treino utilizada no modelo e a quantidade total que se objetivou obter.</li>
-<li>Para cada quantidade de tentativas disponível (1, 5 e 10), baixamos as imagens, classificando com o valor “1” se o Captcha fosse classificado corretamente em alguma das tentativas, e com o valor “0” caso contrário.</li>
-<li>Nos casos com erros, armazenamos um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final.</li>
+<ol type="1">
+<li>Listou-se todos os melhores modelos ajustados para cada tamanho de amostra.</li>
+<li>Filtrou-se os modelos para os que apresentavam acurácia de 5% até 50%</li>
+<li>Definiu-se o tamanho da base a ser obtida, com base no tamanho da base de treino utilizada no modelo e a quantidade total que se objetivou obter.</li>
+<li>Para cada quantidade de tentativas disponível (1, 5 e 10), baixou-se as imagens, anotando com o valor “1” se o rótulo de alguma das tentativas estivesse correto e com o valor “0” caso contrário.</li>
+<li>Nos casos com erros, armazenou-se um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final.</li>
 </ol>
-<p>No final, obtivemos bases de dados de treino para todos os Captchas analisados, com quantidades de imagens variadas de acordo com os parâmetros definidos anteriormente, variando também pela quantidade de tentativas. A quantidade total de bases de dados geradas foi 65.</p>
-<p>Além das bases de treino, construímos, para cada Captcha, uma base de teste. As bases de teste foram construídas completamente do zero, sem utilizar informações de bases anteriores. Para construir as bases, utilizamos a mesma técnica semi-automática definida anteriormente, usando o melhor modelo disponível para classificar a maioria das imagens e classificando manualmente em caso de falha. Em alguns casos, como TJMG e TJRS, a classificação humana quase não foi necessária, pois os classificadores obtidos apresentaram acurácia próxima de 100%.</p>
-<p>Como o único objetivo da base de teste foi o de estimar a acurácia dos modelos finais, a quantidade de observações poderia ser arbitrada. O tamanho das bases de teste foi, então, arbitrado em 1000 imagens para todos os Captchas.</p>
-</div>
-<div id="terceiro-passo-modelo-final" class="section level3" number="2.4.3">
-<h3>
-<span class="header-section-number">2.4.3</span> Terceiro passo: modelo final<a class="anchor" aria-label="anchor" href="#terceiro-passo-modelo-final"><i class="fas fa-link"></i></a>
-</h3>
-<p>O modelo final foi ajustado para cada uma das 65 bases de treino disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizamos o modelo proposto, que considera os erros na verossimilhança do modelo. Caso a imagem tenha sido corretamente classificada, a função de perda é calculada normalmente. Caso ela tenha sido classificada incorretamente, consideramos na verossimilhança a probabilidade de não observar nenhum dos chutes.</p>
-<p>Exemplo. Considere um Captcha com letras e números como vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo (correto) “zab2”. O classificador do passo inicial tentou as seguintes configurações: “zab5”, “sab2”, “sab5”, “zob2”, “zob5”, todas erradas. A probabilidade considerada na verossimilhança para essa imagem é, portanto:</p>
+<p>No final, obteve-se bases de dados de treino para todos os Captchas analisados, com quantidades de imagens variadas de acordo com os parâmetros definidos anteriormente, variando também pela quantidade de tentativas. A quantidade total de bases de dados geradas foi 65.</p>
+<p>Além das bases de treino, foi construída uma base de teste para cada Captcha. As bases de teste foram construídas completamente do zero, sem utilizar informações de bases anteriores. Para construir as bases, utilizou-se a mesma técnica semi-automática definida anteriormente, usando o melhor modelo disponível para classificar a maioria das imagens e classificando manualmente em caso de falha. Em alguns casos, como TJMG e TJRS, a classificação humana quase não foi necessária, pois os classificadores obtidos apresentaram acurácia próxima de 100%.</p>
+<p>Como o único objetivo da base de teste foi o de estimar a acurácia dos modelos finais, a quantidade de observações poderia ser arbitrada. O tamanho das bases de teste foi, então, arbitrado em 1000 imagens para cada Captcha.</p>
+</section>
+<section id="terceiro-passo-modelo-final" class="level3">
+<h3 class="anchored" data-anchor-id="terceiro-passo-modelo-final">Terceiro passo: modelo final</h3>
+<p>O modelo final foi ajustado para cada uma das 65 bases de treino disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se o modelo proposto, que considera os erros na verossimilhança do modelo. Caso a imagem tenha sido corretamente classificada, a função de perda é calculada normalmente. Caso ela tenha sido classificada incorretamente, consideramos na verossimilhança a probabilidade de não observar nenhum dos chutes.</p>
+<p><strong>Exemplo</strong>. Considere um Captcha com letras e números como vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo (correto) “zab2”. O classificador do passo inicial tentou as seguintes configurações: “zab5”, “sab2”, “sab5”, “zob2”, “zob5”, todas erradas. A probabilidade considerada na verossimilhança para essa imagem é, portanto:</p>
 <p><span class="math display">\[
 P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{zob5})
 \]</span></p>
-<p>Além de modificar a forma de calcular a função de perda do modelo, foi necessário testar os hiperparâmetros. Optamos por utilizar os mesmos hiperparâmetros dos modelos iniciais para manter a consistência. O único detalhe nesse ponto é que, como partimos dos parâmetros do modelo inicial, optamos por não modificar a quantidade de unidades na camada densa, variando somente os valores de <em>dropout</em> e de decaimento na taxa de aprendizado. Portanto, ajustamos 9 e não 27 modelos para cada base de dados.</p>
-<p>No final, assim como no primeiro passo, selecionamos classificador com melhor acurácia para cada modelo. Ficamos, então, com 65 modelos no final para comparar com os modelos iniciais e estimar a efetividade do oráculo. As comparações foram feitas através de gráficos de barras, explorando o efeito do uso do oráculo para diferentes Captchas, diferentes modelos iniciais e diferentes quantidades de chutes, além de um gráfico de dispersão para relacionar as acurácias iniciais e finais.</p>
-<p>Além do terceiro passo, fizemos alguns experimentos para verificar se, ao aplicar a técnica do oráculo iterativamente, poderíamos obter melhores resultados. Ou seja, podemos considerar os modelos obtidos no passo 3 como os modelos iniciais do passo 1, aplicar novamente o passo 2 (baixar dados) e o passo 3 (rodar modelo com os novos dados). Isso foi feito para apenas um conjunto selecionado de Captchas para verificar essa possibilidade, não fazendo parte das simulações principais deste estudo.</p>
-
-</div>
-</div>
-</div>
+<p>Além de modificar a forma de calcular a função de perda do modelo, foi necessário testar os hiperparâmetros. Optou-se por utilizar os mesmos hiperparâmetros dos modelos iniciais para manter a consistência. O único detalhe nesse ponto é que, como os parâmetros de partida são os do modelo inicial, optou-se por não modificar a quantidade de unidades na camada densa, variando somente os valores de <em>dropout</em> e de decaimento na taxa de aprendizado. Portanto, ajustou-se 9 e não 27 modelos para cada base de dados.</p>
+<p>No final, assim como no primeiro passo, os classificadors com melhor acurácia foram selecionados para cada modelo. Ficou-se, então, com 65 modelos no final para comparar com os modelos iniciais e estimar a efetividade do oráculo. As comparações foram feitas através de gráficos de barras, explorando o efeito do uso do oráculo para diferentes Captchas, diferentes modelos iniciais e diferentes quantidades de chutes, além de um gráfico de dispersão para relacionar as acurácias iniciais e finais.</p>
+<p>Além do terceiro passo, outros experimentos foram realizados para verificar se, ao aplicar a técnica do oráculo iterativamente, os resultados continuariam melhorando. Ou seja, é possível considerar os modelos obtidos no passo 3 como os modelos iniciais do passo 1, aplicar novamente o passo 2 (baixar dados) e o passo 3 (rodar modelo com os novos dados). Isso foi feito para apenas um conjunto selecionado de Captchas para verificar essa possibilidade, não fazendo parte das simulações principais do estudo.</p>
+<p>As bases de dados das simulações também foram disponibilizadas na aba de lançamentos (<em>releases</em>) do <a href="https://github.com/jtrecenti/doutorado/releases">repositório principal do projeto de pesquisa</a>. As bases podem ser utilizadas para aumentar as bases de treino e para testar outras arquiteturas de redes neurais ao tema dos Captchas com uso de aprendizado fracamente supervisionado.</p>
 
 
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>existem exemplos de Captchas baseados em imagens que não são limitados a letras e números para constituir o rótulo (XXX). Como esses casos não aparecem nas aplicações práticas de interesse, estão fora do escopo do trabalho.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Existem dois tipos principais de requisição HTTP. A requisição GET serve para capturar uma página da internet, enquanto a requisição POST serve para enviar dados para o servidor como, um login e uma senha. A lista completa de requisições está disponível na <a href="https://www.rfc-editor.org/rfc/rfc9110.html" title="https://www.rfc-editor.org/rfc/rfc9110.html">documentação da <em>Internet Engineering Task Force</em> (IETF)</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
-
-
-
-
-  <div class="chapter-nav">
-<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Sobre este documento</a></div>
-<div class="empty"></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#metodologia"><span class="header-section-number">2</span> Metodologia</a></li>
-<li>
-<a class="nav-link" href="#defini%C3%A7%C3%A3o-do-problema"><span class="header-section-number">2.1</span> Definição do problema</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#captcha"><span class="header-section-number">2.1.1</span> Captcha</a></li>
-<li><a class="nav-link" href="#redes-neurais"><span class="header-section-number">2.1.2</span> Redes neurais</a></li>
-<li><a class="nav-link" href="#aprendizado-estat%C3%ADstico"><span class="header-section-number">2.1.3</span> Aprendizado estatístico</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#m%C3%A9todo-mucho-loko"><span class="header-section-number">2.2</span> Método mucho loko</a></li>
-<li>
-<a class="nav-link" href="#dados"><span class="header-section-number">2.3</span> Dados</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#escolha-dos-captchas-analisados"><span class="header-section-number">2.3.1</span> Escolha dos Captchas analisados</a></li>
-<li><a class="nav-link" href="#constru%C3%A7%C3%A3o-dos-dados"><span class="header-section-number">2.3.2</span> Construção dos dados</a></li>
-<li><a class="nav-link" href="#an%C3%A1lise-descritiva"><span class="header-section-number">2.3.3</span> Análise descritiva</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#simulacoes"><span class="header-section-number">2.4</span> Simulações</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#primeiro-passo-modelo-inicial"><span class="header-section-number">2.4.1</span> Primeiro passo: modelo inicial</a></li>
-<li><a class="nav-link" href="#segundo-passo-dados"><span class="header-section-number">2.4.2</span> Segundo passo: dados</a></li>
-<li><a class="nav-link" href="#terceiro-passo-modelo-final"><span class="header-section-number">2.4.3</span> Terceiro passo: modelo final</a></li>
-</ul>
-</li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Doutorado</strong>" was written by Julio Trecenti. It was last built on 25 de setembro de 2022.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
   }
-}
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
 </script>
-</body>
-</html>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./introducao.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./resultados.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelagem</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
