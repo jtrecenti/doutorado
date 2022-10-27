@@ -1,4 +1,4 @@
-# Metodologia
+# Metodologia {#metodologia}
 
 <!-- ----------------------------------------------------------- -->
 
@@ -44,7 +44,7 @@ O fluxo completo de um Captcha envolve cinco componentes: um *rótulo*, um *gera
 4. O oráculo verifica se a resposta está correta.
 5. Dependendo da resposta, o agente é direcionado para a página autenticada ou para uma página de erro.
 
-A Figura \@ref(fig:esquema-captcha) esquematiza o fluxo do Captcha.
+A Figura @fig-esquema-captcha esquematiza o fluxo do Captcha.
 
 ```{r}
 #| label: esquema-captcha
@@ -62,7 +62,7 @@ Os elementos do vetor $\mathbf c$ fazem parte de um alfabeto $\mathcal A$, com c
 
 O elemento da matriz $x_{nm\cdot}$ é denominado *pixel*. Um pixel representa a menor unidade possível da imagem. Em uma imagem colorida, por exemplo, $R=3$. Nesse caso, um pixel é um vetor de três dimensões com valores entre zero e um, representando a intensidade de vermelho, verde e azul da coordenada $(n, m)$ da imagem. Em imagens em escala de cinza, $R=1$ e o pixel, de uma dimensão, representa a intensidade do cinza, sendo 1 o equivalente da cor branca e 0 da cor preta.
 
-A Figura \@ref(fig:exemplo-tjmg) mostra um exemplo Captcha do Tribunal de Justiça de Minas Gerais (TJMG). Nesse caso, tem-se $L=5$ e $|\mathcal A|=10$, apenas os dez algarismos arábicos. A imagem tem dimensões $N=110$, $M=40$ e $R=3$. O rótulo da imagem é $[5,2,4,3,2]^\top$.
+A Figura @fig-exemplo-tjmg mostra um exemplo Captcha do Tribunal de Justiça de Minas Gerais (TJMG). Nesse caso, tem-se $L=5$ e $|\mathcal A|=10$, apenas os dez algarismos arábicos. A imagem tem dimensões $N=110$, $M=40$ e $R=3$. O rótulo da imagem é $[5,2,4,3,2]^\top$.
 
 ```{r}
 #| label: exemplo-tjmg 
@@ -79,7 +79,7 @@ Por exemplo, um Captcha com $L=6$ letras e $|\mathcal A| = 36$ possibilidades em
 
 A forma *one-hot* da resposta pode ser entendida como uma __multinomial__ __multivariada__ (XXX). A resposta é multivariada porque temos $L$ caracteres na imagem e multinomial porque temos $|\mathcal A|$ possíveis caracteres em cada posição. Dessa forma, podemos pensar que um modelo que resolve o Captcha envolve $L$ classificadores com resposta multinomial, cada um dando conta de um dos caracteres. Os classificadores podem ser independentes e podem até contar com etapas de pré-processamento separadas.
 
-Seguindo o exemplo da Figura \@ref(fig:exemplo-tjmg), é possível representar o rótulo da seguinte forma:
+Seguindo o exemplo da Figura @fig-exemplo-tjmg, é possível representar o rótulo da seguinte forma:
 
 $$
 \mathbf c = \left[\begin{array}{c}
@@ -103,7 +103,7 @@ A forma *dummy* da resposta facilita os trabalhos que seguem. Como será visto m
 
 O **gerador** é uma função $g$ que recebe um rótulo como entrada e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de gerar uma imagem fácil de interpretar por humanos, mas difícil de se resolver por máquinas.
 
-Um exemplo de gerador é a função criada no pacote `{captcha}`. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` (XXX), que utiliza o software ImageMagick. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da Figura \@ref(fig:captcha-r-exemplo).
+Um exemplo de gerador é a função criada no pacote `{captcha}`. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` (XXX), que utiliza o software ImageMagick. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da Figura @fig-captcha-r-exemplo.
 
 ```{r captcha-r-exemplo, fig.cap= "Exemplo de captcha gerado pela função captcha::captcha_generate()"}
 set.seed(5)
@@ -136,7 +136,7 @@ $$
 
 Explicando a função: quando a função $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Quando a função $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos para $\mathbf x_{n+1}$, o que inclui o próprio $\mathbf y_{n+1}$. É importante notar que a lista retornada pelo oráculo sempre contém a resposta $\mathbf y_{n+1}$. 
 
-A Figura \@ref(fig:esquema-oraculo) mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.
+A Figura @fig-esquema-oraculo mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.
 
 ```{r}
 #| label: esquema-oraculo
@@ -183,7 +183,7 @@ A técnica proposta pela tese pode utilizar diversas arquiteturas de redes neura
 
 Como uma rede neural possui muitos componentes e subcomponentes, é usual apresentar sua estrutura na forma de um diagrama. Redes neurais costumam ser fáceis de representar através de grafos, que podem ser utilizados de forma mais ou menos detalhada, dependento do interesse.
 
-A Figura \@ref(fig:diagrama-modelo-cnn) mostra, de forma esquemática, os componentes (retângulos tracejados) e subcomponentes (partes internas dos componentes) do modelo utilizado.
+A Figura @fig-diagrama-modelo-cnn mostra, de forma esquemática, os componentes (retângulos tracejados) e subcomponentes (partes internas dos componentes) do modelo utilizado.
 
 ```{r}
 #| label: diagrama-modelo-cnn
@@ -213,7 +213,7 @@ Considere
 $$
 K = \left[\begin{array}{rrr}-1&-1&-1\\0&0&0\\1&1&1\end{array}\right]
 $$
-e a imagem da Figura \@ref(fig:tjmg-exemplo-conv). Como visto anteriormente, trata-de de uma matriz de dimensão $40\times110\times3$.
+e a imagem da Figura @fig-tjmg-exemplo-conv. Como visto anteriormente, trata-de de uma matriz de dimensão $40\times110\times3$.
 
 ```{r}
 #| label: tjmg-exemplo-conv
@@ -257,7 +257,7 @@ Esse é o valor a ser colocado no ponto $(i,j,k)$. Isso funciona em todos os pon
 
 Existem duas formas de trabalhar com as bordas da imagem. A primeira é preenchendo as bordas com zeros, de forma a considerar apenas os pontos da imagem. A segunda é descartar os pontos da borda e retornar uma imagem menor, contendo somente os pixels em que foi possível aplicar todo o *kernel*.
 
-No caso do exemplo, o resultado da convolução fica como na Figura \@ref(fig:tjmg-exemplo-conv-horizontal). A matriz não foi escolhida por acaso: ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada por $-1$ e a última é formada por $1$, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca ($\text{grande} * 1 + \text{pequeno} * (-1)$). A parte destacada da imagem acabou sendo a parte de baixo dos números e, principalmente, a linha que une os números.
+No caso do exemplo, o resultado da convolução fica como na Figura @fig-tjmg-exemplo-conv-horizontal. A matriz não foi escolhida por acaso: ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada por $-1$ e a última é formada por $1$, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca ($\text{grande} * 1 + \text{pequeno} * (-1)$). A parte destacada da imagem acabou sendo a parte de baixo dos números e, principalmente, a linha que une os números.
 
 ```{r}
 #| label: conv-aplicacao-exemplo
@@ -306,7 +306,7 @@ $$
 K = \left[\begin{array}{rrr}-1&0&1\\-1&0&1\\-1&0&1\end{array}\right],
 $$
 
-as partes destacadas são as laterais dos números, conforme Figura \@ref(fig:tjmg-exemplo-conv-vertical).
+as partes destacadas são as laterais dos números, conforme Figura @fig-tjmg-exemplo-conv-vertical.
 
 ```{r}
 #| label: tjmg-exemplo-conv-vertical
@@ -319,7 +319,7 @@ O resultado da convolução pode ter números negativos ou maiores que um. Para 
 
 Uma característica das imagens mostradas acima é que elas ficaram escuras, ou seja, com muitos valores próximos de zero. Uma técnica para modificar a imagem é adicionar uma constante numérica ao resultado da convolução. Esse é o chamado __viés__ (*bias*) da convolução.
 
-A Figura \@ref(fig:tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
+A Figura @fig-tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
 
 ```{r}
 #| label: tjmg-exemplo-conv-vertical-bias
@@ -331,7 +331,7 @@ Uma __camada convolucional__ envolve a aplicação de convoluções com $d$ *ker
 
 É importante notar que, nos exemplos apresentados anteriormente, a convolução foi aplicada a apenas um dos canais da imagem: o primeiro. Quando a imagem de entrada possui vários canais, camada convolucional aplica cada *kernel* em cada canal da imagem e, depois, faz a soma dos valores resultantes.
 
-A Figura \@ref(fig:tjmg-exemplo-camada-conv) mostra um exemplo de aplicação de camada convolucional para a imagem utilizada nos exemplos anteriores. Os *kernels* foram escolhidos com base em um modelo que já foi ajustado para o Captcha. Note que os canais capturam a informação dos números e dos ruídos, focando em detalhes diferentes.
+A Figura @fig-tjmg-exemplo-camada-conv mostra um exemplo de aplicação de camada convolucional para a imagem utilizada nos exemplos anteriores. Os *kernels* foram escolhidos com base em um modelo que já foi ajustado para o Captcha. Note que os canais capturam a informação dos números e dos ruídos, focando em detalhes diferentes.
 
 ```{r}
 #| label: tjmg-exemplo-camada-conv-aplicacao
@@ -498,7 +498,7 @@ Apresentados o objeto de estudo, as redes neurais utilizadas e a proposta da pes
 
 TODO
 
-As definições seguem a mesma terminologia de Cabannes (XXX). Nosso objetivo é obter uma função $f \in \mathcal{Y}^\mathcal{X}$ entre um espaço de entrada $\mathcal X$ e um espaço de saída $\mathcal{Y}$.
+As definições seguem a mesma terminologia de Cabannes (XXX). Nosso objetivo é obter uma função $f \in \mathcal{Y}^{\mathcal{X}}$ entre um espaço de entrada $\mathcal{X}$ e um espaço de saída $\mathcal{Y}$.
 
 Definimos também a função de distribuição conjunta $\rho \in \Delta_{\mathcal X \times \mathcal Y}$ sobre $\mathcal X \times \mathcal Y$. Essa função nem sempre é apresentada em outros contextos, mas será útil para estudar os modelos fracamente supervisionados.
 
@@ -589,7 +589,7 @@ Além dos Captchas de sites, também foram consideradas imagens geradas artifici
 
 Foram gerados dois tipos de Captchas artificiais. O primeiro, chamado __MNIST-Captcha__, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.
 
-A Figura \@ref(fig:captcha-mnist) mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.
+A Figura @fig-captcha-mnist mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.
 
 ```{r}
 #| label: captcha-mnist
@@ -616,7 +616,7 @@ Pelos motivos supracitados, também foi criado um Captcha gerado inteiramente po
 - Probabilidade de adicionar um ruído branco no fundo da imagem
 - Probabilidade de adicionar efeitos de tinta óleo e implosão
 
-A Figura \@ref(fig:captcha-r) mostra um exemplo de R-Captcha. O exemplo apresenta uma linha ligando as letras, comprimento 4, dígitos maiúsculos e minúsculos e distorções.
+A Figura @fig-captcha-r mostra um exemplo de R-Captcha. O exemplo apresenta uma linha ligando as letras, comprimento 4, dígitos maiúsculos e minúsculos e distorções.
 
 ```{r}
 #| label: captcha-r
@@ -632,15 +632,16 @@ Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem de dados
 
 Dentro do ciclo da ciência de dados, pode-se considerar que a raspagem de dados está inserida nas tarefas de coleta e arrumação de dados. De certa forma, é possível comparar a raspagem com uma consulta a um banco de dados remoto, ou mesmo à obtenção de informações através de uma *Application Programming Interface* (API).
 
-Para raspar uma página da web, usualmente se segue o fluxo descrito na Figura \@ref(fig:fluxo-web-scraping). Nem todos os passos foram seguidos na obtenção dos dados necessários para realizar as simulações, mas é importante conhecê-los para compreender bem a origem da ideia de utilizar raspagem em conjunto com métodos de aprendizado de máquinas. O exemplo da RFB foi utilizado para dar contexto aos passos.
+Para raspar uma página da web, usualmente se segue o fluxo descrito na Figura @fig-fluxo-web-scraping. Nem todos os passos foram seguidos na obtenção dos dados necessários para realizar as simulações, mas é importante conhecê-los para compreender bem a origem da ideia de utilizar raspagem em conjunto com métodos de aprendizado de máquinas. O exemplo da RFB foi utilizado para dar contexto aos passos.
 
 ```{r}
 #| label: fluxo-web-scraping
-#| fig.cap: Ciclo da raspagem de dados. Fonte: [curso de Web Scraping da Curso-R](https://curso-r.github.io/main-web-scraping).
+#| fig-cap: "Ciclo da raspagem de dados. Fonte: [curso de Web Scraping da Curso-R](https://curso-r.github.io/main-web-scraping)."
+
 knitr::include_graphics("assets/img/cycle.png")
 ```
 
-No caso da RFB, o trabalho é iniciado acessando-se a [página inicial de busca de CNPJ](http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp), como mostrado na Figura \@ref(fig:raspagem-rfb-inicial). É possível notar que o desafio disponível é do tipo hCaptcha, que não é o Captcha de interesse da pesquisa. No entanto, ao clicar em "Captcha Sonoro", é possível acessar o Captcha de interesse, como mostrado na Figura \@ref(fig:raspagem-rfb-sonoro). O motivo pelo qual o Captcha de texto em imagem foi mantido após a implementação do hCaptcha é desconhecido pelo autor.
+No caso da RFB, o trabalho é iniciado acessando-se a [página inicial de busca de CNPJ](http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp), como mostrado na Figura @fig-raspagem-rfb-inicial. É possível notar que o desafio disponível é do tipo hCaptcha, que não é o Captcha de interesse da pesquisa. No entanto, ao clicar em "Captcha Sonoro", é possível acessar o Captcha de interesse, como mostrado na Figura @fig-raspagem-rfb-sonoro. O motivo pelo qual o Captcha de texto em imagem foi mantido após a implementação do hCaptcha é desconhecido pelo autor.
 
 ```{r}
 #| label: raspagem-rfb-inicial
@@ -656,7 +657,7 @@ knitr::include_graphics("assets/img/raspagem-rfb-sonoro.png")
 
 A segunda tarefa é a de navegar pelo site, registrando as requisições realizadas pelo navegador para realizar a consulta. Isso envolve abrir o inspetor de elementos do navegador, na aba Rede (ou *Network*, em inglês), anotando as requisições que são realizadas.
 
-No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas requisições aparecem na aba "Rede", como mostrado na Figura \@ref(fig:raspagem-rfb-rede). A primeira requisição é do tipo POST[^post], responsável por enviar os dados de CNPJ e do rótulo da imagem para o servidor, que retorna com os dados da empresa.
+No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas requisições aparecem na aba "Rede", como mostrado na Figura @fig-raspagem-rfb-rede. A primeira requisição é do tipo POST[^post], responsável por enviar os dados de CNPJ e do rótulo da imagem para o servidor, que retorna com os dados da empresa.
 
 [^post]: Existem dois tipos principais de requisição HTTP. A requisição GET serve para capturar uma página da internet, enquanto a requisição POST serve para enviar dados para o servidor como, um login e uma senha. A lista completa de requisições está disponível na [documentação da *Internet Engineering Task Force* (IETF)](https://www.rfc-editor.org/rfc/rfc9110.html "https://www.rfc-editor.org/rfc/rfc9110.html").
 

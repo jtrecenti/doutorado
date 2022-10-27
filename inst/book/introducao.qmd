@@ -1,0 +1,141 @@
+# Introdução {#introducao}
+
+Captcha (*Completely Automated Public Turing test to tell Computers and Humans Apart*) é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas.
+
+Captchas estão presentes em toda a internet. Inicialmente criados para prevenir *spam* (*Sending and Posting Advertisement in Mass*), os desafios se tornaram populares rapidamente (XXX), sendo utilizados como forma de evitar evitar o uso indevido de aplicações da *web*. Algumas ações que os desafios podem ajudar a evitar são:
+
+- Criação de contas falsas nos sites.
+- Envio automático de mensagens, via *email* ou formulários de contato.
+- Operações automatizadas, como compra de ingressos para eventos e voto automático em sites de votação.
+- Voto automático em ferramentas de votação na internet.
+- Consulta automatizada em sites para obtenção de dados.
+
+O uso de Captchas tem, por princípio, o objetivo de aumentar a segurança das pessoas que acessam a internet e proteger os sistemas *web* de uso abusivo. Para pessoas que acessam os sites pontualmente, a presença de Captchas representa um mero dissabor; para quem realiza acessos massivos, uma grande dificuldade.
+
+No entanto, o uso de Captchas não é adequado em todas as situações. Um exemplo são os sites de vendas: o uso dos desafios aborrece o usuário, alterando a qualidade da sua experiência. Os sites devem levar esse fator de aborrecimento em conta para não reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar outros mecanismos de prevenção à fraude, como monitoramento da sessão do usuário (XXX).
+
+Também existem casos em que o uso de Captchas é prejudicial. Sua utilização em serviços públicos do Brasil, por exemplo, é problemática, como discutido na próxima seção. 
+
+## Captchas em serviços públicos
+
+A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º, previsão que "todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à segurança da sociedade e do Estado;". Essa previsão é implementada pela Lei de Acesso à Informação (Lei 12.527/2011; LAI), que é aplicada "aos órgãos públicos integrantes da administração direta dos Poderes Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério Público", bem como "as autarquias, as fundações públicas, as empresas públicas, as sociedades de economia mista e demais entidades controladas direta ou indiretamente pela União, Estados, Distrito Federal e Municípios" (Art. 1º). 
+
+A LAI, apesar de trazer diversos benefícios à sociedade, tem dois problemas. A primeira é o __esforço__: tanto a pessoa/órgão que solicita os dados, quanto o órgão que retorna os dados precisam trabalhar para disponibilizar as informações, sendo necessário deslocar equipes para realizar os levantamentos pedidos. A segunda é o __formato__: os dados enviados como resultado de pedidos de LAI podem chegar em formatos inadequados para consumo da solicitante, muitas vezes em *Portable Document Format* (PDF), que dificulta a leitura e análise dos dados (XXX); além disso, como o levantamento é realizado de forma individualizada, o mesmo pedido feito em diferentes períodos (e.g. uma atualização mensal dos dados) pode vir em formatos diferentes, dificultando a leitura e arrumação dos dados.
+
+Uma forma de evitar os problemas de esforço e formato em pedidos de LAI é disponibilizar os dados de **forma aberta**. Como definido pela *Open Knowledge Foundation* (OKFN), a base de dados "deve ser fornecida em uma forma conveniente e modificável isento de obstáculos tecnológicos desnecessários para a realização dos direitos licenciados. Especificamente, os dados devem ser legíveis-por-máquina, disponíveis todo o seu volume, e fornecidos em um formato aberto (ou seja, um formato com sua especificação livremente disponível, e publicada sem qualquer restrições, monetárias ou não, da sua utilização) ou, no mínimo, podem ser processados com pelo menos uma ferramenta de software livre e gratuita."
+
+As vantagens ao disponibilizar dados públicos de forma aberta para a sociedade é um tema pacífico na comunidade científica (XXX). Infelizmente, existem diversos dados públicos que não estão disponíveis de forma aberta, em plataformas como o [dados.gov.br](https://dados.gov.br). 
+
+A dificuldade de acesso é particularmente evidente no Poder Judiciário, que além de não disponibilizar um portal de dados abertos, impõe barreiras aos pedidos de acesso à informação por utilizar diversos sistemas para armazenar os dados. Por exemplo, para pedir uma lista de todos os processos judiciais relacionados a recuperação judicial de empresas, as únicas alternativas são i) pedir os dados ao Conselho Nacional de Justiça (CNJ), que não possui informações suficientes para obter a lista (XXX) ou ii) expedir ofícios aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções e critérios de acesso aos dados, diferentes prazos para atendimento e diferentes formatos, podendo, inclusive, negar o pedido de acesso. 
+
+A dificuldade para acessar os dados do judiciário é a principal barreira para realização de pesquisas pela Associação Brasileira de Jurimetria (ABJ), empresa na qual o autor desta tese trabalha. A entidade tem como missão principal a realização de estudos para implementar políticas públicas utilizando dados do judiciário.
+
+Dos 16 projetos disponibilizados na [página de pesquisas no site da ABJ](https://abj.org.br/pesquisas/), pelo menos 12 (75%) apresentaram dificuldades na obtenção dos dados via pedidos de acesso aos órgãos. Três exemplos icônicos são o da pesquisa sobre Tempo dos processos relacionados à adoção no Brasil (XXX), o Observatório da Insolvência: Rio de Janeiro (XXX) e o Diagnóstico do Contencioso Tributário Administrativo (XXX). No primeiro caso, dois tribunais enviaram os dados em arquivos em papel, sendo que um deles ultrapassou mil páginas com números de processos impressos. No segundo caso, o pedido foi respondido com uma planilha de contagens ao invés da lista de processos. No último caso, até mesmo órgãos que faziam parte do grupo de trabalho da pesquisa negaram pedido de acesso a dados de processos tributários em primeira instância, com argumentos que variavam desde a dificuldade técnica de levantar os dados até a Lei Geral de Proteção de Dados (LGPD).
+
+Em muitas situações, portanto, a única alternativa para realizar as pesquisas é acessando os dados via coleta automatizada nos sites. Todos os tribunais possuem ferramentas de consulta individualizadas de processos, por conta do que está previsto na CF. A solução, portanto, passa a ser construir uma ferramenta que obtém todos os dados automaticamente. Tal conceito é conhecido como *raspagem de dados* (XXX) e será desenvolvido com maiores detalhes no Capítulo @sec-metodologia.
+
+Os Captchas se tornam prejudiciais à sociedade quando o acesso automatizado é necessário para realizar pesquisas científicas. Infelizmente, XX dos 91 tribunais utilizam a barreira do Captcha. Alguns tribunais, inclusive, têm o entendimento de que o acesso automatizado é prejudicial, como o TJRS, que emitiu um [comunicado](https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/) sobre o tema.
+
+Uma justificativa comum para implementar Captchas em consultas públicas é a estabilidade dos sistemas. Ao realizar muitas consultas de forma automática, um robô pode tornar o sistema instável e, em algumas situações, até mesmo derrubar o servidor que disponibiliza as consultas.
+
+O problema é que utilizar Captchas não impede o acesso automatizado. As empresas que fazem acesso automatizado em tribunais podem construir ferramentas ou utilizar serviços externos de resolução de Captchas. Ou seja, ao utilizar Captchas, o acesso não é impedido, e sim especializado.
+
+Além disso, utilizar Captchas é uma solução ineficiente. Do ponto de vista técnico, a solução mais eficiente para disponibilizar os dados é através de ferramentas de dados abertos como o *Comprehensive Knowledge Archive Network* (CKAN). Ao disponibilizar os dados de forma aberta, as consultas automatizadas ficariam isoladas dos sites de consulta pública, o que garantiria o acesso das pessoas sem problemas de indisponibilidade.
+
+Não é só para as pessoas que fazem pesquisa com dados públicos que o uso de Captchas pode ser prejudicial. No mercado, existem serviços de resolução de Captcha que utilizam mão de obra humana, em regimes que pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um exemplo é o [2Captcha](https://2captcha.com/make-money-online), que funciona como um Uber dos Captchas: o algoritmo automatizado envia o Captcha para a plataforma, que é acessado e resolvido por uma pessoa, retornando a solução para o algoritmo.
+
+Segundo o site, o valor pago pelo 2Captcha é de US$ 0.5 para 1 a 2 horas de trabalho. No regime da Consolidação das Leis do Trabalho (Decreto-Lei 5.452/1943, CLT) as horas mensais de trabalho são 220. Trabalhando continuamente no 2Captcha, isso daria um salário de 55 a 110 dólares por mês, valor bem abaixo do salário mínimo, que no ano de 2022 era de R\$ 1.100,00 (XXX). Ou seja, os serviços públicos acabam, indiretamente, incentivando um mercado que paga abaixo do salário mínimo.
+
+A solução definitiva para os problemas gerado pelos Captchas é a disponibilização dos dados públicos de forma aberta. Na ausência dessa solução, seja por falta de interesse ou iniciativa dos órgãos públicos, a alternativa é desenvolver uma solução para resolver Captchas que seja gratuita e aberta. Tal solução desincentivaria economicamente o uso de sistemas como o 2Captcha, protegendo as pessoas que fazem as resoluções e permitindo que as pessoas pesquisadoras realizem seus levantamentos.
+
+O presente trabalho busca avançar nesse sentido. A solução desenvolvida envolve um modelo que resolve alguns Captchas automaticamente, reduzindo significativamente a necessidade de rotulação manual.
+
+Para compreender completamente o avanço que a tese representa, no entanto, é necessário apresentar o histórico de desenvolvimento dos Captchas. O histórico é apresentado na próxima Seção, através da luta de geradores e resolvedores de Captchas, que pode ser dada como encerrada no ano de 2018, com o advento do *reCaptcha v3*.
+
+### Uma luta de geradores e resolvedores
+
+> contar a história dos captchas como uma luta de classes: geradores e classificadores
+
+> na história, ir citando os papers que vão aparecendo
+
+> o advento do recaptcha
+
+> quando surgir o primeiro classificador com convnets, definir de forma mais detalhada
+
+Quem venceu a luta de geradores e resolvedores? Na verdade, nenhuma das duas (XXX). O que ocorreu com o reCaptcha v3 e seus sucessores foi, no fundo, uma mudança de perspectiva: o Captcha deixou de ser um sistema __passivo__ e passou a ser um sistema __ativo__ de verificação. Ao invés de criar uma tarefa difícil de resolver por robôs e fácil de resolver por pessoas, os sistemas criaram uma camada de verificação da sessão de acesso do usuário, incluindo análises do navegador, dos *cookies* e dos padrões de cliques. Antes mesmo de chegar no desafio do Captcha, portanto, o algoritmo de acesso precisa enganar os verificadores. Essa tarefa é muito mais parecida com um problema de *cyberataque* do que uma tarefa de inteligência artificial (XXX). 
+
+A luta continua, mas não é mais entre geradores e resolvedores. 
+
+De qualquer forma, os Captchas baseados textos em imagens continuam sendo os mais populares. Isso é especialmente evidente nos serviços públicos que são objeto da presente pesquisa, já que os serviços raramente são atualizados com ferramentas mais recentes. Ainda não foi encontrado um resolvedor geral para imagens e também não existem desafios comprovadamente impossíveis de resolver por inteligência artificial.
+
+A investigação foco da tese será na busca de um resolvedor universal de Captchas de textos em imagens. O objetivo será atingido de forma parcial, explorando o potencial de uso do __oráculo__, apresentado na próxima seção.
+
+### Oráculo
+
+Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado, são muito sensíveis a perturbações pequenas nas imagens (XXX). Por isso, se o site de um tribunal, por exemplo, mudar o Captcha utilizado, seria necessário baixar e anotar uma nova base de dados para treinar o modelo. Os avanços em técnicas de regularização fazem com que o modelo seja menos afetado por mudanças nos desafios gerados. Uma técnica de regularização que ajuda na capacidade de generalização é a aumentação de dados com adição de ruídos (XXX). No entanto, nenhuma técnica garante que o modelo terá excelentes resultados em novos desafios.
+
+Outra alternativa é desenvolver modelos que aprendem com poucos dados anotados. Avanços recentes indicam que modelos generativos adversariais (GAN) e modelos relacionados podem apresentar bons resultados na resolução de tarefas de imagens, mesmo com uma base de dados anotada pequena (XXX). Nesse sentido, ainda que um site mude seu Captcha, é possível ajustar um modelo que resolve esse Captcha sem a necessidade de anotar muitos exemplos para construir uma nova base de treino. 
+
+Nessa tese, apresenta-se uma nova técnica para resolver Captchas com poucos dados anotados. A técnica consiste em aproveitar o fato de que o Captcha aplica um teste de Turing reverso para gerar bases de dados automaticamente. Ou seja, a técnica resolve o problema não com modelos mais sofisticados, mas com a utilização eficiente dos recursos disponíveis. Essa é a técnica do oráculo.
+
+Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado está correto. Eles estão disponíveis em todos os sites, já que, por definição, o Captcha precisa apresentar o resultado do teste para o usuário. O nome "oráculo" vem do fato de que o site já possui a informação correta, como um deus. O site, no entanto, se comunica com o usuário através de um intermediário (o oráculo) que apresenta a resposta de forma limitada. 
+
+Oráculos se manifestam de diversas formas nos sites com Captchas. Por exemplo, pode dar a possibilidade de realizar apenas um teste por imagem, vários testes por imagem, ou ainda retornar informações ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode retornar com um "bom o suficiente" quando o rótulo não está totalmente correto (XXX).
+
+O oráculo é uma forma de obter uma base virtualmente infinita. Do ponto de vista de modelagem, é similar a um problema de aprendizado por reforço (XXX), mas com uma resposta limitada (acertou ou errou).
+
+A técnica consiste em utilizar um modelo inicial, possivelmente fraco. Em seguida, o site é acessado múltiplas vezes, gerando uma nova base de dados virtualmente infinita, que é completamente anotada nos casos de acerto e que apresenta o histórico de erros no caso de erro. O modelo inicial poderia ser ajustado com as técnicas usuais de modelagem, ou utilizando um modelo mais sofisticado como GAN. 
+
+Utilizar somente os casos classificados corretamente, obtidos dos acertos no teste do oráculo, induz viés de seleção na amostra (XXX). Como o modelo só tem acesso aos casos em que já funciona bem, a informação obtida não é tão relevante. O desafio de modelagem da tese reside em como considerar a informação fornecida pelo oráculo nos casos em que o modelo inicial erra.
+
+Do ponto de vista estatístico, a informação produzida pelo oráculo pode ser entendida como uma informação censurada (XXX). Isso acontece pois a informação existe e é correta, mas não está completa. No entanto, como a informação é resultado do teste de um rótulo produzido por um modelo, faz sentido afirmar que a censura não é gerada por acaso (XXX).
+
+Na área de aprendizado de máquinas (XXX), um modelo apresenta resposta censurada ou incompleta é colocado na classe de problemas do aprendizado fracamente supervisionado (XXX). Trata-se de uma área ainda pouco investigada estudada na literatura (XXX) e bastante ampla, englobando não só os métodos supervisionados (XXX) como também os métodos semi-supervisionados (XXX). A tese apresentará os conceitos de aprendizado fracamente supervisionado, com foco na classe de problemas que a modelagem utilizando Captchas representa.
+
+Para criar uma base de dados usando o oráculo, é necessário utilizar técnicas de raspagem de dados, imitando repetidamente o que um usuário faria para acessar o site. Por isso, a raspagem de dados se torna fundamental para a construção do modelo, tornando-se um dos objetivos da pesquisa.
+
+## Objetivos {#objetivos}
+
+O objetivo geral da tese é desenvolver uma solução inovadora, chamada WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de aprendizado profundo com raspagem de dados.
+
+Especificamente, a pesquisa tem como objetivos:
+
+1. Descrever o modelo proposto e estudar suas propriedades.
+2. Construir e disponibilizar um repositório de dados para realização de mais pesquisas no ramo.
+3. Ajustar e testar a eficácia do modelo proposto.
+4. Disponibilizar um pacote computacional aberto, possibilitando a resolução de Captchas presentes em serviços públicos.
+
+## Justificativa
+
+O presente trabalho é relevante para a ciência por conta de sua importância prática, importância teórica e viabilidade técnica. Os pontos são explicados abaixo.
+
+Captchas em serviços públicos causam desequilíbrio de mercado e incentivam o uso de serviços com formas de remuneração duvidosas. O objetivo 4 vai de encontro direto com esse problema, disponibilizando uma ferramenta gratuita e aberta para resolução de Captchas que, pelo menos até a escrita da tese, pode ser utilizada em dezenas de serviços públicos.
+
+Do ponto de vista teórico, a tese é importante por apresentar uma aplicação muito elegante do aprendizado fracamente supervisionado. No caso do Captcha, como a base de dados fracamente supervisionada é virtualmente infinita, trata-se de uma excelente oportunidade para testar novas técnicas e como elas se comportam empiricamente. Os objetivos 1 e 2 estão relacionadas a essa justificativa.
+
+Finalmente, com relação à viabilidade técnica, o trabalho parte de uma lista de Captchas que já foram resolvidos utilizando aprendizado profundo. Como os Captchas já estão resolvidos, mesmo que a WAWL não apresentasse bons resultados -- e apresenta -- o projeto ainda teria como subprodutos as bases de dados e o pacote computacional disponibilizados abertamente. O objetivo 3 é o que torna a proposta tecnicamente viável.
+
+## Hipóteses
+
+<!-- REVISAR DEPOIS DE TERMINAR O PROJETO -->
+
+O projeto foi desenvolvido em torno de duas hipóteses principais. Tais hipóteses são oriundas tanto do levantamento bibliográfico realizado para desenvolver a pesquisa, quanto da experiência pessoal do autor em projetos de pesquisa aplicados.
+
+1. A utilização de aprendizado fracamente supervisionado com oráculo permite a criação de modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.
+    a. Sub-hipótese: É possível criar um modelo genérico que funciona bem e se adapta com o uso do oráculo.
+    a. Sub-hipótese: Com a teoria de aprendizado fracamente supervisionado, é possível demonstrar que modelos criados dessa forma apresentam desempenho análogo ao que seria obtido com bases totalmente supervisionadas.
+
+1. É possível aliar a área de raspagem de dados com a área de modelagem estatística
+    a. Sub-hipótese: O uso de raspagem de dados como passo intermediário do processo de modelagem apresenta resultados positivos no poder preditivo dos Captchas.
+    a. Sub-hipótese: É possível criar um modelo com aprendizado ativo, que melhora continuamente conforme é utilizado nos sites.
+
+## Organização do trabalho
+
+O segundo capítulo, "metodologia" contém todos os passos dados para construção da tese, tanto do ponto de vista teórico como prático. Parte-se da definição técnica dos Captchas, chegando até as redes neurais e a classe problema trabalhada de forma ampla. Em seguida, apresenta-se o método WAWL e suas características. Depois, a base de dados é descrita, mostrando as fontes de dados consideradas e as técnicas de raspagem de dados utilizadas. Por último, descreve-se, com detalhes, as simulações realizadas para obtenção dos resultados empíricos.
+
+O terceiro capítulo, "resultados", apresenta os resultados da pesquisa. Do ponto de vista teórico, são apresentadas as demonstrações das propriedades do modelo. Do ponto de vista empírico, são apresentados os resultados das simulações e outros experimentos realizados com a técnica WAWL.
+
+No quarto e último capítulo, "conclusion", a pesquisa é concluída, com apresentação das considerações finais e próximos passos. Também foi incluído um apêndice descrevendo e documentando o pacote `{captcha}`, criado atingir o objetivo 4 da pesquisa.
+
+
+

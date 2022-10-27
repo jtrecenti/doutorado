@@ -1,0 +1,49 @@
+project:
+  type: book
+  output-dir: "../../docs"
+
+book:
+  title: "Captchas"
+  author: "Julio Trecenti"
+  date: "2022-10-30"
+  chapters:
+    - index.qmd
+    - introducao.qmd
+    - metodologia.qmd
+    - resultados.qmd
+    - conclusoes.qmd
+  appendices:
+    - pacote.qmd
+  downloads: [pdf]
+  page-navigation: true
+  navbar:
+    search: true
+    right:
+      - icon: github
+        href: https://github.com/jtrecenti/doutorado
+        aria-label: GitHub
+
+number-depth: 1
+
+bibliography: [assets/bib/book.bib]
+
+format:
+  html:
+    code-fold: true
+  pdf:
+    keep-tex: true
+    template: assets/tex/template.tex
+
+lang: pt
+
+execute:
+  echo: false
+  warning: false
+
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    out.width: \linewidth
+    R.options:
+      knitr.graphics.auto_pdf: true

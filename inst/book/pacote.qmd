@@ -1,5 +1,3 @@
-# (APPENDIX) Apêndice {-} 
-
 # Pacote {captcha}
 
 > Citar versão anterior {decryptr}
