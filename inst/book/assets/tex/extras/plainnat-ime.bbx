@@ -1,0 +1,208 @@
+% Author: Nelson Lago
+% This file is derived from files in the BibLaTeX distribution
+% and, therefore, is distributed under the LPPL
+
+\ProvidesFile{plainnat-ime.bbx}
+[2021/02/04 v1.1 plainnat-like bibliographies by IME/USP]
+
+% Vamos usar um formato similar a alphabetic, mas mudamos o label; ao
+% invés de alpha, inserimos o \cite de authoryear.cbx como label.
+% Também não vamos fazer uma margem do tamanho do maior label, como
+% alphabetic faz, porque os labels aqui são muito grandes. Vamos usar
+% apenas "hanging indent" na primeira linha.
+
+\RequireBibliographyStyle{alphabetic}
+\RequirePackage{regexpatch}
+
+% alphabetic usa anyt
+\ExecuteBibliographyOptions{sorting=nyt}
+
+% Com mais de 5 nomes, usa "et al."
+\ExecuteBibliographyOptions{maxbibnames=5}
+
+% Vamos deixar um pequeno espaço entre cada item da bibliografia
+\setlength{\bibitemsep}{1em}
+
+% Para mudar o tamanho da fonte na bibliografia:
+%\renewcommand*{\bibfont}{\footnotesize}
+
+% Se quisermos fazer o "citado na pg. X" em fonte menor, modificamos
+% o comando definido em biblatex.def
+%\xpretobibmacro{pageref}{\scriptsize}{}{}
+%\xpretobibmacro{setpageref}{\scriptsize}{}{}
+
+% Sobrenomes na bibliografia (e nas citações) em Small Caps
+\renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
+
+% Autores no formato "nome sobrenome"
+\DeclareNameAlias{sortname}{given-family}
+\DeclareNameAlias{default}{given-family}
+
+% Autores no formato "sobrenome, nome"
+%\DeclareNameAlias{sortname}{family-given}
+%\DeclareNameAlias{default}{family-given}
+
+\DefineBibliographyStrings{brazilian}{
+  % Na bibliografia, criamos links para as páginas onde uma
+  % determinada obra foi citada. O texto padrão para indicar
+  % isso é "ver...", vamos trocar.
+  backrefpage  = {citado na pg\adddot},
+  backrefpages = {citado nas pgs\adddot},
+  page         = {pg\adddot},
+  pages        = {pgs\adddot},
+}
+
+% Por padrão, os labels na bibliografia não têm nada de
+% especial (além do que for definido, por exemplo, com
+% \mkbibnamefamily). O usuário pode redefinir este comando
+% para fazer, por exemplo, negrito.
+\providecommand*{\labelhighlight}[1]{#1}
+
+% A primeira linha de cada item da bibliografia pode ter margem menor
+% que as demais; aqui definimos essa diferença:
+\setlength{\bibhang}{2em}
+
+% No estilo alfabético, biblatex coloca o "label" de cada item
+% alinhado à esquerda; com os labels longos que estamos usando,
+% faz mais sentido alinhar à direita.
+\renewcommand*{\makelabel}[1]{\hss#1}
+
+\newcommand{\disablelinksinlabels}{
+  % No texto, se estamos usando o pacote hyperref, o label é um
+  % link para o item na bibliografia. Usando o label na própria
+  % bibliografia, não faz sentido criar esse link. Por conta disso,
+  % precisamos redefinir as macros de authoryear.cbx que incluem
+  % o comando "bibhyperref" removendo esse comando.
+
+  \xpatchbibmacro*{cite:label}
+    {[bibhyperref]}{}{}{}
+
+  \xpatchbibmacro*{cite:shorthand}
+    {[bibhyperref]}{}{}{}
+
+  \xpatchbibmacro*{cite:labeldate+extradate}
+    {[bibhyperref]}{}{}{}
+
+  \xpatchbibmacro*{cite:labelyear+extrayear}
+    {[bibhyperref]}{}{}{}
+
+  \xpatchbibmacro*{cite}
+    {[bibhyperref]}{}{}{}
+}
+
+% Baseado em alphabetic.bbx
+\defbibenvironment{bibliography}
+  {\disablelinksinlabels
+  \list
+      {\printtext{%
+        \mkbibbrackets{%
+          \labelhighlight{%
+              % Gera os labels da bibliografia com o mesmo número de autores
+              % antes de "et al." que quando da geração dos labels no texto.
+              % Note o escopo restrito.
+              {\c@maxnames\blx@maxcitenames\relax
+              \c@minnames\blx@mincitenames\relax
+              \usebibmacro{cite}}}}}}
+      {\setlength{\labelwidth}{\bibhang}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+  }
+  {\endlist}
+  {\item}
+
+
+% bibtex assume que os títulos no arquivo .bib seguem o formato "title case",
+% ou seja, "A Maioria das Palavras É Iniciada por Maiúsculas". Se o estilo
+% bibliográfico usa esse formato, o título é impresso sem mudanças; se o
+% estilo bibliográfico não usa esse formato, bibtex transforma o título
+% em caixa baixa.
+%
+% biblatex permite controlar esse processo, definindo um FieldFormat
+% chamado titlecase que armazena uma macro que altera a caixa do
+% título. A macro registrada por padrão é \MakeSentenceCase, que modifica
+% todas as palavras do título exceto a primeira para caixa baixa. Essa
+% macro, no entanto, apenas modifica o título se a língua atual corresponder
+% a uma das línguas para as quais esse comportamento é desejado. biblatex
+% ativa a macro para a língua inglesa; para ativar esse mecanismo para a
+% língua portuguesa. AtBeginBibliography serve para contornar este bug:
+% https://github.com/plk/biblatex/issues/1090
+% TODO: o bug acima foi corrigido em jan/2021, portanto podemos remover
+% AtBeginBibliography daqui em 2023 ou 2024.
+\AtBeginBibliography{
+  \DeclareCaseLangs*{brazilian,brazil,portuges,portuguese}
+}
+
+% Mais abaixo, definimos uma outra macro, \NoChangeOrSentenceCase, que
+% mantém maiúsculas/minúsculas como no arquivo .bib, exceto para artigos
+% ou capítulos de livro. Essa é uma convenção relativamente comum, embora
+% um tanto anacrônica: ela fazia sentido quando a capitalização era o único
+% mecanismo de destacar o título do documento. Essa macro utiliza
+% \MakeSentenceCase, então ela também é afetada por \DeclareCaseLangs.
+%
+% Assim, há três opções de processamento:
+%
+% 1. Não faz nada, apenas reproduz o que está no arquivo .bib:
+%\DeclareFieldFormat{titlecase}{#1}
+%
+% 2. Transforma todos os títulos em caixa baixa, que é o usual em português.
+% Esse é o default de biblatex, que por padrão afeta apenas o inglês:
+%\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
+%
+% 4. Transforma apenas os títulos de artigos ou capítulos de livros em
+% caixa baixa:
+\DeclareFieldFormat{titlecase}{\NoChangeOrSentenceCase{#1}}
+
+% Esta macro implementa o mecanismo descrito acima
+% https://tex.stackexchange.com/q/22980
+\newrobustcmd{\NoChangeOrSentenceCase}[1]{%
+  \ifboolexpr{
+       test {\ifcurrentfield{booktitle}}
+    or test {\ifcurrentfield{booksubtitle}}
+    or test {\ifcurrentfield{maintitle}}
+    or test {\ifcurrentfield{mainsubtitle}}
+    or test {\ifcurrentfield{journaltitle}}
+    or test {\ifcurrentfield{journalsubtitle}}
+    or test {\ifcurrentfield{issuetitle}}
+    or test {\ifcurrentfield{issuesubtitle}}
+    or test {\ifentrytype{book}}
+    or test {\ifentrytype{mvbook}}
+    or test {\ifentrytype{bookinbook}}
+    or test {\ifentrytype{booklet}}
+    or test {\ifentrytype{suppbook}}
+    or test {\ifentrytype{collection}}
+    or test {\ifentrytype{mvcollection}}
+    or test {\ifentrytype{suppcollection}}
+    or test {\ifentrytype{manual}}
+    or test {\ifentrytype{periodical}}
+    or test {\ifentrytype{suppperiodical}}
+    or test {\ifentrytype{proceedings}}
+    or test {\ifentrytype{mvproceedings}}
+    or test {\ifentrytype{reference}}
+    or test {\ifentrytype{mvreference}}
+    or test {\ifentrytype{report}}
+    or test {\ifentrytype{thesis}}
+    or test {\ifentrytype{online}}
+    or test {\ifentrytype{misc}}
+    }
+    {#1}
+    {\MakeSentenceCase*{#1}}}
+
+
+% "et al." em itálico, conforme
+% https://github.com/plk/biblatex/issues/899#issuecomment-502967208
+
+\providecommand*{\mkbibetal}[1]{\mkbibitalic{#1}}
+
+\renewbibmacro*{name:andothers}{%
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {\ifnumgreater{\value{liststop}}{1}
+       {\finalandcomma}
+       {}%
+     \printdelim{andothersdelim}\bibstring[\mkbibetal]{andothers}}
+    {}}

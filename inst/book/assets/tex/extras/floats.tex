@@ -1,0 +1,300 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FIGURAS / FLOATS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% LaTeX escolhe automaticamente o "melhor" lugar para colocar cada float.
+% Por padrão, ele tenta colocá-los no topo da página e depois no pé da
+% página; se não tiver sucesso, vai para a página seguinte e recomeça.
+% Se esse algoritmo não tiver sucesso "logo", LaTeX cria uma página só
+% com floats. É possível modificar esse comportamento com as opções de
+% posicionamento: "tp", por exemplo, instrui LaTeX a considerar apenas
+% o topo da página ou uma página só de floats (ignorando o pé da página),
+% e "htbp" o instrui para tentar "aqui" como a primeira opção. A ordem
+% dessas opções não é relevante: dentre as opções disponíveis, LaTeX
+% sempre tenta "aqui, topo, pé, página". Os pacotes "float" e "floatrow"
+% acrescentam a opção "H", que significa "aqui, incondicionalmente".
+%
+% A escolha do "melhor" lugar leva em conta os parâmetros abaixo, mas é
+% possível ignorá-los com a opção de posicionamento "!". Dado que os
+% valores default não são muito bons para floats "grandes" ou documentos
+% com muitos floats, é muito comum usar "!" ou "H". No entanto, modificando
+% estes parâmetros o algoritmo automático tende a funcionar melhor. Ainda
+% assim, vale ler a discussão a respeito na seção "Limitações do LaTeX"
+% deste modelo.
+
+% Fração da página que pode ser ocupada por floats no topo. Default: 0.7
+% \renewcommand{\topfraction}{.8}
+% Idem para documentos em colunas e floats que tomam as 2 colunas. Default: 0.7
+%\renewcommand{\dbltopfraction}{.7}
+% Fração da página que pode ser ocupada por floats no pé. Default: 0.3
+%\renewcommand{\bottomfraction}{.3}
+% Fração mínima da página que deve conter texto. Default: 0.2
+%\renewcommand{\textfraction}{.2}
+% Numa página só de floats, fração mínima que deve ser ocupada. Default: 0.5
+% floatpagefraction *deve* ser menor que topfraction.
+\renewcommand{\floatpagefraction}{.66}
+% Idem para documentos em colunas e floats que tomam as 2 colunas. Default: 0.5
+\renewcommand{\dblfloatpagefraction}{.66}
+% Máximo de floats no topo da página. Default: 2
+\setcounter{topnumber}{3}
+% Idem para documentos em colunas e floats que tomam as 2 colunas. Default: 2
+%\setcounter{dbltopnumber}{2}
+% Máximo de floats no pé da página. Default: 1
+\setcounter{bottomnumber}{2}
+% Máximo de floats por página. Default: 3
+\setcounter{totalnumber}{5}
+
+% A package float é amplamente utilizada; ela permite definir novos tipos
+% de float e também acrescenta a possibilidade de definir "H" como opção de
+% posicionamento do float, que significa "aqui, incondicionalmente". No
+% entanto, ela tem algumas fragilidades e não é atualizada desde 2001.
+% floatrow é uma versão aprimorada e com mais recursos da package "float",
+% mas também não é atualizada desde 2009. Aqui utilizamos alguns recursos
+% disponibilizados por ambas e é possível escolher qual delas utilizar.
+% Um dos principais recursos dessas packages é permitir a criação de novos
+% tipos de float; veja o arquivo source-code.tex para um exemplo.
+%\usepackage{float}
+\usepackage{floatrow}
+
+% Por padrão, LaTeX prefere colocar floats no topo da página que
+% onde eles foram definidos; vamos mudar isso. Este comando depende
+% do pacote "floatrow", carregado logo acima.
+\floatplacement{table}{htbp}
+\floatplacement{figure}{htbp}
+
+% Em alguns casos, um float pode aparecer antes do local do texto em que
+% foi definido (ou seja, no topo da página ao invés do meio da página).
+% Esta package garante que floats (tabelas e figuras) só apareçam após
+% o local no texto em que foram definidos; veja os detalhes em
+% https://tex.stackexchange.com/a/297580 . Note que, se o float tem a
+% opção "h", normalmente LaTeX *não* coloca o float no topo da página
+% atual: se o float não pode ser colocado "here", ele é delegado para
+% a página seguinte.
+\usepackage{flafter}
+
+% Às vezes um float pode ser adiado por muitas páginas; é possível forçar
+% LaTeX a imprimir todos os floats pendentes com o comando \clearpage mas,
+% para isso, o usuário deve identificar os casos problemáticos e inserir
+% \clearpage manualmente. Esta package acrescenta o comando \FloatBarrier,
+% que executa \clearpage apenas se necessário no local em que é chamado.
+% "above" e "below" desabilitam a barreira quando os floats estão na mesma
+% página. A desvantagem de placeins é que, para funcionar, ela gera quebras
+% de página que muitas vezes são inesperadas.
+\usepackage[above,below]{placeins}
+
+% Em documentos com duas colunas, floats normalmente são colocados como
+% parte de uma das colunas. No entanto, é possível usar "\begin{figure*}"
+% ou "\begin{table*}" para criar floats que ocupam as duas colunas. Floats
+% "duplos" desse tipo têm algumas limitações:
+%
+% 1. Mesmo que haja espaço disponível na página atual, eles são sempre
+%    inseridos na página seguinte ao lugar em que foram definidos (então
+%    é comum defini-los antes do lugar "certo" para compensar isso)
+%
+% 2. Eles só podem aparecer no topo da página ou em uma página de floats,
+%    ou seja, nunca "here" nem no pé da página.
+%
+% 3. Em alguns casos, eles podem aparecer fora da ordem em relação aos
+%    demais floats do mesmo tipo (o que não acontece com floats "normais")
+%
+% Esta package:
+%
+% 1. Soluciona parcialmente o primeiro problema: floats "duplos" podem
+%    aparecer na página em que são definidos se sua definição está contida
+%    no texto da coluna da esquerda;
+%
+% 2. Soluciona o segundo problema: floats "duplos" podem aparecer tanto no
+%    topo quanto no pé da página. Observe que eles *não* podem aparecer
+%    "here" porque isso não faz sentido: a figura interromperia o fluxo
+%    do texto da "outra" coluna (ainda assim, as packages midfloat e cuted
+%    permitem fazer isso).
+%
+% 3. Soluciona o terceiro problema.
+\usepackage{stfloats}
+
+% Às vezes é interessante utilizar uma imagem mais larga que o texto.
+% Por padrão, \centering *não* vai centralizar a imagem corretamente
+% nesse caso. Com esta package, podemos acrescentar a opção "center"
+% ao comando \includegraphics para resolver esse problema
+% (ou seja, \includegraphics[width=1.2\textwidth,center]{imagem}.
+% A package tem muitos outros recursos também
+\usepackage[export]{adjustbox}
+
+% Define o ambiente "\begin{landscape} -- \end{landscape}"; o texto entre
+% esses comandos é impresso em modo paisagem, podendo se estender por várias
+% páginas. A rotação não inclui os cabeçalhos e rodapés das páginas.
+% O principal uso desta package é em conjunto com a package longtable: se
+% você precisa mostrar uma tabela muito larga (que precisa ser impressa em
+% modo paisagem) e longa (que se estende por várias páginas), use
+% "\begin{landscape}" e "\begin{longtable}" em conjunto. Note que o modo
+% landscape entra em ação imediatamente, ou seja, "\begin{landscape}" gera
+% uma quebra de página no local em que é chamado. Na maioria dos casos, o
+% que se quer não é isso, mas sim um "float paisagem"; isso é o que a
+% package rotating oferece (veja abaixo).
+\usepackage{pdflscape}
+
+% Define dois novos tipos de float: sidewaystable e sidewaysfigure, que
+% imprimem a figura ou tabela sozinha em uma página em modo paisagem. Além
+% disso, permite girar elementos na página de diversas outras maneiras.
+\usepackage[figuresright,clockwise]{rotating}
+
+% Captions com fonte menor, indentação normal, corpo do texto
+% negrito e nome do caption itálico
+\usepackage[
+  font=small,
+  format=plain,
+  labelfont=bf,up,
+  textfont=it,up]{caption}
+
+% Em geral, a package caption é capaz de "adivinhar" se o caption
+% está acima ou abaixo da figura/tabela, mas isso não funciona
+% corretamente com longtable. Aqui, forçamos a package a considerar
+% que os captions ficam abaixo das tabelas.
+\captionsetup*[longtable]{position=bottom}
+
+% Sub-figuras (e seus captions) - observe que existe uma package chamada
+% "subfigure", mas ela é obsoleta; use esta no seu lugar.
+\usepackage{subcaption}
+
+% Permite criar imagens com texto ao redor
+%\usepackage{wrapfig}
+% Esta é similar, mas me parece uma opção melhor:
+%\usepackage{cutwin}
+
+% Permite incorporar um arquivo PDF como uma página adicional. Útil se
+% for necessário importar uma imagem ou tabela muito grande ou ainda
+% para definir uma capa personalizada.
+\usepackage{pdfpages}
+
+% Permite importar figuras. LaTeX "tradicional" só é capaz de trabalhar com
+% figuras EPS; hoje em dia não há nenhuma boa razão para usar essa versão.
+% Já pdfTeX, XeTeX e LuaTeX podem usar figuras nos formatos PDF, JPG e PNG.
+% Em algumas instalações, essas versões conseguem converter automaticamente
+% arquivos EPS para PDF, mas não isso é garantido, então é melhor evitar o
+% formato EPS.
+\usepackage{graphicx}
+
+% Caixas de texto coloridas
+%\usepackage{tcolorbox}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TABELAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Tabelas simples são fáceis de fazer em LaTeX; tabelas com alguma sofisticação
+% são trabalhosas, pois é difícil controlar alinhamento, largura das colunas,
+% distância entre células etc. Ou seja, é muito comum que a tabela final fique
+% "torta". Por isso, em muitos casos, vale mais a pena gerar a tabela em uma
+% planilha, como LibreOffice calc ou excel, transformar em PDF e importar como
+% figura, especialmente se você quer controlar largura/altura das células
+% manualmente etc. No entanto, se você quiser fazer as tabelas em LaTeX para
+% garantir a consistência com o tipo e o tamanho das fontes, é possível e o
+% resultado é muito bom. Aqui há alguns pacotes que incrementam os recursos de
+% tabelas do LaTeX e alguns comandos pré-prontos que podem facilitar um pouco
+% seu uso.
+
+% LaTeX por padrão não permite notas de rodapé dentro de tabelas. De maneira
+% geral, notas de rodapé em tabelas são consideradas "ruins" em termos de
+% tipografia, mas às vezes são necessárias. Se esse é o caso, o recomendado
+% é que as notas de rodapé apareçam no "rodapé" da tabela, com numeração
+% própria, e não no rodapé da página. Você pode fazer isso com esta package:
+\usepackage{threeparttable}
+% Formatação personalizada das notas de threeparttable:
+\appto{\TPTnoteSettings}{\footnotesize\itshape}
+\def\TPTtagStyle{\textit}
+% Outra opção é a package ctable, que ainda oferece vários outros
+% recursos mas usa uma sintaxe diferente.
+%\usepackage{ctable}
+
+% Se você realmente quer notas de rodapé em tabelas que aparecem como as
+% demais notas de rodapé (no final da página e mantendo a sequência numérica),
+% você pode usar a package abaixo. No entanto, ela não funciona com floats
+% duplos (floats que ocupam toda a largura da página em um documento de duas
+% colunas) e, em alguns casos, a nota pode desaparecer ou aparecer em uma
+% página diferente da tabela (mova o lugar do texto em que ela é definida
+% para resolver esse problema).
+\usepackage{tablefootnote}
+
+% Por padrão, cada coluna de uma tabela tem a largura do maior texto contido
+% nela, ou seja, se uma coluna contém uma célula muito larga, LaTeX não
+% força nenhuma quebra de linha e a tabela "estoura" a largura do papel. A
+% solução simples, nesses casos, é inserir uma ou mais quebras de linha
+% manualmente, o que além de deselegante não é totalmente trivial (é preciso
+% usar \makecell).
+% Esta package estende o ambiente tabular para permitir definir um tamanho
+% fixo para uma ou mais colunas; nesse caso, LaTeX quebra as linhas se uma
+% célula é larga demais para a largura definida. Encontrar valores "bons"
+% para as larguras das colunas, no entanto, também é um trabalho manual
+% um tanto penoso. As packages tabularx e tabulary permitem configurar
+% algumas colunas como "largura automática", evitando a necessidade da
+% definição manual. Finalmente, ltxtable permite utilizar tabularx e
+% longtable juntas. Neste modelo, não usamos tabularx/tabulary, mas você
+% pode carregá-las se quiser.
+\usepackage{array}
+
+% Se você quer ter um pouco mais de controle sobre o tamanho de cada coluna da
+% tabela, utilize estes tipos de coluna (criados com base nos recursos do pacote
+% array). É só usar algo como M{número}, onde "número" (por exemplo, 0.4) é a
+% fração de \textwidth que aquela coluna deve ocupar. "M" significa que o
+% conteúdo da célula é centralizado; "L", alinhado à esquerda; "J", justificado;
+% "R", alinhado à direita. Obviamente, a soma de todas as frações não pode ser
+% maior que 1, senão a tabela vai ultrapassar a linha da margem.
+\newcolumntype{M}[1]{>{\centering}m{#1\textwidth}}
+\newcolumntype{L}[1]{>{\RaggedRight}m{#1\textwidth}}
+\newcolumntype{R}[1]{>{\RaggedLeft}m{#1\textwidth}}
+\newcolumntype{J}[1]{m{#1\textwidth}}
+
+% Permite alinhar os elementos de uma coluna pelo ponto decimal; dê
+% preferência à package siunitx (carregada em utils.tex), que também
+% oferece esse recurso e muitos outros.
+\usepackage{dcolumn}
+
+% Define tabelas do tipo "longtable", similares a "tabular" mas que podem ser
+% divididas em várias páginas. "longtable" também funciona corretamente com
+% notas de rodapé. Note que, como uma longtable pode se estender por várias
+% páginas, não faz sentido colocá-las em um float "table". Por conta disso,
+% longtable define o comando "\caption" internamente.
+\usepackage{longtable}
+
+% Permite agregar linhas de tabelas, fazendo colunas "compridas"
+\usepackage{multirow}
+
+% Cria comando adicional para possibilitar a inserção de quebras de linha
+% em uma célula de tabela, entre outros
+\usepackage{makecell}
+
+% Às vezes a tabela é muito larga e não cabe na página. Se os cabeçalhos da
+% tabela é que são demasiadamente largos, uma solução é inclinar o texto das
+% células do cabeçalho. Para fazer isso, use o comando "\rothead".
+\renewcommand{\rothead}[2][60]{\makebox[11mm][l]{\rotatebox{#1}{\makecell[c]{#2}}}}
+
+% Se quiser criar uma linha mais grossa no meio de uma tabela, use
+% o comando "\thickhline".
+\newlength\savedwidth
+\newcommand\thickhline{
+  \noalign{
+    \global\savedwidth\arrayrulewidth
+    \global\arrayrulewidth 1.5pt
+  }
+  \hline
+  \noalign{\global\arrayrulewidth\savedwidth}
+}
+
+% Modifica (melhora) o layout default das tabelas e acrescenta os comandos
+% \toprule, \bottomrule, \midrule e \cmidrule
+\usepackage{booktabs}
+
+% Permite colorir linhas, colunas ou células
+\usepackage{colortbl}
+
+% Ao invés de digitar os dados de uma tabela dentro do seu documento,
+% você pode fazer LaTeX ler os dados de um arquivo CSV e criar uma
+% tabela automaticamente com uma destas duas packages:
+%\usepackage{csvsimple}     % mais simples
+%\usepackage{pgfplotstable} % mais complexa
+
+% Você também pode se interessar pelo ambiente "tabbing", que permite
+% criar tabelas simples com algumas vantagens em relação a "tabular",
+% ou por esta package, que permite criar tabulações.
+%\usepackage{tabto}

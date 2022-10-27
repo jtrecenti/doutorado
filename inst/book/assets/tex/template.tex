@@ -1,0 +1,450 @@
+% Arquivo LaTeX de exemplo de dissertação/tese a ser apresentada à CPG do IME-USP
+%
+% Criação: Jesús P. Mena-Chalco
+% Revisão: Fabio Kon e Paulo Feofiloff
+% Adaptação para UTF8, biblatex e outras melhorias: Nelson Lago
+%
+% Except where otherwise indicated, these files are distributed under
+% the MIT Licence. The example text, which includes the tutorial and
+% examples as well as the explanatory comments in the source, are
+% available under the Creative Commons Attribution International
+% Licence, v4.0 (CC-BY 4.0) - https://creativecommons.org/licenses/by/4.0/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREÂMBULO LaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% A opção twoside (frente-e-verso) significa que a aparência das páginas pares
+% e ímpares pode ser diferente. Por exemplo, as margens podem ser diferentes ou
+% os números de página podem aparecer à direita ou à esquerda alternadamente.
+% Mas nada impede que você crie um documento "só frente" e, ao imprimir, faça
+% a impressão frente-e-verso.
+%
+% Aqui também definimos a língua padrão do documento
+% (a última da lista) e línguas adicionais.
+%\documentclass[12pt,twoside,brazilian,english]{book}
+\documentclass[12pt,twoside,english,brazilian]{book}
+
+% Ao invés de definir o tamanho das margens, vamos definir os tamanhos do
+% texto, do cabeçalho e do rodapé, e deixamos a package geometry calcular
+% o tamanho das margens em função do tamanho do papel. Assim, obtemos o
+% mesmo resultado impresso, mas com margens diferentes, se o tamanho do
+% papel for diferente.
+\usepackage[a4paper]{geometry}
+
+\geometry{
+  textwidth=152mm,
+  hmarginratio=12:17, % 24:34 -> com papel A4, 24mm + 152mm + 34mm = 210mm
+  textheight=237mm,
+  vmarginratio=8:7, % 32:28 -> com papel A4, 32mm + 237mm + 28mm = 297mm
+  headsep=11mm, % distância entre a base do cabeçalho e o texto
+  headheight=21mm, % qualquer medida grande o suficiente, p.ex., top - headsep
+  footskip=10mm,
+  marginpar=20mm,
+  marginparsep=5mm,
+}
+
+% \usepackage{libertinus}
+% \usepackage{libertinust1math}
+% \usepackage{imagechapter}
+
+% \usepackage[brazilian](babel)
+
+% Vários pacotes e opções de configuração genéricos; para personalizar o
+% resultado, modifique estes arquivos.
+\input{assets/tex/extras/basics}
+\input{assets/tex/extras/languages}
+\input{assets/tex/extras/fonts}
+
+\input{assets/tex/extras/floats}
+
+\input{assets/tex/extras/imeusp-thesis} % capa, páginas preliminares e alguns detalhes
+\input{assets/tex/extras/imeusp-formatting}
+\input{assets/tex/extras/index}
+\input{assets/tex/extras/bibconfig}
+\input{assets/tex/extras/hyperlinks}
+%\nocolorlinks % para impressão em P&B
+\input{assets/tex/extras/source-code}
+\input{assets/tex/extras/utils}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+
+% Diretórios onde estão as figuras; com isso, não é preciso colocar o caminho
+% completo em \includegraphics (e nem a extensão).
+% \graphicspath{{figuras/},{logos/}}
+
+% Comandos rápidos para mudar de língua:
+% \en -> muda para o inglês
+% \br -> muda para o português
+% \texten{blah} -> o texto "blah" é em inglês
+% \textbr{blah} -> o texto "blah" é em português
+\babeltags{br = brazilian, en = english}
+
+% Bibliografia
+\usepackage[
+  style=assets/tex/extras/plainnat-ime, % variante de autor-data, similar a plainnat
+  %style=alphabetic, % similar a alpha
+  %style=numeric, % comum em artigos
+  %style=authoryear-comp, % autor-data "padrão" do biblatex
+  %style=apa, % variante de autor-data, muito usado
+  %style=abnt,
+]{biblatex}
+
+\usepackage{bookmark}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METADADOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% O arquivo com os dados bibliográficos para biblatex; você pode usar
+% este comando mais de uma vez para acrescentar múltiplos arquivos
+\addbibresource{assets/bib/book.bib}
+
+% Este comando permite acrescentar itens à lista de referências sem incluir
+% uma referência de fato no texto (pode ser usado em qualquer lugar do texto)
+%\nocite{bronevetsky02,schmidt03:MSc, FSF:GNU-GPL, CORBA:spec, MenaChalco08}
+% Com este comando, todos os itens do arquivo .bib são incluídos na lista
+% de referências
+%\nocite{*}
+
+% É possível definir como determinadas palavras podem (ou não) ser
+% hifenizadas; no entanto, a hifenização automática geralmente funciona bem
+% \babelhyphenation{documentclass latexmk soft-ware clsguide} % todas as línguas
+% \babelhyphenation[brazilian]{Fu-la-no}
+% \babelhyphenation[english]{what-ever}
+
+% Estes comandos definem o título e autoria do trabalho e devem sempre ser
+% definidos, pois além de serem utilizados para criar a capa, também são
+% armazenados nos metadados do PDF.
+\title{
+    % Obrigatório nas duas línguas
+    titlept={Título do trabalho},
+    titleen={Title of the document},
+    % Opcional, mas se houver deve existir nas duas línguas
+    subtitlept={um subtítulo},
+    subtitleen={a subtitle},
+}
+
+\author{Nome Completo}
+
+% Para TCCs, este comando define o supervisor
+\orientador[fem]{Profª. Drª. Fulana de Tal}
+
+% Se não houver, remova; se houver mais de um, basta
+% repetir o comando quantas vezes forem necessárias
+\coorientador{Prof. Dr. Ciclano de Tal}
+\coorientador[fem]{Profª. Drª. Beltrana de Tal}
+
+% A página de rosto da versão para depósito (ou seja, a versão final
+% antes da defesa) deve ser diferente da página de rosto da versão
+% definitiva (ou seja, a versão final após a incorporação das sugestões
+% da banca).
+\defesa{
+  nivel=doutorado, % mestrado, doutorado ou tcc
+  % É a versão para defesa ou a versão definitiva?
+  %definitiva,
+  % É qualificação?
+  %quali,
+  programa={Ciência da Computação},
+  membrobanca={Profª. Drª. Fulana de Tal (orientadora) -- IME-USP [sem ponto final]},
+  % Em inglês, não há o "ª"
+  %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Ciclano de Tal -- IME-USP [sem ponto final]},
+  membrobanca={Profª. Drª. Convidada de Tal -- IMPA [sem ponto final]},
+  % Se não houve bolsa, remova
+  %
+  % Norma sobre agradecimento por auxílios da FAPESP:
+  % https://fapesp.br/11789/referencia-ao-apoio-da-fapesp-em-todas-as-formas-de-divulgacao
+  %
+  % Norma sobre agradecimento por auxílios da CAPES (Portaria 206,
+  % de 4 de Setembro de 2018):
+  % https://www.in.gov.br/materia/-/asset_publisher/Kujrw0TZC2Mb/content/id/39729251/do1-2018-09-05-portaria-n-206-de-4-de-setembro-de-2018-39729135
+  %
+  %apoio={O presente trabalho foi realizado com apoio da Coordenação
+  %       de Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Código de Financiamento 001}, % o código é sempre 001
+  %
+  %apoio={This study was financed in part by the Coordenação de
+  %       Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Finance Code 001}, % o código é sempre 001
+  %
+  %apoio={Durante o desenvolvimento deste trabalho, o autor recebeu\\
+  %       auxílio financeiro da FAPESP -- processo nº aaaa/nnnnn-d},
+  %
+  %apoio={During the development if this work, the author received\\
+  %       financial support from FAPESP -- grant \#aaaa/nnnnn-d},
+  %
+  apoio={Durante o desenvolvimento deste trabalho o autor
+         recebeu auxílio financeiro da XXXX},
+  local={São Paulo},
+  data=2017-08-10, % YYYY-MM-DD
+  % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
+  % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
+  % correspondente (o sistema insere automaticamente o texto da licença).
+  % Se quiser estabelecer regras diferentes para o uso de seu trabalho,
+  % converse com seu orientador e coloque o texto da licença aqui, mas
+  % observe que apenas TCCs sob alguma licença Creative Commons serão
+  % acrescentados ao BDTA. Se você tem alguma intenção de publicar o
+  % trabalho comercialmente no futuro, sugerimos a licença CC-BY-NC-ND.
+  direitos={CC-BY}, % Creative Commons Attribution 4.0 International License
+  %direitos={CC-BY-NC-ND}, % Creative Commons Attribution / NonCommercial /
+                           % NoDerivatives 4.0 International License
+  %direitos={Autorizo a reprodução e divulgação total ou parcial
+  %          deste trabalho, por qualquer meio convencional ou
+  %          eletrônico, para fins de estudo e pesquisa, desde que
+  %          citada a fonte.},
+  %direitos={I authorize the complete or partial reproduction and disclosure
+  %          of this work by any conventional or electronic means for study
+  %          and research purposes, provided that the source is acknowledged.}
+  % Para gerar a ficha catalográfica, acesse https://fc.ime.usp.br/,
+  % preencha o formulário e escolha a opção "Gerar Código LaTeX".
+  % Basta copiar e colar o resultado aqui.
+  fichacatalografica={},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% AQUI COMEÇA O CONTEÚDO DE FATO %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% CAPA E PÁGINAS INICIAIS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Aqui começa o conteúdo inicial que aparece antes do capítulo 1, ou seja,
+% página de rosto, resumo, sumário etc. O comando frontmatter faz números
+% de página aparecem em algarismos romanos ao invés de arábicos e
+% desabilita a contagem de capítulos.
+\frontmatter
+
+\pagestyle{plain}
+
+\onehalfspacing % Espaçamento 1,5 na capa e páginas iniciais
+
+\maketitle % capa e folha de rosto
+
+%%%%%%%%%%%%%%%% DEDICATÓRIA, AGRADECIMENTOS, RESUMO/ABSTRACT %%%%%%%%%%%%%%%%%%
+
+\begin{dedicatoria}
+Esta seção é opcional e fica numa página separada; ela pode ser usada para
+uma dedicatória ou epígrafe.
+\end{dedicatoria}
+
+% Reinicia o contador de páginas (a próxima página recebe o número "i") para
+% que a página da dedicatória não seja contada.
+\pagenumbering{roman}
+
+% Agradecimentos:
+% Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar
+% esta página. A epígrafe, obviamente, é opcional; é possível colocar
+% epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
+% não ser incluída no sumário.
+\chapter*{Agradecimentos}
+\epigrafe{Do. Or do not. There is no try.}{Mestre Yoda}
+
+Texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto. Texto opcional.
+
+% \input{conteudo/resumoabstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% LISTAS DE FIGURAS ETC. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Como as listas que se seguem podem não incluir uma quebra de página
+% obrigatória, inserimos uma quebra manualmente aqui.
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+% Todas as listas são opcionais; Usando "\chapter*" elas não são incluídas
+% no sumário. As listas geradas automaticamente também não são incluídas por
+% conta das opções "notlot" e "notlof" que usamos para a package tocbibind.
+
+% Normalmente, "\chapter*" faz o novo capítulo iniciar em uma nova página, e as
+% listas geradas automaticamente também por padrão ficam em páginas separadas.
+% Como cada uma destas listas é muito curta, não faz muito sentido fazer isso
+% aqui, então usamos este comando para desabilitar essas quebras de página.
+% Se você preferir, comente as linhas com esse comando e des-comente as linhas
+% sem ele para criar as listas em páginas separadas. Observe que você também
+% pode inserir quebras de página manualmente (com \clearpage, veja o exemplo
+% mais abaixo).
+\newcommand\disablenewpage[1]{{\let\clearpage\par\let\cleardoublepage\par #1}}
+
+% Nestas listas, é melhor usar "raggedbottom" (veja basics.tex). Colocamos
+% a opção correspondente e as listas dentro de um grupo para ativar
+% raggedbottom apenas temporariamente.
+\bgroup
+\raggedbottom
+
+%%%%% Listas criadas manualmente
+
+%\chapter*{Lista de abreviaturas}
+\disablenewpage{\chapter*{Lista de abreviaturas}}
+
+\begin{tabular}{rl}
+   CFT & Transformada contínua de Fourier (\emph{Continuous Fourier Transform})\\
+   DFT & Transformada discreta de Fourier (\emph{Discrete Fourier Transform})\\
+  EIIP & Potencial de interação elétron-íon (\emph{Electron-Ion Interaction Potentials})\\
+  STFT & Transformada de Fourier de tempo reduzido (\emph{Short-Time Fourier Transform})\\
+  ABNT & Associação Brasileira de Normas Técnicas\\
+   URL & Localizador Uniforme de Recursos (\emph{Uniform Resource Locator})\\
+   IME & Instituto de Matemática e Estatística\\
+   USP & Universidade de São Paulo
+\end{tabular}
+
+%\chapter*{Lista de símbolos}
+\disablenewpage{\chapter*{Lista de símbolos}}
+
+% Quebra de página manual
+\clearpage
+
+%%%%% Listas criadas automaticamente
+
+% Você pode escolher se quer ou não permitir a quebra de página
+%\listoffigures
+\disablenewpage{\listoffigures}
+
+% Você pode escolher se quer ou não permitir a quebra de página
+%\listoftables
+\disablenewpage{\listoftables}
+
+% Esta lista é criada "automaticamente" pela package float quando
+% definimos o novo tipo de float "program" (em utils.tex)
+% Você pode escolher se quer ou não permitir a quebra de página
+%\listof{program}{\programlistname}
+\disablenewpage{\listof{program}{\programlistname}}
+
+% Sumário (obrigatório)
+\tableofcontents
+
+\egroup % Final de "raggedbottom"
+
+% Referências indiretas ("x", veja "y") para o índice remissivo (opcionais,
+% pois o índice é opcional). É comum colocar esses itens no final do documento,
+% junto com o comando \printindex, mas em alguns casos isso torna necessário
+% executar texindy (ou makeindex) mais de uma vez, então colocar aqui é melhor.
+\index{Inglês|see{Língua estrangeira}}
+\index{Figuras|see{Floats}}
+\index{Tabelas|see{Floats}}
+\index{Código-fonte|see{Floats}}
+\index{Subcaptions|see{Subfiguras}}
+\index{Sublegendas|see{Subfiguras}}
+\index{Equações|see{Modo matemático}}
+\index{Fórmulas|see{Modo matemático}}
+\index{Rodapé, notas|see{Notas de rodapé}}
+\index{Captions|see{Legendas}}
+\index{Versão original|see{Tese/Dissertação, versões}}
+\index{Versão corrigida|see{Tese/Dissertação, versões}}
+\index{Palavras estrangeiras|see{Língua estrangeira}}
+\index{Floats!Algoritmo|see{Floats, ordem}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CAPÍTULOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Aqui vai o conteúdo principal do trabalho, ou seja, os capítulos que compõem
+% a dissertação/tese. O comando mainmatter reinicia a contagem de páginas,
+% modifica a numeração para números arábicos e ativa a contagem de capítulos.
+\mainmatter
+
+\pagestyle{mainmatter}
+
+% Espaçamento simples
+\singlespacing
+
+$body$
+
+% \input{conteudo/00-exemplo-introducao}
+% \input{conteudo/01-exemplo-normas-ime}
+% \input{conteudo/02-exemplo-usando-o-modelo}
+% \input{conteudo/03-exemplo-latex}
+% \input{conteudo/04-exemplo-tutorial}
+% \input{conteudo/05-exemplo-exemplos}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES E ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Um apêndice é algum conteúdo adicional de sua autoria que faz parte e
+% colabora com a ideia geral do texto mas que, por alguma razão, não precisa
+% fazer parte da sequência do discurso; por exemplo, a demonstração de um
+% teorema intermediário, as perguntas usadas em uma pesquisa qualitativa etc.
+%
+% Um anexo é um documento que não faz parte da tese (em geral, nem é de sua
+% autoria) mas é relevante para o conteúdo; por exemplo, a especificação do
+% padrão técnico ou a legislação que o trabalho discute, um artigo de jornal
+% apresentando a percepção do público sobre o tema da tese etc.
+%
+% Os comandos appendix e annex reiniciam a numeração de capítulos e passam
+% a numerá-los com letras. "annex" não faz parte de nenhuma classe padrão,
+% foi criado para este modelo. Se o trabalho não tiver apêndices ou anexos,
+% remova estas linhas.
+%
+% Diferentemente de \mainmatter, \backmatter etc., \appendix e \annex não
+% forçam o início de uma nova página. Em geral isso não é importante, pois
+% o comando seguinte costuma ser "\chapter", mas pode causar problemas com
+% a formatação dos cabeçalhos. Assim, vamos forçar uma nova página antes
+% de cada um deles.
+
+%%%% Apêndices %%%%
+
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+\pagestyle{appendix}
+
+\appendix
+
+% \addappheadtotoc acrescenta a palavra "Apêndice" ao sumário; se
+% só há apêndices, sem anexos, provavelmente não é necessário.
+\addappheadtotoc
+
+% \input{conteudo/apendice-exemplo-pseudocodigo}
+\par
+
+%%%% Anexos %%%%
+
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+\pagestyle{appendix} % repete o anterior, caso você não use apêndices
+
+\annex
+
+% \addappheadtotoc acrescenta a palavra "Anexo" ao sumário; se
+% só há anexos, sem apêndices, provavelmente não é necessário.
+\addappheadtotoc
+
+% \input{conteudo/anexo-exemplo-faq}
+\par
+
+
+%%%%%%%%%%%%%%% SEÇÕES FINAIS (BIBLIOGRAFIA E ÍNDICE REMISSIVO) %%%%%%%%%%%%%%%%
+
+% O comando backmatter desabilita a numeração de capítulos.
+\backmatter
+
+\pagestyle{backmatter}
+
+% Espaço adicional no sumário antes das referências / índice remissivo
+\addtocontents{toc}{\vspace{2\baselineskip plus .5\baselineskip minus .5\baselineskip}}
+
+% A bibliografia é obrigatória
+
+\printbibliography[
+  title=\refname\label{bibliografia}, % "Referências", recomendado pela ABNT
+  %title=\bibname\label{bibliografia}, % "Bibliografia"
+  heading=bibintoc, % Inclui a bibliografia no sumário
+]
+
+\printindex % imprime o índice remissivo no documento (opcional)
+
+\end{document}

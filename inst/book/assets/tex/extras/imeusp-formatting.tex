@@ -1,0 +1,218 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% SUMÁRIO, CABEÇALHOS, SEÇÕES %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Formatação personalizada do sumário, lista de tabelas/figuras etc.
+%\usepackage{titletoc}
+
+% titlesec permite definir formatação personalizada de títulos, seções etc.
+% Observe que titlesec é incompatível com os comandos refsection
+% e refsegment do pacote biblatex!
+% Vamos usar titlesec apenas
+% para fazer títulos, seções etc. não serem justificados.
+\usepackage[raggedright]{titlesec}
+
+% Permite saber o número total de páginas; útil para colocar no
+% rodapé algo como "página 3 de 10" com "\thepage de \pageref{LastPage}"
+%\usepackage{lastpage}
+
+% Permite definir cabeçalhos e rodapés
+%\usepackage{fancyhdr}
+
+% Personalização de cabeçalhos e rodapés com o estilo deste modelo
+\usepackage{imeusp-headers} % carregado do diretório extras (veja basics.tex)
+
+% biblatex pode ser configurado para inserir a bibliografia no sumário;
+% bibtex não oferece essa possibilidade. Com esta package, resolvemos
+% esse problema.
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+% Só olha até o nível 2 (subseções) para gerar o sumário e os
+% cabeçalhos, ou seja, não coloca nomes de subsubseções (nível 3)
+% no sumário nem nos cabeçalhos.
+\setcounter{tocdepth}{2}
+
+% Só numera até o nível 2 (subseções, como 2.3.1), ou seja, não numera
+% sub-subseções (como 2.3.1.1). Veja que isso afeta referências
+% cruzadas: se você fizer \ref{uma-sub-subsecao} sem que ela seja
+% numerada, a referência vai apontar para a seção um nível acima.
+\setcounter{secnumdepth}{2}
+
+% Normalmente, o capítulo de introdução não deve ser numerado, mas
+% deve aparecer no sumário. Por padrão, LaTeX não oferece uma solução
+% para isso, então criamos aqui os comandos \unnumberedchapter,
+% \unnumberedsection e \unnumberedsubsection.
+\newcommand{\unnumberedchapter}[2][]{
+  \ifblank{#1}
+    {
+      \chapter*{#2}
+      \phantomsection
+      \addcontentsline{toc}{chapter}{#2}
+      \chaptermark{#2}
+    }
+    {
+      \chapter*{#2}
+      \phantomsection
+      \addcontentsline{toc}{chapter}{#1}
+      \chaptermark{#1}
+    }
+}
+
+\newcommand{\unnumberedsection}[2][]{
+  \ifblank{#1}
+    {
+      \section*{#2}
+      \phantomsection
+      \addcontentsline{toc}{section}{#2}
+      \sectionmark{#2}
+    }
+    {
+      \section*{#2}
+      \phantomsection
+      \addcontentsline{toc}{section}{#1}
+      \sectionmark{#1}
+    }
+}
+
+\newcommand{\unnumberedsubsection}[2][]{
+  \ifblank{#1}
+    {
+      \subsection*{#2}
+      \phantomsection
+      \addcontentsline{toc}{subsection}{#2}
+    }
+    {
+      \subsection*{#2}
+      \phantomsection
+      \addcontentsline{toc}{subsection}{#1}
+    }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% ESPAÇAMENTO E ALINHAMENTO %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% LaTeX por default segue o estilo americano e não faz a indentação da
+% primeira linha do primeiro parágrafo de uma seção; este pacote ativa essa
+% indentação, como é o estilo brasileiro
+\usepackage{indentfirst}
+
+% A primeira linha de cada parágrafo costuma ter um pequeno recuo para
+% tornar mais fácil visualizar onde cada parágrafo começa. Além disso, é
+% possível colocar um espaço em branco entre um parágrafo e outro. Esta
+% package coloca o espaço em branco e desabilita o recuo; como queremos
+% o espaço *e* o recuo, é preciso guardar o valor padrão do recuo e
+% redefini-lo depois de carregar a package.
+% TODO: depois que ubuntu 18.04 se tornar obsoleta (abril/2023), remover
+%       as linhas "oldparindent" e carregar a package com a opção "indent".
+\newlength\oldparindent
+\setlength\oldparindent\parindent
+\usepackage[parfill]{parskip}
+\setlength\parindent\oldparindent
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% EPÍGRAFE E NOTAS DE RODAPÉ %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% O formato padrão do pacote epigraph é bem feinho...
+% Outra opção para epígrafes é o pacote quotchap
+\usepackage{epigraph}
+
+\setlength\epigraphwidth{.85\textwidth}
+
+% Sem linha entre o texto e o autor
+\setlength{\epigraphrule}{0pt}
+
+% Ambiente auxiliar para colocar margem à direita da epígrafe
+% (como sempre, o modo mais simples de mudar as margens de um
+% pagrágrafo é fazer de conta que é uma lista)
+\newenvironment{epShiftLeft}
+  {
+    \par\begin{list}{}
+      {
+        \leftmargin 0pt
+        \labelwidth 0pt
+        \labelsep 0pt
+        \itemsep 0pt
+        \topsep 0pt
+        \partopsep 0pt
+        \rightmargin 2em
+      }
+    \item\FlushRight
+  }
+  {
+    \end{list}
+    % O espaço padrão que epigraph coloca entre a citação
+    % e o autor é muito pequeno; vamos aumentar um pouco
+    \vspace*{.3\baselineskip}
+  }
+
+\renewcommand\textflush{epShiftLeft}
+\renewcommand\sourceflush{epShiftLeft}
+
+\newcommand{\epigrafe}[2] {%
+  \ifstrempty{#2}{
+    \epigraph{\itshape #1}{}
+  }{
+    \epigraph{\itshape #1}{--- #2}
+  }
+}
+
+% Formato personalizado para as notas de rodapé. Copiado quase
+% literalmente do exemplo na documentação das classes-padrão de
+% LaTeX2e (texdoc classes). Seria possível fazer algo similar
+% usando list{} com um único item usando \@thefnmark como label.
+
+% \footnotesep não é um espaço adicional, mas sim um strut que
+% existe no começo de cada nota. É por isso que o valor é "grande"
+% (\baselineskip) mas a separação de fato é pequena.
+\makeatletter
+\renewcommand\@makefntext[1]{%
+    \setlength{\footnotesep}{1\baselineskip}%
+    \@setpar{%
+        \@@par
+        \@tempdima = \hsize
+        \advance\@tempdima-4pt\relax
+        \parshape \@ne 4pt \@tempdima
+    }%
+    \par
+    \parindent 1em\noindent
+    \parskip .3\baselineskip
+    \hbox to \z@{\hss\@makefnmark\,}#1%
+}
+\makeatother
+
+% \maketitle redefine as notas de rodapé (\thanks) para usar símbolos
+% ao invés de números, mas essa não é a única mudança. \maketitle
+% também muda \@makefnmark para que a indicação de nota de rodapé
+% não ocupe espaço horizontal (isso é feito com \rlap). Isso é feito
+% porque a lista de autores em geral é similar a
+% \author{Fulano\thanks{instituição 1}, Ciclano\thanks{instituição 2}}.
+% Com essa mudança, a nota aparece acima da vírgula entre os autores.
+% Mas isso significa que\maketitle precisa também modificar \@makefntext
+% para que esse efeito aconteça apenas na lista de autores e não na
+% nota em si. Assim, como criamos um novo formato para as notas de
+% rodapé, precisamos mudar o formato em \maketitle também.
+\makeatletter
+\newcommand\@maketitlemakefntext[1]{%
+    \setlength{\footnotesep}{1\baselineskip}%
+    \@setpar{%
+        \@@par
+        \@tempdima = \hsize
+        \advance\@tempdima-4pt\relax
+        \parshape \@ne 4pt \@tempdima
+    }%
+    \par
+    \parindent 1em\noindent
+    \parskip .3\baselineskip
+    \hbox to \z@{\hss\@textsuperscript{\normalfont\@thefnmark}\,}#1%
+}
+
+\patchcmd\maketitle
+  {\long\def\@makefntext}
+  {\let\@makefntext\@maketitlemakefntext\long\def\@disabledmakefntext}
+  {}{}
+
+\makeatother
