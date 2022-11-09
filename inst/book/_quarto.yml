@@ -12,20 +12,18 @@ book:
     - metodologia.qmd
     - resultados.qmd
     - conclusoes.qmd
+    - bibliografia.qmd
   appendices:
     - pacote.qmd
   downloads: [pdf]
   page-navigation: true
-  navbar:
-    search: true
-    right:
-      - icon: github
-        href: https://github.com/jtrecenti/doutorado
-        aria-label: GitHub
 
 number-depth: 1
 
-bibliography: [assets/bib/book.bib]
+bibliography: [book.bib, captcha.bib, references.bib]
+csl: /Users/julio/OneDrive/Documentos/jtrecenti/doutorado/inst/book/abnt.csl
+
+google-scholar: true
 
 format:
   html:
@@ -39,6 +37,7 @@ lang: pt
 execute:
   echo: false
   warning: false
+  freeze: true
 
 knitr:
   opts_chunk:
