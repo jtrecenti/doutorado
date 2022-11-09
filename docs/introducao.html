@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.219">
+<meta name="generator" content="quarto-1.2.258">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Captchas - 2&nbsp; Introdução</title>
+<title>Captchas - 1&nbsp; Introdução</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,26 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -42,11 +62,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 20,
   "language": {
     "search-no-results-text": "Nenhum resultado",
@@ -62,42 +82,84 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<meta name="citation_title" content="[[1]{.chapter-number}&nbsp; [Introdução]{.chapter-title}]{#introducao .quarto-section-identifier}">
+<meta name="citation_language" content="pt">
+<meta name="citation_reference" content="citation_title=Dynamic documents with R and knitr;,citation_author=Yihui Xie;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://yihui.name/knitr/;">
+<meta name="citation_reference" content="citation_title=Captcha - Google Acadêmico;,citation_publisher=https://scholar.google.com.br/scholar?hl=pt-BR&amp;amp;amp;as_sdt=0%2C5&amp;q=captcha&amp;btnG=;">
+<meta name="citation_reference" content="citation_title=Building Segmentation Based Human-Friendly Human Interaction Proofs (HIPs);,citation_abstract=Human interaction proofs (HIPs) have become common place on the internet due to their effectiveness in deterring automated abuse of online services intended for humans. However, there is a co-evolutionary arms race in progress and these proofs are becoming more difficult for genuine users while attackers are getting better at breaking existing HIPs. We studied various popular HIPs on the internet to understand their strength and human friendliness. To determine HIP strength, we adopted a direct approach of building computer attacks using image processing and machine learning techniques. To understand human-friendliness, a sequence of users studies were conducted to investigate HIP character recognition by humans under a variety of visual distortions and clutter commonly employed in reading-based HIPs. We found that many of the online HIPs are pure recognition tasks that can be easily broken using machine learning. The stronger HIPs tend to pose a combination of segmentation and recognition challenges. Further, the HIP user studies show that given correct segmentation, computers are much better at HIP character recognition than humans. In light of these results, we propose that segmentation-based reading challenges are the future for building stronger human-friendly HIPs. An example of such a segmentation-based HIP is presented with a preliminary assessment of its strength and human-friendliness.;,citation_author=Kumar Chellapilla;,citation_author=Kevin Larson;,citation_author=Patrice Y. Simard;,citation_author=Mary Czerwinski;,citation_editor=Henry S. Baird;,citation_editor=Daniel P. Lopresti;,citation_publication_date=2005;,citation_cover_date=2005;,citation_year=2005;,citation_doi=10.1007/11427896_1;,citation_isbn=978-3-540-32117-0;,citation_language=en-US;,citation_conference_title=Human Interactive Proofs;,citation_conference=Springer;,citation_series_title=Lecture Notes in Computer Science;">
+<meta name="citation_reference" content="citation_title=Designing human friendly human interaction proofs (HIPs);,citation_abstract=HIPs, or Human Interactive Proofs, are challenges meant to be easily solved by humans, while remaining too hard to be economically solved by computers. HIPs are increasingly used to protect services against automatic script attacks. To be effective, a HIP must be difficult enough to discourage script attacks by raising the computation and/or development cost of breaking the HIP to an unprofitable level. At the same time, the HIP must be easy enough to solve in order to not discourage humans from using the service. Early HIP designs have successfully met these criteria [1]. However, the growing sophistication of attackers and correspondingly increasing profit incentives have rendered most of the currently deployed HIPs vulnerable to attack [2,7,12]. Yet, most companies have been reluctant to increase the difficulty of their HIPs for fear of making them too complex or unappealing to humans. The purpose of this study is to find the visual distortions that are most effective at foiling computer attacks without hindering humans. The contribution of this research is that we discovered that 1) automatically generating HIPs by varying particular distortion parameters renders HIPs that are too easy for computer hackers to break, yet humans still have difficulty recognizing them, and 2) it is possible to build segmentation-based HIPs that are extremely difficult and expensive for computers to solve, while remaining relatively easy for humans.;,citation_author=Kumar Chellapilla;,citation_author=Kevin Larson;,citation_author=Patrice Simard;,citation_author=Mary Czerwinski;,citation_publication_date=2005-04;,citation_cover_date=2005-04;,citation_year=2005;,citation_doi=10.1145/1054972.1055070;,citation_isbn=978-1-58113-998-3;,citation_conference_title=Proceedings of the SIGCHI Conference on Human Factors in Computing Systems;,citation_conference=Association for Computing Machinery;,citation_series_title=CHI ’05;">
+<meta name="citation_reference" content="citation_title=Using machine learning to break visual human interaction proofs (HIPs);,citation_author=Kumar Chellapilla;,citation_author=Patrice Simard;,citation_publication_date=2004;,citation_cover_date=2004;,citation_year=2004;,citation_volume=17;,citation_journal_title=Advances in neural information processing systems;">
+<meta name="citation_reference" content="citation_title=Análise de sobrevivência aplicada;,citation_author=Enrico Antonio Colosimo;,citation_author=Suely Ruiz Giolo;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;">
+<meta name="citation_reference" content="citation_title=Diagnóstico do Contencioso Tributário Administrativo;,citation_abstract=Estudo sobre estrutura do contencioso, processos administrativos tributários e percepções dos agentes;,citation_publisher=https://abj.org.br/pesquisas/bid-tributario/;">
+<meta name="citation_reference" content="citation_title=A generative vision model that trains with high data efficiency and breaks text-based CAPTCHAs;,citation_author=Dileep George;,citation_author=Wolfgang Lehrach;,citation_author=Ken Kansky;,citation_author=Miguel Lázaro-Gredilla;,citation_author=Christopher Laan;,citation_author=Bhaskara Marthi;,citation_author=Xinghua Lou;,citation_author=Zhaoshi Meng;,citation_author=Yi Liu;,citation_author=Huayan Wang;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_issue=6368;,citation_volume=358;,citation_journal_title=Science;,citation_publisher=American Association for the Advancement of Science;">
+<meta name="citation_reference" content="citation_title=Generative Adversarial Networks;,citation_abstract=We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1/2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples.;,citation_author=Ian J. Goodfellow;,citation_author=Jean Pouget-Abadie;,citation_author=Mehdi Mirza;,citation_author=Bing Xu;,citation_author=David Warde-Farley;,citation_author=Sherjil Ozair;,citation_author=Aaron Courville;,citation_author=Yoshua Bengio;,citation_publication_date=2014-06;,citation_cover_date=2014-06;,citation_year=2014;,citation_fulltext_html_url=https://arxiv.org/abs/1406.2661;,citation_doi=10.48550/arXiv.1406.2661;,citation_publisher=arXiv;">
+<meta name="citation_reference" content="citation_title=Generative adversarial networks;,citation_author=Ian Goodfellow;,citation_author=Jean Pouget-Abadie;,citation_author=Mehdi Mirza;,citation_author=Bing Xu;,citation_author=David Warde-Farley;,citation_author=Sherjil Ozair;,citation_author=Aaron Courville;,citation_author=Yoshua Bengio;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_issue=11;,citation_volume=63;,citation_journal_title=Communications of the ACM;,citation_publisher=ACM New York, NY, USA;">
+<meta name="citation_reference" content="citation_title=Multi-digit number recognition from street view imagery using deep convolutional neural networks;,citation_author=Ian J. Goodfellow;,citation_author=Yaroslav Bulatov;,citation_author=Julian Ibarz;,citation_author=Sacha Arnoud;,citation_author=Vinay Shet;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_fulltext_html_url=https://arxiv.org/abs/1312.6082;,citation_journal_title=arXiv preprint arXiv:1312.6082;">
+<meta name="citation_reference" content="citation_title=Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks;,citation_abstract=Recognizing arbitrary multi-character text in unconstrained natural photographs is a hard problem. In this paper, we address an equally hard sub-problem in this domain viz. recognizing arbitrary multi-digit numbers from Street View imagery. Traditional approaches to solve this problem typically separate out the localization, segmentation, and recognition steps. In this paper we propose a unified approach that integrates these three steps via the use of a deep convolutional neural network that operates directly on the image pixels. We employ the DistBelief implementation of deep neural networks in order to train large, distributed neural networks on high quality images. We find that the performance of this approach increases with the depth of the convolutional network, with the best performance occurring in the deepest architecture we trained, with eleven hidden layers. We evaluate this approach on the publicly available SVHN dataset and achieve over $96\%$ accuracy in recognizing complete street numbers. We show that on a per-digit recognition task, we improve upon the state-of-the-art, achieving $97.84\%$ accuracy. We also evaluate this approach on an even more challenging dataset generated from Street View imagery containing several tens of millions of street number annotations and achieve over $90\%$ accuracy. To further explore the applicability of the proposed system to broader text recognition tasks, we apply it to synthetic distorted text from reCAPTCHA. reCAPTCHA is one of the most secure reverse turing tests that uses distorted text to distinguish humans from bots. We report a $99.8\%$ accuracy on the hardest category of reCAPTCHA. Our evaluations on both tasks indicate that at specific operating thresholds, the performance of the proposed system is comparable to, and in some cases exceeds, that of human operators.;,citation_author=Ian J. Goodfellow;,citation_author=Yaroslav Bulatov;,citation_author=Julian Ibarz;,citation_author=Sacha Arnoud;,citation_author=Vinay Shet;,citation_publication_date=2014-04;,citation_cover_date=2014-04;,citation_year=2014;,citation_fulltext_html_url=https://arxiv.org/abs/1312.6082;,citation_doi=10.48550/arXiv.1312.6082;,citation_publisher=arXiv;">
+<meta name="citation_reference" content="citation_title=Inaccessibility of CAPTCHA;,citation_publisher=https://www.w3.org/TR/turingtest/;">
+<meta name="citation_reference" content="citation_title=Captcha and Its Techniques: A Review;,citation_abstract=Captcha (Completely Automated public Turing test to tell Computers and Humans Apart) system is used to verify whether a user is human or computer program. It’s also known as human Interactive Proof (HIP) and based upon Artificial Intelligence. Captcha is a program that protects websites from web-bots by generating tests that computer cannot pass but human can pass .This paper comprise introduction of captcha, various techniques, application of captcha and drawbacks of captcha.;,citation_author=Kiranjot Kaur;,citation_author=Sunny Behal;,citation_publication_date=2014-01;,citation_cover_date=2014-01;,citation_year=2014;,citation_volume=5;,citation_journal_title=International Journal of Computer Science and Information Technologies,;">
+<meta name="citation_reference" content="citation_title=Deep learning;,citation_author=Yann LeCun;,citation_author=Yoshua Bengio;,citation_author=Geoffrey Hinton;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_issue=7553;,citation_volume=521;,citation_journal_title=nature;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=Method for selectively restricting access to computer systems;,citation_author=Mark D. Lillibridge;,citation_author=Martin Abadi;,citation_author=Krishna Bharat;,citation_author=Andrei Z. Broder;,citation_publication_date=2001-02;,citation_cover_date=2001-02;,citation_year=2001;">
+<meta name="citation_reference" content="citation_title=Estado brasileiro e transparência avaliando a aplicação da Lei de Acesso à Informação;,citation_author=Gregory Michener;,citation_author=Luiz Fernando Moncau;,citation_author=Rafael Braem Velasco;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;">
+<meta name="citation_reference" content="citation_title=Recognizing objects in adversarial clutter: Breaking a visual CAPTCHA;,citation_author=Greg Mori;,citation_author=Jitendra Malik;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_volume=1;,citation_conference_title=2003 IEEE Computer Society Conference on Computer Vision and Pattern Recognition, 2003. Proceedings.;,citation_conference=IEEE;">
+<meta name="citation_reference" content="citation_title=Open data in science;,citation_author=Peter Murray-Rust;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_journal_title=Nature Precedings;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=Deep Generative Positive-Unlabeled Learning under Selection Bias;,citation_abstract=Learning in the positive-unlabeled (PU) setting is prevalent in real world applications. Many previous works depend upon theSelected Completely At Random (SCAR) assumption to utilize unlabeled data, but the SCAR assumption is not often applicable to the real world due to selection bias in label observations. This paper is the first generative PU learning model without the SCAR assumption. Specifically, we derive the PU risk function without the SCAR assumption, and we generate a set of virtual PU examples to train the classifier. Although our PU risk function is more generalizable, the function requires PU instances that do not exist in the observations. Therefore, we introduce the VAE-PU, which is a variant of variational autoencoders to separate two latent variables that generate either features or observation indicators. The separated latent information enables the model to generate virtual PU instances. We test the VAE-PU on benchmark datasets with and without the SCAR assumption. The results indicate that the VAE-PU is superior when selection bias exists, and the VAE-PU is also competent under the SCAR assumption. The results also emphasize that the VAE-PU is effective when there are few positive-labeled instances due to modeling on selection bias.;,citation_author=Byeonghu Na;,citation_author=Hyemi Kim;,citation_author=Kyungwoo Song;,citation_author=Weonyoung Joo;,citation_author=Yoon-Yeong Kim;,citation_author=Il-Chul Moon;,citation_publication_date=2020-10;,citation_cover_date=2020-10;,citation_year=2020;,citation_doi=10.1145/3340531.3411971;,citation_isbn=978-1-4503-6859-9;,citation_conference_title=Proceedings of the 29th ACM International Conference on Information &amp;amp;amp; Knowledge Management;,citation_conference=Association for Computing Machinery;,citation_series_title=CIKM ’20;">
+<meta name="citation_reference" content="citation_title=Regularizing deep neural networks by noise: Its interpretation and optimization;,citation_author=Hyeonwoo Noh;,citation_author=Tackgeun You;,citation_author=Jonghwan Mun;,citation_author=Bohyung Han;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_volume=30;,citation_journal_title=Advances in Neural Information Processing Systems;">
+<meta name="citation_reference" content="citation_title=Observatório da insolvência: Rio de Janeiro;,citation_abstract=Estudo sobre as recuperações judiciais do estado do Rio de Janeiro.;,citation_publisher=https://abj.org.br/pesquisas/obsrjrj/;">
+<meta name="citation_reference" content="citation_title=Method and system for discriminating a human action from a computerized action;,citation_author=Eran Reshef;,citation_author=Gil Raanan;,citation_author=Eilon Solan;,citation_publication_date=2005-05;,citation_cover_date=2005-05;,citation_year=2005;">
+<meta name="citation_reference" content="citation_title=Deep learning is robust to massive label noise;,citation_author=David Rolnick;,citation_author=Andreas Veit;,citation_author=Serge Belongie;,citation_author=Nir Shavit;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://arxiv.org/abs/1705.10694;,citation_journal_title=arXiv preprint arXiv:1705.10694;">
+<meta name="citation_reference" content="citation_title=Reinforcement learning: An introduction;,citation_author=Richard S. Sutton;,citation_author=Andrew G. Barto;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;">
+<meta name="citation_reference" content="citation_title=Tempo dos processos relacionados à adoção;,citation_abstract=Análise do tempo dos processos relacionados à adoção no Brasil, especialmente de processos relativos a desconstituição do poder familiar.;,citation_publisher=https://abj.org.br/pesquisas/adocao/;">
+<meta name="citation_reference" content="citation_title=Computing machinery and intelligence;,citation_author=Alan M. Turing;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_inbook_title=Parsing the turing test;">
+<meta name="citation_reference" content="citation_title=Captcha: Telling humans and computers apart automatically;,citation_author=Luis Von Ahn;,citation_author=Manuel Blum;,citation_author=Nicholas Hopper;,citation_author=John Langford;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_conference_title=Proceedings of eurocrypt;">
+<meta name="citation_reference" content="citation_title=reCAPTCHA: Human-Based Character Recognition via Web Security Measures;,citation_abstract=CAPTCHAs (Completely Automated Public Turing test to tell Computers and Humans Apart) are widespread security measures on the World Wide Web that prevent automated programs from abusing online services. They do so by asking humans to perform a task that computers cannot yet perform, such as deciphering distorted characters. Our research explored whether such human effort can be channeled into a useful purpose: helping to digitize old printed material by asking users to decipher scanned words from books that computerized optical character recognition failed to recognize. We showed that this method can transcribe text with a word accuracy exceeding 99%, matching the guarantee of professional human transcribers. Our apparatus is deployed in more than 40,000 Web sites and has transcribed over 440 million words.;,citation_author=Luis Ahn;,citation_author=Benjamin Maurer;,citation_author=Colin McMillen;,citation_author=David Abraham;,citation_author=Manuel Blum;,citation_publication_date=2008-09;,citation_cover_date=2008-09;,citation_year=2008;,citation_issue=5895;,citation_doi=10.1126/science.1160379;,citation_issn=0036-8075, 1095-9203;,citation_volume=321;,citation_language=en-US;,citation_journal_title=Science;">
+<meta name="citation_reference" content="citation_title=Telling humans and computers apart automatically or how lazy cryptographers do AI (Tech. Rep. No. CMU-CS-02-117);,citation_author=L. Ahn;,citation_author=M. Blum;,citation_author=J. Langford;,citation_publication_date=2002;,citation_cover_date=2002;,citation_year=2002;,citation_technical_report_institution=Carnegie Mellon University;">
+<meta name="citation_reference" content="citation_title=Telling humans and computers apart automatically;,citation_author=Luis Von Ahn;,citation_author=Manuel Blum;,citation_author=John Langford;,citation_publication_date=2004;,citation_cover_date=2004;,citation_year=2004;,citation_issue=2;,citation_volume=47;,citation_journal_title=Communications of the ACM;,citation_publisher=ACM New York, NY, USA;">
+<meta name="citation_reference" content="citation_title=Make complex captchas simple: A fast text captcha solver based on a small number of samples;,citation_author=Yao Wang;,citation_author=Yuliang Wei;,citation_author=Mingjin Zhang;,citation_author=Yang Liu;,citation_author=Bailing Wang;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_volume=578;,citation_journal_title=Information Sciences;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=A survey of CAPTCHA technologies to distinguish between human and computer;,citation_author=Xin Xu;,citation_author=Lei Liu;,citation_author=Bo Li;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_volume=408;,citation_journal_title=Neurocomputing;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=Yet another text captcha solver: A generative adversarial network based approach;,citation_author=Guixin Ye;,citation_author=Zhanyong Tang;,citation_author=Dingyi Fang;,citation_author=Zhanxing Zhu;,citation_author=Yansong Feng;,citation_author=Pengfei Xu;,citation_author=Xiaojiang Chen;,citation_author=Zheng Wang;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_conference_title=Proceedings of the 2018 ACM SIGSAC conference on computer and communications security;">
+<meta name="citation_reference" content="citation_title=Adversarial examples: Attacks and defenses for deep learning;,citation_author=Xiaoyong Yuan;,citation_author=Pan He;,citation_author=Qile Zhu;,citation_author=Xiaolin Li;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_issue=9;,citation_volume=30;,citation_journal_title=IEEE transactions on neural networks and learning systems;,citation_publisher=IEEE;">
+<meta name="citation_reference" content="citation_title=A brief introduction to weakly supervised learning;,citation_author=Zhi-Hua Zhou;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_issue=1;,citation_volume=5;,citation_journal_title=National science review;,citation_publisher=Oxford University Press;">
+<meta name="citation_reference" content="citation_title=Recognizing objects in adversarial clutter: Breaking a visual CAPTCHA;,citation_author=Greg Mori;,citation_author=Jitendra Malik;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_volume=1;,citation_conference=IEEE;">
+<meta name="citation_reference" content="citation_title=Recognizing objects in adversarial clutter: Breaking a visual CAPTCHA;,citation_author=Greg Mori;,citation_author=Jitendra Malik;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_volume=1;,citation_conference=IEEE;">
+<meta name="citation_reference" content="citation_title=Designing human friendly human interaction proofs (HIPs);,citation_author=Kumar Chellapilla;,citation_author=Kevin Larson;,citation_author=Patrice Simard;,citation_author=Mary Czerwinski;,citation_publication_date=2005-04-02;,citation_cover_date=2005-04-02;,citation_year=2005;,citation_fulltext_html_url=https://doi.org/10.1145/1054972.1055070;,citation_doi=10.1145/1054972.1055070;,citation_conference=Association for Computing Machinery;,citation_series_title=CHI ’05;">
+<meta name="citation_reference" content="citation_title=Using machine learning to break visual human interaction proofs (HIPs);,citation_author=Kumar Chellapilla;,citation_author=Patrice Simard;,citation_publication_date=2004;,citation_cover_date=2004;,citation_year=2004;,citation_volume=17;,citation_journal_title=Advances in neural information processing systems;">
+<meta name="citation_reference" content="citation_title=Multi-digit number recognition from street view imagery using deep convolutional neural networks;,citation_author=Ian J. Goodfellow;,citation_author=Yaroslav Bulatov;,citation_author=Julian Ibarz;,citation_author=Sacha Arnoud;,citation_author=Vinay Shet;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_journal_title=arXiv preprint arXiv:1312.6082;">
+<meta name="citation_reference" content="citation_title=Deep learning;,citation_author=Yann LeCun;,citation_author=Yoshua Bengio;,citation_author=Geoffrey Hinton;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_issue=7553;,citation_volume=521;,citation_journal_title=nature;">
+<meta name="citation_reference" content="citation_title=Deep learning;,citation_author=Yann LeCun;,citation_author=Yoshua Bengio;,citation_author=Geoffrey Hinton;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_issue=7553;,citation_volume=521;,citation_journal_title=nature;">
+<meta name="citation_reference" content="citation_title=Generative adversarial networks;,citation_author=Ian Goodfellow;,citation_author=Jean Pouget-Abadie;,citation_author=Mehdi Mirza;,citation_author=Bing Xu;,citation_author=David Warde-Farley;,citation_author=Sherjil Ozair;,citation_author=Aaron Courville;,citation_author=Yoshua Bengio;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_issue=11;,citation_volume=63;,citation_journal_title=Communications of the ACM;">
+<meta name="citation_reference" content="citation_title=Generative adversarial networks;,citation_author=Ian J. Goodfellow;,citation_author=Jean Pouget-Abadie;,citation_author=Mehdi Mirza;,citation_author=Bing Xu;,citation_author=David Warde-Farley;,citation_author=Sherjil Ozair;,citation_author=Aaron Courville;,citation_author=Yoshua Bengio;,citation_doi=10.48550/arXiv.1406.2661;">
+<meta name="citation_reference" content="citation_title=A generative vision model that trains with high data efficiency and breaks text-based CAPTCHAs;,citation_author=Dileep George;,citation_author=Wolfgang Lehrach;,citation_author=Ken Kansky;,citation_author=Miguel Lázaro-Gredilla;,citation_author=Christopher Laan;,citation_author=Bhaskara Marthi;,citation_author=Xinghua Lou;,citation_author=Zhaoshi Meng;,citation_author=Yi Liu;,citation_author=Huayan Wang;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_issue=6368;,citation_volume=358;,citation_journal_title=Science;">
+<meta name="citation_reference" content="citation_title=Yet another text captcha solver: A generative adversarial network based approach;,citation_author=Guixin Ye;,citation_author=Zhanyong Tang;,citation_author=Dingyi Fang;,citation_author=Zhanxing Zhu;,citation_author=Yansong Feng;,citation_author=Pengfei Xu;,citation_author=Xiaojiang Chen;,citation_author=Zheng Wang;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;">
+<meta name="citation_reference" content="citation_title=Yet another text captcha solver: A generative adversarial network based approach;,citation_author=Guixin Ye;,citation_author=Zhanyong Tang;,citation_author=Dingyi Fang;,citation_author=Zhanxing Zhu;,citation_author=Yansong Feng;,citation_author=Pengfei Xu;,citation_author=Xiaojiang Chen;,citation_author=Zheng Wang;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;">
+<meta name="citation_reference" content="citation_title=Make complex captchas simple: A fast text captcha solver based on a small number of samples;,citation_author=Yao Wang;,citation_author=Yuliang Wei;,citation_author=Mingjin Zhang;,citation_author=Yang Liu;,citation_author=Bailing Wang;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_volume=578;,citation_journal_title=Information Sciences;">
+<meta name="citation_reference" content="citation_title=A survey of CAPTCHA technologies to distinguish between human and computer;,citation_author=Xin Xu;,citation_author=Lei Liu;,citation_author=Bo Li;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_volume=408;,citation_journal_title=Neurocomputing;">
+<meta name="citation_reference" content="citation_title=Adversarial examples: Attacks and defenses for deep learning;,citation_author=Xiaoyong Yuan;,citation_author=Pan He;,citation_author=Qile Zhu;,citation_author=Xiaolin Li;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_issue=9;,citation_volume=30;,citation_journal_title=IEEE transactions on neural networks and learning systems;">
+<meta name="citation_reference" content="citation_title=Regularizing deep neural networks by noise: Its interpretation and optimization;,citation_author=Hyeonwoo Noh;,citation_author=Tackgeun You;,citation_author=Jonghwan Mun;,citation_author=Bohyung Han;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_volume=30;,citation_journal_title=Advances in Neural Information Processing Systems;">
+<meta name="citation_reference" content="citation_title=reCAPTCHA: Human-Based Character Recognition via Web Security Measures;,citation_author=Luis Ahn;,citation_author=Benjamin Maurer;,citation_author=Colin McMillen;,citation_author=David Abraham;,citation_author=Manuel Blum;,citation_publication_date=2008-09-12;,citation_cover_date=2008-09-12;,citation_year=2008;,citation_fulltext_html_url=https://www.science.org/doi/10.1126/science.1160379;,citation_issue=5895;,citation_doi=10.1126/science.1160379;,citation_volume=321;,citation_language=en;,citation_journal_title=Science;">
+<meta name="citation_reference" content="citation_title=Reinforcement learning: An introduction;,citation_author=Richard S. Sutton;,citation_author=Andrew G. Barto;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;">
+<meta name="citation_reference" content="citation_title=Deep generative positive-unlabeled learning under selection bias;,citation_author=Byeonghu Na;,citation_author=Hyemi Kim;,citation_author=Kyungwoo Song;,citation_author=Weonyoung Joo;,citation_author=Yoon-Yeong Kim;,citation_author=Il-Chul Moon;,citation_publication_date=2020-10-19;,citation_cover_date=2020-10-19;,citation_year=2020;,citation_fulltext_html_url=https://doi.org/10.1145/3340531.3411971;,citation_doi=10.1145/3340531.3411971;,citation_conference=Association for Computing Machinery;,citation_series_title=CIKM ’20;">
+<meta name="citation_reference" content="citation_title=Análise de sobrevivência aplicada;,citation_author=Enrico Antonio Colosimo;,citation_author=Suely Ruiz Giolo;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;">
+<meta name="citation_reference" content="citation_title=A brief introduction to weakly supervised learning;,citation_author=Zhi-Hua Zhou;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_issue=1;,citation_volume=5;,citation_journal_title=National science review;">
+<meta name="citation_reference" content="citation_title=Computing machinery and intelligence;,citation_author=Alan M. Turing;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_inbook_title=undefined;">
+<meta name="citation_reference" content="citation_title=Telling humans and computers apart automatically or how lazy cryptographers do AI (tech. Rep. No. CMU-CS-02-117);,citation_author=L. Ahn;,citation_author=M. Blum;,citation_author=J. Langford;,citation_publication_date=2002;,citation_cover_date=2002;,citation_year=2002;,citation_fulltext_html_url=http://reports-archive.adm.cs.cmu.edu/anon/2002/CMU-CS-02-117.pdf;">
+<meta name="citation_reference" content="citation_title=Inaccessibility of CAPTCHA;,citation_fulltext_html_url=https://www.w3.org/TR/turingtest/;">
+<meta name="citation_reference" content="citation_title=Estado brasileiro e transparência avaliando a aplicação da lei de acesso à informação;,citation_author=Gregory Michener;,citation_author=Luiz Fernando Moncau;,citation_author=Rafael Braem Velasco;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;">
+<meta name="citation_reference" content="citation_title=Open data in science;,citation_author=Peter Murray-Rust;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_journal_title=Nature Precedings;">
+<meta name="citation_reference" content="citation_title=Observatório da insolvência: Rio de janeiro;,citation_fulltext_html_url=https://abj.org.br/pesquisas/obsrjrj/;">
+<meta name="citation_reference" content="citation_title=Tempo dos processos relacionados à adoção;,citation_fulltext_html_url=https://abj.org.br/pesquisas/adocao/;">
+<meta name="citation_reference" content="citation_title=Diagnóstico do contencioso tributário administrativo;,citation_fulltext_html_url=https://abj.org.br/pesquisas/bid-tributario/;">
+<meta name="citation_reference" content="citation_title=Diagnóstico do contencioso tributário administrativo;,citation_fulltext_html_url=https://abj.org.br/pesquisas/bid-tributario/;">
+<meta name="citation_reference" content="citation_title=Web scraping;,citation_author=Bo Zhao;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf;,citation_journal_title=Encyclopedia of big data;">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Captchas</span>
-    </a>
-  </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/jtrecenti/doutorado"><i class="bi bi-github" role="img" aria-label="GitHub">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="./Captchas.pdf"><i class="bi bi-file-pdf" role="img" aria-label="Download PDF">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-</ul>
-              <div id="quarto-search" class="" title="Search"></div>
-          </div> <!-- /navcollapse -->
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -105,9 +167,17 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Captchas</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Captchas.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -117,27 +187,32 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Sobre este documento</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Sobre este documento</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./introducao.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></a>
+  <a href="./introducao.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./metodologia.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metodologia</span></a>
+  <a href="./metodologia.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metodologia</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resultados.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelagem</span></a>
+  <a href="./resultados.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Modelagem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conclusoes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusões</span></a>
+  <a href="./conclusoes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusões</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bibliografia.html" class="sidebar-item-text sidebar-link">Bibliografia</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -164,12 +239,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#captchas-em-serviços-públicos" id="toc-captchas-em-serviços-públicos" class="nav-link active" data-scroll-target="#captchas-em-serviços-públicos">Captchas em serviços públicos</a>
-  <ul class="collapse">
-  <li><a href="#uma-luta-de-geradores-e-resolvedores" id="toc-uma-luta-de-geradores-e-resolvedores" class="nav-link" data-scroll-target="#uma-luta-de-geradores-e-resolvedores">Uma luta de geradores e resolvedores</a></li>
+  <li><a href="#captchas-em-serviços-públicos" id="toc-captchas-em-serviços-públicos" class="nav-link active" data-scroll-target="#captchas-em-serviços-públicos">Captchas em serviços públicos</a></li>
+  <li><a href="#uma-luta-entre-geradores-e-resolvedores" id="toc-uma-luta-entre-geradores-e-resolvedores" class="nav-link" data-scroll-target="#uma-luta-entre-geradores-e-resolvedores">Uma luta entre geradores e resolvedores</a></li>
   <li><a href="#oráculo" id="toc-oráculo" class="nav-link" data-scroll-target="#oráculo">Oráculo</a></li>
-  </ul></li>
-  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos">Objetivos</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos">Objetivo</a></li>
   <li><a href="#justificativa" id="toc-justificativa" class="nav-link" data-scroll-target="#justificativa">Justificativa</a></li>
   <li><a href="#hipóteses" id="toc-hipóteses" class="nav-link" data-scroll-target="#hipóteses">Hipóteses</a></li>
   <li><a href="#organização-do-trabalho" id="toc-organização-do-trabalho" class="nav-link" data-scroll-target="#organização-do-trabalho">Organização do trabalho</a></li>
@@ -181,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="introducao" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span></h1>
+<h1 class="title"><span id="introducao" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></h1>
 </div>
 
 
@@ -196,19 +269,9 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Captcha (<em>Completely Automated Public Turing test to tell Computers and Humans Apart</em>) é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas.</p>
-<p>A <a href="#fig-teste">Figura&nbsp;<span>2.1</span></a> é um teste para configurar imagens.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-teste" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="assets/img/cycle.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;2.1: Uma caption</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Captchas estão presentes em toda a internet. Inicialmente criados para prevenir <em>spam</em> (<em>Sending and Posting Advertisement in Mass</em>), os desafios se tornaram populares rapidamente (XXX), sendo utilizados como forma de evitar evitar o uso indevido de aplicações da <em>web</em>. Algumas ações que os desafios podem ajudar a evitar são:</p>
+<p>Captcha (<em>Completely Automated Public Turing test to tell Computers and Humans Apart</em>) é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. Outro nome para os Captchas é <em>Human Interaction Proofs,</em> ou HIPs <span class="citation" data-cites="chellapilla2005">(<a href="bibliografia.html#ref-chellapilla2005" role="doc-biblioref">CHELLAPILLA et al., 2005</a>)</span>.</p>
+<p>Um Captcha pode ser classificado como uma variação do teste de Turing <span class="citation" data-cites="turing2009">(<a href="bibliografia.html#ref-turing2009" role="doc-biblioref">TURING, 2009</a>)</span>. A diferença no caso do Captcha é que a avaliação da humanidade do agente é feita por uma máquina ao invés de uma pessoa – por isso o termo <em>automated</em>. Captchas podem ser classificados em algumas situações com os chamados <strong>testes de Turing reversos</strong>, apesar dos autores originais afastarem essa caracterização <span class="citation" data-cites="vonahnTellingHumansComputers2002">(<a href="bibliografia.html#ref-vonahnTellingHumansComputers2002" role="doc-biblioref">AHN; BLUM; LANGFORD, 2002</a>)</span>.</p>
+<p>Captchas estão presentes em toda a internet. Inicialmente criados para prevenir <em>spam</em> (<em>Sending and Posting Advertisement in Mass</em>), os desafios se tornaram populares rapidamente <span class="citation" data-cites="vonahnReCAPTCHAHumanBasedCharacter2008">(<a href="bibliografia.html#ref-vonahnReCAPTCHAHumanBasedCharacter2008" role="doc-biblioref">AHN et al., 2008</a>)</span>, sendo utilizados como forma de evitar evitar o uso indevido de aplicações da <em>web</em>. Algumas ações que os desafios podem ajudar a evitar são:</p>
 <ul>
 <li>Criação de contas falsas nos sites.</li>
 <li>Envio automático de mensagens, via <em>email</em> ou formulários de contato.</li>
@@ -217,63 +280,77 @@ ul.task-list li input[type="checkbox"] {
 <li>Consulta automatizada em sites para obtenção de dados.</li>
 </ul>
 <p>O uso de Captchas tem, por princípio, o objetivo de aumentar a segurança das pessoas que acessam a internet e proteger os sistemas <em>web</em> de uso abusivo. Para pessoas que acessam os sites pontualmente, a presença de Captchas representa um mero dissabor; para quem realiza acessos massivos, uma grande dificuldade.</p>
-<p>No entanto, o uso de Captchas não é adequado em todas as situações. Um exemplo são os sites de vendas: o uso dos desafios aborrece o usuário, alterando a qualidade da sua experiência. Os sites devem levar esse fator de aborrecimento em conta para não reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar outros mecanismos de prevenção à fraude, como monitoramento da sessão do usuário (XXX).</p>
+<p>No entanto, o uso de Captchas não é adequado em todas as situações. Um exemplo são os sites de vendas: o uso dos desafios aborrece o usuário, alterando a qualidade da sua experiência. Os sites devem levar esse fator de aborrecimento em conta para não reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar outros mecanismos de prevenção à fraude, como monitoramento da sessão do usuário <span class="citation" data-cites="inaccess">(<a href="bibliografia.html#ref-inaccess" role="doc-biblioref"><span>«Inaccessibility of CAPTCHA»</span>, [s.d.]</a>)</span>.</p>
 <p>Também existem casos em que o uso de Captchas é prejudicial. Sua utilização em serviços públicos do Brasil, por exemplo, é problemática, como discutido na próxima seção.</p>
 <section id="captchas-em-serviços-públicos" class="level2">
 <h2 class="anchored" data-anchor-id="captchas-em-serviços-públicos">Captchas em serviços públicos</h2>
 <p>A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º, previsão que “todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à segurança da sociedade e do Estado;”. Essa previsão é implementada pela Lei de Acesso à Informação (Lei 12.527/2011; LAI), que é aplicada “aos órgãos públicos integrantes da administração direta dos Poderes Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério Público”, bem como “as autarquias, as fundações públicas, as empresas públicas, as sociedades de economia mista e demais entidades controladas direta ou indiretamente pela União, Estados, Distrito Federal e Municípios” (Art. 1º).</p>
-<p>A LAI, apesar de trazer diversos benefícios à sociedade, tem dois problemas. A primeira é o <strong>esforço</strong>: tanto a pessoa/órgão que solicita os dados, quanto o órgão que retorna os dados precisam trabalhar para disponibilizar as informações, sendo necessário deslocar equipes para realizar os levantamentos pedidos. A segunda é o <strong>formato</strong>: os dados enviados como resultado de pedidos de LAI podem chegar em formatos inadequados para consumo da solicitante, muitas vezes em <em>Portable Document Format</em> (PDF), que dificulta a leitura e análise dos dados (XXX); além disso, como o levantamento é realizado de forma individualizada, o mesmo pedido feito em diferentes períodos (e.g.&nbsp;uma atualização mensal dos dados) pode vir em formatos diferentes, dificultando a leitura e arrumação dos dados.</p>
+<p>A LAI, apesar de trazer diversos benefícios à sociedade, tem dois problemas. A primeira é o <strong>esforço</strong>: tanto a pessoa/órgão que solicita os dados, quanto o órgão que retorna os dados precisam trabalhar para disponibilizar as informações, sendo necessário deslocar equipes para realizar os levantamentos pedidos. A segunda é o <strong>formato</strong>: os dados enviados como resultado de pedidos de LAI podem chegar em formatos inadequados para consumo da solicitante, muitas vezes em <em>Portable Document Format</em> (PDF), que dificulta a leitura e análise dos dados <span class="citation" data-cites="michener2015">(<a href="bibliografia.html#ref-michener2015" role="doc-biblioref">MICHENER; MONCAU; VELASCO, 2015</a>, pág. 55)</span>; além disso, como o levantamento é realizado de forma individualizada, o mesmo pedido feito em diferentes períodos (e.g.&nbsp;uma atualização mensal dos dados) pode vir em formatos diferentes, dificultando a leitura e arrumação dos dados.</p>
 <p>Uma forma de evitar os problemas de esforço e formato em pedidos de LAI é disponibilizar os dados de <strong>forma aberta</strong>. Como definido pela <em>Open Knowledge Foundation</em> (OKFN), a base de dados “deve ser fornecida em uma forma conveniente e modificável isento de obstáculos tecnológicos desnecessários para a realização dos direitos licenciados. Especificamente, os dados devem ser legíveis-por-máquina, disponíveis todo o seu volume, e fornecidos em um formato aberto (ou seja, um formato com sua especificação livremente disponível, e publicada sem qualquer restrições, monetárias ou não, da sua utilização) ou, no mínimo, podem ser processados com pelo menos uma ferramenta de software livre e gratuita.”</p>
-<p>As vantagens ao disponibilizar dados públicos de forma aberta para a sociedade é um tema pacífico na comunidade científica (XXX). Infelizmente, existem diversos dados públicos que não estão disponíveis de forma aberta, em plataformas como o <a href="https://dados.gov.br">dados.gov.br</a>.</p>
-<p>A dificuldade de acesso é particularmente evidente no Poder Judiciário, que além de não disponibilizar um portal de dados abertos, impõe barreiras aos pedidos de acesso à informação por utilizar diversos sistemas para armazenar os dados. Por exemplo, para pedir uma lista de todos os processos judiciais relacionados a recuperação judicial de empresas, as únicas alternativas são i) pedir os dados ao Conselho Nacional de Justiça (CNJ), que não possui informações suficientes para obter a lista (XXX) ou ii) expedir ofícios aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções e critérios de acesso aos dados, diferentes prazos para atendimento e diferentes formatos, podendo, inclusive, negar o pedido de acesso.</p>
+<p>As vantagens ao disponibilizar dados públicos de forma aberta para a sociedade é um tema pacífico na comunidade científica <span class="citation" data-cites="murray-rust2008">(<a href="bibliografia.html#ref-murray-rust2008" role="doc-biblioref">MURRAY-RUST, 2008</a>)</span>. Infelizmente, existem diversos dados públicos que não estão disponíveis de forma aberta, em plataformas como o <a href="https://dados.gov.br">dados.gov.br</a>.</p>
+<p>A dificuldade de acesso é particularmente evidente no Poder Judiciário, que além de não disponibilizar um portal de dados abertos, impõe barreiras aos pedidos de acesso à informação por utilizar diversos sistemas para armazenar os dados. Por exemplo, para pedir uma lista de todos os processos judiciais relacionados a recuperação judicial de empresas, as únicas alternativas são i) pedir os dados ao Conselho Nacional de Justiça (CNJ), que não possui informações suficientes para obter a lista<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> ou ii) expedir ofícios aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções e critérios de acesso aos dados, diferentes prazos para atendimento e diferentes formatos, podendo, inclusive, negar o pedido de acesso.</p>
 <p>A dificuldade para acessar os dados do judiciário é a principal barreira para realização de pesquisas pela Associação Brasileira de Jurimetria (ABJ), empresa na qual o autor desta tese trabalha. A entidade tem como missão principal a realização de estudos para implementar políticas públicas utilizando dados do judiciário.</p>
-<p>Dos 16 projetos disponibilizados na <a href="https://abj.org.br/pesquisas/">página de pesquisas no site da ABJ</a>, pelo menos 12 (75%) apresentaram dificuldades na obtenção dos dados via pedidos de acesso aos órgãos. Três exemplos icônicos são o da pesquisa sobre Tempo dos processos relacionados à adoção no Brasil (XXX), o Observatório da Insolvência: Rio de Janeiro (XXX) e o Diagnóstico do Contencioso Tributário Administrativo (XXX). No primeiro caso, dois tribunais enviaram os dados em arquivos em papel, sendo que um deles ultrapassou mil páginas com números de processos impressos. No segundo caso, o pedido foi respondido com uma planilha de contagens ao invés da lista de processos. No último caso, até mesmo órgãos que faziam parte do grupo de trabalho da pesquisa negaram pedido de acesso a dados de processos tributários em primeira instância, com argumentos que variavam desde a dificuldade técnica de levantar os dados até a Lei Geral de Proteção de Dados (LGPD).</p>
-<p>Em muitas situações, portanto, a única alternativa para realizar as pesquisas é acessando os dados via coleta automatizada nos sites. Todos os tribunais possuem ferramentas de consulta individualizadas de processos, por conta do que está previsto na CF. A solução, portanto, passa a ser construir uma ferramenta que obtém todos os dados automaticamente. Tal conceito é conhecido como <em>raspagem de dados</em> (XXX) e será desenvolvido com maiores detalhes no Capítulo <span class="quarto-unresolved-ref">?sec-metodologia</span>.</p>
-<p>Os Captchas se tornam prejudiciais à sociedade quando o acesso automatizado é necessário para realizar pesquisas científicas. Infelizmente, XX dos 91 tribunais utilizam a barreira do Captcha. Alguns tribunais, inclusive, têm o entendimento de que o acesso automatizado é prejudicial, como o TJRS, que emitiu um <a href="https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/">comunicado</a> sobre o tema.</p>
+<p>Dos 16 projetos disponibilizados na <a href="https://abj.org.br/pesquisas/">página de pesquisas no site da ABJ</a>, pelo menos 12 (75%) apresentaram dificuldades na obtenção dos dados via pedidos de acesso aos órgãos. Três exemplos icônicos são o da pesquisa sobre Tempo dos processos relacionados à adoção no Brasil <span class="citation" data-cites="tempodo">(<a href="bibliografia.html#ref-tempodo" role="doc-biblioref"><span>«Tempo dos processos relacionados à adoção»</span>, [s.d.]</a>)</span>, o Observatório da Insolvência: Rio de Janeiro <span class="citation" data-cites="observat">(<a href="bibliografia.html#ref-observat" role="doc-biblioref"><span>«Observatório da insolvência»</span>, [s.d.]</a>)</span> e o Diagnóstico do Contencioso Tributário Administrativo <span class="citation" data-cites="diagnosticoABJ">(<a href="bibliografia.html#ref-diagnosticoABJ" role="doc-biblioref"><span>«Diagnóstico do Contencioso Tributário Administrativo»</span>, [s.d.]</a>)</span>. No primeiro caso, dois tribunais enviaram os dados em arquivos em papel, sendo que um deles ultrapassou mil páginas com números de processos impressos. No segundo caso, o pedido foi respondido com uma planilha de contagens ao invés da lista de processos. No último caso, até mesmo órgãos que faziam parte do grupo de trabalho da pesquisa negaram pedido de acesso a dados de processos tributários em primeira instância, com argumentos que variavam desde a dificuldade técnica de levantar os dados até a Lei Geral de Proteção de Dados (LGPD).</p>
+<p>Em muitas situações, portanto, a única alternativa para realizar as pesquisas é acessando os dados via coleta automatizada nos sites. Todos os tribunais possuem ferramentas de consulta individualizadas de processos, por conta do que está previsto na CF. A solução, portanto, passa a ser construir uma ferramenta que obtém todos os dados automaticamente. Tal conceito é conhecido como <em>raspagem de dados</em> <span class="citation" data-cites="zhao2017">(<a href="bibliografia.html#ref-zhao2017" role="doc-biblioref">ZHAO, 2017</a>)</span> e será desenvolvido com maiores detalhes no Capítulo <span class="quarto-unresolved-ref">?sec-metodologia</span>.</p>
+<p>Os Captchas se tornam prejudiciais à sociedade quando o acesso automatizado é necessário para realizar pesquisas científicas. Infelizmente, boa parte dos tribunais utilizam a barreira do Captcha. Alguns tribunais, inclusive, têm o entendimento de que o acesso automatizado é prejudicial, como o TJRS, que emitiu um <a href="https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/">comunicado</a> sobre o tema.</p>
 <p>Uma justificativa comum para implementar Captchas em consultas públicas é a estabilidade dos sistemas. Ao realizar muitas consultas de forma automática, um robô pode tornar o sistema instável e, em algumas situações, até mesmo derrubar o servidor que disponibiliza as consultas.</p>
 <p>O problema é que utilizar Captchas não impede o acesso automatizado. As empresas que fazem acesso automatizado em tribunais podem construir ferramentas ou utilizar serviços externos de resolução de Captchas. Ou seja, ao utilizar Captchas, o acesso não é impedido, e sim especializado.</p>
 <p>Além disso, utilizar Captchas é uma solução ineficiente. Do ponto de vista técnico, a solução mais eficiente para disponibilizar os dados é através de ferramentas de dados abertos como o <em>Comprehensive Knowledge Archive Network</em> (CKAN). Ao disponibilizar os dados de forma aberta, as consultas automatizadas ficariam isoladas dos sites de consulta pública, o que garantiria o acesso das pessoas sem problemas de indisponibilidade.</p>
-<p>Não é só para as pessoas que fazem pesquisa com dados públicos que o uso de Captchas pode ser prejudicial. No mercado, existem serviços de resolução de Captcha que utilizam mão de obra humana, em regimes que pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um exemplo é o <a href="https://2captcha.com/make-money-online">2Captcha</a>, que funciona como um Uber dos Captchas: o algoritmo automatizado envia o Captcha para a plataforma, que é acessado e resolvido por uma pessoa, retornando a solução para o algoritmo.</p>
-<p>Segundo o site, o valor pago pelo 2Captcha é de US$ 0.5 para 1 a 2 horas de trabalho. No regime da Consolidação das Leis do Trabalho (Decreto-Lei 5.452/1943, CLT) as horas mensais de trabalho são 220. Trabalhando continuamente no 2Captcha, isso daria um salário de 55 a 110 dólares por mês, valor bem abaixo do salário mínimo, que no ano de 2022 era de R$ 1.100,00 (XXX). Ou seja, os serviços públicos acabam, indiretamente, incentivando um mercado que paga abaixo do salário mínimo.</p>
+<p>Não é só para as pessoas que fazem pesquisa com dados públicos que o uso de Captchas pode ser prejudicial. No mercado, existem serviços de resolução de Captcha que utilizam mão de obra humana, em regimes que pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um exemplo é o 2Captcha<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, que funciona como um Uber dos Captchas: o algoritmo automatizado envia o Captcha para a plataforma, que é acessado e resolvido por uma pessoa, retornando a solução para o algoritmo.</p>
+<p>Segundo o site, o valor pago pelo 2Captcha é de US$ 0.5 para 1 a 2 horas de trabalho. No regime da Consolidação das Leis do Trabalho (Decreto-Lei 5.452/1943, CLT) as horas mensais de trabalho são 220. Trabalhando continuamente no 2Captcha, isso daria um salário de 55 a 110 dólares por mês, valor bem abaixo do salário mínimo, que no ano de 2022 era de R$ 1.100,00<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Ou seja, os serviços públicos acabam, indiretamente, incentivando um mercado que paga abaixo do salário mínimo. Luis von Ahn, um dos criadores dos Captchas, define o 2Captcha como um <em>sweatshop</em>, um termo utilizado para caracterizar empresas que têm condições de trabalho inaceitáveis.</p>
 <p>A solução definitiva para os problemas gerado pelos Captchas é a disponibilização dos dados públicos de forma aberta. Na ausência dessa solução, seja por falta de interesse ou iniciativa dos órgãos públicos, a alternativa é desenvolver uma solução para resolver Captchas que seja gratuita e aberta. Tal solução desincentivaria economicamente o uso de sistemas como o 2Captcha, protegendo as pessoas que fazem as resoluções e permitindo que as pessoas pesquisadoras realizem seus levantamentos.</p>
 <p>O presente trabalho busca avançar nesse sentido. A solução desenvolvida envolve um modelo que resolve alguns Captchas automaticamente, reduzindo significativamente a necessidade de rotulação manual.</p>
 <p>Para compreender completamente o avanço que a tese representa, no entanto, é necessário apresentar o histórico de desenvolvimento dos Captchas. O histórico é apresentado na próxima Seção, através da luta de geradores e resolvedores de Captchas, que pode ser dada como encerrada no ano de 2018, com o advento do <em>reCaptcha v3</em>.</p>
-<section id="uma-luta-de-geradores-e-resolvedores" class="level3">
-<h3 class="anchored" data-anchor-id="uma-luta-de-geradores-e-resolvedores">Uma luta de geradores e resolvedores</h3>
-<blockquote class="blockquote">
-<p>contar a história dos captchas como uma luta de classes: geradores e classificadores</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>na história, ir citando os papers que vão aparecendo</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>o advento do recaptcha</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>quando surgir o primeiro classificador com convnets, definir de forma mais detalhada</p>
-</blockquote>
-<p>Quem venceu a luta de geradores e resolvedores? Na verdade, nenhuma das duas (XXX). O que ocorreu com o reCaptcha v3 e seus sucessores foi, no fundo, uma mudança de perspectiva: o Captcha deixou de ser um sistema <strong>passivo</strong> e passou a ser um sistema <strong>ativo</strong> de verificação. Ao invés de criar uma tarefa difícil de resolver por robôs e fácil de resolver por pessoas, os sistemas criaram uma camada de verificação da sessão de acesso do usuário, incluindo análises do navegador, dos <em>cookies</em> e dos padrões de cliques. Antes mesmo de chegar no desafio do Captcha, portanto, o algoritmo de acesso precisa enganar os verificadores. Essa tarefa é muito mais parecida com um problema de <em>cyberataque</em> do que uma tarefa de inteligência artificial (XXX).</p>
-<p>A luta continua, mas não é mais entre geradores e resolvedores.</p>
-<p>De qualquer forma, os Captchas baseados textos em imagens continuam sendo os mais populares. Isso é especialmente evidente nos serviços públicos que são objeto da presente pesquisa, já que os serviços raramente são atualizados com ferramentas mais recentes. Ainda não foi encontrado um resolvedor geral para imagens e também não existem desafios comprovadamente impossíveis de resolver por inteligência artificial.</p>
-<p>A investigação foco da tese será na busca de um resolvedor universal de Captchas de textos em imagens. O objetivo será atingido de forma parcial, explorando o potencial de uso do <strong>oráculo</strong>, apresentado na próxima seção.</p>
 </section>
-<section id="oráculo" class="level3">
-<h3 class="anchored" data-anchor-id="oráculo">Oráculo</h3>
-<p>Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado, são muito sensíveis a perturbações pequenas nas imagens (XXX). Por isso, se o site de um tribunal, por exemplo, mudar o Captcha utilizado, seria necessário baixar e anotar uma nova base de dados para treinar o modelo. Os avanços em técnicas de regularização fazem com que o modelo seja menos afetado por mudanças nos desafios gerados. Uma técnica de regularização que ajuda na capacidade de generalização é a aumentação de dados com adição de ruídos (XXX). No entanto, nenhuma técnica garante que o modelo terá excelentes resultados em novos desafios.</p>
-<p>Outra alternativa é desenvolver modelos que aprendem com poucos dados anotados. Avanços recentes indicam que modelos generativos adversariais (GAN) e modelos relacionados podem apresentar bons resultados na resolução de tarefas de imagens, mesmo com uma base de dados anotada pequena (XXX). Nesse sentido, ainda que um site mude seu Captcha, é possível ajustar um modelo que resolve esse Captcha sem a necessidade de anotar muitos exemplos para construir uma nova base de treino.</p>
-<p>Nessa tese, apresenta-se uma nova técnica para resolver Captchas com poucos dados anotados. A técnica consiste em aproveitar o fato de que o Captcha aplica um teste de Turing reverso para gerar bases de dados automaticamente. Ou seja, a técnica resolve o problema não com modelos mais sofisticados, mas com a utilização eficiente dos recursos disponíveis. Essa é a técnica do oráculo.</p>
+<section id="uma-luta-entre-geradores-e-resolvedores" class="level2">
+<h2 class="anchored" data-anchor-id="uma-luta-entre-geradores-e-resolvedores">Uma luta entre geradores e resolvedores</h2>
+<p>O primeiro texto técnico sobre Captchas foi publicado por <span class="citation" data-cites="vonahnTellingHumansComputers2002">AHN; BLUM; LANGFORD (<a href="bibliografia.html#ref-vonahnTellingHumansComputers2002" role="doc-biblioref">2002</a>)</span>. O texto apresenta o Captcha e seu significado através do problema de geração de <em>emails</em> automáticos no Yahoo. Em seguida, apresenta alguns exemplos de candidatos a Captcha, com tarefas de reconhecimento de padrões ou textos. Uma característica interessante que os autores colocam sobre o Captcha é que suas imagens devem ser disponíveis publicamente. O texto também faz a conexão entre a tarefa dos Captchas e os desafios da inteligência artificial. Um ponto a destacar é que os autores defendem que os Captchas devem ser resolvidos, pois isso implica em avanços na inteligência artificial. O site original do projeto, <em>The Captcha Project</em>, foi lançado em 2000.</p>
+<p>O relatório técnico de <span class="citation" data-cites="vonahnTellingHumansComputers2002">AHN; BLUM; LANGFORD (<a href="bibliografia.html#ref-vonahnTellingHumansComputers2002" role="doc-biblioref">2002</a>)</span> não foi o primeiro a apresentar o nome Captcha, nem suas aplicações. <span class="citation" data-cites="reshefMethodSystemDiscriminating2005">RESHEF; RAANAN; SOLAN (<a href="bibliografia.html#ref-reshefMethodSystemDiscriminating2005" role="doc-biblioref">2005</a>)</span> foi o primeiro registro de patente com o termo e <span class="citation" data-cites="lillibridgeMethodSelectivelyRestricting2001">LILLIBRIDGE et al. (<a href="bibliografia.html#ref-lillibridgeMethodSelectivelyRestricting2001" role="doc-biblioref">2001</a>)</span> foi o primeiro registro de patente que implementou uma solução aos sistemas de Captchas. No entanto, o relatório de 2022 é o primeiro que reconhecidamente trata do tema como um problema de inteligência artificial como um teste de Turing automatizado.</p>
+<p>Os artigos mais conhecidos de introdução aos Captchas são vonahnCaptchaTellingHumans2003 e vonahnTellingHumansComputers2004. O conteúdo dos trabalhos é o mesmo, sendo o primeiro deles na forma de apresentação e o segundo na forma de relatório. A apresentação é a primeira a mostrar o projeto reCaptcha, que será comentado em uma subseção própria. Um detalhe interessante é a ênfase dos autores no termo <em>Public</em> dos Captchas, mostrando a preocupação em manter os códigos públicos.</p>
+<p>Os autores também defendem que o Captcha é uma forma de fazer com que pessoas mal intencionadas contribuam com os avanços da inteligência artificial. Se uma pessoa (ainda que mal intencionada) resolve um Captcha e publica essa solução, isso significa que a comunidade científica avançou na área de inteligência artificial.</p>
+<p>Não demorou para surgirem os primeiros resolvedores de Captchas<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. <span class="citation" data-cites="mori2003a">MORI; MALIK (<a href="bibliografia.html#ref-mori2003a" role="doc-biblioref">2003</a>)</span> foi um dos primeiros trabalhos publicados sobre o tema e utiliza diversas técnicas de processamento de imagens para obter os rótulos corretos. Também não demorou para a comunidade científica perceber que redes neurais eram úteis nesse contexto <span class="citation" data-cites="chellapilla2004">(<a href="bibliografia.html#ref-chellapilla2004" role="doc-biblioref">CHELLAPILLA; SIMARD, 2004</a>)</span>. No artigo de 2004, Chellapilla e Simard desenvolvem um algoritmo baseado em heurísticas para segmentar a imagem e redes neurais para identificar as imagens individuais.</p>
+<p>A partir desse ponto, foi iniciada uma luta entre geradores e resolvedores de Captchas. Do lado dos geradores, as pessoas envolvidas foram tanto acadêmicos tentando desenvolver desafios cada vez mais difíceis para avançar na pesquisa em inteligência artificial, quanto empresas de tecnologia tentando se proteger contra programas avançados. Do lado dos resolvedores, as pessoas envolvidas foram tanto acadêmicos tentando desenvolver novas técnicas para avançar nos modelos de reconhecimento de imagens, quanto <em>spammers</em> buscando novas formas de realizar ataques cibernéticos.</p>
+<p>Um dos geradores de Captchas mais conhecidos é Luis von Ahn, que também é um dos criadores do Captcha. Um pedaço da história está disponível nos primeiros cinco minutos da entrevista com Luis Von Ahn em um programa chamado <em>Spark</em><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Na entrevista, Von Ahn conta um pouco da origem dos Captchas em Carnegie Mellon, contando que ficou frustrado com o fato das pessoas perderem tempo de inteligência humana ao resolver Captchas, o que deu origem ao reCaptcha. Outro vídeo instrutivo é uma palestra de Von Ahn na <em>Thinking Digital Conference</em> sobre a história do reCaptcha<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Segundo ele, a <em>startup</em> foi criada em maio de 2007<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, depois de von Ahn perceber que aproximadamente 200 milhões de Captchas eram resolvidos diariamente.</p>
+<p>O reCaptcha v1 foi uma solução de aproveitar o tempo das pessoas que resolvem Captchas para digitalizar livros <span class="citation" data-cites="vonahnReCAPTCHAHumanBasedCharacter2008">(<a href="bibliografia.html#ref-vonahnReCAPTCHAHumanBasedCharacter2008" role="doc-biblioref">AHN et al., 2008</a>)</span>. A ideia do reCaptcha, como demonstrada na <a href="#fig-recaptcha-v1">Figura&nbsp;<span>1.1</span></a>, foi apresentar duas palavras distorcidas para a pessoa: a primeira seria utilizada para verificar se a pessoa era um humano, e a segunda seria utilizada para decifrar um texto que os robôs na época não conseguiam ler. Em 2009, a empresa foi comprada pela Google, que utilizou o reCaptcha para digitalizar os Google Books.</p>
+<div id="fig-recaptcha-v1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="assets/img/recaptcha-v1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;1.1: Explicação de von Ahn sobre o funcionamento do reCaptcha</figcaption><p></p>
+</figure>
+</div>
+<p>Curiosamente, foi com a própria Google que os resolvedores ficaram em vantagem na luta. Os modelos de inteligência artificial continuaram avançando, notadamente com o avanço dos modelos de redes neurais profundas <span class="citation" data-cites="lecun2015a">(<a href="bibliografia.html#ref-lecun2015a" role="doc-biblioref">LECUN; BENGIO; HINTON, 2015</a>)</span>. No trabalho de <span class="citation" data-cites="goodfellow2013">GOODFELLOW et al. (<a href="bibliografia.html#ref-goodfellow2013" role="doc-biblioref">2013</a>)</span>, todos funcionários da Google na época, foi apresentado um modelo de redes neurais convolucionais que resolvia o reCaptcha v1 com 99.8% de acurácia. No ano seguinte, em 2014, a Google descontinuou o reCaptcha v1, lançando o reCaptcha v2.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>O reCaptcha v2 apresentou duas inovações importantes. O primeiro foi o botão “<em>I’m not a robot</em>”, um verificador automático do navegador que utiliza heurísticas para detectar se o padrão de acesso ao site se assemelha com um robô ou humano. O segundo foi a mudança no tipo de tarefa: ao invés de rotular um texto distorcido, o desafio passou a ser identificar objetos e animais, como na <a href="#fig-turkey">Figura&nbsp;<span>1.2</span></a>.</p>
+<p>A mudança do tipo de tarefa de visão computacional mudança foi importante para o sucesso do reCaptcha v2. Isso ocorre porque o desafio é mais difícil, já que existem muito mais objetos e imagens do que letras e números, aumentando significativamente o suporte da variável resposta. Por exemplo, um modelo para identificar um reCaptcha de gatos pode ser facilmente desenvolvido a partir de uma base pré-classificada, potencialmente custosa para ser construída. O reCaptcha v2, no entanto, pode facilmente mudar a tarefa para identificar leões, cães, hidrantes e semáforos, inutilizando o modelo criado para classificar gatos. O reCaptcha v2 também foi um sucesso para treinar os modelos desenvolvidos pela própria Google: usando o mesmo princípio do reCaptcha v1, a humanidade era verificada com apenas uma parte das imagens. As outras imagens eram utilizadas para rotular imagens, utilizadas para aprimorar os modelos utilizados nos projetos de carros autônomos, Google Street View e outras iniciativas da empresa.</p>
+<div id="fig-turkey" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="assets/img/turkey.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;1.2: Exemplo do reCaptcha v2 com a imagens de perus.</figcaption><p></p>
+</figure>
+</div>
+<p>Com o advento do reCaptcha v2, a pergunta dos resolvedores de Captcha passou a ser: como criar modelos que funcionam razoavelmente bem nos Captchas sem a necessidade de rotular vários casos? Se esse desafio fosse resolvido, dois avanços aconteceriam: i) um grande avanço na inteligência artificial, especificamente na área de visão computacional, e ii) uma nova forma de vencer a luta.</p>
+<p>Até o momento de escrita da tese, não existia um modelo geral que resolvesse com alta acurácia todos os desafios colocados pelo reCaptcha v2 e seus concorrentes. No entanto, vários avanços apareceram no sentido de reduzir a quantidade de imagens rotuladas para criar candidatos a resolvedores. Dentre eles, o mais significativos são os baseados nas redes generativas adversariais (<em>Generative Adversarial Networks,</em> ou GANs), propostas no famoso trabalho de <span class="citation" data-cites="goodfellow">GOODFELLOW et al. (<a href="bibliografia.html#ref-goodfellow" role="doc-biblioref">[s.d.]</a>)</span>. O primeiro trabalho que utiliza modelos generativos no contexto de Captchas mostrou uma redução de 300x na quantidade de dados classificados necessária para resolver um Captcha [<span class="citation" data-cites="george2017">GEORGE et al. (<a href="bibliografia.html#ref-george2017" role="doc-biblioref">2017</a>)</span>; nesse caso, os autores propõem uma rede diferente do GAN, chamada <em>Recursive Cortical Network</em>, ou RCN]. Outros trabalhos mais recentes <span class="citation" data-cites="ye2018a wang2021">(<a href="bibliografia.html#ref-wang2021" role="doc-biblioref">WANG et al., 2021</a>; <a href="bibliografia.html#ref-ye2018a" role="doc-biblioref">YE et al., 2018</a>)</span> avançam ainda mais na pesquisa, reduzindo o trabalho de classificação para um novo Captcha de texto para aproximadamente 2 horas.</p>
+<p>Mas foi em 2018, com o reCaptcha v3, que a Google deu a palavra final. Com a nova versão, as verificações de navegador passaram a ser muito mais poderosas, sendo raros os casos em que o site fica em dúvidas se a pessoa é ou não um robô. Versões mais recentes, como o reCaptcha <em>Enterprise,</em> de 2020, ainda permitem que as pessoas que mantêm os sites façam o ajuste de modelos de detecção de robôs. Os desafios de reconhecimento de texto, objetos ou imagens perderam a importância.</p>
+<p>Então, no final, quem venceu a luta de geradores e resolvedores? Na verdade, nenhuma das duas! O que ocorreu com o reCaptcha v3 e seus sucessores foi, no fundo, uma mudança de perspectiva: o Captcha deixou de ser um sistema <strong>passivo</strong> e passou a ser um sistema <strong>ativo</strong> de verificação. Ao invés de criar uma tarefa difícil de resolver por robôs e fácil de resolver por pessoas, os sistemas criaram uma camada de verificação da sessão de acesso do usuário, incluindo análises do navegador, dos <em>cookies</em> e dos padrões de cliques. Antes mesmo de chegar no desafio de reconhecimento, o algoritmo de acesso precisa enganar os verificadores. Essa tarefa é muito mais parecida com um problema de <em>cyberataque</em> do que uma tarefa de inteligência artificial.</p>
+<p>A guerra entre sites e <em>spammers</em> continua, mas não é mais uma luta entre geradores e resolvedores. Por conta disso, os desafios dos Captchas, sejam de texto ou de imagem, são hoje muito mais uma questão acadêmica do que uma questão de segurança. A pesquisa sobre Captchas ainda é promissora e pode gerar muitos resultados importantes para a área de inteligência artificial.</p>
+<p>Infelizmente, Captchas de textos em imagens continuam sendo populares na <em>internet</em>. Isso é especialmente evidente nos serviços públicos – objeto deste trabalho –, já que os serviços raramente são atualizados com ferramentas mais recentes. Desenvolver uma ferramenta que facilita a resolução de Captchas em sites públicos é uma forma de incentivar os sites a serem atualizados. Se o Captcha inseguro parar de fazer efeito prático, os sites terão de atualizar a tecnologia, seja colocando Captchas mais poderosos, que é o resultado indesejado, ou disponibilizando os dados públicos de forma aberta, que é o resultado desejado.</p>
+<p>Essa é a lacuna identificada a partir da observação do estado atual dos serviços públicos e dos trabalhos acadêmicos analisados. No presente trabalho, será apresentado um fluxo de trabalho que pode ser facilmente aplicado a diferentes modelos de resolução de Captchas, incluindo arquiteturas que ainda não foram desenvolvidas. O fluxo de trabalho funcionará como um acelerador do aprendizado, possibilitando a criação de modelos que não precisam de intervenção humana. O resultado será encontrado explorando o potencial de uso do <strong>oráculo</strong>, apresentado na próxima seção.</p>
+</section>
+<section id="oráculo" class="level2">
+<h2 class="anchored" data-anchor-id="oráculo">Oráculo</h2>
+<p>Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado, são muito sensíveis a perturbações pequenas nas imagens <span class="citation" data-cites="yuan2019">(<a href="bibliografia.html#ref-yuan2019" role="doc-biblioref">YUAN et al., 2019</a>)</span>. Por isso, se o site de um tribunal, por exemplo, mudar o Captcha utilizado, seria necessário baixar e anotar uma nova base de dados para treinar o modelo. Os avanços em técnicas de regularização fazem com que o modelo seja menos afetado por mudanças nos desafios gerados. Uma técnica de regularização que ajuda na capacidade de generalização é a aumentação de dados com adição de ruídos <span class="citation" data-cites="noh2017">(<a href="bibliografia.html#ref-noh2017" role="doc-biblioref">NOH et al., 2017</a>)</span>. No entanto, nenhuma técnica garante que o modelo terá excelentes resultados em novos desafios.</p>
+<p>Outra alternativa é desenvolver modelos que aprendem com poucos dados anotados. Como comentado anteriormente, GANs e modelos relacionados podem apresentar bons resultados na resolução de tarefas de imagens, mesmo com uma base de dados anotada. Nesse sentido, ainda que um site mude seu Captcha, é possível ajustar um modelo que resolve esse Captcha sem a necessidade de anotar muitos exemplos para construir uma nova base de treino.</p>
+<p>Nessa tese, apresenta-se uma nova técnica para resolver Captchas com poucos dados anotados. A técnica consiste em aproveitar o fato de que o Captcha aplica um teste de Turing automático para gerar bases de dados automaticamente. Ou seja, a técnica resolve o problema não com modelos mais sofisticados, mas com a utilização eficiente dos recursos disponíveis. Qualquer modelo pode se aproveitar dessa característica dos Catpchas, incluindo arquiteturas que ainda não foram desenvolvidas. Essa é a técnica do oráculo.</p>
 <p>Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado está correto. Eles estão disponíveis em todos os sites, já que, por definição, o Captcha precisa apresentar o resultado do teste para o usuário. O nome “oráculo” vem do fato de que o site já possui a informação correta, como um deus. O site, no entanto, se comunica com o usuário através de um intermediário (o oráculo) que apresenta a resposta de forma limitada.</p>
-<p>Oráculos se manifestam de diversas formas nos sites com Captchas. Por exemplo, pode dar a possibilidade de realizar apenas um teste por imagem, vários testes por imagem, ou ainda retornar informações ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode retornar com um “bom o suficiente” quando o rótulo não está totalmente correto (XXX).</p>
-<p>O oráculo é uma forma de obter uma base virtualmente infinita. Do ponto de vista de modelagem, é similar a um problema de aprendizado por reforço (XXX), mas com uma resposta limitada (acertou ou errou).</p>
+<p>Oráculos se manifestam de diversas formas nos sites com Captchas. Por exemplo, pode dar a possibilidade de realizar apenas um teste por imagem, vários testes por imagem, ou ainda retornar informações ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode retornar com um “bom o suficiente” quando o rótulo não está totalmente correto <span class="citation" data-cites="vonahnReCAPTCHAHumanBasedCharacter2008">(<a href="bibliografia.html#ref-vonahnReCAPTCHAHumanBasedCharacter2008" role="doc-biblioref">AHN et al., 2008</a>)</span>.</p>
+<p>O oráculo é uma forma de obter uma base virtualmente infinita. Do ponto de vista de modelagem, é similar a um problema de aprendizado por reforço <span class="citation" data-cites="sutton2018">(<a href="bibliografia.html#ref-sutton2018" role="doc-biblioref">SUTTON; BARTO, 2018</a>)</span>, mas com uma resposta binária (acertou ou errou) no lugar de um escore.</p>
 <p>A técnica consiste em utilizar um modelo inicial, possivelmente fraco. Em seguida, o site é acessado múltiplas vezes, gerando uma nova base de dados virtualmente infinita, que é completamente anotada nos casos de acerto e que apresenta o histórico de erros no caso de erro. O modelo inicial poderia ser ajustado com as técnicas usuais de modelagem, ou utilizando um modelo mais sofisticado como GAN.</p>
-<p>Utilizar somente os casos classificados corretamente, obtidos dos acertos no teste do oráculo, induz viés de seleção na amostra (XXX). Como o modelo só tem acesso aos casos em que já funciona bem, a informação obtida não é tão relevante. O desafio de modelagem da tese reside em como considerar a informação fornecida pelo oráculo nos casos em que o modelo inicial erra.</p>
-<p>Do ponto de vista estatístico, a informação produzida pelo oráculo pode ser entendida como uma informação censurada (XXX). Isso acontece pois a informação existe e é correta, mas não está completa. No entanto, como a informação é resultado do teste de um rótulo produzido por um modelo, faz sentido afirmar que a censura não é gerada por acaso (XXX).</p>
-<p>Na área de aprendizado de máquinas (XXX), um modelo apresenta resposta censurada ou incompleta é colocado na classe de problemas do aprendizado fracamente supervisionado (XXX). Trata-se de uma área ainda pouco investigada estudada na literatura (XXX) e bastante ampla, englobando não só os métodos supervisionados (XXX) como também os métodos semi-supervisionados (XXX). A tese apresentará os conceitos de aprendizado fracamente supervisionado, com foco na classe de problemas que a modelagem utilizando Captchas representa.</p>
+<p>Infelizmente, utilizar somente os casos classificados corretamente, obtidos dos acertos no teste do oráculo, induz viés de seleção na amostra <span class="citation" data-cites="na2020">(<a href="bibliografia.html#ref-na2020" role="doc-biblioref">NA et al., 2020</a>)</span>. Como o modelo só tem acesso aos casos em que já funciona bem, a informação obtida não é tão relevante. O desafio de modelagem da tese reside em como considerar a informação fornecida pelo oráculo nos casos em que o modelo inicial erra.</p>
+<p>Do ponto de vista estatístico, a informação produzida pelo oráculo pode ser entendida como uma informação censurada <span class="citation" data-cites="colosimo2006">(<a href="bibliografia.html#ref-colosimo2006" role="doc-biblioref">COLOSIMO; GIOLO, 2006</a>)</span>. Isso acontece pois a informação existe e é correta, mas não está completa. No entanto, como a informação é resultado do teste de um rótulo produzido por um modelo, faz sentido afirmar que a censura não é gerada por acaso.</p>
+<p>Na área de aprendizado de máquinas, um modelo apresenta resposta censurada ou incompleta é colocado na classe de problemas do aprendizado fracamente supervisionado <span class="citation" data-cites="zhou2018">(<a href="bibliografia.html#ref-zhou2018" role="doc-biblioref">ZHOU, 2018</a>)</span>. Trata-se de uma área ainda pouco investigada estudada na literatura, mas bastante ampla, englobando não só os métodos supervisionados como também os métodos semi-supervisionados. A tese apresentará os conceitos de aprendizado fracamente supervisionado, com foco na classe de problemas que a modelagem utilizando Captchas representa.</p>
 <p>Para criar uma base de dados usando o oráculo, é necessário utilizar técnicas de raspagem de dados, imitando repetidamente o que um usuário faria para acessar o site. Por isso, a raspagem de dados se torna fundamental para a construção do modelo, tornando-se um dos objetivos da pesquisa.</p>
 </section>
-</section>
 <section id="objetivos" class="level2">
-<h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
+<h2 class="anchored" data-anchor-id="objetivos">Objetivo</h2>
 <p>O objetivo geral da tese é desenvolver uma solução inovadora, chamada WAWL (<em>Web Automatic Weak Learning</em>) para resolver Captchas, misturando técnicas de aprendizado profundo com raspagem de dados.</p>
 <p>Especificamente, a pesquisa tem como objetivos:</p>
 <ol type="1">
@@ -314,6 +391,102 @@ ul.task-list li input[type="checkbox"] {
 <p>No quarto e último capítulo, “conclusion”, a pesquisa é concluída, com apresentação das considerações finais e próximos passos. Também foi incluído um apêndice descrevendo e documentando o pacote <code>{captcha}</code>, criado atingir o objetivo 4 da pesquisa.</p>
 
 
+<div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="doc-bibliography" style="display: none">
+<div id="ref-vonahnReCAPTCHAHumanBasedCharacter2008" class="csl-entry" role="doc-biblioentry">
+AHN, L. VON et al. reCAPTCHA: Human-Based Character Recognition via Web Security Measures. <strong>Science</strong>, v. 321, n. 5895, p. 1465–1468, 12 set. 2008. Disponível em: &lt;<a href="https://www.science.org/doi/10.1126/science.1160379">https://www.science.org/doi/10.1126/science.1160379</a>&gt;.
+</div>
+<div id="ref-vonahnTellingHumansComputers2002" class="csl-entry" role="doc-biblioentry">
+AHN, L. VON; BLUM, M.; LANGFORD, J. <strong>Telling humans and computers apart automatically or how lazy cryptographers do AI (Tech. Rep. No. CMU-CS-02-117)</strong>. Disponível em: &lt;<a href="http://reports-archive.adm.cs.cmu.edu/anon/2002/CMU-CS-02-117.pdf">http://reports-archive.adm.cs.cmu.edu/anon/2002/CMU-CS-02-117.pdf</a>&gt;.
+</div>
+<div id="ref-chellapilla2005" class="csl-entry" role="doc-biblioentry">
+CHELLAPILLA, K. et al. <strong>Designing human friendly human interaction proofs (HIPs)</strong>. : CHI ’05.New York, NY, USA: Association for Computing Machinery, 2 abr. 2005. Disponível em: &lt;<a href="https://doi.org/10.1145/1054972.1055070">https://doi.org/10.1145/1054972.1055070</a>&gt;.
+</div>
+<div id="ref-chellapilla2004" class="csl-entry" role="doc-biblioentry">
+CHELLAPILLA, K.; SIMARD, P. Using machine learning to break visual human interaction proofs (HIPs). <strong>Advances in neural information processing systems</strong>, v. 17, 2004.
+</div>
+<div id="ref-colosimo2006" class="csl-entry" role="doc-biblioentry">
+COLOSIMO, E. A.; GIOLO, S. R. <strong>Análise de sobrevivência aplicada</strong>. Editora Blucher, 2006.
+</div>
+<div id="ref-diagnosticoABJ" class="csl-entry" role="doc-biblioentry">
+<strong>Diagnóstico do Contencioso Tributário Administrativo</strong>., [s.d.]. Disponível em: &lt;<a href="https://abj.org.br/pesquisas/bid-tributario/">https://abj.org.br/pesquisas/bid-tributario/</a>&gt;.
+</div>
+<div id="ref-george2017" class="csl-entry" role="doc-biblioentry">
+GEORGE, D. et al. A generative vision model that trains with high data efficiency and breaks text-based CAPTCHAs. <strong>Science</strong>, v. 358, n. 6368, p. eaag2612, 2017.
+</div>
+<div id="ref-goodfellow2013" class="csl-entry" role="doc-biblioentry">
+GOODFELLOW, I. J. et al. Multi-digit number recognition from street view imagery using deep convolutional neural networks. <strong>arXiv preprint arXiv:1312.6082</strong>, 2013.
+</div>
+<div id="ref-goodfellow" class="csl-entry" role="doc-biblioentry">
+GOODFELLOW, I. J. et al. <a href="https://doi.org/10.48550/arXiv.1406.2661">Generative Adversarial Networks</a>. [s.d.].
+</div>
+<div id="ref-inaccess" class="csl-entry" role="doc-biblioentry">
+<strong>Inaccessibility of CAPTCHA</strong>., [s.d.]. Disponível em: &lt;<a href="https://www.w3.org/TR/turingtest/">https://www.w3.org/TR/turingtest/</a>&gt;.
+</div>
+<div id="ref-lecun2015a" class="csl-entry" role="doc-biblioentry">
+LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning. <strong>nature</strong>, v. 521, n. 7553, p. 436444, 2015.
+</div>
+<div id="ref-lillibridgeMethodSelectivelyRestricting2001" class="csl-entry" role="doc-biblioentry">
+LILLIBRIDGE, M. D. et al. <strong>Method for Selectively Restricting Access to Computer Systems</strong>., fev. 2001.
+</div>
+<div id="ref-michener2015" class="csl-entry" role="doc-biblioentry">
+MICHENER, G.; MONCAU, L. F.; VELASCO, R. B. <strong>Estado brasileiro e transparência avaliando a aplicação da Lei de Acesso à Informação</strong>.
+</div>
+<div id="ref-mori2003a" class="csl-entry" role="doc-biblioentry">
+MORI, G.; MALIK, J. <strong>Recognizing objects in adversarial clutter: Breaking a visual CAPTCHA</strong>. IEEE, 2003.
+</div>
+<div id="ref-murray-rust2008" class="csl-entry" role="doc-biblioentry">
+MURRAY-RUST, P. Open data in science. <strong>Nature Precedings</strong>, p. 11, 2008.
+</div>
+<div id="ref-na2020" class="csl-entry" role="doc-biblioentry">
+NA, B. et al. <strong>Deep Generative Positive-Unlabeled Learning under Selection Bias</strong>. : CIKM ’20.New York, NY, USA: Association for Computing Machinery, 19 out. 2020. Disponível em: &lt;<a href="https://doi.org/10.1145/3340531.3411971">https://doi.org/10.1145/3340531.3411971</a>&gt;.
+</div>
+<div id="ref-noh2017" class="csl-entry" role="doc-biblioentry">
+NOH, H. et al. Regularizing deep neural networks by noise: Its interpretation and optimization. <strong>Advances in Neural Information Processing Systems</strong>, v. 30, 2017.
+</div>
+<div id="ref-observat" class="csl-entry" role="doc-biblioentry">
+<strong>Observatório da insolvência: Rio de Janeiro</strong>., [s.d.]. Disponível em: &lt;<a href="https://abj.org.br/pesquisas/obsrjrj/">https://abj.org.br/pesquisas/obsrjrj/</a>&gt;.
+</div>
+<div id="ref-reshefMethodSystemDiscriminating2005" class="csl-entry" role="doc-biblioentry">
+RESHEF, E.; RAANAN, G.; SOLAN, E. <strong>Method and System for Discriminating a Human Action from a Computerized Action</strong>., 2005.
+</div>
+<div id="ref-sutton2018" class="csl-entry" role="doc-biblioentry">
+SUTTON, R. S.; BARTO, A. G. <strong>Reinforcement learning: An introduction</strong>. MIT press, 2018.
+</div>
+<div id="ref-tempodo" class="csl-entry" role="doc-biblioentry">
+<strong>Tempo dos processos relacionados à adoção</strong>., [s.d.]. Disponível em: &lt;<a href="https://abj.org.br/pesquisas/adocao/">https://abj.org.br/pesquisas/adocao/</a>&gt;.
+</div>
+<div id="ref-turing2009" class="csl-entry" role="doc-biblioentry">
+TURING, A. M. Computing machinery and intelligence. Em: Springer, 2009. p. 2365.
+</div>
+<div id="ref-wang2021" class="csl-entry" role="doc-biblioentry">
+WANG, Y. et al. Make complex captchas simple: a fast text captcha solver based on a small number of samples. <strong>Information Sciences</strong>, v. 578, p. 181194, 2021.
+</div>
+<div id="ref-ye2018a" class="csl-entry" role="doc-biblioentry">
+YE, G. et al. <strong>Yet another text captcha solver: A generative adversarial network based approach</strong>. 2018.
+</div>
+<div id="ref-yuan2019" class="csl-entry" role="doc-biblioentry">
+YUAN, X. et al. Adversarial examples: Attacks and defenses for deep learning. <strong>IEEE transactions on neural networks and learning systems</strong>, v. 30, n. 9, p. 28052824, 2019.
+</div>
+<div id="ref-zhao2017" class="csl-entry" role="doc-biblioentry">
+ZHAO, B. Web scraping. <strong>Encyclopedia of big data</strong>, p. 13, 2017. Disponível em: &lt;<a href="https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf">https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf</a>&gt;.
+</div>
+<div id="ref-zhou2018" class="csl-entry" role="doc-biblioentry">
+ZHOU, Z.-H. A brief introduction to weakly supervised learning. <strong>National science review</strong>, v. 5, n. 1, p. 4453, 2018.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>O CNJ só consegue listar processos de um tem a partir da definição de Classes e Assuntos, disponíveis nas <a href="https://www.cnj.jus.br/sgt/consulta_publica_classes.php">Sistema de Gestão de Tabelas (SGT) do CNJ</a>. Processos relacionados a recuperação judicial, no entanto, não respeitam a taxonomia do SGT <span class="citation" data-cites="observat">(<a href="bibliografia.html#ref-observat" role="doc-biblioref"><span>«Observatório da insolvência»</span>, [s.d.]</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://2captcha.com/make-money-online">Link do 2Captcha</a>. Último acesso em 01/11/2022.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Fonte: <a href="http://www.ipeadata.gov.br/exibeserie.aspx?stub=1&amp;serid1739471028=1739471028">IPEA</a>. Último acesso em 01/11/2022.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Outro termo para <em>resolver</em> Captchas é <em>quebrar</em> Captchas. Nesta tese, optou-se por utilizar o termo <em>resolver,</em> para enfatizar a interpretação do Captcha como um desafio, não como um problema de criptografia.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Spark, 2011. Link no Web Archive: https://web.archive.org/web/20120603142110/http://www.cbc.ca/spark/2011/11/full-interview-luis-von-ahn-on-duolingo/. Último acesso em 01/11/2022<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="https://www.youtube.com/watch?v=i_5ew4btJiQ">Link do vídeo no YouTube</a>. Último acesso em 01/11/2022.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Segundo o <a href="https://www.wired.com/2007/06/ff-humancomp/">texto da Wired</a>: “<em>So he’s fighting back. In late May, von Ahn launched reCaptcha, a service that he believes is the toughest Captcha yet devised. ReCaptcha presents users with two stretched and skewed words, each bisected by a diagonal line”.</em> Último acesso em 01/11/2022.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><em>Are you a robot? Introducing No Captcha reCaptcha.</em> Acessível no <a href="https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html">blog da Google</a>. Último acesso em 01/11/2022.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -453,12 +626,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Sobre este documento</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Sobre este documento</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./metodologia.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metodologia</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metodologia</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
