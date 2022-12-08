@@ -1,0 +1,3665 @@
+% Arquivo LaTeX de exemplo de dissertação/tese a ser apresentada à CPG do IME-USP
+%
+% Criação: Jesús P. Mena-Chalco
+% Revisão: Fabio Kon e Paulo Feofiloff
+% Adaptação para UTF8, biblatex e outras melhorias: Nelson Lago
+%
+% Except where otherwise indicated, these files are distributed under
+% the MIT Licence. The example text, which includes the tutorial and
+% examples as well as the explanatory comments in the source, are
+% available under the Creative Commons Attribution International
+% Licence, v4.0 (CC-BY 4.0) - https://creativecommons.org/licenses/by/4.0/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREÂMBULO LaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% A opção twoside (frente-e-verso) significa que a aparência das páginas pares
+% e ímpares pode ser diferente. Por exemplo, as margens podem ser diferentes ou
+% os números de página podem aparecer à direita ou à esquerda alternadamente.
+% Mas nada impede que você crie um documento "só frente" e, ao imprimir, faça
+% a impressão frente-e-verso.
+%
+% Aqui também definimos a língua padrão do documento
+% (a última da lista) e línguas adicionais.
+%\documentclass[12pt,twoside,brazilian,english]{book}
+\documentclass[12pt,twoside,english,brazilian]{book}
+
+% Ao invés de definir o tamanho das margens, vamos definir os tamanhos do
+% texto, do cabeçalho e do rodapé, e deixamos a package geometry calcular
+% o tamanho das margens em função do tamanho do papel. Assim, obtemos o
+% mesmo resultado impresso, mas com margens diferentes, se o tamanho do
+% papel for diferente.
+\usepackage[a4paper]{geometry}
+
+\geometry{
+  textwidth=152mm,
+  hmarginratio=12:17, % 24:34 -> com papel A4, 24mm + 152mm + 34mm = 210mm
+  textheight=237mm,
+  vmarginratio=8:7, % 32:28 -> com papel A4, 32mm + 237mm + 28mm = 297mm
+  headsep=11mm, % distância entre a base do cabeçalho e o texto
+  headheight=21mm, % qualquer medida grande o suficiente, p.ex., top - headsep
+  footskip=10mm,
+  marginpar=20mm,
+  marginparsep=5mm,
+}
+
+% \usepackage{libertinus}
+% \usepackage{libertinust1math}
+% \usepackage{imagechapter}
+
+% \usepackage[brazilian](babel)
+
+% Vários pacotes e opções de configuração genéricos; para personalizar o
+% resultado, modifique estes arquivos.
+\input{assets/tex/extras/basics}
+\input{assets/tex/extras/languages}
+\input{assets/tex/extras/fonts}
+
+\input{assets/tex/extras/floats}
+
+\input{assets/tex/extras/imeusp-thesis} % capa, páginas preliminares e alguns detalhes
+\input{assets/tex/extras/imeusp-formatting}
+\input{assets/tex/extras/index}
+\input{assets/tex/extras/bibconfig}
+\input{assets/tex/extras/hyperlinks}
+%\nocolorlinks % para impressão em P&B
+\input{assets/tex/extras/source-code}
+\input{assets/tex/extras/utils}
+
+
+
+% Diretórios onde estão as figuras; com isso, não é preciso colocar o caminho
+% completo em \includegraphics (e nem a extensão).
+% \graphicspath{{figuras/},{logos/}}
+
+% Comandos rápidos para mudar de língua:
+% \en -> muda para o inglês
+% \br -> muda para o português
+% \texten{blah} -> o texto "blah" é em inglês
+% \textbr{blah} -> o texto "blah" é em português
+\babeltags{br = brazilian, en = english}
+
+% Bibliografia
+\usepackage[
+  style=assets/tex/extras/plainnat-ime, % variante de autor-data, similar a plainnat
+  %style=alphabetic, % similar a alpha
+  %style=numeric, % comum em artigos
+  %style=authoryear-comp, % autor-data "padrão" do biblatex
+  %style=apa, % variante de autor-data, muito usado
+  %style=abnt,
+]{biblatex}
+
+\usepackage{bookmark}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METADADOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% O arquivo com os dados bibliográficos para biblatex; você pode usar
+% este comando mais de uma vez para acrescentar múltiplos arquivos
+\addbibresource{assets/bib/book.bib}
+
+% Este comando permite acrescentar itens à lista de referências sem incluir
+% uma referência de fato no texto (pode ser usado em qualquer lugar do texto)
+%\nocite{bronevetsky02,schmidt03:MSc, FSF:GNU-GPL, CORBA:spec, MenaChalco08}
+% Com este comando, todos os itens do arquivo .bib são incluídos na lista
+% de referências
+%\nocite{*}
+
+% É possível definir como determinadas palavras podem (ou não) ser
+% hifenizadas; no entanto, a hifenização automática geralmente funciona bem
+% \babelhyphenation{documentclass latexmk soft-ware clsguide} % todas as línguas
+% \babelhyphenation[brazilian]{Fu-la-no}
+% \babelhyphenation[english]{what-ever}
+
+% Estes comandos definem o título e autoria do trabalho e devem sempre ser
+% definidos, pois além de serem utilizados para criar a capa, também são
+% armazenados nos metadados do PDF.
+\title{
+    % Obrigatório nas duas línguas
+    titlept={Título do trabalho},
+    titleen={Title of the document},
+    % Opcional, mas se houver deve existir nas duas línguas
+    subtitlept={um subtítulo},
+    subtitleen={a subtitle},
+}
+
+\author{Nome Completo}
+
+% Para TCCs, este comando define o supervisor
+\orientador[fem]{Profª. Drª. Fulana de Tal}
+
+% Se não houver, remova; se houver mais de um, basta
+% repetir o comando quantas vezes forem necessárias
+\coorientador{Prof. Dr. Ciclano de Tal}
+\coorientador[fem]{Profª. Drª. Beltrana de Tal}
+
+% A página de rosto da versão para depósito (ou seja, a versão final
+% antes da defesa) deve ser diferente da página de rosto da versão
+% definitiva (ou seja, a versão final após a incorporação das sugestões
+% da banca).
+\defesa{
+  nivel=doutorado, % mestrado, doutorado ou tcc
+  % É a versão para defesa ou a versão definitiva?
+  %definitiva,
+  % É qualificação?
+  %quali,
+  programa={Ciência da Computação},
+  membrobanca={Profª. Drª. Fulana de Tal (orientadora) -- IME-USP [sem ponto final]},
+  % Em inglês, não há o "ª"
+  %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Ciclano de Tal -- IME-USP [sem ponto final]},
+  membrobanca={Profª. Drª. Convidada de Tal -- IMPA [sem ponto final]},
+  % Se não houve bolsa, remova
+  %
+  % Norma sobre agradecimento por auxílios da FAPESP:
+  % https://fapesp.br/11789/referencia-ao-apoio-da-fapesp-em-todas-as-formas-de-divulgacao
+  %
+  % Norma sobre agradecimento por auxílios da CAPES (Portaria 206,
+  % de 4 de Setembro de 2018):
+  % https://www.in.gov.br/materia/-/asset_publisher/Kujrw0TZC2Mb/content/id/39729251/do1-2018-09-05-portaria-n-206-de-4-de-setembro-de-2018-39729135
+  %
+  %apoio={O presente trabalho foi realizado com apoio da Coordenação
+  %       de Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Código de Financiamento 001}, % o código é sempre 001
+  %
+  %apoio={This study was financed in part by the Coordenação de
+  %       Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Finance Code 001}, % o código é sempre 001
+  %
+  %apoio={Durante o desenvolvimento deste trabalho, o autor recebeu\\
+  %       auxílio financeiro da FAPESP -- processo nº aaaa/nnnnn-d},
+  %
+  %apoio={During the development if this work, the author received\\
+  %       financial support from FAPESP -- grant \#aaaa/nnnnn-d},
+  %
+  apoio={Durante o desenvolvimento deste trabalho o autor
+         recebeu auxílio financeiro da XXXX},
+  local={São Paulo},
+  data=2017-08-10, % YYYY-MM-DD
+  % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
+  % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
+  % correspondente (o sistema insere automaticamente o texto da licença).
+  % Se quiser estabelecer regras diferentes para o uso de seu trabalho,
+  % converse com seu orientador e coloque o texto da licença aqui, mas
+  % observe que apenas TCCs sob alguma licença Creative Commons serão
+  % acrescentados ao BDTA. Se você tem alguma intenção de publicar o
+  % trabalho comercialmente no futuro, sugerimos a licença CC-BY-NC-ND.
+  direitos={CC-BY}, % Creative Commons Attribution 4.0 International License
+  %direitos={CC-BY-NC-ND}, % Creative Commons Attribution / NonCommercial /
+                           % NoDerivatives 4.0 International License
+  %direitos={Autorizo a reprodução e divulgação total ou parcial
+  %          deste trabalho, por qualquer meio convencional ou
+  %          eletrônico, para fins de estudo e pesquisa, desde que
+  %          citada a fonte.},
+  %direitos={I authorize the complete or partial reproduction and disclosure
+  %          of this work by any conventional or electronic means for study
+  %          and research purposes, provided that the source is acknowledged.}
+  % Para gerar a ficha catalográfica, acesse https://fc.ime.usp.br/,
+  % preencha o formulário e escolha a opção "Gerar Código LaTeX".
+  % Basta copiar e colar o resultado aqui.
+  fichacatalografica={},
+}
+
+
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% AQUI COMEÇA O CONTEÚDO DE FATO %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% CAPA E PÁGINAS INICIAIS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Aqui começa o conteúdo inicial que aparece antes do capítulo 1, ou seja,
+% página de rosto, resumo, sumário etc. O comando frontmatter faz números
+% de página aparecem em algarismos romanos ao invés de arábicos e
+% desabilita a contagem de capítulos.
+\frontmatter
+
+\pagestyle{plain}
+
+\onehalfspacing % Espaçamento 1,5 na capa e páginas iniciais
+
+\maketitle % capa e folha de rosto
+
+%%%%%%%%%%%%%%%% DEDICATÓRIA, AGRADECIMENTOS, RESUMO/ABSTRACT %%%%%%%%%%%%%%%%%%
+
+\begin{dedicatoria}
+Esta seção é opcional e fica numa página separada; ela pode ser usada para
+uma dedicatória ou epígrafe.
+\end{dedicatoria}
+
+% Reinicia o contador de páginas (a próxima página recebe o número "i") para
+% que a página da dedicatória não seja contada.
+\pagenumbering{roman}
+
+% Agradecimentos:
+% Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar
+% esta página. A epígrafe, obviamente, é opcional; é possível colocar
+% epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
+% não ser incluída no sumário.
+\chapter*{Agradecimentos}
+\epigrafe{Do. Or do not. There is no try.}{Mestre Yoda}
+
+Texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto texto texto texto texto texto texto texto texto texto
+texto texto texto texto. Texto opcional.
+
+% \input{conteudo/resumoabstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% LISTAS DE FIGURAS ETC. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Como as listas que se seguem podem não incluir uma quebra de página
+% obrigatória, inserimos uma quebra manualmente aqui.
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+% Todas as listas são opcionais; Usando "\chapter*" elas não são incluídas
+% no sumário. As listas geradas automaticamente também não são incluídas por
+% conta das opções "notlot" e "notlof" que usamos para a package tocbibind.
+
+% Normalmente, "\chapter*" faz o novo capítulo iniciar em uma nova página, e as
+% listas geradas automaticamente também por padrão ficam em páginas separadas.
+% Como cada uma destas listas é muito curta, não faz muito sentido fazer isso
+% aqui, então usamos este comando para desabilitar essas quebras de página.
+% Se você preferir, comente as linhas com esse comando e des-comente as linhas
+% sem ele para criar as listas em páginas separadas. Observe que você também
+% pode inserir quebras de página manualmente (com \clearpage, veja o exemplo
+% mais abaixo).
+\newcommand\disablenewpage[1]{{\let\clearpage\par\let\cleardoublepage\par #1}}
+
+% Nestas listas, é melhor usar "raggedbottom" (veja basics.tex). Colocamos
+% a opção correspondente e as listas dentro de um grupo para ativar
+% raggedbottom apenas temporariamente.
+\bgroup
+\raggedbottom
+
+%%%%% Listas criadas manualmente
+
+%\chapter*{Lista de abreviaturas}
+\disablenewpage{\chapter*{Lista de abreviaturas}}
+
+\begin{tabular}{rl}
+   CFT & Transformada contínua de Fourier (\emph{Continuous Fourier Transform})\\
+   DFT & Transformada discreta de Fourier (\emph{Discrete Fourier Transform})\\
+  EIIP & Potencial de interação elétron-íon (\emph{Electron-Ion Interaction Potentials})\\
+  STFT & Transformada de Fourier de tempo reduzido (\emph{Short-Time Fourier Transform})\\
+  ABNT & Associação Brasileira de Normas Técnicas\\
+   URL & Localizador Uniforme de Recursos (\emph{Uniform Resource Locator})\\
+   IME & Instituto de Matemática e Estatística\\
+   USP & Universidade de São Paulo
+\end{tabular}
+
+%\chapter*{Lista de símbolos}
+\disablenewpage{\chapter*{Lista de símbolos}}
+
+% Quebra de página manual
+\clearpage
+
+%%%%% Listas criadas automaticamente
+
+% Você pode escolher se quer ou não permitir a quebra de página
+%\listoffigures
+\disablenewpage{\listoffigures}
+
+% Você pode escolher se quer ou não permitir a quebra de página
+%\listoftables
+\disablenewpage{\listoftables}
+
+% Esta lista é criada "automaticamente" pela package float quando
+% definimos o novo tipo de float "program" (em utils.tex)
+% Você pode escolher se quer ou não permitir a quebra de página
+%\listof{program}{\programlistname}
+\disablenewpage{\listof{program}{\programlistname}}
+
+% Sumário (obrigatório)
+\tableofcontents
+
+\egroup % Final de "raggedbottom"
+
+% Referências indiretas ("x", veja "y") para o índice remissivo (opcionais,
+% pois o índice é opcional). É comum colocar esses itens no final do documento,
+% junto com o comando \printindex, mas em alguns casos isso torna necessário
+% executar texindy (ou makeindex) mais de uma vez, então colocar aqui é melhor.
+\index{Inglês|see{Língua estrangeira}}
+\index{Figuras|see{Floats}}
+\index{Tabelas|see{Floats}}
+\index{Código-fonte|see{Floats}}
+\index{Subcaptions|see{Subfiguras}}
+\index{Sublegendas|see{Subfiguras}}
+\index{Equações|see{Modo matemático}}
+\index{Fórmulas|see{Modo matemático}}
+\index{Rodapé, notas|see{Notas de rodapé}}
+\index{Captions|see{Legendas}}
+\index{Versão original|see{Tese/Dissertação, versões}}
+\index{Versão corrigida|see{Tese/Dissertação, versões}}
+\index{Palavras estrangeiras|see{Língua estrangeira}}
+\index{Floats!Algoritmo|see{Floats, ordem}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CAPÍTULOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Aqui vai o conteúdo principal do trabalho, ou seja, os capítulos que compõem
+% a dissertação/tese. O comando mainmatter reinicia a contagem de páginas,
+% modifica a numeração para números arábicos e ativa a contagem de capítulos.
+\mainmatter
+
+\pagestyle{mainmatter}
+
+% Espaçamento simples
+\singlespacing
+
+\bookmarksetup{startatroot}
+
+\hypertarget{sobre-este-documento}{%
+\chapter*{Sobre este documento}\label{sobre-este-documento}}
+\addcontentsline{toc}{chapter}{Sobre este documento}
+
+\markboth{Sobre este documento}{Sobre este documento}
+
+Blabla, RMarkdown\ldots{}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{introducao}{%
+\chapter{Introdução}\label{introducao}}
+
+Captcha (\emph{Completely Automated Public Turing test to tell Computers
+and Humans Apart}) é um desafio utilizado para identificar se o acesso à
+uma página na internet é realizada por uma pessoa ou uma máquina. O
+desafio é projetado para ser fácil de resolver por humanos, mas difícil
+de resolver por máquinas. Outro nome para os Captchas é \emph{Human
+Interaction Proofs,} ou HIPs (CHELLAPILLA et al., 2005).
+
+Um Captcha pode ser classificado como uma variação do teste de Turing
+(TURING, 2009). A diferença no caso do Captcha é que a avaliação da
+humanidade do agente é feita por uma máquina ao invés de uma pessoa --
+por isso o termo \emph{automated}. Captchas podem ser classificados em
+algumas situações com os chamados \textbf{testes de Turing reversos},
+apesar dos autores originais afastarem essa caracterização (AHN; BLUM;
+LANGFORD, 2002).
+
+Captchas estão presentes em toda a internet. Inicialmente criados para
+prevenir \emph{spam} (\emph{Sending and Posting Advertisement in Mass}),
+os desafios se tornaram populares rapidamente (AHN et al., 2008), sendo
+utilizados como forma de evitar evitar o uso indevido de aplicações da
+\emph{web}. Algumas ações que os desafios podem ajudar a evitar são:
+
+\begin{itemize}
+\tightlist
+\item
+  Criação de contas falsas nos sites.
+\item
+  Envio automático de mensagens, via \emph{email} ou formulários de
+  contato.
+\item
+  Operações automatizadas, como compra de ingressos para eventos e voto
+  automático em sites de votação.
+\item
+  Voto automático em ferramentas de votação na internet.
+\item
+  Consulta automatizada em sites para obtenção de dados.
+\end{itemize}
+
+O uso de Captchas tem, por princípio, o objetivo de aumentar a segurança
+das pessoas que acessam a internet e proteger os sistemas \emph{web} de
+uso abusivo. Para pessoas que acessam os sites pontualmente, a presença
+de Captchas representa um mero dissabor; para quem realiza acessos
+massivos, uma grande dificuldade.
+
+No entanto, o uso de Captchas não é adequado em todas as situações. Um
+exemplo são os sites de vendas: o uso dos desafios aborrece o usuário,
+alterando a qualidade da sua experiência. Os sites devem levar esse
+fator de aborrecimento em conta para não reduzir a taxa de conversão. Em
+alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar
+outros mecanismos de prevenção à fraude, como monitoramento da sessão do
+usuário ({«Inaccessibility of CAPTCHA»}, {[}s.d.{]}).
+
+Também existem casos em que o uso de Captchas é prejudicial. Sua
+utilização em serviços públicos do Brasil, por exemplo, é problemática,
+como discutido na próxima seção.
+
+\hypertarget{captchas-em-serviuxe7os-puxfablicos}{%
+\section{Captchas em serviços
+públicos}\label{captchas-em-serviuxe7os-puxfablicos}}
+
+A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º,
+previsão que ``todos têm direito a receber dos órgãos públicos
+informações de seu interesse particular, ou de interesse coletivo ou
+geral, que serão prestadas no prazo da lei, sob pena de
+responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à
+segurança da sociedade e do Estado;''. Essa previsão é implementada pela
+Lei de Acesso à Informação (Lei 12.527/2011; LAI), que é aplicada ``aos
+órgãos públicos integrantes da administração direta dos Poderes
+Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do
+Ministério Público'', bem como ``as autarquias, as fundações públicas,
+as empresas públicas, as sociedades de economia mista e demais entidades
+controladas direta ou indiretamente pela União, Estados, Distrito
+Federal e Municípios'' (Art. 1º).
+
+A LAI, apesar de trazer diversos benefícios à sociedade, tem dois
+problemas. A primeira é o \textbf{esforço}: tanto a pessoa/órgão que
+solicita os dados, quanto o órgão que retorna os dados precisam
+trabalhar para disponibilizar as informações, sendo necessário deslocar
+equipes para realizar os levantamentos pedidos. A segunda é o
+\textbf{formato}: os dados enviados como resultado de pedidos de LAI
+podem chegar em formatos inadequados para consumo da solicitante, muitas
+vezes em \emph{Portable Document Format} (PDF), que dificulta a leitura
+e análise dos dados (MICHENER; MONCAU; VELASCO, 2015, pág. 55); além
+disso, como o levantamento é realizado de forma individualizada, o mesmo
+pedido feito em diferentes períodos (e.g.~uma atualização mensal dos
+dados) pode vir em formatos diferentes, dificultando a leitura e
+arrumação dos dados.
+
+Uma forma de evitar os problemas de esforço e formato em pedidos de LAI
+é disponibilizar os dados de \textbf{forma aberta}. Como definido pela
+\emph{Open Knowledge Foundation} (OKFN), a base de dados ``deve ser
+fornecida em uma forma conveniente e modificável isento de obstáculos
+tecnológicos desnecessários para a realização dos direitos licenciados.
+Especificamente, os dados devem ser legíveis-por-máquina, disponíveis
+todo o seu volume, e fornecidos em um formato aberto (ou seja, um
+formato com sua especificação livremente disponível, e publicada sem
+qualquer restrições, monetárias ou não, da sua utilização) ou, no
+mínimo, podem ser processados com pelo menos uma ferramenta de software
+livre e gratuita.''
+
+As vantagens ao disponibilizar dados públicos de forma aberta para a
+sociedade é um tema pacífico na comunidade científica (MURRAY-RUST,
+2008). Infelizmente, existem diversos dados públicos que não estão
+disponíveis de forma aberta, em plataformas como o
+\href{https://dados.gov.br}{dados.gov.br}.
+
+A dificuldade de acesso é particularmente evidente no Poder Judiciário,
+que além de não disponibilizar um portal de dados abertos, impõe
+barreiras aos pedidos de acesso à informação por utilizar diversos
+sistemas para armazenar os dados. Por exemplo, para pedir uma lista de
+todos os processos judiciais relacionados a recuperação judicial de
+empresas, as únicas alternativas são i) pedir os dados ao Conselho
+Nacional de Justiça (CNJ), que não possui informações suficientes para
+obter a lista\footnote{O CNJ só consegue listar processos de um tem a
+  partir da definição de Classes e Assuntos, disponíveis nas
+  \href{https://www.cnj.jus.br/sgt/consulta_publica_classes.php}{Sistema
+  de Gestão de Tabelas (SGT) do CNJ}. Processos relacionados a
+  recuperação judicial, no entanto, não respeitam a taxonomia do SGT
+  ({«Observatório da insolvência»}, {[}s.d.{]}).} ou ii) expedir ofícios
+aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções
+e critérios de acesso aos dados, diferentes prazos para atendimento e
+diferentes formatos, podendo, inclusive, negar o pedido de acesso.
+
+A dificuldade para acessar os dados do judiciário é a principal barreira
+para realização de pesquisas pela Associação Brasileira de Jurimetria
+(ABJ), empresa na qual o autor desta tese trabalha. A entidade tem como
+missão principal a realização de estudos para implementar políticas
+públicas utilizando dados do judiciário.
+
+Dos 16 projetos disponibilizados na
+\href{https://abj.org.br/pesquisas/}{página de pesquisas no site da
+ABJ}, pelo menos 12 (75\%) apresentaram dificuldades na obtenção dos
+dados via pedidos de acesso aos órgãos. Três exemplos icônicos são o da
+pesquisa sobre Tempo dos processos relacionados à adoção no Brasil
+({«Tempo dos processos relacionados à adoção»}, {[}s.d.{]}), o
+Observatório da Insolvência: Rio de Janeiro ({«Observatório da
+insolvência»}, {[}s.d.{]}) e o Diagnóstico do Contencioso Tributário
+Administrativo ({«Diagnóstico do Contencioso Tributário
+Administrativo»}, {[}s.d.{]}). No primeiro caso, dois tribunais enviaram
+os dados em arquivos em papel, sendo que um deles ultrapassou mil
+páginas com números de processos impressos. No segundo caso, o pedido
+foi respondido com uma planilha de contagens ao invés da lista de
+processos. No último caso, até mesmo órgãos que faziam parte do grupo de
+trabalho da pesquisa negaram pedido de acesso a dados de processos
+tributários em primeira instância, com argumentos que variavam desde a
+dificuldade técnica de levantar os dados até a Lei Geral de Proteção de
+Dados (LGPD).
+
+Em muitas situações, portanto, a única alternativa para realizar as
+pesquisas é acessando os dados via coleta automatizada nos sites. Todos
+os tribunais possuem ferramentas de consulta individualizadas de
+processos, por conta do que está previsto na CF. A solução, portanto,
+passa a ser construir uma ferramenta que obtém todos os dados
+automaticamente. Tal conceito é conhecido como \emph{raspagem de dados}
+(ZHAO, 2017a) e será desenvolvido com maiores detalhes no Capítulo
+Capítulo~\ref{sec-metodologia}.
+
+Os Captchas se tornam prejudiciais à sociedade quando o acesso
+automatizado é necessário para realizar pesquisas científicas.
+Infelizmente, boa parte dos tribunais utilizam a barreira do Captcha.
+Alguns tribunais, inclusive, têm o entendimento de que o acesso
+automatizado é prejudicial, como o TJRS, que emitiu um
+\href{https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/}{comunicado}
+sobre o tema.
+
+Uma justificativa comum para implementar Captchas em consultas públicas
+é a estabilidade dos sistemas. Ao realizar muitas consultas de forma
+automática, um robô pode tornar o sistema instável e, em algumas
+situações, até mesmo derrubar o servidor que disponibiliza as consultas.
+
+O problema é que utilizar Captchas não impede o acesso automatizado. As
+empresas que fazem acesso automatizado em tribunais podem construir
+ferramentas ou utilizar serviços externos de resolução de Captchas. Ou
+seja, ao utilizar Captchas, o acesso não é impedido, e sim
+especializado.
+
+Além disso, utilizar Captchas é uma solução ineficiente. Do ponto de
+vista técnico, a solução mais eficiente para disponibilizar os dados é
+através de ferramentas de dados abertos como o \emph{Comprehensive
+Knowledge Archive Network} (CKAN). Ao disponibilizar os dados de forma
+aberta, as consultas automatizadas ficariam isoladas dos sites de
+consulta pública, o que garantiria o acesso das pessoas sem problemas de
+indisponibilidade.
+
+Não é só para as pessoas que fazem pesquisa com dados públicos que o uso
+de Captchas pode ser prejudicial. No mercado, existem serviços de
+resolução de Captcha que utilizam mão de obra humana, em regimes que
+pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um
+exemplo é o 2Captcha\footnote{\href{https://2captcha.com/make-money-online}{Link
+  do 2Captcha}. Último acesso em 01/11/2022.}, que funciona como um Uber
+dos Captchas: o algoritmo automatizado envia o Captcha para a
+plataforma, que é acessado e resolvido por uma pessoa, retornando a
+solução para o algoritmo.
+
+Segundo o site, o valor pago pelo 2Captcha é de US\$ 0.5 para 1 a 2
+horas de trabalho. No regime da Consolidação das Leis do Trabalho
+(Decreto-Lei 5.452/1943, CLT) as horas mensais de trabalho são 220.
+Trabalhando continuamente no 2Captcha, isso daria um salário de 55 a 110
+dólares por mês, valor bem abaixo do salário mínimo, que no ano de 2022
+era de R\$ 1.100,00\footnote{Fonte:
+  \href{http://www.ipeadata.gov.br/exibeserie.aspx?stub=1\&serid1739471028=1739471028}{IPEA}.
+  Último acesso em 01/11/2022.}. Ou seja, os serviços públicos acabam,
+indiretamente, incentivando um mercado que paga abaixo do salário
+mínimo. Luis von Ahn, um dos criadores dos Captchas, define o 2Captcha
+como um \emph{sweatshop}, um termo utilizado para caracterizar empresas
+que têm condições de trabalho inaceitáveis.
+
+A solução definitiva para os problemas gerado pelos Captchas é a
+disponibilização dos dados públicos de forma aberta. Na ausência dessa
+solução, seja por falta de interesse ou iniciativa dos órgãos públicos,
+a alternativa é desenvolver uma solução para resolver Captchas que seja
+gratuita e aberta. Tal solução desincentivaria economicamente o uso de
+sistemas como o 2Captcha, protegendo as pessoas que fazem as resoluções
+e permitindo que as pessoas pesquisadoras realizem seus levantamentos.
+
+O presente trabalho busca avançar nesse sentido. A solução desenvolvida
+envolve um modelo que resolve alguns Captchas automaticamente, reduzindo
+significativamente a necessidade de rotulação manual.
+
+Para compreender completamente o avanço que a tese representa, no
+entanto, é necessário apresentar o histórico de desenvolvimento dos
+Captchas. O histórico é apresentado na próxima Seção, através da luta de
+geradores e resolvedores de Captchas, que pode ser dada como encerrada
+no ano de 2018, com o advento do \emph{reCaptcha v3}.
+
+\hypertarget{uma-luta-entre-geradores-e-resolvedores}{%
+\section{Uma luta entre geradores e
+resolvedores}\label{uma-luta-entre-geradores-e-resolvedores}}
+
+O primeiro texto técnico sobre Captchas foi publicado por AHN; BLUM;
+LANGFORD (2002). O texto apresenta o Captcha e seu significado através
+do problema de geração de \emph{emails} automáticos no Yahoo. Em
+seguida, apresenta alguns exemplos de candidatos a Captcha, com tarefas
+de reconhecimento de padrões ou textos. Uma característica interessante
+que os autores colocam sobre o Captcha é que suas imagens devem ser
+disponíveis publicamente. O texto também faz a conexão entre a tarefa
+dos Captchas e os desafios da inteligência artificial. Um ponto a
+destacar é que os autores defendem que os Captchas devem ser resolvidos,
+pois isso implica em avanços na inteligência artificial. O site original
+do projeto, \emph{The Captcha Project}, foi lançado em 2000.
+
+O relatório técnico de AHN; BLUM; LANGFORD (2002) não foi o primeiro a
+apresentar o nome Captcha, nem suas aplicações. RESHEF; RAANAN; SOLAN
+(2005) foi o primeiro registro de patente com o termo e LILLIBRIDGE et
+al. (2001) foi o primeiro registro de patente que implementou uma
+solução aos sistemas de Captchas. No entanto, o relatório de 2022 é o
+primeiro que reconhecidamente trata do tema como um problema de
+inteligência artificial como um teste de Turing automatizado.
+
+Os artigos mais conhecidos de introdução aos Captchas são VON AHN et al.
+(2003) e VON AHN; BLUM; LANGFORD (2004). O conteúdo dos trabalhos é o
+mesmo, sendo o primeiro deles na forma de apresentação e o segundo na
+forma de relatório. A apresentação é a primeira a mostrar o projeto
+reCaptcha, que será comentado em uma subseção própria. Um detalhe
+interessante é a ênfase dos autores no termo \emph{Public} dos Captchas,
+mostrando a preocupação em manter os códigos públicos.
+
+Os autores também defendem que o Captcha é uma forma de fazer com que
+pessoas mal intencionadas contribuam com os avanços da inteligência
+artificial. Se uma pessoa (ainda que mal intencionada) resolve um
+Captcha e publica essa solução, isso significa que a comunidade
+científica avançou na área de inteligência artificial.
+
+Não demorou para surgirem os primeiros resolvedores de
+Captchas\footnote{Outro termo para \emph{resolver} Captchas é
+  \emph{quebrar} Captchas. Nesta tese, optou-se por utilizar o termo
+  \emph{resolver,} para enfatizar a interpretação do Captcha como um
+  desafio, não como um problema de criptografia.}. MORI; MALIK (2003)
+foi um dos primeiros trabalhos publicados sobre o tema e utiliza
+diversas técnicas de processamento de imagens para obter os rótulos
+corretos. Também não demorou para a comunidade científica perceber que
+redes neurais eram úteis nesse contexto (CHELLAPILLA; SIMARD, 2004). No
+artigo de 2004, Chellapilla e Simard desenvolvem um algoritmo baseado em
+heurísticas para segmentar a imagem e redes neurais para identificar as
+imagens individuais.
+
+A partir desse ponto, foi iniciada uma luta entre geradores e
+resolvedores de Captchas. Do lado dos geradores, as pessoas envolvidas
+foram tanto acadêmicos tentando desenvolver desafios cada vez mais
+difíceis para avançar na pesquisa em inteligência artificial, quanto
+empresas de tecnologia tentando se proteger contra programas avançados.
+Do lado dos resolvedores, as pessoas envolvidas foram tanto acadêmicos
+tentando desenvolver novas técnicas para avançar nos modelos de
+reconhecimento de imagens, quanto \emph{spammers} buscando novas formas
+de realizar ataques cibernéticos.
+
+Um dos geradores de Captchas mais conhecidos é Luis von Ahn, que também
+é um dos criadores do Captcha. Um pedaço da história está disponível nos
+primeiros cinco minutos da entrevista com Luis Von Ahn em um programa
+chamado \emph{Spark}\footnote{Spark, 2011.
+  \href{https://web.archive.org/web/20120603142110/http://www.cbc.ca/spark/2011/11/full-interview-luis-von-ahn-on-duolingo/}{Link
+  no Web Archive}. Último acesso em 01/11/2022.}. Na entrevista, Von Ahn
+conta um pouco da origem dos Captchas em Carnegie Mellon, contando que
+ficou frustrado com o fato das pessoas perderem tempo de inteligência
+humana ao resolver Captchas, o que deu origem ao reCaptcha. Outro vídeo
+instrutivo é uma palestra de Von Ahn na \emph{Thinking Digital
+Conference} sobre a história do reCaptcha\footnote{\href{https://www.youtube.com/watch?v=i_5ew4btJiQ}{Link
+  do vídeo no YouTube}. Último acesso em 01/11/2022.}. Segundo ele, a
+\emph{startup} foi criada em maio de 2007\footnote{Segundo o
+  \href{https://www.wired.com/2007/06/ff-humancomp/}{texto da Wired}:
+  ``\emph{So he's fighting back. In late May, von Ahn launched
+  reCaptcha, a service that he believes is the toughest Captcha yet
+  devised. ReCaptcha presents users with two stretched and skewed words,
+  each bisected by a diagonal line''.} Último acesso em 01/11/2022.},
+depois de von Ahn perceber que aproximadamente 200 milhões de Captchas
+eram resolvidos diariamente.
+
+O reCaptcha v1 foi uma solução de aproveitar o tempo das pessoas que
+resolvem Captchas para digitalizar livros (AHN et al., 2008). A ideia do
+reCaptcha, como demonstrada na Figura~\ref{fig-recaptcha-v1}, foi
+apresentar duas palavras distorcidas para a pessoa: a primeira seria
+utilizada para verificar se a pessoa era um humano, e a segunda seria
+utilizada para decifrar um texto que os robôs na época não conseguiam
+ler. Em 2009, a empresa foi comprada pela Google, que utilizou o
+reCaptcha para digitalizar os Google Books.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/recaptcha-v1.png}
+
+}
+
+\caption{\label{fig-recaptcha-v1}Explicação de von Ahn sobre o
+funcionamento do reCaptcha}
+
+\end{figure}
+
+Curiosamente, foi com a própria Google que os resolvedores ficaram em
+vantagem na luta. Os modelos de inteligência artificial continuaram
+avançando, notadamente com o avanço dos modelos de redes neurais
+profundas (LECUN; BENGIO; HINTON, 2015a). No trabalho de GOODFELLOW et
+al. (2013), todos funcionários da Google na época, foi apresentado um
+modelo de redes neurais convolucionais que resolvia o reCaptcha v1 com
+99.8\% de acurácia. No ano seguinte, em 2014, a Google descontinuou o
+reCaptcha v1, lançando o reCaptcha v2.\footnote{\emph{Are you a robot?
+  Introducing No Captcha reCaptcha.} Acessível no
+  \href{https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html}{blog
+  da Google}. Último acesso em 01/11/2022.}
+
+O reCaptcha v2 apresentou duas inovações importantes. O primeiro foi o
+botão ``\emph{I'm not a robot}'', um verificador automático do navegador
+que utiliza heurísticas para detectar se o padrão de acesso ao site se
+assemelha com um robô ou humano. O segundo foi a mudança no tipo de
+tarefa: ao invés de rotular um texto distorcido, o desafio passou a ser
+identificar objetos e animais, como na Figura~\ref{fig-turkey}.
+
+A mudança do tipo de tarefa de visão computacional mudança foi
+importante para o sucesso do reCaptcha v2. Isso ocorre porque o desafio
+é mais difícil, já que existem muito mais objetos e imagens do que
+letras e números, aumentando significativamente o suporte da variável
+resposta. Por exemplo, um modelo para identificar um reCaptcha de gatos
+pode ser facilmente desenvolvido a partir de uma base pré-classificada,
+potencialmente custosa para ser construída. O reCaptcha v2, no entanto,
+pode facilmente mudar a tarefa para identificar leões, cães, hidrantes e
+semáforos, inutilizando o modelo criado para classificar gatos. O
+reCaptcha v2 também foi um sucesso para treinar os modelos desenvolvidos
+pela própria Google: usando o mesmo princípio do reCaptcha v1, a
+humanidade era verificada com apenas uma parte das imagens. As outras
+imagens eram utilizadas para rotular imagens, utilizadas para aprimorar
+os modelos utilizados nos projetos de carros autônomos, Google Street
+View e outras iniciativas da empresa.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/turkey.png}
+
+}
+
+\caption{\label{fig-turkey}Exemplo do reCaptcha v2 com a imagens de
+perus.}
+
+\end{figure}
+
+Com o advento do reCaptcha v2, a pergunta dos resolvedores de Captcha
+passou a ser: como criar modelos que funcionam razoavelmente bem nos
+Captchas sem a necessidade de rotular vários casos? Se esse desafio
+fosse resolvido, dois avanços aconteceriam: i) um grande avanço na
+inteligência artificial, especificamente na área de visão computacional,
+e ii) uma nova forma de vencer a luta.
+
+Até o momento de escrita da tese, não existia um modelo geral que
+resolvesse com alta acurácia todos os desafios colocados pelo reCaptcha
+v2 e seus concorrentes. No entanto, vários avanços apareceram no sentido
+de reduzir a quantidade de imagens rotuladas para criar candidatos a
+resolvedores. Dentre eles, o mais significativos são os baseados nas
+redes generativas adversariais (\emph{Generative Adversarial Networks,}
+ou GANs), propostas no famoso trabalho de GOODFELLOW et al.
+({[}s.d.{]}). O primeiro trabalho que utiliza modelos generativos no
+contexto de Captchas mostrou uma redução de 300x na quantidade de dados
+classificados necessária para resolver um Captcha (GEORGE et al. (2017);
+nesse caso, os autores propõem uma rede diferente do GAN, chamada
+\emph{Recursive Cortical Network}, ou RCN). Outros trabalhos mais
+recentes (WANG et al., 2021; YE et al., 2018a) avançam ainda mais na
+pesquisa, reduzindo o trabalho de classificação para um novo Captcha de
+texto para aproximadamente 2 horas.
+
+Mas foi em 2018, com o reCaptcha v3, que a Google deu a palavra final.
+Com a nova versão, as verificações de navegador passaram a ser muito
+mais poderosas, sendo raros os casos em que o site fica em dúvidas se a
+pessoa é ou não um robô. Versões mais recentes, como o reCaptcha
+\emph{Enterprise,} de 2020, ainda permitem que as pessoas que mantêm os
+sites façam o ajuste de modelos de detecção de robôs. Os desafios de
+reconhecimento de texto, objetos ou imagens perderam a importância.
+
+Então, no final, quem venceu a luta de geradores e resolvedores? Na
+verdade, nenhuma das duas! O que ocorreu com o reCaptcha v3 e seus
+sucessores foi, no fundo, uma mudança de perspectiva: o Captcha deixou
+de ser um sistema \textbf{passivo} e passou a ser um sistema
+\textbf{ativo} de verificação. Ao invés de criar uma tarefa difícil de
+resolver por robôs e fácil de resolver por pessoas, os sistemas criaram
+uma camada de verificação da sessão de acesso do usuário, incluindo
+análises do navegador, dos \emph{cookies} e dos padrões de cliques.
+Antes mesmo de chegar no desafio de reconhecimento, o algoritmo de
+acesso precisa enganar os verificadores. Essa tarefa é muito mais
+parecida com um problema de \emph{cyberataque} do que uma tarefa de
+inteligência artificial.
+
+A guerra entre sites e \emph{spammers} continua, mas não é mais uma luta
+entre geradores e resolvedores. Por conta disso, os desafios dos
+Captchas, sejam de texto ou de imagem, são hoje muito mais uma questão
+acadêmica do que uma questão de segurança. A pesquisa sobre Captchas
+ainda é promissora e pode gerar muitos resultados importantes para a
+área de inteligência artificial.
+
+Infelizmente, Captchas de textos em imagens continuam sendo populares na
+\emph{internet}. Isso é especialmente evidente nos serviços públicos --
+objeto deste trabalho --, já que os serviços raramente são atualizados
+com ferramentas mais recentes. Desenvolver uma ferramenta que facilita a
+resolução de Captchas em sites públicos é uma forma de incentivar os
+sites a serem atualizados. Se o Captcha inseguro parar de fazer efeito
+prático, os sites terão de atualizar a tecnologia, seja colocando
+Captchas mais poderosos, que é o resultado indesejado, ou
+disponibilizando os dados públicos de forma aberta, que é o resultado
+desejado.
+
+Essa é a lacuna identificada a partir da observação do estado atual dos
+serviços públicos e dos trabalhos acadêmicos analisados. No presente
+trabalho, será apresentado um fluxo de trabalho que pode ser facilmente
+aplicado a diferentes modelos de resolução de Captchas, incluindo
+arquiteturas que ainda não foram desenvolvidas. O fluxo de trabalho
+funcionará como um acelerador do aprendizado, possibilitando a criação
+de modelos que não precisam de intervenção humana. O resultado será
+encontrado explorando o potencial de uso do \textbf{oráculo},
+apresentado na próxima seção.
+
+\hypertarget{oruxe1culo}{%
+\section{Oráculo}\label{oruxe1culo}}
+
+Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado,
+são muito sensíveis a perturbações pequenas nas imagens (YUAN et al.,
+2019). Por isso, se o site de um tribunal, por exemplo, mudar o Captcha
+utilizado, seria necessário baixar e anotar uma nova base de dados para
+treinar o modelo. Os avanços em técnicas de regularização fazem com que
+o modelo seja menos afetado por mudanças nos desafios gerados. Uma
+técnica de regularização que ajuda na capacidade de generalização é a
+aumentação de dados com adição de ruídos (NOH et al., 2017). No entanto,
+nenhuma técnica garante que o modelo terá excelentes resultados em novos
+desafios.
+
+Outra alternativa é desenvolver modelos que aprendem com poucos dados
+anotados. Como comentado anteriormente, GANs e modelos relacionados
+podem apresentar bons resultados na resolução de tarefas de imagens,
+mesmo com uma base de dados anotada. Nesse sentido, ainda que um site
+mude seu Captcha, é possível ajustar um modelo que resolve esse Captcha
+sem a necessidade de anotar muitos exemplos para construir uma nova base
+de treino.
+
+Nessa tese, apresenta-se uma nova técnica para resolver Captchas com
+poucos dados anotados. A técnica consiste em aproveitar o fato de que o
+Captcha aplica um teste de Turing automático para gerar bases de dados
+automaticamente. Ou seja, a técnica resolve o problema não com modelos
+mais sofisticados, mas com a utilização eficiente dos recursos
+disponíveis. Qualquer modelo pode se aproveitar dessa característica dos
+Catpchas, incluindo arquiteturas que ainda não foram desenvolvidas. Essa
+é a técnica do oráculo.
+
+Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado
+está correto. Eles estão disponíveis em todos os sites, já que, por
+definição, o Captcha precisa apresentar o resultado do teste para o
+usuário. O nome ``oráculo'' vem do fato de que o site já possui a
+informação correta, como um deus. O site, no entanto, se comunica com o
+usuário através de um intermediário (o oráculo) que apresenta a resposta
+de forma limitada.
+
+Oráculos se manifestam de diversas formas nos sites com Captchas. Por
+exemplo, pode dar a possibilidade de realizar apenas um teste por
+imagem, vários testes por imagem, ou ainda retornar informações
+ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode
+retornar com um ``bom o suficiente'' quando o rótulo não está totalmente
+correto (AHN et al., 2008).
+
+O oráculo é uma forma de obter uma base virtualmente infinita. Do ponto
+de vista de modelagem, é similar a um problema de aprendizado por
+reforço (SUTTON; BARTO, 2018), mas com uma resposta binária (acertou ou
+errou) no lugar de um escore.
+
+A técnica consiste em utilizar um modelo inicial, possivelmente fraco.
+Em seguida, o site é acessado múltiplas vezes, gerando uma nova base de
+dados virtualmente infinita, que é completamente anotada nos casos de
+acerto e que apresenta o histórico de erros no caso de erro. O modelo
+inicial poderia ser ajustado com as técnicas usuais de modelagem, ou
+utilizando um modelo mais sofisticado como GAN.
+
+Infelizmente, utilizar somente os casos classificados corretamente,
+obtidos dos acertos no teste do oráculo, induz viés de seleção na
+amostra (NA et al., 2020). Como o modelo só tem acesso aos casos em que
+já funciona bem, a informação obtida não é tão relevante. O desafio de
+modelagem da tese reside em como considerar a informação fornecida pelo
+oráculo nos casos em que o modelo inicial erra.
+
+Do ponto de vista estatístico, a informação produzida pelo oráculo pode
+ser entendida como uma informação censurada (COLOSIMO; GIOLO, 2006).
+Isso acontece pois a informação existe e é correta, mas não está
+completa. No entanto, como a informação é resultado do teste de um
+rótulo produzido por um modelo, faz sentido afirmar que a censura não é
+gerada por acaso.
+
+Na área de aprendizado de máquinas, um modelo apresenta resposta
+censurada ou incompleta é colocado na classe de problemas do aprendizado
+fracamente supervisionado (ZHOU, 2018). Trata-se de uma área ainda pouco
+investigada estudada na literatura, mas bastante ampla, englobando não
+só os métodos supervisionados como também os métodos
+semi-supervisionados. A tese apresentará os conceitos de aprendizado
+fracamente supervisionado, com foco na classe de problemas que a
+modelagem utilizando Captchas representa.
+
+Para criar uma base de dados usando o oráculo, é necessário utilizar
+técnicas de raspagem de dados, imitando repetidamente o que um usuário
+faria para acessar o site. Por isso, a raspagem de dados se torna
+fundamental para a construção do modelo, tornando-se um dos objetivos da
+pesquisa.
+
+\hypertarget{objetivos}{%
+\section{Objetivo}\label{objetivos}}
+
+O objetivo geral da tese é desenvolver uma solução inovadora, chamada
+WAWL (\emph{Web Automatic Weak Learning}) para resolver Captchas,
+misturando técnicas de aprendizado profundo com raspagem de dados.
+
+Especificamente, a pesquisa tem como objetivos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Descrever o modelo proposto e estudar suas propriedades.
+\item
+  Construir e disponibilizar um repositório de dados para realização de
+  mais pesquisas no ramo.
+\item
+  Ajustar e testar a eficácia do modelo proposto.
+\item
+  Disponibilizar um pacote computacional aberto, possibilitando a
+  resolução de Captchas presentes em serviços públicos.
+\end{enumerate}
+
+\hypertarget{justificativa}{%
+\section{Justificativa}\label{justificativa}}
+
+O presente trabalho é relevante para a ciência por conta de sua
+importância prática, importância teórica e viabilidade técnica. Os
+pontos são explicados abaixo.
+
+Captchas em serviços públicos causam desequilíbrio de mercado e
+incentivam o uso de serviços com formas de remuneração duvidosas. O
+objetivo 4 vai de encontro direto com esse problema, disponibilizando
+uma ferramenta gratuita e aberta para resolução de Captchas que, pelo
+menos até a escrita da tese, pode ser utilizada em dezenas de serviços
+públicos.
+
+Do ponto de vista teórico, a tese é importante por apresentar uma
+aplicação muito elegante do aprendizado fracamente supervisionado. No
+caso do Captcha, como a base de dados fracamente supervisionada é
+virtualmente infinita, trata-se de uma excelente oportunidade para
+testar novas técnicas e como elas se comportam empiricamente. Os
+objetivos 1 e 2 estão relacionadas a essa justificativa.
+
+Finalmente, com relação à viabilidade técnica, o trabalho parte de uma
+lista de Captchas que já foram resolvidos utilizando aprendizado
+profundo. Como os Captchas já estão resolvidos, mesmo que a WAWL não
+apresentasse bons resultados -- e apresenta -- o projeto ainda teria
+como subprodutos as bases de dados e o pacote computacional
+disponibilizados abertamente. O objetivo 3 é o que torna a proposta
+tecnicamente viável.
+
+\hypertarget{hipuxf3teses}{%
+\section{Hipóteses}\label{hipuxf3teses}}
+
+O projeto foi desenvolvido em torno de duas hipóteses principais. Tais
+hipóteses são oriundas tanto do levantamento bibliográfico realizado
+para desenvolver a pesquisa, quanto da experiência pessoal do autor em
+projetos de pesquisa aplicados.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A utilização de aprendizado fracamente supervisionado com oráculo
+  permite a criação de modelos que resolvem Captchas de textos em
+  imagens sem a necessidade de criar grandes bases anotadas.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Sub-hipótese: É possível criar um modelo genérico que funciona bem e
+    se adapta com o uso do oráculo.
+  \item
+    Sub-hipótese: Com a teoria de aprendizado fracamente supervisionado,
+    é possível demonstrar que modelos criados dessa forma apresentam
+    desempenho análogo ao que seria obtido com bases totalmente
+    supervisionadas.
+  \end{enumerate}
+\item
+  É possível aliar a área de raspagem de dados com a área de modelagem
+  estatística
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Sub-hipótese: O uso de raspagem de dados como passo intermediário do
+    processo de modelagem apresenta resultados positivos no poder
+    preditivo dos Captchas.
+  \item
+    Sub-hipótese: É possível criar um modelo com aprendizado ativo, que
+    melhora continuamente conforme é utilizado nos sites.
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{organizauxe7uxe3o-do-trabalho}{%
+\section{Organização do trabalho}\label{organizauxe7uxe3o-do-trabalho}}
+
+O segundo capítulo, ``metodologia'' contém todos os passos dados para
+construção da tese, tanto do ponto de vista teórico como prático.
+Parte-se da definição técnica dos Captchas, chegando até as redes
+neurais e a classe problema trabalhada de forma ampla. Em seguida,
+apresenta-se o método WAWL e suas características. Depois, a base de
+dados é descrita, mostrando as fontes de dados consideradas e as
+técnicas de raspagem de dados utilizadas. Por último, descreve-se, com
+detalhes, as simulações realizadas para obtenção dos resultados
+empíricos.
+
+O terceiro capítulo, ``resultados'', apresenta os resultados da
+pesquisa. Do ponto de vista teórico, são apresentadas as demonstrações
+das propriedades do modelo. Do ponto de vista empírico, são apresentados
+os resultados das simulações e outros experimentos realizados com a
+técnica WAWL.
+
+No quarto e último capítulo, ``conclusion'', a pesquisa é concluída, com
+apresentação das considerações finais e próximos passos. Também foi
+incluído um apêndice descrevendo e documentando o pacote
+\texttt{\{captcha\}}, criado atingir o objetivo 4 da pesquisa.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{sec-metodologia}{%
+\chapter{Metodologia}\label{sec-metodologia}}
+
+O capítulo está organizado em três seções: definição do problema, dados
+e simulações. A primeira mostra a base matemática do problema estudado e
+as escolhas de sintaxe e terminologias. A segunda descreve as fontes de
+dados e o processo de coleta, já que a base foi construída totalmente do
+zero. A terceira mostra como foram planejadas as simulações para
+verificar se a solução proposta funciona bem empiricamente.
+
+Na parte de redes neurais, optou-se por trabalhar nas pontes entre os
+modelos clássicos de estatística e os modelos de redes neurais, mas sem
+tecer todos os detalhes técnicos que podem ser encontrados em livros
+didáticos. Antes de 2015, a pesquisa em redes neurais nos departamentos
+de estatística era uma novidade, sofrendo até certo preconceito por ser
+uma classe de modelos ``caixa-preta''. Com o passar do tempo, no
+entanto, a área está ficando cada vez mais popular, envolvendo até mesmo
+trabalhos de iniciação científica no tema. Por isso, optou-se por trazer
+poucos detalhes da área, focando nas pontes entre os modelos clássicos e
+as redes neurais. Espera-se que o conteúdo possa ser aproveitado por
+pessoas interessadas em ensinar redes neurais para estudantes de
+estatística.
+
+Na seção de dados, procurou-se apresentar a metodologia de coleta em
+detalhes. Isso foi feito porque a área de raspagem de dados não é comum
+para estudantes de estatística, existindo até uma percepção entre
+acadêmicos de que trata-se de uma área separada da estatística. Uma das
+hipóteses de pesquisa, bem como a solução técnica apresentada neste
+trabalho é justamente uma ponte entre as duas áreas, justificando um
+detalhamento maior dos conceitos.
+
+Implementações de raspagem de dados, no entanto, são inconstantes. Um
+site de interesse pode mudar sua estrutura ou simplesmente trocar o
+Captcha para um reCaptcha da noite para o dia, alterando completamente o
+fluxo de coleta. Isso aconteceu, inclusive, com um dos sites mais
+importantes dentro do contexto da jurimetria: em 2018, o Tribunal de
+Justiça de São Paulo (TJSP) passou a utilizar o reCaptcha para bloquear
+ferramentas automatizadas. Qualquer código ou fluxo para acessar as
+fontes de dados consideradas no trabalho, portanto, estariam datadas no
+momento da publicação. Por isso, optou-se por apresentar essa parte de
+forma genérica e deixar as atualizações para os códigos, que estão
+disponíveis publicamente e serão mantidos com contribuições da
+comunidade.
+
+Na seção de simulações, procurou-se descrever os passos dados em
+detalhe. Nesse caso, a escolha do detalhamento se deu por motivos
+puramente científicos, para que qualquer pessoa possa reproduzir os
+passos dados. Dessa forma, pessoas interessadas na área podem replicar
+os resultados em outros exemplos com alterações mínimas no fluxo, além
+de sugerir melhorias.
+
+\hypertarget{definiuxe7uxe3o-do-problema}{%
+\section{Definição do problema}\label{definiuxe7uxe3o-do-problema}}
+
+O problema a ser trabalhado é um caso de \emph{aprendizado fracamente
+supervisionado} (ZHOU, 2018). Trata-se de uma generalização do
+aprendizado supervisionado e também do aprendizado
+\emph{semi-supervisionado}. Usualmente, a área de aprendizado
+estatístico (ou aprendizado de máquinas) se concentra em dois tipos de
+problemas principais: o aprendizado supervisionado e o aprendizado não
+supervisionado. Isso ocorre principalmente por fins didáticos, pois é
+mais fácil passar os modelos que fazem parte de cada área.
+
+No entanto, a estatística evolui com os problemas que ocorrem no mundo.
+E, no mundo, os problemas nem sempre recaem em uma ou outra categoria. O
+que temos, na verdade, é que os problemas não supervisionados e
+supervisionados estão conectados, desde que o objetivo de uma pesquisa
+seja o de predizer valores (regressão) ou categorias (classificação).
+
+Nesse sentido, uma área que ficou popular nos últimos anos, até por
+conta dos avanços na área de Deep Learning, é o \emph{aprendizado
+semi-supervisionado} (ZHU, 2005). Trata-se de uma classe de problemas
+contendo uma amostra completamente anotada e uma amostra sem anotações.
+A amostra sem anotações é usada para compreender como os dados foram
+gerados, e os parâmetros podem ser compartilhados com a parte
+supervisionada do modelo. Isso poderia indicar que existem três classes
+de problemas: o não supervisionado, o supervisionado e o
+semi-supervisionado.
+
+Mas isso também não representa todas as classes de problemas. Em muitas
+aplicações reais, obter uma anotação completa e correta pode ser custoso
+ou até impraticável. Além disso por envolver trabalho humano, é comum
+que classificações contenham erros. Para lidar com esses casos existe
+uma área, que generaliza as anteriores, que é o aprendizado fracamente
+supervisionado.
+
+Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da
+área existem diversos tipos de problemas, como aprendizado
+semi-supervisionado, aprendizado de múltiplas instâncias (BLUM; KALAI,
+1998), aprendizado com rótulos incorretos ou incompletos (ZHOU, 2018). O
+caso dos Captchas com o uso do oráculo será apresentado como outra
+classe de problemas, chamada \textbf{\emph{aprendizado com rótulos
+parciais}} (\emph{partial label learning}, PLL, (JIN; GHAHRAMANI,
+2002)). Essa classe apresenta uma especialização ainda mais próxima do
+problema estudado, chamado \textbf{\emph{aprendizado com rótulos
+complementares}} (\emph{complementary label learning}, (ISHIDA et al.,
+2017a)).
+
+A intepretação do Captcha como um problema de PLL será apresentada no
+final do capítulo. A jornada começa de onde deve começar, com aqueles
+que são objeto de análise deste trabalho: os Captchas.
+
+\hypertarget{captcha}{%
+\subsection{Captcha}\label{captcha}}
+
+Captcha é um \emph{desafio} do tipo \emph{desafio-resposta} usado para
+determinar se a usuário do sistema é um humano. Existem diversos tipos
+de Captcha diferentes, que envolvem desde identificar textos em imagens
+até resolver expressões matemáticas complexas.
+
+O foco deste trabalho reside nos Captchas baseados em imagens rotuladas,
+que é o tipo mais comum. Em seguida, a menos que se mencione ao
+contrário, todos os Captchas apresentados são desse tipo.
+
+O fluxo completo de um Captcha envolve cinco componentes: um
+\emph{rótulo}, um \emph{gerador}, uma \emph{imagem}, um agente e um
+\emph{oráculo}. Um ciclo do Captcha é completado ao seguir os passos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  O rótulo é definido, usualmente com algum procedimento aleatório,
+  ocultado do agente.
+\item
+  A imagem é gerada a partir do rótulo e apresentada para o agente.
+\item
+  O agente preenche sua resposta a partir da imagem (que pode estar
+  certo ou errado)
+\item
+  O oráculo verifica se a resposta está correta.
+\item
+  Dependendo da resposta, o agente é direcionado para a página
+  autenticada ou para uma página de erro.
+\end{enumerate}
+
+A Figura~\ref{fig-esquema-captcha} esquematiza o fluxo do Captcha.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/esquema-captcha.png}
+
+}
+
+\caption{\label{fig-esquema-captcha}Fluxo do Captcha}
+
+\end{figure}
+
+\hypertarget{imagem-ruxf3tulo-e-variuxe1vel-resposta}{%
+\subsubsection{Imagem, rótulo e variável
+resposta}\label{imagem-ruxf3tulo-e-variuxe1vel-resposta}}
+
+A imagem é uma matriz
+\(\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}\), contendo
+padrões que, a partir da análise humana, levam ao rótulo do Captcha. O
+\emph{rótulo} dado por um vetor de caracteres
+\(\mathbf c = [c_1,\dots,c_L]^\top\). O comprimento \(L\) pode ser fixo
+ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir
+com comprimentos diferentes. Nas definições que seguem considerou-se
+\(L\) como fixo, por simplicidade.
+
+Os elementos do vetor \(\mathbf c\) fazem parte de um alfabeto
+\(\mathcal A\), com cardinalidade \(|\mathcal A|\), finito e conhecido.
+O alfabeto contém todos os possíveis caracteres que podem aparecer na
+imagem. Na maioria dos casos, \(\mathcal A\) corresponde a uma
+combinação de algarismos arábicos (0-9) e letras do alfabeto latino
+(a-z), podendo diferenciar ou não as letras maiúsculas e
+minúsculas\footnote{existem exemplos de Captchas baseados em imagens que
+  não são limitados a letras e números para constituir o rótulo (KAUR;
+  BEHAL, 2014). Como esses casos não aparecem nas aplicações práticas de
+  interesse, estão fora do escopo do trabalho.}.
+
+O elemento da matriz \(x_{nm\cdot}\) é denominado \emph{pixel}. Um pixel
+representa a menor unidade possível da imagem. Em uma imagem colorida,
+por exemplo, \(R=3\). Nesse caso, um pixel é um vetor de três dimensões
+com valores entre zero e um, representando a intensidade de vermelho,
+verde e azul da coordenada \((n, m)\) da imagem. Em imagens em escala de
+cinza, \(R=1\) e o pixel, de uma dimensão, representa a intensidade do
+cinza, sendo 1 o equivalente da cor branca e 0 da cor preta.
+
+A Figura~\ref{fig-exemplo-tjmg} mostra um exemplo Captcha do Tribunal de
+Justiça de Minas Gerais (TJMG). Nesse caso, tem-se \(L=5\) e
+\(|\mathcal A|=10\), apenas os dez algarismos arábicos. A imagem tem
+dimensões \(N=110\), \(M=40\) e \(R=3\). O rótulo da imagem é
+\([5,2,4,3,2]^\top\).
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/tjmg16283c1e6d06.jpeg}
+
+}
+
+\caption{\label{fig-exemplo-tjmg}Exemplo de Captcha no TJMG.}
+
+\end{figure}
+
+A \textbf{variável resposta} é uma matriz binária
+\(\mathbf y_{L \times |\mathcal A|}\), em que cada linha representa um
+dos valores do vetor \(\mathbf c\), enquanto as colunas possuem um
+representante para cada elemento de \(\mathcal A\). Um elemento
+\(y_{ij}\) vale 1 se o elemento \(i\) do rótulo \(\mathbf c\)
+corresponde ao elemento \(j\) do alfabeto \(\mathcal A\), valendo zero
+caso contrário. A variável resposta pode ser pensada também como o
+\emph{one-hot encoding} do rótulo.
+
+Uma maneira alternativa de definir a variável resposta seria com um
+vetor de índices representando cada elemento do alfabeto em um vetor. O
+problema de trabalhar dessa forma é que a variável resposta
+\(\mathbf y\) tem um número exponencial de combinações: o rótulo possui
+\(L\) caracteres, sendo que cada caractere pode ter \(|\mathcal A|\)
+valores, totalizando \(|\mathcal A|^L\) combinações.
+
+Por exemplo, um Captcha com \(L=6\) letras e \(|\mathcal A| = 36\)
+possibilidades em cada letra (26 letras do alfabeto latino e 10
+algarismos arábicos), possui um total de 2.176.782.336 (\(>\) 2 bilhões)
+combinações. Por isso, modelar as imagens diretamente através de uma
+única variável resposta categórica é tecnicamente inviável.
+
+A forma \emph{one-hot} da resposta pode ser entendida como uma
+\textbf{multinomial} \textbf{multivariada} (LI; TSUNG; ZOU, 2014). A
+resposta é multivariada porque temos \(L\) caracteres na imagem e
+multinomial porque temos \(|\mathcal A|\) possíveis caracteres em cada
+posição. Dessa forma, podemos pensar que um modelo que resolve o Captcha
+envolve \(L\) classificadores com resposta multinomial, cada um dando
+conta de um dos caracteres. Os classificadores podem ser independentes e
+podem até contar com etapas de pré-processamento separadas.
+
+Seguindo o exemplo da Figura~\ref{fig-exemplo-tjmg}, é possível
+representar o rótulo da seguinte forma:
+
+\[
+\mathbf c = \left[\begin{array}{c}
+     5  \\
+     2 \\
+     4 \\
+     3 \\
+     2
+\end{array}\right] \rightarrow \mathbf{y} = \left[\begin{array}{cccccccccc}
+    0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{array}\right]
+\]
+
+A forma \emph{dummy} da resposta facilita os trabalhos que seguem. Como
+será visto mais adiante, o modelo de rede neural gerará uma matriz de
+probabilidades que somam \(1\) em cada linha, com as probabilidades de
+cada caractere em cada posição.
+
+\hypertarget{gerador}{%
+\subsubsection{Gerador}\label{gerador}}
+
+O \textbf{gerador} é uma função \(g\) que recebe um rótulo como entrada
+e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de
+gerar uma imagem fácil de interpretar por humanos, mas difícil de se
+resolver por máquinas.
+
+Um exemplo de gerador é a função criada no pacote \texttt{\{captcha\}}.
+A função foi criada para realizar simulações do sistema de resolução
+proposto na tese, a partir do pacote \texttt{\{magick\}} (OOMS, 2021),
+que utiliza o software \emph{ImageMagick}. A função aplica uma série de
+distorções e efeitos comuns no contexto de Captchas, gerando imagens
+como a da Figura~\ref{fig-captcha-r-exemplo}.
+
+\begin{figure}
+
+{\centering \includegraphics{./metodologia_files/figure-pdf/fig-captcha-r-exemplo-1.pdf}
+
+}
+
+\caption{\label{fig-captcha-r-exemplo}Exemplo de captcha gerado pela
+função \texttt{captcha::captcha\_generate()}}
+
+\end{figure}
+
+O gerador segue os passos abaixo, a partir do momento em que um rótulo
+\(\mathbf c\) existe:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  É criada uma matriz \(N\times M \times R\), com valores entre zero e
+  um gerados por simulações de uma \(\mathcal U(0,1)\).
+\item
+  É adicionada uma cor base ao ruído, definida de forma aleatória.
+\item
+  A matriz é transformada em um objeto do tipo \texttt{magick-image}.
+\item
+  A imagem é preenchida com o valor do rótulo, adicionando-se efeitos
+  como rotação, linha unindo as letras e variação de cores.
+\item
+  A imagem recebe outros tipos de distorções, como adição de ruído,
+  alteração de cores e outros efeitos.
+\end{enumerate}
+
+No final, o gerador retorna a imagem, que é a única informação enviada
+ao agente. O rótulo fica escondido para verificação do oráculo.
+
+\hypertarget{sec-oraculo}{%
+\subsubsection{Oráculo}\label{sec-oraculo}}
+
+Para definir o oráculo, utilizou-se uma terminologia que é facilmente
+encaixada com a teoria de aprendizado fracamente supervisionado. Seja
+\(g\) um classificador utilizado para predizer o rótulo de uma imagem e
+seja \(\mathbf X_{n+1}\) uma nova imagem que é observada, com sua
+resposta \(\mathbf Y_{n+1}\), desconhecida. A operação
+\(g(\mathbf X_{n+1}) = \hat {\mathbf Y}_{n+1}\) retorna um candidato
+para \(\mathbf Y_{n+1}\), que pode estar correto ou errado.
+
+O oráculo é uma função
+\(\mathcal O: \mathcal Y \rightarrow 2^{\mathcal Y}\), ou seja, uma
+função que recebe um elemento do domínio da resposta \(\mathcal Y\) (ou
+seja, do conjunto de todas as combinações de rótulos) para o conjunto de
+subconjuntos (as partes) de \(\mathcal Y\). Na prática, a função retorna
+uma lista de possíveis valores de \({\mathbf Y}_{n+1}\), da seguinte
+forma:
+
+\[
+\mathcal O(\hat {\mathbf Y}_{n+1}) = \left\{\begin{array}{ll}
+    \{\mathbf Y_{n+1}\}, & \text{ se } \mathbf Y_{n+1} = \hat {\mathbf Y}_{n+1}  \\
+    \mathcal Y \setminus \{\hat {\mathbf Y}_{n+1}\}, & \text{ se } \mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1}
+\end{array}\right.
+\]
+
+Explicando a função: quando o classificador \(g\) acerta o rótulo, o
+oráculo retorna uma lista que contém apenas um elemento: o próprio
+rótulo. Para simplificar, também é possível utilizar a notação de
+\emph{rotulo complementar}
+\(\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}\).
+Quando o classificador \(g\) retorna o rótulo errado, o oráculo retorna
+uma lista com todos os outros possíveis rótulos do rótulo, o que inclui
+o verdadeiro valor \(\mathbf Y_{n+1}\).
+
+A Figura~\ref{fig-esquema-oraculo} mostra o funcionamento do oráculo no
+exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado
+apresentado é o valor um, indicando que o rótulo está correto. Quando a
+predição é diferente do rótulo, o resultado apresentado é o valor zero,
+indicando que o valor testado está incorreto e que, portanto, o rótulo
+real é um dentre todos os outros possíveis rótulos.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/esquema-oraculo.png}
+
+}
+
+\caption{\label{fig-esquema-oraculo}Esquema mostrando o funcionamento do
+oráculo.}
+
+\end{figure}
+
+É possível generalizar naturalmente o oráculo para múltiplos chutes
+mudando a definição da função que faz predições. Seja \(h\) uma função
+que retorna um conjunto de \(k\) respostas possíveis,
+\(k\in \mathbb N\), \(k\geq 1\), com \(\mathbf x_{n+1}\) e
+\(\mathbf y_{n+1}\) iguais aos definidos definidos anteriormente. Então
+o oráculo tem o funcionamento definido abaixo:
+
+\[
+\mathcal O(h(\mathbf x_{n+1})) = \left\{\begin{array}{ll}
+    \{\mathbf y_{n+1}\}, & \text{ se } \mathbf y_{n+1} \in h(\mathbf x_{n+1})  \\
+   \mathcal Y \setminus h(\mathbf x_{n+1}), & \text{ se } \mathbf y_{n+1} \notin h(\mathbf x_{n+1})
+\end{array}\right..
+\]
+
+Nesse caso, o oráculo também retorna uma lista com a resposta
+\(\mathbf y_{n+1}\). A única diferença é que, quando o Captcha aceita
+múltiplos chutes, a lista retornada em caso de erro tem um comprimento
+menor.
+
+O oráculo tem um papel fundamental na solução proposta. O fato do
+oráculo sempre retornar a resposta correta na lista de opções faz com
+que ela necessariamente reduza o espaço de respostas a serem buscadas em
+uma tentativa futura. Esse fato será explorado a partir de um método
+iterativo para encontrar o valor real do rótulo.
+
+\hypertarget{fatos-estilizados}{%
+\subsubsection{Fatos estilizados}\label{fatos-estilizados}}
+
+Captchas costumam ter dimensões relativamente pequenas, com a altura
+\(N\) variando entre 30 e 200 \emph{pixels} e a largura \(M\) variando
+entre 100 e 300 \emph{pixels}. As imagens costumam ser retangulares para
+comportar várias letras lado a lado, ou seja, geralmente \(M > N\). O
+valor de \(R\) é 1 para imagens em escala de cinza e 3 para imagens
+coloridas.
+
+Historicamente, uma alternativa para resolver Captchas é separando o
+problema em duas tarefas: segmentar e classificar. A tarefa de
+segmentação consiste em receber uma imagem com várias letras e detectar
+pontos de corte, separando-a em várias imagens de uma letra. Já a
+classificação consiste em receber uma imagem com uma letra e identificar
+o caractere correspondente. Nesse caso, a resposta é reduzida para
+\(|\mathcal A|\) categorias, que cresce linearmente e, portanto,
+tratável.
+
+A tarefa de resolver Captchas também poderia ser vista como um problema
+de reconhecimento óptico de caracteres (\emph{Optical Character
+Recognition}, OCR). No entanto, as distorções encontradas em Captchas
+são bem diferentes das distorções encontradas em textos escaneados, que
+são o objeto de aplicação de ferramentas de OCR. Por esse motivo, as
+ferramentas usuais de OCR apresentam resultados pouco satisfatórios em
+vários Captchas.
+
+As distorções encontradas em Captchas podem ser agrupadas em distorções
+para dificultar a segmentação e distorções para dificultar a
+classificação. Na parte de classificação, as principais formas de
+dificultar o trabalho dos modelos são i) mudar as fontes (serifa ou sem
+serifa ou negrito/itálico, por exemplo), ii) mudar letras minúsculas
+para maiúsculas e iii) adicionar distorções nos caracteres. Já na parte
+de segmentação, as principais formas são i) colar os caracteres e ii)
+adicionar linhas ligando os dígitos. Essas técnicas são combinadas com a
+adição de ruído e distorção nas imagens completas para compor a imagem
+final.
+
+\hypertarget{redes-neurais}{%
+\subsection{Redes neurais}\label{redes-neurais}}
+
+A abordagem discutida ao longo da tese utiliza redes neurais
+convolucionais. Para explicar o funcionamento dessa técnica,
+apresenta-se as definições para redes neurais e para a operação de
+convolução no contexto de Captchas, construindo o modelo utilizado nas
+simulações do modelo proposto.
+
+A ideia abaixo é apresentar como funcionam as redes neurais no contexto
+de Captchas. O modelo apresentado é o que foi utilizado nas simulações,
+que é um modelo de redes neurais convolucionais simples, similar ao
+LeNet, com três camadas convolucionais e duas camadas densas (LECUN et
+al., 1998).
+
+A técnica proposta pela tese pode utilizar diversas arquiteturas de
+redes neurais. A escolha de uma arquitetura mais simples foi feita para
+demonstrar a eficácia do procedimento de forma mais contundente. Outras
+arquiteturas mais rebuscadas, como as apresentadas no referencial
+teórico (GEORGE et al., 2017; YE et al., 2018b) podem melhorar a
+aplicação do modelo. A única restrição é que ela possa receber uma
+função de perda modificada, como será mostrado a seguir.
+
+É possível organizar a estrutura de uma rede neural em três componentes:
+a \textbf{arquitetura da rede}, a \textbf{função de perda} e o
+\textbf{otimizador}. Os componentes são detalhados nas próximas
+subseções.
+
+Como uma rede neural possui muitos componentes e subcomponentes, é usual
+apresentar sua estrutura na forma de um diagrama. Redes neurais costumam
+ser fáceis de representar através de grafos, que podem ser utilizados de
+forma mais ou menos detalhada, dependento do interesse.
+
+A Figura~\ref{fig-diagrama-modelo-cnn} mostra, de forma esquemática, os
+componentes (retângulos tracejados) e subcomponentes (partes internas
+dos componentes) do modelo utilizado.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/diagrama-modelo-cnn.png}
+
+}
+
+\caption{\label{fig-diagrama-modelo-cnn}Diagrama representando o modelo
+utilizado de forma genérica, com todos os componentes e subcomponentes
+apresentados de forma esquemática. As partes de fora dos componentes são
+entradas de dados ou decisões de parada do ajuste.}
+
+\end{figure}
+
+\hypertarget{arquitetura-da-rede}{%
+\subsubsection{Arquitetura da rede}\label{arquitetura-da-rede}}
+
+A arquitetura da rede é uma função que leva os dados de entrada na
+estrutura de dados da variável resposta. A arquitetura tem papel similar
+ao exercido pelo componente sistemático em um modelo linear generalizado
+(NELDER; WEDDERBURN, 1972). Trata-se da parte mais complexa da rede
+neural, carregando todos os parâmetros que serão otimizados.
+
+A arquitetura da rede possui três componentes principais, separados em
+dois itens cada:
+
+\begin{itemize}
+\tightlist
+\item
+  as camadas ocultas: camadas \textbf{convolucionais} e camadas
+  \textbf{densas};
+\item
+  as técnicas de regularização: \textbf{normalização em lote}
+  (\emph{batch normalization}), \textbf{\emph{dropout}} e junção de
+  pixels (\emph{max pooling});
+\item
+  as funções de ativação: função de ativação linear retificada
+  (\emph{rectified linear unit}, ReLU) e a função de normalização
+  exponencial (\emph{softmax}).
+\end{itemize}
+
+Abaixo, apresenta-se as definições seguindo-se a ordem de aplicação das
+operações na arquitetura da rede neural: camada convolucional, ReLU,
+\emph{max pooling}, \emph{batch normalization}, \emph{dropout}, camada
+densa e \emph{softmax}.
+
+A \textbf{convolução} é uma operação linear que recebe como entrada uma
+matriz e retorna outra matriz. Ela é diferente de uma operação usual de
+multiplicação de matrizes vista no contexto de modelos lineares
+generalizados, por envolver uma operação nos elementos na vizinhança de
+cada pixel.
+
+Uma forma organizada de fazer essa soma ponderada é criando uma matriz
+de pesos. Com ela, não é necessário procurar os pontos da vizinhança.
+Para cada ponto \((i,j)\), obtem-se a matriz de vizinhança,
+multiplica-se pontualmente pela matriz de pesos e soma-se os valores
+resultantes. A matriz de pesos é chamada de núcleo, ou \emph{kernel}.
+
+Considere
+
+\[
+K = \left[\begin{array}{rrr}-1&-1&-1\\0&0&0\\1&1&1\end{array}\right]
+\]
+
+e a imagem da Figura~\ref{fig-tjmg-exemplo-conv}. Como visto
+anteriormente, trata-de de uma matriz de dimensão
+\(40\times110\times3\).
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/tjmg16283c1e6d06.jpeg}
+
+}
+
+\caption{\label{fig-tjmg-exemplo-conv}Imagem de Captcha utilizado em
+exemplos anteriores.}
+
+\end{figure}
+
+Tome por exemplo a primeira dimensão do pixel \((i,j,k) = (12,16,1)\). A
+vizinhança 3x3 em torno desse ponto é dada por
+
+\[
+P_{i,j,k} = \left[\begin{array}{rrr}
+0.094 & 0.412 & 0.686 \\ 
+0.051 & 0.063 & 0.529 \\ 
+0.071 & 0.000 & 0.086 
+\end{array}\right]
+\]
+
+A operação de convolução é feita da seguinte forma:
+
+\[
+\begin{aligned}
+(P_{12,16,1} *K )_{12,16,1}
+&= k_{1,1}p_{11,15,1} + k_{1,2}p_{11,16,1} + k_{1,3}p_{11,17,1} + \\
+&+ k_{2,1}p_{12,15,1} + k_{2,2}p_{12,16,1} + k_{2,3}p_{12,17,1} + \\
+&+ k_{3,1}p_{13,15,1} + k_{3,2}p_{13,16,1} + k_{3,3}p_{13,17,1}
+\end{aligned}
+\]
+
+Esse é o valor a ser colocado no ponto \((i,j,k)\). Isso funciona em
+todos os pontos que não estão na borda da imagem.
+
+Existem duas formas de trabalhar com as bordas da imagem. A primeira é
+preenchendo as bordas com zeros, de forma a considerar apenas os pontos
+da imagem. A segunda é descartar os pontos da borda e retornar uma
+imagem menor, contendo somente os pixels em que foi possível aplicar
+todo o \emph{kernel}.
+
+No caso do exemplo, o resultado da convolução fica como na
+Figura~\ref{fig-tjmg-exemplo-conv-horizontal}. A matriz não foi
+escolhida por acaso: ela serve para destacar padrões horizontais da
+imagem. Como a primeira linha é formada por \(-1\) e a última é formada
+por \(1\), a matriz fica com valor alto se a parte de cima do pixel for
+preta e a parte de baixo for branca
+(\(\text{grande} * 1 + \text{pequeno} * (-1)\)). A parte destacada da
+imagem acabou sendo a parte de baixo dos números e, principalmente, a
+linha que une os números.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/tjmg_conv_horizontal.jpeg}
+
+}
+
+\caption{\label{fig-tjmg-exemplo-conv-horizontal}Aplicação de uma
+convolução com kernel horizontal.}
+
+\end{figure}
+
+Aplicando o kernel vertical abaixo
+
+\[
+K = \left[\begin{array}{rrr}-1&0&1\\-1&0&1\\-1&0&1\end{array}\right],
+\]
+
+as partes destacadas são as laterais dos números, conforme
+Figura~\ref{fig-tjmg-exemplo-conv-vertical}.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/tjmg_conv_vertical.jpeg}
+
+}
+
+\caption{\label{fig-tjmg-exemplo-conv-vertical}Aplicação de uma
+convolução com kernel horizontal.}
+
+\end{figure}
+
+O resultado da convolução pode ter números negativos ou maiores que um.
+Para que seja possível visualizar, as imagens mostradas acima foram
+normalizadas.
+
+Uma característica das imagens mostradas acima é que elas ficaram
+escuras, ou seja, com muitos valores próximos de zero. Uma técnica para
+modificar a imagem é adicionar uma constante numérica ao resultado da
+convolução. Esse é o chamado \textbf{viés} (\emph{bias}) da convolução.
+
+A Figura~\ref{fig-tjmg-exemplo-conv-vertical-bias}) mostra o efeito de
+adicionar um viés de \texttt{0.6} após aplicação da convolução com
+kernel vertical. É possível idenificar claramente a diferença entre os
+números (mais suaves) e as curvas usadas para conectar os números (mais
+proeminetes).
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/tjmg_conv_vertical_bias.jpeg}
+
+}
+
+\caption{\label{fig-tjmg-exemplo-conv-vertical-bias}Aplicação de uma
+convolução com kernel horizontal.}
+
+\end{figure}
+
+Uma \textbf{camada convolucional} envolve a aplicação de convoluções com
+\(d\) \emph{kernels} em uma matriz, além da adição do \emph{bias}. O
+resultado da aplicação de uma camada convolucional com preenchimento das
+bordas é uma matriz com as mesmas dimensões \(N\) e \(M\) da matriz de
+entrada, mas com \(d\) entradas na dimensão das cores. Como o valor de
+\(d\) pode ser diferente de 1 ou 3, não faz mais sentido tratar essa
+dimensão como cores, por isso essa dimensão é chamada de \textbf{canais}
+da imagem resultante.
+
+É importante notar que, nos exemplos apresentados anteriormente, a
+convolução foi aplicada a apenas um dos canais da imagem: o primeiro.
+Quando a imagem de entrada possui vários canais, camada convolucional
+aplica cada \emph{kernel} em cada canal da imagem e, depois, faz a soma
+dos valores resultantes.
+
+A Figura~\ref{fig-tjmg-exemplo-camada-conv} mostra um exemplo de
+aplicação de camada convolucional para a imagem utilizada nos exemplos
+anteriores. Os \emph{kernels} foram escolhidos com base em um modelo que
+já foi ajustado para o Captcha. Note que os canais capturam a informação
+dos números e dos ruídos, focando em detalhes diferentes.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/tjmg_conv1_modelo.jpeg}
+
+}
+
+\caption{\label{fig-tjmg-exemplo-camada-conv}Resultado da aplicação da
+primeira convolução à imagem.}
+
+\end{figure}
+
+Antes da aplicação da camada convolucional, a operação de
+\textbf{\emph{batch normalization}} foi aplicada. Essa operação nada mas
+faz do que normalizar os números da matriz de entrada antes da aplicação
+da convolução, ou seja, retirar a média e dividir pelo desvio padrão.
+
+\[
+x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
+\]
+
+O valor \(\epsilon\), geralmente um valor pequeno, é adicionado para
+evitar problemas numéricos quando a variância é muito baixa. Os
+parâmetros \(\gamma\) e \(\beta\) podem ser adicionados no passo da
+normalização, fazendo parte do fluxo de aprendizagem do modelo. Apesar
+de não ser uma teoria fechada, alguns resultados indicam que o uso de
+\emph{batch normalization} reduz o tempo de aprendizado dos modelos
+(IOFFE; SZEGEDY, 2015). O passo foi adicionado nos modelos por
+apresentar bons resulados nas simulações.
+
+Após a aplicação da convolução, também é aplicada a função não linear
+\textbf{ReLU}. A transformação ReLU é a mais simples das funções da
+ativação, sendo igual à função identidade quando a entrada é positiva e
+zero caso contrário:
+
+\[
+\text{ReLU}(x) = x\mathbb I_{(x>0)}.
+\]
+
+A função ReLU serve para tornar a arquitetura do modelo uma operação não
+linear. Qualquer operação não linear poderia ser utilizada, mas a mais
+simples e mais popular é a ReLU.
+
+Em seguida, aplica-se uma operação para reduzir a dimensão da imagem,
+chamada \textbf{\emph{max pooling}}. Trata-se de uma operação que recebe
+a imagem e um \emph{kernel}, retornando, para cada janela, o maior valor
+dos pixels. Usualmente, a técnica também utiliza \emph{strides} fazendo
+com que cada pixel seja avaliado apenas uma vez. Por exemplo, para uma
+matriz com dimensões \(M_{10\times10}\) e \emph{kernel} com dimensões
+\(2\times2\), o resultado é uma matriz \(M^p_{5\times5}\) onde cada
+elemento é o valor máximo da janela correspondente ao pixel.
+
+A operação \emph{max pooling} é muito comum no contexto de redes neurais
+convolucionais. Sua aplicação é importante para que os \emph{kernels}
+sejam aplicados em diferentes níveis da imagem de entrada.
+
+A aplicação das camadas convolucionais é repetida três vezes. Ou seja,
+as seguintes operações são aplicadas a partir da imagem original:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{batch normalization}: 6 parâmetros
+\item
+  camada convolucional: 896 parâmetros
+\item
+  ReLU
+\item
+  \emph{max pooling}
+\item
+  \emph{batch normalization}: 64 parâmetros
+\item
+  camada convolucional: 18.496 parâmetros
+\item
+  ReLU
+\item
+  \emph{max pooling}
+\item
+  \emph{batch normalization}: 128 parâmetros
+\item
+  camada convolucional: 36.928 parâmetros
+\item
+  ReLU
+\item
+  \emph{max pooling}
+\item
+  \emph{batch normalization}: 128 parâmetros
+\end{enumerate}
+
+A dimensão da imagem de entrada, bem como quantidade de canais gerados
+por cada camada convolucional foram fixadas. Tais números podem ser
+considerados como hiperparâmetros do modelo, mas foram fixados para
+facilitar as simulações, que já contam com diversos hiperparâmetros.
+
+A imagem de entrada foi fixada na dimensão \(32\times192\). O valor foi
+definido dessa forma porque um dos Captchas de referência, da Receita
+Federal do Brasil (RFB), possui 6 letras e \(32*6=192\). Ou seja, é como
+se a imagem fosse a colagem lado a lado de 6 imagens \(32\times32\).
+
+A quantidade de canais gerados pelas camadas convolucionais foram
+fixadas em 32, 64 e 64. A utilização de números crescentes de canais nas
+camadas convolucionais é comum (LECUN et al., 1998), bem como a
+utilização de números que são potências de 2 (LECUN; BENGIO; HINTON,
+2015b). Nesse sentido, um possível valor para a terceira camada era de
+128 canais, mas optou-se por 64 canais para que a quantidade de
+parâmetros não ficasse grande demais, já que isso exigiria mais tempo de
+computação e computadores mais poderosos.
+
+O total de parâmetros que podem ser otimizados até o final das camadas
+convolucionais é 56.646. Esse número pode parecer grande no contexto de
+modelos estatísticos tradicionais como uma regressão linear, que teria,
+considerando cada pixel como uma covariável, 4.401 parâmetros
+(\(40\times110\) e o intercepto). No entanto, é uma quantidade
+relativamente pequena no contexto de redes neurais. Redes neurais
+recentes aplicadas a imagens, como o DALL-E 2 possui 3,5 bilhões de
+parâmetros (RAMESH et al., {[}s.d.{]}).
+
+Em seguida, o resultado é transformado para um formato retangular,
+similar ao que se encontra em modelos de regressão. Aqui, as dimensões
+da imagem não são mais importantes e os pixels de cada canal são
+tratados como variáveis preditoras. Esse passo pode ser interpretado da
+seguinte forma: as camadas convolucionais funcionam como um
+pré-processamento aplicado às imagens, como uma engenharia de variáveis
+(KUHN; JOHNSON, 2019) otimizada, já que os parâmetros são ajustados no
+modelo.
+
+Uma vez obtidas as variáveis preditoras com o pré-processamento, é a
+hora de aplicar as camadas densas. Tais camadas são as mais comuns no
+contexto de redes neurais. Nesse caso, a operação linear aplicada é uma
+multiplicação de matrizes, similar ao que é feito em um modelo linear
+generalizado. Na verdade, o componente sistemático de um modelo linear
+generalizado é equivalente a uma camada densa com a aplicação de viés,
+com a função de ativação da fazendo o papel da função de ligação.
+
+Assim como existem os canais das camadas convolucionais, existem os
+filtros das camadas densas. A quantidade de filtros define a dimensão do
+vetor de saída. O número de parâmetros da camada densa é igual ao número
+de itens no vetor de entrada multiplicado pelo número de filtros, somado
+à quantidade de filtros novamente, por conta do \emph{bias}. No caso do
+exemplo, a saída das camadas convolucionais tem dimensão
+\(2\times22\times64\) , ou seja, 64 canais de imagens \(2\times 22\).
+Com a transformação em vetor, a quantidade de colunas da base passa a
+ser a multiplicação das dimensões, ou 2.816. No modelo ajustado que foi
+utilizado como exemplo, aplicou-se 200 filtros na camada densa,
+totalizando 563.400 parâmetros. Nas simulações, a quantidade de filtros
+foi variada para produzir modelos com menor ou maior capacidade.
+
+É no contexto da grande quantidade de parâmetros que entra o conceito do
+\emph{dropout} (BALDI; SADOWSKI, 2013). Trata-se de uma regra de
+regularização muito simples de implementar, mas que possui grande
+impacto no ajuste dos modelos. A técnica consiste em selecionar uma
+amostra dos parâmetros em uma das camadas e apagá-los, forçando que os
+valores sejam fixados em zero. Na prática, essa técnica obriga o modelo
+a ser ajustado de forma que amostras aleatórias dos parâmetros sejam
+boas para predizer a variável resposta. Quando o modelo ajustado é usado
+para inferências, o \emph{dropout} é desativado e o modelo pode utilizar
+todos os parâmetros, obtendo-se, na prática, uma média ponderada das
+predições de cada sub-modelo. Dessa forma, o dropout tem um efeito
+similar à aplicação da técnica de \emph{bagging} (GALAR et al., 2011),
+muito utilizada na área de árvores de decisão.
+
+O \emph{dropout} é aplicado após a finalização das camadas
+convolucionais. Em seguida, vem a primeira camada densa, um ReLU e um
+\emph{batch normalization}. Depois, é aplicada mais um \emph{dropout} e
+mais uma camada densa. Com isso, a aplicação de operações é finalizada.
+O total de parâmetros na configuração do modelo apresentado foi de
+630.496. Os modelos mais simples utilizados nas simulações, com 100
+filtros na camada densa, têm 343.696. Os mais complexos, com 300 filtros
+na camada densa, têm 917.396 parâmetros.
+
+Para finalizar a arquitetura do modelo, as quantidades resultantes devem
+ser ajustadas ao formato da variável resposta. O número de filtros da
+segunda camada densa precisa ser escolhido cuidadosamente, pois deve ser
+igual à multiplicação das dimensões da variável resposta. No caso do
+TJMG, os rótulos têm comprimento igual a 5 e vocabulário de comprimento
+10 (algarismos arábicos), organizados em uma matriz \(5\times10\), com
+50 entradas. Por isso, a quantidade de filtros da última camada densa
+também é 50, e o vetor de saída é formatado para uma matriz de dimensão
+\(5\times10\).
+
+No final, o resultado precisa ser normalizado para que fique no mesmo
+escopo de variação da resposta. A resposta possui apenas zeros e uns,
+sendo que cada linha da matriz tem somente um número ``1'',
+correspondendo ao índice do rótulo no alfabeto e, nas outras entradas, o
+valor zero. A saída do modelo deve, portanto, apresentar números entre
+zero e um que somam 1 em cada linha.
+
+Isso é feito através da função \emph{softmax}, aplicada a cada linha da
+matriz de saída. A função softmax é uma normalização que utiliza a
+função exponencial no denominador, forçando que a soma dos valores do
+vetor seja um.
+
+\[
+\text{soft}\max(y_i) = \frac{e^{y_i}}{\sum_{j=1}^{|\mathcal A|} e^{y_j}}
+\]
+
+No exemplo, a saída do modelo é a matriz abaixo:
+
+\[
+\hat{\mathbf z} = \left[\begin{array}{rrrrrrrrrr}
+  -17.54 & -13.52 & -15.49 & -6.67 & -9.91 & 9.94 & -11.40 & -10.93 & -11.84 & -9.31 \\ 
+  -10.93 & -15.62 & 8.31 & -6.59 & -11.08 & -10.37 & -10.06 & -5.83 & -11.43 & -15.17 \\ 
+  -10.54 & -13.67 & -9.61 & -11.46 & 11.28 & -14.35 & -9.91 & -11.37 & -9.91 & -10.02 \\ 
+  -18.19 & -9.60 & -10.96 & 5.35 & -10.15 & -6.63 & -15.56 & -13.34 & -6.87 & -10.86 \\ 
+  -11.36 & -8.73 & 6.46 & -7.05 & -6.14 & -9.26 & -18.98 & -10.36 & -16.11 & -9.67 \\ 
+\end{array}\right].
+\]
+
+Note que a matriz apresenta valores negativos e positivos. Na primeira
+linha, por exemplo, o valor positivo está na sexta coluna,
+correspondendo ao algarismo ``5''. De fato, esse é o valor do primeiro
+elemento do rótulo para esta imagem. Após a aplicação do softmax, a
+matriz de predições obtida é a matriz abaixo. Mesmo usando cinco casas
+decimais, na maioria dos casos, o modelo de exemplo aparenta ter
+confiança nas respostas.
+
+\[
+\hat{\mathbf y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
+  0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 0.00 & 999.99 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 999.99 & 0.00 & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 & 0.00 \\
+\end{array}\right].
+\]
+
+Vale notar que, dependendo da implementação, nem sempre é necessário
+aplicar a função \emph{softmax}. Em alguns pacotes computacionais como o
+\texttt{torch}, utilizado nesta tese, a normalização pode ser feita
+diretamente na função de perda, que aproveita a expressão completa para
+realizar algumas simplificações matemáticas e, com isso, melhorar a
+precisão das computações. O uso da função de perda ficará claro na
+próxima subseção.
+
+\hypertarget{perda}{%
+\subsubsection{Perda}\label{perda}}
+
+A função de perda utilizada em um problema de classificação deve levar
+em conta as probabilidades (ou log-probabilidades) associadas aos
+rótulos. A perda deve ser pequena se a probabilidade associada ao rótulo
+correto for alta e a perda deve ser grande se a probabilidade associada
+ao rótulo correto for baixa.
+
+Uma função de perda natural e popular nesse sentido é a de entropia
+cruzada, ou \emph{cross-entropy}. Trata-se de uma perda com a formulação
+
+\[
+\ell(g(x), y) = -\sum_{i=1}^c \mathbb I(y=i)\log(g_i(x)),
+\]
+
+em que \(g_i(x)\) é a probabilidade dada ao rótulo \(i\) pela função
+\(g\). Se o rótulo \(i\) é diferente do rótulo correto \(y\), a função
+de perda vale zero por conta da função indicadora. Quando \(i=y\), a
+perda é igual ao oposto do logaritmo da probabilidade associada ao
+rótulo \(i\). Quanto menor a probabilidade, maior o valor da perda.
+
+Ao trabalhar com o oráculo, a entropia cruzada passa a não fazer sentido
+nos casos em que o modelo inicial erra. Por isso, a função de perda terá
+de ser adaptada no método WAWL.
+
+\hypertarget{sec-otimizador}{%
+\subsubsection{Otimizador}\label{sec-otimizador}}
+
+O otimizador utilizado para os modelos ajustados na tese foi o ADAM
+(KINGMA; BA, {[}s.d.{]}). A sigla significa \emph{Adaptive Moment
+Estimator} e funciona como uma extensão da descida de gradiente
+estocástica (LECUN et al., 2012), atualizando os parâmetros da seguinte
+forma:
+
+\[
+\begin{array}{cl}
+m_{\theta}^{(t+1)} &\leftarrow \beta_1m_{\theta}^{(t)} + (1-\beta_1)\nabla_\theta L^{(t)} \\
+v_{\theta}^{(t+1)} &\leftarrow \beta_2v_{\theta}^{(t)} + (1-\beta_2)(\nabla_\theta L^{(t)})^2 \\
+\hat{m}_{\theta} &= \frac{m_\theta^{(t+1)}}{1-\beta_1^t} \\
+\hat{v}_{\theta} &= \frac{v_\theta^{(t+1)}}{1-\beta_2^t} \\
+\theta^{(t+1)} &\leftarrow \theta^{(t)} - \eta \frac{\hat{m}_{\theta}}{\sqrt{\hat{v}_{\theta}} + \epsilon},
+\end{array}
+\]
+
+onde \(m\) e \(v\) são médias moveis para atualização dos parâmetros,
+ponderando a perda e a perda ao quadrado com o passo anterior usando
+pesos \(\beta_1\) e \(\beta_2\), respectivamente. Nessa notação \(\eta\)
+é a taxa de aprendizado, um hiperparâmetro a ser ajustado. Por último, o
+valor de \(\epsilon\) é uma constante, usualmente pequena, para evitar
+divisão por zero.
+
+\hypertarget{aprendizado-estatuxedstico}{%
+\subsection{Aprendizado estatístico}\label{aprendizado-estatuxedstico}}
+
+Apresentados o objeto de estudo, as redes neurais utilizadas e a
+proposta da pesquisa, passa-se a discutir o significado disso tudo no
+contexto de aprendizado estatístico. Essa parte foi escrita para
+proporcionar a base teórica e a notação para apresentar as propriedades
+do modelo WAWL.
+
+O aprendizado fracamente supervisionado pode ser dividido em três tipos
+principais. A supervisão com erros, a supervisão com rótulos incompletos
+e a supervisão de grupos de observações. O caso do Captcha pode ser
+entendido como uma sub-área do aprendizado fracamente supervisionado com
+rótulos incompletos chamada aprendizado com dados parcialmente rotulados
+(\emph{partial label learning,} PLL\emph{)}, já que uma parte da base
+pode ser anotada sem erros e uma parte da base é a resposta do oráculo
+indicando uma lista de rótulos possíveis incluindo o correto.
+
+A área de PLL não é nova (GRANDVALET, 2002) e aparece com outros nomes,
+como aprendizado com rótulos ambíguos (HÜLLERMEIER; BERINGER, 2006) e
+aprendizado de rótulos em superconjuntos (\emph{superset-label
+learning)} (LIU; DIETTERICH, 2012). Um caso particular de PLL, aplicável
+ao tema do Captcha são rótulos complementares (ISHIDA et al., 2017b),
+que considera os chutes errados na notação do problema.
+
+As definições seguem uma terminologia adaptada a partir da leitura de
+JIN; GHAHRAMANI (2002), COUR; SAPP; TASKAR (2011) e FENG et al. (2020a).
+Sempre que possível, os casos são adaptados para o problema do Captcha
+diretamente. Quando necessário, apresenta-se primeiro a definição
+genérica e depois a formulação para o Captcha.
+
+Em um problema de aprendizado supervisionado tradicional, tem-se um
+conjunto de casos rotulados \(S=\{(\mathbf x_i,y_i), i=1,\dots, m\}\)
+com uma distribuição \(p(\mathbf X,Y)\) desconhecida, onde
+\(\mathbf X\in \mathcal X\) é uma imagem e \(\mathbf Y\) é o rótulo, que
+possui \(|A|^L\) possíveis valores. O objetivo é obter um classificador
+\(g\) que leva um valor de \(\mathbf x\) para o rótulo correto
+\(\mathbf y\).
+
+Para delimitar se o resultado da aplicação do classificador está bom ou
+ruim, utiliza-se uma função de perda. No caso do Captcha, como o
+interesse é simplesmente acertar o rótulo inteiro (não importa se o
+classificador acerta só uma parte do rótulo), utiliza-se uma função
+chamada 0-1:
+
+\begin{equation}\protect\hypertarget{eq-perda}{}{
+\mathcal L(g(\mathbf x),\mathbf y) = \mathbb I (g(\mathbf x) \neq \mathbf y),
+}\label{eq-perda}\end{equation}
+
+em que \(\mathbb I(\cdot)\) é uma função indicadora. Como a função de
+perda é aplicada a apenas um par \((\mathbf x,y)\), define-se
+formalmente que o objetivo do problema de aprendizado é minimizar o
+\emph{risco}, que é o valor esperado da função de perda:
+
+\begin{equation}\protect\hypertarget{eq-risco}{}{
+\mathcal R(g) = \mathbb E_{p(\mathbf X,Y)}[\mathcal L(g(\mathbf X),Y)].
+}\label{eq-risco}\end{equation}
+
+A função de risco, no entanto, não é observada, já que depende da
+distribuição desconhecida de \(p(\mathbf X,Y)\). Para lidar com esse
+problema, usualmente é utilizado um estimador do risco, calculado tanto
+em bases usadas na validação cruzada quanto na base de teste.
+
+\[
+\hat{\mathcal R}(g) = \sum_{i=1}^n \ell(g(\mathbf x),y))
+\]
+
+Na base de teste, utilizada para estimar o risco, a função de perda 0-1
+é apropriada. Na etapa de validação cruzada de um modelo de aprendizado
+profundo, é útil considerar uma aproximação da função de perda que seja
+contínua e derivável, funcionando como uma versão suavizada da perda
+0-1. A partir de um vetor de parâmetros \(\boldsymbol \theta\)
+originados da arquitetura do modelo, uma escolha de função de perda é a
+entropia cruzada, como mostrado anteriormente. Os parâmetros são
+estimados a partir de um otimizador, como o ADAM, apresentado na
+Seção~\ref{sec-otimizador}.
+
+As definições começam a precisar de ajustes quando \(y\) deixa de ser um
+rótulo fixado. Como descrito na Seção~\ref{sec-oraculo}, a base de dados
+observada contém tanto rótulos observados de forma exata quanto rótulos
+apenas parcialmente informados. Nesse caso, os dados são gerados por uma
+distribuição
+
+\[
+p(\mathbf X,\mathbf Y,\bar{\mathbf Y})=p(\mathbf X, \mathbf Y)p(\bar{\mathbf Y}|\mathbf X,\mathbf Y),
+\]
+
+em que \(\bar{\mathbf Y}\) é um conjunto de rótulos \emph{incorretos}.
+Nesse caso observam-se, além das instâncias
+\((\mathbf x_i,\mathbf y_i)\) quando o modelo inicial acerta, as
+instâncias \((\mathbf x_j, \bar{\mathbf {y}}_j)\) quando o modelo
+inicial erra. Supondo que \(\bar{\mathbf Y}\) é condicionalmente
+independente de \({\mathbf Y}\) dado \({\mathbf X}\), temos que
+
+\[
+p(\mathbf X,\mathbf Y,\bar{\mathbf Y})=p(\mathbf X, \mathbf Y)p(\bar{\mathbf Y}|\mathbf Y).
+\]
+
+No caso dos Captchas, essa suposição é verificada. A probabilidade do
+modelo inicial errar depende apenas do rótulo e não das distorções
+realizadas pela imagem gerada a partir do rótulo. Além disso, a partir
+do modelo inicial, é possível estimar os valores de
+\(p(\bar{\mathbf Y}|\mathbf Y)\) a partir da base de teste utilizada
+para medir a acurácia do modelo.
+
+Nos casos em que \(|\hat{\mathbf Y}|=1\), as probabilidades
+\(p(\bar{\mathbf Y}|\mathbf Y)\) podem ser organizadas em uma matriz de
+transição \(\mathbf Q\), contendo as probabilidades de se obter um
+rótulo incorreto para cada possível valor do rótulo. Isso acontece nos
+Captchas em que não é possível realizar múltiplos chutes. Para resolver
+problemas desse tipo, é possível realizar um ajuste na função de
+predição que a torna a função de perda consistente e com taxa de
+convergência conhecida (YU et al., 2018):
+
+\[
+f_{\text{adj}} (\mathbf X) = \mathbf Q ^{\top}f(\mathbf X)
+\]
+
+O tipo de problema apresentado acima é conhecido como \emph{biased
+complementary label}, ou seja, rótulo complementar com viés. Também é
+possível considerar um caso sem viés, ou seja, quando
+\(p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}\) para todos os valores
+de \(\mathbf Y\). Esse caso também foi resolvido do ponto de vista
+teórico(ISHIDA et al., 2017a). As conclusões são parecidas, ou seja, é
+possível encontrar taxas de convergência para que o problema com rótulos
+complementares se aproxime de um problema com observações completas.
+
+Quando os rótulos complementares não apresentam viés, existe ainda uma
+extensão para rótulos complementares múltiplos (FENG et al., 2020b).
+Neste caso, é possível derivar uma função de risco empírica que,
+novamente, converge para a função de risco do problema completamente
+supervisionado, além de apresentar taxas de convergência para essa
+função de risco.
+
+O caso do oráculo e dos Captchas é um problema com múltiplos rótulos
+complementares e com viés. Até o momento, não existe uma solução geral
+para este tipo de problema. No entanto, espera-se que as soluções para
+problemas desse tipo tenham taxas de convergência mais estreitas do que
+o caso de rótulos complementares, com ou sem viés, já que rótulos
+complementares múltiplos trazem mais informação do que rótulos
+complementares simples.
+
+\hypertarget{muxe9todo-wawl}{%
+\section{Método WAWL}\label{muxe9todo-wawl}}
+
+O método WAWL (\emph{Web Automatic Weak Learning}) é a solução proposta
+na pesquisa. Trata-se da técnica baixar dados da web para compor parte
+da amostra que é utilizada no ajuste do modelo.
+
+O método WAWL é inovador por dois motivos. Primeiro, porque o método faz
+a ponte entre áreas que até o momento eram partes separadas do ciclo da
+ciência de dados: a raspagem de dados e o aprendizado estatístico. Além
+disso, o método é uma nova alternativa para resolver Captchas com pouca
+ou nenhuma intervenção humana.
+
+Existem duas formas principais de aplicar o método WAWL. A primeira
+criando novas bases de treino a partir de um modelo inicial e
+atualizando os modelos com os dados baixados. A segunda é baixando os
+dados dentro do próprio ciclo de ajuste do modelo, acessando a web no
+momento de construção de um \emph{minibatch}.
+
+A arquitetura do modelo WAWL pode ser a mesma de um modelo ajustado com
+uma base completamente anotada. O modelo pode, inclusive, aproveitar os
+parâmetros já ajustados em uma eventual versão inicial do modelo para
+acelerar o aprendizado. Nada impede, no entanto, que uma arquitetura
+diferente seja utilizada, desde que a entrada seja uma imagem e a saída
+seja uma matriz com as dimensões da variável resposta. O WAWL é
+agnóstico à arquitetura do modelo.
+
+A função de perda deve ser adaptada para considerar a informação
+limitada fornecida pelo oráculo. Quando o rótulo fornecido pelo modelo
+está correto, a informação é considerada normalmente, através da função
+de perda da regressão multinomial multivariada. Já quando o rótulo
+fornecido pelo modelo é incorreto, a função de perda é calculada com
+base na probabilidade do rótulo estar incorreto:
+
+\[
+1 - p(\mathbf y|\boldsymbol \theta),
+\]
+
+Considerando o rótulo complementar \(\bar y\) e a função \(\hat f\) dada
+pela rede neural, a fórmula para descrever a função de perda é descrita
+da seguinte forma:
+
+\[
+l(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y=\bar y)\right]
+\]
+
+A função de perda proposta pode ser explicada de maneira intuitiva
+através de um exemplo. Considere um problema com apenas \(c\) possíveis
+valores para o rótulo (ou seja, uma resposta multinomial, sem ser
+multivariada). Considere também que a rede neural retorna uma alta
+probabilidade, por exemplo, \(0.99\), para o valor \(i\), que o oráculo
+identificou como incorreta. Nesse caso, a função de perda é dada por
+
+\[
+l(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\]
+
+Como é possível ver no exemplo, quanto maior a probabilidade dada a um
+rótulo identificado como incorreto pelo oráculo, mais a função de perda
+penaliza essa predição. Dessa forma, a função de perda consegue
+incorporar completamente a informação dada pelo oráculo.
+
+Quando o Captcha aceita múltiplos chutes, a mesma conta é válida,
+bastando subtrair as probabilidades de todos os rótulos incorretos:
+
+\[
+l(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y \in \bar {\mathbf y})\right]
+\]
+
+No final, o valor que é passado para a função de perda é a soma das
+perdas para todas as observações do \emph{minibatch}. A soma considera
+tanto as perdas calculadas com base nos rótulos corretos quanto as
+perdas calculadas com base nos rótulos incorretos.
+
+O otimizador que obtém novas estimativas dos parâmetros também não
+precisa ser modificado. Basta aplicar a mesma técnica utilizada na
+modelagem usual, como descida de gradiente estocástica ou métodos
+adaptativos, como \emph{RMSProp} ou \emph{Adam}.
+
+Um detalhe importante sobre o método é sobre a implementação. Com a
+utilização de ferramentas que fazem diferenciação automática como o
+\emph{torch} e o \emph{TensorFlow}, basta implementar a parte da
+arquitetura, a função de perda e especificar o otimizador, já que o
+processo de atualização dos parâmetros é feito automaticamente. No
+entanto, dependendo da implementação, não é possível fazer a atualização
+dos parâmetros usando o componente de computação gráfica, que
+potencialmente acelera o ajuste dos modelos de forma significativa. Na
+implementação atual, a função de perda apresentada não permite
+utilização desse componente, sendo uma melhoria sugerida para futuros
+trabalhos.
+
+\hypertarget{dados}{%
+\section{Dados}\label{dados}}
+
+Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para
+realizar a pesquisa. Como comentado anteriormente, a base foi construída
+do zero para os fins do projeto, sendo uma parte significativa dos
+esforços para chegar nos achados.
+
+No total, foram construídas bases de dados de dez Captchas que estavam
+disponíveis publicamente no momento da realização da pesquisa. Os
+Captchas foram revisados pela última vez no dia 14/09/2022, para
+verificar se ainda estavam ativos. Além disso, foram construídas duas
+bases de dados de Captchas desenvolvidos internamente para fins de
+teste.
+
+Parte dos dados foram obtidos como um passo intermediário das
+simulações. A presente seção descreve como os robôs de coleta foram
+construídos, bem como a metodologia para obter rótulos via classificação
+manual. Na subseção de dados da seção de simulação, é possível acessar
+informações sobre os dados baixados para realizar as simulações.
+
+\hypertarget{escolha-dos-captchas-analisados}{%
+\subsection{Escolha dos Captchas
+analisados}\label{escolha-dos-captchas-analisados}}
+
+Para selecionar os Captchas, foram adotados alguns critérios objetivos.
+Os critérios foram:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  O site acessado é de um serviço público (governo federal, tribunal,
+  etc).
+\item
+  O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com
+  extensão jpeg ou png.
+\item
+  O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma
+  origem devem ter sempre o mesmo comprimento.
+\end{enumerate}
+
+A primeira restrição para escolha dos Captchas é de ordem
+principiológica. Um serviço público não deveria restringir o acesso aos
+dados para robôs. Como já discutido anteriormente, nesses casos, a
+existência do Captcha não tem como finalidade dar maior segurança ao
+serviço prestado, mas sim limitar o acesso aos servidores por robôs.
+
+As restrições 2 e 3 foram escolhidas com o objetivo de facilitar as
+simulações para obtenção dos resultados. Em princípio, nada impede que
+os modelos desenvolvidos trabalhem com outros tipos de rótulos, desde
+que exista uma lista prévia de rótulos. Além disso, é possível realizar
+adaptações no pré-processamento base de dados para lidar com diferentes
+comprimentos de Captchas.
+
+A Tabela Tabela~\ref{tbl-lista-captcha} mostra os Captchas trabalhados.
+Dos 10 exemplos trabalhados, 6 têm origem em tribunais, que são
+conhecidos por não disponibilizarem os dados de forma aberta.
+
+\hypertarget{tbl-lista-captcha}{}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4303}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2545}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3152}}@{}}
+\caption{\label{tbl-lista-captcha}Lista de captchas
+analisados.}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Captcha
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Exemplo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Origem
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Captcha
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Exemplo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Origem
+\end{minipage} \\
+\midrule()
+\endhead
+\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5} &
+\includegraphics{./assets/img/dados_trf5.jpg} & Tribunal Regional
+Federal 5 \\
+\href{https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn_pesquisar=Pesquisar}{tjmg}
+& \includegraphics{./assets/img/dados_tjmg.jpeg} & Tribunal de Justiça
+de Minas Gerais \\
+\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}
+& \includegraphics{./assets/img/dados_trt.jpeg} & Tribunal Regional do
+Trabalho 3 \\
+\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj} &
+\includegraphics{./assets/img/dados_esaj.png} & Tribunal de Justiça da
+Bahia \\
+\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp} &
+\includegraphics{./assets/img/dados_jucesp.jpg} & Junta Comercial de São
+Paulo \\
+\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe} &
+\includegraphics{./assets/img/dados_tjpe.png} & Tribunal de Justiça de
+Pernambuco \\
+\href{https://www.tjrs.jus.br/site_php/consulta/verificador.php}{tjrs} &
+\includegraphics{./assets/img/dados_tjrs.jpg} & Tribunal de Justiça do
+Rio Grande do Sul \\
+\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx}{cadesp}
+& \includegraphics{./assets/img/dados_cadesp.jpg} & Centro de Apoio ao
+Desenvolvimento da Saúde Pública \\
+\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar\&acao_origem_externa=protocolo_pesquisar\&id_orgao_acesso_externo=0}{sei}
+& \includegraphics{./assets/img/dados_sei.png} & Sistema Eletrônico de
+Informações - ME \\
+\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp}{rfb}
+& \includegraphics{./assets/img/dados_rfb.png} & Receita Federal \\
+\bottomrule()
+\end{longtable}
+
+Além dos Captchas de sites, também foram consideradas imagens geradas
+artificialmente. O motivo de criar Captchas artificiais é a facilidade
+de rodar modelos e simulações, já que nos casos reais é necessário ter
+acesso à internet e também construir bases de dados de cada Captcha.
+
+Foram gerados dois tipos de Captchas artificiais. O primeiro, chamado
+\textbf{MNIST-Captcha}, é simplesmente uma adaptação da conhecida base
+MNIST para ficar no formato de um Captcha. A partir da escolha do
+comprimento e dos caracteres que fazem parte da imagem, o gerador
+simplesmente faz uma amostra aleatória da base do MNIST e compõe as
+imagens horizontalmente.
+
+A Figura~\ref{fig-captcha-mnist} mostra um exemplo do Captcha gerado a
+partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha
+foi de 4 valores.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/mnist128c49c36e13_6297.png}
+
+}
+
+\caption{\label{fig-captcha-mnist}Exemplo de MNIST-Captcha}
+
+\end{figure}
+
+O problema do MNIST-Captcha é que a base de dados original é finita.
+Apesar de possuir por volta de 60 mil observações e de um Captcha
+crescer em ordem exponencial, o MNIST-Captcha pode gerar Captchas
+repetidos. Além disso, é necessário tomar cuidado com as bases de treino
+e teste, já que os elementos de teste não poderiam fazer parte de
+nenhuma observação de treino.
+
+Pelos motivos supracitados, também foi criado um Captcha gerado
+inteiramente por programação, chamado \textbf{R-Captcha}. O Captcha é
+gerado utilizando a ferramenta ImageMagick, com a possibilidade de
+customizar diversos parâmetros, como
+
+\begin{itemize}
+\tightlist
+\item
+  Quais caracteres usar na imagem
+\item
+  O comprimento do Captcha
+\item
+  Dimensões da imagem
+\item
+  Probabilidade de rotação da imagem
+\item
+  Probabilidade de adicionar um risco entre as letras
+\item
+  Probabilidade de adicionar uma borda nas letras
+\item
+  Probabilidade de adicionar uma caixa (retângulo) em torno das letras
+\item
+  Probabilidade de adicionar um ruído branco no fundo da imagem
+\item
+  Probabilidade de adicionar efeitos de tinta óleo e implosão
+\end{itemize}
+
+A Figura~\ref{fig-captcha-r} mostra um exemplo de R-Captcha. O exemplo
+apresenta uma linha ligando as letras, comprimento 4, dígitos maiúsculos
+e minúsculos e distorções.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/captcha128c4a9c32e4_boy4.png}
+
+}
+
+\caption{\label{fig-captcha-r}Exemplo de MNIST-Captcha}
+
+\end{figure}
+
+Por ser uma versão mais flexível e completa, optou-se por trabalhar
+principalmente com o R-Captcha nas simulações. O MNIST-Captcha foi
+implementado mas não foi utilizado nas simulações.
+
+\hypertarget{construuxe7uxe3o-dos-dados}{%
+\subsection{Construção dos dados}\label{construuxe7uxe3o-dos-dados}}
+
+Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem
+de dados (ZHAO, 2017b). A raspagem de dados é uma área da ciência da
+computação responsável por criar rotinas que automatizam a coleta de
+dados provenientes da web. Trata-se de uma atividade muito comum em
+pesquisas aplicadas, especialmente as que envolvem análise de dados
+públicos que não estão disponíveis de forma aberta, como os dados do
+Judiciário.
+
+Dentro do ciclo da ciência de dados, pode-se considerar que a raspagem
+de dados está inserida nas tarefas de coleta e arrumação de dados. De
+certa forma, é possível comparar a raspagem com uma consulta a um banco
+de dados remoto, ou mesmo à obtenção de informações através de uma
+\emph{Application Programming Interface} (API).
+
+Para raspar uma página da web, usualmente se segue o fluxo descrito na
+Figura~\ref{fig-fluxo-web-scraping}. Nem todos os passos foram seguidos
+na obtenção dos dados necessários para realizar as simulações, mas é
+importante conhecê-los para compreender bem a origem da ideia de
+utilizar raspagem em conjunto com métodos de aprendizado de máquinas. O
+exemplo da RFB foi utilizado para dar contexto aos passos.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/cycle.png}
+
+}
+
+\caption{\label{fig-fluxo-web-scraping}Ciclo da raspagem de dados.
+Fonte: \href{https://curso-r.github.io/main-web-scraping}{curso de Web
+Scraping da Curso-R}.}
+
+\end{figure}
+
+No caso da RFB, o trabalho é iniciado acessando-se a
+\href{http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp}{página
+inicial de busca de CNPJ}, como mostrado na
+Figura~\ref{fig-raspagem-rfb-inicial}. É possível notar que o desafio
+disponível é do tipo \emph{hCaptcha}, que não é o Captcha de interesse
+da pesquisa. No entanto, ao clicar em ``Captcha Sonoro'', é possível
+acessar o Captcha de interesse, como mostrado na
+Figura~\ref{fig-raspagem-rfb-sonoro}. O motivo pelo qual o Captcha de
+texto em imagem foi mantido após a implementação do \emph{hCaptcha} é
+desconhecido pelo autor.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/raspagem-rfb-inicial.png}
+
+}
+
+\caption{\label{fig-raspagem-rfb-inicial}Página de busca de CNPJ da
+RFB.}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/raspagem-rfb-sonoro.png}
+
+}
+
+\caption{\label{fig-raspagem-rfb-sonoro}Página de busca de CNPJ da RFB,
+com Captcha de texto.}
+
+\end{figure}
+
+A segunda tarefa é a de navegar pelo site, registrando as requisições
+realizadas pelo navegador para realizar a consulta. Isso envolve abrir o
+inspetor de elementos do navegador, na aba Rede (ou \emph{Network}, em
+inglês), anotando as requisições que são realizadas.
+
+No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira
+de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas
+requisições aparecem na aba ``Rede'', como mostrado na
+Figura~\ref{fig-raspagem-rfb-rede}. A primeira requisição é do tipo
+POST\footnote{Existem dois tipos principais de requisição HTTP. A
+  requisição GET serve para capturar uma página da internet, enquanto a
+  requisição POST serve para enviar dados para o servidor como, um login
+  e uma senha. A lista completa de requisições está disponível na
+  \href{https://www.rfc-editor.org/rfc/rfc9110.html}{documentação da
+  \emph{Internet Engineering Task Force} (IETF)}.}, responsável por
+enviar os dados de CNPJ e do rótulo da imagem para o servidor, que
+retorna com os dados da empresa.
+
+\begin{figure}
+
+{\centering \includegraphics{./assets/img/raspagem-rfb-rede.png}
+
+}
+
+\caption{\label{fig-raspagem-rfb-rede}Resultado da busca por CNPJ,
+mostrando a aba Rede.}
+
+\end{figure}
+
+Investigando a requisição POST, na sub-aba ``Requisição'', é possível
+observar os dados da consulta. Trata-se de um conjunto de parâmetros
+enviados na forma de lista, com as informações abaixo. Para replicar a
+requisição na linguagem de programação, estes são os dados enviados.
+
+\begin{verbatim}
+{
+    "origem": "comprovante",
+    "cnpj": "13.612.840/0001-57",
+    "txtTexto_captcha_serpro_gov_br": "7hkhze",
+    "search_type": "cnpj"
+}
+\end{verbatim}
+
+As etapas de replicar, parsear e validar envolvem baixar e processar os
+dados na linguagem de programação. No caso do Captcha da RFB, essa
+tarefa envolve os passos abaixo.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Acessar a página inicial de
+  \href{http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp}{busca
+  com Captcha sonoro}, através de uma requisição GET.
+\item
+  Baixar a imagem do Captcha com uma requisição GET, usando o
+  \href{http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/captcha/gerarCaptcha.asp}{link
+  gerado} ao clicar no botão de atualizar o Captcha.
+\item
+  Obter o rótulo a partir da imagem do Captcha.
+\item
+  Realizar a requisição POST com os dados do exemplo e o rótulo correto
+  da imagem, baixando arquivo resultante em um HTML.
+\item
+  Utilizar técnicas de raspagem de arquivos HTML para obter os dados de
+  interesse (como, por exemplo, a razão social da empresa) e validar os
+  resultados, verificando, por exemplo, se o resultado estava completo e
+  disponível.
+\end{enumerate}
+
+Todos os passos descritos acima devem ser realizados em uma sessão
+persistente. Isso significa que a biblioteca utilizada para realizar as
+requisições deve ser capaz de guardar os \emph{cookies} entre a
+requisição GET do primeiro passo e a requisição POST do quarto passo, de
+forma que as requisições sejam interligadas.
+
+O quinto passo da lista acima descreve a parte de \emph{parsear,} que é
+a responsável pelo nome ``raspagem'' nessa área do conhecimento. O nome
+é adequado porque usualmente os arquivos baixados estão em um formato
+bruto, inadequado para realização de análises. Os dados precisam ser
+então extraídos -- raspados -- do arquivo HTML, através de ferramentas
+de transformação de arquivos como a \emph{libxml2} (WICKHAM; HESTER;
+OOMS, 2021), técnicas para acessar pedaços do documento, como o XPath
+(WICKHAM, 2022a) e técnicas de manipulação de textos, como expressões
+regulares (WICKHAM, 2022b).
+
+A iteração encerra o fluxo da raspagem de dados. Nessa etapa, as
+operações de replicar, parsear e validar o resultado são reaplicadas
+iterativamente, com o fim de baixar dados para compor uma base maior. No
+exemplo da RFB, isso significaria montar uma base de dados a partir de
+uma lista de CNPJs.
+
+No contexto dos Captchas, o interesse está nos passos de Replicar e
+Validar. Estes são os passos em que a imagem é baixado e o rótulo é
+anotado e testado no servidor. Esses são os passos relacionados à
+classificação manual, e também à implementação do oráculo.
+
+A classificação manual dos Captchas envolve o trabalho de baixar, anotar
+(manualmente) e verificar se a anotação está correta. Trata-se de um
+trabalho repetitivo e dispendioso, utilizado para gerar as simulações do
+trabalho.
+
+O oráculo envolve a possibilidade de checar, de forma automática, se uma
+predição do rótulo de uma imagem está correta. Por ser um teste de
+Turing inverso, o Captcha é obrigado a mencionar se uma predição está
+correta: se a predição foi correta, a página de interesse é acessada; se
+a predição está incorreta, o site envia uma mensagem de erro.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Acessar a página do site de interesse.
+\item
+  Preencher o formulário de pesquisa com a informação a ser consultada.
+  Por exemplo, no site da RFB, a informação é o CNPJ da empresa a ser
+  consultada. Em um site de tribunal, a informação é um número
+  identificador de processo.
+\item
+  Baixar a imagem do Captcha da busca.
+\item
+  Obter o rótulo da imagem, aplicando um modelo na imagem baixada ou
+  classificado manualmente.
+\item
+  Submeter a consulta no site, informando o rótulo.
+\item
+  Verificar o resultado. Se acessou a página desejada, o rótulo está
+  correto. Caso contrário, o rótulo está incorreto.
+\end{enumerate}
+
+O procedimento descrito pode ser reproduzindo indefinidamente. Isso
+significa que é possível criar uma base de dados virtualmente infinita
+de imagens rotuladas, com a informação adicional do rótulo estar correto
+ou incorreto. Isso foi feito para gerar os dados utilizados na
+simulação.
+
+O problema do uso de oráculos é que a informação adicional recebida
+quando o modelo erra é \textbf{incompleta}. A única informação nova
+disponível é que o rótulo testado está incorreto, dentre todos os
+rótulos possíveis daquela imagem. Como existe uma grande quantidade de
+rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, a
+informação que o oráculo fornece é fraca.
+
+Uma possível abordagem para lidar com o segundo problema seria
+simplesmente descartar os Captchas classificados incorretamente. Podemos
+criar uma base de dados (virtualmente infinita) somente com os rótulos
+corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem
+sérios problemas, já que considera somente os casos em que o
+classificador já funciona bem. Nosso objetivo é melhorar o modelo
+justamente nos casos em que o oráculo acusa erros.
+
+Outra oportunidade que o oráculo oferece em parte dos casos é a
+possibilidade de testar mais de uma predição. Sites com essa
+característica permitem que a pessoa ou robô teste mais de uma predição
+caso o Captcha tenha fracassado. Como é possível observar na
+Tabela~\ref{tbl-lista-captcha}, dos 10 Captchas trabalhados, 7 permitem
+a realização desses testes.
+
+Neste momento, cabe uma observação sobre oráculos e força bruta. O poder
+de testar vários rótulos para o mesmo Captcha implica na possibilidade
+teórica de resolver um Captcha por força bruta. Bastaria testar todos os
+rótulos possíveis para acessar a página de interesse. Na prática, no
+entanto, essa estratégia não funciona, já que a quantidade de rótulos
+possíveis é muito grande para testar no site, seja por demorar muito
+tempo ou pelo site forçar a troca do desafio após a passagem de
+determinado tempo ou quantidade de tentativas.
+
+Voltando ao ciclo da raspagem, ao longo do procedimento de baixar
+imagens de Captchas e aplicar o oráculo, pelo menos duas funções devem
+ser criadas: \textbf{acesso} e \textbf{teste}. A operação de acesso é
+responsável por preencher o formulário de busca e baixar o Captcha
+(passos 1 a 3 da lista acima). A operação de teste é responsável por
+submeter um rótulo do Captcha e verificar retornar se o rótulo está
+correto ou incorreto (passos 4 a 6 da lista acima). Em alguns casos, as
+funções de acesso e teste precisam compartilhar parâmetros que contêm a
+sessão do usuário, para garantir que o teste envolva o mesmo Captcha da
+etapa de acesso.
+
+Os Captchas foram anotados manualmente com o procedimento chamado de
+semi-automático, definido a seguir. No pacote
+\texttt{\{captchaDownload\}}, foram desenvolvidas ferramentas para
+baixar e organizar cada Captcha, utilizando o oráculo para garantir que
+as imagens eram corretamente classificadas.
+
+Cada Captcha teve as primeiras 100 observações classificadas
+manualmente. Isso foi feito a partir do próprio RStudio, utilizando a
+ferramenta de classificação manual do pacote \texttt{\{captcha\}}.
+
+A partir das classificações iniciais, um modelo foi ajustado com a
+quantidade de observações disponível. Esse passo também foi feito a
+partir do pacote \texttt{\{captcha\}}, que cria um projeto de
+classificação para um Captcha específico.
+
+O modelo, então, foi utilizado como uma ferramenta para otimizar a
+classificação manual, funcionando da seguinte forma. Primeiro, o modelo
+tenta realizar a predição automaticamente e o oráculo avisa se a
+predição está correta ou não. Se estiver incorreto e o site aceitar
+várias tentativas, o modelo tenta novamente, mas com uma segunda
+alternativa de predição. Caso o site não aceite várias tentativas ou o
+modelo não consiga acertar o Captcha em \(N\) tentativas (abritrado como
+dez), a imagem do Captcha aparece para classificação manual.
+
+Com o procedimento destacado acima, é criada uma nova base de dados, que
+por sua vez é utilizada para ajustar um novo modelo. O modelo,
+atualizado, é utilizado para classificar novos Captchas, e assim por
+diante, até que o modelo ajustado alcance uma acurácia razoável, que foi
+arbitrada em 80\%. Com isso o procedimento de anotação é finalizado.
+
+O único problema do procedimento de classificação diz respeito aos
+Captchas que não aceitam várias tentativas. Nesses casos, não é possível
+verificar com certeza absoluta que um caso classificado manualmente
+(após a tentativa do modelo) foi classificado corretamente, já que a
+classificação manual seria a segunda tentativa. No entanto, esse
+problema aparece somente em três Captchas (\texttt{cadesp},
+\texttt{jucesp} e \texttt{trf5}). A classificação manual dos 100
+primeiros Captchas, no entanto, mostrou que pelo menos 95\% dos Captchas
+foram classificados corretamente quando classificados manualmente. A
+proporção máxima de 5\% de erro é negligenciável considerando que a
+maior parte das bases de dados foi construída com verificação do
+oráculo.
+
+Em alguns casos, os rótulos dos Captchas podem ser obtidos sem
+intervenção humana, utilizando técnicas de raspagem de dados e
+processamento de sinais. Um exemplo é o Captcha do SEI, que mostra
+informações suficientes para resolver o Captcha na própria URL que gera
+a imagem. Outro exemplo é o TJMG, que libera, além da imagem, um áudio
+contendo o mesmo rótulo da imagem, sem a adição de ruídos. Como o áudio
+não tem ruídos, basta ler o áudio, separar os áudios de cada caractere e
+calcular uma estatística simples (como a soma das amplitudes, ao
+quadrado). Essa estatística é utilizada para associar um pedaço de áudio
+a um caractere.
+
+A Tabela~\ref{tbl-lista-captcha-carac} caracteriza os Captchas anotados.
+Todos os Captchas possuem comprimento entre 4 e 6 dígitos e, com exceção
+do SEI, não são sensíveis a maiúsculas e minúsculas.
+
+\hypertarget{tbl-lista-captcha-carac}{}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.4965}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1469}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0769}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0839}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0629}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1329}}@{}}
+\caption{\label{tbl-lista-captcha-carac}Lista de captchas analisados e
+suas características.}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Site
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Aceita vários chutes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Caracteres
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Comprimento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Colorido
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\# rótulos anotados
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Site
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Aceita vários chutes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Caracteres
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Comprimento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Colorido
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\# rótulos anotados
+\end{minipage} \\
+\midrule()
+\endhead
+\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5} &
+Não & 0:9 & 6 & não & 1000 \\
+\href{https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn_pesquisar=Pesquisar}{tjmg}
+& Sim & 0:9 & 5 & sim & 1000 \\
+\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}
+& Sim & a-z0:9 & 6 & não & 1500 \\
+\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj} & Sim & a-z & 5 & sim
+& 3000 \\
+\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp} &
+Não & a-z0-9 & 5 & não & 4000 \\
+\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe} &
+Sim & a-z0-9 & 5 & não & 4000 \\
+\href{https://www.tjrs.jus.br/site_php/consulta/verificador.php}{tjrs} &
+Sim & 0-9 & 4 & sim & 2000 \\
+\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx}{cadesp}
+& Não & a-z & 4 & sim & 3000 \\
+\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar\&acao_origem_externa=protocolo_pesquisar\&id_orgao_acesso_externo=0}{sei}
+& Sim & a-zA-Z0-9 & 4 & sim & 10000 \\
+\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp}{rfb}
+& Sim & a-z0-9 & 6 & não & 4000 \\
+\bottomrule()
+\end{longtable}
+
+As bases de dados com imagens anotadas foram disponibilizadas na aba de
+lançamentos (\emph{releases}) do
+\href{https://github.com/jtrecenti/doutorado/releases}{repositório
+principal do projeto de pesquisa}. As bases com imagens e modelos
+ajustados estão disponíveis para quem tiver interesse em fazer novas
+pesquisas e utilizar os resultados em suas aplicações, sem restrições de
+uso.
+
+\hypertarget{simulacoes}{%
+\section{Simulações}\label{simulacoes}}
+
+Para verificar o poder do uso do oráculo para o aprendizado do modelo,
+uma série de simulações foi desenvolvidas. As simulações foram
+organizadas em três passos: modelo inicial, dados e modelo final. Os
+passos foram descritos em maior detalhe a seguir.
+
+\hypertarget{primeiro-passo-modelo-inicial}{%
+\subsection{Primeiro passo: modelo
+inicial}\label{primeiro-passo-modelo-inicial}}
+
+A simulação do modelo inicial teve como objetivo obter modelos
+preditivos de Captchas com acurácias distintas. O modelo inicial seria
+usado, então, para baixar dados diretamente do site usando o oráculo e,
+por fim, ajustar um modelo final com os novos dados provenientes do
+oráculo.
+
+Os modelos iniciais foram construídos em dois passos. O primeiro foi
+montar a base de dados completa, suficiente para ajustar um modelo com
+alta acurácia, que arbitrados em 80\%, como descrito anteriormente.
+Depois, montou-se 10 amostras de dados com subconjuntos das bases
+completas, cada uma contendo 10\%, 20\%, e assim por diante, até a base
+completa. Por exemplo: no Captcha da Jucesp, construiu-se um modelo com
+acurácia maior que 80\% com 4000 Captchas. A partir disso, foi feita uma
+partição dos dados com 400 imagens (10\% do total), 800 imagens (20\% do
+total) e assim por diante, até o modelo com 4000 Captchas.
+
+Para cada tamanho de amostra \(A\), aplicou-se uma bateria de 27
+modelos. Isso foi feito porque para diferentes quantidades de amostra, a
+configuração dos hiperparâmetros que resulta no melhor modelo pode ser
+diferente. Os modelos seguiram uma grade de hiperparâmetros considerando
+três informações:
+
+\begin{itemize}
+\tightlist
+\item
+  A quantidade de unidades computacionais na primeira camada densa após
+  as camadas convolucionais, com os valores considerados: 100, 200 e
+  300.
+\item
+  O valor do \emph{dropout} aplicado às camadas densas, com os valores
+  considerados: 10\%, 30\% e 50\%.
+\item
+  O fator de decaimento na taxa de aprendizado a cada época, com os
+  valores considerados: 1\%, 2\% e 3\%.
+\end{itemize}
+
+Combinando os três valores dos três hiperparâmetros, tem-se um total de
+\(27=3^3\) hiperparâmetros. Com isso, foi possível identificar, para
+cada tamanho de amostra \(A\), o classificador \(C_A\) com a melhor
+acurácia dentre os modelos ajustados.
+
+No final do primeiro passo, portanto, considera-se apenas o melhor
+modelo para cada tamanho de amostra, dentre os 27 ajustados. É claro que
+os modelos encontrados por essa técnica não são, necessariamente, os
+melhor modelo possíveis. No entanto, como a técnica é a mesma para todos
+os Captchas, é possível fazer comparações através de uma metodologia
+mais transparente.
+
+\hypertarget{segundo-passo-dados}{%
+\subsection{Segundo passo: dados}\label{segundo-passo-dados}}
+
+O segundo passo teve como objetivo construir as bases de dados
+utilizando o oráculo. Primeiro, foi necessário decidir quais modelos,
+dentre os 10 ajustados para cada Captcha, seriam utilizados para
+construir novas bases. Não faria sentido, por exemplo, considerar um
+modelo com acurácia de 0\%, já que ele não produziria nenhuma observação
+comparado com um modelo que chuta aleatoriamente. Também não faria
+sentido considerar um classificador com acurácia de 100\%, já que nesse
+caso não há o que testar com a técnica do oráculo.
+
+Decidiu-se que seria necessário considerar somente os modelos que
+resultaram em acurácias maiores de 1\% e menores de 50\%. O valor máximo
+foi decidido após realizar alguns testes empíricos e verificar,
+informalmente, que a técnica do oráculo realmente resultava em ganhos
+expressivos, mesmo com modelos de baixa acurácia. Concluiu-se então que
+não seria necessário testar a eficácia da técnica para classificadores
+com alta acurácia. Já o valor mínimo foi decidido de forma arbitrária,
+retirando-se os classificadores com acurácia muito baixa.
+
+A segunda decisão a ser tomada para construção dos dados foi a
+quantidade de imagens que seria baixada para cada Captcha. Como são
+Captchas de diferentes dificuldades, a quantidade de dados seria
+diferente. Optou-se por baixar a quantidade de dados de forma a montar
+uma base de treino que contém a quantidade de observações necessária
+para obter o melhor modelo daquele Captcha. Por exemplo, no TJRS, um
+modelo com acurácia próxima de 100\% foi identificado com 2000
+observações. O melhor modelo com 300 imagens (240 para treino, 60 para
+teste) resultou em uma acurácia de 35\%. Foram, então, baixadas 1760
+observações para compor o total de 2000 na base de treino. As imagens de
+teste do modelo inicial poderiam até ser utilizadas, mas optamos por
+descartar para garantir que o modelo não ficasse sobreajustado para a
+primeira base.
+
+O motivo de baixar a mesma quantidade de observações que o melhor modelo
+inicial foi feita por dois motivos. O primeiro é que existem evidências
+de que é possível construir um bom modelo com essa quantidade de
+imagens, ainda que em um caso as informações são completas e, no outro,
+incompletas. O segundo é que isso permite a comparação do resultado do
+modelo completamente anotado contra o modelo que é parcialmente anotado
+e com anotações incompletas provenientes do oráculo.
+
+A terceira e última decisão tomada para baixar os dados foi a quantidade
+de chutes que o modelo poderia fazer, nos casos em que isso é permitido
+pelo site. Optou-se, de forma arbitrária, por três valores: 1, que é
+equivalente a um site que não permite múltiplos chutes, 5 chutes e 10
+chutes.
+
+Portanto, o procedimento de coleta dos dados foi feito, para cada
+Captcha, da seguinte forma:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Listou-se todos os melhores modelos ajustados para cada tamanho de
+  amostra.
+\item
+  Filtrou-se os modelos para os que apresentavam acurácia de 5\% até
+  50\%
+\item
+  Definiu-se o tamanho da base a ser obtida, com base no tamanho da base
+  de treino utilizada no modelo e a quantidade total que se objetivou
+  obter.
+\item
+  Para cada quantidade de tentativas disponível (1, 5 e 10), baixou-se
+  as imagens, anotando com o valor ``1'' se o rótulo de alguma das
+  tentativas estivesse correto e com o valor ``0'' caso contrário.
+\item
+  Nos casos com erros, armazenou-se um arquivo de log para cada Captcha
+  com o histórico de tentativas incorretas, que é a informação mais
+  importante a ser passada do modelo final.
+\end{enumerate}
+
+No final, obteve-se bases de dados de treino para todos os Captchas
+analisados, com quantidades de imagens variadas de acordo com os
+parâmetros definidos anteriormente, variando também pela quantidade de
+tentativas. A quantidade total de bases de dados geradas foi 65.
+
+Além das bases de treino, foi construída uma base de teste para cada
+Captcha. As bases de teste foram construídas completamente do zero, sem
+utilizar informações de bases anteriores. Para construir as bases,
+utilizou-se a mesma técnica semi-automática definida anteriormente,
+usando o melhor modelo disponível para classificar a maioria das imagens
+e classificando manualmente em caso de falha. Em alguns casos, como TJMG
+e TJRS, a classificação humana quase não foi necessária, pois os
+classificadores obtidos apresentaram acurácia próxima de 100\%.
+
+Como o único objetivo da base de teste foi o de estimar a acurácia dos
+modelos finais, a quantidade de observações poderia ser arbitrada. O
+tamanho das bases de teste foi, então, arbitrado em 1000 imagens para
+cada Captcha.
+
+\hypertarget{terceiro-passo-modelo-final}{%
+\subsection{Terceiro passo: modelo
+final}\label{terceiro-passo-modelo-final}}
+
+O modelo final foi ajustado para cada uma das 65 bases de treino
+disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se
+o modelo proposto, que considera os erros na verossimilhança do modelo.
+Caso a imagem tenha sido corretamente classificada, a função de perda é
+calculada normalmente. Caso ela tenha sido classificada incorretamente,
+consideramos na verossimilhança a probabilidade de não observar nenhum
+dos chutes.
+
+\textbf{Exemplo}. Considere um Captcha com letras e números como
+vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo
+(correto) ``zab2''. O classificador do passo inicial tentou as seguintes
+configurações: ``zab5'', ``sab2'', ``sab5'', ``zob2'', ``zob5'', todas
+erradas. A probabilidade considerada na verossimilhança para essa imagem
+é, portanto:
+
+\[
+P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{zob5})
+\]
+
+Além de modificar a forma de calcular a função de perda do modelo, foi
+necessário testar os hiperparâmetros. Optou-se por utilizar os mesmos
+hiperparâmetros dos modelos iniciais para manter a consistência. O único
+detalhe nesse ponto é que, como os parâmetros de partida são os do
+modelo inicial, optou-se por não modificar a quantidade de unidades na
+camada densa, variando somente os valores de \emph{dropout} e de
+decaimento na taxa de aprendizado. Portanto, ajustou-se 9 e não 27
+modelos para cada base de dados.
+
+No final, assim como no primeiro passo, os classificadors com melhor
+acurácia foram selecionados para cada modelo. Ficou-se, então, com 65
+modelos no final para comparar com os modelos iniciais e estimar a
+efetividade do oráculo. As comparações foram feitas através de gráficos
+de barras, explorando o efeito do uso do oráculo para diferentes
+Captchas, diferentes modelos iniciais e diferentes quantidades de
+chutes, além de um gráfico de dispersão para relacionar as acurácias
+iniciais e finais.
+
+Além do terceiro passo, outros experimentos foram realizados para
+verificar se, ao aplicar a técnica do oráculo iterativamente, os
+resultados continuariam melhorando. Ou seja, é possível considerar os
+modelos obtidos no passo 3 como os modelos iniciais do passo 1, aplicar
+novamente o passo 2 (baixar dados) e o passo 3 (rodar modelo com os
+novos dados). Isso foi feito para apenas um conjunto selecionado de
+Captchas para verificar essa possibilidade, não fazendo parte das
+simulações principais do estudo.
+
+As bases de dados das simulações também foram disponibilizadas na aba de
+lançamentos (\emph{releases}) do
+\href{https://github.com/jtrecenti/doutorado/releases}{repositório
+principal do projeto de pesquisa}. As bases podem ser utilizadas para
+aumentar as bases de treino e para testar outras arquiteturas de redes
+neurais ao tema dos Captchas com uso de aprendizado fracamente
+supervisionado.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{model}{%
+\chapter{Modelagem}\label{model}}
+
+O fato da informação ser incompleta e fraca não significa que ela é
+inútil. Neste capítulo, discutimos como a informação do oráculo é usada
+pelos modelos e mostramos, tanto através de demonstrações matemáticas
+quanto com simulações que os resultados são positivos e consistentes.
+
+O capítulo foi organizado duas seções. Na Seção @ref(result-theory),
+mostramos as propriedades matemáticas e probabilísticas da estratégia
+adotada. Na Seção @ref(result-sim), mostramos os resultados empíricos
+obtidos das simulações.
+
+\hypertarget{result-theory}{%
+\section{Resultados teóricos}\label{result-theory}}
+
+Nesta seção, buscamos demonstrar que o uso de oráculos com a função de
+perda baseada nas informações censuradas i) não piora o poder preditivo
+do modelo e ii) converge para o modelo preditivo ótimo. Para isso, temos
+de passar por uma série de definições.
+
+\hypertarget{result-sim}{%
+\section{Resultados empíricos}\label{result-sim}}
+
+Nesta seção mostramos os resultados das simulações realizadas. Como
+comentado no capítulo anterior, foram realizadas 65 simulações no total,
+variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade
+de tentativas no oráculo.
+
+Para realizar os cálculos, montamos uma base de dados com os resultados
+das simulações. A base está disponível publicamente no
+\href{https://github.com/jtrecenti/doutorado}{repositório da tese} e
+contém colunas para o Captcha ajustado (\texttt{captcha}), a quantidade
+de observações do modelo inicial (\texttt{n}), a quantidade de
+tentativas do oráculo (\texttt{ntry}), a etapa da simulação
+(\texttt{fase}, inicial ou oráculo), o caminho do modelo ajustado
+(\texttt{model}) e a acurácia obtida (\texttt{acc}).
+
+Em média, foi observado o ganho de 314\% na acurácia após a aplicação da
+técnica do oráculo. Ou seja, em média a acurácia do modelo com aplicação
+do oráculo foi de mais de três vezes a acurácia do modelo inicial. Em
+termos absolutos (diferença entre as acurácias), o ganho foi de 27\%, ou
+seja, depois da aplicação do oráculo os modelos ganharam, em média, 27\%
+na acurácia.
+
+Separando os resultados gerais por quantidade de tentativas, observa-se
+os ganhos relativos e absolutos nas Figuras
+@ref(fig:simulacao-geral-ntry-relativo) e
+@ref(fig:simulacao-geral-ntry-absoluto). Cada ponto é uma simulação e o
+ponto em destaque é o valor médio, acompanhado de intervalo
+\(m \mp 2*s/\sqrt(n)\), com \(m\) sendo a média, \(s\) o desvio padrão e
+\(n\) a quantidade de dados. A linha pontilhada indica se a acurácia
+aumentou ou diminuiu após a aplicação da técnica.
+
+Na Figura @ref(fig:simulacao-geral-ntry-relativo) é possível notar que
+os ganhos em acurácia apresentam alta variabilidade, mas que apresentam
+uma tendência positiva com relação ao número de tentativas. O ganho
+entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre
+aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por
+sites que aceitam vários chutes é relevante e que não há necessidade de
+fazer tantos chutes para aproveitar essa oportunidade.
+
+\begin{figure}
+
+{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-ntry-relativo-1.pdf}
+
+}
+
+\caption{Ganho percentual ao utilizar a técnica do oráculo, dividido por
+quantidade de tentativas.}
+
+\end{figure}
+
+A Figura @ref(fig: simulacao-geral-ntry-absoluto), com as os ganhos
+absolutos, mostra a mesma informação mas em quantidades mais fáceis de
+interpretar. O ganho médio absoluto em Captchas mais de um chute girou
+em torno de 40\%, enquanto que o ganho com apenas um chute ficou um
+pouco acima de 25\%. Importante notar também que o uso do oráculo só
+piorou a acurácia do modelo (e pouco) em casos que com apenas um chute,
+mostrando que a técnica é consistentemente efetiva.
+
+\begin{figure}
+
+{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-ntry-absoluto-1.pdf}
+
+}
+
+\caption{Ganhos absolutos ao utilizar a técnica do oráculo, dividido por
+quantidade de tentativas.}
+
+\end{figure}
+
+As Figuras @ref(fig:simulacao-geral-inicial-relativo) e
+@ref(fig:simulacao-geral-inicial-absoluto) apresentam os resultados
+gerais separando por acurácia inicial do modelo. A estrutura do gráfico
+é similar às visualizações separando por quantidade de tentativas. As
+categorias escolhidas foram de até 10\%, mais de 10\% até 35\% e mais de
+35\% de acurácia no modelo inicial. A escolha dos intervalos se deram
+pela quantidade de observações em cada categoria
+
+A Figura @ref(fig:simulacao-geral-inicial-relativo) mostra os ganhos
+relativos. É possível notar uma tendência de queda no ganho de acurácia
+com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse
+resultado é esperado, pois, como a acurácia é um número entre zero e um,
+um modelo que já possui alta acurácia não tem a possibilidade de
+aumentar tanto.
+
+\begin{figure}
+
+{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-inicial-relativo-1.pdf}
+
+}
+
+\caption{Ganho percentual ao utilizar a técnica do oráculo, dividido por
+acurácia do modelo inicial.}
+
+\end{figure}
+
+A Figura @ref(fig:simulacao-geral-inicial-absoluto) mostra os ganhos
+absolutos. O gráfico apresenta o mesmo problema que o anterior, já que o
+ganho máximo depende da acurácia inicial do modelo. Mesmo assim, é
+possível notar que, em termos absolutos, modelos com acurácia inicial
+entre 10\% e 35\% apresentaram um ganho maior que modelos com acurácia
+inicial de até 10\%.
+
+\begin{figure}
+
+{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-inicial-absoluto-1.pdf}
+
+}
+
+\caption{Ganho absoluto ao utilizar a técnica do oráculo, dividido por
+acurácia do modelo inicial.}
+
+\end{figure}
+
+Para lidar com o fato da acurácia ser um número limitado, fizemos o
+mesmo gráficos de antes, mas ajustado pelo máximo possível que a técnica
+do oráculo poderia proporcionar. O ganho absoluto ajustado de uma
+simulação é dado por
+
+\[
+\text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
+\]
+
+A Figura @ref(fig:simulacao-geral-inicial-absoluto-ajustado) mostra os
+ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho
+expressivo da técnica do oráculo para modelos iniciais com mais do que
+10\% de acurácia com relação a modelos iniciais com até 10\% de
+acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a
+técnica é menor. É importante notar, no entanto, que as simulações
+mostram a aplicação da técnica apenas uma vez -- é possível baixar mais
+dados e atualizar o modelo indefinidamente. O menor efeito da técnica
+para modelos iniciais fracos não significa, portanto, que a técnica não
+funciona para modelos iniciais fracos; pelo contrário: ela ajuda o
+modelo a sair do estado inicial e o leva para uma acurácia maior, de
+onde poderíamos aplicar a técnica novamente para obter resultads ainda
+mais expressivos.
+
+\begin{figure}
+
+{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-inicial-absoluto-ajustado-1.pdf}
+
+}
+
+\caption{Ganho absoluto ao utilizar a técnica do oráculo, dividido por
+acurácia do modelo inicial.}
+
+\end{figure}
+
+Na Figura @ref(fig:simulacao-captcha), mostramos os resultados separando
+por Captcha. Cada linha é uma combinação de Captcha, quantidade de
+tentativas e acurácia modelo inicial, que foi classificado em três
+categorias. As linhas pontilhadas indicam modelos ajustados com mais de
+uma tentativa, enquanto as linhas contínuas mostram modelos ajustados
+com apenas uma tentativa. A primeira extremidade de cada linha, do lado
+esquerdo, indica a acurácia do modelo inicial e a segunda extremidade,
+do lado direito, a acurácia do modelo usando a técnica do oráculo.
+
+\begin{figure}
+
+{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-captcha-1.pdf}
+
+}
+
+\caption{Resultados da simulação por captcha, quantidade de tentativas e
+modelo inicial.}
+
+\end{figure}
+
+Pelo gráfico, é possível identificar duas informações relevantes. Como
+já verificado anteriormente, os modelos ajustados com mais de uma
+tentativa apresentam maiores ganhos do que os modelos ajustados com
+apenas uma tentativa. Verifica-se também que modelos com acurácia
+inicial menores não necessariamente apresentam ganhos menores quando
+separados por Captcha.
+
+Pelas análises das simulações, é possível concluir que a técnica do
+oráculo foi bastante bem sucedida. Primeiro, ela apresenta resultados
+expressivos e de forma consistente, mesmo dando apenas um passo de
+obtenção de dados e ajuste de novo modelo. Além disso, a técnica é capaz
+de se aproveitar de sites que permitem a verificação do oráculo
+múltiplas vezes para o mesmo Captcha. Por último, a técnica apresenta
+ganhos mesmo para modelos iniciais muito fracos (com acurácias de até
+10\%), indicando que sua aplicação é indicada para qualquer modelo
+inicial com mais de 5\% de acurácia, o que é bastante factível de
+atingir com bases pequenas ou com modelos genéricos.
+
+\hypertarget{aplicauxe7uxe3o-iterada}{%
+\subsection{Aplicação iterada}\label{aplicauxe7uxe3o-iterada}}
+
+Um possível problema em aplicar a técnica do oráculo é que a técnica
+pode introduzir viés no modelo, o que impediria de ser aprimorado
+indefinidamente. Mesmo que os teoremas dêem uma boa base para acreditar
+que isso não seja verdade, foi feito um teste empírico, com apenas um
+Captcha, para verificar se a aplicação da técnica múltiplas vezes
+apresenta bons resultados.
+
+O Captcha escolhido para a simulação foi o \texttt{trf5}, por ser um
+Captcha que não aceita múltiplos chutes, em uma tentativa de obter um
+pior caso. Para esse Captcha, o melhor modelo obtido com a técnica do
+oráculo foi considerado como modelo inicial e usado para baixar novos
+dados do site do Tribunal. Os novos dados foram adicionados à base de
+treino, ajustando-se um novo modelo.
+
+A Figura @ref(fig:aplicacao-iterada) mostra os resultados da aplicação
+iterada. A utilização da técnica não só funcionou como levou o modelo a
+uma acurácia de 100\%.
+
+\begin{figure}
+
+{\centering \includegraphics{./resultados_files/figure-pdf/aplicacao-iterada-1.pdf}
+
+}
+
+\caption{Resultados da aplicação iterada da técnica.}
+
+\end{figure}
+
+O resultado sugere que a técnica pode sim ser utilizada indefinidamente
+para auxiliar no aprendizado do modelo. Ela sugere, ainda, que uma
+técnica de aprendizado ativo com \emph{feedback} automático do oráculo
+pode dar bons resultados, já que a forma de obter os dados não introduz
+viés no ajuste do modelo.
+
+\hypertarget{aprendizado-ativo-todo}{%
+\subsection{Aprendizado ativo (TODO)}\label{aprendizado-ativo-todo}}
+
+\begin{quote}
+Aqui a ideia é mostrar os resultados do aprendizado ativo, se der tempo
+de fazer.
+\end{quote}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{conclusao}{%
+\chapter{Conclusões}\label{conclusao}}
+
+\begin{quote}
+Concluir sobre a parte mais política (captchas e dados abertos etc)
+\end{quote}
+
+\begin{quote}
+Concluir sobre o avanço científico na modelagem estatística
+\end{quote}
+
+\begin{quote}
+Reforçar a contribuição técnica para a comunidade com o pacote e o app
+\end{quote}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{bibliografia}{%
+\chapter*{Bibliografia}\label{bibliografia}}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+\markboth{Bibliografia}{Bibliografia}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{1}
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnReCAPTCHAHumanBasedCharacter2008}{}}%
+AHN, L. VON et al. reCAPTCHA: Human-Based Character Recognition via Web
+Security Measures. \textbf{Science}, v. 321, n. 5895, p. 1465--1468, 12
+set. 2008. Disponível em:
+\textless{}\url{https://www.science.org/doi/10.1126/science.1160379}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnTellingHumansComputers2002}{}}%
+AHN, L. VON; BLUM, M.; LANGFORD, J. \textbf{Telling humans and computers
+apart automatically or how lazy cryptographers do AI (Tech. Rep. No.
+CMU-CS-02-117)}. Disponível em:
+\textless{}\url{http://reports-archive.adm.cs.cmu.edu/anon/2002/CMU-CS-02-117.pdf}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-baldi2013}{}}%
+BALDI, P.; SADOWSKI, P. J. Understanding dropout. \textbf{Advances in
+neural information processing systems}, v. 26, 2013.
+
+\leavevmode\vadjust pre{\hypertarget{ref-blum1998}{}}%
+BLUM, A.; KALAI, A. A note on learning from multiple-instance examples.
+\textbf{Machine learning}, v. 30, n. 1, p. 2329, 1998.
+
+\leavevmode\vadjust pre{\hypertarget{ref-chellapilla2005}{}}%
+CHELLAPILLA, K. et al. \textbf{Designing human friendly human
+interaction proofs (HIPs)}. : CHI '05.New York, NY, USA: Association for
+Computing Machinery, 2 abr. 2005. Disponível em:
+\textless{}\url{https://doi.org/10.1145/1054972.1055070}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-chellapilla2004}{}}%
+CHELLAPILLA, K.; SIMARD, P. Using machine learning to break visual human
+interaction proofs (HIPs). \textbf{Advances in neural information
+processing systems}, v. 17, 2004.
+
+\leavevmode\vadjust pre{\hypertarget{ref-colosimo2006}{}}%
+COLOSIMO, E. A.; GIOLO, S. R. \textbf{Análise de sobrevivência
+aplicada}. Editora Blucher, 2006.
+
+\leavevmode\vadjust pre{\hypertarget{ref-cour2011}{}}%
+COUR, T.; SAPP, B.; TASKAR, B. Learning from partial labels. \textbf{The
+Journal of Machine Learning Research}, v. 12, p. 15011536, 2011.
+
+\leavevmode\vadjust pre{\hypertarget{ref-diagnosticoABJ}{}}%
+\textbf{Diagnóstico do Contencioso Tributário Administrativo}.,
+{[}s.d.{]}. Disponível em:
+\textless{}\url{https://abj.org.br/pesquisas/bid-tributario/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-feng2020}{}}%
+FENG, L. et al. Provably consistent partial-label learning.
+\textbf{Advances in Neural Information Processing Systems}, v. 33, p.
+1094810960, a2020.
+
+\leavevmode\vadjust pre{\hypertarget{ref-feng2020a}{}}%
+FENG, L. et al. \textbf{Learning with multiple complementary labels}.
+PMLR, b2020.
+
+\leavevmode\vadjust pre{\hypertarget{ref-galar2011}{}}%
+GALAR, M. et al. A review on ensembles for the class imbalance problem:
+bagging-, boosting-, and hybrid-based approaches. \textbf{IEEE
+Transactions on Systems, Man, and Cybernetics, Part C (Applications and
+Reviews)}, v. 42, n. 4, p. 463484, 2011.
+
+\leavevmode\vadjust pre{\hypertarget{ref-george2017}{}}%
+GEORGE, D. et al. A generative vision model that trains with high data
+efficiency and breaks text-based CAPTCHAs. \textbf{Science}, v. 358, n.
+6368, p. eaag2612, 2017.
+
+\leavevmode\vadjust pre{\hypertarget{ref-goodfellow2013}{}}%
+GOODFELLOW, I. J. et al. Multi-digit number recognition from street view
+imagery using deep convolutional neural networks. \textbf{arXiv preprint
+arXiv:1312.6082}, 2013.
+
+\leavevmode\vadjust pre{\hypertarget{ref-goodfellow}{}}%
+GOODFELLOW, I. J. et al.
+\href{https://doi.org/10.48550/arXiv.1406.2661}{Generative Adversarial
+Networks}. {[}s.d.{]}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-grandvalet2002}{}}%
+GRANDVALET, Y. \textbf{Logistic regression for partial labels}. 2002.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hullermeier2006}{}}%
+HÜLLERMEIER, E.; BERINGER, J. Learning from ambiguously labeled
+examples. \textbf{Intelligent Data Analysis}, v. 10, n. 5, p. 419439,
+2006.
+
+\leavevmode\vadjust pre{\hypertarget{ref-inaccess}{}}%
+\textbf{Inaccessibility of CAPTCHA}., {[}s.d.{]}. Disponível em:
+\textless{}\url{https://www.w3.org/TR/turingtest/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ioffe2015}{}}%
+IOFFE, S.; SZEGEDY, C. \textbf{Batch normalization: Accelerating deep
+network training by reducing internal covariate shift}. PMLR, 2015.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ishida2017}{}}%
+ISHIDA, T. et al. Learning from complementary labels. \textbf{Advances
+in neural information processing systems}, v. 30, b2017.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ishida2017a}{}}%
+ISHIDA, T. et al. Learning from complementary labels. \textbf{Advances
+in neural information processing systems}, v. 30, a2017.
+
+\leavevmode\vadjust pre{\hypertarget{ref-jin2002}{}}%
+JIN, R.; GHAHRAMANI, Z. Learning with multiple labels. \textbf{Advances
+in neural information processing systems}, v. 15, 2002.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kaur2014}{}}%
+KAUR, K.; BEHAL, S. Captcha and Its Techniques: A Review.
+\textbf{International Journal of Computer Science and Information
+Technologies,} v. 5, 1 jan. 2014.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kingma2014}{}}%
+KINGMA, D. P.; BA, J.
+\href{https://doi.org/10.48550/arXiv.1412.6980}{Adam: A Method for
+Stochastic Optimization}. {[}s.d.{]}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kuhn2019}{}}%
+KUHN, M.; JOHNSON, K. \textbf{Feature engineering and selection: A
+practical approach for predictive models}. CRC Press, 2019.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lecun1998}{}}%
+LECUN, Y. et al. Gradient-based learning applied to document
+recognition. \textbf{Proceedings of the IEEE}, v. 86, n. 11, p.
+22782324, 1998.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lecun2012}{}}%
+LECUN, Y. A. et al. Efficient backprop. Em: Springer, 2012. p. 948.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lecun2015}{}}%
+LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning. \textbf{nature}, v.
+521, n. 7553, p. 436444, b2015.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lecun2015a}{}}%
+LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning. \textbf{nature}, v.
+521, n. 7553, p. 436444, a2015.
+
+\leavevmode\vadjust pre{\hypertarget{ref-li2014}{}}%
+LI, J.; TSUNG, F.; ZOU, C. Multivariate binomial/multinomial control
+chart. \textbf{IIE Transactions}, v. 46, n. 5, p. 526542, 2014.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lillibridgeMethodSelectivelyRestricting2001}{}}%
+LILLIBRIDGE, M. D. et al. \textbf{Method for Selectively Restricting
+Access to Computer Systems}., fev. 2001.
+
+\leavevmode\vadjust pre{\hypertarget{ref-liu2012}{}}%
+LIU, L.; DIETTERICH, T. A conditional multinomial mixture model for
+superset label learning. \textbf{Advances in neural information
+processing systems}, v. 25, 2012.
+
+\leavevmode\vadjust pre{\hypertarget{ref-michener2015}{}}%
+MICHENER, G.; MONCAU, L. F.; VELASCO, R. B. \textbf{Estado brasileiro e
+transparência avaliando a aplicação da Lei de Acesso à Informação}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mori2003a}{}}%
+MORI, G.; MALIK, J. \textbf{Recognizing objects in adversarial clutter:
+Breaking a visual CAPTCHA}. IEEE, 2003.
+
+\leavevmode\vadjust pre{\hypertarget{ref-murray-rust2008}{}}%
+MURRAY-RUST, P. Open data in science. \textbf{Nature Precedings}, p. 11,
+2008.
+
+\leavevmode\vadjust pre{\hypertarget{ref-na2020}{}}%
+NA, B. et al. \textbf{Deep Generative Positive-Unlabeled Learning under
+Selection Bias}. : CIKM '20.New York, NY, USA: Association for Computing
+Machinery, 19 out. 2020. Disponível em:
+\textless{}\url{https://doi.org/10.1145/3340531.3411971}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-nelder1972}{}}%
+NELDER, J. A.; WEDDERBURN, R. W. Generalized linear models.
+\textbf{Journal of the Royal Statistical Society: Series A (General)},
+v. 135, n. 3, p. 370384, 1972.
+
+\leavevmode\vadjust pre{\hypertarget{ref-noh2017}{}}%
+NOH, H. et al. Regularizing deep neural networks by noise: Its
+interpretation and optimization. \textbf{Advances in Neural Information
+Processing Systems}, v. 30, 2017.
+
+\leavevmode\vadjust pre{\hypertarget{ref-observat}{}}%
+\textbf{Observatório da insolvência: Rio de Janeiro}., {[}s.d.{]}.
+Disponível em:
+\textless{}\url{https://abj.org.br/pesquisas/obsrjrj/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-magick-2}{}}%
+OOMS, J. magick: Advanced Graphics and Image-Processing in R. 2021.
+Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=magick}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ramesh}{}}%
+RAMESH, A. et al.
+\href{https://doi.org/10.48550/arXiv.2204.06125}{Hierarchical
+Text-Conditional Image Generation with CLIP Latents}. {[}s.d.{]}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-reshefMethodSystemDiscriminating2005}{}}%
+RESHEF, E.; RAANAN, G.; SOLAN, E. \textbf{Method and System for
+Discriminating a Human Action from a Computerized Action}., 2005.
+
+\leavevmode\vadjust pre{\hypertarget{ref-sutton2018}{}}%
+SUTTON, R. S.; BARTO, A. G. \textbf{Reinforcement learning: An
+introduction}. MIT press, 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-tempodo}{}}%
+\textbf{Tempo dos processos relacionados à adoção}., {[}s.d.{]}.
+Disponível em:
+\textless{}\url{https://abj.org.br/pesquisas/adocao/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-turing2009}{}}%
+TURING, A. M. Computing machinery and intelligence. Em: Springer, 2009.
+p. 2365.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnCaptchaTellingHumans2003}{}}%
+VON AHN, L. et al. \textbf{Captcha: {Telling} Humans and Computers Apart
+Automatically}. Proceedings of Eurocrypt. \textbf{Anais}...2003.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnTellingHumansComputers2004}{}}%
+VON AHN, L.; BLUM, M.; LANGFORD, J. Telling Humans and Computers Apart
+Automatically. \textbf{Communications of the ACM}, v. 47, n. 2, p.
+56--60, 2004.
+
+\leavevmode\vadjust pre{\hypertarget{ref-wang2021}{}}%
+WANG, Y. et al. Make complex captchas simple: a fast text captcha solver
+based on a small number of samples. \textbf{Information Sciences}, v.
+578, p. 181194, 2021.
+
+\leavevmode\vadjust pre{\hypertarget{ref-stringr}{}}%
+WICKHAM, H. stringr: Simple, Consistent Wrappers for Common String
+Operations. b2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=stringr}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rvest}{}}%
+WICKHAM, H. rvest: Easily Harvest (Scrape) Web Pages. a2022. Disponível
+em:
+\textless{}\url{https://CRAN.R-project.org/package=rvest}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-xml2}{}}%
+WICKHAM, H.; HESTER, J.; OOMS, J. xml2: Parse XML. 2021. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=xml2}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ye2018}{}}%
+YE, G. et al. \textbf{Yet another text captcha solver: A generative
+adversarial network based approach}. b2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ye2018a}{}}%
+YE, G. et al. \textbf{Yet another text captcha solver: A generative
+adversarial network based approach}. a2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yu2018}{}}%
+YU, X. et al. \textbf{Learning with biased complementary labels}. 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yuan2019}{}}%
+YUAN, X. et al. Adversarial examples: Attacks and defenses for deep
+learning. \textbf{IEEE transactions on neural networks and learning
+systems}, v. 30, n. 9, p. 28052824, 2019.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhao2017}{}}%
+ZHAO, B. Web scraping. \textbf{Encyclopedia of big data}, p. 13, a2017.
+Disponível em:
+\textless{}\url{https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhao2017a}{}}%
+ZHAO, B. Web scraping. \textbf{Encyclopedia of big data}, p. 13, b2017.
+Disponível em:
+\textless{}\url{https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhou2018}{}}%
+ZHOU, Z.-H. A brief introduction to weakly supervised learning.
+\textbf{National science review}, v. 5, n. 1, p. 4453, 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhu2005}{}}%
+ZHU, X. J. Semi-supervised learning literature survey. 2005.
+
+\end{CSLReferences}
+
+\appendix
+\addcontentsline{toc}{part}{Apêndices}
+
+\hypertarget{pacote}{%
+\chapter{Pacote}\label{pacote}}
+
+\begin{quote}
+Citar versão anterior \{decryptr\}
+\end{quote}
+
+\begin{quote}
+Funções do \{captcha\}
+\end{quote}
+
+\begin{quote}
+Print screens do \{ancaptcha\}
+\end{quote}
+
+% \input{conteudo/00-exemplo-introducao}
+% \input{conteudo/01-exemplo-normas-ime}
+% \input{conteudo/02-exemplo-usando-o-modelo}
+% \input{conteudo/03-exemplo-latex}
+% \input{conteudo/04-exemplo-tutorial}
+% \input{conteudo/05-exemplo-exemplos}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES E ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Um apêndice é algum conteúdo adicional de sua autoria que faz parte e
+% colabora com a ideia geral do texto mas que, por alguma razão, não precisa
+% fazer parte da sequência do discurso; por exemplo, a demonstração de um
+% teorema intermediário, as perguntas usadas em uma pesquisa qualitativa etc.
+%
+% Um anexo é um documento que não faz parte da tese (em geral, nem é de sua
+% autoria) mas é relevante para o conteúdo; por exemplo, a especificação do
+% padrão técnico ou a legislação que o trabalho discute, um artigo de jornal
+% apresentando a percepção do público sobre o tema da tese etc.
+%
+% Os comandos appendix e annex reiniciam a numeração de capítulos e passam
+% a numerá-los com letras. "annex" não faz parte de nenhuma classe padrão,
+% foi criado para este modelo. Se o trabalho não tiver apêndices ou anexos,
+% remova estas linhas.
+%
+% Diferentemente de \mainmatter, \backmatter etc., \appendix e \annex não
+% forçam o início de uma nova página. Em geral isso não é importante, pois
+% o comando seguinte costuma ser "\chapter", mas pode causar problemas com
+% a formatação dos cabeçalhos. Assim, vamos forçar uma nova página antes
+% de cada um deles.
+
+%%%% Apêndices %%%%
+
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+\pagestyle{appendix}
+
+\appendix
+
+% \addappheadtotoc acrescenta a palavra "Apêndice" ao sumário; se
+% só há apêndices, sem anexos, provavelmente não é necessário.
+\addappheadtotoc
+
+% \input{conteudo/apendice-exemplo-pseudocodigo}
+\par
+
+%%%% Anexos %%%%
+
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+\pagestyle{appendix} % repete o anterior, caso você não use apêndices
+
+\annex
+
+% \addappheadtotoc acrescenta a palavra "Anexo" ao sumário; se
+% só há anexos, sem apêndices, provavelmente não é necessário.
+\addappheadtotoc
+
+% \input{conteudo/anexo-exemplo-faq}
+\par
+
+
+%%%%%%%%%%%%%%% SEÇÕES FINAIS (BIBLIOGRAFIA E ÍNDICE REMISSIVO) %%%%%%%%%%%%%%%%
+
+% O comando backmatter desabilita a numeração de capítulos.
+\backmatter
+
+\pagestyle{backmatter}
+
+% Espaço adicional no sumário antes das referências / índice remissivo
+\addtocontents{toc}{\vspace{2\baselineskip plus .5\baselineskip minus .5\baselineskip}}
+
+% A bibliografia é obrigatória
+
+\printbibliography[
+  title=\refname\label{bibliografia}, % "Referências", recomendado pela ABNT
+  %title=\bibname\label{bibliografia}, % "Bibliografia"
+  heading=bibintoc, % Inclui a bibliografia no sumário
+]
+
+\printindex % imprime o índice remissivo no documento (opcional)
+
+\end{document}
