@@ -1,14 +1,18 @@
+---
+bibliography: references.bib
+---
+
 # Metodologia {#metodologia}
 
 <!-- ----------------------------------------------------------- -->
 
-Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do trabalho, pois, mais do que simplesmente apresentar o código utilizado, mostra o passo a passo, as dores e as decisões difíceis que tiveram de ser tomadas para concluir o projeto.
+<!-- Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do trabalho, pois, mais do que simplesmente apresentar o código utilizado, mostra o passo a passo, as dores e as decisões difíceis que tiveram de ser tomadas para concluir o projeto. -->
 
 O capítulo está organizado em três seções: definição do problema, dados e simulações. A primeira mostra a base matemática do problema estudado e as escolhas de sintaxe e terminologias. A segunda descreve as fontes de dados e o processo de coleta, já que a base foi construída totalmente do zero. A terceira mostra como foram planejadas as simulações para verificar se a solução proposta funciona bem empiricamente.
 
-Pode parecer incomum uma seção de definições no capítulo de metodologia. No entanto, ela é muito importante para as discussões que seguem. Como será mostrado mais adiante, a pesquisa também apresenta resultados teóricos da solução proposta, mas para apresentá-los é necessário escrever as definições do objeto matemático que está sendo estudado. 
+<!-- Pode parecer incomum uma seção de definições no capítulo de metodologia. No entanto, ela é muito importante para as discussões que seguem. Como será mostrado mais adiante, a pesquisa também apresenta resultados teóricos da solução proposta, mas, para apresentá-los, é necessário colocar as definições do objeto matemático que está sendo estudado. -->
 
-Uma decisão mais difícil de tomar na parte teórica foi sobre a parte de redes neurais. No início do projeto de doutorado, a pesquisa em redes neurais nos departamentos de estatística era uma novidade, sofrendo até certo preconceito por ser um modelo "caixa-preta". Com o passar do tempo, no entanto, a área está ficando cada vez mais popular, inclusive com pessoas da graduação fazendo iniciação científica neste tema. Por isso, optou-se por trabalhar nas pontes entre os modelos clássicos de estatística e os modelos de redes neurais, mas sem todos os detalhes técnicos que podem ser encontrados com qualidade em livros didáticos. Espera-se que o conteúdo possa ser utilizado por pessoas interessadas em ensinar redes neurais para estudantes de estatística.
+Na parte de redes neurais, optou-se por trabalhar nas pontes entre os modelos clássicos de estatística e os modelos de redes neurais, mas sem tecer todos os detalhes técnicos que podem ser encontrados em livros didáticos. Antes de 2015, a pesquisa em redes neurais nos departamentos de estatística era uma novidade, sofrendo até certo preconceito por ser uma classe de modelos "caixa-preta". Com o passar do tempo, no entanto, a área está ficando cada vez mais popular, envolvendo até mesmo trabalhos de iniciação científica no tema. Por isso, optou-se por trazer poucos detalhes da área, focando nas pontes entre os modelos clássicos e as redes neurais. Espera-se que o conteúdo possa ser aproveitado por pessoas interessadas em ensinar redes neurais para estudantes de estatística.
 
 Na seção de dados, procurou-se apresentar a metodologia de coleta em detalhes. Isso foi feito porque a área de raspagem de dados não é comum para estudantes de estatística, existindo até uma percepção entre acadêmicos de que trata-se de uma área separada da estatística. Uma das hipóteses de pesquisa, bem como a solução técnica apresentada neste trabalho é justamente uma ponte entre as duas áreas, justificando um detalhamento maior dos conceitos.
 
@@ -20,29 +24,31 @@ Na seção de simulações, procurou-se descrever os passos dados em detalhe. Ne
 
 <!-- Nesta seção, buscou-se definir o problema trabalhado de forma precisa. Escolheu-se fazer isso de baixo para cima, a partir da estrutura de dados dos Captchas e depois do problema estatístico. Cabe, no entanto, um adiantamento do que vem pela frente para facilitar a leitura. -->
 
-O problema a ser trabalhado é um caso de *aprendizado fracamente supervisionado*. Trata-se de uma generalização do aprendizado supervisionado e também do aprendizado *semi-supervisionado*. Usualmente, a área de aprendizado estatístico (ou aprendizado de máquinas) se concentra em dois tipos de problemas principais: o aprendizado supervisionado e o aprendizado não supervisionado. É possível observar essa classificação em diversos livros-texto da área (XXX). Isso ocorre principalmente por fins didáticos, pois é mais fácil passar os modelos que fazem parte de cada área.
+O problema a ser trabalhado é um caso de *aprendizado fracamente supervisionado* [@zhou2018]. Trata-se de uma generalização do aprendizado supervisionado e também do aprendizado *semi-supervisionado*. Usualmente, a área de aprendizado estatístico (ou aprendizado de máquinas) se concentra em dois tipos de problemas principais: o aprendizado supervisionado e o aprendizado não supervisionado. Isso ocorre principalmente por fins didáticos, pois é mais fácil passar os modelos que fazem parte de cada área.
 
 No entanto, a estatística evolui com os problemas que ocorrem no mundo. E, no mundo, os problemas nem sempre recaem em uma ou outra categoria. O que temos, na verdade, é que os problemas não supervisionados e supervisionados estão conectados, desde que o objetivo de uma pesquisa seja o de predizer valores (regressão) ou categorias (classificação).
 
-Nesse sentido, uma área que ficou popular nos últimos anos, até por conta dos avanços na área de Deep Learning, é o *aprendizado semi-supervisionado*. Trata-se de uma classe de problemas contendo uma amostra completamente anotada e uma amostra sem anotações. A amostra sem anotações é usada para compreender como os dados foram gerados, e os parâmetros podem ser compartilhados com a parte supervisionada do modelo. Isso poderia indicar que existem três classes de problemas: o não supervisionado, o supervisionado e o semi-supervisionado.
+Nesse sentido, uma área que ficou popular nos últimos anos, até por conta dos avanços na área de Deep Learning, é o *aprendizado semi-supervisionado* [@zhu2005]. Trata-se de uma classe de problemas contendo uma amostra completamente anotada e uma amostra sem anotações. A amostra sem anotações é usada para compreender como os dados foram gerados, e os parâmetros podem ser compartilhados com a parte supervisionada do modelo. Isso poderia indicar que existem três classes de problemas: o não supervisionado, o supervisionado e o semi-supervisionado.
 
 Mas isso também não representa todas as classes de problemas. Em muitas aplicações reais, obter uma anotação completa e correta pode ser custoso ou até impraticável. Além disso por envolver trabalho humano, é comum que classificações contenham erros. Para lidar com esses casos existe uma área, que generaliza as anteriores, que é o aprendizado fracamente supervisionado.
 
-O problema fracamente supervisionado será o final da jornada. Ela começa de onde deve começar, com aqueles que são objeto de análise deste trabalho: os Captchas.
+Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área existem diversos tipos de problemas, como aprendizado semi-supervisionado, aprendizado de múltiplas instâncias [@blum1998], aprendizado com rótulos incorretos ou incompletos [@zhou2018]. O caso dos Captchas com o uso do oráculo será apresentado como outra classe de problemas, chamada ***aprendizado com rótulos parciais*** (*partial label learning*, PLL, [@jin2002]). Essa classe apresenta uma especialização ainda mais próxima do problema estudado, chamado ***aprendizado com rótulos complementares*** (*complementary label learning*, [@ishida2017a]).
+
+A intepretação do Captcha como um problema de PLL será apresentada no final do capítulo. A jornada começa de onde deve começar, com aqueles que são objeto de análise deste trabalho: os Captchas.
 
 ### Captcha
 
-Captcha é um *desafio* do tipo *desafio-resposta* usado para determinar se a usuário do sistema é um humano. Existem diversos tipos de Captcha diferentes, que envolvem desde identificar textos em imagens até resolver expressões matemáticas complexas. 
+Captcha é um *desafio* do tipo *desafio-resposta* usado para determinar se a usuário do sistema é um humano. Existem diversos tipos de Captcha diferentes, que envolvem desde identificar textos em imagens até resolver expressões matemáticas complexas.
 
 O foco deste trabalho reside nos Captchas baseados em imagens rotuladas, que é o tipo mais comum. Em seguida, a menos que se mencione ao contrário, todos os Captchas apresentados são desse tipo.
 
 O fluxo completo de um Captcha envolve cinco componentes: um *rótulo*, um *gerador*, uma *imagem*, um agente e um *oráculo*. Um ciclo do Captcha é completado ao seguir os passos:
 
-1. O rótulo é definido, usualmente com algum procedimento aleatório, ocultado do agente.
-2. A imagem é gerada a partir do rótulo e apresentada para o agente.
-3. O agente preenche sua resposta a partir da imagem (que pode estar certo ou errado)
-4. O oráculo verifica se a resposta está correta.
-5. Dependendo da resposta, o agente é direcionado para a página autenticada ou para uma página de erro.
+1.  O rótulo é definido, usualmente com algum procedimento aleatório, ocultado do agente.
+2.  A imagem é gerada a partir do rótulo e apresentada para o agente.
+3.  O agente preenche sua resposta a partir da imagem (que pode estar certo ou errado)
+4.  O oráculo verifica se a resposta está correta.
+5.  Dependendo da resposta, o agente é direcionado para a página autenticada ou para uma página de erro.
 
 A Figura @fig-esquema-captcha esquematiza o fluxo do Captcha.
 
@@ -54,11 +60,11 @@ knitr::include_graphics("assets/img/esquema-captcha.png")
 
 #### Imagem, rótulo e variável resposta
 
-A imagem é uma matriz $\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}$, contendo padrões que, a partir da análise humana, levam ao rótulo do Captcha. O *rótulo* dado por um vetor de caracteres $\mathbf c = [c_1,\dots,c_L]^\top$. O comprimento $L$ pode ser fixo ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir com comprimentos diferentes. Nas definições que seguem vamos considerar $L$ como fixo, por simplicidade.
+A imagem é uma matriz $\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}$, contendo padrões que, a partir da análise humana, levam ao rótulo do Captcha. O *rótulo* dado por um vetor de caracteres $\mathbf c = [c_1,\dots,c_L]^\top$. O comprimento $L$ pode ser fixo ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir com comprimentos diferentes. Nas definições que seguem considerou-se $L$ como fixo, por simplicidade.
 
-Os elementos do vetor $\mathbf c$ fazem parte de um alfabeto $\mathcal A$, com cardinalidade $|\mathcal A|$, finito e conhecido. O alfabeto contém todos os possíveis caracteres que podem aparecer na imagem. Na maioria dos casos, $\mathcal A$ corresponde a uma combinação de algarismos arábicos (0-9) e letras do alfabeto latino (a-z), podendo diferenciar ou não as letras maiúsculas e minúsculas[^letra-numero].
+Os elementos do vetor $\mathbf c$ fazem parte de um alfabeto $\mathcal A$, com cardinalidade $|\mathcal A|$, finito e conhecido. O alfabeto contém todos os possíveis caracteres que podem aparecer na imagem. Na maioria dos casos, $\mathcal A$ corresponde a uma combinação de algarismos arábicos (0-9) e letras do alfabeto latino (a-z), podendo diferenciar ou não as letras maiúsculas e minúsculas[^1].
 
-[^letra-numero]: existem exemplos de Captchas baseados em imagens que não são limitados a letras e números para constituir o rótulo (XXX). Como esses casos não aparecem nas aplicações práticas de interesse, estão fora do escopo do trabalho.
+[^1]: existem exemplos de Captchas baseados em imagens que não são limitados a letras e números para constituir o rótulo [@kaur2014]. Como esses casos não aparecem nas aplicações práticas de interesse, estão fora do escopo do trabalho.
 
 O elemento da matriz $x_{nm\cdot}$ é denominado *pixel*. Um pixel representa a menor unidade possível da imagem. Em uma imagem colorida, por exemplo, $R=3$. Nesse caso, um pixel é um vetor de três dimensões com valores entre zero e um, representando a intensidade de vermelho, verde e azul da coordenada $(n, m)$ da imagem. Em imagens em escala de cinza, $R=1$ e o pixel, de uma dimensão, representa a intensidade do cinza, sendo 1 o equivalente da cor branca e 0 da cor preta.
 
@@ -71,13 +77,13 @@ A Figura @fig-exemplo-tjmg mostra um exemplo Captcha do Tribunal de Justiça de 
 knitr::include_graphics("assets/img/tjmg16283c1e6d06.jpeg")
 ```
 
-A **variável resposta** é uma matriz binária $\mathbf y_{L \times |\mathcal A|}$, em que cada linha representa um dos valores do vetor $\mathbf c$, enquanto as colunas possuem um representante para cada elemento de $\mathcal A$. Um elemento $y_{ij}$ vale 1 se o elemento $i$ do rótulo $\mathbf c$ corresponde ao elemento $j$ do alfabeto $\mathcal A$, valendo zero caso contrário. A variável resposta pode ser pensada também como o *one-hot encoding* do rótulo. 
+A **variável resposta** é uma matriz binária $\mathbf y_{L \times |\mathcal A|}$, em que cada linha representa um dos valores do vetor $\mathbf c$, enquanto as colunas possuem um representante para cada elemento de $\mathcal A$. Um elemento $y_{ij}$ vale 1 se o elemento $i$ do rótulo $\mathbf c$ corresponde ao elemento $j$ do alfabeto $\mathcal A$, valendo zero caso contrário. A variável resposta pode ser pensada também como o *one-hot encoding* do rótulo.
 
 Uma maneira alternativa de definir a variável resposta seria com um vetor de índices representando cada elemento do alfabeto em um vetor. O problema de trabalhar dessa forma é que a variável resposta $\mathbf y$ tem um número exponencial de combinações: o rótulo possui $L$ caracteres, sendo que cada caractere pode ter $|\mathcal A|$ valores, totalizando $|\mathcal A|^L$ combinações.
 
 Por exemplo, um Captcha com $L=6$ letras e $|\mathcal A| = 36$ possibilidades em cada letra (26 letras do alfabeto latino e 10 algarismos arábicos), possui um total de 2.176.782.336 ($>$ 2 bilhões) combinações. Por isso, modelar as imagens diretamente através de uma única variável resposta categórica é tecnicamente inviável.
 
-A forma *one-hot* da resposta pode ser entendida como uma __multinomial__ __multivariada__ (XXX). A resposta é multivariada porque temos $L$ caracteres na imagem e multinomial porque temos $|\mathcal A|$ possíveis caracteres em cada posição. Dessa forma, podemos pensar que um modelo que resolve o Captcha envolve $L$ classificadores com resposta multinomial, cada um dando conta de um dos caracteres. Os classificadores podem ser independentes e podem até contar com etapas de pré-processamento separadas.
+A forma *one-hot* da resposta pode ser entendida como uma **multinomial** **multivariada** [@li2014]. A resposta é multivariada porque temos $L$ caracteres na imagem e multinomial porque temos $|\mathcal A|$ possíveis caracteres em cada posição. Dessa forma, podemos pensar que um modelo que resolve o Captcha envolve $L$ classificadores com resposta multinomial, cada um dando conta de um dos caracteres. Os classificadores podem ser independentes e podem até contar com etapas de pré-processamento separadas.
 
 Seguindo o exemplo da Figura @fig-exemplo-tjmg, é possível representar o rótulo da seguinte forma:
 
@@ -103,7 +109,7 @@ A forma *dummy* da resposta facilita os trabalhos que seguem. Como será visto m
 
 O **gerador** é uma função $g$ que recebe um rótulo como entrada e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de gerar uma imagem fácil de interpretar por humanos, mas difícil de se resolver por máquinas.
 
-Um exemplo de gerador é a função criada no pacote `{captcha}`. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` (XXX), que utiliza o software ImageMagick. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da Figura @fig-captcha-r-exemplo.
+Um exemplo de gerador é a função criada no pacote `{captcha}`. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick-2], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da Figura @fig-captcha-r-exemplo.
 
 ```{r captcha-r-exemplo, fig.cap= "Exemplo de captcha gerado pela função captcha::captcha_generate()"}
 set.seed(5)
@@ -113,28 +119,28 @@ plot(captcha::captcha_generate()$image)
 
 O gerador segue os passos abaixo, a partir do momento em que um rótulo $\mathbf c$ existe:
 
-1. É criada uma matriz $N\times M \times R$, com valores entre zero e um gerados por simulações de uma $\mathcal U(0,1)$.
-2. É adicionada uma cor base ao ruído, definida de forma aleatória.
-3. A matriz é transformada em um objeto do tipo `magick-image`.
-4. A imagem é preenchida com o valor do rótulo, adicionando-se efeitos como rotação, linha unindo as letras e variação de cores.
-5. A imagem recebe outros tipos de distorções, como adição de ruído, alteração de cores e outros efeitos.
+1.  É criada uma matriz $N\times M \times R$, com valores entre zero e um gerados por simulações de uma $\mathcal U(0,1)$.
+2.  É adicionada uma cor base ao ruído, definida de forma aleatória.
+3.  A matriz é transformada em um objeto do tipo `magick-image`.
+4.  A imagem é preenchida com o valor do rótulo, adicionando-se efeitos como rotação, linha unindo as letras e variação de cores.
+5.  A imagem recebe outros tipos de distorções, como adição de ruído, alteração de cores e outros efeitos.
 
 No final, o gerador retorna a imagem, que é a única informação enviada ao agente. O rótulo fica escondido para verificação do oráculo.
 
-#### Oráculo
+#### Oráculo {#sec-oraculo}
 
-Para definir o oráculo, utilizou-se uma terminologia que é facilmente encaixada com a teoria de aprendizado fracamente supervisionado. Seja $g$ um modelo utilizado para predizer o valor de uma imagem e seja $\mathbf x_{n+1}$ uma nova imagem que é observada, com sua resposta $\mathbf y_{n+1}$, desconhecida. A operação $g(\mathbf x_{n+1}) = \hat {\mathbf y}_{n+1}$ retorna um candidato para $\mathbf y_{n+1}$, que pode estar correto ou errado.
+Para definir o oráculo, utilizou-se uma terminologia que é facilmente encaixada com a teoria de aprendizado fracamente supervisionado. Seja $g$ um classificador utilizado para predizer o rótulo de uma imagem e seja $\mathbf X_{n+1}$ uma nova imagem que é observada, com sua resposta $\mathbf Y_{n+1}$, desconhecida. A operação $g(\mathbf X_{n+1}) = \hat {\mathbf Y}_{n+1}$ retorna um candidato para $\mathbf Y_{n+1}$, que pode estar correto ou errado.
 
-O oráculo é uma função $\mathcal O: \mathcal Y \rightarrow 2^{\mathcal Y}$, ou seja, uma função que recebe um elemento do domínio da resposta $\mathcal Y$ (ou seja, do conjunto de todas as combinações de rótulos) para o conjunto de subconjuntos (as partes) de $\mathcal Y$. Ou seja, a função retorna uma lista de possíveis valores de ${\mathbf y}_{n+1}$. O oráculo funciona da seguinte forma:
+O oráculo é uma função $\mathcal O: \mathcal Y \rightarrow 2^{\mathcal Y}$, ou seja, uma função que recebe um elemento do domínio da resposta $\mathcal Y$ (ou seja, do conjunto de todas as combinações de rótulos) para o conjunto de subconjuntos (as partes) de $\mathcal Y$. Na prática, a função retorna uma lista de possíveis valores de ${\mathbf Y}_{n+1}$, da seguinte forma:
 
 $$
-\mathcal O(\hat {\mathbf y}_{n+1}) = \left\{\begin{array}{ll}
-    \{\mathbf y_{n+1}\}, & \text{ se } \mathbf y_{n+1} = \hat {\mathbf y}_{n+1}  \\
-    \mathcal Y \setminus \{\hat {\mathbf y}_{n+1}\}, & \text{ se } \mathbf y_{n+1} \neq \hat {\mathbf y}_{n+1}
+\mathcal O(\hat {\mathbf Y}_{n+1}) = \left\{\begin{array}{ll}
+    \{\mathbf Y_{n+1}\}, & \text{ se } \mathbf Y_{n+1} = \hat {\mathbf Y}_{n+1}  \\
+    \mathcal Y \setminus \{\hat {\mathbf Y}_{n+1}\}, & \text{ se } \mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1}
 \end{array}\right.
 $$
 
-Explicando a função: quando a função $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Quando a função $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos para $\mathbf x_{n+1}$, o que inclui o próprio $\mathbf y_{n+1}$. É importante notar que a lista retornada pelo oráculo sempre contém a resposta $\mathbf y_{n+1}$. 
+Explicando a função: quando o classificador $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Para simplificar, também é possível utilizar a notação de *rotulo complementar* $\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}$. Quando o classificador $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos do rótulo, o que inclui o verdadeiro valor $\mathbf Y_{n+1}$.
 
 A Figura @fig-esquema-oraculo mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.
 
@@ -159,7 +165,7 @@ O oráculo tem um papel fundamental na solução proposta. O fato do oráculo se
 
 #### Fatos estilizados
 
-Captchas costumam ter dimensões relativamente pequenas, com a altura $N$ variando entre 30 e 200 *pixels* e a largura $M$ variando entre 100 e 300 \textit{pixels}. As imagens costumam ser retangulares para comportar várias letras lado a lado, ou seja, geralmente $M > N$. O valor de $R$ é 1 para imagens em escala de cinza e 3 para imagens coloridas.
+Captchas costumam ter dimensões relativamente pequenas, com a altura $N$ variando entre 30 e 200 *pixels* e a largura $M$ variando entre 100 e 300 *pixels*. As imagens costumam ser retangulares para comportar várias letras lado a lado, ou seja, geralmente $M > N$. O valor de $R$ é 1 para imagens em escala de cinza e 3 para imagens coloridas.
 
 Historicamente, uma alternativa para resolver Captchas é separando o problema em duas tarefas: segmentar e classificar. A tarefa de segmentação consiste em receber uma imagem com várias letras e detectar pontos de corte, separando-a em várias imagens de uma letra. Já a classificação consiste em receber uma imagem com uma letra e identificar o caractere correspondente. Nesse caso, a resposta é reduzida para $|\mathcal A|$ categorias, que cresce linearmente e, portanto, tratável.
 
@@ -167,19 +173,17 @@ A tarefa de resolver Captchas também poderia ser vista como um problema de reco
 
 As distorções encontradas em Captchas podem ser agrupadas em distorções para dificultar a segmentação e distorções para dificultar a classificação. Na parte de classificação, as principais formas de dificultar o trabalho dos modelos são i) mudar as fontes (serifa ou sem serifa ou negrito/itálico, por exemplo), ii) mudar letras minúsculas para maiúsculas e iii) adicionar distorções nos caracteres. Já na parte de segmentação, as principais formas são i) colar os caracteres e ii) adicionar linhas ligando os dígitos. Essas técnicas são combinadas com a adição de ruído e distorção nas imagens completas para compor a imagem final.
 
-TODO
-
 ### Redes neurais
 
 A abordagem discutida ao longo da tese utiliza redes neurais convolucionais. Para explicar o funcionamento dessa técnica, apresenta-se as definições para redes neurais e para a operação de convolução no contexto de Captchas, construindo o modelo utilizado nas simulações do modelo proposto.
 
 <!-- Uma rede neural neste contexto pode ser entendida como uma extensão de modelos lineares generalizados com a alteração da arquitetura dos componentes do modelo. Para mostrar esse conceito, parte-se da definição de um modelo regressão logística até construir uma rede neural com camadas ocultas. -->
 
-A ideia abaixo é apresentar como funcionam as redes neurais no contexto de Captchas. O modelo apresentado é o que foi utilizado nas simulações, que é um modelo de redes neurais convolucionais simples, similar ao LeNet, com três camadas convolucionais e duas camadas densas (XXX). 
+A ideia abaixo é apresentar como funcionam as redes neurais no contexto de Captchas. O modelo apresentado é o que foi utilizado nas simulações, que é um modelo de redes neurais convolucionais simples, similar ao LeNet, com três camadas convolucionais e duas camadas densas [@lecun1998].
 
-A técnica proposta pela tese pode utilizar diversas arquiteturas de redes neurais. A escolha de uma arquitetura mais simples foi feita para demonstrar a eficácia do procedimento de forma mais contundente. Outras arquiteturas mais rebuscadas, como as apresentadas no referencial teórico (XXX) podem melhorar a aplicação do modelo. A única restrição é que ela possa receber uma função de perda modificada, como será mostrado a seguir.
+A técnica proposta pela tese pode utilizar diversas arquiteturas de redes neurais. A escolha de uma arquitetura mais simples foi feita para demonstrar a eficácia do procedimento de forma mais contundente. Outras arquiteturas mais rebuscadas, como as apresentadas no referencial teórico [@george2017; @ye2018] podem melhorar a aplicação do modelo. A única restrição é que ela possa receber uma função de perda modificada, como será mostrado a seguir.
 
-É possível organizar a estrutura de uma rede neural em três componentes: a __arquitetura da rede__, a __função de perda__ e o __otimizador__. Os componentes são detalhados nas próximas subseções.
+É possível organizar a estrutura de uma rede neural em três componentes: a **arquitetura da rede**, a **função de perda** e o **otimizador**. Os componentes são detalhados nas próximas subseções.
 
 Como uma rede neural possui muitos componentes e subcomponentes, é usual apresentar sua estrutura na forma de um diagrama. Redes neurais costumam ser fáceis de representar através de grafos, que podem ser utilizados de forma mais ou menos detalhada, dependento do interesse.
 
@@ -191,20 +195,19 @@ A Figura @fig-diagrama-modelo-cnn mostra, de forma esquemática, os componentes 
 knitr::include_graphics("assets/img/diagrama-modelo-cnn.png")
 ```
 
-
 #### Arquitetura da rede
 
-A arquitetura da rede é uma função que leva os dados de entrada na estrutura de dados da variável resposta. A arquitetura tem papel similar ao exercido pelo componente sistemático em um modelo linear generalizado (XXX). Trata-se da parte  mais complexa da rede neural, carregando todos os parâmetros que serão otimizados.
+A arquitetura da rede é uma função que leva os dados de entrada na estrutura de dados da variável resposta. A arquitetura tem papel similar ao exercido pelo componente sistemático em um modelo linear generalizado [@nelder1972]. Trata-se da parte mais complexa da rede neural, carregando todos os parâmetros que serão otimizados.
 
-A arquitetura da rede possui três componentes principais, separados em dois itens cada: 
+A arquitetura da rede possui três componentes principais, separados em dois itens cada:
 
-- as camadas ocultas: camadas __convolucionais__ e camadas __densas__;
-- as técnicas de regularização: __normalização em lote__ (*batch normalization*), __*dropout*__ e junção de pixels (*max pooling*);
-- as funções de ativação: função de ativação linear retificada (*rectified linear unit*, ReLU) e a função de normalização exponencial (*softmax*).
+-   as camadas ocultas: camadas **convolucionais** e camadas **densas**;
+-   as técnicas de regularização: **normalização em lote** (*batch normalization*), ***dropout*** e junção de pixels (*max pooling*);
+-   as funções de ativação: função de ativação linear retificada (*rectified linear unit*, ReLU) e a função de normalização exponencial (*softmax*).
 
 Abaixo, apresenta-se as definições seguindo-se a ordem de aplicação das operações na arquitetura da rede neural: camada convolucional, ReLU, *max pooling*, *batch normalization*, *dropout*, camada densa e *softmax*.
 
-A __convolução__ é uma operação linear que recebe como entrada uma matriz e retorna outra matriz. Ela é diferente de uma operação usual de multiplicação de matrizes vista no contexto de modelos lineares generalizados, por envolver uma operação nos elementos na vizinhança de cada pixel.
+A **convolução** é uma operação linear que recebe como entrada uma matriz e retorna outra matriz. Ela é diferente de uma operação usual de multiplicação de matrizes vista no contexto de modelos lineares generalizados, por envolver uma operação nos elementos na vizinhança de cada pixel.
 
 Uma forma organizada de fazer essa soma ponderada é criando uma matriz de pesos. Com ela, não é necessário procurar os pontos da vizinhança. Para cada ponto $(i,j)$, obtem-se a matriz de vizinhança, multiplica-se pontualmente pela matriz de pesos e soma-se os valores resultantes. A matriz de pesos é chamada de núcleo, ou *kernel*.
 
@@ -212,8 +215,7 @@ Considere
 
 $$
 K = \left[\begin{array}{rrr}-1&-1&-1\\0&0&0\\1&1&1\end{array}\right]
-$$
-e a imagem da Figura @fig-tjmg-exemplo-conv. Como visto anteriormente, trata-de de uma matriz de dimensão $40\times110\times3$.
+$$ e a imagem da Figura @fig-tjmg-exemplo-conv. Como visto anteriormente, trata-de de uma matriz de dimensão $40\times110\times3$.
 
 ```{r}
 #| label: tjmg-exemplo-conv
@@ -293,7 +295,6 @@ convolve(img, kern_vertical) |>
   magick::image_write("assets/img/tjmg_conv_vertical_bias.jpeg", format = "jpeg")
 ```
 
-
 ```{r}
 #| label: tjmg-exemplo-conv-horizontal
 #| fig.cap: Aplicação de uma convolução com kernel horizontal.
@@ -314,10 +315,9 @@ as partes destacadas são as laterais dos números, conforme Figura @fig-tjmg-ex
 knitr::include_graphics("assets/img/tjmg_conv_vertical.jpeg")
 ```
 
-
 O resultado da convolução pode ter números negativos ou maiores que um. Para que seja possível visualizar, as imagens mostradas acima foram normalizadas.
 
-Uma característica das imagens mostradas acima é que elas ficaram escuras, ou seja, com muitos valores próximos de zero. Uma técnica para modificar a imagem é adicionar uma constante numérica ao resultado da convolução. Esse é o chamado __viés__ (*bias*) da convolução.
+Uma característica das imagens mostradas acima é que elas ficaram escuras, ou seja, com muitos valores próximos de zero. Uma técnica para modificar a imagem é adicionar uma constante numérica ao resultado da convolução. Esse é o chamado **viés** (*bias*) da convolução.
 
 A Figura @fig-tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
 
@@ -327,7 +327,7 @@ A Figura @fig-tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um v
 knitr::include_graphics("assets/img/tjmg_conv_vertical_bias.jpeg")
 ```
 
-Uma __camada convolucional__ envolve a aplicação de convoluções com $d$ *kernels* em uma matriz, além da adição do *bias*. O resultado da aplicação de uma camada convolucional com preenchimento das bordas é uma matriz com as mesmas dimensões $N$ e $M$ da matriz de entrada, mas com $d$ entradas na dimensão das cores. Como o valor de $d$ pode ser diferente de 1 ou 3, não faz mais sentido tratar essa dimensão como cores, por isso essa dimensão é chamada de __canais__ da imagem resultante. 
+Uma **camada convolucional** envolve a aplicação de convoluções com $d$ *kernels* em uma matriz, além da adição do *bias*. O resultado da aplicação de uma camada convolucional com preenchimento das bordas é uma matriz com as mesmas dimensões $N$ e $M$ da matriz de entrada, mas com $d$ entradas na dimensão das cores. Como o valor de $d$ pode ser diferente de 1 ou 3, não faz mais sentido tratar essa dimensão como cores, por isso essa dimensão é chamada de **canais** da imagem resultante.
 
 É importante notar que, nos exemplos apresentados anteriormente, a convolução foi aplicada a apenas um dos canais da imagem: o primeiro. Quando a imagem de entrada possui vários canais, camada convolucional aplica cada *kernel* em cada canal da imagem e, depois, faz a soma dos valores resultantes.
 
@@ -385,21 +385,21 @@ softm
 
 ```
 
-
 ```{r}
 #| label: tjmg-exemplo-camada-conv
 #| fig.cap: "Resultado da aplicação da primeira convolução à imagem."
 knitr::include_graphics("assets/img/tjmg_conv1_modelo.jpeg")
 ```
-Antes da aplicação da camada convolucional, a operação de __*batch normalization*__ foi aplicada. Essa operação nada mas faz do que normalizar os números da matriz de entrada antes da aplicação da convolução, ou seja, retirar a média e dividir pelo desvio padrão.
+
+Antes da aplicação da camada convolucional, a operação de ***batch normalization*** foi aplicada. Essa operação nada mas faz do que normalizar os números da matriz de entrada antes da aplicação da convolução, ou seja, retirar a média e dividir pelo desvio padrão.
 
 $$
 x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
 $$
 
-O valor $\epsilon$, geralmente um valor pequeno, é adicionado para evitar problemas numéricos quando a variância é muito baixa. Os parâmetros $\gamma$ e $\beta$ podem ser adicionados no passo da normalização, fazendo parte do fluxo de aprendizagem do modelo. Apesar de não ser uma teoria fechada, alguns resultados (XXX, Sergey Ioffe, Christian Szegedy 2015) indicam que o uso de *batch normalization* reduz o tempo de aprendizado dos modelos. O passo foi adicionado nos modelos por apresentar bons resulados nas simulações.
+O valor $\epsilon$, geralmente um valor pequeno, é adicionado para evitar problemas numéricos quando a variância é muito baixa. Os parâmetros $\gamma$ e $\beta$ podem ser adicionados no passo da normalização, fazendo parte do fluxo de aprendizagem do modelo. Apesar de não ser uma teoria fechada, alguns resultados indicam que o uso de *batch normalization* reduz o tempo de aprendizado dos modelos [@ioffe2015]. O passo foi adicionado nos modelos por apresentar bons resulados nas simulações.
 
-Após a aplicação da convolução, também é aplicada a função não linear __ReLU__. A transformação ReLU é a mais simples das funções da ativação, sendo igual à função identidade quando a entrada é positiva e zero caso contrário:
+Após a aplicação da convolução, também é aplicada a função não linear **ReLU**. A transformação ReLU é a mais simples das funções da ativação, sendo igual à função identidade quando a entrada é positiva e zero caso contrário:
 
 $$
 \text{ReLU}(x) = x\mathbb I_{(x>0)}.
@@ -407,41 +407,41 @@ $$
 
 A função ReLU serve para tornar a arquitetura do modelo uma operação não linear. Qualquer operação não linear poderia ser utilizada, mas a mais simples e mais popular é a ReLU.
 
-Em seguida, aplica-se uma operação para reduzir a dimensão da imagem, chamada __*max pooling*__. Trata-se de uma operação que recebe a imagem e um *kernel*, retornando, para cada janela, o maior valor dos pixels. Usualmente, a técnica também utiliza *strides* fazendo com que cada pixel seja avaliado apenas uma vez. Por exemplo, para uma matriz com dimensões $M_{10\times10}$ e *kernel* com dimensões $2\times2$, o resultado é uma matriz $M^p_{5\times5}$ onde cada elemento é o valor máximo da janela correspondente ao pixel.
+Em seguida, aplica-se uma operação para reduzir a dimensão da imagem, chamada ***max pooling***. Trata-se de uma operação que recebe a imagem e um *kernel*, retornando, para cada janela, o maior valor dos pixels. Usualmente, a técnica também utiliza *strides* fazendo com que cada pixel seja avaliado apenas uma vez. Por exemplo, para uma matriz com dimensões $M_{10\times10}$ e *kernel* com dimensões $2\times2$, o resultado é uma matriz $M^p_{5\times5}$ onde cada elemento é o valor máximo da janela correspondente ao pixel.
 
 A operação *max pooling* é muito comum no contexto de redes neurais convolucionais. Sua aplicação é importante para que os *kernels* sejam aplicados em diferentes níveis da imagem de entrada.
 
 A aplicação das camadas convolucionais é repetida três vezes. Ou seja, as seguintes operações são aplicadas a partir da imagem original:
 
-1. *batch normalization*: 6 parâmetros
-1. camada convolucional: 896 parâmetros
-1. ReLU
-1. *max pooling*
-1. *batch normalization*: 64 parâmetros
-1. camada convolucional: 18.496 parâmetros
-1. ReLU
-1. *max pooling*
-1. *batch normalization*: 128 parâmetros
-1. camada convolucional: 36.928 parâmetros
-1. ReLU
-1. *max pooling*
-1. *batch normalization*: 128 parâmetros
+1.  *batch normalization*: 6 parâmetros
+2.  camada convolucional: 896 parâmetros
+3.  ReLU
+4.  *max pooling*
+5.  *batch normalization*: 64 parâmetros
+6.  camada convolucional: 18.496 parâmetros
+7.  ReLU
+8.  *max pooling*
+9.  *batch normalization*: 128 parâmetros
+10. camada convolucional: 36.928 parâmetros
+11. ReLU
+12. *max pooling*
+13. *batch normalization*: 128 parâmetros
 
 A dimensão da imagem de entrada, bem como quantidade de canais gerados por cada camada convolucional foram fixadas. Tais números podem ser considerados como hiperparâmetros do modelo, mas foram fixados para facilitar as simulações, que já contam com diversos hiperparâmetros.
 
 A imagem de entrada foi fixada na dimensão $32\times192$. O valor foi definido dessa forma porque um dos Captchas de referência, da Receita Federal do Brasil (RFB), possui 6 letras e $32*6=192$. Ou seja, é como se a imagem fosse a colagem lado a lado de 6 imagens $32\times32$.
 
-A quantidade de canais gerados pelas camadas convolucionais foram fixadas em 32, 64 e 64. A utilização de números crescentes de canais nas camadas convolucionais é comum (XXX), bem como a utilização de números que são potências de 2 (XXX). Nesse sentido, um possível valor para a terceira camada era de 128 canais, mas optou-se por 64 canais para que a quantidade de parâmetros não ficasse grande demais, já que isso exigiria mais tempo de computação e computadores mais poderosos.
+A quantidade de canais gerados pelas camadas convolucionais foram fixadas em 32, 64 e 64. A utilização de números crescentes de canais nas camadas convolucionais é comum [@lecun1998], bem como a utilização de números que são potências de 2 [@lecun2015]. Nesse sentido, um possível valor para a terceira camada era de 128 canais, mas optou-se por 64 canais para que a quantidade de parâmetros não ficasse grande demais, já que isso exigiria mais tempo de computação e computadores mais poderosos.
 
-O total de parâmetros que podem ser otimizados até o final das camadas convolucionais é 56.646. Esse número pode parecer grande no contexto de modelos estatísticos tradicionais como uma regressão linear, que teria, considerando cada pixel como uma covariável, 4.401 parâmetros ($40\times110$ e o intercepto). No entanto, é uma quantidade relativamente pequena no contexto de redes neurais. Redes neurais recentes aplicadas a imagens, como o DALL-E 2 possui 3,5 bilhões de parâmetros (XXX).
+O total de parâmetros que podem ser otimizados até o final das camadas convolucionais é 56.646. Esse número pode parecer grande no contexto de modelos estatísticos tradicionais como uma regressão linear, que teria, considerando cada pixel como uma covariável, 4.401 parâmetros ($40\times110$ e o intercepto). No entanto, é uma quantidade relativamente pequena no contexto de redes neurais. Redes neurais recentes aplicadas a imagens, como o DALL-E 2 possui 3,5 bilhões de parâmetros [@ramesh].
 
-Em seguida, o resultado é transformado para um formato retangular, similar ao que se encontra em modelos de regressão. Aqui, as dimensões da imagem não são mais importantes e os pixels de cada canal são tratados como variáveis preditoras. Esse passo pode ser interpretado da seguinte forma: as camadas convolucionais funcionam como um pré-processamento aplicado às imagens, como uma engenharia de variáveis (XXX) otimizada, já que os parâmetros são ajustados no modelo. 
+Em seguida, o resultado é transformado para um formato retangular, similar ao que se encontra em modelos de regressão. Aqui, as dimensões da imagem não são mais importantes e os pixels de cada canal são tratados como variáveis preditoras. Esse passo pode ser interpretado da seguinte forma: as camadas convolucionais funcionam como um pré-processamento aplicado às imagens, como uma engenharia de variáveis [@kuhn2019] otimizada, já que os parâmetros são ajustados no modelo.
 
 Uma vez obtidas as variáveis preditoras com o pré-processamento, é a hora de aplicar as camadas densas. Tais camadas são as mais comuns no contexto de redes neurais. Nesse caso, a operação linear aplicada é uma multiplicação de matrizes, similar ao que é feito em um modelo linear generalizado. Na verdade, o componente sistemático de um modelo linear generalizado é equivalente a uma camada densa com a aplicação de viés, com a função de ativação da fazendo o papel da função de ligação.
 
 Assim como existem os canais das camadas convolucionais, existem os filtros das camadas densas. A quantidade de filtros define a dimensão do vetor de saída. O número de parâmetros da camada densa é igual ao número de itens no vetor de entrada multiplicado pelo número de filtros, somado à quantidade de filtros novamente, por conta do *bias*. No caso do exemplo, a saída das camadas convolucionais tem dimensão $2\times22\times64$ , ou seja, 64 canais de imagens $2\times 22$. Com a transformação em vetor, a quantidade de colunas da base passa a ser a multiplicação das dimensões, ou 2.816. No modelo ajustado que foi utilizado como exemplo, aplicou-se 200 filtros na camada densa, totalizando 563.400 parâmetros. Nas simulações, a quantidade de filtros foi variada para produzir modelos com menor ou maior capacidade.
 
-É no contexto da grande quantidade de parâmetros que entra o conceito do *dropout* (XXX). Trata-se de uma regra de regularização muito simples de implementar, mas que possui grande impacto no ajuste dos modelos. A técnica consiste em selecionar uma amostra dos parâmetros em uma das camadas e apagá-los, forçando que os valores sejam fixados em zero. Na prática, essa técnica obriga o modelo a ser ajustado de forma que amostras aleatórias dos parâmetros sejam boas para predizer a variável resposta. Quando o modelo ajustado é usado para inferências, o *dropout* é desativado e o modelo pode utilizar todos os parâmetros, obtendo-se, na prática, uma média ponderada das predições de cada sub-modelo. Dessa forma, o dropout tem um efeito similar à aplicação da técnica de *bagging* (XXX), muito utilizada na área de árvores de decisão.
+É no contexto da grande quantidade de parâmetros que entra o conceito do *dropout* [@baldi2013]. Trata-se de uma regra de regularização muito simples de implementar, mas que possui grande impacto no ajuste dos modelos. A técnica consiste em selecionar uma amostra dos parâmetros em uma das camadas e apagá-los, forçando que os valores sejam fixados em zero. Na prática, essa técnica obriga o modelo a ser ajustado de forma que amostras aleatórias dos parâmetros sejam boas para predizer a variável resposta. Quando o modelo ajustado é usado para inferências, o *dropout* é desativado e o modelo pode utilizar todos os parâmetros, obtendo-se, na prática, uma média ponderada das predições de cada sub-modelo. Dessa forma, o dropout tem um efeito similar à aplicação da técnica de *bagging* [@galar2011], muito utilizada na área de árvores de decisão.
 
 O *dropout* é aplicado após a finalização das camadas convolucionais. Em seguida, vem a primeira camada densa, um ReLU e um *batch normalization*. Depois, é aplicada mais um *dropout* e mais uma camada densa. Com isso, a aplicação de operações é finalizada. O total de parâmetros na configuração do modelo apresentado foi de 630.496. Os modelos mais simples utilizados nas simulações, com 100 filtros na camada densa, têm 343.696. Os mais complexos, com 300 filtros na camada densa, têm 917.396 parâmetros.
 
@@ -469,14 +469,13 @@ $$
 
 Note que a matriz apresenta valores negativos e positivos. Na primeira linha, por exemplo, o valor positivo está na sexta coluna, correspondendo ao algarismo "5". De fato, esse é o valor do primeiro elemento do rótulo para esta imagem. Após a aplicação do softmax, a matriz de predições obtida é a matriz abaixo. Mesmo usando cinco casas decimais, na maioria dos casos, o modelo de exemplo aparenta ter confiança nas respostas.
 
-
 $$
-\hat{\mathbf y} = \left[\begin{array}{rrrrrrrrrr}
-  0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 1.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 \\ 
-  0.00000 & 0.00000 & 1.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 \\ 
-  0.00000 & 0.00000 & 0.00000 & 0.00000 & 1.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 \\ 
-  0.00000 & 0.00000 & 0.00000 & 0.99999 & 0.00000 & 0.00001 & 0.00000 & 0.00000 & 0.00000 & 0.00000 \\ 
-  0.00000 & 0.00000 & 0.99999 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 & 0.00000 \\
+\hat{\mathbf y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
+  0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 0.00 & 999.99 & 0.00 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  0.00 & 0.00 & 999.99 & 0.00 & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 & 0.00 \\
 \end{array}\right].
 $$
 
@@ -484,39 +483,91 @@ Vale notar que, dependendo da implementação, nem sempre é necessário aplicar
 
 #### Perda
 
-TODO
+A função de perda utilizada em um problema de classificação deve levar em conta as probabilidades (ou log-probabilidades) associadas aos rótulos. A perda deve ser pequena se a probabilidade associada ao rótulo correto for alta e a perda deve ser grande se a probabilidade associada ao rótulo correto for baixa.
 
-#### Otimizador
+Uma função de perda natural e popular nesse sentido é a de entropia cruzada, ou *cross-entropy*. Trata-se de uma perda com a formulação
 
-TODO
+$$
+\ell(g(x), y) = -\sum_{i=1}^c \mathbb I(y=i)\log(g_i(x)),
+$$
+
+em que $g_i(x)$ é a probabilidade dada ao rótulo $i$ pela função $g$. Se o rótulo $i$ é diferente do rótulo correto $y$, a função de perda vale zero por conta da função indicadora. Quando $i=y$, a perda é igual ao oposto do logaritmo da probabilidade associada ao rótulo $i$. Quanto menor a probabilidade, maior o valor da perda.
+
+Ao trabalhar com o oráculo, a entropia cruzada passa a não fazer sentido nos casos em que o modelo inicial erra. Por isso, a função de perda terá de ser adaptada no método WAWL.
+
+#### Otimizador {#sec-otimizador}
+
+O otimizador utilizado para os modelos ajustados na tese foi o ADAM [@kingma2014]. A sigla significa *Adaptive Moment Estimator* e funciona como uma extensão da descida de gradiente estocástica [@lecun2012], atualizando os parâmetros da seguinte forma:
+
+$$
+\begin{array}{cl}
+m_{\theta}^{(t+1)} &\leftarrow \beta_1m_{\theta}^{(t)} + (1-\beta_1)\nabla_\theta L^{(t)} \\
+v_{\theta}^{(t+1)} &\leftarrow \beta_2v_{\theta}^{(t)} + (1-\beta_2)(\nabla_\theta L^{(t)})^2 \\
+\hat{m}_{\theta} &= \frac{m_\theta^{(t+1)}}{1-\beta_1^t} \\
+\hat{v}_{\theta} &= \frac{v_\theta^{(t+1)}}{1-\beta_2^t} \\
+\theta^{(t+1)} &\leftarrow \theta^{(t)} - \eta \frac{\hat{m}_{\theta}}{\sqrt{\hat{v}_{\theta}} + \epsilon},
+\end{array}
+$$
+
+onde $m$ e $v$ são médias moveis para atualização dos parâmetros, ponderando a perda e a perda ao quadrado com o passo anterior usando pesos $\beta_1$ e $\beta_2$, respectivamente. Nessa notação $\eta$ é a taxa de aprendizado, um hiperparâmetro a ser ajustado. Por último, o valor de $\epsilon$ é uma constante, usualmente pequena, para evitar divisão por zero.
 
 ### Aprendizado estatístico
 
-Apresentados o objeto de estudo, as redes neurais utilizadas e a proposta da pesquisa, passa-se a discutir o significado disso tudo no contexto de aprendizado estatístico. Essa parte foi escrita para proporcionar a base teórica e a notação para apresentar as propriedades do modelo proposto na tese.
+Apresentados o objeto de estudo, as redes neurais utilizadas e a proposta da pesquisa, passa-se a discutir o significado disso tudo no contexto de aprendizado estatístico. Essa parte foi escrita para proporcionar a base teórica e a notação para apresentar as propriedades do modelo WAWL.
 
-#### Aprendizado supervisionado
+O aprendizado fracamente supervisionado pode ser dividido em três tipos principais. A supervisão com erros, a supervisão com rótulos incompletos e a supervisão de grupos de observações. O caso do Captcha pode ser entendido como uma sub-área do aprendizado fracamente supervisionado com rótulos incompletos chamada aprendizado com dados parcialmente rotulados (*partial label learning,* PLL*)*, já que uma parte da base pode ser anotada sem erros e uma parte da base é a resposta do oráculo indicando uma lista de rótulos possíveis incluindo o correto.
 
-TODO
+A área de PLL não é nova [@grandvalet2002] e aparece com outros nomes, como aprendizado com rótulos ambíguos [@hullermeier2006] e aprendizado de rótulos em superconjuntos (*superset-label learning)* [@liu2012]. Um caso particular de PLL, aplicável ao tema do Captcha são rótulos complementares [@ishida2017], que considera os chutes errados na notação do problema.
 
-As definições seguem a mesma terminologia de Cabannes (XXX). Nosso objetivo é obter uma função $f \in \mathcal{Y}^{\mathcal{X}}$ entre um espaço de entrada $\mathcal{X}$ e um espaço de saída $\mathcal{Y}$.
+As definições seguem uma terminologia adaptada a partir da leitura de @jin2002, @cour2011 e @feng2020. Sempre que possível, os casos são adaptados para o problema do Captcha diretamente. Quando necessário, apresenta-se primeiro a definição genérica e depois a formulação para o Captcha.
 
-Definimos também a função de distribuição conjunta $\rho \in \Delta_{\mathcal X \times \mathcal Y}$ sobre $\mathcal X \times \mathcal Y$. Essa função nem sempre é apresentada em outros contextos, mas será útil para estudar os modelos fracamente supervisionados.
+Em um problema de aprendizado supervisionado tradicional, tem-se um conjunto de casos rotulados $S=\{(\mathbf x_i,y_i), i=1,\dots, m\}$ com uma distribuição $p(\mathbf X,Y)$ desconhecida, onde $\mathbf X\in \mathcal X$ é uma imagem e $\mathbf Y$ é o rótulo, que possui $|A|^L$ possíveis valores. O objetivo é obter um classificador $g$ que leva um valor de $\mathbf x$ para o rótulo correto $\mathbf y$.
 
-Finalmente, definimos uma função de perda $\ell \in \mathbb R^{\mathcal Y \times \mathcal Y}$, que minimiza o risco
+Para delimitar se o resultado da aplicação do classificador está bom ou ruim, utiliza-se uma função de perda. No caso do Captcha, como o interesse é simplesmente acertar o rótulo inteiro (não importa se o classificador acerta só uma parte do rótulo), utiliza-se uma função chamada 0-1:
 
 $$
-\mathcal R(f;\rho) = \mathbb E_{(X,Y)\sim\rho}[\ell(f(X),Y)]
+\mathcal L(g(\mathbf x),\mathbf y) = \mathbb I (g(\mathbf x) \neq \mathbf y),
+$$ {#eq-perda}
+
+em que $\mathbb I(\cdot)$ é uma função indicadora. Como a função de perda é aplicada a apenas um par $(\mathbf x,y)$, define-se formalmente que o objetivo do problema de aprendizado é minimizar o *risco*, que é o valor esperado da função de perda:
+
+$$
+\mathcal R(g) = \mathbb E_{p(\mathbf X,Y)}[\mathcal L(g(\mathbf X),Y)].
+$$ {#eq-risco}
+
+A função de risco, no entanto, não é observada, já que depende da distribuição desconhecida de $p(\mathbf X,Y)$. Para lidar com esse problema, usualmente é utilizado um estimador do risco, calculado tanto em bases usadas na validação cruzada quanto na base de teste.
+
+$$
+\hat{\mathcal R}(g) = \sum_{i=1}^n \ell(g(\mathbf x),y))
 $$
 
-Ou seja, o risco é a o risco geral, definido como o valor esperado da função de perda sob $\rho$ para os valores possíveis de $X$ e $Y$.
+Na base de teste, utilizada para estimar o risco, a função de perda 0-1 é apropriada. Na etapa de validação cruzada de um modelo de aprendizado profundo, é útil considerar uma aproximação da função de perda que seja contínua e derivável, funcionando como uma versão suavizada da perda 0-1. A partir de um vetor de parâmetros $\boldsymbol \theta$ originados da arquitetura do modelo, uma escolha de função de perda é a entropia cruzada, como mostrado anteriormente. Os parâmetros são estimados a partir de um otimizador, como o ADAM, apresentado na @sec-otimizador-perda.
 
-#### Aprendizado fracamente supervisionado
+As definições começam a precisar de ajustes quando $y$ deixa de ser um rótulo fixado. Como descrito na @sec-oraculo, a base de dados observada contém tanto rótulos observados de forma exata quanto rótulos apenas parcialmente informados. Nesse caso, os dados são gerados por uma distribuição
 
-TODO
+$$
+p(\mathbf X,\mathbf Y,\bar{\mathbf Y})=p(\mathbf X, \mathbf Y)p(\bar{\mathbf Y}|\mathbf X,\mathbf Y),
+$$
 
-O aprendizado fracamente supervisionado pode ser dividido em três tipos principais. A supervisão com erros, a supervisão com rótulos incompletos e a supervisão de grupos de observações. O caso do Captcha pode ser entendido como aprendizado fracamente supervisionado com rótulos incompletos, já que uma parte da base pode ser anotada (supomos que sem erros) e uma parte da base é a resposta do oráculo indicando uma lista de rótulos possíveis que incluem o correto.
+em que $\bar{\mathbf Y}$ é um conjunto de rótulos *incorretos*. Nesse caso observam-se, além das instâncias $(\mathbf x_i,\mathbf y_i)$ quando o modelo inicial acerta, as instâncias $(\mathbf x_j, \bar{\mathbf {y}}_j)$ quando o modelo inicial erra. Supondo que $\bar{\mathbf Y}$ é condicionalmente independente de ${\mathbf Y}$ dado ${\mathbf X}$, temos que
 
-Formalmente, o aprendizado fracamente supervisionado é definido como uma generalização do aprendizado totalmente supervisionado, como mostrado em seguida.
+$$
+p(\mathbf X,\mathbf Y,\bar{\mathbf Y})=p(\mathbf X, \mathbf Y)p(\bar{\mathbf Y}|\mathbf Y).
+$$
+
+No caso dos Captchas, essa suposição é verificada. A probabilidade do modelo inicial errar depende apenas do rótulo e não das distorções realizadas pela imagem gerada a partir do rótulo. Além disso, a partir do modelo inicial, é possível estimar os valores de $p(\bar{\mathbf Y}|\mathbf Y)$ a partir da base de teste utilizada para medir a acurácia do modelo.
+
+Nos casos em que $|\hat{\mathbf Y}|=1$, as probabilidades $p(\bar{\mathbf Y}|\mathbf Y)$ podem ser organizadas em uma matriz de transição $\mathbf Q$, contendo as probabilidades de se obter um rótulo incorreto para cada possível valor do rótulo. Isso acontece nos Captchas em que não é possível realizar múltiplos chutes. Para resolver problemas desse tipo, é possível realizar um ajuste na função de predição que a torna a função de perda consistente e com taxa de convergência conhecida [@yu2018]:
+
+$$
+f_{\text{adj}} (\mathbf X) = \mathbf Q ^{\top}f(\mathbf X)
+$$
+
+O tipo de problema apresentado acima é conhecido como *biased complementary label*, ou seja, rótulo complementar com viés. Também é possível considerar um caso sem viés, ou seja, quando $p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}$ para todos os valores de $\mathbf Y$. Esse caso também foi resolvido do ponto de vista teórico[@ishida2017a]. As conclusões são parecidas, ou seja, é possível encontrar taxas de convergência para que o problema com rótulos complementares se aproxime de um problema com observações completas.
+
+Quando os rótulos complementares não apresentam viés, existe ainda uma extensão para rótulos complementares múltiplos [@feng2020a]. Neste caso, é possível derivar uma função de risco empírica que, novamente, converge para a função de risco do problema completamente supervisionado, além de apresentar taxas de convergência para essa função de risco.
+
+O caso do oráculo e dos Captchas é um problema com múltiplos rótulos complementares e com viés. Até o momento, não existe uma solução geral para este tipo de problema. No entanto, espera-se que as soluções para problemas desse tipo tenham taxas de convergência mais estreitas do que o caso de rótulos complementares, com ou sem viés, já que rótulos complementares múltiplos trazem mais informação do que rótulos complementares simples.
 
 ## Método WAWL
 
@@ -528,31 +579,37 @@ Existem duas formas principais de aplicar o método WAWL. A primeira criando nov
 
 A arquitetura do modelo WAWL pode ser a mesma de um modelo ajustado com uma base completamente anotada. O modelo pode, inclusive, aproveitar os parâmetros já ajustados em uma eventual versão inicial do modelo para acelerar o aprendizado. Nada impede, no entanto, que uma arquitetura diferente seja utilizada, desde que a entrada seja uma imagem e a saída seja uma matriz com as dimensões da variável resposta. O WAWL é agnóstico à arquitetura do modelo.
 
-Já a função de perda deve ser adaptada para considerar a informação limitada fornecida pelo oráculo. Quando o rótulo fornecido pelo modelo está correto, a informação é considerada normalmente, através da função de perda da regressão multinomial multivariada. Já quando o rótulo fornecido pelo modelo é incorreto, a função de perda é calculada com base na probabilidade do rótulo estar incorreto:
+A função de perda deve ser adaptada para considerar a informação limitada fornecida pelo oráculo. Quando o rótulo fornecido pelo modelo está correto, a informação é considerada normalmente, através da função de perda da regressão multinomial multivariada. Já quando o rótulo fornecido pelo modelo é incorreto, a função de perda é calculada com base na probabilidade do rótulo estar incorreto:
 
 $$
-1 - \mathbb P(\hat{\mathbf y}|\boldsymbol \theta)
+1 - p(\mathbf y|\boldsymbol \theta),
 $$
 
-Para ficar na mesma escala da função de perda dos casos corretos, calcula-se o logaritmo, obtendo a log-verossimilhança:
+Considerando o rótulo complementar $\bar y$ e a função $\hat f$ dada pela rede neural, a fórmula para descrever a função de perda é descrita da seguinte forma:
 
 $$
-l_i = -\log(1 - \mathbb P(\hat{\mathbf y}|\boldsymbol \theta))
+l(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y=\bar y)\right]
 $$
+
+A função de perda proposta pode ser explicada de maneira intuitiva através de um exemplo. Considere um problema com apenas $c$ possíveis valores para o rótulo (ou seja, uma resposta multinomial, sem ser multivariada). Considere também que a rede neural retorna uma alta probabilidade, por exemplo, $0.99$, para o valor $i$, que o oráculo identificou como incorreta. Nesse caso, a função de perda é dada por
+
+$$
+l(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+$$
+
+Como é possível ver no exemplo, quanto maior a probabilidade dada a um rótulo identificado como incorreto pelo oráculo, mais a função de perda penaliza essa predição. Dessa forma, a função de perda consegue incorporar completamente a informação dada pelo oráculo.
 
 Quando o Captcha aceita múltiplos chutes, a mesma conta é válida, bastando subtrair as probabilidades de todos os rótulos incorretos:
 
 $$
-l_i = -\log(1 - \mathbb P(\hat{\mathbf y}_1|\boldsymbol \theta)-\mathbb P(\hat{\mathbf y}_2|\boldsymbol \theta)-\dots-\mathbb P(\hat{\mathbf y}_k|\boldsymbol \theta))
+l(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y \in \bar {\mathbf y})\right]
 $$
 
 No final, o valor que é passado para a função de perda é a soma das perdas para todas as observações do *minibatch*. A soma considera tanto as perdas calculadas com base nos rótulos corretos quanto as perdas calculadas com base nos rótulos incorretos.
 
 O otimizador que obtém novas estimativas dos parâmetros também não precisa ser modificado. Basta aplicar a mesma técnica utilizada na modelagem usual, como descida de gradiente estocástica ou métodos adaptativos, como *RMSProp* ou *Adam*.
 
-Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow*, basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando a placa de vídeo do computador, que usualmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização de placa de vídeo, sendo uma melhoria sugerida para futuros trabalhos.
-
-<!-- ---------------------------------------------------------------------- -->
+Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow*, basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando o componente de computação gráfica, que potencialmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização desse componente, sendo uma melhoria sugerida para futuros trabalhos.
 
 ## Dados
 
@@ -560,34 +617,33 @@ Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para real
 
 No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/09/2022, para verificar se ainda estavam ativos. Além disso, foram construídas duas bases de dados de Captchas desenvolvidos internamente para fins de teste.
 
-Parte dos dados foram obtidos como um passo intermediário das simulações. A presente seção descreve como os robôs de coleta foram construídos, bem como a metodologia para obter rótulos via classificação manual. Na subseção de dados da seção de simulação, é possível acessar informações sobre os dados baixados para realizar as simulações. 
+Parte dos dados foram obtidos como um passo intermediário das simulações. A presente seção descreve como os robôs de coleta foram construídos, bem como a metodologia para obter rótulos via classificação manual. Na subseção de dados da seção de simulação, é possível acessar informações sobre os dados baixados para realizar as simulações.
 
 ### Escolha dos Captchas analisados
 
 Para selecionar os Captchas, foram adotados alguns critérios objetivos. Os critérios foram:
 
-1. O site acessado é de um serviço público (governo federal, tribunal, etc).
-2. O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com extensão jpeg ou png.
-3. O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma origem devem ter sempre o mesmo comprimento.
+1.  O site acessado é de um serviço público (governo federal, tribunal, etc).
+2.  O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com extensão jpeg ou png.
+3.  O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma origem devem ter sempre o mesmo comprimento.
 
 A primeira restrição para escolha dos Captchas é de ordem principiológica. Um serviço público não deveria restringir o acesso aos dados para robôs. Como já discutido anteriormente, nesses casos, a existência do Captcha não tem como finalidade dar maior segurança ao serviço prestado, mas sim limitar o acesso aos servidores por robôs.
 
 As restrições 2 e 3 foram escolhidas com o objetivo de facilitar as simulações para obtenção dos resultados. Em princípio, nada impede que os modelos desenvolvidos trabalhem com outros tipos de rótulos, desde que exista uma lista prévia de rótulos. Além disso, é possível realizar adaptações no pré-processamento base de dados para lidar com diferentes comprimentos de Captchas.
 
-A Tabela \@ref(tab:lista-captcha) mostra os Captchas trabalhados. Dos 10 exemplos trabalhados, 6 têm origem em tribunais, que são conhecidos por não disponibilizarem os dados de forma aberta.
+A Tabela @tbl-lista-captcha mostra os Captchas trabalhados. Dos 10 exemplos trabalhados, 6 têm origem em tribunais, que são conhecidos por não disponibilizarem os dados de forma aberta.
 
 ```{r lista-captcha}
+#| label: tbl-lista-captcha
+#| tbl-cap: Lista de captchas analisados.
 doutorado::da_captchas |> 
   dplyr::select(site, exemplo, descricao) |> 
-  knitr::kable(
-    caption = "Lista de captchas analisados.", 
-    col.names = c("Captcha", "Exemplo", "Origem")
-  )
+  knitr::kable(col.names = c("Captcha", "Exemplo", "Origem"))
 ```
 
 Além dos Captchas de sites, também foram consideradas imagens geradas artificialmente. O motivo de criar Captchas artificiais é a facilidade de rodar modelos e simulações, já que nos casos reais é necessário ter acesso à internet e também construir bases de dados de cada Captcha.
 
-Foram gerados dois tipos de Captchas artificiais. O primeiro, chamado __MNIST-Captcha__, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.
+Foram gerados dois tipos de Captchas artificiais. O primeiro, chamado **MNIST-Captcha**, é simplesmente uma adaptação da conhecida base MNIST para ficar no formato de um Captcha. A partir da escolha do comprimento e dos caracteres que fazem parte da imagem, o gerador simplesmente faz uma amostra aleatória da base do MNIST e compõe as imagens horizontalmente.
 
 A Figura @fig-captcha-mnist mostra um exemplo do Captcha gerado a partir da base MNIST. No exemplo, o comprimento escolhido para o Captcha foi de 4 valores.
 
@@ -604,17 +660,17 @@ knitr::include_graphics("assets/img/mnist128c49c36e13_6297.png")
 
 O problema do MNIST-Captcha é que a base de dados original é finita. Apesar de possuir por volta de 60 mil observações e de um Captcha crescer em ordem exponencial, o MNIST-Captcha pode gerar Captchas repetidos. Além disso, é necessário tomar cuidado com as bases de treino e teste, já que os elementos de teste não poderiam fazer parte de nenhuma observação de treino.
 
-Pelos motivos supracitados, também foi criado um Captcha gerado inteiramente por programação, chamado __R-Captcha__. O Captcha é gerado utilizando a ferramenta ImageMagick, com a possibilidade de customizar diversos parâmetros, como
+Pelos motivos supracitados, também foi criado um Captcha gerado inteiramente por programação, chamado **R-Captcha**. O Captcha é gerado utilizando a ferramenta ImageMagick, com a possibilidade de customizar diversos parâmetros, como
 
-- Quais caracteres usar na imagem
-- O comprimento do Captcha
-- Dimensões da imagem
-- Probabilidade de rotação da imagem
-- Probabilidade de adicionar um risco entre as letras
-- Probabilidade de adicionar uma borda nas letras
-- Probabilidade de adicionar uma caixa (retângulo) em torno das letras
-- Probabilidade de adicionar um ruído branco no fundo da imagem
-- Probabilidade de adicionar efeitos de tinta óleo e implosão
+-   Quais caracteres usar na imagem
+-   O comprimento do Captcha
+-   Dimensões da imagem
+-   Probabilidade de rotação da imagem
+-   Probabilidade de adicionar um risco entre as letras
+-   Probabilidade de adicionar uma borda nas letras
+-   Probabilidade de adicionar uma caixa (retângulo) em torno das letras
+-   Probabilidade de adicionar um ruído branco no fundo da imagem
+-   Probabilidade de adicionar efeitos de tinta óleo e implosão
 
 A Figura @fig-captcha-r mostra um exemplo de R-Captcha. O exemplo apresenta uma linha ligando as letras, comprimento 4, dígitos maiúsculos e minúsculos e distorções.
 
@@ -624,11 +680,12 @@ A Figura @fig-captcha-r mostra um exemplo de R-Captcha. O exemplo apresenta uma 
 #| fig.align: center
 knitr::include_graphics("assets/img/captcha128c4a9c32e4_boy4.png")
 ```
+
 Por ser uma versão mais flexível e completa, optou-se por trabalhar principalmente com o R-Captcha nas simulações. O MNIST-Captcha foi implementado mas não foi utilizado nas simulações.
 
 ### Construção dos dados
 
-Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem de dados (XXX). A raspagem de dados é uma área da ciência da computação responsável por criar rotinas que automatizam a coleta de dados provenientes da web. Trata-se de uma atividade muito comum em pesquisas aplicadas, especialmente as que envolvem análise de dados públicos que não estão disponíveis de forma aberta, como os dados do Judiciário.
+Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem de dados [@zhao2017a]. A raspagem de dados é uma área da ciência da computação responsável por criar rotinas que automatizam a coleta de dados provenientes da web. Trata-se de uma atividade muito comum em pesquisas aplicadas, especialmente as que envolvem análise de dados públicos que não estão disponíveis de forma aberta, como os dados do Judiciário.
 
 Dentro do ciclo da ciência de dados, pode-se considerar que a raspagem de dados está inserida nas tarefas de coleta e arrumação de dados. De certa forma, é possível comparar a raspagem com uma consulta a um banco de dados remoto, ou mesmo à obtenção de informações através de uma *Application Programming Interface* (API).
 
@@ -657,16 +714,15 @@ knitr::include_graphics("assets/img/raspagem-rfb-sonoro.png")
 
 A segunda tarefa é a de navegar pelo site, registrando as requisições realizadas pelo navegador para realizar a consulta. Isso envolve abrir o inspetor de elementos do navegador, na aba Rede (ou *Network*, em inglês), anotando as requisições que são realizadas.
 
-No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas requisições aparecem na aba "Rede", como mostrado na Figura @fig-raspagem-rfb-rede. A primeira requisição é do tipo POST[^post], responsável por enviar os dados de CNPJ e do rótulo da imagem para o servidor, que retorna com os dados da empresa.
+No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas requisições aparecem na aba "Rede", como mostrado na Figura @fig-raspagem-rfb-rede. A primeira requisição é do tipo POST[^2], responsável por enviar os dados de CNPJ e do rótulo da imagem para o servidor, que retorna com os dados da empresa.
 
-[^post]: Existem dois tipos principais de requisição HTTP. A requisição GET serve para capturar uma página da internet, enquanto a requisição POST serve para enviar dados para o servidor como, um login e uma senha. A lista completa de requisições está disponível na [documentação da *Internet Engineering Task Force* (IETF)](https://www.rfc-editor.org/rfc/rfc9110.html "https://www.rfc-editor.org/rfc/rfc9110.html").
+[^2]: Existem dois tipos principais de requisição HTTP. A requisição GET serve para capturar uma página da internet, enquanto a requisição POST serve para enviar dados para o servidor como, um login e uma senha. A lista completa de requisições está disponível na [documentação da *Internet Engineering Task Force* (IETF)](https://www.rfc-editor.org/rfc/rfc9110.html "https://www.rfc-editor.org/rfc/rfc9110.html").
 
 ```{r}
 #| label: raspagem-rfb-rede
 #| fig.cap: Resultado da busca por CNPJ, mostrando a aba Rede.
 knitr::include_graphics("assets/img/raspagem-rfb-rede.png")
 ```
-
 
 Investigando a requisição POST, na sub-aba "Requisição", é possível observar os dados da consulta. Trata-se de um conjunto de parâmetros enviados na forma de lista, com as informações abaixo. Para replicar a requisição na linguagem de programação, estes são os dados enviados.
 
@@ -676,7 +732,6 @@ Investigando a requisição POST, na sub-aba "Requisição", é possível observ
         "txtTexto_captcha_serpro_gov_br": "7hkhze",
         "search_type": "cnpj"
     }
-
 
 As etapas de replicar, parsear e validar envolvem baixar e processar os dados na linguagem de programação. No caso do Captcha da RFB, essa tarefa envolve os passos abaixo.
 
@@ -688,7 +743,7 @@ As etapas de replicar, parsear e validar envolvem baixar e processar os dados na
 
 Todos os passos descritos acima devem ser realizados em uma sessão persistente. Isso significa que a biblioteca utilizada para realizar as requisições deve ser capaz de guardar os *cookies* entre a requisição GET do primeiro passo e a requisição POST do quarto passo, de forma que as requisições sejam interligadas.
 
-O quinto passo da lista acima descreve a parte de *parsear,* que é a responsável pelo nome "raspagem" nessa área do conhecimento. O nome é adequado porque usualmente os arquivos baixados estão em um formato bruto, inadequado para realização de análises. Os dados precisam ser então extraídos -- raspados -- do arquivo HTML, através de ferramentas de transformação de arquivos como a *libxml2* (XXX), técnicas para acessar pedaços do documento, como o XPath (XXX) e técnicas de manipulação de textos, como expressões regulares (XXX).
+O quinto passo da lista acima descreve a parte de *parsear,* que é a responsável pelo nome "raspagem" nessa área do conhecimento. O nome é adequado porque usualmente os arquivos baixados estão em um formato bruto, inadequado para realização de análises. Os dados precisam ser então extraídos -- raspados -- do arquivo HTML, através de ferramentas de transformação de arquivos como a *libxml2* [@xml2], técnicas para acessar pedaços do documento, como o XPath [@rvest] e técnicas de manipulação de textos, como expressões regulares [@stringr].
 
 A iteração encerra o fluxo da raspagem de dados. Nessa etapa, as operações de replicar, parsear e validar o resultado são reaplicadas iterativamente, com o fim de baixar dados para compor uma base maior. No exemplo da RFB, isso significaria montar uma base de dados a partir de uma lista de CNPJs.
 
@@ -711,11 +766,11 @@ O problema do uso de oráculos é que a informação adicional recebida quando o
 
 Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros.
 
-Outra oportunidade que o oráculo oferece em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa característica permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na Tabela \@ref(tab:lista-captcha), dos 10 Captchas trabalhados, 7 permitem a realização desses testes.
+Outra oportunidade que o oráculo oferece em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa característica permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na @tbl-lista-captcha, dos 10 Captchas trabalhados, 7 permitem a realização desses testes.
 
 Neste momento, cabe uma observação sobre oráculos e força bruta. O poder de testar vários rótulos para o mesmo Captcha implica na possibilidade teórica de resolver um Captcha por força bruta. Bastaria testar todos os rótulos possíveis para acessar a página de interesse. Na prática, no entanto, essa estratégia não funciona, já que a quantidade de rótulos possíveis é muito grande para testar no site, seja por demorar muito tempo ou pelo site forçar a troca do desafio após a passagem de determinado tempo ou quantidade de tentativas.
 
-Voltando ao ciclo da raspagem, ao longo do procedimento de baixar imagens de Captchas e aplicar o oráculo, pelo menos duas funções devem ser criadas: __acesso__ e __teste__. A operação de acesso é responsável por preencher o formulário de busca e baixar o Captcha (passos 1 a 3 da lista acima). A operação de teste é responsável por submeter um rótulo do Captcha e verificar retornar se o rótulo está correto ou  incorreto (passos 4 a 6 da lista acima). Em alguns casos, as funções de acesso e teste precisam compartilhar parâmetros que contêm a sessão do usuário, para garantir que o teste envolva o mesmo Captcha da etapa de acesso.
+Voltando ao ciclo da raspagem, ao longo do procedimento de baixar imagens de Captchas e aplicar o oráculo, pelo menos duas funções devem ser criadas: **acesso** e **teste**. A operação de acesso é responsável por preencher o formulário de busca e baixar o Captcha (passos 1 a 3 da lista acima). A operação de teste é responsável por submeter um rótulo do Captcha e verificar retornar se o rótulo está correto ou incorreto (passos 4 a 6 da lista acima). Em alguns casos, as funções de acesso e teste precisam compartilhar parâmetros que contêm a sessão do usuário, para garantir que o teste envolva o mesmo Captcha da etapa de acesso.
 
 Os Captchas foram anotados manualmente com o procedimento chamado de semi-automático, definido a seguir. No pacote `{captchaDownload}`, foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas.
 
@@ -731,13 +786,14 @@ O único problema do procedimento de classificação diz respeito aos Captchas q
 
 Em alguns casos, os rótulos dos Captchas podem ser obtidos sem intervenção humana, utilizando técnicas de raspagem de dados e processamento de sinais. Um exemplo é o Captcha do SEI, que mostra informações suficientes para resolver o Captcha na própria URL que gera a imagem. Outro exemplo é o TJMG, que libera, além da imagem, um áudio contendo o mesmo rótulo da imagem, sem a adição de ruídos. Como o áudio não tem ruídos, basta ler o áudio, separar os áudios de cada caractere e calcular uma estatística simples (como a soma das amplitudes, ao quadrado). Essa estatística é utilizada para associar um pedaço de áudio a um caractere.
 
-A Tabela \@ref(tab:lista-captcha-carac) caracteriza os Captchas anotados. Todos os Captchas possuem comprimento entre 4 e 6 dígitos e, com exceção do SEI, não são sensíveis a maiúsculas e minúsculas. 
+A @tbl-lista-captcha-carac caracteriza os Captchas anotados. Todos os Captchas possuem comprimento entre 4 e 6 dígitos e, com exceção do SEI, não são sensíveis a maiúsculas e minúsculas.
 
 ```{r}
+#| label: tbl-lista-captcha-carac
+#| tbl-cap: "Lista de captchas analisados e suas características."
 doutorado::da_captchas |> 
   dplyr::select(site, chutes, caracteres, comprimento, colorido, n_total) |> 
   knitr::kable(
-    caption = "Lista de captchas analisados.", 
     col.names = c("Site", "Aceita vários chutes", "Caracteres",
                   "Comprimento", "Colorido", "# rótulos anotados")
   )
@@ -781,11 +837,11 @@ A terceira e última decisão tomada para baixar os dados foi a quantidade de ch
 
 Portanto, o procedimento de coleta dos dados foi feito, para cada Captcha, da seguinte forma:
 
-1. Listou-se todos os melhores modelos ajustados para cada tamanho de amostra.
-2. Filtrou-se os modelos para os que apresentavam acurácia de 5% até 50%
-3. Definiu-se o tamanho da base a ser obtida, com base no tamanho da base de treino utilizada no modelo e a quantidade total que se objetivou obter.
-4. Para cada quantidade de tentativas disponível (1, 5 e 10), baixou-se as imagens, anotando com o valor "1" se o rótulo de alguma das tentativas estivesse correto e com o valor "0" caso contrário.
-5. Nos casos com erros, armazenou-se um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final.
+1.  Listou-se todos os melhores modelos ajustados para cada tamanho de amostra.
+2.  Filtrou-se os modelos para os que apresentavam acurácia de 5% até 50%
+3.  Definiu-se o tamanho da base a ser obtida, com base no tamanho da base de treino utilizada no modelo e a quantidade total que se objetivou obter.
+4.  Para cada quantidade de tentativas disponível (1, 5 e 10), baixou-se as imagens, anotando com o valor "1" se o rótulo de alguma das tentativas estivesse correto e com o valor "0" caso contrário.
+5.  Nos casos com erros, armazenou-se um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final.
 
 No final, obteve-se bases de dados de treino para todos os Captchas analisados, com quantidades de imagens variadas de acordo com os parâmetros definidos anteriormente, variando também pela quantidade de tentativas. A quantidade total de bases de dados geradas foi 65.
 
@@ -797,7 +853,7 @@ Como o único objetivo da base de teste foi o de estimar a acurácia dos modelos
 
 O modelo final foi ajustado para cada uma das 65 bases de treino disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se o modelo proposto, que considera os erros na verossimilhança do modelo. Caso a imagem tenha sido corretamente classificada, a função de perda é calculada normalmente. Caso ela tenha sido classificada incorretamente, consideramos na verossimilhança a probabilidade de não observar nenhum dos chutes.
 
-__Exemplo__. Considere um Captcha com letras e números como vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo (correto) "zab2". O classificador do passo inicial tentou as seguintes configurações: "zab5", "sab2", "sab5", "zob2", "zob5", todas erradas. A probabilidade considerada na verossimilhança para essa imagem é, portanto:
+**Exemplo**. Considere um Captcha com letras e números como vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo (correto) "zab2". O classificador do passo inicial tentou as seguintes configurações: "zab5", "sab2", "sab5", "zob2", "zob5", todas erradas. A probabilidade considerada na verossimilhança para essa imagem é, portanto:
 
 $$
 P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{zob5})
