@@ -24,7 +24,7 @@
 % Aqui também definimos a língua padrão do documento
 % (a última da lista) e línguas adicionais.
 %\documentclass[12pt,twoside,brazilian,english]{book}
-\documentclass[12pt,twoside,english,brazilian]{book}
+\documentclass[12pt,twoside,brazilian]{book}
 
 % Ao invés de definir o tamanho das margens, vamos definir os tamanhos do
 % texto, do cabeçalho e do rodapé, e deixamos a package geometry calcular
@@ -95,6 +95,7 @@ $endif$
 ]{biblatex}
 
 \usepackage{bookmark}
+\usepackage{hhline}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -125,22 +126,22 @@ $endif$
 % armazenados nos metadados do PDF.
 \title{
     % Obrigatório nas duas línguas
-    titlept={Título do trabalho},
-    titleen={Title of the document},
+    titlept={Resolvendo Captchas},
+    titleen={Solving Captchas},
     % Opcional, mas se houver deve existir nas duas línguas
-    subtitlept={um subtítulo},
-    subtitleen={a subtitle},
+    subtitlept={usando aprendizado parcialmente supervisionado},
+    subtitleen={using partial supervised learning},
 }
 
-\author{Nome Completo}
+\author{Julio Adolfo Zucon Trecenti}
 
 % Para TCCs, este comando define o supervisor
-\orientador[fem]{Profª. Drª. Fulana de Tal}
+\orientador{Prof. Dr. Victor Fossaluza}
 
 % Se não houver, remova; se houver mais de um, basta
 % repetir o comando quantas vezes forem necessárias
-\coorientador{Prof. Dr. Ciclano de Tal}
-\coorientador[fem]{Profª. Drª. Beltrana de Tal}
+% \coorientador{Prof. Dr. Ciclano de Tal}
+% \coorientador[fem]{Profª. Drª. Beltrana de Tal}
 
 % A página de rosto da versão para depósito (ou seja, a versão final
 % antes da defesa) deve ser diferente da página de rosto da versão
@@ -152,12 +153,13 @@ $endif$
   %definitiva,
   % É qualificação?
   %quali,
-  programa={Ciência da Computação},
-  membrobanca={Profª. Drª. Fulana de Tal (orientadora) -- IME-USP [sem ponto final]},
+  programa={Estatística},
+  membrobanca={Prof. Dr. Victor Fossaluza (orientadora) -- IME-USP [sem ponto final]},
   % Em inglês, não há o "ª"
   %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
-  membrobanca={Prof. Dr. Ciclano de Tal -- IME-USP [sem ponto final]},
-  membrobanca={Profª. Drª. Convidada de Tal -- IMPA [sem ponto final]},
+  membrobanca={Prof. Dr. Rafael Izbicki -- UFSCar [sem ponto final]},
+  membrobanca={Prof. Dr. Rafael Stern -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Renato Vicente -- IME-USP [sem ponto final]},
   % Se não houve bolsa, remova
   %
   % Norma sobre agradecimento por auxílios da FAPESP:
@@ -181,10 +183,10 @@ $endif$
   %apoio={During the development if this work, the author received\\
   %       financial support from FAPESP -- grant \#aaaa/nnnnn-d},
   %
-  apoio={Durante o desenvolvimento deste trabalho o autor
-         recebeu auxílio financeiro da XXXX},
-  local={São Paulo},
-  data=2017-08-10, % YYYY-MM-DD
+  % apoio={Durante o desenvolvimento deste trabalho o autor
+  %        recebeu auxílio financeiro da XXXX},
+  % local={São Paulo},
+  % data=2017-08-10, % YYYY-MM-DD
   % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
   % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
   % correspondente (o sistema insere automaticamente o texto da licença).
@@ -234,6 +236,9 @@ $endif$
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+
+\setkeys{Gin}{width=0.8\textwidth,height=0.8\textheight,keepaspectratio}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% AQUI COMEÇA O CONTEÚDO DE FATO %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -258,8 +263,7 @@ $endif$
 %%%%%%%%%%%%%%%% DEDICATÓRIA, AGRADECIMENTOS, RESUMO/ABSTRACT %%%%%%%%%%%%%%%%%%
 
 \begin{dedicatoria}
-Esta seção é opcional e fica numa página separada; ela pode ser usada para
-uma dedicatória ou epígrafe.
+Aos meus pais,
 \end{dedicatoria}
 
 % Reinicia o contador de páginas (a próxima página recebe o número "i") para
@@ -272,12 +276,9 @@ uma dedicatória ou epígrafe.
 % epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
 % não ser incluída no sumário.
 \chapter*{Agradecimentos}
-\epigrafe{Do. Or do not. There is no try.}{Mestre Yoda}
+\epigrafe{Gratitude is not just a feeling, but a choice. We can choose to focus on the things we are grateful for, even in the midst of difficult circumstances. When we do this, we can experience a sense of peace and contentment that can help us to weather any storm.}{ChatGPT}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto. Texto opcional.
+Agradecer a todo mundo.
 
 % \input{conteudo/resumoabstract}
 
@@ -316,12 +317,6 @@ texto texto texto texto. Texto opcional.
 \disablenewpage{\chapter*{Lista de abreviaturas}}
 
 \begin{tabular}{rl}
-   CFT & Transformada contínua de Fourier (\emph{Continuous Fourier Transform})\\
-   DFT & Transformada discreta de Fourier (\emph{Discrete Fourier Transform})\\
-  EIIP & Potencial de interação elétron-íon (\emph{Electron-Ion Interaction Potentials})\\
-  STFT & Transformada de Fourier de tempo reduzido (\emph{Short-Time Fourier Transform})\\
-  ABNT & Associação Brasileira de Normas Técnicas\\
-   URL & Localizador Uniforme de Recursos (\emph{Uniform Resource Locator})\\
    IME & Instituto de Matemática e Estatística\\
    USP & Universidade de São Paulo
 \end{tabular}
@@ -424,33 +419,33 @@ $body$
 \if@openright\cleardoublepage\else\clearpage\fi
 \makeatother
 
-\pagestyle{appendix}
+% \pagestyle{appendix}
 
-\appendix
+% \appendix
 
 % \addappheadtotoc acrescenta a palavra "Apêndice" ao sumário; se
 % só há apêndices, sem anexos, provavelmente não é necessário.
-\addappheadtotoc
+% \addappheadtotoc
 
 % \input{conteudo/apendice-exemplo-pseudocodigo}
-\par
+% \par
 
 %%%% Anexos %%%%
 
-\makeatletter
-\if@openright\cleardoublepage\else\clearpage\fi
-\makeatother
+% \makeatletter
+% \if@openright\cleardoublepage\else\clearpage\fi
+% \makeatother
 
-\pagestyle{appendix} % repete o anterior, caso você não use apêndices
+% \pagestyle{appendix} % repete o anterior, caso você não use apêndices
 
-\annex
+% \annex
 
 % \addappheadtotoc acrescenta a palavra "Anexo" ao sumário; se
 % só há anexos, sem apêndices, provavelmente não é necessário.
-\addappheadtotoc
+% \addappheadtotoc
 
 % \input{conteudo/anexo-exemplo-faq}
-\par
+% \par
 
 
 %%%%%%%%%%%%%%% SEÇÕES FINAIS (BIBLIOGRAFIA E ÍNDICE REMISSIVO) %%%%%%%%%%%%%%%%

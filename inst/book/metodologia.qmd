@@ -74,6 +74,7 @@ A @fig-exemplo-tjmg mostra um exemplo Captcha do Tribunal de Justiça de Minas G
 #| label: fig-exemplo-tjmg 
 #| fig-cap: "Exemplo de Captcha no TJMG."
 #| fig-align: center
+#| out-width: 110px
 knitr::include_graphics("assets/img/tjmg16283c1e6d06.jpeg")
 ```
 
@@ -114,6 +115,7 @@ Um exemplo de gerador é a função criada no pacote `{captcha}`. A função foi
 ```{r}
 #| label: fig-captcha-r-exemplo
 #| fig-cap: Exemplo de captcha gerado pela função `captcha::captcha_generate()`
+#| out-width: 110px
 set.seed(5)
 par(mar = c(0,0,0,0))
 plot(captcha::captcha_generate()$image)
@@ -224,6 +226,7 @@ e a imagem da @fig-tjmg-exemplo-conv. Como visto anteriormente, trata-de de uma 
 ```{r}
 #| label: fig-tjmg-exemplo-conv
 #| fig-cap: "Imagem de Captcha utilizado em exemplos anteriores."
+#| out-width: 110px
 knitr::include_graphics("assets/img/tjmg16283c1e6d06.jpeg")
 ```
 
@@ -232,12 +235,10 @@ Tome por exemplo a primeira dimensão do pixel $(i,j,k) = (12,16,1)$. A vizinhan
 ```{r}
 #| label: fig-tjmg-exemplo-conv-pixel
 #| eval: false
-
 "assets/img/tjmg16283c1e6d06.jpeg" |> 
   jpeg::readJPEG() |> 
   magrittr::extract(12 + seq(-1, 1), 16 + seq(-1, 1), 1) |> 
   round(3)
-
 ```
 
 $$
@@ -302,6 +303,7 @@ convolve(img, kern_vertical) |>
 ```{r}
 #| label: fig-tjmg-exemplo-conv-horizontal
 #| fig-cap: Aplicação de uma convolução com kernel horizontal.
+#| out-width: 110px
 knitr::include_graphics("assets/img/tjmg_conv_horizontal.jpeg")
 ```
 
@@ -315,7 +317,8 @@ as partes destacadas são as laterais dos números, conforme @fig-tjmg-exemplo-c
 
 ```{r}
 #| label: fig-tjmg-exemplo-conv-vertical
-#| fig-cap: Aplicação de uma convolução com kernel horizontal. 
+#| fig-cap: Aplicação de uma convolução com kernel horizontal.
+#| out-width: 110px
 knitr::include_graphics("assets/img/tjmg_conv_vertical.jpeg")
 ```
 
@@ -328,6 +331,7 @@ A @fig-tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um viés de
 ```{r}
 #| label: fig-tjmg-exemplo-conv-vertical-bias
 #| fig-cap: Aplicação de uma convolução com kernel horizontal. 
+#| out-width: 110px
 knitr::include_graphics("assets/img/tjmg_conv_vertical_bias.jpeg")
 ```
 
@@ -635,14 +639,43 @@ A primeira restrição para escolha dos Captchas é de ordem principiológica. U
 
 As restrições 2 e 3 foram escolhidas com o objetivo de facilitar as simulações para obtenção dos resultados. Em princípio, nada impede que os modelos desenvolvidos trabalhem com outros tipos de rótulos, desde que exista uma lista prévia de rótulos. Além disso, é possível realizar adaptações no pré-processamento base de dados para lidar com diferentes comprimentos de Captchas.
 
-A Tabela @tbl-lista-captcha mostra os Captchas trabalhados. Dos 10 exemplos trabalhados, 6 têm origem em tribunais, que são conhecidos por não disponibilizarem os dados de forma aberta.
+A @tbl-lista-captcha mostra os Captchas trabalhados. Dos 10 exemplos trabalhados, 6 têm origem em tribunais, que são conhecidos por não disponibilizarem os dados de forma aberta.
 
 ```{r lista-captcha}
 #| label: tbl-lista-captcha
 #| tbl-cap: Lista de captchas analisados.
-doutorado::da_captchas |> 
-  dplyr::select(site, exemplo, descricao) |> 
-  knitr::kable(col.names = c("Captcha", "Exemplo", "Origem"))
+
+da_tab <- doutorado::da_captchas |> 
+  dplyr::mutate(
+    link = stringr::str_extract(site, "(?<=\\()[^)]+"),
+    nm = stringr::str_extract(site, "(?<=\\[)[^\\]]+"),
+    img_file = stringr::str_extract(exemplo, "(?<=\\()[^)]+")
+  ) |> 
+  dplyr::select(nm, exemplo, descricao, link, img_file)
+
+da_tab |> 
+  flextable::flextable(
+    col_keys = c("nm", "exemplo", "descricao")
+  ) |> 
+  flextable::set_header_labels(
+    nm = "Captcha", exemplo = "Exemplo", descricao = "Descrição"
+  ) |> 
+  flextable::mk_par(
+    j = 1,
+    value = flextable::as_paragraph(
+      flextable::hyperlink_text(x = nm, url = link)
+    )
+  ) |> 
+  flextable::mk_par(
+    j = 2,
+    value = flextable::as_paragraph(
+      flextable::as_image(src = img_file, width = .9, height = .45)
+    )
+  ) |> 
+  flextable::width(3, j = 3) |> 
+  flextable::width(1.5, j = 2) |> 
+  flextable::theme_apa()
+
 ```
 
 Além dos Captchas de sites, também foram consideradas imagens geradas artificialmente. O motivo de criar Captchas artificiais é a facilidade de rodar modelos e simulações, já que nos casos reais é necessário ter acesso à internet e também construir bases de dados de cada Captcha.
@@ -655,6 +688,7 @@ A @fig-captcha-mnist mostra um exemplo do Captcha gerado a partir da base MNIST.
 #| label: fig-captcha-mnist
 #| fig-cap: Exemplo de MNIST-Captcha
 #| fig-align: center
+#| out-width: 150px
 
 # path_mnist <- "../../../captchaDownload/data-raw/mnist/img_individual"
 # x <- captchaDownload:::captcha_generate_mnist("assets/img/", path_mnist)
@@ -682,6 +716,7 @@ A @fig-captcha-r mostra um exemplo de R-Captcha. O exemplo apresenta uma linha l
 #| label: fig-captcha-r
 #| fig-cap: Exemplo de MNIST-Captcha
 #| fig-align: center
+#| out-width: 150px
 knitr::include_graphics("assets/img/captcha128c4a9c32e4_boy4.png")
 ```
 
@@ -795,12 +830,38 @@ A @tbl-lista-captcha-carac caracteriza os Captchas anotados. Todos os Captchas p
 ```{r}
 #| label: tbl-lista-captcha-carac
 #| tbl-cap: "Lista de captchas analisados e suas características."
-doutorado::da_captchas |> 
-  dplyr::select(site, chutes, caracteres, comprimento, colorido, n_total) |> 
-  knitr::kable(
-    col.names = c("Site", "Aceita vários chutes", "Caracteres",
-                  "Comprimento", "Colorido", "# rótulos anotados")
-  )
+
+da_tab <- doutorado::da_captchas |> 
+  dplyr::mutate(
+    link = stringr::str_extract(site, "(?<=\\()[^)]+"),
+    nm = stringr::str_extract(site, "(?<=\\[)[^\\]]+")
+  ) |> 
+  dplyr::select(nm, chutes, caracteres, comprimento, colorido, n_total, link)
+
+da_tab |> 
+  flextable::flextable(col_keys = c(
+    "nm", "chutes", "caracteres", "comprimento",
+    "colorido", "n_total"
+  )) |> 
+  flextable::set_header_labels(
+    nm = "Captcha", 
+    chutes = "Aceita vários chutes",
+    caracteres = "Caracteres",
+    comprimento = "Comprimento",
+    colorido = "Colorido",
+    n_total = "# Rótulos anotados"
+  ) |> 
+  flextable::mk_par(
+    j = 1,
+    value = flextable::as_paragraph(
+      flextable::hyperlink_text(x = nm, url = link)
+    )
+  ) |> 
+  flextable::width(1.5, j = 2) |> 
+  flextable::width(1.5, j = 6) |> 
+  flextable::width(1.2, j = 3) |> 
+  flextable::theme_apa()
+
 ```
 
 As bases de dados com imagens anotadas foram disponibilizadas na aba de lançamentos (*releases*) do [repositório principal do projeto de pesquisa](https://github.com/jtrecenti/doutorado/releases). As bases com imagens e modelos ajustados estão disponíveis para quem tiver interesse em fazer novas pesquisas e utilizar os resultados em suas aplicações, sem restrições de uso.

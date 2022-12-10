@@ -24,7 +24,7 @@
 % Aqui também definimos a língua padrão do documento
 % (a última da lista) e línguas adicionais.
 %\documentclass[12pt,twoside,brazilian,english]{book}
-\documentclass[12pt,twoside,english,brazilian]{book}
+\documentclass[12pt,twoside,brazilian]{book}
 
 % Ao invés de definir o tamanho das margens, vamos definir os tamanhos do
 % texto, do cabeçalho e do rodapé, e deixamos a package geometry calcular
@@ -92,6 +92,7 @@
 ]{biblatex}
 
 \usepackage{bookmark}
+\usepackage{hhline}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -122,22 +123,22 @@
 % armazenados nos metadados do PDF.
 \title{
     % Obrigatório nas duas línguas
-    titlept={Título do trabalho},
-    titleen={Title of the document},
+    titlept={Resolvendo Captchas},
+    titleen={Solving Captchas},
     % Opcional, mas se houver deve existir nas duas línguas
-    subtitlept={um subtítulo},
-    subtitleen={a subtitle},
+    subtitlept={usando aprendizado parcialmente supervisionado},
+    subtitleen={using partial supervised learning},
 }
 
-\author{Nome Completo}
+\author{Julio Adolfo Zucon Trecenti}
 
 % Para TCCs, este comando define o supervisor
-\orientador[fem]{Profª. Drª. Fulana de Tal}
+\orientador{Prof. Dr. Victor Fossaluza}
 
 % Se não houver, remova; se houver mais de um, basta
 % repetir o comando quantas vezes forem necessárias
-\coorientador{Prof. Dr. Ciclano de Tal}
-\coorientador[fem]{Profª. Drª. Beltrana de Tal}
+% \coorientador{Prof. Dr. Ciclano de Tal}
+% \coorientador[fem]{Profª. Drª. Beltrana de Tal}
 
 % A página de rosto da versão para depósito (ou seja, a versão final
 % antes da defesa) deve ser diferente da página de rosto da versão
@@ -149,12 +150,13 @@
   %definitiva,
   % É qualificação?
   %quali,
-  programa={Ciência da Computação},
-  membrobanca={Profª. Drª. Fulana de Tal (orientadora) -- IME-USP [sem ponto final]},
+  programa={Estatística},
+  membrobanca={Prof. Dr. Victor Fossaluza (orientadora) -- IME-USP [sem ponto final]},
   % Em inglês, não há o "ª"
   %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
-  membrobanca={Prof. Dr. Ciclano de Tal -- IME-USP [sem ponto final]},
-  membrobanca={Profª. Drª. Convidada de Tal -- IMPA [sem ponto final]},
+  membrobanca={Prof. Dr. Rafael Izbicki -- UFSCar [sem ponto final]},
+  membrobanca={Prof. Dr. Rafael Stern -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Renato Vicente -- IME-USP [sem ponto final]},
   % Se não houve bolsa, remova
   %
   % Norma sobre agradecimento por auxílios da FAPESP:
@@ -178,10 +180,10 @@
   %apoio={During the development if this work, the author received\\
   %       financial support from FAPESP -- grant \#aaaa/nnnnn-d},
   %
-  apoio={Durante o desenvolvimento deste trabalho o autor
-         recebeu auxílio financeiro da XXXX},
-  local={São Paulo},
-  data=2017-08-10, % YYYY-MM-DD
+  % apoio={Durante o desenvolvimento deste trabalho o autor
+  %        recebeu auxílio financeiro da XXXX},
+  % local={São Paulo},
+  % data=2017-08-10, % YYYY-MM-DD
   % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
   % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
   % correspondente (o sistema insere automaticamente o texto da licença).
@@ -231,6 +233,9 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+
+\setkeys{Gin}{width=0.8\textwidth,height=0.8\textheight,keepaspectratio}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% AQUI COMEÇA O CONTEÚDO DE FATO %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,8 +260,7 @@
 %%%%%%%%%%%%%%%% DEDICATÓRIA, AGRADECIMENTOS, RESUMO/ABSTRACT %%%%%%%%%%%%%%%%%%
 
 \begin{dedicatoria}
-Esta seção é opcional e fica numa página separada; ela pode ser usada para
-uma dedicatória ou epígrafe.
+Aos meus pais,
 \end{dedicatoria}
 
 % Reinicia o contador de páginas (a próxima página recebe o número "i") para
@@ -269,12 +273,9 @@ uma dedicatória ou epígrafe.
 % epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
 % não ser incluída no sumário.
 \chapter*{Agradecimentos}
-\epigrafe{Do. Or do not. There is no try.}{Mestre Yoda}
+\epigrafe{Gratitude is not just a feeling, but a choice. We can choose to focus on the things we are grateful for, even in the midst of difficult circumstances. When we do this, we can experience a sense of peace and contentment that can help us to weather any storm.}{ChatGPT}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto. Texto opcional.
+Agradecer a todo mundo.
 
 % \input{conteudo/resumoabstract}
 
@@ -313,12 +314,6 @@ texto texto texto texto. Texto opcional.
 \disablenewpage{\chapter*{Lista de abreviaturas}}
 
 \begin{tabular}{rl}
-   CFT & Transformada contínua de Fourier (\emph{Continuous Fourier Transform})\\
-   DFT & Transformada discreta de Fourier (\emph{Discrete Fourier Transform})\\
-  EIIP & Potencial de interação elétron-íon (\emph{Electron-Ion Interaction Potentials})\\
-  STFT & Transformada de Fourier de tempo reduzido (\emph{Short-Time Fourier Transform})\\
-  ABNT & Associação Brasileira de Normas Técnicas\\
-   URL & Localizador Uniforme de Recursos (\emph{Uniform Resource Locator})\\
    IME & Instituto de Matemática e Estatística\\
    USP & Universidade de São Paulo
 \end{tabular}
@@ -397,6 +392,11 @@ Blabla, RMarkdown\ldots{}
 \hypertarget{introducao}{%
 \chapter{Introdução}\label{introducao}}
 
+\epigrafe{Captchas: where even computers need to prove they're not robots!}{ChatGPT}
+\epigrafe{Even robots need a break from the daily grind of solving captchas.}{ChatGPT}
+\epigrafe{I thought I was human, but the captcha told me otherwise!}{ChatGPT}
+\epigrafe{Why do we need to prove we're not robots to a robot? Isn't that a robot's job?}{ChatGPT, a robot}
+
 Captcha (\emph{Completely Automated Public Turing test to tell Computers
 and Humans Apart}) é um desafio utilizado para identificar se o acesso à
 uma página na internet é realizada por uma pessoa ou uma máquina. O
@@ -441,12 +441,13 @@ de Captchas representa um mero dissabor; para quem realiza acessos
 massivos, uma grande dificuldade.
 
 No entanto, o uso de Captchas não é adequado em todas as situações. Um
-exemplo são os sites de vendas: o uso dos desafios aborrece o usuário,
-alterando a qualidade da sua experiência. Os sites devem levar esse
-fator de aborrecimento em conta para não reduzir a taxa de conversão. Em
-alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar
-outros mecanismos de prevenção à fraude, como monitoramento da sessão do
-usuário ({«Inaccessibility of CAPTCHA»}, {[}s.d.{]}).
+exemplo são os sites de vendas: o uso dos desafios pode aborrecer o
+usuário, alterando a qualidade da sua experiência. Os sites devem levar
+esse fator de aborrecimento em conta para não reduzir a taxa de
+conversão. Em alguns casos, pode fazer mais sentido abandonar os
+Captchas e utilizar outros mecanismos de prevenção à fraude, como
+monitoramento da sessão do usuário ({«Inaccessibility of CAPTCHA»},
+{[}s.d.{]}).
 
 Também existem casos em que o uso de Captchas é prejudicial. Sua
 utilização em serviços públicos do Brasil, por exemplo, é problemática,
@@ -457,18 +458,18 @@ como discutido na próxima seção.
 públicos}\label{captchas-em-serviuxe7os-puxfablicos}}
 
 A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º,
-previsão que ``todos têm direito a receber dos órgãos públicos
-informações de seu interesse particular, ou de interesse coletivo ou
-geral, que serão prestadas no prazo da lei, sob pena de
-responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à
-segurança da sociedade e do Estado;''. Essa previsão é implementada pela
-Lei de Acesso à Informação (Lei 12.527/2011; LAI), que é aplicada ``aos
-órgãos públicos integrantes da administração direta dos Poderes
-Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do
-Ministério Público'', bem como ``as autarquias, as fundações públicas,
-as empresas públicas, as sociedades de economia mista e demais entidades
-controladas direta ou indiretamente pela União, Estados, Distrito
-Federal e Municípios'' (Art. 1º).
+prevê que ``todos têm direito a receber dos órgãos públicos informações
+de seu interesse particular, ou de interesse coletivo ou geral, que
+serão prestadas no prazo da lei, sob pena de responsabilidade,
+ressalvadas aquelas cujo sigilo seja imprescindível à segurança da
+sociedade e do Estado;''. Essa previsão é implementada pela Lei de
+Acesso à Informação (Lei 12.527/2011; LAI), que se aplica ``aos órgãos
+públicos integrantes da administração direta dos Poderes Executivo,
+Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério
+Público'', bem como ``as autarquias, as fundações públicas, as empresas
+públicas, as sociedades de economia mista e demais entidades controladas
+direta ou indiretamente pela União, Estados, Distrito Federal e
+Municípios'' (Art. 1º).
 
 A LAI, apesar de trazer diversos benefícios à sociedade, tem dois
 problemas. A primeira é o \textbf{esforço}: tanto a pessoa/órgão que
@@ -494,7 +495,8 @@ todo o seu volume, e fornecidos em um formato aberto (ou seja, um
 formato com sua especificação livremente disponível, e publicada sem
 qualquer restrições, monetárias ou não, da sua utilização) ou, no
 mínimo, podem ser processados com pelo menos uma ferramenta de software
-livre e gratuita.''
+livre e gratuita.''\footnote{Link: \url{https://okfn.org/opendata/}.
+  Último acesso em 01/11/2022.}
 
 As vantagens ao disponibilizar dados públicos de forma aberta para a
 sociedade é um tema pacífico na comunidade científica (MURRAY-RUST,
@@ -509,8 +511,9 @@ sistemas para armazenar os dados. Por exemplo, para pedir uma lista de
 todos os processos judiciais relacionados a recuperação judicial de
 empresas, as únicas alternativas são i) pedir os dados ao Conselho
 Nacional de Justiça (CNJ), que não possui informações suficientes para
-obter a lista\footnote{O CNJ só consegue listar processos de um tem a
-  partir da definição de Classes e Assuntos, disponíveis nas
+obter a lista\footnote{O CNJ só consegue listar os processos
+  relacionados a um tema a partir da definição de Classes e Assuntos,
+  disponíveis nas
   \href{https://www.cnj.jus.br/sgt/consulta_publica_classes.php}{Sistema
   de Gestão de Tabelas (SGT) do CNJ}. Processos relacionados a
   recuperação judicial, no entanto, não respeitam a taxonomia do SGT
@@ -588,7 +591,9 @@ exemplo é o 2Captcha\footnote{\href{https://2captcha.com/make-money-online}{Lin
   do 2Captcha}. Último acesso em 01/11/2022.}, que funciona como um Uber
 dos Captchas: o algoritmo automatizado envia o Captcha para a
 plataforma, que é acessado e resolvido por uma pessoa, retornando a
-solução para o algoritmo.
+solução para o algoritmo. O 2Captcha é operado pela ALTWEB LLC-FZ, uma
+empresa com base em Dubai\footnote{\href{https://2captcha.com/terms-of-service}{Link
+  dos termos de serviço do 2Captcha}. Último acesso em 01/11/2022.}.
 
 Segundo o site, o valor pago pelo 2Captcha é de US\$ 0.5 para 1 a 2
 horas de trabalho. No regime da Consolidação das Leis do Trabalho
@@ -641,7 +646,7 @@ O relatório técnico de AHN; BLUM; LANGFORD (2002) não foi o primeiro a
 apresentar o nome Captcha, nem suas aplicações. RESHEF; RAANAN; SOLAN
 (2005) foi o primeiro registro de patente com o termo e LILLIBRIDGE et
 al. (2001) foi o primeiro registro de patente que implementou uma
-solução aos sistemas de Captchas. No entanto, o relatório de 2022 é o
+solução aos sistemas de Captchas. No entanto, o relatório de 2002 é o
 primeiro que reconhecidamente trata do tema como um problema de
 inteligência artificial como um teste de Turing automatizado.
 
@@ -714,7 +719,7 @@ reCaptcha para digitalizar os Google Books.
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/recaptcha-v1.png}
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{./assets/img/recaptcha-v1.png}
 
 }
 
@@ -760,12 +765,12 @@ View e outras iniciativas da empresa.
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/turkey.png}
+{\centering \includegraphics[width=0.4\textwidth,height=\textheight]{./assets/img/turkey.png}
 
 }
 
 \caption{\label{fig-turkey}Exemplo do reCaptcha v2 com a imagens de
-perus.}
+perus}
 
 \end{figure}
 
@@ -832,14 +837,13 @@ disponibilizando os dados públicos de forma aberta, que é o resultado
 desejado.
 
 Essa é a lacuna identificada a partir da observação do estado atual dos
-serviços públicos e dos trabalhos acadêmicos analisados. No presente
-trabalho, será apresentado um fluxo de trabalho que pode ser facilmente
-aplicado a diferentes modelos de resolução de Captchas, incluindo
-arquiteturas que ainda não foram desenvolvidas. O fluxo de trabalho
-funcionará como um acelerador do aprendizado, possibilitando a criação
-de modelos que não precisam de intervenção humana. O resultado será
-encontrado explorando o potencial de uso do \textbf{oráculo},
-apresentado na próxima seção.
+serviços públicos e dos trabalhos acadêmicos analisados. Nesta pesquisa,
+será apresentado um fluxo de trabalho que pode ser facilmente aplicado a
+diferentes modelos de resolução de Captchas, incluindo arquiteturas que
+ainda não foram desenvolvidas. O fluxo de trabalho funcionará como um
+acelerador do aprendizado, possibilitando a criação de modelos que não
+precisam de intervenção humana. O resultado será encontrado explorando o
+potencial de uso do \textbf{oráculo}, apresentado na próxima seção.
 
 \hypertarget{oruxe1culo}{%
 \section{Oráculo}\label{oruxe1culo}}
@@ -864,21 +868,21 @@ sem a necessidade de anotar muitos exemplos para construir uma nova base
 de treino.
 
 Nessa tese, apresenta-se uma nova técnica para resolver Captchas com
-poucos dados anotados. A técnica consiste em aproveitar o fato de que o
-Captcha aplica um teste de Turing automático para gerar bases de dados
-automaticamente. Ou seja, a técnica resolve o problema não com modelos
-mais sofisticados, mas com a utilização eficiente dos recursos
-disponíveis. Qualquer modelo pode se aproveitar dessa característica dos
-Catpchas, incluindo arquiteturas que ainda não foram desenvolvidas. Essa
-é a técnica do oráculo.
+poucos dados anotados, chamada de \emph{oráculo}. A técnica consiste em
+aproveitar o fato de que o Captcha aplica um teste de Turing automático
+para gerar bases de dados automaticamente. Ou seja, a técnica resolve o
+problema não com modelos mais sofisticados, mas com a utilização
+eficiente dos recursos disponíveis. Qualquer modelo pode se aproveitar
+dessa característica dos Catpchas, incluindo arquiteturas que ainda não
+foram desenvolvidas.
 
 Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado
-está correto. Eles estão disponíveis em todos os sites, já que, por
-definição, o Captcha precisa apresentar o resultado do teste para o
-usuário. O nome ``oráculo'' vem do fato de que o site já possui a
-informação correta, como um deus. O site, no entanto, se comunica com o
-usuário através de um intermediário (o oráculo) que apresenta a resposta
-de forma limitada.
+está correto. Eles estão disponíveis em todos os sites com Captchas, já
+que, por definição, o Captcha precisa apresentar o resultado do teste
+para o usuário. O nome ``oráculo'' foi inspirado na mitologia grega,
+partindo do fato de que o site já possui a informação correta, como um
+deus. O site, no entanto, se comunica com o usuário através de um
+intermediário (o oráculo) que apresenta a resposta de forma limitada.
 
 Oráculos se manifestam de diversas formas nos sites com Captchas. Por
 exemplo, pode dar a possibilidade de realizar apenas um teste por
@@ -933,7 +937,8 @@ pesquisa.
 
 O objetivo geral da tese é desenvolver uma solução inovadora, chamada
 WAWL (\emph{Web Automatic Weak Learning}) para resolver Captchas,
-misturando técnicas de aprendizado profundo com raspagem de dados.
+misturando técnicas de aprendizado profundo com raspagem de dados e
+aproveitando os dados fornecidos pelo oráculo.
 
 Especificamente, a pesquisa tem como objetivos:
 
@@ -1011,7 +1016,7 @@ projetos de pesquisa aplicados.
   \end{enumerate}
 \item
   É possível aliar a área de raspagem de dados com a área de modelagem
-  estatística
+  estatística.
 
   \begin{enumerate}
   \def\labelenumii{\alph{enumii}.}
@@ -1045,7 +1050,7 @@ das propriedades do modelo. Do ponto de vista empírico, são apresentados
 os resultados das simulações e outros experimentos realizados com a
 técnica WAWL.
 
-No quarto e último capítulo, ``conclusion'', a pesquisa é concluída, com
+No quarto e último capítulo, ``conclusão'', a pesquisa é concluída, com
 apresentação das considerações finais e próximos passos. Também foi
 incluído um apêndice descrevendo e documentando o pacote
 \texttt{\{captcha\}}, criado atingir o objetivo 4 da pesquisa.
@@ -1240,7 +1245,7 @@ dimensões \(N=110\), \(M=40\) e \(R=3\). O rótulo da imagem é
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/tjmg16283c1e6d06.jpeg}
+{\centering \includegraphics[width=1.14583in,height=\textheight]{./assets/img/tjmg16283c1e6d06.jpeg}
 
 }
 
@@ -1320,7 +1325,7 @@ como a da Figura~\ref{fig-captcha-r-exemplo}.
 
 \begin{figure}
 
-{\centering \includegraphics{./metodologia_files/figure-pdf/fig-captcha-r-exemplo-1.pdf}
+{\centering \includegraphics[width=1.14583in,height=\textheight]{./metodologia_files/figure-pdf/fig-captcha-r-exemplo-1.pdf}
 
 }
 
@@ -1575,7 +1580,7 @@ anteriormente, trata-de de uma matriz de dimensão
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/tjmg16283c1e6d06.jpeg}
+{\centering \includegraphics[width=1.14583in,height=\textheight]{./assets/img/tjmg16283c1e6d06.jpeg}
 
 }
 
@@ -1627,7 +1632,7 @@ linha que une os números.
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/tjmg_conv_horizontal.jpeg}
+{\centering \includegraphics[width=1.14583in,height=\textheight]{./assets/img/tjmg_conv_horizontal.jpeg}
 
 }
 
@@ -1647,7 +1652,7 @@ Figura~\ref{fig-tjmg-exemplo-conv-vertical}.
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/tjmg_conv_vertical.jpeg}
+{\centering \includegraphics[width=1.14583in,height=\textheight]{./assets/img/tjmg_conv_vertical.jpeg}
 
 }
 
@@ -1673,7 +1678,7 @@ proeminetes).
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/tjmg_conv_vertical_bias.jpeg}
+{\centering \includegraphics[width=1.14583in,height=\textheight]{./assets/img/tjmg_conv_vertical_bias.jpeg}
 
 }
 
@@ -2277,68 +2282,95 @@ que exista uma lista prévia de rótulos. Além disso, é possível realizar
 adaptações no pré-processamento base de dados para lidar com diferentes
 comprimentos de Captchas.
 
-A Tabela Tabela~\ref{tbl-lista-captcha} mostra os Captchas trabalhados.
-Dos 10 exemplos trabalhados, 6 têm origem em tribunais, que são
-conhecidos por não disponibilizarem os dados de forma aberta.
+A Tabela~\ref{tbl-lista-captcha} mostra os Captchas trabalhados. Dos 10
+exemplos trabalhados, 6 têm origem em tribunais, que são conhecidos por
+não disponibilizarem os dados de forma aberta.
 
 \hypertarget{tbl-lista-captcha}{}
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4303}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2545}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3152}}@{}}
-\caption{\label{tbl-lista-captcha}Lista de captchas
-analisados.}\tabularnewline
-\toprule()
-\begin{minipage}[b]{\linewidth}\raggedright
-Captcha
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Exemplo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Origem
-\end{minipage} \\
-\midrule()
-\endfirsthead
-\toprule()
-\begin{minipage}[b]{\linewidth}\raggedright
-Captcha
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Exemplo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Origem
-\end{minipage} \\
-\midrule()
-\endhead
-\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5} &
-\includegraphics{./assets/img/dados_trf5.jpg} & Tribunal Regional
-Federal 5 \\
-\href{https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn_pesquisar=Pesquisar}{tjmg}
-& \includegraphics{./assets/img/dados_tjmg.jpeg} & Tribunal de Justiça
-de Minas Gerais \\
-\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}
-& \includegraphics{./assets/img/dados_trt.jpeg} & Tribunal Regional do
-Trabalho 3 \\
-\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj} &
-\includegraphics{./assets/img/dados_esaj.png} & Tribunal de Justiça da
-Bahia \\
-\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp} &
-\includegraphics{./assets/img/dados_jucesp.jpg} & Junta Comercial de São
-Paulo \\
-\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe} &
-\includegraphics{./assets/img/dados_tjpe.png} & Tribunal de Justiça de
-Pernambuco \\
-\href{https://www.tjrs.jus.br/site_php/consulta/verificador.php}{tjrs} &
-\includegraphics{./assets/img/dados_tjrs.jpg} & Tribunal de Justiça do
-Rio Grande do Sul \\
-\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx}{cadesp}
-& \includegraphics{./assets/img/dados_cadesp.jpg} & Centro de Apoio ao
-Desenvolvimento da Saúde Pública \\
-\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar\&acao_origem_externa=protocolo_pesquisar\&id_orgao_acesso_externo=0}{sei}
-& \includegraphics{./assets/img/dados_sei.png} & Sistema Eletrônico de
-Informações - ME \\
-\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp}{rfb}
-& \includegraphics{./assets/img/dados_rfb.png} & Receita Federal \\
-\bottomrule()
+\begin{table}[H]
+
+\providecommand{\docline}[3]{\noalign{\global\setlength{\arrayrulewidth}{#1}}\arrayrulecolor[HTML]{#2}\cline{#3}}
+
+\setlength{\tabcolsep}{0pt}
+
+\renewcommand*{\arraystretch}{1.5}
+
+\begin{longtable}[c]{|p{0.75in}|p{1.50in}|p{3.00in}}
+
+\caption{\label{tbl-lista-captcha}Lista de captchas analisados. } \\ 
+
+
+\hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Captcha}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Exemplo}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Descrição}}} \\
+
+\hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}\endhead
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-1.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Tribunal\ Regional\ Federal\ 5}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www4.tjmg.jus.br/juridico/sf/proc\_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn\_pesquisar=Pesquisar}{tjmg}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-2.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Tribunal\ de\ Justiça\ de\ Minas\ Gerais}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-3.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Tribunal\ Regional\ do\ Trabalho\ 3}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-4.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Tribunal\ de\ Justiça\ da\ Bahia}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-5.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Junta\ Comercial\ de\ São\ Paulo}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-6.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Tribunal\ de\ Justiça\ de\ Pernambuco}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.tjrs.jus.br/site\_php/consulta/verificador.php}{tjrs}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-7.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Tribunal\ de\ Justiça\ do\ Rio\ Grande\ do\ Sul}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3}{cadesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-8.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Centro\ de\ Apoio\ ao\ Desenvolvimento\ da\ Saúde\ Pública}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md\_pesq\_processo\_pesquisar.php?acao\_externa=protocolo\_pesquisar\&acao\_origem\_externa=protocolo\_pesquisar\&id\_orgao\_acesso\_externo=0}{sei}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-9.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sistema\ Eletrônico\ de\ Informações\ -\ ME}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva\_Solicitacao\_CS.asp}{rfb}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\includegraphics[width=0.9in, height=0.45in]{metodologia_files/figure-pdf/tbl-lista-captcha-10.png}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Receita\ Federal}}} \\
+
+\hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}
+
+
+
 \end{longtable}
+
+\end{table}
 
 Além dos Captchas de sites, também foram consideradas imagens geradas
 artificialmente. O motivo de criar Captchas artificiais é a facilidade
@@ -2358,7 +2390,7 @@ foi de 4 valores.
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/mnist128c49c36e13_6297.png}
+{\centering \includegraphics[width=1.5625in,height=\textheight]{./assets/img/mnist128c49c36e13_6297.png}
 
 }
 
@@ -2406,7 +2438,7 @@ e minúsculos e distorções.
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/captcha128c4a9c32e4_boy4.png}
+{\centering \includegraphics[width=1.5625in,height=\textheight]{./assets/img/captcha128c4a9c32e4_boy4.png}
 
 }
 
@@ -2724,69 +2756,90 @@ Todos os Captchas possuem comprimento entre 4 e 6 dígitos e, com exceção
 do SEI, não são sensíveis a maiúsculas e minúsculas.
 
 \hypertarget{tbl-lista-captcha-carac}{}
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.4965}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1469}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0769}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0839}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0629}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1329}}@{}}
-\caption{\label{tbl-lista-captcha-carac}Lista de captchas analisados e
-suas características.}\tabularnewline
-\toprule()
-\begin{minipage}[b]{\linewidth}\raggedright
-Site
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Aceita vários chutes
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Caracteres
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Comprimento
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Colorido
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-\# rótulos anotados
-\end{minipage} \\
-\midrule()
-\endfirsthead
-\toprule()
-\begin{minipage}[b]{\linewidth}\raggedright
-Site
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Aceita vários chutes
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Caracteres
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Comprimento
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Colorido
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-\# rótulos anotados
-\end{minipage} \\
-\midrule()
-\endhead
-\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5} &
-Não & 0:9 & 6 & não & 1000 \\
-\href{https://www4.tjmg.jus.br/juridico/sf/proc_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn_pesquisar=Pesquisar}{tjmg}
-& Sim & 0:9 & 5 & sim & 1000 \\
-\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}
-& Sim & a-z0:9 & 6 & não & 1500 \\
-\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj} & Sim & a-z & 5 & sim
-& 3000 \\
-\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp} &
-Não & a-z0-9 & 5 & não & 4000 \\
-\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe} &
-Sim & a-z0-9 & 5 & não & 4000 \\
-\href{https://www.tjrs.jus.br/site_php/consulta/verificador.php}{tjrs} &
-Sim & 0-9 & 4 & sim & 2000 \\
-\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3))/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx}{cadesp}
-& Não & a-z & 4 & sim & 3000 \\
-\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar\&acao_origem_externa=protocolo_pesquisar\&id_orgao_acesso_externo=0}{sei}
-& Sim & a-zA-Z0-9 & 4 & sim & 10000 \\
-\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao_CS.asp}{rfb}
-& Sim & a-z0-9 & 6 & não & 4000 \\
-\bottomrule()
+\begin{table}[H]
+
+\providecommand{\docline}[3]{\noalign{\global\setlength{\arrayrulewidth}{#1}}\arrayrulecolor[HTML]{#2}\cline{#3}}
+
+\setlength{\tabcolsep}{0pt}
+
+\renewcommand*{\arraystretch}{1.5}
+
+\begin{longtable}[c]{|p{0.75in}|p{1.50in}|p{1.20in}|p{0.75in}|p{0.75in}|p{1.50in}}
+
+\caption{\label{tbl-lista-captcha-carac}Lista de captchas analisados e suas características. } \\ 
+
+
+\hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Captcha}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Aceita\ vários\ chutes}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Caracteres}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Comprimento}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Colorido}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\#\ Rótulos\ anotados}}} \\
+
+\hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}\endhead
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www4.tjmg.jus.br/juridico/sf/proc\_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn\_pesquisar=Pesquisar}{tjmg}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1,500.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{3,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.tjrs.jus.br/site\_php/consulta/verificador.php}{tjrs}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{2,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3}{cadesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{3,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md\_pesq\_processo\_pesquisar.php?acao\_externa=protocolo\_pesquisar\&acao\_origem\_externa=protocolo\_pesquisar\&id\_orgao\_acesso\_externo=0}{sei}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-zA-Z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{10,000.00}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva\_Solicitacao\_CS.asp}{rfb}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4,000.00}}} \\
+
+\hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}
+
+
+
 \end{longtable}
+
+\end{table}
 
 As bases de dados com imagens anotadas foram disponibilizadas na aba de
 lançamentos (\emph{releases}) do
@@ -3613,33 +3666,33 @@ Print screens do \{ancaptcha\}
 \if@openright\cleardoublepage\else\clearpage\fi
 \makeatother
 
-\pagestyle{appendix}
+% \pagestyle{appendix}
 
-\appendix
+% \appendix
 
 % \addappheadtotoc acrescenta a palavra "Apêndice" ao sumário; se
 % só há apêndices, sem anexos, provavelmente não é necessário.
-\addappheadtotoc
+% \addappheadtotoc
 
 % \input{conteudo/apendice-exemplo-pseudocodigo}
-\par
+% \par
 
 %%%% Anexos %%%%
 
-\makeatletter
-\if@openright\cleardoublepage\else\clearpage\fi
-\makeatother
+% \makeatletter
+% \if@openright\cleardoublepage\else\clearpage\fi
+% \makeatother
 
-\pagestyle{appendix} % repete o anterior, caso você não use apêndices
+% \pagestyle{appendix} % repete o anterior, caso você não use apêndices
 
-\annex
+% \annex
 
 % \addappheadtotoc acrescenta a palavra "Anexo" ao sumário; se
 % só há anexos, sem apêndices, provavelmente não é necessário.
-\addappheadtotoc
+% \addappheadtotoc
 
 % \input{conteudo/anexo-exemplo-faq}
-\par
+% \par
 
 
 %%%%%%%%%%%%%%% SEÇÕES FINAIS (BIBLIOGRAFIA E ÍNDICE REMISSIVO) %%%%%%%%%%%%%%%%

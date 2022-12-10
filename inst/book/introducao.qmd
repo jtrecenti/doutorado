@@ -1,5 +1,10 @@
 # Introdução {#introducao}
 
+\epigrafe{Captchas: where even computers need to prove they're not robots!}{ChatGPT}
+\epigrafe{Even robots need a break from the daily grind of solving captchas.}{ChatGPT}
+\epigrafe{I thought I was human, but the captcha told me otherwise!}{ChatGPT}
+\epigrafe{Why do we need to prove we're not robots to a robot? Isn't that a robot's job?}{ChatGPT, a robot}
+
 Captcha (*Completely Automated Public Turing test to tell Computers and Humans Apart*) é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. Outro nome para os Captchas é *Human Interaction Proofs,* ou HIPs [@chellapilla2005].
 
 Um Captcha pode ser classificado como uma variação do teste de Turing [@turing2009]. A diferença no caso do Captcha é que a avaliação da humanidade do agente é feita por uma máquina ao invés de uma pessoa -- por isso o termo *automated*. Captchas podem ser classificados em algumas situações com os chamados **testes de Turing reversos**, apesar dos autores originais afastarem essa caracterização [@vonahnTellingHumansComputers2002].
@@ -14,23 +19,25 @@ Captchas estão presentes em toda a internet. Inicialmente criados para prevenir
 
 O uso de Captchas tem, por princípio, o objetivo de aumentar a segurança das pessoas que acessam a internet e proteger os sistemas *web* de uso abusivo. Para pessoas que acessam os sites pontualmente, a presença de Captchas representa um mero dissabor; para quem realiza acessos massivos, uma grande dificuldade.
 
-No entanto, o uso de Captchas não é adequado em todas as situações. Um exemplo são os sites de vendas: o uso dos desafios aborrece o usuário, alterando a qualidade da sua experiência. Os sites devem levar esse fator de aborrecimento em conta para não reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar outros mecanismos de prevenção à fraude, como monitoramento da sessão do usuário [@inaccess].
+No entanto, o uso de Captchas não é adequado em todas as situações. Um exemplo são os sites de vendas: o uso dos desafios pode aborrecer o usuário, alterando a qualidade da sua experiência. Os sites devem levar esse fator de aborrecimento em conta para não reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido abandonar os Captchas e utilizar outros mecanismos de prevenção à fraude, como monitoramento da sessão do usuário [@inaccess].
 
 Também existem casos em que o uso de Captchas é prejudicial. Sua utilização em serviços públicos do Brasil, por exemplo, é problemática, como discutido na próxima seção.
 
 ## Captchas em serviços públicos
 
-A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º, previsão que "todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à segurança da sociedade e do Estado;". Essa previsão é implementada pela Lei de Acesso à Informação (Lei 12.527/2011; LAI), que é aplicada "aos órgãos públicos integrantes da administração direta dos Poderes Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério Público", bem como "as autarquias, as fundações públicas, as empresas públicas, as sociedades de economia mista e demais entidades controladas direta ou indiretamente pela União, Estados, Distrito Federal e Municípios" (Art. 1º).
+A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º, prevê que "todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à segurança da sociedade e do Estado;". Essa previsão é implementada pela Lei de Acesso à Informação (Lei 12.527/2011; LAI), que se aplica "aos órgãos públicos integrantes da administração direta dos Poderes Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério Público", bem como "as autarquias, as fundações públicas, as empresas públicas, as sociedades de economia mista e demais entidades controladas direta ou indiretamente pela União, Estados, Distrito Federal e Municípios" (Art. 1º).
 
 A LAI, apesar de trazer diversos benefícios à sociedade, tem dois problemas. A primeira é o **esforço**: tanto a pessoa/órgão que solicita os dados, quanto o órgão que retorna os dados precisam trabalhar para disponibilizar as informações, sendo necessário deslocar equipes para realizar os levantamentos pedidos. A segunda é o **formato**: os dados enviados como resultado de pedidos de LAI podem chegar em formatos inadequados para consumo da solicitante, muitas vezes em *Portable Document Format* (PDF), que dificulta a leitura e análise dos dados [@michener2015, pág. 55]; além disso, como o levantamento é realizado de forma individualizada, o mesmo pedido feito em diferentes períodos (e.g. uma atualização mensal dos dados) pode vir em formatos diferentes, dificultando a leitura e arrumação dos dados.
 
-Uma forma de evitar os problemas de esforço e formato em pedidos de LAI é disponibilizar os dados de **forma aberta**. Como definido pela *Open Knowledge Foundation* (OKFN), a base de dados "deve ser fornecida em uma forma conveniente e modificável isento de obstáculos tecnológicos desnecessários para a realização dos direitos licenciados. Especificamente, os dados devem ser legíveis-por-máquina, disponíveis todo o seu volume, e fornecidos em um formato aberto (ou seja, um formato com sua especificação livremente disponível, e publicada sem qualquer restrições, monetárias ou não, da sua utilização) ou, no mínimo, podem ser processados com pelo menos uma ferramenta de software livre e gratuita."
+Uma forma de evitar os problemas de esforço e formato em pedidos de LAI é disponibilizar os dados de **forma aberta**. Como definido pela *Open Knowledge Foundation* (OKFN), a base de dados "deve ser fornecida em uma forma conveniente e modificável isento de obstáculos tecnológicos desnecessários para a realização dos direitos licenciados. Especificamente, os dados devem ser legíveis-por-máquina, disponíveis todo o seu volume, e fornecidos em um formato aberto (ou seja, um formato com sua especificação livremente disponível, e publicada sem qualquer restrições, monetárias ou não, da sua utilização) ou, no mínimo, podem ser processados com pelo menos uma ferramenta de software livre e gratuita."[^okfn]
+
+[^okfn]: Link: <https://okfn.org/opendata/>. Último acesso em 01/11/2022.
 
 As vantagens ao disponibilizar dados públicos de forma aberta para a sociedade é um tema pacífico na comunidade científica [@murray-rust2008]. Infelizmente, existem diversos dados públicos que não estão disponíveis de forma aberta, em plataformas como o [dados.gov.br](https://dados.gov.br).
 
 A dificuldade de acesso é particularmente evidente no Poder Judiciário, que além de não disponibilizar um portal de dados abertos, impõe barreiras aos pedidos de acesso à informação por utilizar diversos sistemas para armazenar os dados. Por exemplo, para pedir uma lista de todos os processos judiciais relacionados a recuperação judicial de empresas, as únicas alternativas são i) pedir os dados ao Conselho Nacional de Justiça (CNJ), que não possui informações suficientes para obter a lista[^introducao-1] ou ii) expedir ofícios aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções e critérios de acesso aos dados, diferentes prazos para atendimento e diferentes formatos, podendo, inclusive, negar o pedido de acesso.
 
-[^introducao-1]: O CNJ só consegue listar processos de um tem a partir da definição de Classes e Assuntos, disponíveis nas [Sistema de Gestão de Tabelas (SGT) do CNJ](https://www.cnj.jus.br/sgt/consulta_publica_classes.php). Processos relacionados a recuperação judicial, no entanto, não respeitam a taxonomia do SGT [@observat].
+[^introducao-1]: O CNJ só consegue listar os processos relacionados a um tema a partir da definição de Classes e Assuntos, disponíveis nas [Sistema de Gestão de Tabelas (SGT) do CNJ](https://www.cnj.jus.br/sgt/consulta_publica_classes.php). Processos relacionados a recuperação judicial, no entanto, não respeitam a taxonomia do SGT [@observat].
 
 A dificuldade para acessar os dados do judiciário é a principal barreira para realização de pesquisas pela Associação Brasileira de Jurimetria (ABJ), empresa na qual o autor desta tese trabalha. A entidade tem como missão principal a realização de estudos para implementar políticas públicas utilizando dados do judiciário.
 
@@ -46,9 +53,11 @@ O problema é que utilizar Captchas não impede o acesso automatizado. As empres
 
 Além disso, utilizar Captchas é uma solução ineficiente. Do ponto de vista técnico, a solução mais eficiente para disponibilizar os dados é através de ferramentas de dados abertos como o *Comprehensive Knowledge Archive Network* (CKAN). Ao disponibilizar os dados de forma aberta, as consultas automatizadas ficariam isoladas dos sites de consulta pública, o que garantiria o acesso das pessoas sem problemas de indisponibilidade.
 
-Não é só para as pessoas que fazem pesquisa com dados públicos que o uso de Captchas pode ser prejudicial. No mercado, existem serviços de resolução de Captcha que utilizam mão de obra humana, em regimes que pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um exemplo é o 2Captcha[^introducao-2], que funciona como um Uber dos Captchas: o algoritmo automatizado envia o Captcha para a plataforma, que é acessado e resolvido por uma pessoa, retornando a solução para o algoritmo.
+Não é só para as pessoas que fazem pesquisa com dados públicos que o uso de Captchas pode ser prejudicial. No mercado, existem serviços de resolução de Captcha que utilizam mão de obra humana, em regimes que pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um exemplo é o 2Captcha[^introducao-2], que funciona como um Uber dos Captchas: o algoritmo automatizado envia o Captcha para a plataforma, que é acessado e resolvido por uma pessoa, retornando a solução para o algoritmo. O 2Captcha é operado pela ALTWEB LLC-FZ, uma empresa com base em Dubai[^base-2captcha].
 
 [^introducao-2]: [Link do 2Captcha](https://2captcha.com/make-money-online). Último acesso em 01/11/2022.
+
+[^base-2captcha]: [Link dos termos de serviço do 2Captcha](https://2captcha.com/terms-of-service). Último acesso em 01/11/2022.
 
 Segundo o site, o valor pago pelo 2Captcha é de US\$ 0.5 para 1 a 2 horas de trabalho. No regime da Consolidação das Leis do Trabalho (Decreto-Lei 5.452/1943, CLT) as horas mensais de trabalho são 220. Trabalhando continuamente no 2Captcha, isso daria um salário de 55 a 110 dólares por mês, valor bem abaixo do salário mínimo, que no ano de 2022 era de R\$ 1.100,00[^introducao-3]. Ou seja, os serviços públicos acabam, indiretamente, incentivando um mercado que paga abaixo do salário mínimo. Luis von Ahn, um dos criadores dos Captchas, define o 2Captcha como um *sweatshop*, um termo utilizado para caracterizar empresas que têm condições de trabalho inaceitáveis.
 
@@ -64,7 +73,7 @@ Para compreender completamente o avanço que a tese representa, no entanto, é n
 
 O primeiro texto técnico sobre Captchas foi publicado por @vonahnTellingHumansComputers2002. O texto apresenta o Captcha e seu significado através do problema de geração de *emails* automáticos no Yahoo. Em seguida, apresenta alguns exemplos de candidatos a Captcha, com tarefas de reconhecimento de padrões ou textos. Uma característica interessante que os autores colocam sobre o Captcha é que suas imagens devem ser disponíveis publicamente. O texto também faz a conexão entre a tarefa dos Captchas e os desafios da inteligência artificial. Um ponto a destacar é que os autores defendem que os Captchas devem ser resolvidos, pois isso implica em avanços na inteligência artificial. O site original do projeto, *The Captcha Project*, foi lançado em 2000.
 
-O relatório técnico de @vonahnTellingHumansComputers2002 não foi o primeiro a apresentar o nome Captcha, nem suas aplicações. @reshefMethodSystemDiscriminating2005 foi o primeiro registro de patente com o termo e @lillibridgeMethodSelectivelyRestricting2001 foi o primeiro registro de patente que implementou uma solução aos sistemas de Captchas. No entanto, o relatório de 2022 é o primeiro que reconhecidamente trata do tema como um problema de inteligência artificial como um teste de Turing automatizado.
+O relatório técnico de @vonahnTellingHumansComputers2002 não foi o primeiro a apresentar o nome Captcha, nem suas aplicações. @reshefMethodSystemDiscriminating2005 foi o primeiro registro de patente com o termo e @lillibridgeMethodSelectivelyRestricting2001 foi o primeiro registro de patente que implementou uma solução aos sistemas de Captchas. No entanto, o relatório de 2002 é o primeiro que reconhecidamente trata do tema como um problema de inteligência artificial como um teste de Turing automatizado.
 
 Os artigos mais conhecidos de introdução aos Captchas são @vonahnCaptchaTellingHumans2003 e @vonahnTellingHumansComputers2004. O conteúdo dos trabalhos é o mesmo, sendo o primeiro deles na forma de apresentação e o segundo na forma de relatório. A apresentação é a primeira a mostrar o projeto reCaptcha, que será comentado em uma subseção própria. Um detalhe interessante é a ênfase dos autores no termo *Public* dos Captchas, mostrando a preocupação em manter os códigos públicos.
 
@@ -86,7 +95,12 @@ Um dos geradores de Captchas mais conhecidos é Luis von Ahn, que também é um 
 
 O reCaptcha v1 foi uma solução de aproveitar o tempo das pessoas que resolvem Captchas para digitalizar livros [@vonahnReCAPTCHAHumanBasedCharacter2008]. A ideia do reCaptcha, como demonstrada na @fig-recaptcha-v1, foi apresentar duas palavras distorcidas para a pessoa: a primeira seria utilizada para verificar se a pessoa era um humano, e a segunda seria utilizada para decifrar um texto que os robôs na época não conseguiam ler. Em 2009, a empresa foi comprada pela Google, que utilizou o reCaptcha para digitalizar os Google Books.
 
-![Explicação de von Ahn sobre o funcionamento do reCaptcha](assets/img/recaptcha-v1.png){#fig-recaptcha-v1}
+```{r}
+#| label: fig-recaptcha-v1
+#| fig-cap: Explicação de von Ahn sobre o funcionamento do reCaptcha
+#| out-width: 80%
+knitr::include_graphics("assets/img/recaptcha-v1.png")
+```
 
 Curiosamente, foi com a própria Google que os resolvedores ficaram em vantagem na luta. Os modelos de inteligência artificial continuaram avançando, notadamente com o avanço dos modelos de redes neurais profundas [@lecun2015a]. No trabalho de @goodfellow2013, todos funcionários da Google na época, foi apresentado um modelo de redes neurais convolucionais que resolvia o reCaptcha v1 com 99.8% de acurácia. No ano seguinte, em 2014, a Google descontinuou o reCaptcha v1, lançando o reCaptcha v2.[^introducao-8]
 
@@ -96,7 +110,13 @@ O reCaptcha v2 apresentou duas inovações importantes. O primeiro foi o botão 
 
 A mudança do tipo de tarefa de visão computacional mudança foi importante para o sucesso do reCaptcha v2. Isso ocorre porque o desafio é mais difícil, já que existem muito mais objetos e imagens do que letras e números, aumentando significativamente o suporte da variável resposta. Por exemplo, um modelo para identificar um reCaptcha de gatos pode ser facilmente desenvolvido a partir de uma base pré-classificada, potencialmente custosa para ser construída. O reCaptcha v2, no entanto, pode facilmente mudar a tarefa para identificar leões, cães, hidrantes e semáforos, inutilizando o modelo criado para classificar gatos. O reCaptcha v2 também foi um sucesso para treinar os modelos desenvolvidos pela própria Google: usando o mesmo princípio do reCaptcha v1, a humanidade era verificada com apenas uma parte das imagens. As outras imagens eram utilizadas para rotular imagens, utilizadas para aprimorar os modelos utilizados nos projetos de carros autônomos, Google Street View e outras iniciativas da empresa.
 
-![Exemplo do reCaptcha v2 com a imagens de perus.](assets/img/turkey.png){#fig-turkey}
+```{r}
+#| label: fig-turkey
+#| fig-cap: Exemplo do reCaptcha v2 com a imagens de perus
+#| out-width: 40%
+knitr::include_graphics("assets/img/turkey.png")
+```
+
 
 Com o advento do reCaptcha v2, a pergunta dos resolvedores de Captcha passou a ser: como criar modelos que funcionam razoavelmente bem nos Captchas sem a necessidade de rotular vários casos? Se esse desafio fosse resolvido, dois avanços aconteceriam: i) um grande avanço na inteligência artificial, especificamente na área de visão computacional, e ii) uma nova forma de vencer a luta.
 
@@ -110,7 +130,7 @@ A guerra entre sites e *spammers* continua, mas não é mais uma luta entre gera
 
 Infelizmente, Captchas de textos em imagens continuam sendo populares na *internet*. Isso é especialmente evidente nos serviços públicos -- objeto deste trabalho --, já que os serviços raramente são atualizados com ferramentas mais recentes. Desenvolver uma ferramenta que facilita a resolução de Captchas em sites públicos é uma forma de incentivar os sites a serem atualizados. Se o Captcha inseguro parar de fazer efeito prático, os sites terão de atualizar a tecnologia, seja colocando Captchas mais poderosos, que é o resultado indesejado, ou disponibilizando os dados públicos de forma aberta, que é o resultado desejado.
 
-Essa é a lacuna identificada a partir da observação do estado atual dos serviços públicos e dos trabalhos acadêmicos analisados. No presente trabalho, será apresentado um fluxo de trabalho que pode ser facilmente aplicado a diferentes modelos de resolução de Captchas, incluindo arquiteturas que ainda não foram desenvolvidas. O fluxo de trabalho funcionará como um acelerador do aprendizado, possibilitando a criação de modelos que não precisam de intervenção humana. O resultado será encontrado explorando o potencial de uso do **oráculo**, apresentado na próxima seção.
+Essa é a lacuna identificada a partir da observação do estado atual dos serviços públicos e dos trabalhos acadêmicos analisados. Nesta pesquisa, será apresentado um fluxo de trabalho que pode ser facilmente aplicado a diferentes modelos de resolução de Captchas, incluindo arquiteturas que ainda não foram desenvolvidas. O fluxo de trabalho funcionará como um acelerador do aprendizado, possibilitando a criação de modelos que não precisam de intervenção humana. O resultado será encontrado explorando o potencial de uso do **oráculo**, apresentado na próxima seção.
 
 ## Oráculo
 
@@ -118,9 +138,9 @@ Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado, são muit
 
 Outra alternativa é desenvolver modelos que aprendem com poucos dados anotados. Como comentado anteriormente, GANs e modelos relacionados podem apresentar bons resultados na resolução de tarefas de imagens, mesmo com uma base de dados anotada. Nesse sentido, ainda que um site mude seu Captcha, é possível ajustar um modelo que resolve esse Captcha sem a necessidade de anotar muitos exemplos para construir uma nova base de treino.
 
-Nessa tese, apresenta-se uma nova técnica para resolver Captchas com poucos dados anotados. A técnica consiste em aproveitar o fato de que o Captcha aplica um teste de Turing automático para gerar bases de dados automaticamente. Ou seja, a técnica resolve o problema não com modelos mais sofisticados, mas com a utilização eficiente dos recursos disponíveis. Qualquer modelo pode se aproveitar dessa característica dos Catpchas, incluindo arquiteturas que ainda não foram desenvolvidas. Essa é a técnica do oráculo.
+Nessa tese, apresenta-se uma nova técnica para resolver Captchas com poucos dados anotados, chamada de *oráculo*. A técnica consiste em aproveitar o fato de que o Captcha aplica um teste de Turing automático para gerar bases de dados automaticamente. Ou seja, a técnica resolve o problema não com modelos mais sofisticados, mas com a utilização eficiente dos recursos disponíveis. Qualquer modelo pode se aproveitar dessa característica dos Catpchas, incluindo arquiteturas que ainda não foram desenvolvidas.
 
-Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado está correto. Eles estão disponíveis em todos os sites, já que, por definição, o Captcha precisa apresentar o resultado do teste para o usuário. O nome "oráculo" vem do fato de que o site já possui a informação correta, como um deus. O site, no entanto, se comunica com o usuário através de um intermediário (o oráculo) que apresenta a resposta de forma limitada.
+Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado está correto. Eles estão disponíveis em todos os sites com Captchas, já que, por definição, o Captcha precisa apresentar o resultado do teste para o usuário. O nome "oráculo" foi inspirado na mitologia grega, partindo do fato de que o site já possui a informação correta, como um deus. O site, no entanto, se comunica com o usuário através de um intermediário (o oráculo) que apresenta a resposta de forma limitada.
 
 Oráculos se manifestam de diversas formas nos sites com Captchas. Por exemplo, pode dar a possibilidade de realizar apenas um teste por imagem, vários testes por imagem, ou ainda retornar informações ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode retornar com um "bom o suficiente" quando o rótulo não está totalmente correto [@vonahnReCAPTCHAHumanBasedCharacter2008].
 
@@ -138,7 +158,7 @@ Para criar uma base de dados usando o oráculo, é necessário utilizar técnica
 
 ## Objetivo {#objetivos}
 
-O objetivo geral da tese é desenvolver uma solução inovadora, chamada WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de aprendizado profundo com raspagem de dados.
+O objetivo geral da tese é desenvolver uma solução inovadora, chamada WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de aprendizado profundo com raspagem de dados e aproveitando os dados fornecidos pelo oráculo.
 
 Especificamente, a pesquisa tem como objetivos:
 
@@ -166,7 +186,7 @@ O projeto foi desenvolvido em torno de duas hipóteses principais. Tais hipótes
 1.  A utilização de aprendizado fracamente supervisionado com oráculo permite a criação de modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.
     a.  Sub-hipótese: É possível criar um modelo genérico que funciona bem e se adapta com o uso do oráculo.
     b.  Sub-hipótese: Com a teoria de aprendizado fracamente supervisionado, é possível demonstrar que modelos criados dessa forma apresentam desempenho análogo ao que seria obtido com bases totalmente supervisionadas.
-2.  É possível aliar a área de raspagem de dados com a área de modelagem estatística
+2.  É possível aliar a área de raspagem de dados com a área de modelagem estatística.
     a.  Sub-hipótese: O uso de raspagem de dados como passo intermediário do processo de modelagem apresenta resultados positivos no poder preditivo dos Captchas.
     b.  Sub-hipótese: É possível criar um modelo com aprendizado ativo, que melhora continuamente conforme é utilizado nos sites.
 
@@ -176,4 +196,4 @@ O segundo capítulo, "metodologia" contém todos os passos dados para construç�
 
 O terceiro capítulo, "resultados", apresenta os resultados da pesquisa. Do ponto de vista teórico, são apresentadas as demonstrações das propriedades do modelo. Do ponto de vista empírico, são apresentados os resultados das simulações e outros experimentos realizados com a técnica WAWL.
 
-No quarto e último capítulo, "conclusion", a pesquisa é concluída, com apresentação das considerações finais e próximos passos. Também foi incluído um apêndice descrevendo e documentando o pacote `{captcha}`, criado atingir o objetivo 4 da pesquisa.
+No quarto e último capítulo, "conclusão", a pesquisa é concluída, com apresentação das considerações finais e próximos passos. Também foi incluído um apêndice descrevendo e documentando o pacote `{captcha}`, criado atingir o objetivo 4 da pesquisa.
