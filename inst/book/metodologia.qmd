@@ -838,6 +838,8 @@ da_tab <- doutorado::da_captchas |>
   ) |> 
   dplyr::select(nm, chutes, caracteres, comprimento, colorido, n_total, link)
 
+
+
 da_tab |> 
   flextable::flextable(col_keys = c(
     "nm", "chutes", "caracteres", "comprimento",
@@ -845,7 +847,7 @@ da_tab |>
   )) |> 
   flextable::set_header_labels(
     nm = "Captcha", 
-    chutes = "Aceita vários chutes",
+    chutes = "Vários chutes",
     caracteres = "Caracteres",
     comprimento = "Comprimento",
     colorido = "Colorido",
@@ -857,10 +859,19 @@ da_tab |>
       flextable::hyperlink_text(x = nm, url = link)
     )
   ) |> 
-  flextable::width(1.5, j = 2) |> 
-  flextable::width(1.5, j = 6) |> 
-  flextable::width(1.2, j = 3) |> 
-  flextable::theme_apa()
+  flextable::width(0.8, j = 2) |> 
+  flextable::width(1.3, j = 6) |> 
+  flextable::width(1.1, j = 3) |> 
+  flextable::width(1.1, j = 4) |> 
+  flextable::colformat_num(
+    j = 6, big.mark = ".",
+    decimal.mark = ","
+  ) |> 
+  flextable::theme_apa() |> 
+  flextable::set_formatter(
+    comprimento = \(x) sprintf("%.0f", x),
+    n_total = \(x) sprintf("%.0f", x)
+  )
 
 ```
 

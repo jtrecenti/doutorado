@@ -1,18 +1,17 @@
-# Modelagem {#model}
+# Resultados {#sec-results}
 
-O fato da informação ser incompleta e fraca não significa que ela é inútil. Neste capítulo, discutimos como a informação do oráculo é usada pelos modelos e mostramos, tanto através de demonstrações matemáticas quanto com simulações que os resultados são positivos e consistentes.
+Neste capítulo, discute-se como a informação do oráculo é usada pelos modelos. Para isso, são apresentadas tanto demonstrações matemáticas quanto resultados empíricos, mostrando que os resultados são positivos e consistentes.
 
-O capítulo foi organizado duas seções. Na Seção \@ref(result-theory), mostramos as propriedades matemáticas e probabilísticas da estratégia adotada. Na Seção \@ref(result-sim), mostramos os resultados empíricos obtidos das simulações.
+O capítulo foi organizado três seções. Na @sec-result-theory, são apresentadas as propriedades matemáticas e probabilísticas da estratégia adotada. Na @sec-result-sim, são revelados os resultados empíricos obtidos das simulações. Na @sec-discussao, os resultados são discutidos, fazendo a ponte entre as hipóteses de pesquisa e os resultados.
 
+## Resultados teóricos {#sec-result-theory}
 
-## Resultados teóricos {#result-theory}
+Nesta seção, buscou-se demonstrar que o uso dos dados fornecidos pelo oráculo com adaptação da função de perda i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, é necessário retomar algumas definições para avançar.
 
-Nesta seção, buscamos demonstrar que o uso de oráculos com a função de perda baseada nas informações censuradas i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, temos de passar por uma série de definições.
-
-
-## Resultados empíricos {#result-sim}
+## Resultados empíricos {#sec-result-sim}
 
 ```{r}
+#| echo: false
 total_sim <- doutorado::da_results_simulacao |> 
   dplyr::distinct(captcha, n, ntry) |> 
   nrow()
@@ -30,13 +29,14 @@ ganho_absoluto <- doutorado::da_results_simulacao |>
   scales::percent()
 ```
 
-Nesta seção mostramos os resultados das simulações realizadas. Como comentado no capítulo anterior, foram realizadas `r total_sim` simulações no total, variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade de tentativas no oráculo.
+Nesta seção são revelados os resultados das simulações realizadas. Como comentado anteriormente, foram realizadas `r total_sim` simulações no total, variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade de tentativas no oráculo.
 
-Para realizar os cálculos, montamos uma base de dados com os resultados das simulações. A base está disponível publicamente no [repositório da tese](https://github.com/jtrecenti/doutorado) e contém colunas para o Captcha ajustado (`captcha`), a quantidade de observações do modelo inicial (`n`), a quantidade de tentativas do oráculo (`ntry`), a etapa da simulação (`fase`, inicial ou oráculo), o caminho do modelo ajustado (`model`) e a acurácia obtida (`acc`).
+Para realizar os cálculos, montou-se uma base de dados com os resultados das simulações. A base está disponível publicamente no [repositório da tese](https://github.com/jtrecenti/doutorado) e contém colunas para o Captcha ajustado (`captcha`), a quantidade de observações do modelo inicial (`n`), a quantidade de tentativas do oráculo (`ntry`), a etapa da simulação (`fase`, inicial ou oráculo), o caminho do modelo ajustado (`model`) e a acurácia obtida (`acc`).
 
-Em média, foi observado o ganho de `r ganho_medio` na acurácia após a aplicação da técnica do oráculo. Ou seja, em média a acurácia do modelo com aplicação do oráculo foi de mais de três vezes a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de `r ganho_absoluto`, ou seja, depois da aplicação do oráculo os modelos ganharam, em média, `r ganho_absoluto` na acurácia.
+Em média, foi observado um ganho de `r ganho_medio` na acurácia após a aplicação da técnica do oráculo. Ou seja, em média a acurácia do modelo com aplicação do oráculo foi de mais de três vezes a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de `r ganho_absoluto`, ou seja, depois da aplicação do oráculo os modelos ganharam, em média, `r ganho_absoluto` na acurácia.
 
 ```{r}
+#| echo: false
 tab_stats <- doutorado::da_results_simulacao |> 
   dplyr::select(-model) |> 
   dplyr::filter(ntry != "03") |> 
@@ -59,11 +59,16 @@ tab_lines <- tibble::tibble(
 )
 ```
 
-Separando os resultados gerais por quantidade de tentativas, observa-se os ganhos relativos e absolutos nas Figuras \@ref(fig:simulacao-geral-ntry-relativo) e \@ref(fig:simulacao-geral-ntry-absoluto). Cada ponto é uma simulação e o ponto em destaque é o valor médio, acompanhado de intervalo $m \mp 2*s/\sqrt(n)$, com $m$ sendo a média, $s$ o desvio padrão e $n$ a quantidade de dados. A linha pontilhada indica se a acurácia aumentou ou diminuiu após a aplicação da técnica. 
+Separando os resultados gerais por quantidade de tentativas, observa-se os ganhos relativos e absolutos nas [Figuras @fig-simulacao-geral-ntry-relativo] e [-@fig-simulacao-geral-ntry-absoluto]. Cada ponto é uma simulação e o ponto em destaque é o valor médio, acompanhado de intervalo $m \mp 2*s/\sqrt(n)$, com $m$ sendo a média, $s$ o desvio padrão e $n$ a quantidade de dados. A linha pontilhada indica se a acurácia aumentou ou diminuiu após a aplicação da técnica. 
 
-Na Figura \@ref(fig:simulacao-geral-ntry-relativo) é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante e que não há necessidade de fazer tantos chutes para aproveitar essa oportunidade.
+Na @fig-simulacao-geral-ntry-relativo é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante e que não há necessidade de fazer tantos chutes para aproveitar essa oportunidade.
 
-```{r simulacao-geral-ntry-relativo, fig.width=5, fig.height=4, fig.cap="Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."}
+```{r}
+#| label: fig-simulacao-geral-ntry-relativo
+#| fig-width: 5
+#| fig-height: 4
+#| fig-cap: Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas.
+#| out-width: 80%
 
 tab_stats_correta <- tab_stats  |> 
   dplyr::filter(name == "Percentual") |> 
@@ -89,7 +94,7 @@ tab_stats_correta |>
     ggplot2::aes(ymin = lower, ymax = upper),
     colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
     width = .2,
-    size = 1
+    linewidth = 1
   ) +
   ggplot2::geom_point(
     colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
@@ -116,9 +121,13 @@ tab_stats_correta |>
   )
 ```
 
-A Figura \@ref(fig: simulacao-geral-ntry-absoluto), com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em Captchas mais de um chute girou em torno de 40%, enquanto que o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do modelo (e pouco) em casos que com apenas um chute, mostrando que a técnica é consistentemente efetiva.
+A Figura @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em Captchas mais de um chute girou em torno de 40%, enquanto que o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do modelo (e pouco) em casos que com apenas um chute, mostrando que a técnica é consistentemente efetiva.
 
-```{r simulacao-geral-ntry-absoluto, fig.width=5, fig.height=4, fig.cap="Ganhos absolutos ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."}
+```{r}
+#| label: fig-simulacao-geral-ntry-absoluto
+#| fig-width: 5
+#| fig-height: 4
+#| fig-cap: "Ganhos absolutos ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."
 tab_stats  |> 
   dplyr::filter(name == "Absoluto") |> 
   dplyr::group_by(ntry, name) |> 
@@ -141,7 +150,7 @@ tab_stats  |>
     ggplot2::aes(ymin = lower, ymax = upper),
     colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
     width = .2,
-    size = 1
+    linewidth = 1
   ) +
   ggplot2::geom_point(
     colour = viridis::viridis(2, 1, .3, .8, 1, "A")[1],
@@ -196,12 +205,16 @@ tab_stats_inicial <- doutorado::da_results_simulacao |>
   ))
 ```
 
-As Figuras \@ref(fig:simulacao-geral-inicial-relativo) e \@ref(fig:simulacao-geral-inicial-absoluto) apresentam os resultados gerais separando por acurácia inicial do modelo. A estrutura do gráfico é similar às visualizações separando por quantidade de tentativas. As categorias escolhidas foram de até 10%, mais de 10% até 35% e mais de 35% de acurácia no modelo inicial. A escolha dos intervalos se deram pela quantidade de observações em cada categoria
+As [Figuras @fig-simulacao-geral-inicial-relativo] e [-@fig-simulacao-geral-inicial-absoluto] apresentam os resultados gerais separando por acurácia inicial do modelo. A estrutura do gráfico é similar às visualizações separando por quantidade de tentativas. As categorias escolhidas foram de até 10%, mais de 10% até 35% e mais de 35% de acurácia no modelo inicial. A escolha dos intervalos se deram pela quantidade de observações em cada categoria.
 
+A @fig-simulacao-geral-inicial-relativo mostra os ganhos relativos. É possível notar uma tendência de queda no ganho de acurácia com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse resultado é esperado, pois, como a acurácia é um número entre zero e um, um modelo que já possui alta acurácia não tem a possibilidade de aumentar tanto.
 
-A Figura \@ref(fig:simulacao-geral-inicial-relativo) mostra os ganhos relativos. É possível notar uma tendência de queda no ganho de acurácia com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse resultado é esperado, pois, como a acurácia é um número entre zero e um, um modelo que já possui alta acurácia não tem a possibilidade de aumentar tanto.
+```{r}
+#| label: fig-simulacao-geral-inicial-relativo
+#| fig-width: 5
+#| fig-height: 4
+#| fig-cap: "Ganho percentual ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
 
-```{r simulacao-geral-inicial-relativo, fig.width=5, fig.height=4, fig.cap="Ganho percentual ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."}
 tab_stats_inicial  |> 
   dplyr::filter(name == "Percentual") |> 
   dplyr::group_by(inicial_cut, name) |> 
@@ -224,7 +237,7 @@ tab_stats_inicial  |>
     ggplot2::aes(ymin = lower, ymax = upper),
     colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
     width = .2,
-    size = 1
+    linewidth = 1
   ) +
   ggplot2::geom_point(
     colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
@@ -252,9 +265,14 @@ tab_stats_inicial  |>
 ```
 
 
-A Figura \@ref(fig:simulacao-geral-inicial-absoluto) mostra os ganhos absolutos. O gráfico apresenta o mesmo problema que o anterior, já que o ganho máximo depende da acurácia inicial do modelo. Mesmo assim, é possível notar que, em termos absolutos, modelos com acurácia inicial entre 10% e 35% apresentaram um ganho maior que modelos com acurácia inicial de até 10%.
+A @fig-simulacao-geral-inicial-absoluto mostra os ganhos absolutos. O gráfico apresenta o mesmo problema que o anterior, já que o ganho máximo depende da acurácia inicial do modelo. Mesmo assim, é possível notar que, em termos absolutos, modelos com acurácia inicial entre 10% e 35% apresentaram um ganho maior que modelos com acurácia inicial de até 10%.
 
-```{r simulacao-geral-inicial-absoluto, fig.width=5, fig.height=4, fig.cap="Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."}
+```{r}
+#| label: fig-simulacao-geral-inicial-absoluto
+#| fig-width: 5
+#| fig-height: 4
+#| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
+
 tab_stats_inicial  |> 
   dplyr::filter(name == "Absoluto") |> 
   dplyr::group_by(inicial_cut, name) |> 
@@ -277,7 +295,7 @@ tab_stats_inicial  |>
     ggplot2::aes(ymin = lower, ymax = upper),
     colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
     width = .2,
-    size = 1
+    linewidth = 1
   ) +
   ggplot2::geom_point(
     colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
@@ -309,10 +327,14 @@ Para lidar com o fato da acurácia ser um número limitado, fizemos o mesmo grá
 $$
 \text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
 $$
+A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica do oráculo para modelos iniciais com mais do que 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para uma acurácia maior, de onde poderíamos aplicar a técnica novamente para obter resultads ainda mais expressivos.
 
-A Figura \@ref(fig:simulacao-geral-inicial-absoluto-ajustado) mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica do oráculo para modelos iniciais com mais do que 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para uma acurácia maior, de onde poderíamos aplicar a técnica novamente para obter resultads ainda mais expressivos.
+```{r}
+#| label: fig-simulacao-geral-inicial-absoluto-ajustado
+#| fig-width: 5
+#| fig-height: 4
+#| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
 
-```{r simulacao-geral-inicial-absoluto-ajustado, fig.width=5, fig.height=4, fig.cap="Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."}
 tab_stats_inicial  |> 
   dplyr::filter(name == "Absoluto (ajustado)") |> 
   dplyr::group_by(inicial_cut, name) |> 
@@ -335,7 +357,7 @@ tab_stats_inicial  |>
     ggplot2::aes(ymin = lower, ymax = upper),
     colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
     width = .2,
-    size = 1
+    linewidth = 1
   ) +
   ggplot2::geom_point(
     colour = viridis::viridis(2, 1, .3, .7, 1, "A")[2],
@@ -362,9 +384,15 @@ tab_stats_inicial  |>
   )
 ```
 
-Na Figura \@ref(fig:simulacao-captcha), mostramos os resultados separando por Captcha. Cada linha é uma combinação de Captcha, quantidade de tentativas e acurácia modelo inicial, que foi classificado em três categorias. As linhas pontilhadas indicam modelos ajustados com mais de uma tentativa, enquanto as linhas contínuas mostram modelos ajustados com apenas uma tentativa. A primeira extremidade de cada linha, do lado esquerdo, indica a acurácia do modelo inicial e a segunda extremidade, do lado direito, a acurácia do modelo usando a técnica do oráculo.
+Na @fig-simulacao-captcha, mostramos os resultados separando por Captcha. Cada linha é uma combinação de Captcha, quantidade de tentativas e acurácia modelo inicial, que foi classificado em três categorias. As linhas pontilhadas indicam modelos ajustados com mais de uma tentativa, enquanto as linhas contínuas mostram modelos ajustados com apenas uma tentativa. A primeira extremidade de cada linha, do lado esquerdo, indica a acurácia do modelo inicial e a segunda extremidade, do lado direito, a acurácia do modelo usando a técnica do oráculo.
 
-```{r simulacao-captcha, fig.width=8, fig.height=5, fig.cap="Resultados da simulação por captcha, quantidade de tentativas e modelo inicial."}
+```{r}
+#| label: fig-simulacao-captcha
+#| fig-width: 8
+#| fig-height: 5
+#| out-width: 100%
+#| fig-cap: "Resultados da simulação por captcha, quantidade de tentativas e modelo inicial."
+
 doutorado::da_results_simulacao |>
   dplyr::select(-model) |>
   dplyr::mutate(ntry2 = dplyr::case_when(
@@ -377,7 +405,12 @@ doutorado::da_results_simulacao |>
     inicial, c(0, .1, .35, .6),
     labels = c("Até 10%", "Entre 10% e 35%", "Mais de 35%")
   )) |> 
-  tidyr::pivot_longer(c(inicial, oraculo), names_to = "fase", values_to = "acc") |> 
+  dplyr::rename(wawl = oraculo) |> 
+  tidyr::pivot_longer(
+    c(inicial, wawl), 
+    names_to = "fase", 
+    values_to = "acc"
+  ) |> 
   ggplot2::ggplot(ggplot2::aes(
     x = fase, y = acc,
     colour = inicial_cut,
@@ -389,12 +422,15 @@ doutorado::da_results_simulacao |>
   ggplot2::scale_colour_viridis_d(begin = .2, end = .8, option = "A") +
   ggplot2::scale_y_continuous(labels = scales::percent) +
   ggplot2::facet_wrap(~captcha) +
-  ggplot2::theme_bw() +
+  ggthemes::theme_hc() +
   ggplot2::labs(
     x = "Técnica",
     y = "Acurácia",
     colour = "Modelo inicial",
     linetype = "# Tentativas"
+  ) +
+  ggplot2::theme(
+    legend.position = "right"
   )
 ```
 
@@ -408,9 +444,13 @@ Um possível problema em aplicar a técnica do oráculo é que a técnica pode i
 
 O Captcha escolhido para a simulação foi o `trf5`, por ser um Captcha que não aceita múltiplos chutes, em uma tentativa de obter um pior caso. Para esse Captcha, o melhor modelo obtido com a técnica do oráculo foi considerado como modelo inicial e usado para baixar novos dados do site do Tribunal. Os novos dados foram adicionados à base de treino, ajustando-se um novo modelo.
 
-A Figura \@ref(fig:aplicacao-iterada) mostra os resultados da aplicação iterada. A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.
+A @fig-aplicacao-iterada mostra os resultados da aplicação iterada. A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.
 
-```{r aplicacao-iterada, fig.cap="Resultados da aplicação iterada da técnica.", fig.width=7, fig.height=4}
+```{r}
+#| label: fig-aplicacao-iterada
+#| fig-cap: "Resultados da aplicação iterada da técnica."
+#| fig-width: 7
+#| fig-height: 4
 
 dados_iteracao_trf5 <- tibble::tribble(
   ~n, ~ntry,         ~tempo,              ~acc,
@@ -419,10 +459,9 @@ dados_iteracao_trf5 <- tibble::tribble(
   "00101",  "01", "acc_oraculo2",                 1
 )
 
-
 dados_iteracao_trf5 |> 
   ggplot2::ggplot(ggplot2::aes(x = tempo, y = acc)) +
-  ggplot2::geom_col(fill = viridis::viridis(2,.8,.3,.7,1,"A")[1]) +
+  ggplot2::geom_col(fill = viridis::viridis(2,.9,.3,.7,1,"A")[1]) +
   ggplot2::scale_y_continuous(labels = scales::percent) +
   ggplot2::scale_x_discrete(
     labels = c(
@@ -441,7 +480,4 @@ dados_iteracao_trf5 |>
 
 O resultado sugere que a técnica pode sim ser utilizada indefinidamente para auxiliar no aprendizado do modelo. Ela sugere, ainda, que uma técnica de aprendizado ativo com *feedback* automático do oráculo pode dar bons resultados, já que a forma de obter os dados não introduz viés no ajuste do modelo.
 
-### Aprendizado ativo (TODO)
-
-> Aqui a ideia é mostrar os resultados do aprendizado ativo, se der tempo de fazer.
-
+## Discussão {#sec-discussao}
