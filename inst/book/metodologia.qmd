@@ -6,6 +6,8 @@ bibliography: references.bib
 
 <!-- ----------------------------------------------------------- -->
 
+<!-- Lembrete: citar os pacotes principais usados, como luz, torch, etc. -->
+
 <!-- Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do trabalho, pois, mais do que simplesmente apresentar o código utilizado, mostra o passo a passo, as dores e as decisões difíceis que tiveram de ser tomadas para concluir o projeto. -->
 
 O capítulo está organizado em três seções: definição do problema, dados e simulações. A primeira mostra a base matemática do problema estudado e as escolhas de sintaxe e terminologias. A segunda descreve as fontes de dados e o processo de coleta, já que a base foi construída totalmente do zero. A terceira mostra como foram planejadas as simulações para verificar se a solução proposta funciona bem empiricamente.
@@ -32,7 +34,7 @@ Nesse sentido, uma área que ficou popular nos últimos anos, até por conta dos
 
 Mas isso também não representa todas as classes de problemas. Em muitas aplicações reais, obter uma anotação completa e correta pode ser custoso ou até impraticável. Além disso por envolver trabalho humano, é comum que classificações contenham erros. Para lidar com esses casos existe uma área, que generaliza as anteriores, que é o aprendizado fracamente supervisionado.
 
-Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área existem diversos tipos de problemas, como aprendizado semi-supervisionado, aprendizado de múltiplas instâncias [@blum1998], aprendizado com rótulos incorretos ou incompletos [@zhou2018]. O caso dos Captchas com o uso do oráculo será apresentado como outra classe de problemas, chamada ***aprendizado com rótulos parciais*** (*partial label learning*, PLL, [@jin2002]). Essa classe apresenta uma especialização ainda mais próxima do problema estudado, chamado ***aprendizado com rótulos complementares*** (*complementary label learning*, [@ishida2017a]).
+Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área existem diversos tipos de problemas, como aprendizado semi-supervisionado, aprendizado de múltiplas instâncias [@blum1998] e o aprendizado com rótulos incorretos ou incompletos [@zhou2018]. O caso dos Captchas com o uso do oráculo será apresentado como outra classe de problemas, chamada ***aprendizado com rótulos parciais*** (*partial label learning*, PLL, [@jin2002]). Essa classe apresenta uma especialização ainda mais próxima do problema estudado, chamado ***aprendizado com rótulos complementares*** (*complementary label learning*, [@ishida2017a]).
 
 A intepretação do Captcha como um problema de PLL será apresentada no final do capítulo. A jornada começa de onde deve começar, com aqueles que são objeto de análise deste trabalho: os Captchas.
 
@@ -46,7 +48,7 @@ O fluxo completo de um Captcha envolve cinco componentes: um *rótulo*, um *gera
 
 1.  O rótulo é definido, usualmente com algum procedimento aleatório, ocultado do agente.
 2.  A imagem é gerada a partir do rótulo e apresentada para o agente.
-3.  O agente preenche sua resposta a partir da imagem (que pode estar certo ou errado)
+3.  O agente preenche sua resposta a partir da imagem (que pode estar certa ou errada).
 4.  O oráculo verifica se a resposta está correta.
 5.  Dependendo da resposta, o agente é direcionado para a página autenticada ou para uma página de erro.
 
@@ -60,7 +62,7 @@ knitr::include_graphics("assets/img/esquema-captcha.png")
 
 #### Imagem, rótulo e variável resposta
 
-A imagem é uma matriz $\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}$, contendo padrões que, a partir da análise humana, levam ao rótulo do Captcha. O *rótulo* dado por um vetor de caracteres $\mathbf c = [c_1,\dots,c_L]^\top$. O comprimento $L$ pode ser fixo ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir com comprimentos diferentes. Nas definições que seguem considerou-se $L$ como fixo, por simplicidade.
+A imagem é uma matriz $\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}$, contendo padrões que, a partir da análise humana, levam ao rótulo do Captcha. O *rótulo* é dado por um vetor de caracteres $\mathbf c = [c_1,\dots,c_L]^\top$. O comprimento $L$ pode ser fixo ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir com comprimentos diferentes. Nas definições que seguem considerou-se $L$ como fixo, por simplicidade.
 
 Os elementos do vetor $\mathbf c$ fazem parte de um alfabeto $\mathcal A$, com cardinalidade $|\mathcal A|$, finito e conhecido. O alfabeto contém todos os possíveis caracteres que podem aparecer na imagem. Na maioria dos casos, $\mathcal A$ corresponde a uma combinação de algarismos arábicos (0-9) e letras do alfabeto latino (a-z), podendo diferenciar ou não as letras maiúsculas e minúsculas[^1].
 
@@ -110,7 +112,7 @@ A forma *dummy* da resposta facilita os trabalhos que seguem. Como será visto m
 
 O **gerador** é uma função $g$ que recebe um rótulo como entrada e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de gerar uma imagem fácil de interpretar por humanos, mas difícil de se resolver por máquinas.
 
-Um exemplo de gerador é a função criada no pacote `{captcha}`. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick-2], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
+Um exemplo de gerador é a função `captcha_generate()`criada no pacote `{captcha}` (mais informações no apêndice `pacote.qmd` - ARRUMAR). A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick-2], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
 
 ```{r}
 #| label: fig-captcha-r-exemplo
@@ -126,7 +128,7 @@ O gerador segue os passos abaixo, a partir do momento em que um rótulo $\mathbf
 1.  É criada uma matriz $N\times M \times R$, com valores entre zero e um gerados por simulações de uma $\mathcal U(0,1)$.
 2.  É adicionada uma cor base ao ruído, definida de forma aleatória.
 3.  A matriz é transformada em um objeto do tipo `magick-image`.
-4.  A imagem é preenchida com o valor do rótulo, adicionando-se efeitos como rotação, linha unindo as letras e variação de cores.
+4.  A imagem é preenchida com o valor do rótulo, adicionando-se efeitos como rotação, uma linha unindo as letras e variação de cores.
 5.  A imagem recebe outros tipos de distorções, como adição de ruído, alteração de cores e outros efeitos.
 
 No final, o gerador retorna a imagem, que é a única informação enviada ao agente. O rótulo fica escondido para verificação do oráculo.
@@ -144,7 +146,7 @@ $$
 \end{array}\right.
 $$
 
-Explicando a função: quando o classificador $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Para simplificar, também é possível utilizar a notação de *rotulo complementar* $\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}$. Quando o classificador $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos do rótulo, o que inclui o verdadeiro valor $\mathbf Y_{n+1}$.
+Ou seja, quando o classificador $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Para simplificar, também é possível utilizar a notação de *rótulo complementar* $\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}$. Quando o classificador $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos do rótulo, o que inclui o verdadeiro valor $\mathbf Y_{n+1}$.
 
 A @fig-esquema-oraculo mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.
 
@@ -169,15 +171,19 @@ O oráculo tem um papel fundamental na solução proposta. O fato do oráculo se
 
 #### Fatos estilizados
 
+> EU COLOCARIA ESSE PARÁGRAFO ANTES! FACILITARIA O ENTENDIMENTO DA SEÇÃO "Imagem, rótulo e variável resposta"
 Captchas costumam ter dimensões relativamente pequenas, com a altura $N$ variando entre 30 e 200 *pixels* e a largura $M$ variando entre 100 e 300 *pixels*. As imagens costumam ser retangulares para comportar várias letras lado a lado, ou seja, geralmente $M > N$. O valor de $R$ é 1 para imagens em escala de cinza e 3 para imagens coloridas.
 
 Historicamente, uma alternativa para resolver Captchas é separando o problema em duas tarefas: segmentar e classificar. A tarefa de segmentação consiste em receber uma imagem com várias letras e detectar pontos de corte, separando-a em várias imagens de uma letra. Já a classificação consiste em receber uma imagem com uma letra e identificar o caractere correspondente. Nesse caso, a resposta é reduzida para $|\mathcal A|$ categorias, que cresce linearmente e, portanto, tratável.
 
-A tarefa de resolver Captchas também poderia ser vista como um problema de reconhecimento óptico de caracteres (*Optical Character Recognition*, OCR). No entanto, as distorções encontradas em Captchas são bem diferentes das distorções encontradas em textos escaneados, que são o objeto de aplicação de ferramentas de OCR. Por esse motivo, as ferramentas usuais de OCR apresentam resultados pouco satisfatórios em vários Captchas.
+A tarefa de resolver Captchas também poderia ser vista como um problema de reconhecimento óptico de caracteres (*Optical Character Recognition*, OCR). No entanto, as distorções encontradas em Captchas são bem diferentes das distorções encontradas em textos escaneados, que são o objeto de aplicação de ferramentas de OCR. Por esse motivo, as ferramentas usuais de OCR apresentam resultados pouco satisfatórios em vários Captchas. 
+
 
 As distorções encontradas em Captchas podem ser agrupadas em distorções para dificultar a segmentação e distorções para dificultar a classificação. Na parte de classificação, as principais formas de dificultar o trabalho dos modelos são i) mudar as fontes (serifa ou sem serifa ou negrito/itálico, por exemplo), ii) mudar letras minúsculas para maiúsculas e iii) adicionar distorções nos caracteres. Já na parte de segmentação, as principais formas são i) colar os caracteres e ii) adicionar linhas ligando os dígitos. Essas técnicas são combinadas com a adição de ruído e distorção nas imagens completas para compor a imagem final.
 
 ### Redes neurais
+
+<!-- Talvez o Dani possa te ajudar a revisar essa parte, já que ele entende do assunto -->
 
 A abordagem discutida ao longo da tese utiliza redes neurais convolucionais. Para explicar o funcionamento dessa técnica, apresenta-se as definições para redes neurais e para a operação de convolução no contexto de Captchas, construindo o modelo utilizado nas simulações do modelo proposto.
 
@@ -326,7 +332,7 @@ O resultado da convolução pode ter números negativos ou maiores que um. Para 
 
 Uma característica das imagens mostradas acima é que elas ficaram escuras, ou seja, com muitos valores próximos de zero. Uma técnica para modificar a imagem é adicionar uma constante numérica ao resultado da convolução. Esse é o chamado **viés** (*bias*) da convolução.
 
-A @fig-tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
+A @fig-tjmg-exemplo-conv-vertical-bias mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
 
 ```{r}
 #| label: fig-tjmg-exemplo-conv-vertical-bias
@@ -399,7 +405,7 @@ softm
 knitr::include_graphics("assets/img/tjmg_conv1_modelo.jpeg")
 ```
 
-Antes da aplicação da camada convolucional, a operação de ***batch normalization*** foi aplicada. Essa operação nada mas faz do que normalizar os números da matriz de entrada antes da aplicação da convolução, ou seja, retirar a média e dividir pelo desvio padrão.
+Antes da aplicação da camada convolucional, a operação de ***batch normalization*** foi aplicada. Essa operação normaliza os números da matriz de entrada antes da aplicação da convolução, ou seja, retira a média e divide pelo desvio padrão.
 
 $$
 x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
