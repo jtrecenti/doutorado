@@ -897,7 +897,7 @@ Para cada tamanho de amostra $A$, aplicou-se uma bateria de 27 modelos. Isso foi
 
 Combinando os três valores dos três hiperparâmetros, tem-se um total de $27=3^3$ hiperparâmetros. Com isso, foi possível identificar, para cada tamanho de amostra $A$, o classificador $C_A$ com a melhor acurácia dentre os modelos ajustados.
 
-No final do primeiro passo, portanto, considera-se apenas o melhor modelo para cada tamanho de amostra, dentre os 27 ajustados. É claro que os modelos encontrados por essa técnica não são, necessariamente, os melhor modelo possíveis. No entanto, como a técnica é a mesma para todos os Captchas, é possível fazer comparações através de uma metodologia mais transparente.
+No final do primeiro passo, portanto, considera-se apenas o melhor modelo para cada tamanho de amostra, dentre os 27 ajustados. É claro que os modelos encontrados por essa técnica não são, necessariamente, os melhores modelos possíveis. No entanto, como a técnica é a mesma para todos os Captchas, é possível fazer comparações através de uma metodologia mais transparente.
 
 ### Segundo passo: dados
 
@@ -917,7 +917,7 @@ Portanto, o procedimento de coleta dos dados foi feito, para cada Captcha, da se
 2.  Filtrou-se os modelos para os que apresentavam acurácia de 5% até 50%
 3.  Definiu-se o tamanho da base a ser obtida, com base no tamanho da base de treino utilizada no modelo e a quantidade total que se objetivou obter.
 4.  Para cada quantidade de tentativas disponível (1, 5 e 10), baixou-se as imagens, anotando com o valor "1" se o rótulo de alguma das tentativas estivesse correto e com o valor "0" caso contrário.
-5.  Nos casos com erros, armazenou-se um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final.
+5.  Nos casos com erros, armazenou-se um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final. <!--- aqui é 'do' modelo mesmo? ou 'ao modelo'?-->
 
 No final, obteve-se bases de dados de treino para todos os Captchas analisados, com quantidades de imagens variadas de acordo com os parâmetros definidos anteriormente, variando também pela quantidade de tentativas. A quantidade total de bases de dados geradas foi 65.
 
@@ -935,10 +935,12 @@ $$
 P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{zob5})
 $$
 
+<!-- nao entendi --->
+
 Além de modificar a forma de calcular a função de perda do modelo, foi necessário testar os hiperparâmetros. Optou-se por utilizar os mesmos hiperparâmetros dos modelos iniciais para manter a consistência. O único detalhe nesse ponto é que, como os parâmetros de partida são os do modelo inicial, optou-se por não modificar a quantidade de unidades na camada densa, variando somente os valores de *dropout* e de decaimento na taxa de aprendizado. Portanto, ajustou-se 9 e não 27 modelos para cada base de dados.
 
 No final, assim como no primeiro passo, os classificadors com melhor acurácia foram selecionados para cada modelo. Ficou-se, então, com 65 modelos no final para comparar com os modelos iniciais e estimar a efetividade do oráculo. As comparações foram feitas através de gráficos de barras, explorando o efeito do uso do oráculo para diferentes Captchas, diferentes modelos iniciais e diferentes quantidades de chutes, além de um gráfico de dispersão para relacionar as acurácias iniciais e finais.
 
 Além do terceiro passo, outros experimentos foram realizados para verificar se, ao aplicar a técnica do oráculo iterativamente, os resultados continuariam melhorando. Ou seja, é possível considerar os modelos obtidos no passo 3 como os modelos iniciais do passo 1, aplicar novamente o passo 2 (baixar dados) e o passo 3 (rodar modelo com os novos dados). Isso foi feito para apenas um conjunto selecionado de Captchas para verificar essa possibilidade, não fazendo parte das simulações principais do estudo.
 
-As bases de dados das simulações também foram disponibilizadas na aba de lançamentos (*releases*) do [repositório principal do projeto de pesquisa](https://github.com/jtrecenti/doutorado/releases). As bases podem ser utilizadas para aumentar as bases de treino e para testar outras arquiteturas de redes neurais ao tema dos Captchas com uso de aprendizado fracamente supervisionado.
+As bases de dados das simulações também foram disponibilizadas na aba de lançamentos (*releases*) do [repositório principal do projeto de pesquisa](https://github.com/jtrecenti/doutorado/releases). As bases podem ser utilizadas para aumentar as bases de treino e para testar outras arquiteturas de redes neurais ao tema dos Captchas com uso de aprendizado fracamente supervisionado. <!--- lembrar de colocar os releases --->
