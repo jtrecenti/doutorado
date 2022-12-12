@@ -623,13 +623,13 @@ No final, o valor que é passado para a função de perda é a soma das perdas p
 
 O otimizador que obtém novas estimativas dos parâmetros também não precisa ser modificado. Basta aplicar a mesma técnica utilizada na modelagem usual, como descida de gradiente estocástica ou métodos adaptativos, como *RMSProp* ou *Adam*.
 
-Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow*, basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando o componente de computação gráfica, que potencialmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização desse componente, sendo uma melhoria sugerida para futuros trabalhos.
+Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow* <!---LINKS? ou nota de rodapé --->, basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando o componente de computação gráfica, que potencialmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização desse componente, sendo uma melhoria sugerida para futuros trabalhos.
 
 ## Dados
 
-Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para realizar a pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para chegar nos achados.
+Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para realizar a pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para chegar nos resultados.
 
-No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/09/2022, para verificar se ainda estavam ativos. Além disso, foram construídas duas bases de dados de Captchas desenvolvidos internamente para fins de teste.
+No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no período da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/09/2022, para verificar se ainda estavam ativos. Além disso, foram construídas duas bases de dados de Captchas desenvolvidos internamente para fins de teste.
 
 Parte dos dados foram obtidos como um passo intermediário das simulações. A presente seção descreve como os robôs de coleta foram construídos, bem como a metodologia para obter rótulos via classificação manual. Na subseção de dados da seção de simulação, é possível acessar informações sobre os dados baixados para realizar as simulações.
 
@@ -692,7 +692,7 @@ A @fig-captcha-mnist mostra um exemplo do Captcha gerado a partir da base MNIST.
 
 ```{r}
 #| label: fig-captcha-mnist
-#| fig-cap: Exemplo de MNIST-Captcha
+#| fig-cap: Exemplo de MNIST-Captcha.
 #| fig-align: center
 #| out-width: 150px
 
@@ -796,7 +796,7 @@ No contexto dos Captchas, o interesse está nos passos de Replicar e Validar. Es
 
 A classificação manual dos Captchas envolve o trabalho de baixar, anotar (manualmente) e verificar se a anotação está correta. Trata-se de um trabalho repetitivo e dispendioso, utilizado para gerar as simulações do trabalho.
 
-O oráculo envolve a possibilidade de checar, de forma automática, se uma predição do rótulo de uma imagem está correta. Por ser um teste de Turing inverso, o Captcha é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.
+O oráculo envolve a possibilidade de checar, de forma automática, se uma predição do rótulo de uma imagem está correta. Por ser um teste de Turing inverso, o Captcha é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro. Em termos gerais, as etapas de replicar, parsear e validar para qualquer site de interesse envolvem os passos a seguir.
 
 1.  Acessar a página do site de interesse.
 2.  Preencher o formulário de pesquisa com a informação a ser consultada. Por exemplo, no site da RFB, a informação é o CNPJ da empresa a ser consultada. Em um site de tribunal, a informação é um número identificador de processo.
@@ -809,7 +809,7 @@ O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa qu
 
 O problema do uso de oráculos é que a informação adicional recebida quando o modelo erra é **incompleta**. A única informação nova disponível é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como existe uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, a informação que o oráculo fornece é fraca.
 
-Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros.
+Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros. <!--- entao o que foi feito foi.... ? ou ta descrito onde?--->
 
 Outra oportunidade que o oráculo oferece em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa característica permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na @tbl-lista-captcha, dos 10 Captchas trabalhados, 7 permitem a realização desses testes.
 
@@ -817,7 +817,7 @@ Neste momento, cabe uma observação sobre oráculos e força bruta. O poder de 
 
 Voltando ao ciclo da raspagem, ao longo do procedimento de baixar imagens de Captchas e aplicar o oráculo, pelo menos duas funções devem ser criadas: **acesso** e **teste**. A operação de acesso é responsável por preencher o formulário de busca e baixar o Captcha (passos 1 a 3 da lista acima). A operação de teste é responsável por submeter um rótulo do Captcha e verificar retornar se o rótulo está correto ou incorreto (passos 4 a 6 da lista acima). Em alguns casos, as funções de acesso e teste precisam compartilhar parâmetros que contêm a sessão do usuário, para garantir que o teste envolva o mesmo Captcha da etapa de acesso.
 
-Os Captchas foram anotados manualmente com o procedimento chamado de semi-automático, definido a seguir. No pacote `{captchaDownload}`, foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas.
+Os Captchas foram anotados manualmente com o procedimento chamado de semi-automático, definido a seguir. No pacote `{captchaDownload}` <!--REFERENCIA OU CITAÇÃO DO APENDICE--->, foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas.
 
 Cada Captcha teve as primeiras 100 observações classificadas manualmente. Isso foi feito a partir do próprio RStudio, utilizando a ferramenta de classificação manual do pacote `{captcha}`.
 
@@ -832,6 +832,11 @@ O único problema do procedimento de classificação diz respeito aos Captchas q
 Em alguns casos, os rótulos dos Captchas podem ser obtidos sem intervenção humana, utilizando técnicas de raspagem de dados e processamento de sinais. Um exemplo é o Captcha do SEI, que mostra informações suficientes para resolver o Captcha na própria URL que gera a imagem. Outro exemplo é o TJMG, que libera, além da imagem, um áudio contendo o mesmo rótulo da imagem, sem a adição de ruídos. Como o áudio não tem ruídos, basta ler o áudio, separar os áudios de cada caractere e calcular uma estatística simples (como a soma das amplitudes, ao quadrado). Essa estatística é utilizada para associar um pedaço de áudio a um caractere.
 
 A @tbl-lista-captcha-carac caracteriza os Captchas anotados. Todos os Captchas possuem comprimento entre 4 e 6 dígitos e, com exceção do SEI, não são sensíveis a maiúsculas e minúsculas.
+
+
+<!--- REVISAR NESSA TABELA AS CASAS DECIMAIS E FORMATACAO DE NUMEROS GRANDES --->
+
+<!--- Caracteres, SEPARADOR?--->
 
 ```{r}
 #| label: tbl-lista-captcha-carac
