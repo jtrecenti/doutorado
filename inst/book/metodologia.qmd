@@ -32,7 +32,7 @@ Nesse sentido, uma área que ficou popular nos últimos anos, até por conta dos
 
 Mas isso também não representa todas as classes de problemas. Em muitas aplicações reais, obter uma anotação completa e correta pode ser custoso ou até impraticável. Além disso por envolver trabalho humano, é comum que classificações contenham erros. Para lidar com esses casos existe uma área, que generaliza as anteriores, que é o aprendizado fracamente supervisionado.
 
-Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área existem diversos tipos de problemas, como aprendizado semi-supervisionado, aprendizado de múltiplas instâncias [@blum1998], aprendizado com rótulos incorretos ou incompletos [@zhou2018]. O caso dos Captchas com o uso do oráculo será apresentado como outra classe de problemas, chamada ***aprendizado com rótulos parciais*** (*partial label learning*, PLL, [@jin2002]). Essa classe apresenta uma especialização ainda mais próxima do problema estudado, chamado ***aprendizado com rótulos complementares*** (*complementary label learning*, [@ishida2017a]).
+Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área existem diversos tipos de problemas, como aprendizado semi-supervisionado, aprendizado de múltiplas instâncias [@blum1998] e o aprendizado com rótulos incorretos ou incompletos [@zhou2018]. O caso dos Captchas com o uso do oráculo será apresentado como outra classe de problemas, chamada ***aprendizado com rótulos parciais*** (*partial label learning*, PLL, [@jin2002]). Essa classe apresenta uma especialização ainda mais próxima do problema estudado, chamado ***aprendizado com rótulos complementares*** (*complementary label learning*, [@ishida2017a]).
 
 A intepretação do Captcha como um problema de PLL será apresentada no final do capítulo. A jornada começa de onde deve começar, com aqueles que são objeto de análise deste trabalho: os Captchas.
 
@@ -46,7 +46,7 @@ O fluxo completo de um Captcha envolve cinco componentes: um *rótulo*, um *gera
 
 1.  O rótulo é definido, usualmente com algum procedimento aleatório, ocultado do agente.
 2.  A imagem é gerada a partir do rótulo e apresentada para o agente.
-3.  O agente preenche sua resposta a partir da imagem (que pode estar certo ou errado)
+3.  O agente preenche sua resposta a partir da imagem (que pode estar certa ou errada)
 4.  O oráculo verifica se a resposta está correta.
 5.  Dependendo da resposta, o agente é direcionado para a página autenticada ou para uma página de erro.
 
@@ -60,7 +60,9 @@ knitr::include_graphics("assets/img/esquema-captcha.png")
 
 #### Imagem, rótulo e variável resposta
 
-A imagem é uma matriz $\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}$, contendo padrões que, a partir da análise humana, levam ao rótulo do Captcha. O *rótulo* dado por um vetor de caracteres $\mathbf c = [c_1,\dots,c_L]^\top$. O comprimento $L$ pode ser fixo ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir com comprimentos diferentes. Nas definições que seguem considerou-se $L$ como fixo, por simplicidade.
+A imagem é uma matriz $\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}$, contendo padrões que, a partir da análise humana, levam ao rótulo do Captcha. O *rótulo* é dado por um vetor de caracteres $\mathbf c = [c_1,\dots,c_L]^\top$. O comprimento $L$ pode ser fixo ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir com comprimentos diferentes. Nas definições que seguem considerou-se $L$ como fixo, por simplicidade.
+
+Captchas costumam ter dimensões relativamente pequenas, com a altura $N$ variando entre 30 e 200 *pixels* e a largura $M$ variando entre 100 e 300 *pixels*. As imagens costumam ser retangulares para comportar várias letras lado a lado, ou seja, geralmente $M > N$. O valor de $R$ é 1 para imagens em escala de cinza e 3 para imagens coloridas.
 
 Os elementos do vetor $\mathbf c$ fazem parte de um alfabeto $\mathcal A$, com cardinalidade $|\mathcal A|$, finito e conhecido. O alfabeto contém todos os possíveis caracteres que podem aparecer na imagem. Na maioria dos casos, $\mathcal A$ corresponde a uma combinação de algarismos arábicos (0-9) e letras do alfabeto latino (a-z), podendo diferenciar ou não as letras maiúsculas e minúsculas[^1].
 
@@ -110,7 +112,7 @@ A forma *dummy* da resposta facilita os trabalhos que seguem. Como será visto m
 
 O **gerador** é uma função $g$ que recebe um rótulo como entrada e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de gerar uma imagem fácil de interpretar por humanos, mas difícil de se resolver por máquinas.
 
-Um exemplo de gerador é a função criada no pacote `{captcha}`. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick-2], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
+Um exemplo de gerador é a função `captcha_generate()` criada no pacote `{captcha}`, como descrito no @sec-pacote. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick-2], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
 
 ```{r}
 #| label: fig-captcha-r-exemplo
@@ -126,7 +128,7 @@ O gerador segue os passos abaixo, a partir do momento em que um rótulo $\mathbf
 1.  É criada uma matriz $N\times M \times R$, com valores entre zero e um gerados por simulações de uma $\mathcal U(0,1)$.
 2.  É adicionada uma cor base ao ruído, definida de forma aleatória.
 3.  A matriz é transformada em um objeto do tipo `magick-image`.
-4.  A imagem é preenchida com o valor do rótulo, adicionando-se efeitos como rotação, linha unindo as letras e variação de cores.
+4.  A imagem é preenchida com o valor do rótulo, adicionando-se efeitos como rotação, uma linha unindo as letras e variação de cores.
 5.  A imagem recebe outros tipos de distorções, como adição de ruído, alteração de cores e outros efeitos.
 
 No final, o gerador retorna a imagem, que é a única informação enviada ao agente. O rótulo fica escondido para verificação do oráculo.
@@ -144,7 +146,7 @@ $$
 \end{array}\right.
 $$
 
-Explicando a função: quando o classificador $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Para simplificar, também é possível utilizar a notação de *rotulo complementar* $\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}$. Quando o classificador $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos do rótulo, o que inclui o verdadeiro valor $\mathbf Y_{n+1}$.
+Quando o classificador $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Para simplificar, também é possível utilizar a notação de *rótulo complementar* $\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}$. Quando o classificador $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos do rótulo, o que inclui o verdadeiro valor $\mathbf Y_{n+1}$.
 
 A @fig-esquema-oraculo mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.
 
@@ -168,8 +170,6 @@ Nesse caso, o oráculo também retorna uma lista com a resposta $\mathbf y_{n+1}
 O oráculo tem um papel fundamental na solução proposta. O fato do oráculo sempre retornar a resposta correta na lista de opções faz com que ela necessariamente reduza o espaço de respostas a serem buscadas em uma tentativa futura. Esse fato será explorado a partir de um método iterativo para encontrar o valor real do rótulo.
 
 #### Fatos estilizados
-
-Captchas costumam ter dimensões relativamente pequenas, com a altura $N$ variando entre 30 e 200 *pixels* e a largura $M$ variando entre 100 e 300 *pixels*. As imagens costumam ser retangulares para comportar várias letras lado a lado, ou seja, geralmente $M > N$. O valor de $R$ é 1 para imagens em escala de cinza e 3 para imagens coloridas.
 
 Historicamente, uma alternativa para resolver Captchas é separando o problema em duas tarefas: segmentar e classificar. A tarefa de segmentação consiste em receber uma imagem com várias letras e detectar pontos de corte, separando-a em várias imagens de uma letra. Já a classificação consiste em receber uma imagem com uma letra e identificar o caractere correspondente. Nesse caso, a resposta é reduzida para $|\mathcal A|$ categorias, que cresce linearmente e, portanto, tratável.
 
@@ -219,7 +219,7 @@ Considere
 
 $$
 K = \left[\begin{array}{rrr}-1&-1&-1\\0&0&0\\1&1&1\end{array}\right]
-$$ 
+$$
 
 e a imagem da @fig-tjmg-exemplo-conv. Como visto anteriormente, trata-de de uma matriz de dimensão $40\times110\times3$.
 
@@ -326,7 +326,7 @@ O resultado da convolução pode ter números negativos ou maiores que um. Para 
 
 Uma característica das imagens mostradas acima é que elas ficaram escuras, ou seja, com muitos valores próximos de zero. Uma técnica para modificar a imagem é adicionar uma constante numérica ao resultado da convolução. Esse é o chamado **viés** (*bias*) da convolução.
 
-A @fig-tjmg-exemplo-conv-vertical-bias) mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
+A @fig-tjmg-exemplo-conv-vertical-bias mostra o efeito de adicionar um viés de `0.6` após aplicação da convolução com kernel vertical. É possível idenificar claramente a diferença entre os números (mais suaves) e as curvas usadas para conectar os números (mais proeminetes).
 
 ```{r}
 #| label: fig-tjmg-exemplo-conv-vertical-bias
@@ -399,7 +399,7 @@ softm
 knitr::include_graphics("assets/img/tjmg_conv1_modelo.jpeg")
 ```
 
-Antes da aplicação da camada convolucional, a operação de ***batch normalization*** foi aplicada. Essa operação nada mas faz do que normalizar os números da matriz de entrada antes da aplicação da convolução, ou seja, retirar a média e dividir pelo desvio padrão.
+Antes da aplicação da camada convolucional, a operação de ***batch normalization*** foi aplicada. Essa operação normaliza os números da matriz de entrada antes da aplicação da convolução, retirando a média e dividindo pelo desvio padrão.
 
 $$
 x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
@@ -467,15 +467,15 @@ No exemplo, a saída do modelo é a matriz abaixo:
 
 $$
 \hat{\mathbf z} = \left[\begin{array}{rrrrrrrrrr}
-  -17.54 & -13.52 & -15.49 & -6.67 & -9.91 & 9.94 & -11.40 & -10.93 & -11.84 & -9.31 \\ 
-  -10.93 & -15.62 & 8.31 & -6.59 & -11.08 & -10.37 & -10.06 & -5.83 & -11.43 & -15.17 \\ 
-  -10.54 & -13.67 & -9.61 & -11.46 & 11.28 & -14.35 & -9.91 & -11.37 & -9.91 & -10.02 \\ 
-  -18.19 & -9.60 & -10.96 & 5.35 & -10.15 & -6.63 & -15.56 & -13.34 & -6.87 & -10.86 \\ 
-  -11.36 & -8.73 & 6.46 & -7.05 & -6.14 & -9.26 & -18.98 & -10.36 & -16.11 & -9.67 \\ 
+  -17.5 & -13.5 & -15.4 & -6.6 & -9.9 & 9.9 & -11.4 & -10.9 & -11.8 & -9.3 \\ 
+  -10.9 & -15.6 & 8.3 & -6.5 & -11.0 & -10.3 & -10.0 & -5.8 & -11.4 & -15.1 \\ 
+  -10.5 & -13.6 & -9.6 & -11.4 & 11.2 & -14.3 & -9.9 & -11.3 & -9.9 & -10.0 \\ 
+  -18.1 & -9.6 & -10.9 & 5.3 & -10.1 & -6.6 & -15.5 & -13.3 & -6.8 & -10.8 \\ 
+  -11.3 & -8.7 & 6.4 & -7.0 & -6.1 & -9.2 & -18.9 & -10.3 & -16.1 & -9.6 \\ 
 \end{array}\right].
 $$
 
-Note que a matriz apresenta valores negativos e positivos. Na primeira linha, por exemplo, o valor positivo está na sexta coluna, correspondendo ao algarismo "5". De fato, esse é o valor do primeiro elemento do rótulo para esta imagem. Após a aplicação do softmax, a matriz de predições obtida é a matriz abaixo. Mesmo usando cinco casas decimais, na maioria dos casos, o modelo de exemplo aparenta ter confiança nas respostas.
+Note que a matriz apresenta valores negativos e positivos. Na primeira linha, por exemplo, o valor positivo está na sexta coluna, correspondendo ao algarismo "5". De fato, esse é o valor do primeiro elemento do rótulo para esta imagem. Após a aplicação do *softmax*, a matriz de predições obtida é a matriz abaixo. O modelo de exemplo aparenta ter confiança nas respostas, já que dá probabilidades bem altas para alguns valores e quase zero para outros valores.
 
 $$
 \hat{\mathbf y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
@@ -487,7 +487,9 @@ $$
 \end{array}\right].
 $$
 
-Vale notar que, dependendo da implementação, nem sempre é necessário aplicar a função *softmax*. Em alguns pacotes computacionais como o `torch`, utilizado nesta tese, a normalização pode ser feita diretamente na função de perda, que aproveita a expressão completa para realizar algumas simplificações matemáticas e, com isso, melhorar a precisão das computações. O uso da função de perda ficará claro na próxima subseção.
+Vale notar que, dependendo da implementação, nem sempre é necessário aplicar a função *softmax*. Em alguns pacotes computacionais como o `torch`[^torch], utilizado nesta tese, a normalização pode ser feita diretamente na função de perda, que aproveita a expressão completa para realizar algumas simplificações matemáticas e, com isso, melhorar a precisão das computações. O uso da função de perda ficará claro na próxima subseção.
+
+[^torch]: Mais sobre o (py)torch: <https://pytorch.org/>. Último acesso em 22 de novembro de 2022.
 
 #### Perda
 
@@ -577,7 +579,7 @@ Quando os rótulos complementares não apresentam viés, existe ainda uma extens
 
 O caso do oráculo e dos Captchas é um problema com múltiplos rótulos complementares e com viés. Até o momento, não existe uma solução geral para este tipo de problema. No entanto, espera-se que as soluções para problemas desse tipo tenham taxas de convergência mais estreitas do que o caso de rótulos complementares, com ou sem viés, já que rótulos complementares múltiplos trazem mais informação do que rótulos complementares simples.
 
-## Método WAWL
+## Método WAWL {#sec-wawl}
 
 O método WAWL (*Web Automatic Weak Learning*) é a solução proposta na pesquisa. Trata-se da técnica baixar dados da web para compor parte da amostra que é utilizada no ajuste do modelo.
 
@@ -617,13 +619,17 @@ No final, o valor que é passado para a função de perda é a soma das perdas p
 
 O otimizador que obtém novas estimativas dos parâmetros também não precisa ser modificado. Basta aplicar a mesma técnica utilizada na modelagem usual, como descida de gradiente estocástica ou métodos adaptativos, como *RMSProp* ou *Adam*.
 
-Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow*, basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando o componente de computação gráfica, que potencialmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização desse componente, sendo uma melhoria sugerida para futuros trabalhos.
+Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow*[^2], basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando o componente de computação gráfica, que potencialmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização desse componente, sendo uma melhoria possível em futuros trabalhos.
+
+[^2]: Mais detalhes em <https://www.tensorflow.org/>. Último acesso em 22 de novembro de 2022.
+
+O ajuste dos modelos, tanto para simulações quanto para construção dos modelos finais, utilizou o pacote `{torch}` [@torch], que é uma implementação do PyTorch para a linguagem de programação R [@rcran]. O pacote `{luz}` [@luz] foi utilizado para organizar as funções de perda e hiperparâmetros, enquanto o pacote `{torchvision}` [@torchvision] foi utilizado para utilidades no tratamento de imagens.
 
 ## Dados
 
-Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para realizar a pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para chegar nos achados.
+Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para realizar a pesquisa. Como comentado anteriormente, a base foi construída do zero para os fins do projeto, sendo uma parte significativa dos esforços para chegar nos resultados.
 
-No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no momento da realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/09/2022, para verificar se ainda estavam ativos. Além disso, foram construídas duas bases de dados de Captchas desenvolvidos internamente para fins de teste.
+No total, foram construídas bases de dados de dez Captchas que estavam disponíveis publicamente no período de realização da pesquisa. Os Captchas foram revisados pela última vez no dia 14/09/2022, para verificar se ainda estavam ativos. Além disso, foram construídas duas bases de dados de Captchas desenvolvidos internamente para fins de teste.
 
 Parte dos dados foram obtidos como um passo intermediário das simulações. A presente seção descreve como os robôs de coleta foram construídos, bem como a metodologia para obter rótulos via classificação manual. Na subseção de dados da seção de simulação, é possível acessar informações sobre os dados baixados para realizar as simulações.
 
@@ -753,9 +759,9 @@ knitr::include_graphics("assets/img/raspagem-rfb-sonoro.png")
 
 A segunda tarefa é a de navegar pelo site, registrando as requisições realizadas pelo navegador para realizar a consulta. Isso envolve abrir o inspetor de elementos do navegador, na aba Rede (ou *Network*, em inglês), anotando as requisições que são realizadas.
 
-No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas requisições aparecem na aba "Rede", como mostrado na @fig-raspagem-rfb-rede. A primeira requisição é do tipo POST[^2], responsável por enviar os dados de CNPJ e do rótulo da imagem para o servidor, que retorna com os dados da empresa.
+No exemplo, testamos o CNPJ 13.612.840/0001-57, da Associação Brasileira de Jurimetria. Ao preencher o CNPJ e o rótulo do Captcha, algumas requisições aparecem na aba "Rede", como mostrado na @fig-raspagem-rfb-rede. A primeira requisição é do tipo POST[^3], responsável por enviar os dados de CNPJ e do rótulo da imagem para o servidor, que retorna com os dados da empresa.
 
-[^2]: Existem dois tipos principais de requisição HTTP. A requisição GET serve para capturar uma página da internet, enquanto a requisição POST serve para enviar dados para o servidor como, um login e uma senha. A lista completa de requisições está disponível na [documentação da *Internet Engineering Task Force* (IETF)](https://www.rfc-editor.org/rfc/rfc9110.html "https://www.rfc-editor.org/rfc/rfc9110.html").
+[^3]: Existem dois tipos principais de requisição HTTP. A requisição GET serve para capturar uma página da internet, enquanto a requisição POST serve para enviar dados para o servidor como, um login e uma senha. A lista completa de requisições está disponível na [documentação da *Internet Engineering Task Force* (IETF)](https://www.rfc-editor.org/rfc/rfc9110.html "https://www.rfc-editor.org/rfc/rfc9110.html").
 
 ```{r}
 #| label: fig-raspagem-rfb-rede
@@ -790,7 +796,7 @@ No contexto dos Captchas, o interesse está nos passos de Replicar e Validar. Es
 
 A classificação manual dos Captchas envolve o trabalho de baixar, anotar (manualmente) e verificar se a anotação está correta. Trata-se de um trabalho repetitivo e dispendioso, utilizado para gerar as simulações do trabalho.
 
-O oráculo envolve a possibilidade de checar, de forma automática, se uma predição do rótulo de uma imagem está correta. Por ser um teste de Turing inverso, o Captcha é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro.
+O oráculo envolve a possibilidade de checar, de forma automática, se uma predição do rótulo de uma imagem está correta. Por ser um teste de Turing inverso, o Captcha é obrigado a mencionar se uma predição está correta: se a predição foi correta, a página de interesse é acessada; se a predição está incorreta, o site envia uma mensagem de erro. As etapas de replicar, parsear e validar para qualquer site de interesse envolvem os passos a seguir.
 
 1.  Acessar a página do site de interesse.
 2.  Preencher o formulário de pesquisa com a informação a ser consultada. Por exemplo, no site da RFB, a informação é o CNPJ da empresa a ser consultada. Em um site de tribunal, a informação é um número identificador de processo.
@@ -803,7 +809,7 @@ O procedimento descrito pode ser reproduzindo indefinidamente. Isso significa qu
 
 O problema do uso de oráculos é que a informação adicional recebida quando o modelo erra é **incompleta**. A única informação nova disponível é que o rótulo testado está incorreto, dentre todos os rótulos possíveis daquela imagem. Como existe uma grande quantidade de rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, a informação que o oráculo fornece é fraca.
 
-Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. Podemos criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. Nosso objetivo é melhorar o modelo justamente nos casos em que o oráculo acusa erros.
+Uma possível abordagem para lidar com o segundo problema seria simplesmente descartar os Captchas classificados incorretamente. É possível criar uma base de dados (virtualmente infinita) somente com os rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem sérios problemas, já que considera somente os casos em que o classificador já funciona bem. O trabalho realizado na tese incorpora a informação fornecida pelo oráculo quando o modelo erra.
 
 Outra oportunidade que o oráculo oferece em parte dos casos é a possibilidade de testar mais de uma predição. Sites com essa característica permitem que a pessoa ou robô teste mais de uma predição caso o Captcha tenha fracassado. Como é possível observar na @tbl-lista-captcha, dos 10 Captchas trabalhados, 7 permitem a realização desses testes.
 
@@ -811,7 +817,7 @@ Neste momento, cabe uma observação sobre oráculos e força bruta. O poder de 
 
 Voltando ao ciclo da raspagem, ao longo do procedimento de baixar imagens de Captchas e aplicar o oráculo, pelo menos duas funções devem ser criadas: **acesso** e **teste**. A operação de acesso é responsável por preencher o formulário de busca e baixar o Captcha (passos 1 a 3 da lista acima). A operação de teste é responsável por submeter um rótulo do Captcha e verificar retornar se o rótulo está correto ou incorreto (passos 4 a 6 da lista acima). Em alguns casos, as funções de acesso e teste precisam compartilhar parâmetros que contêm a sessão do usuário, para garantir que o teste envolva o mesmo Captcha da etapa de acesso.
 
-Os Captchas foram anotados manualmente com o procedimento chamado de semi-automático, definido a seguir. No pacote `{captchaDownload}`, foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas.
+Os Captchas foram anotados manualmente com o procedimento chamado de semi-automático, definido a seguir. No pacote `{captchaDownload}` (ver Apêndice [-@sec-pacote-download]), foram desenvolvidas ferramentas para baixar e organizar cada Captcha, utilizando o oráculo para garantir que as imagens eram corretamente classificadas.
 
 Cada Captcha teve as primeiras 100 observações classificadas manualmente. Isso foi feito a partir do próprio RStudio, utilizando a ferramenta de classificação manual do pacote `{captcha}`.
 
@@ -897,7 +903,7 @@ Para cada tamanho de amostra $A$, aplicou-se uma bateria de 27 modelos. Isso foi
 
 Combinando os três valores dos três hiperparâmetros, tem-se um total de $27=3^3$ hiperparâmetros. Com isso, foi possível identificar, para cada tamanho de amostra $A$, o classificador $C_A$ com a melhor acurácia dentre os modelos ajustados.
 
-No final do primeiro passo, portanto, considera-se apenas o melhor modelo para cada tamanho de amostra, dentre os 27 ajustados. É claro que os modelos encontrados por essa técnica não são, necessariamente, os melhor modelo possíveis. No entanto, como a técnica é a mesma para todos os Captchas, é possível fazer comparações através de uma metodologia mais transparente.
+No final do primeiro passo, portanto, considera-se apenas o melhor modelo para cada tamanho de amostra, dentre os 27 ajustados. É claro que os modelos encontrados por essa técnica não são, necessariamente, os melhores modelos possíveis. No entanto, como a técnica é a mesma para todos os Captchas, é possível fazer comparações através de uma metodologia mais transparente.
 
 ### Segundo passo: dados
 
@@ -917,7 +923,7 @@ Portanto, o procedimento de coleta dos dados foi feito, para cada Captcha, da se
 2.  Filtrou-se os modelos para os que apresentavam acurácia de 5% até 50%
 3.  Definiu-se o tamanho da base a ser obtida, com base no tamanho da base de treino utilizada no modelo e a quantidade total que se objetivou obter.
 4.  Para cada quantidade de tentativas disponível (1, 5 e 10), baixou-se as imagens, anotando com o valor "1" se o rótulo de alguma das tentativas estivesse correto e com o valor "0" caso contrário.
-5.  Nos casos com erros, armazenou-se um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada do modelo final.
+5.  Nos casos com erros, armazenou-se um arquivo de log para cada Captcha com o histórico de tentativas incorretas, que é a informação mais importante a ser passada para o modelo final.
 
 No final, obteve-se bases de dados de treino para todos os Captchas analisados, com quantidades de imagens variadas de acordo com os parâmetros definidos anteriormente, variando também pela quantidade de tentativas. A quantidade total de bases de dados geradas foi 65.
 
@@ -927,17 +933,11 @@ Como o único objetivo da base de teste foi o de estimar a acurácia dos modelos
 
 ### Terceiro passo: modelo final
 
-O modelo final foi ajustado para cada uma das 65 bases de treino disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se o modelo proposto, que considera os erros na verossimilhança do modelo. Caso a imagem tenha sido corretamente classificada, a função de perda é calculada normalmente. Caso ela tenha sido classificada incorretamente, consideramos na verossimilhança a probabilidade de não observar nenhum dos chutes.
+O modelo final foi ajustado para cada uma das 65 bases de treino disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se o modelo proposto na @sec-wawl. Caso a imagem tenha sido corretamente classificada, a função de perda é calculada normalmente. Caso ela tenha sido classificada incorretamente, considera-se a probabilidade de não observar nenhum dos chutes.
 
-**Exemplo**. Considere um Captcha com letras e números como vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo (correto) "zab2". O classificador do passo inicial tentou as seguintes configurações: "zab5", "sab2", "sab5", "zob2", "zob5", todas erradas. A probabilidade considerada na verossimilhança para essa imagem é, portanto:
+Além de modificar a forma de calcular a função de perda do modelo, foi necessário realizar uma nova busca de hiperparâmetros. Optou-se por utilizar os mesmos hiperparâmetros dos modelos iniciais para manter a consistência. O único detalhe nesse ponto é que, como os parâmetros de partida são os do modelo inicial, optou-se por não modificar a quantidade de unidades na camada densa, variando somente os valores de *dropout* e de decaimento na taxa de aprendizado. Portanto, ajustou-se 9 e não 27 modelos para cada base de dados.
 
-$$
-P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{zob5})
-$$
-
-Além de modificar a forma de calcular a função de perda do modelo, foi necessário testar os hiperparâmetros. Optou-se por utilizar os mesmos hiperparâmetros dos modelos iniciais para manter a consistência. O único detalhe nesse ponto é que, como os parâmetros de partida são os do modelo inicial, optou-se por não modificar a quantidade de unidades na camada densa, variando somente os valores de *dropout* e de decaimento na taxa de aprendizado. Portanto, ajustou-se 9 e não 27 modelos para cada base de dados.
-
-No final, assim como no primeiro passo, os classificadors com melhor acurácia foram selecionados para cada modelo. Ficou-se, então, com 65 modelos no final para comparar com os modelos iniciais e estimar a efetividade do oráculo. As comparações foram feitas através de gráficos de barras, explorando o efeito do uso do oráculo para diferentes Captchas, diferentes modelos iniciais e diferentes quantidades de chutes, além de um gráfico de dispersão para relacionar as acurácias iniciais e finais.
+No final, assim como no primeiro passo, os classificadors com melhor acurácia foram selecionados para cada modelo. Obteve-se, então, com 65 modelos no final para comparar com os modelos iniciais e estimar a efetividade do oráculo. As comparações foram feitas através de gráficos de barras, explorando o efeito do uso do oráculo para diferentes Captchas, diferentes modelos iniciais e diferentes quantidades de chutes, além de um gráfico de dispersão para relacionar as acurácias iniciais e finais.
 
 Além do terceiro passo, outros experimentos foram realizados para verificar se, ao aplicar a técnica do oráculo iterativamente, os resultados continuariam melhorando. Ou seja, é possível considerar os modelos obtidos no passo 3 como os modelos iniciais do passo 1, aplicar novamente o passo 2 (baixar dados) e o passo 3 (rodar modelo com os novos dados). Isso foi feito para apenas um conjunto selecionado de Captchas para verificar essa possibilidade, não fazendo parte das simulações principais do estudo.
 

@@ -1,4 +1,4 @@
-# Pacote {captcha}
+# Pacote captcha {#sec-pacote}
 
 > Citar versão anterior {decryptr}
 
@@ -6,3 +6,7 @@
 
 > Print screens do {ancaptcha}
 
+
+## Pacote captchaDownload {#sec-pacote-download}
+
+## Pacote captchaOracle {#sec-pacote-oracle}
