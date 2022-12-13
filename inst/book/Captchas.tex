@@ -1146,9 +1146,9 @@ supervisionado.
 Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da
 área existem diversos tipos de problemas, como aprendizado
 semi-supervisionado, aprendizado de múltiplas instâncias (BLUM; KALAI,
-1998), aprendizado com rótulos incorretos ou incompletos (ZHOU, 2018). O
-caso dos Captchas com o uso do oráculo será apresentado como outra
-classe de problemas, chamada \textbf{\emph{aprendizado com rótulos
+1998) e o aprendizado com rótulos incorretos ou incompletos (ZHOU,
+2018). O caso dos Captchas com o uso do oráculo será apresentado como
+outra classe de problemas, chamada \textbf{\emph{aprendizado com rótulos
 parciais}} (\emph{partial label learning}, PLL, (JIN; GHAHRAMANI,
 2002)). Essa classe apresenta uma especialização ainda mais próxima do
 problema estudado, chamado \textbf{\emph{aprendizado com rótulos
@@ -1185,7 +1185,7 @@ O fluxo completo de um Captcha envolve cinco componentes: um
   A imagem é gerada a partir do rótulo e apresentada para o agente.
 \item
   O agente preenche sua resposta a partir da imagem (que pode estar
-  certo ou errado)
+  certa ou errada)
 \item
   O oráculo verifica se a resposta está correta.
 \item
@@ -1212,11 +1212,18 @@ resposta}\label{imagem-ruxf3tulo-e-variuxe1vel-resposta}}
 A imagem é uma matriz
 \(\mathbf x = \{x_{nmr} \in [0,1]\}_{N\times M \times R}\), contendo
 padrões que, a partir da análise humana, levam ao rótulo do Captcha. O
-\emph{rótulo} dado por um vetor de caracteres
+\emph{rótulo} é dado por um vetor de caracteres
 \(\mathbf c = [c_1,\dots,c_L]^\top\). O comprimento \(L\) pode ser fixo
 ou variável, ou seja, duas imagens criadas pelo mesmo gerador podem vir
 com comprimentos diferentes. Nas definições que seguem considerou-se
 \(L\) como fixo, por simplicidade.
+
+Captchas costumam ter dimensões relativamente pequenas, com a altura
+\(N\) variando entre 30 e 200 \emph{pixels} e a largura \(M\) variando
+entre 100 e 300 \emph{pixels}. As imagens costumam ser retangulares para
+comportar várias letras lado a lado, ou seja, geralmente \(M > N\). O
+valor de \(R\) é 1 para imagens em escala de cinza e 3 para imagens
+coloridas.
 
 Os elementos do vetor \(\mathbf c\) fazem parte de um alfabeto
 \(\mathcal A\), com cardinalidade \(|\mathcal A|\), finito e conhecido.
@@ -1316,7 +1323,8 @@ e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de
 gerar uma imagem fácil de interpretar por humanos, mas difícil de se
 resolver por máquinas.
 
-Um exemplo de gerador é a função criada no pacote \texttt{\{captcha\}}.
+Um exemplo de gerador é a função \texttt{captcha\_generate()} criada no
+pacote \texttt{\{captcha\}}, como descrito no Apêndice~\ref{sec-pacote}.
 A função foi criada para realizar simulações do sistema de resolução
 proposto na tese, a partir do pacote \texttt{\{magick\}} (OOMS, 2021),
 que utiliza o software \emph{ImageMagick}. A função aplica uma série de
@@ -1349,7 +1357,7 @@ O gerador segue os passos abaixo, a partir do momento em que um rótulo
   A matriz é transformada em um objeto do tipo \texttt{magick-image}.
 \item
   A imagem é preenchida com o valor do rótulo, adicionando-se efeitos
-  como rotação, linha unindo as letras e variação de cores.
+  como rotação, uma linha unindo as letras e variação de cores.
 \item
   A imagem recebe outros tipos de distorções, como adição de ruído,
   alteração de cores e outros efeitos.
@@ -1384,10 +1392,9 @@ forma:
 \end{array}\right.
 \]
 
-Explicando a função: quando o classificador \(g\) acerta o rótulo, o
-oráculo retorna uma lista que contém apenas um elemento: o próprio
-rótulo. Para simplificar, também é possível utilizar a notação de
-\emph{rotulo complementar}
+Quando o classificador \(g\) acerta o rótulo, o oráculo retorna uma
+lista que contém apenas um elemento: o próprio rótulo. Para simplificar,
+também é possível utilizar a notação de \emph{rótulo complementar}
 \(\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}\).
 Quando o classificador \(g\) retorna o rótulo errado, o oráculo retorna
 uma lista com todos os outros possíveis rótulos do rótulo, o que inclui
@@ -1438,13 +1445,6 @@ iterativo para encontrar o valor real do rótulo.
 
 \hypertarget{fatos-estilizados}{%
 \subsubsection{Fatos estilizados}\label{fatos-estilizados}}
-
-Captchas costumam ter dimensões relativamente pequenas, com a altura
-\(N\) variando entre 30 e 200 \emph{pixels} e a largura \(M\) variando
-entre 100 e 300 \emph{pixels}. As imagens costumam ser retangulares para
-comportar várias letras lado a lado, ou seja, geralmente \(M > N\). O
-valor de \(R\) é 1 para imagens em escala de cinza e 3 para imagens
-coloridas.
 
 Historicamente, uma alternativa para resolver Captchas é separando o
 problema em duas tarefas: segmentar e classificar. A tarefa de
@@ -1670,7 +1670,7 @@ escuras, ou seja, com muitos valores próximos de zero. Uma técnica para
 modificar a imagem é adicionar uma constante numérica ao resultado da
 convolução. Esse é o chamado \textbf{viés} (\emph{bias}) da convolução.
 
-A Figura~\ref{fig-tjmg-exemplo-conv-vertical-bias}) mostra o efeito de
+A Figura~\ref{fig-tjmg-exemplo-conv-vertical-bias} mostra o efeito de
 adicionar um viés de \texttt{0.6} após aplicação da convolução com
 kernel vertical. É possível idenificar claramente a diferença entre os
 números (mais suaves) e as curvas usadas para conectar os números (mais
@@ -1720,9 +1720,9 @@ primeira convolução à imagem.}
 \end{figure}
 
 Antes da aplicação da camada convolucional, a operação de
-\textbf{\emph{batch normalization}} foi aplicada. Essa operação nada mas
-faz do que normalizar os números da matriz de entrada antes da aplicação
-da convolução, ou seja, retirar a média e dividir pelo desvio padrão.
+\textbf{\emph{batch normalization}} foi aplicada. Essa operação
+normaliza os números da matriz de entrada antes da aplicação da
+convolução, retirando a média e dividindo pelo desvio padrão.
 
 \[
 x_z = \left(\frac{x-\bar x}{\sqrt{\sigma^2_x + \epsilon}}\right) \gamma + \beta
@@ -1908,21 +1908,21 @@ No exemplo, a saída do modelo é a matriz abaixo:
 
 \[
 \hat{\mathbf z} = \left[\begin{array}{rrrrrrrrrr}
-  -17.54 & -13.52 & -15.49 & -6.67 & -9.91 & 9.94 & -11.40 & -10.93 & -11.84 & -9.31 \\ 
-  -10.93 & -15.62 & 8.31 & -6.59 & -11.08 & -10.37 & -10.06 & -5.83 & -11.43 & -15.17 \\ 
-  -10.54 & -13.67 & -9.61 & -11.46 & 11.28 & -14.35 & -9.91 & -11.37 & -9.91 & -10.02 \\ 
-  -18.19 & -9.60 & -10.96 & 5.35 & -10.15 & -6.63 & -15.56 & -13.34 & -6.87 & -10.86 \\ 
-  -11.36 & -8.73 & 6.46 & -7.05 & -6.14 & -9.26 & -18.98 & -10.36 & -16.11 & -9.67 \\ 
+  -17.5 & -13.5 & -15.4 & -6.6 & -9.9 & 9.9 & -11.4 & -10.9 & -11.8 & -9.3 \\ 
+  -10.9 & -15.6 & 8.3 & -6.5 & -11.0 & -10.3 & -10.0 & -5.8 & -11.4 & -15.1 \\ 
+  -10.5 & -13.6 & -9.6 & -11.4 & 11.2 & -14.3 & -9.9 & -11.3 & -9.9 & -10.0 \\ 
+  -18.1 & -9.6 & -10.9 & 5.3 & -10.1 & -6.6 & -15.5 & -13.3 & -6.8 & -10.8 \\ 
+  -11.3 & -8.7 & 6.4 & -7.0 & -6.1 & -9.2 & -18.9 & -10.3 & -16.1 & -9.6 \\ 
 \end{array}\right].
 \]
 
 Note que a matriz apresenta valores negativos e positivos. Na primeira
 linha, por exemplo, o valor positivo está na sexta coluna,
 correspondendo ao algarismo ``5''. De fato, esse é o valor do primeiro
-elemento do rótulo para esta imagem. Após a aplicação do softmax, a
-matriz de predições obtida é a matriz abaixo. Mesmo usando cinco casas
-decimais, na maioria dos casos, o modelo de exemplo aparenta ter
-confiança nas respostas.
+elemento do rótulo para esta imagem. Após a aplicação do \emph{softmax},
+a matriz de predições obtida é a matriz abaixo. O modelo de exemplo
+aparenta ter confiança nas respostas, já que dá probabilidades bem altas
+para alguns valores e quase zero para outros valores.
 
 \[
 \hat{\mathbf y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
@@ -1936,11 +1936,12 @@ confiança nas respostas.
 
 Vale notar que, dependendo da implementação, nem sempre é necessário
 aplicar a função \emph{softmax}. Em alguns pacotes computacionais como o
-\texttt{torch}, utilizado nesta tese, a normalização pode ser feita
-diretamente na função de perda, que aproveita a expressão completa para
-realizar algumas simplificações matemáticas e, com isso, melhorar a
-precisão das computações. O uso da função de perda ficará claro na
-próxima subseção.
+\texttt{torch}\footnote{Mais sobre o (py)torch:
+  \url{https://pytorch.org/}. Último acesso em 22 de novembro de 2022.},
+utilizado nesta tese, a normalização pode ser feita diretamente na
+função de perda, que aproveita a expressão completa para realizar
+algumas simplificações matemáticas e, com isso, melhorar a precisão das
+computações. O uso da função de perda ficará claro na próxima subseção.
 
 \hypertarget{perda}{%
 \subsubsection{Perda}\label{perda}}
@@ -2136,8 +2137,8 @@ o caso de rótulos complementares, com ou sem viés, já que rótulos
 complementares múltiplos trazem mais informação do que rótulos
 complementares simples.
 
-\hypertarget{muxe9todo-wawl}{%
-\section{Método WAWL}\label{muxe9todo-wawl}}
+\hypertarget{sec-wawl}{%
+\section{Método WAWL}\label{sec-wawl}}
 
 O método WAWL (\emph{Web Automatic Weak Learning}) é a solução proposta
 na pesquisa. Trata-se da técnica baixar dados da web para compor parte
@@ -2217,15 +2218,24 @@ adaptativos, como \emph{RMSProp} ou \emph{Adam}.
 
 Um detalhe importante sobre o método é sobre a implementação. Com a
 utilização de ferramentas que fazem diferenciação automática como o
-\emph{torch} e o \emph{TensorFlow}, basta implementar a parte da
-arquitetura, a função de perda e especificar o otimizador, já que o
-processo de atualização dos parâmetros é feito automaticamente. No
-entanto, dependendo da implementação, não é possível fazer a atualização
-dos parâmetros usando o componente de computação gráfica, que
-potencialmente acelera o ajuste dos modelos de forma significativa. Na
-implementação atual, a função de perda apresentada não permite
-utilização desse componente, sendo uma melhoria sugerida para futuros
-trabalhos.
+\emph{torch} e o \emph{TensorFlow}\footnote{Mais detalhes em
+  \url{https://www.tensorflow.org/}. Último acesso em 22 de novembro de
+  2022.}, basta implementar a parte da arquitetura, a função de perda e
+especificar o otimizador, já que o processo de atualização dos
+parâmetros é feito automaticamente. No entanto, dependendo da
+implementação, não é possível fazer a atualização dos parâmetros usando
+o componente de computação gráfica, que potencialmente acelera o ajuste
+dos modelos de forma significativa. Na implementação atual, a função de
+perda apresentada não permite utilização desse componente, sendo uma
+melhoria possível em futuros trabalhos.
+
+O ajuste dos modelos, tanto para simulações quanto para construção dos
+modelos finais, utilizou o pacote \texttt{\{torch\}} (FALBEL; LURASCHI,
+2022), que é uma implementação do PyTorch para a linguagem de
+programação R (R CORE TEAM, 2021). O pacote \texttt{\{luz\}} (FALBEL,
+2022a) foi utilizado para organizar as funções de perda e
+hiperparâmetros, enquanto o pacote \texttt{\{torchvision\}} (FALBEL,
+2022b) foi utilizado para utilidades no tratamento de imagens.
 
 \hypertarget{dados}{%
 \section{Dados}\label{dados}}
@@ -2233,10 +2243,10 @@ trabalhos.
 Nesta seção, descreve-se em detalhes como foi a obtenção dos dados para
 realizar a pesquisa. Como comentado anteriormente, a base foi construída
 do zero para os fins do projeto, sendo uma parte significativa dos
-esforços para chegar nos achados.
+esforços para chegar nos resultados.
 
 No total, foram construídas bases de dados de dez Captchas que estavam
-disponíveis publicamente no momento da realização da pesquisa. Os
+disponíveis publicamente no período de realização da pesquisa. Os
 Captchas foram revisados pela última vez no dia 14/09/2022, para
 verificar se ainda estavam ativos. Além disso, foram construídas duas
 bases de dados de Captchas desenvolvidos internamente para fins de
@@ -2625,7 +2635,9 @@ O oráculo envolve a possibilidade de checar, de forma automática, se uma
 predição do rótulo de uma imagem está correta. Por ser um teste de
 Turing inverso, o Captcha é obrigado a mencionar se uma predição está
 correta: se a predição foi correta, a página de interesse é acessada; se
-a predição está incorreta, o site envia uma mensagem de erro.
+a predição está incorreta, o site envia uma mensagem de erro. As etapas
+de replicar, parsear e validar para qualquer site de interesse envolvem
+os passos a seguir.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2663,12 +2675,12 @@ rótulos possíveis em um Captcha, muitas vezes na ordem de milhões, a
 informação que o oráculo fornece é fraca.
 
 Uma possível abordagem para lidar com o segundo problema seria
-simplesmente descartar os Captchas classificados incorretamente. Podemos
-criar uma base de dados (virtualmente infinita) somente com os rótulos
-corretos e ajustar um novo modelo. Essa abordagem, no entanto, tem
-sérios problemas, já que considera somente os casos em que o
-classificador já funciona bem. Nosso objetivo é melhorar o modelo
-justamente nos casos em que o oráculo acusa erros.
+simplesmente descartar os Captchas classificados incorretamente. É
+possível criar uma base de dados (virtualmente infinita) somente com os
+rótulos corretos e ajustar um novo modelo. Essa abordagem, no entanto,
+tem sérios problemas, já que considera somente os casos em que o
+classificador já funciona bem. O trabalho realizado na tese incorpora a
+informação fornecida pelo oráculo quando o modelo erra.
 
 Outra oportunidade que o oráculo oferece em parte dos casos é a
 possibilidade de testar mais de uma predição. Sites com essa
@@ -2699,9 +2711,10 @@ etapa de acesso.
 
 Os Captchas foram anotados manualmente com o procedimento chamado de
 semi-automático, definido a seguir. No pacote
-\texttt{\{captchaDownload\}}, foram desenvolvidas ferramentas para
-baixar e organizar cada Captcha, utilizando o oráculo para garantir que
-as imagens eram corretamente classificadas.
+\texttt{\{captchaDownload\}} (ver Apêndice \ref{sec-pacote-download}),
+foram desenvolvidas ferramentas para baixar e organizar cada Captcha,
+utilizando o oráculo para garantir que as imagens eram corretamente
+classificadas.
 
 Cada Captcha teve as primeiras 100 observações classificadas
 manualmente. Isso foi feito a partir do próprio RStudio, utilizando a
@@ -2764,74 +2777,74 @@ do SEI, não são sensíveis a maiúsculas e minúsculas.
 
 \renewcommand*{\arraystretch}{1.5}
 
-\begin{longtable}[c]{|p{0.75in}|p{1.50in}|p{1.20in}|p{0.75in}|p{0.75in}|p{1.50in}}
+\begin{longtable}[c]{|p{0.75in}|p{0.80in}|p{1.10in}|p{1.10in}|p{0.75in}|p{1.30in}}
 
 \caption{\label{tbl-lista-captcha-carac}Lista de captchas analisados e suas características. } \\ 
 
 
 \hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Captcha}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Aceita\ vários\ chutes}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Caracteres}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Comprimento}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Colorido}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\#\ Rótulos\ anotados}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Captcha}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Vários\ chutes}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Caracteres}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Comprimento}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Colorido}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\#\ Rótulos\ anotados}}} \\
 
 \hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}\endhead
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje.trf5.jus.br/pje/ConsultaPublica/listView.seam}{trf5}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www4.tjmg.jus.br/juridico/sf/proc\_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn\_pesquisar=Pesquisar}{tjmg}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www4.tjmg.jus.br/juridico/sf/proc\_resultado.jsp?comrCodigo=24\&numero=1\&listaProcessos=50718889720218130024\&btn\_pesquisar=Pesquisar}{tjmg}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1,500.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://pje-consulta.trt3.jus.br/pje-consulta-api/api/processos/2104879}{trt}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0:9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{1500}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{3,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{http://esaj.tjba.jus.br/cpopg/open.do}{esaj}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{3000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.jucesponline.sp.gov.br/ResultadoBusca.aspx}{jucesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://srv01.tjpe.jus.br/consultaprocessualunificada/}{tjpe}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{5}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.tjrs.jus.br/site\_php/consulta/verificador.php}{tjrs}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{2,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.tjrs.jus.br/site\_php/consulta/verificador.php}{tjrs}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{2000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3}{cadesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{3,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://www.cadesp.fazenda.sp.gov.br/(S(vyfz1cfybbxj3sgpf4eqhxd3}{cadesp}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{3000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md\_pesq\_processo\_pesquisar.php?acao\_externa=protocolo\_pesquisar\&acao\_origem\_externa=protocolo\_pesquisar\&id\_orgao\_acesso\_externo=0}{sei}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-zA-Z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{10,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://sei.economia.gov.br/sei/modulos/pesquisa/md\_pesq\_processo\_pesquisar.php?acao\_externa=protocolo\_pesquisar\&acao\_origem\_externa=protocolo\_pesquisar\&id\_orgao\_acesso\_externo=0}{sei}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-zA-Z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{10000}}} \\
 
 
 
 
 
-\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva\_Solicitacao\_CS.asp}{rfb}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.2in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.5in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4,000.00}}} \\
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{\href{https://servicos.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva\_Solicitacao\_CS.asp}{rfb}}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.8in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{Sim}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{a-z0-9}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.1in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{6}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 0.75in+0\tabcolsep+0\arrayrulewidth}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{não}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\centering}p{\dimexpr 1.3in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\textcolor[HTML]{000000}{\fontsize{11}{22}\selectfont{4000}}} \\
 
 \hhline{>{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}->{\arrayrulecolor[HTML]{000000}\global\arrayrulewidth=1pt}-}
 
@@ -2905,9 +2918,9 @@ acurácia dentre os modelos ajustados.
 No final do primeiro passo, portanto, considera-se apenas o melhor
 modelo para cada tamanho de amostra, dentre os 27 ajustados. É claro que
 os modelos encontrados por essa técnica não são, necessariamente, os
-melhor modelo possíveis. No entanto, como a técnica é a mesma para todos
-os Captchas, é possível fazer comparações através de uma metodologia
-mais transparente.
+melhores modelos possíveis. No entanto, como a técnica é a mesma para
+todos os Captchas, é possível fazer comparações através de uma
+metodologia mais transparente.
 
 \hypertarget{segundo-passo-dados}{%
 \subsection{Segundo passo: dados}\label{segundo-passo-dados}}
@@ -2981,7 +2994,7 @@ Captcha, da seguinte forma:
 \item
   Nos casos com erros, armazenou-se um arquivo de log para cada Captcha
   com o histórico de tentativas incorretas, que é a informação mais
-  importante a ser passada do modelo final.
+  importante a ser passada para o modelo final.
 \end{enumerate}
 
 No final, obteve-se bases de dados de treino para todos os Captchas
@@ -3009,34 +3022,22 @@ final}\label{terceiro-passo-modelo-final}}
 
 O modelo final foi ajustado para cada uma das 65 bases de treino
 disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se
-o modelo proposto, que considera os erros na verossimilhança do modelo.
-Caso a imagem tenha sido corretamente classificada, a função de perda é
-calculada normalmente. Caso ela tenha sido classificada incorretamente,
-consideramos na verossimilhança a probabilidade de não observar nenhum
-dos chutes.
-
-\textbf{Exemplo}. Considere um Captcha com letras e números como
-vocabulário e comprimento de 4 valores. Uma imagem apresenta o rótulo
-(correto) ``zab2''. O classificador do passo inicial tentou as seguintes
-configurações: ``zab5'', ``sab2'', ``sab5'', ``zob2'', ``zob5'', todas
-erradas. A probabilidade considerada na verossimilhança para essa imagem
-é, portanto:
-
-\[
-P = 1 - p(\text{zab5})- p(\text{sab2})- p(\text{sab5})- p(\text{zob2})- p(\text{zob5})
-\]
+o modelo proposto na Seção~\ref{sec-wawl}. Caso a imagem tenha sido
+corretamente classificada, a função de perda é calculada normalmente.
+Caso ela tenha sido classificada incorretamente, considera-se a
+probabilidade de não observar nenhum dos chutes.
 
 Além de modificar a forma de calcular a função de perda do modelo, foi
-necessário testar os hiperparâmetros. Optou-se por utilizar os mesmos
-hiperparâmetros dos modelos iniciais para manter a consistência. O único
-detalhe nesse ponto é que, como os parâmetros de partida são os do
-modelo inicial, optou-se por não modificar a quantidade de unidades na
-camada densa, variando somente os valores de \emph{dropout} e de
-decaimento na taxa de aprendizado. Portanto, ajustou-se 9 e não 27
-modelos para cada base de dados.
+necessário realizar uma nova busca de hiperparâmetros. Optou-se por
+utilizar os mesmos hiperparâmetros dos modelos iniciais para manter a
+consistência. O único detalhe nesse ponto é que, como os parâmetros de
+partida são os do modelo inicial, optou-se por não modificar a
+quantidade de unidades na camada densa, variando somente os valores de
+\emph{dropout} e de decaimento na taxa de aprendizado. Portanto,
+ajustou-se 9 e não 27 modelos para cada base de dados.
 
 No final, assim como no primeiro passo, os classificadors com melhor
-acurácia foram selecionados para cada modelo. Ficou-se, então, com 65
+acurácia foram selecionados para cada modelo. Obteve-se, então, com 65
 modelos no final para comparar com os modelos iniciais e estimar a
 efetividade do oráculo. As comparações foram feitas através de gráficos
 de barras, explorando o efeito do uso do oráculo para diferentes
@@ -3063,36 +3064,38 @@ supervisionado.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{model}{%
-\chapter{Modelagem}\label{model}}
+\hypertarget{sec-results}{%
+\chapter{Resultados}\label{sec-results}}
 
-O fato da informação ser incompleta e fraca não significa que ela é
-inútil. Neste capítulo, discutimos como a informação do oráculo é usada
-pelos modelos e mostramos, tanto através de demonstrações matemáticas
-quanto com simulações que os resultados são positivos e consistentes.
+Neste capítulo, discute-se como a informação do oráculo é usada pelos
+modelos. Para isso, são apresentadas tanto demonstrações matemáticas
+quanto resultados empíricos, mostrando que os resultados são positivos e
+consistentes.
 
-O capítulo foi organizado duas seções. Na Seção @ref(result-theory),
-mostramos as propriedades matemáticas e probabilísticas da estratégia
-adotada. Na Seção @ref(result-sim), mostramos os resultados empíricos
-obtidos das simulações.
+O capítulo foi organizado três seções. Na Seção~\ref{sec-result-theory},
+são apresentadas as propriedades matemáticas e probabilísticas da
+estratégia adotada. Na Seção~\ref{sec-result-sim}, são revelados os
+resultados empíricos obtidos das simulações. Na
+Seção~\ref{sec-discussao}, os resultados são discutidos, fazendo a ponte
+entre as hipóteses de pesquisa e os resultados.
 
-\hypertarget{result-theory}{%
-\section{Resultados teóricos}\label{result-theory}}
+\hypertarget{sec-result-theory}{%
+\section{Resultados teóricos}\label{sec-result-theory}}
 
-Nesta seção, buscamos demonstrar que o uso de oráculos com a função de
-perda baseada nas informações censuradas i) não piora o poder preditivo
-do modelo e ii) converge para o modelo preditivo ótimo. Para isso, temos
-de passar por uma série de definições.
+Nesta seção, buscou-se demonstrar que o uso dos dados fornecidos pelo
+oráculo com adaptação da função de perda i) não piora o poder preditivo
+do modelo e ii) converge para o modelo preditivo ótimo. Para isso, é
+necessário retomar algumas definições para avançar.
 
-\hypertarget{result-sim}{%
-\section{Resultados empíricos}\label{result-sim}}
+\hypertarget{sec-result-sim}{%
+\section{Resultados empíricos}\label{sec-result-sim}}
 
-Nesta seção mostramos os resultados das simulações realizadas. Como
-comentado no capítulo anterior, foram realizadas 65 simulações no total,
+Nesta seção são revelados os resultados das simulações realizadas. Como
+comentado anteriormente, foram realizadas 65 simulações no total,
 variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade
 de tentativas no oráculo.
 
-Para realizar os cálculos, montamos uma base de dados com os resultados
+Para realizar os cálculos, montou-se uma base de dados com os resultados
 das simulações. A base está disponível publicamente no
 \href{https://github.com/jtrecenti/doutorado}{repositório da tese} e
 contém colunas para o Captcha ajustado (\texttt{captcha}), a quantidade
@@ -3101,23 +3104,23 @@ tentativas do oráculo (\texttt{ntry}), a etapa da simulação
 (\texttt{fase}, inicial ou oráculo), o caminho do modelo ajustado
 (\texttt{model}) e a acurácia obtida (\texttt{acc}).
 
-Em média, foi observado o ganho de 314\% na acurácia após a aplicação da
-técnica do oráculo. Ou seja, em média a acurácia do modelo com aplicação
-do oráculo foi de mais de três vezes a acurácia do modelo inicial. Em
-termos absolutos (diferença entre as acurácias), o ganho foi de 27\%, ou
-seja, depois da aplicação do oráculo os modelos ganharam, em média, 27\%
-na acurácia.
+Em média, foi observado um ganho de 333\% na acurácia após a aplicação
+da técnica do oráculo. Ou seja, em média a acurácia do modelo com
+aplicação do oráculo foi de mais de três vezes a acurácia do modelo
+inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi
+de 33\%, ou seja, depois da aplicação do oráculo os modelos ganharam, em
+média, 33\% na acurácia.
 
 Separando os resultados gerais por quantidade de tentativas, observa-se
-os ganhos relativos e absolutos nas Figuras
-@ref(fig:simulacao-geral-ntry-relativo) e
-@ref(fig:simulacao-geral-ntry-absoluto). Cada ponto é uma simulação e o
+os ganhos relativos e absolutos nas
+Figuras~\ref{fig-simulacao-geral-ntry-relativo} e
+\ref{fig-simulacao-geral-ntry-absoluto}. Cada ponto é uma simulação e o
 ponto em destaque é o valor médio, acompanhado de intervalo
 \(m \mp 2*s/\sqrt(n)\), com \(m\) sendo a média, \(s\) o desvio padrão e
 \(n\) a quantidade de dados. A linha pontilhada indica se a acurácia
 aumentou ou diminuiu após a aplicação da técnica.
 
-Na Figura @ref(fig:simulacao-geral-ntry-relativo) é possível notar que
+Na Figura~\ref{fig-simulacao-geral-ntry-relativo} é possível notar que
 os ganhos em acurácia apresentam alta variabilidade, mas que apresentam
 uma tendência positiva com relação ao número de tentativas. O ganho
 entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre
@@ -3127,43 +3130,43 @@ fazer tantos chutes para aproveitar essa oportunidade.
 
 \begin{figure}
 
-{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-ntry-relativo-1.pdf}
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-ntry-relativo-1.pdf}
 
 }
 
-\caption{Ganho percentual ao utilizar a técnica do oráculo, dividido por
-quantidade de tentativas.}
+\caption{\label{fig-simulacao-geral-ntry-relativo}Ganho percentual ao
+utilizar a técnica do oráculo, dividido por quantidade de tentativas.}
 
 \end{figure}
 
-A Figura @ref(fig: simulacao-geral-ntry-absoluto), com as os ganhos
-absolutos, mostra a mesma informação mas em quantidades mais fáceis de
-interpretar. O ganho médio absoluto em Captchas mais de um chute girou
-em torno de 40\%, enquanto que o ganho com apenas um chute ficou um
-pouco acima de 25\%. Importante notar também que o uso do oráculo só
-piorou a acurácia do modelo (e pouco) em casos que com apenas um chute,
-mostrando que a técnica é consistentemente efetiva.
+A Figura Figura~\ref{fig-simulacao-geral-ntry-absoluto}, com as os
+ganhos absolutos, mostra a mesma informação mas em quantidades mais
+fáceis de interpretar. O ganho médio absoluto em Captchas mais de um
+chute girou em torno de 40\%, enquanto que o ganho com apenas um chute
+ficou um pouco acima de 25\%. Importante notar também que o uso do
+oráculo só piorou a acurácia do modelo (e pouco) em casos que com apenas
+um chute, mostrando que a técnica é consistentemente efetiva.
 
 \begin{figure}
 
-{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-ntry-absoluto-1.pdf}
+{\centering \includegraphics{./resultados_files/figure-pdf/fig-simulacao-geral-ntry-absoluto-1.pdf}
 
 }
 
-\caption{Ganhos absolutos ao utilizar a técnica do oráculo, dividido por
-quantidade de tentativas.}
+\caption{\label{fig-simulacao-geral-ntry-absoluto}Ganhos absolutos ao
+utilizar a técnica do oráculo, dividido por quantidade de tentativas.}
 
 \end{figure}
 
-As Figuras @ref(fig:simulacao-geral-inicial-relativo) e
-@ref(fig:simulacao-geral-inicial-absoluto) apresentam os resultados
+As Figuras~\ref{fig-simulacao-geral-inicial-relativo} e
+\ref{fig-simulacao-geral-inicial-absoluto} apresentam os resultados
 gerais separando por acurácia inicial do modelo. A estrutura do gráfico
 é similar às visualizações separando por quantidade de tentativas. As
 categorias escolhidas foram de até 10\%, mais de 10\% até 35\% e mais de
 35\% de acurácia no modelo inicial. A escolha dos intervalos se deram
-pela quantidade de observações em cada categoria
+pela quantidade de observações em cada categoria.
 
-A Figura @ref(fig:simulacao-geral-inicial-relativo) mostra os ganhos
+A Figura~\ref{fig-simulacao-geral-inicial-relativo} mostra os ganhos
 relativos. É possível notar uma tendência de queda no ganho de acurácia
 com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse
 resultado é esperado, pois, como a acurácia é um número entre zero e um,
@@ -3172,16 +3175,16 @@ aumentar tanto.
 
 \begin{figure}
 
-{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-inicial-relativo-1.pdf}
+{\centering \includegraphics{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-relativo-1.pdf}
 
 }
 
-\caption{Ganho percentual ao utilizar a técnica do oráculo, dividido por
-acurácia do modelo inicial.}
+\caption{\label{fig-simulacao-geral-inicial-relativo}Ganho percentual ao
+utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.}
 
 \end{figure}
 
-A Figura @ref(fig:simulacao-geral-inicial-absoluto) mostra os ganhos
+A Figura~\ref{fig-simulacao-geral-inicial-absoluto} mostra os ganhos
 absolutos. O gráfico apresenta o mesmo problema que o anterior, já que o
 ganho máximo depende da acurácia inicial do modelo. Mesmo assim, é
 possível notar que, em termos absolutos, modelos com acurácia inicial
@@ -3190,12 +3193,12 @@ inicial de até 10\%.
 
 \begin{figure}
 
-{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-inicial-absoluto-1.pdf}
+{\centering \includegraphics{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-absoluto-1.pdf}
 
 }
 
-\caption{Ganho absoluto ao utilizar a técnica do oráculo, dividido por
-acurácia do modelo inicial.}
+\caption{\label{fig-simulacao-geral-inicial-absoluto}Ganho absoluto ao
+utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.}
 
 \end{figure}
 
@@ -3206,10 +3209,8 @@ simulação é dado por
 
 \[
 \text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
-\]
-
-A Figura @ref(fig:simulacao-geral-inicial-absoluto-ajustado) mostra os
-ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho
+\] A Figura~\ref{fig-simulacao-geral-inicial-absoluto-ajustado} mostra
+os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho
 expressivo da técnica do oráculo para modelos iniciais com mais do que
 10\% de acurácia com relação a modelos iniciais com até 10\% de
 acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a
@@ -3224,16 +3225,17 @@ mais expressivos.
 
 \begin{figure}
 
-{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-geral-inicial-absoluto-ajustado-1.pdf}
+{\centering \includegraphics{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-absoluto-ajustado-1.pdf}
 
 }
 
-\caption{Ganho absoluto ao utilizar a técnica do oráculo, dividido por
-acurácia do modelo inicial.}
+\caption{\label{fig-simulacao-geral-inicial-absoluto-ajustado}Ganho
+absoluto ao utilizar a técnica do oráculo, dividido por acurácia do
+modelo inicial.}
 
 \end{figure}
 
-Na Figura @ref(fig:simulacao-captcha), mostramos os resultados separando
+Na Figura~\ref{fig-simulacao-captcha}, mostramos os resultados separando
 por Captcha. Cada linha é uma combinação de Captcha, quantidade de
 tentativas e acurácia modelo inicial, que foi classificado em três
 categorias. As linhas pontilhadas indicam modelos ajustados com mais de
@@ -3244,12 +3246,12 @@ do lado direito, a acurácia do modelo usando a técnica do oráculo.
 
 \begin{figure}
 
-{\centering \includegraphics{./resultados_files/figure-pdf/simulacao-captcha-1.pdf}
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-captcha-1.pdf}
 
 }
 
-\caption{Resultados da simulação por captcha, quantidade de tentativas e
-modelo inicial.}
+\caption{\label{fig-simulacao-captcha}Resultados da simulação por
+captcha, quantidade de tentativas e modelo inicial.}
 
 \end{figure}
 
@@ -3288,17 +3290,18 @@ oráculo foi considerado como modelo inicial e usado para baixar novos
 dados do site do Tribunal. Os novos dados foram adicionados à base de
 treino, ajustando-se um novo modelo.
 
-A Figura @ref(fig:aplicacao-iterada) mostra os resultados da aplicação
+A Figura~\ref{fig-aplicacao-iterada} mostra os resultados da aplicação
 iterada. A utilização da técnica não só funcionou como levou o modelo a
 uma acurácia de 100\%.
 
 \begin{figure}
 
-{\centering \includegraphics{./resultados_files/figure-pdf/aplicacao-iterada-1.pdf}
+{\centering \includegraphics{./resultados_files/figure-pdf/fig-aplicacao-iterada-1.pdf}
 
 }
 
-\caption{Resultados da aplicação iterada da técnica.}
+\caption{\label{fig-aplicacao-iterada}Resultados da aplicação iterada da
+técnica.}
 
 \end{figure}
 
@@ -3308,13 +3311,8 @@ técnica de aprendizado ativo com \emph{feedback} automático do oráculo
 pode dar bons resultados, já que a forma de obter os dados não introduz
 viés no ajuste do modelo.
 
-\hypertarget{aprendizado-ativo-todo}{%
-\subsection{Aprendizado ativo (TODO)}\label{aprendizado-ativo-todo}}
-
-\begin{quote}
-Aqui a ideia é mostrar os resultados do aprendizado ativo, se der tempo
-de fazer.
-\end{quote}
+\hypertarget{sec-discussao}{%
+\section{Discussão}\label{sec-discussao}}
 
 \bookmarksetup{startatroot}
 
@@ -3386,6 +3384,20 @@ Journal of Machine Learning Research}, v. 12, p. 15011536, 2011.
 \textbf{Diagnóstico do Contencioso Tributário Administrativo}.,
 {[}s.d.{]}. Disponível em:
 \textless{}\url{https://abj.org.br/pesquisas/bid-tributario/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-luz}{}}%
+FALBEL, D. luz: Higher Level 'API' for 'torch'. a2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=luz}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-torchvision}{}}%
+FALBEL, D. torchvision: Models, Datasets and Transformations for Images.
+b2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=torchvision}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-torch}{}}%
+FALBEL, D.; LURASCHI, J. torch: Tensors and Neural Networks with 'GPU'
+Acceleration. 2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=torch}\textgreater.
 
 \leavevmode\vadjust pre{\hypertarget{ref-feng2020}{}}%
 FENG, L. et al. Provably consistent partial-label learning.
@@ -3526,6 +3538,12 @@ OOMS, J. magick: Advanced Graphics and Image-Processing in R. 2021.
 Disponível em:
 \textless{}\url{https://CRAN.R-project.org/package=magick}\textgreater.
 
+\leavevmode\vadjust pre{\hypertarget{ref-rcran}{}}%
+R CORE TEAM. \textbf{R: A Language and Environment for Statistical
+Computing}. Vienna, Austria: R Foundation for Statistical Computing,
+2021. Disponível em:
+\textless{}\url{https://www.R-project.org/}\textgreater.
+
 \leavevmode\vadjust pre{\hypertarget{ref-ramesh}{}}%
 RAMESH, A. et al.
 \href{https://doi.org/10.48550/arXiv.2204.06125}{Hierarchical
@@ -3614,8 +3632,8 @@ ZHU, X. J. Semi-supervised learning literature survey. 2005.
 \appendix
 \addcontentsline{toc}{part}{Apêndices}
 
-\hypertarget{pacote}{%
-\chapter{Pacote}\label{pacote}}
+\hypertarget{sec-pacote}{%
+\chapter{Pacote captcha}\label{sec-pacote}}
 
 \begin{quote}
 Citar versão anterior \{decryptr\}
@@ -3628,6 +3646,12 @@ Funções do \{captcha\}
 \begin{quote}
 Print screens do \{ancaptcha\}
 \end{quote}
+
+\hypertarget{sec-pacote-download}{%
+\section{Pacote captchaDownload}\label{sec-pacote-download}}
+
+\hypertarget{sec-pacote-oracle}{%
+\section{Pacote captchaOracle}\label{sec-pacote-oracle}}
 
 % \input{conteudo/00-exemplo-introducao}
 % \input{conteudo/01-exemplo-normas-ime}

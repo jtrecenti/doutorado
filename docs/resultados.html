@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Captchas - 3&nbsp; Modelagem</title>
+<title>Captchas - 3&nbsp; Resultados</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,7 +63,7 @@ ul.task-list li input[type="checkbox"] {
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="citation_title" content="[[3]{.chapter-number}&nbsp; [Modelagem]{.chapter-title}]{#model .quarto-section-identifier}">
+<meta name="citation_title" content="[[3]{.chapter-number}&nbsp; [Resultados]{.chapter-title}]{#sec-results .quarto-section-identifier}">
 <meta name="citation_language" content="pt">
 <meta name="citation_reference" content="citation_title=Dynamic Documents with R and knitr;,citation_author=Yihui Xie;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://yihui.name/knitr/;">
 <meta name="citation_reference" content="citation_title=Understanding Dropout;,citation_author=Pierre Baldi;,citation_author=Peter J. Sadowski;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_volume=26;,citation_journal_title=Advances in neural information processing systems;">
@@ -202,6 +202,10 @@ ul.task-list li input[type="checkbox"] {
 <meta name="citation_reference" content="citation_title=Captcha and Its Techniques: A Review;,citation_author=Kiranjot Kaur;,citation_author=Sunny Behal;,citation_publication_date=2014-01-01;,citation_cover_date=2014-01-01;,citation_year=2014;,citation_volume=5;,citation_journal_title=International Journal of Computer Science and Information Technologies,;">
 <meta name="citation_reference" content="citation_title=Multivariate binomial/multinomial control chart;,citation_author=Jian Li;,citation_author=Fugee Tsung;,citation_author=Changliang Zou;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_issue=5;,citation_volume=46;,citation_journal_title=IIE Transactions;">
 <meta name="citation_reference" content="citation_title=Batch normalization: Accelerating deep network training by reducing internal covariate shift;,citation_author=Sergey Ioffe;,citation_author=Christian Szegedy;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_conference=PMLR;">
+<meta name="citation_reference" content="citation_title=torch: Tensors and Neural Networks with ’GPU’ Acceleration;,citation_author=Daniel Falbel;,citation_author=Javier Luraschi;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://CRAN.R-project.org/package=torch;">
+<meta name="citation_reference" content="citation_title=luz: Higher Level ’API’ for ’torch’;,citation_author=Daniel Falbel;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://CRAN.R-project.org/package=luz;">
+<meta name="citation_reference" content="citation_title=torchvision: Models, Datasets and Transformations for Images;,citation_author=Daniel Falbel;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://CRAN.R-project.org/package=torchvision;">
+<meta name="citation_reference" content="citation_title=R: A Language and Environment for Statistical Computing;,citation_author=R Core Team;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.R-project.org/;">
 </head>
 
 <body class="nav-sidebar floating">
@@ -210,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Modelagem</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resultados</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -253,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resultados.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Modelagem</span></a>
+  <a href="./resultados.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resultados</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -276,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pacote.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Pacote</span></a>
+  <a href="./pacote.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Pacote captcha</span></a>
   </div>
 </li>
       </ul>
@@ -290,12 +294,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#result-theory" id="toc-result-theory" class="nav-link active" data-scroll-target="#result-theory">Resultados teóricos</a></li>
-  <li><a href="#result-sim" id="toc-result-sim" class="nav-link" data-scroll-target="#result-sim">Resultados empíricos</a>
+  <li><a href="#sec-result-theory" id="toc-sec-result-theory" class="nav-link active" data-scroll-target="#sec-result-theory">Resultados teóricos</a></li>
+  <li><a href="#sec-result-sim" id="toc-sec-result-sim" class="nav-link" data-scroll-target="#sec-result-sim">Resultados empíricos</a>
   <ul class="collapse">
   <li><a href="#aplicação-iterada" id="toc-aplicação-iterada" class="nav-link" data-scroll-target="#aplicação-iterada">Aplicação iterada</a></li>
-  <li><a href="#aprendizado-ativo-todo" id="toc-aprendizado-ativo-todo" class="nav-link" data-scroll-target="#aprendizado-ativo-todo">Aprendizado ativo (TODO)</a></li>
   </ul></li>
+  <li><a href="#sec-discussao" id="toc-sec-discussao" class="nav-link" data-scroll-target="#sec-discussao">Discussão</a></li>
   </ul>
 </nav>
     </div>
@@ -304,7 +308,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="model" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Modelagem</span></span></h1>
+<h1 class="title"><span id="sec-results" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resultados</span></span></h1>
 </div>
 
 
@@ -319,42 +323,42 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>O fato da informação ser incompleta e fraca não significa que ela é inútil. Neste capítulo, discutimos como a informação do oráculo é usada pelos modelos e mostramos, tanto através de demonstrações matemáticas quanto com simulações que os resultados são positivos e consistentes.</p>
-<p>O capítulo foi organizado duas seções. Na Seção @ref(result-theory), mostramos as propriedades matemáticas e probabilísticas da estratégia adotada. Na Seção @ref(result-sim), mostramos os resultados empíricos obtidos das simulações.</p>
-<section id="result-theory" class="level2">
-<h2 class="anchored" data-anchor-id="result-theory">Resultados teóricos</h2>
-<p>Nesta seção, buscamos demonstrar que o uso de oráculos com a função de perda baseada nas informações censuradas i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, temos de passar por uma série de definições.</p>
+<p>Neste capítulo, discute-se como a informação do oráculo é usada pelos modelos. Para isso, são apresentadas tanto demonstrações matemáticas quanto resultados empíricos, mostrando que os resultados são positivos e consistentes.</p>
+<p>O capítulo foi organizado três seções. Na <a href="#sec-result-theory"><span>Seção&nbsp;3.1</span></a>, são apresentadas as propriedades matemáticas e probabilísticas da estratégia adotada. Na <a href="#sec-result-sim"><span>Seção&nbsp;3.2</span></a>, são revelados os resultados empíricos obtidos das simulações. Na <a href="#sec-discussao"><span>Seção&nbsp;3.3</span></a>, os resultados são discutidos, fazendo a ponte entre as hipóteses de pesquisa e os resultados.</p>
+<section id="sec-result-theory" class="level2">
+<h2 class="anchored" data-anchor-id="sec-result-theory">Resultados teóricos</h2>
+<p>Nesta seção, buscou-se demonstrar que o uso dos dados fornecidos pelo oráculo com adaptação da função de perda i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, é necessário retomar algumas definições para avançar.</p>
 </section>
-<section id="result-sim" class="level2">
-<h2 class="anchored" data-anchor-id="result-sim">Resultados empíricos</h2>
+<section id="sec-result-sim" class="level2">
+<h2 class="anchored" data-anchor-id="sec-result-sim">Resultados empíricos</h2>
 <div class="cell">
 
 </div>
-<p>Nesta seção mostramos os resultados das simulações realizadas. Como comentado no capítulo anterior, foram realizadas 65 simulações no total, variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade de tentativas no oráculo.</p>
-<p>Para realizar os cálculos, montamos uma base de dados com os resultados das simulações. A base está disponível publicamente no <a href="https://github.com/jtrecenti/doutorado">repositório da tese</a> e contém colunas para o Captcha ajustado (<code>captcha</code>), a quantidade de observações do modelo inicial (<code>n</code>), a quantidade de tentativas do oráculo (<code>ntry</code>), a etapa da simulação (<code>fase</code>, inicial ou oráculo), o caminho do modelo ajustado (<code>model</code>) e a acurácia obtida (<code>acc</code>).</p>
-<p>Em média, foi observado o ganho de 314% na acurácia após a aplicação da técnica do oráculo. Ou seja, em média a acurácia do modelo com aplicação do oráculo foi de mais de três vezes a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de 27%, ou seja, depois da aplicação do oráculo os modelos ganharam, em média, 27% na acurácia.</p>
+<p>Nesta seção são revelados os resultados das simulações realizadas. Como comentado anteriormente, foram realizadas 65 simulações no total, variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade de tentativas no oráculo.</p>
+<p>Para realizar os cálculos, montou-se uma base de dados com os resultados das simulações. A base está disponível publicamente no <a href="https://github.com/jtrecenti/doutorado">repositório da tese</a> e contém colunas para o Captcha ajustado (<code>captcha</code>), a quantidade de observações do modelo inicial (<code>n</code>), a quantidade de tentativas do oráculo (<code>ntry</code>), a etapa da simulação (<code>fase</code>, inicial ou oráculo), o caminho do modelo ajustado (<code>model</code>) e a acurácia obtida (<code>acc</code>).</p>
+<p>Em média, foi observado um ganho de 333% na acurácia após a aplicação da técnica do oráculo. Ou seja, em média a acurácia do modelo com aplicação do oráculo foi de mais de três vezes a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de 33%, ou seja, depois da aplicação do oráculo os modelos ganharam, em média, 33% na acurácia.</p>
 <div class="cell">
 
 </div>
-<p>Separando os resultados gerais por quantidade de tentativas, observa-se os ganhos relativos e absolutos nas Figuras @ref(fig:simulacao-geral-ntry-relativo) e @ref(fig:simulacao-geral-ntry-absoluto). Cada ponto é uma simulação e o ponto em destaque é o valor médio, acompanhado de intervalo <span class="math inline">\(m \mp 2*s/\sqrt(n)\)</span>, com <span class="math inline">\(m\)</span> sendo a média, <span class="math inline">\(s\)</span> o desvio padrão e <span class="math inline">\(n\)</span> a quantidade de dados. A linha pontilhada indica se a acurácia aumentou ou diminuiu após a aplicação da técnica.</p>
-<p>Na Figura @ref(fig:simulacao-geral-ntry-relativo) é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante e que não há necessidade de fazer tantos chutes para aproveitar essa oportunidade.</p>
+<p>Separando os resultados gerais por quantidade de tentativas, observa-se os ganhos relativos e absolutos nas <a href="#fig-simulacao-geral-ntry-relativo">Figuras&nbsp;<span>3.1</span></a> e <a href="#fig-simulacao-geral-ntry-absoluto"><span>3.2</span></a>. Cada ponto é uma simulação e o ponto em destaque é o valor médio, acompanhado de intervalo <span class="math inline">\(m \mp 2*s/\sqrt(n)\)</span>, com <span class="math inline">\(m\)</span> sendo a média, <span class="math inline">\(s\)</span> o desvio padrão e <span class="math inline">\(n\)</span> a quantidade de dados. A linha pontilhada indica se a acurácia aumentou ou diminuiu após a aplicação da técnica.</p>
+<p>Na <a href="#fig-simulacao-geral-ntry-relativo">Figura&nbsp;<span>3.1</span></a> é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante e que não há necessidade de fazer tantos chutes para aproveitar essa oportunidade.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-simulacao-geral-ntry-relativo" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/simulacao-geral-ntry-relativo-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas.</figcaption><p></p>
+<p><img src="resultados_files/figure-html/fig-simulacao-geral-ntry-relativo-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.1: Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>A Figura @ref(fig: simulacao-geral-ntry-absoluto), com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em Captchas mais de um chute girou em torno de 40%, enquanto que o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do modelo (e pouco) em casos que com apenas um chute, mostrando que a técnica é consistentemente efetiva.</p>
+<p>A Figura <a href="#fig-simulacao-geral-ntry-absoluto">Figura&nbsp;<span>3.2</span></a>, com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em Captchas mais de um chute girou em torno de 40%, enquanto que o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do modelo (e pouco) em casos que com apenas um chute, mostrando que a técnica é consistentemente efetiva.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-simulacao-geral-ntry-absoluto" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/simulacao-geral-ntry-absoluto-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Ganhos absolutos ao utilizar a técnica do oráculo, dividido por quantidade de tentativas.</figcaption><p></p>
+<p><img src="resultados_files/figure-html/fig-simulacao-geral-ntry-absoluto-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.2: Ganhos absolutos ao utilizar a técnica do oráculo, dividido por quantidade de tentativas.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -362,25 +366,25 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 
 </div>
-<p>As Figuras @ref(fig:simulacao-geral-inicial-relativo) e @ref(fig:simulacao-geral-inicial-absoluto) apresentam os resultados gerais separando por acurácia inicial do modelo. A estrutura do gráfico é similar às visualizações separando por quantidade de tentativas. As categorias escolhidas foram de até 10%, mais de 10% até 35% e mais de 35% de acurácia no modelo inicial. A escolha dos intervalos se deram pela quantidade de observações em cada categoria</p>
-<p>A Figura @ref(fig:simulacao-geral-inicial-relativo) mostra os ganhos relativos. É possível notar uma tendência de queda no ganho de acurácia com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse resultado é esperado, pois, como a acurácia é um número entre zero e um, um modelo que já possui alta acurácia não tem a possibilidade de aumentar tanto.</p>
+<p>As <a href="#fig-simulacao-geral-inicial-relativo">Figuras&nbsp;<span>3.3</span></a> e <a href="#fig-simulacao-geral-inicial-absoluto"><span>3.4</span></a> apresentam os resultados gerais separando por acurácia inicial do modelo. A estrutura do gráfico é similar às visualizações separando por quantidade de tentativas. As categorias escolhidas foram de até 10%, mais de 10% até 35% e mais de 35% de acurácia no modelo inicial. A escolha dos intervalos se deram pela quantidade de observações em cada categoria.</p>
+<p>A <a href="#fig-simulacao-geral-inicial-relativo">Figura&nbsp;<span>3.3</span></a> mostra os ganhos relativos. É possível notar uma tendência de queda no ganho de acurácia com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse resultado é esperado, pois, como a acurácia é um número entre zero e um, um modelo que já possui alta acurácia não tem a possibilidade de aumentar tanto.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-simulacao-geral-inicial-relativo" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/simulacao-geral-inicial-relativo-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Ganho percentual ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.</figcaption><p></p>
+<p><img src="resultados_files/figure-html/fig-simulacao-geral-inicial-relativo-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.3: Ganho percentual ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>A Figura @ref(fig:simulacao-geral-inicial-absoluto) mostra os ganhos absolutos. O gráfico apresenta o mesmo problema que o anterior, já que o ganho máximo depende da acurácia inicial do modelo. Mesmo assim, é possível notar que, em termos absolutos, modelos com acurácia inicial entre 10% e 35% apresentaram um ganho maior que modelos com acurácia inicial de até 10%.</p>
+<p>A <a href="#fig-simulacao-geral-inicial-absoluto">Figura&nbsp;<span>3.4</span></a> mostra os ganhos absolutos. O gráfico apresenta o mesmo problema que o anterior, já que o ganho máximo depende da acurácia inicial do modelo. Mesmo assim, é possível notar que, em termos absolutos, modelos com acurácia inicial entre 10% e 35% apresentaram um ganho maior que modelos com acurácia inicial de até 10%.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-simulacao-geral-inicial-absoluto" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/simulacao-geral-inicial-absoluto-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.</figcaption><p></p>
+<p><img src="resultados_files/figure-html/fig-simulacao-geral-inicial-absoluto-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.4: Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -388,25 +392,24 @@ ul.task-list li input[type="checkbox"] {
 <p>Para lidar com o fato da acurácia ser um número limitado, fizemos o mesmo gráficos de antes, mas ajustado pelo máximo possível que a técnica do oráculo poderia proporcionar. O ganho absoluto ajustado de uma simulação é dado por</p>
 <p><span class="math display">\[
 \text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
-\]</span></p>
-<p>A Figura @ref(fig:simulacao-geral-inicial-absoluto-ajustado) mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica do oráculo para modelos iniciais com mais do que 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez – é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para uma acurácia maior, de onde poderíamos aplicar a técnica novamente para obter resultads ainda mais expressivos.</p>
+\]</span> A <a href="#fig-simulacao-geral-inicial-absoluto-ajustado">Figura&nbsp;<span>3.5</span></a> mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica do oráculo para modelos iniciais com mais do que 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez – é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para uma acurácia maior, de onde poderíamos aplicar a técnica novamente para obter resultads ainda mais expressivos.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-simulacao-geral-inicial-absoluto-ajustado" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/simulacao-geral-inicial-absoluto-ajustado-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.</figcaption><p></p>
+<p><img src="resultados_files/figure-html/fig-simulacao-geral-inicial-absoluto-ajustado-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.5: Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Na Figura @ref(fig:simulacao-captcha), mostramos os resultados separando por Captcha. Cada linha é uma combinação de Captcha, quantidade de tentativas e acurácia modelo inicial, que foi classificado em três categorias. As linhas pontilhadas indicam modelos ajustados com mais de uma tentativa, enquanto as linhas contínuas mostram modelos ajustados com apenas uma tentativa. A primeira extremidade de cada linha, do lado esquerdo, indica a acurácia do modelo inicial e a segunda extremidade, do lado direito, a acurácia do modelo usando a técnica do oráculo.</p>
+<p>Na <a href="#fig-simulacao-captcha">Figura&nbsp;<span>3.6</span></a>, mostramos os resultados separando por Captcha. Cada linha é uma combinação de Captcha, quantidade de tentativas e acurácia modelo inicial, que foi classificado em três categorias. As linhas pontilhadas indicam modelos ajustados com mais de uma tentativa, enquanto as linhas contínuas mostram modelos ajustados com apenas uma tentativa. A primeira extremidade de cada linha, do lado esquerdo, indica a acurácia do modelo inicial e a segunda extremidade, do lado direito, a acurácia do modelo usando a técnica do oráculo.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-simulacao-captcha" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/simulacao-captcha-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Resultados da simulação por captcha, quantidade de tentativas e modelo inicial.</figcaption><p></p>
+<p><img src="resultados_files/figure-html/fig-simulacao-captcha-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.6: Resultados da simulação por captcha, quantidade de tentativas e modelo inicial.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -417,27 +420,24 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="aplicação-iterada">Aplicação iterada</h3>
 <p>Um possível problema em aplicar a técnica do oráculo é que a técnica pode introduzir viés no modelo, o que impediria de ser aprimorado indefinidamente. Mesmo que os teoremas dêem uma boa base para acreditar que isso não seja verdade, foi feito um teste empírico, com apenas um Captcha, para verificar se a aplicação da técnica múltiplas vezes apresenta bons resultados.</p>
 <p>O Captcha escolhido para a simulação foi o <code>trf5</code>, por ser um Captcha que não aceita múltiplos chutes, em uma tentativa de obter um pior caso. Para esse Captcha, o melhor modelo obtido com a técnica do oráculo foi considerado como modelo inicial e usado para baixar novos dados do site do Tribunal. Os novos dados foram adicionados à base de treino, ajustando-se um novo modelo.</p>
-<p>A Figura @ref(fig:aplicacao-iterada) mostra os resultados da aplicação iterada. A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.</p>
+<p>A <a href="#fig-aplicacao-iterada">Figura&nbsp;<span>3.7</span></a> mostra os resultados da aplicação iterada. A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-aplicacao-iterada" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/aplicacao-iterada-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Resultados da aplicação iterada da técnica.</figcaption><p></p>
+<p><img src="resultados_files/figure-html/fig-aplicacao-iterada-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.7: Resultados da aplicação iterada da técnica.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>O resultado sugere que a técnica pode sim ser utilizada indefinidamente para auxiliar no aprendizado do modelo. Ela sugere, ainda, que uma técnica de aprendizado ativo com <em>feedback</em> automático do oráculo pode dar bons resultados, já que a forma de obter os dados não introduz viés no ajuste do modelo.</p>
 </section>
-<section id="aprendizado-ativo-todo" class="level3">
-<h3 class="anchored" data-anchor-id="aprendizado-ativo-todo">Aprendizado ativo (TODO)</h3>
-<blockquote class="blockquote">
-<p>Aqui a ideia é mostrar os resultados do aprendizado ativo, se der tempo de fazer.</p>
-</blockquote>
-
-
 </section>
+<section id="sec-discussao" class="level2">
+<h2 class="anchored" data-anchor-id="sec-discussao">Discussão</h2>
+
+
 </section>
 
 </main> <!-- /main -->
