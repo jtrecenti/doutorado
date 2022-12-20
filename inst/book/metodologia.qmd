@@ -36,7 +36,7 @@ Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área 
 
 A intepretação do Captcha como um problema de PLL será apresentada no final do capítulo. A jornada começa de onde deve começar, com aqueles que são objeto de análise deste trabalho: os Captchas.
 
-### Captcha
+### Captcha {#sec-definicao-captcha}
 
 Captcha é um *desafio* do tipo *desafio-resposta* usado para determinar se a usuário do sistema é um humano. Existem diversos tipos de Captcha diferentes, que envolvem desde identificar textos em imagens até resolver expressões matemáticas complexas.
 
@@ -199,7 +199,7 @@ A @fig-diagrama-modelo-cnn mostra, de forma esquemática, os componentes (retân
 knitr::include_graphics("assets/img/diagrama-modelo-cnn.png")
 ```
 
-#### Arquitetura da rede
+#### Arquitetura da rede {#sec-arquitetura-rede}
 
 A arquitetura da rede é uma função que leva os dados de entrada na estrutura de dados da variável resposta. A arquitetura tem papel similar ao exercido pelo componente sistemático em um modelo linear generalizado [@nelder1972]. Trata-se da parte mais complexa da rede neural, carregando todos os parâmetros que serão otimizados.
 
