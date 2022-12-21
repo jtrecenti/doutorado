@@ -258,18 +258,18 @@ Ao criar um novo projeto, pelo comando `new_captcha()` ou pela interface do RStu
 
 Sobre a parte de modelagem, cabe uma descrição mais detalhada. O primeiro passo do *script* é criar objetos do tipo *dataset* (objeto que armazena os dados de forma consistente) e *dataloader* (objeto que obtém amostras do dataset, que são utilizadas como os *minibatches* do modelo), com uma estrutura orquestrada pelo pacote `{torch}`.
 
-A função `captcha_dataset()` cria o *dataset* recebe como parâmetro uma pasta de arquivos e gera um objeto com classes `my_captcha`, `dataset` e `R6`. A função é, na verdade, um objeto do tipo `dataset_generator`, criada utilizando-se a função `dataset()` do pacote `{torch}`. O objeto é chamado da mesma forma que uma função usual do R, aceitando alguns parâmetros adicionais:
+A função `captcha_dataset()` cria o *dataset*, e recebe como parâmetro uma pasta de arquivos e gera um objeto com classes `my_captcha`, `dataset` e `R6`. A função é, na verdade, um objeto do tipo `dataset_generator`, criada utilizando a função `dataset()` do pacote `{torch}`. O objeto é chamado da mesma forma que uma função usual do R, aceitando alguns parâmetros adicionais:
 
 -   `captcha=`: (opcional) fornecer um nome para o captcha.
 -   `transform_image=`: operação de transformação a ser aplicada à imagem. Por padrão, utiliza a função `captcha_transform_image()`, que lê a imagem e redimensiona para ficar com dimensões `32x192`. A dimensão foi escolhida para facilitar a implementação das camadas convolucionais e para lidar com o fato de que usualmente os Captchas são imagens retangulares.
 -   `transform_label=`: operação de transformação para gerar a variável resposta. Por padrão, utiliza a função `captcha_transform_label()`, que recebe um vetor de todos os possíveis caracteres do Captcha e aplica a operação `one_hot()`, obtendo-se a versão matricial da resposta com zeros e uns, como descrito na @sec-definicao-captcha.
--   `augmentation=`: operações para aumentação de dados . Por exemplo, pode ser uma função que adiciona um ruído aleatório à imagem original para que, ao gerar uma nova amostra, os dados utilizados sejam sempre diferentes.
+-   `augmentation=`: operações para aumentação de dados. Por exemplo, pode ser uma função que adiciona um ruído aleatório à imagem original para que, ao gerar uma nova amostra, os dados utilizados sejam sempre diferentes.
 
-A função `captcha_dataset()` deve ser aplicada duas vezes, uma para criar a base de treino e outra para criar a base de validação. A separação de bases de treino e validação deve ser feita de forma manual, copiando parte dos Captchas anotados para uma nova pasta, com aleatorização. É papel do usuário separar as bases em pastas distintas carregá-as em um *dataset*.
+A função `captcha_dataset()` deve ser aplicada duas vezes, uma para criar a base de treino e outra para criar a base de validação. A separação de bases de treino e validação deve ser feita de forma manual, copiando parte dos Captchas anotados para uma nova pasta, com aleatorização. É papel do usuário separar as bases em pastas distintas e carregá-las em um *dataset*.
 
 Em seguida, os *dataloaders* são criados utilizando-se a função `dataloader()` do pacote `{torch}`. Nessa parte é definido o tamanho do *minibatch*, além de outros possíveis parâmetros disponíveis na função do `{torch}`. Para mais detalhes, o usuário pode [acessar a documentação da função neste link](https://torch.mlverse.org/docs/reference/dataloader.html). Devem ser criados *dataloaders* tanto para a base de treino quanto para a base de validação.
 
-A próxima etapa é a especificação do modelo. No *script* de modelagem, o modelo é fornecido pelo objeto `net_captcha` do pacote `{captcha}`. Assim como no caso do *dataset*, o `net_captcha` é um objeto especial do `{torch}`, com classes `CAPTCHA-CNN`, `nn_module` e `nn_module_generator`, O objeto pode ser utilizado como uma função, gerando um módulo do `torch`, similar a uma função de predição. No entanto, por conta da forma que o objeto é utilizado em passos posteriores pelo pacote `{luz}`, o objeto a ser considerado é mesmo o `nn_module_generator`, como colocado no *script*.
+A próxima etapa é a especificação do modelo. No *script* de modelagem, o modelo é fornecido pelo objeto `net_captcha` do pacote `{captcha}`. Assim como no caso do *dataset*, o `net_captcha` é um objeto especial do `{torch}`, com classes `CAPTCHA-CNN`, `nn_module` e `nn_module_generator`. O objeto pode ser utilizado como uma função, gerando um módulo do `torch`, similar a uma função de predição. No entanto, por conta da forma que o objeto é utilizado em passos posteriores pelo pacote `{luz}`, o objeto a ser considerado é mesmo o `nn_module_generator`, como colocado no *script*.
 
 Para customizar o modelo, o usuário deve modificar os métodos `initialize()` e `forward()`, acessados dentro do objeto `net_captcha$public_methods`. O primeiro é responsável pela inicialização do modelo, contendo a descrição das operações que são realizadas, como convoluções. O segundo é a função *feed forward* das redes neurais, que recebe uma imagem e retorna um objeto contendo os *logitos* ou probabilidades, no formato da variável resposta.
 
@@ -315,7 +315,7 @@ initialize = function(input_dim,
   self$transform <- transform
 }
 ```
-
+<!--- O QUE SAO LOGITOS??--->
 A função de *feed forward* foi descrita abaixo. A função aplica o passo-a-passo descrito na @sec-arquitetura-rede, recebendo uma imagem `x` como entrada e retornando uma matriz de logitos, que dão os pesos do modelo para cada letra da resposta. O modelo retorna os logitos e não as probabilidades porque, no passo seguinte, a função de perda considera como entrada os logitos. Se o usuário decidir modificar o método `forward` para retornar probabilidades, precisará também adaptar a função de perda utilizada.
 
 ```{r}
@@ -427,7 +427,7 @@ Com isso, o trabalho pode ser compartilhado e Captchas podem ser resolvidos de f
 
 O pacote `{captchaDownload}` foi construído para armazenar os códigos de baixar dados de Captchas de forma consistente. O pacote também inclui funções para trabalhar com oráculos.
 
-O pacote não foi criado para ser usado por muitas pessoas. O intuito de criar o pacote foi o de organizar as funções utilizadas para realizar as simulações e obter os resultados empíricos da tese.
+O pacote não foi criado para ser usado pelo público geral. O intuito de criar o pacote foi o de organizar as funções utilizadas para realizar as simulações e obter os resultados empíricos da tese.
 
 As funções do pacote `{captchaDownload}` são organizadas em dois tipos principais. As funções de *acesso*, identificadas pelo termo `_access`, fazem o *download* da imagem do Captcha e retornam todas as informações necessárias para fazer a verificação do oráculo, como, por exemplo, *cookies* e dados da sessão do usuário. Já as funções de *teste*, identificadas pelo termo `_test`, servem para verificar se um rótulo fornecido para o Captcha está correto ou não.
 
