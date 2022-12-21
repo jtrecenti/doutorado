@@ -121,7 +121,7 @@ plot(captchas)
 options(captcha.print.cols = op)
 ```
 
-Quando o vetor de Captchas é muito grande, a função `plot()` mostra um número máximo d imagens, acompanhado de uma mensagem. Por padrão, esse número é 100, com 25 linhas e 4 colunas. A opção pode ser sobrescrita combinando as opções `captcha.print.cols=` e `captcha.print.rows=`. A @fig-exemplo-plot-multi-varias mostra um exemplo do comportamento da função quando o número de imagens excede 100.
+Quando o vetor de Captchas é muito grande, a função `plot()` mostra um número máximo de imagens, acompanhado de uma mensagem. Por padrão, esse número é 100, com 25 linhas e 4 colunas. A opção pode ser sobrescrita combinando as opções `captcha.print.cols=` e `captcha.print.rows=`. A @fig-exemplo-plot-multi-varias mostra um exemplo do comportamento da função quando o número de imagens excede 100.
 
 ```{r}
 #| label: fig-exemplo-plot-multi-varias
@@ -157,7 +157,7 @@ captcha <- read_captcha(exemplo, ans_in_path = TRUE)
 plot(captcha)
 ```
 
-A função `captcha_annotate()` serve para classificar uma imagem de Captcha, manual ou automaticamente. Isso é feito modificando o caminho da imagem, adicionando o texto `_rotulo` ao final do caminho do arquivo. A função possui os parâmetros listados abaixo:
+A função `captcha_annotate()` serve para anotar o rótulo de uma imagem de Captcha, manual ou automaticamente. Isso é feito modificando o caminho da imagem, adicionando o texto `_rotulo` ao final do caminho do arquivo. A função possui os parâmetros listados abaixo:
 
 -   `files=`: objeto de classe `captcha` lido com a função `read_captcha()` (recomendado) ou vetor de caminhos de arquivos.
 -   `labels=`: (opcional) vetor com os rótulos das imagens. Deve ter o mesmo `length()` do que `files=`. Por padrão, o valor é `NULL`, indicando que deve ser aberto um `prompt` para que o usuário insira a resposta manualmente.
@@ -171,7 +171,7 @@ Quando não existe um rótulo, a função `captcha_annotate()`, que abre o `prom
 
 ```{r}
 #| label: fig-exemplo-classify
-#| fig-cap: "Exemplo de aplicação da função classify. O rótulo `bhusp5` foi inserido manualmente."
+#| fig-cap: "Exemplo de aplicação da função `captcha_annotate()`. O rótulo `bhusp5` foi inserido manualmente."
 knitr::include_graphics("assets/img/exemplo_classify.png")
 ```
 
@@ -200,7 +200,7 @@ O pacote `{captcha}` também fornece uma interface básica para o desenvolviment
 
 A parte de modelagem parte de algumas premissas sobre a base de dados. As imagens precisam estar em uma pasta e ter o padrão `caminho/do/arquivo/<id>_<lab>.<ext>`, onde:
 
--   `<id>`: pode ser qualquer nome, de preferência sem acentuação ou outros caracteres especiais, para evitar problemas de *encoding*. Geralmente, é um *hash* identificando o tipo e id do captcha. **Observação**: ao classificar um caso, é importante que o `id` seja único, já que dois Captchas podem ter o mesmo rótulo.
+-   `<id>`: pode ser qualquer nome, de preferência sem acentuação ou outros caracteres especiais, para evitar problemas de *encoding*. Geralmente, é um *hash* identificando o tipo e id do captcha. **Observação**: ao anotar um caso, é importante que o `id` seja único, já que dois Captchas podem ter o mesmo rótulo.
 -   `<lab>`: é o rótulo do Captcha. Pode ser um conjunto de caracteres entre `[a-zA-Z0-9]`, diferenciando maiúsculas e minúsculas se necessário. No momento, todos os arquivos em uma pasta devem ter a mesma quantidade de caracteres (comprimento homogêneo). Futuramente, o pacote poderá considerar Captchas de comprimento heterogêneo.
 -   `<ext>`: extensão do arquivo. Pode ser `.png`, `.jpeg` ou `.jpg`. As operações também funcionam para o formato `.svg`, mas pode apresentar problemas por conta da transparência da imagem.
 
