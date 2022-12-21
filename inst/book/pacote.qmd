@@ -30,7 +30,7 @@ Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacote
 
 ## Pacote captcha {#sec-pacote-captcha}
 
-O pacote `{captcha}` foi construído para funcionar como uma caixa de ferramentas para pessoas que desejam trabalhar com Captchas. O pacote possui funções de leitura, visualização, classificação, preparação de dados, modelagem, carregamento de modelos pré-treinados e predição. O pacote também permite a construção de um fluxo de trabalho para resolver um novo Captcha, criando um pacote para orquestrar o passo-a-passo.
+O pacote `{captcha}` foi construído para funcionar como uma caixa de ferramentas para pessoas que desejam trabalhar com Captchas. O pacote possui funções de leitura, visualização, anotação, preparação de dados, modelagem, carregamento de modelos pré-treinados e predição. O pacote também permite a construção de um fluxo de trabalho para resolver um novo Captcha, criando um pacote para orquestrar o passo-a-passo.
 
 ### Uso básico
 
@@ -166,7 +166,7 @@ A função `captcha_annotate()` serve para classificar uma imagem de Captcha, ma
 
 A função, depois de aplicada, retorna um vetor com os caminhos dos arquivos modificados. O parâmetro `labels=` é útil para lidar com situações em que sabemos o rótulo do Captcha. Por exemplo, em um fluxo de trabalho que utiliza o oráculo, pode ser que um modelo inicial já forneça o valor correto do rótulo.
 
-Quando não existe um rótulo, a função `captcha_annotate()`, que abre o `prompt` para classificação e aplica `plot()` para visualizar a imagem. A @fig-exemplo-classify mostra um exemplo de aplicação da função `captcha_annotate()` no software [RStudio](https://posit.co/download/rstudio-desktop/).
+Quando não existe um rótulo, a função `captcha_annotate()`, que abre o `prompt` para anotação e aplica `plot()` para visualizar a imagem. A @fig-exemplo-classify mostra um exemplo de aplicação da função `captcha_annotate()` no software [RStudio](https://posit.co/download/rstudio-desktop/).
 
 
 ```{r}
@@ -196,7 +196,7 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 
 ### Modelagem {#sec-ap-modelagem}
 
-O pacote `{captcha}` também fornece uma interface básica para o desenvolvimento de modelos a partir de uma base completamente classificada. A classificação pode ser feita manualmente pela função `captcha_annotate()`, apresentada anteriormente, ou por outro método desenvolvido pelo usuário.
+O pacote `{captcha}` também fornece uma interface básica para o desenvolvimento de modelos a partir de uma base completamente anotada. A anotação pode ser feita manualmente pela função `captcha_annotate()`, apresentada anteriormente, ou por outro método desenvolvido pelo usuário.
 
 A parte de modelagem parte de algumas premissas sobre a base de dados. As imagens precisam estar em uma pasta e ter o padrão `caminho/do/arquivo/<id>_<lab>.<ext>`, onde:
 
@@ -239,7 +239,7 @@ A função `captcha_fit_model()`, apresentada na subseção anterior, é engessa
 
 Outra desvantagem da utilização do `captcha_fit_model()` é a disponibilização dos modelos. Um modelo pode ser utilizado localmente, mas a tarefa de disponibilizar as bases de dados e o modelo para outras pessoas não tem um procedimento bem definido.
 
-Para organizar o fluxo de trabalho, implementou-se um fluxo de classificação de Captchas dentro do pacote `{captcha}`. A função que orquestra esse fluxo é a `new_captcha()`. A função possui apenas um parâmetro, `path=`, que é o caminho de uma nova pasta a ser criada.
+Para organizar o fluxo de trabalho, implementou-se um fluxo de anotação de Captchas dentro do pacote `{captcha}`. A função que orquestra esse fluxo é a `new_captcha()`. A função possui apenas um parâmetro, `path=`, que é o caminho de uma nova pasta a ser criada.
 
 A função também pode ser chamada criando-se um projeto dentro do próprio RStudio. A @fig-exemplo-rstudio-template mostra um exemplo de utilização do template dentro do RStudio, após clicar em `Novo Projeto > Novo Diretório`.
 
@@ -252,7 +252,7 @@ knitr::include_graphics("assets/img/exemplo-rstudio-template.png")
 Ao criar um novo projeto, pelo comando `new_captcha()` ou pela interface do RStudio, uma nova janela é aberta. O projeto contém quatro arquivos:
 
 -   `01_download.R`: Contém algumas funções para auxiliar no desenvolvimento de funções que baixam Captchas em um caso real. Na prática, as funções que baixam Captchas precisam ser adaptadas porque os sites são organizados de formas muito diferentes.
--   `02_annotate.R`: Contém um *template* para classificação manual de Captchas. A classificação manual pode tanto ser realizada usando a interface criada pelo pacote `{captcha}` quanto externamente. No final, os arquivos classificados devem ser salvos na pasta `img`, no formato descrito na Subseção [-@sec-ap-modelagem].
+-   `02_annotate.R`: Contém um *template* para anotação manual de Captchas. A anotação manual pode tanto ser realizada usando a interface criada pelo pacote `{captcha}` quanto externamente. No final, os arquivos classificados devem ser salvos na pasta `img`, no formato descrito na Subseção [-@sec-ap-modelagem].
 -   `03_model.R`: Contém um *template* para modelagem, permitindo a customização completa do procedimento de ajuste. O *script* contém comandos para carregar os dados, especificar o modelo, realizar o ajuste e salvar o modelo ajustado.
 -   `04_share.R`: Contém funções para criar um repositório *git* da solução e disponibilizar o modelo ajustado. O modelo poderá ser lido e aplicado utilizando-se a função `captcha_load_model()`, para utilização em diferentes contextos, sem a necessidade de copiar arquivos localmente.
 
@@ -487,7 +487,7 @@ Agora, aplica-se a função `captcha_test_trf5()` para verificar se o rótulo es
 
 Cada Captcha possui uma função de acesso e uma função de teste. Na prática, se uma pessoa desejar resolver um novo Captcha usando a técnica do oráculo, são essas funções que ela precisar desenvolver. Todas as outras operações podem ser generalizadas para diferentes casos de uso e estão implementadas nos pacotes `{captchaDownload}` e `{captchaOracle}`. Vale notar que a construção dessas funções geralmente é necessária para a construção de *web scrapers*, ou seja, elas não criam dificuldades adicionais para pessoas interessadas em resolver Captchas para acessar dados da *internet*. 
 
-A função principal do pacote `{captchaDownload}` é a `captcha_oracle()`. A função é responsável por realizar a classificação parcial automática dos Captchas utilizando um modelo inicial e o oráculo. A função possui os seguintes parâmetros:
+A função principal do pacote `{captchaDownload}` é a `captcha_oracle()`. A função é responsável por realizar a anotação parcial automática dos Captchas utilizando um modelo inicial e o oráculo. A função possui os seguintes parâmetros:
 
 - `path=`: caminho em que os arquivos serão salvos.
 - `model=`: modelo para predizer o rótulo de uma imagem.
@@ -496,7 +496,7 @@ A função principal do pacote `{captchaDownload}` é a `captcha_oracle()`. A fu
 - `captcha_access=`: função que baixa um Captcha e retorna dados da sessão para validar o Captcha, como mostrada anteriormente.
 - `captcha_test=`: função que testa se um Captcha está correto a partir de um rótulo específico, como mostrado anteriormente.
 
-A função amarra todos os conceitos necessários para criar novas bases de dados de forma automática. Primeiro, considera o caminho para salvar os dados. Em seguida, considera o modelo e formas de lidar com o oráculo. Por último, recebe as funções de acesso e de teste do Captcha. A função escreve um arquivo de *log* com os resultados dos testes. O arquivo contém `max_ntry` linhas, podendo ter uma linha adicional se `manual=TRUE`, já que, se o modelo errar todas os chutes, a classificação manual deve ser adicionada.
+A função amarra todos os conceitos necessários para criar novas bases de dados de forma automática. Primeiro, considera o caminho para salvar os dados. Em seguida, considera o modelo e formas de lidar com o oráculo. Por último, recebe as funções de acesso e de teste do Captcha. A função escreve um arquivo de *log* com os resultados dos testes. O arquivo contém `max_ntry` linhas, podendo ter uma linha adicional se `manual=TRUE`, já que, se o modelo errar todas os chutes, a anotação manual deve ser adicionada.
 
 No exemplo do TRF5, a chamada da função `captcha_oracle()` com um chute ficaria da seguinte forma:
 
