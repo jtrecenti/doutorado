@@ -26,7 +26,7 @@ Com o advento do pacote `{torch}`[@torch-2], no entanto, tudo foi facilitado. O 
 
 O pacote `{captcha}`, apesar de ter sido construído do zero, foi desenvolvido durante *lives* realizadas na plataforma *Twitch*. A construção em *lives* foi interessante porque era possível obter *feedback* e ideias da comunidade durante a construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na arquitetura do pacote.
 
-Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacotes adicionais. Os pacote `{captchaDownload}` e `{captchaOracle}` foram desenvolvidos para facilitar a obtenção dos resultados da tese, enquanto o pacote `{captcha}` pode ser utilizado por qualquer pessoa interessada em visualizar, classificar e resolver Captchas. As próximas subseções do apêndice descrevem os três pacotes.
+Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacotes adicionais. Os pacote `{captchaDownload}` e `{captchaOracle}` foram desenvolvidos para facilitar a obtenção dos resultados da tese, enquanto o pacote `{captcha}` pode ser utilizado por qualquer pessoa interessada em visualizar, anotar e resolver Captchas. As próximas subseções do apêndice descrevem os três pacotes.
 
 ## Pacote captcha {#sec-pacote-captcha}
 
@@ -161,7 +161,7 @@ A função `captcha_annotate()` serve para anotar o rótulo de uma imagem de Cap
 
 -   `files=`: objeto de classe `captcha` lido com a função `read_captcha()` (recomendado) ou vetor de caminhos de arquivos.
 -   `labels=`: (opcional) vetor com os rótulos das imagens. Deve ter o mesmo `length()` do que `files=`. Por padrão, o valor é `NULL`, indicando que deve ser aberto um `prompt` para que o usuário insira a resposta manualmente.
--   `path=`: (opcional) caminho da pasta onde os arquivos classificados serão salvos. Por padrão, salva os arquivos com nomes modificados na mesma pasta dos arquivos originais.
+-   `path=`: (opcional) caminho da pasta onde os arquivos anotados serão salvos. Por padrão, salva os arquivos com nomes modificados na mesma pasta dos arquivos originais.
 -   `rm_old=`: (opcional) deletar ou não os arquivos originais. Por padrão, é `FALSE`.
 
 A função, depois de aplicada, retorna um vetor com os caminhos dos arquivos modificados. O parâmetro `labels=` é útil para lidar com situações em que sabemos o rótulo do Captcha. Por exemplo, em um fluxo de trabalho que utiliza o oráculo, pode ser que um modelo inicial já forneça o valor correto do rótulo.
@@ -204,15 +204,15 @@ A parte de modelagem parte de algumas premissas sobre a base de dados. As imagen
 -   `<lab>`: é o rótulo do Captcha. Pode ser um conjunto de caracteres entre `[a-zA-Z0-9]`, diferenciando maiúsculas e minúsculas se necessário. No momento, todos os arquivos em uma pasta devem ter a mesma quantidade de caracteres (comprimento homogêneo). Futuramente, o pacote poderá considerar Captchas de comprimento heterogêneo.
 -   `<ext>`: extensão do arquivo. Pode ser `.png`, `.jpeg` ou `.jpg`. As operações também funcionam para o formato `.svg`, mas pode apresentar problemas por conta da transparência da imagem.
 
-Atendidas as premissas da base classificada, é possível ajustar um modelo de redes neurais usando o pacote `{captcha}`. No entanto, como o ajuste de modelos de redes neurais envolve uma série de nuances e pequenas adaptações, optou-se por exportar funções em dois níveis de aprofundamento. A primeira é a **automatizada**, utilizando a função `captcha_fit_model()` descrito a seguir, enquanto a segunda é a **procedimental**, utilizando o passo a passo descrito na Subseção [-@sec-captcha-do-zero].
+Atendidas as premissas da base anotada, é possível ajustar um modelo de redes neurais usando o pacote `{captcha}`. No entanto, como o ajuste de modelos de redes neurais envolve uma série de nuances e pequenas adaptações, optou-se por exportar funções em dois níveis de aprofundamento. A primeira é a **automatizada**, utilizando a função `captcha_fit_model()` descrito a seguir, enquanto a segunda é a **procedimental**, utilizando o passo a passo descrito na Subseção [-@sec-captcha-do-zero].
 
-A função `captcha_fit_model()` ajusta um modelo a partir de uma pasta com arquivos classificados. A função recebe os parâmetros: `dir=`, contendo o caminho dos arquivos classificados; `dir_valid=`, (opcional) contendo o caminho dos arquivos classificados para validação; `prop_valid=`, contendo a proporção da base de treino a ser considerada como validação, ignorada quando `dir_valid=` é fornecida (por padrão, considera-se 20% da base para validação).
+A função `captcha_fit_model()` ajusta um modelo a partir de uma pasta com arquivos anotados. A função recebe os parâmetros: `dir=`, contendo o caminho dos arquivos anotados; `dir_valid=`, (opcional) contendo o caminho dos arquivos anotados para validação; `prop_valid=`, contendo a proporção da base de treino a ser considerada como validação, ignorada quando `dir_valid=` é fornecida (por padrão, considera-se 20% da base para validação).
 
 A função `captcha_fit_model()` também possui alguns parâmetros relacionados à modelagem. São eles: `dropout=`, especificando o percentual de *dropout* aplicado às camadas ocultas da rede (por padrão, `0.25`); `dense_units=`, especificando a quantidade de unidades na camada oculta que vem depois das camadas convolucionais (por padrão, 200); `decay=`, especificando o percentual de decaimento da taxa de aprendizado (por padrão, `0.99`); `epochs=` número de épocas para ajuste do modelo (por padrão 100). Uma observação importante é que o modelo está configurado para parar o ajuste após 20 iterações sem redução significativa na função de perda (arbitrado em 1%; para mais detalhes ver a Subseção [-@sec-captcha-do-zero]).
 
 No final, a função retorna um modelo ajustado com classe `luz_module_fitted`, que pode ser salvo em disco utilizando-se a função `luz_save()`. O modelo também pode ser serializado para utilização em outros pacotes como pytorch. Um tutorial sobre serialização pode ser encontrado na [documentação do pacote torch](https://torch.mlverse.org/docs/articles/serialization.html).
 
-O pacote `{captchaOracle}` possui uma interface similar para trabalhar com bases parcialmente classificadas. Como a estrutura de dados nesse caso é mais complexa e pode evoluir no futuro, os códigos foram organizados em outro pacote. Mais detalhes na Seção [-@sec-pacote-oracle].
+O pacote `{captchaOracle}` possui uma interface similar para trabalhar com bases parcialmente anotadas. Como a estrutura de dados nesse caso é mais complexa e pode evoluir no futuro, os códigos foram organizados em outro pacote. Mais detalhes na Seção [-@sec-pacote-oracle].
 
 Na documentação do pacote `{captcha}`, foi adicionado um exemplo de aplicação. O exemplo utiliza captchas gerados usando a função `captcha_generate()`, que gera Captchas utilizando o pacote `{magick}`. O Captcha foi criado para a construção da tese, apelidado de `R-Captcha`, e possui os seguintes parâmetros:
 
@@ -252,7 +252,7 @@ knitr::include_graphics("assets/img/exemplo-rstudio-template.png")
 Ao criar um novo projeto, pelo comando `new_captcha()` ou pela interface do RStudio, uma nova janela é aberta. O projeto contém quatro arquivos:
 
 -   `01_download.R`: Contém algumas funções para auxiliar no desenvolvimento de funções que baixam Captchas em um caso real. Na prática, as funções que baixam Captchas precisam ser adaptadas porque os sites são organizados de formas muito diferentes.
--   `02_annotate.R`: Contém um *template* para anotação manual de Captchas. A anotação manual pode tanto ser realizada usando a interface criada pelo pacote `{captcha}` quanto externamente. No final, os arquivos classificados devem ser salvos na pasta `img`, no formato descrito na Subseção [-@sec-ap-modelagem].
+-   `02_annotate.R`: Contém um *template* para anotação manual de Captchas. A anotação manual pode tanto ser realizada usando a interface criada pelo pacote `{captcha}` quanto externamente. No final, os arquivos anotados devem ser salvos na pasta `img`, no formato descrito na Subseção [-@sec-ap-modelagem].
 -   `03_model.R`: Contém um *template* para modelagem, permitindo a customização completa do procedimento de ajuste. O *script* contém comandos para carregar os dados, especificar o modelo, realizar o ajuste e salvar o modelo ajustado.
 -   `04_share.R`: Contém funções para criar um repositório *git* da solução e disponibilizar o modelo ajustado. O modelo poderá ser lido e aplicado utilizando-se a função `captcha_load_model()`, para utilização em diferentes contextos, sem a necessidade de copiar arquivos localmente.
 
@@ -265,7 +265,7 @@ A função `captcha_dataset()` cria o *dataset* recebe como parâmetro uma pasta
 -   `transform_label=`: operação de transformação para gerar a variável resposta. Por padrão, utiliza a função `captcha_transform_label()`, que recebe um vetor de todos os possíveis caracteres do Captcha e aplica a operação `one_hot()`, obtendo-se a versão matricial da resposta com zeros e uns, como descrito na @sec-definicao-captcha.
 -   `augmentation=`: operações para aumentação de dados . Por exemplo, pode ser uma função que adiciona um ruído aleatório à imagem original para que, ao gerar uma nova amostra, os dados utilizados sejam sempre diferentes.
 
-A função `captcha_dataset()` deve ser aplicada duas vezes, uma para criar a base de treino e outra para criar a base de validação. A separação de bases de treino e validação deve ser feita de forma manual, copiando parte dos Captchas classificados para uma nova pasta, com aleatorização. É papel do usuário separar as bases em pastas distintas carregá-as em um *dataset*.
+A função `captcha_dataset()` deve ser aplicada duas vezes, uma para criar a base de treino e outra para criar a base de validação. A separação de bases de treino e validação deve ser feita de forma manual, copiando parte dos Captchas anotados para uma nova pasta, com aleatorização. É papel do usuário separar as bases em pastas distintas carregá-as em um *dataset*.
 
 Em seguida, os *dataloaders* são criados utilizando-se a função `dataloader()` do pacote `{torch}`. Nessa parte é definido o tamanho do *minibatch*, além de outros possíveis parâmetros disponíveis na função do `{torch}`. Para mais detalhes, o usuário pode [acessar a documentação da função neste link](https://torch.mlverse.org/docs/reference/dataloader.html). Devem ser criados *dataloaders* tanto para a base de treino quanto para a base de validação.
 
@@ -410,7 +410,7 @@ No final do fluxo definido pelo pacote `{luz}`, será obtido um modelo ajustado.
 
 Por último, o modelo deve ser salvo em um arquivo local. Isso é feito utilizando-se a função `luz_save()` do pacote `{luz}`, guardando um objeto com extensão `.pt`, que será disponibilizado no `04_share.R`.
 
-Cabe também um detalhamento do *script* disponibilizado em `04_share.R`. O script utiliza o pacote `{usethis}` [@usethis] para organizar o repositório, configurando o Git (software de versionamento de códigos) e o GitHub (sistema *web* de organização de repositórios). Além disso, o *script* utiliza o pacote `{piggyback}` [@piggyback] para disponibilizar o modelo ajustado nos *releases* do repositório criado. Opcionalmente, o usuário poderá também disponibilizar a base com os arquivos classificados em um arquivo `.zip`, o que é recomendado, pois permite que outras pessoas possam trabalhar com os mesmos dados e aprimorar os modelos.
+Cabe também um detalhamento do *script* disponibilizado em `04_share.R`. O script utiliza o pacote `{usethis}` [@usethis] para organizar o repositório, configurando o Git (software de versionamento de códigos) e o GitHub (sistema *web* de organização de repositórios). Além disso, o *script* utiliza o pacote `{piggyback}` [@piggyback] para disponibilizar o modelo ajustado nos *releases* do repositório criado. Opcionalmente, o usuário poderá também disponibilizar a base com os arquivos anotados em um arquivo `.zip`, o que é recomendado, pois permite que outras pessoas possam trabalhar com os mesmos dados e aprimorar os modelos.
 
 Um detalhe importante é sobre a inserção de arquivos pesados no repositório. O *script* utiliza *releases* para disponibilizar as soluções porque não é uma boa prática subir arquivos como modelos ajustados ou arquivos brutos (imagens) diretamente no repositório. Isso acontece porque o repositório pode ficar demasiadamente pesado e o histórico do *Git* fica alterado.
 
@@ -492,7 +492,7 @@ A função principal do pacote `{captchaDownload}` é a `captcha_oracle()`. A fu
 - `path=`: caminho em que os arquivos serão salvos.
 - `model=`: modelo para predizer o rótulo de uma imagem.
 - `max_ntry=`: quantidade máxima de chutes até desistir.
-- `manual=`: caso o máximo de tentativas seja alcançado, abrir o *prompt* para classificar manualmente? Por padrão, sim.
+- `manual=`: caso o máximo de tentativas seja alcançado, abrir o *prompt* para anotar manualmente? Por padrão, sim.
 - `captcha_access=`: função que baixa um Captcha e retorna dados da sessão para validar o Captcha, como mostrada anteriormente.
 - `captcha_test=`: função que testa se um Captcha está correto a partir de um rótulo específico, como mostrado anteriormente.
 
@@ -589,7 +589,7 @@ A estrutura de dados no caso do oráculo é mais complexa do que no caso canôni
 
 O módulo `net_captcha_oracle()` faz poucos ajustes à estrutura inicial fornecida pelo módulo `net_captcha()` do pacote `{captcha}`. A única modificação da função é que ela recebe um modelo inicial de entrada, transferindo os pesos ajustados do modelo ao novo módulo. O módulo `net_captcha_oracle()`, inclusive, poderia ser utilizado fora do contexto do WAWL, já que só utiliza os dados de *input*, que não são alterados.
 
-A função `captcha_accuracy_oracle()` é utilizada para estimar a acurácia do modelo. Para isso, a função precisa lidar com o fato de que os dados de validação apresentam uma estrutura diferente dos dados de treino, já que estão completamente classificados. No treino, a acurácia é calculada considerando apenas os casos em que a resposta é conhecida. Na validação, a acurácia é calculada considerando-se todas as observações.
+A função `captcha_accuracy_oracle()` é utilizada para estimar a acurácia do modelo. Para isso, a função precisa lidar com o fato de que os dados de validação apresentam uma estrutura diferente dos dados de treino, já que estão completamente anotados. No treino, a acurácia é calculada considerando apenas os casos em que a resposta é conhecida. Na validação, a acurácia é calculada considerando-se todas as observações.
 
 Por último, a função `oracle_loss()` é a que contém a proposta de função de perda do método WAWL. Nos casos corretos, a função de perda é obtida calculando-se uma entropia cruzada simples. Nos casos incorretos, a perda é calculada pela estratégia `1-p`, ou seja, considerando o complementar da probabilidade de observar os chutes que foram apresentados segundo o modelo.
 
