@@ -1,3 +1,8 @@
 # Sobre este documento {.unnumbered}
 
-Blabla, RMarkdown...
+Este documento foi construído utilizando o [Quarto](https://quarto.org/), um sistema de publicação científica de código aberto desenvolvido com base no [Pandoc](https://pandoc.org/). Os códigos foram escritos com o [software estatístico R](https://cran.r-project.org/) na [versão 4.2.2](https://cran.r-project.org/bin/windows/base/). 
+
+O documento foi escrito em duas versões: PDF e HTML. A versão em HTML foi construída com [Quarto Books](https://quarto.org/docs/books/). A versão em PDF incorpora o [template do IME-USP](https://gitlab.com/ccsl-usp/modelo-latex), mantido pelo [Centro de Competência de Software Livre](https://ccsl.ime.usp.br/).
+
+Todos os códigos e textos da tese podem ser acessados publicamente [neste link](https://github.com/jtrecenti/doutorado). Boa leitura!
+
