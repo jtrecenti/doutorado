@@ -4,6 +4,16 @@ bibliography: references.bib
 
 # Metodologia {#sec-metodologia}
 
+\epigrafe{If machine learning can decipher captchas, what's next? Toilets that can read our minds?}{ChatGPT}
+
+::: {.content-visible when-format="html"}
+
+> If machine learning can decipher captchas, what's next? Toilets that can read our minds?
+> 
+> -- ChatGPT
+
+:::
+
 <!-- ----------------------------------------------------------- -->
 
 <!-- Trabalhos de estatística costumam ter uma parte de metodologia maior do que introdução e resultados. Essa tese não será diferente. A metodologia é essencial para garantir a reprodutibilidade do trabalho, pois, mais do que simplesmente apresentar o código utilizado, mostra o passo a passo, as dores e as decisões difíceis que tiveram de ser tomadas para concluir o projeto. -->
@@ -931,7 +941,7 @@ Além das bases de treino, foi construída uma base de teste para cada Captcha. 
 
 Como o único objetivo da base de teste foi o de estimar a acurácia dos modelos finais, a quantidade de observações poderia ser arbitrada. O tamanho das bases de teste foi, então, arbitrado em 1000 imagens para cada Captcha.
 
-### Terceiro passo: modelo final
+### Terceiro passo: modelo final {#sec-modelo-final}
 
 O modelo final foi ajustado para cada uma das 65 bases de treino disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se o modelo proposto na @sec-wawl. Caso a imagem tenha sido corretamente classificada, a função de perda é calculada normalmente. Caso ela tenha sido classificada incorretamente, considera-se a probabilidade de não observar nenhum dos chutes.
 

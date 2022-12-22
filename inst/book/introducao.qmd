@@ -1,9 +1,14 @@
-# Introdução {#introducao}
+# Introdução {#sec-introducao}
 
-\epigrafe{Captchas: where even computers need to prove they're not robots!}{ChatGPT}
-\epigrafe{Even robots need a break from the daily grind of solving captchas.}{ChatGPT}
-\epigrafe{I thought I was human, but the captcha told me otherwise!}{ChatGPT}
 \epigrafe{Why do we need to prove we're not robots to a robot? Isn't that a robot's job?}{ChatGPT, a robot}
+
+::: {.content-visible when-format="html"}
+
+> Why do we need to prove we're not robots to a robot? Isn't that a robot's job?
+> 
+> -- ChatGPT, a robot
+
+:::
 
 Captcha (*Completely Automated Public Turing test to tell Computers and Humans Apart*) é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. Outro nome para os Captchas é *Human Interaction Proofs,* ou HIPs [@chellapilla2005].
 
@@ -23,7 +28,7 @@ No entanto, o uso de Captchas não é adequado em todas as situações. Um exemp
 
 Também existem casos em que o uso de Captchas é prejudicial. Sua utilização em serviços públicos do Brasil, por exemplo, é problemática, como discutido na próxima seção.
 
-## Captchas em serviços públicos
+## Captchas em serviços públicos {#sec-captchas-publicos}
 
 A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º, prevê que "todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à segurança da sociedade e do Estado;". Essa previsão é implementada pela Lei de Acesso à Informação (Lei 12.527/2011; LAI), que se aplica "aos órgãos públicos integrantes da administração direta dos Poderes Executivo, Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério Público", bem como "as autarquias, as fundações públicas, as empresas públicas, as sociedades de economia mista e demais entidades controladas direta ou indiretamente pela União, Estados, Distrito Federal e Municípios" (Art. 1º).
 
@@ -45,7 +50,7 @@ Dos 16 projetos disponibilizados na [página de pesquisas no site da ABJ](https:
 
 Em muitas situações, portanto, a única alternativa para realizar as pesquisas é acessando os dados via coleta automatizada nos sites. Todos os tribunais possuem ferramentas de consulta individualizadas de processos, por conta do que está previsto na CF. A solução, portanto, passa a ser construir uma ferramenta que obtém todos os dados automaticamente. Tal conceito é conhecido como *raspagem de dados* [@zhao2017] e será desenvolvido com maiores detalhes no Capítulo @sec-metodologia.
 
-Os Captchas se tornam prejudiciais à sociedade quando o acesso automatizado é necessário para realizar pesquisas científicas. Infelizmente, boa parte dos tribunais utilizam a barreira do Captcha. Alguns tribunais, inclusive, têm o entendimento de que o acesso automatizado é prejudicial, como o TJRS, que emitiu um [comunicado](https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/) sobre o tema.
+Os Captchas se tornam prejudiciais à sociedade quando o acesso automatizado é necessário para realizar pesquisas científicas. Infelizmente, vários tribunais utilizam a barreira do Captcha. Alguns tribunais, inclusive, têm o entendimento de que o acesso automatizado é prejudicial, como o TJRS, que emitiu um [comunicado](https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/) sobre o tema.
 
 Uma justificativa comum para implementar Captchas em consultas públicas é a estabilidade dos sistemas. Ao realizar muitas consultas de forma automática, um robô pode tornar o sistema instável e, em algumas situações, até mesmo derrubar o servidor que disponibiliza as consultas.
 
@@ -69,7 +74,7 @@ O presente trabalho busca avançar nesse sentido. A solução desenvolvida envol
 
 Para compreender completamente o avanço que a tese representa, no entanto, é necessário apresentar o histórico de desenvolvimento dos Captchas. O histórico é apresentado na próxima Seção, através da luta de geradores e resolvedores de Captchas, que pode ser dada como encerrada no ano de 2018, com o advento do *reCaptcha v3*.
 
-## Uma luta entre geradores e resolvedores
+## Uma luta entre geradores e resolvedores {#sec-historia}
 
 O primeiro texto técnico sobre Captchas foi publicado por @vonahnTellingHumansComputers2002. O texto apresenta o Captcha e seu significado através do problema de geração de *emails* automáticos no Yahoo. Em seguida, apresenta alguns exemplos de candidatos a Captcha, com tarefas de reconhecimento de padrões ou textos. Uma característica interessante que os autores colocam sobre o Captcha é que suas imagens devem ser disponíveis publicamente. O texto também faz a conexão entre a tarefa dos Captchas e os desafios da inteligência artificial. Um ponto a destacar é que os autores defendem que os Captchas devem ser resolvidos, pois isso implica em avanços na inteligência artificial. O site original do projeto, *The Captcha Project*, foi lançado em 2000.
 
@@ -132,7 +137,7 @@ Infelizmente, Captchas de textos em imagens continuam sendo populares na *intern
 
 Essa é a lacuna identificada a partir da observação do estado atual dos serviços públicos e dos trabalhos acadêmicos analisados. Nesta pesquisa, será apresentado um fluxo de trabalho que pode ser facilmente aplicado a diferentes modelos de resolução de Captchas, incluindo arquiteturas que ainda não foram desenvolvidas. O fluxo de trabalho funcionará como um acelerador do aprendizado, possibilitando a criação de modelos que não precisam de intervenção humana. O resultado será encontrado explorando o potencial de uso do **oráculo**, apresentado na próxima seção.
 
-## Oráculo
+## Oráculo {#sec-intro-oraculo}
 
 Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado, são muito sensíveis a perturbações pequenas nas imagens [@yuan2019]. Por isso, se o site de um tribunal, por exemplo, mudar o Captcha utilizado, seria necessário baixar e anotar uma nova base de dados para treinar o modelo. Os avanços em técnicas de regularização fazem com que o modelo seja menos afetado por mudanças nos desafios gerados. Uma técnica de regularização que ajuda na capacidade de generalização é a aumentação de dados com adição de ruídos [@noh2017]. No entanto, nenhuma técnica garante que o modelo terá excelentes resultados em novos desafios.
 
@@ -156,7 +161,7 @@ Na área de aprendizado de máquinas, um modelo apresenta resposta censurada ou 
 
 Para criar uma base de dados usando o oráculo, é necessário utilizar técnicas de raspagem de dados, imitando repetidamente o que um usuário faria para acessar o site. Por isso, a raspagem de dados se torna fundamental para a construção do modelo, tornando-se um dos objetivos da pesquisa.
 
-## Objetivo {#objetivos}
+## Objetivo {#sec-objetivos}
 
 O objetivo geral da tese é desenvolver uma solução inovadora, chamada WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de aprendizado profundo com raspagem de dados e aproveitando os dados fornecidos pelo oráculo.
 
@@ -167,7 +172,7 @@ Especificamente, a pesquisa tem como objetivos:
 3.  Ajustar e testar a eficácia do modelo proposto.
 4.  Disponibilizar um pacote computacional aberto, possibilitando a resolução de Captchas presentes em serviços públicos.
 
-## Justificativa
+## Justificativa {#sec-justificativa}
 
 O presente trabalho é relevante para a ciência por conta de sua importância prática, importância teórica e viabilidade técnica. Os pontos são explicados abaixo.
 
@@ -177,23 +182,24 @@ Do ponto de vista teórico, a tese é importante por apresentar uma aplicação 
 
 Finalmente, com relação à viabilidade técnica, o trabalho parte de uma lista de Captchas que já foram resolvidos utilizando aprendizado profundo. Como os Captchas já estão resolvidos, mesmo que a WAWL não apresentasse bons resultados -- e apresenta -- o projeto ainda teria como subprodutos as bases de dados e o pacote computacional disponibilizados abertamente. O objetivo 3 é o que torna a proposta tecnicamente viável.
 
-## Hipóteses
+## Hipóteses {#sec-hipoteses}
 
-<!-- REVISAR DEPOIS DE TERMINAR O PROJETO -->
+O projeto foi desenvolvido em torno de duas hipóteses principais. As hipóteses têm origem tanto do levantamento bibliográfico realizado para desenvolver a pesquisa, quanto da experiência pessoal do autor em projetos de pesquisa aplicados.
 
-O projeto foi desenvolvido em torno de duas hipóteses principais. Tais hipóteses são oriundas tanto do levantamento bibliográfico realizado para desenvolver a pesquisa, quanto da experiência pessoal do autor em projetos de pesquisa aplicados.
+1.  A utilização de aprendizado fracamente supervisionado permite a criação de modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.
+<!-- a.  Sub-hipótese: É possível criar um modelo genérico que funciona bem e se adapta com o uso do oráculo. -->
+<!-- b.  Sub-hipótese: Com a teoria de aprendizado fracamente supervisionado, é possível demonstrar que modelos criados dessa forma apresentam desempenho análogo ao que seria obtido com bases totalmente supervisionadas. -->
 
-1.  A utilização de aprendizado fracamente supervisionado com oráculo permite a criação de modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.
-    a.  Sub-hipótese: É possível criar um modelo genérico que funciona bem e se adapta com o uso do oráculo.
-    b.  Sub-hipótese: Com a teoria de aprendizado fracamente supervisionado, é possível demonstrar que modelos criados dessa forma apresentam desempenho análogo ao que seria obtido com bases totalmente supervisionadas.
 2.  É possível aliar a área de raspagem de dados com a área de modelagem estatística.
-    a.  Sub-hipótese: O uso de raspagem de dados como passo intermediário do processo de modelagem apresenta resultados positivos no poder preditivo dos Captchas.
-    b.  Sub-hipótese: É possível criar um modelo com aprendizado ativo, que melhora continuamente conforme é utilizado nos sites.
 
-## Organização do trabalho
+<!-- a.  Sub-hipótese: O uso de raspagem de dados como passo intermediário do processo de modelagem apresenta resultados positivos no poder preditivo dos Captchas. -->
 
-O segundo capítulo, "metodologia" contém todos os passos dados para construção da tese, tanto do ponto de vista teórico como prático. Parte-se da definição técnica dos Captchas, chegando até as redes neurais e a classe problema trabalhada de forma ampla. Em seguida, apresenta-se o método WAWL e suas características. Depois, a base de dados é descrita, mostrando as fontes de dados consideradas e as técnicas de raspagem de dados utilizadas. Por último, descreve-se, com detalhes, as simulações realizadas para obtenção dos resultados empíricos.
+<!-- b.  Sub-hipótese: É possível criar um modelo com aprendizado ativo, que melhora continuamente conforme é utilizado nos sites. -->
 
-O terceiro capítulo, "resultados", apresenta os resultados da pesquisa. Do ponto de vista teórico, são apresentadas as demonstrações das propriedades do modelo. Do ponto de vista empírico, são apresentados os resultados das simulações e outros experimentos realizados com a técnica WAWL.
+## Organização do trabalho {#sec-organizacao}
+
+O segundo capítulo, "metodologia", contém todos os passos dados para construção da tese, tanto do ponto de vista teórico como prático. Parte-se da definição técnica dos Captchas, chegando até as redes neurais e a classe problema trabalhada de forma ampla. Em seguida, apresenta-se o método WAWL e suas características. Depois, a base de dados é descrita, mostrando as fontes de dados consideradas e as técnicas de raspagem de dados utilizadas. Por último, descreve-se, com detalhes, as simulações realizadas para obtenção dos resultados empíricos.
+
+O terceiro capítulo, "resultados", apresenta os resultados da pesquisa. Do ponto de vista teórico, são apresentadas as propriedades do modelo proposto. Do ponto de vista empírico, são apresentados os resultados das simulações e outros experimentos realizados com a técnica WAWL. O capítulo também apresenta uma breve discussão dos resultados obtidos.
 
 No quarto e último capítulo, "conclusão", a pesquisa é concluída, com apresentação das considerações finais e próximos passos. Também foi incluído um apêndice descrevendo e documentando o pacote `{captcha}`, criado atingir o objetivo 4 da pesquisa.
