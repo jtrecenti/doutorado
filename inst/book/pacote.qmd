@@ -61,12 +61,12 @@ O objeto é uma lista com três elementos: `$img`, que contém imagem lida com o
 str(captcha)
 ```
 
-A função `read_captcha()` possui um parâmetro `ans_in_path=`, que indica se o rótulo está contido no caminho da imagem. Se `ans_in_path=TRUE`, a função tentará extrair o rótulo do arquivo (obtendo o texto que vem depois do último `_` do caminho) e armazenar no elemento `$lab`.
+A função `read_captcha()` possui um parâmetro `lab_in_path=`, que indica se o rótulo está contido no caminho da imagem. Se `lab_in_path=TRUE`, a função tentará extrair o rótulo do arquivo (obtendo o texto que vem depois do último `_` do caminho) e armazenar no elemento `$lab`.
 
 ```{r}
 #| echo: true
 exemplo <- "assets/img/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(exemplo, ans_in_path = TRUE)
+captcha <- read_captcha(exemplo, lab_in_path = TRUE)
 
 str(captcha)
 ```
@@ -153,7 +153,7 @@ Por fim, se a imagem possui um rótulo, por padrão, a função `plot()` mostra 
 #| echo: true
 #| out-width: 30%
 exemplo <- "assets/img/mnist128c49c36e13_6297.png"
-captcha <- read_captcha(exemplo, ans_in_path = TRUE)
+captcha <- read_captcha(exemplo, lab_in_path = TRUE)
 plot(captcha)
 ```
 
@@ -258,9 +258,8 @@ Ao criar um novo projeto, pelo comando `new_captcha()` ou pela interface do RStu
 
 Sobre a parte de modelagem, cabe uma descrição mais detalhada. O primeiro passo do *script* é criar objetos do tipo *dataset* (objeto que armazena os dados de forma consistente) e *dataloader* (objeto que obtém amostras do dataset, que são utilizadas como os *minibatches* do modelo), com uma estrutura orquestrada pelo pacote `{torch}`.
 
-A função `captcha_dataset()` cria o *dataset* recebe como parâmetro uma pasta de arquivos e gera um objeto com classes `my_captcha`, `dataset` e `R6`. A função é, na verdade, um objeto do tipo `dataset_generator`, criada utilizando-se a função `dataset()` do pacote `{torch}`. O objeto é chamado da mesma forma que uma função usual do R, aceitando alguns parâmetros adicionais:
+A função `captcha_dataset()` cria o *dataset* recebendo como parâmetro uma pasta de arquivos e gera um objeto com classes `my_captcha`, `dataset` e `R6`. A função é, na verdade, um objeto do tipo `dataset_generator`, criada utilizando-se a função `dataset()` do pacote `{torch}`. O objeto é chamado da mesma forma que uma função usual do R, aceitando alguns parâmetros adicionais:
 
--   `captcha=`: (opcional) fornecer um nome para o captcha.
 -   `transform_image=`: operação de transformação a ser aplicada à imagem. Por padrão, utiliza a função `captcha_transform_image()`, que lê a imagem e redimensiona para ficar com dimensões `32x192`. A dimensão foi escolhida para facilitar a implementação das camadas convolucionais e para lidar com o fato de que usualmente os Captchas são imagens retangulares.
 -   `transform_label=`: operação de transformação para gerar a variável resposta. Por padrão, utiliza a função `captcha_transform_label()`, que recebe um vetor de todos os possíveis caracteres do Captcha e aplica a operação `one_hot()`, obtendo-se a versão matricial da resposta com zeros e uns, como descrito na @sec-definicao-captcha.
 -   `augmentation=`: operações para aumentação de dados . Por exemplo, pode ser uma função que adiciona um ruído aleatório à imagem original para que, ao gerar uma nova amostra, os dados utilizados sejam sempre diferentes.
@@ -319,6 +318,9 @@ initialize = function(input_dim,
 A função de *feed forward* foi descrita abaixo. A função aplica o passo-a-passo descrito na @sec-arquitetura-rede, recebendo uma imagem `x` como entrada e retornando uma matriz de logitos, que dão os pesos do modelo para cada letra da resposta. O modelo retorna os logitos e não as probabilidades porque, no passo seguinte, a função de perda considera como entrada os logitos. Se o usuário decidir modificar o método `forward` para retornar probabilidades, precisará também adaptar a função de perda utilizada.
 
 ```{r}
+#| echo: true
+#| eval: false
+
 forward = function(x) {
 
   out <- x |>
@@ -365,7 +367,7 @@ Definida a arquitetura do modelo, o penúltimo passo é o ajuste. O ajuste do mo
 
 No caso dos Captchas, o código `{luz}` para ajuste do modelo segue quatro passos, encadeados pelo operador *pipe*, ou `|>`:
 
--   `setup()`: serve para determinar a função de perda, o otimizador e as métricas a serem acompanhadas. No *script*, a função de perda utilizada é a `nn_multilabel_soft_margin_loss()` do `{torch}`, o otimizador é o `optim_adam()` do `{torch}` e a métrica é a `captcha_accuracy()`, desenvolvida no pacote `{captcha}` para apresentar a acurácia considerando a imagem completa do Captcha e não a acurácia de cada letra da imagem, que seria o resultado se fosse utilizada a função `luz_metric_accuracy()`, do pacote `{luz}`
+-   `setup()`: serve para determinar a função de perda, o otimizador e as métricas a serem acompanhadas. No *script*, a função de perda utilizada é a `nn_multilabel_soft_margin_loss()` do `{torch}`, o otimizador é o `optim_adam()` do `{torch}` e a métrica é a `captcha_accuracy()`, desenvolvida no pacote `{captcha}` para apresentar a acurácia considerando a imagem completa do Captcha e não a acurácia de cada letra da imagem, que seria o resultado se fosse utilizada a função `luz_metric_accuracy()`, do pacote `{luz}`.
 -   `set_hparams()`: serve para informar os hiperparâmetros e outras informações do modelo. Os parâmetros colocados dentro dessa função são exatamente os parâmetros do método `initialize()` da rede neural criada no passo anterior.
 -   `set_opt_hparams()`: serve para informar os hiperparâmetros da otimização. Os parâmetros colocados nessa função são passados para a função de otimização. No script, o único parâmetro informado é a taxa de aprendizado, fixada em `0.01`.
 -   `fit()`: serve para inicializar o *loop* de ajuste do modelo. Aqui, é necessário passar os *dataloaders* de treino e validação, a quantidade de épocas (fixada em 100), e os *callbacks*, que são operações a serem aplicadas em diferentes momentos do ajuste (por exemplo, ao final de cada iteração). Por padrão, os *callbacks* são:
@@ -581,7 +583,7 @@ Os dados fornecidos pelo pacote ficam tanto na forma de imagens rotuladas quanto
 
 O pacote `{captchaOracle}`, assim como o `{captchaDownload}`, foi desenvolvido para a construção da tese. O pacote, portanto, não apresenta documentação extensiva e suas funções podem não estar com a sintaxe final. Futuramente, o pacote poderá funcionar como novo *backend* para o pacote `{captcha}`, aplicando o WAWL como uma alternativa no fluxo de resolução de Captchas definido na Subseção [-@sec-captcha-do-zero]. 
 
-O pacote possui quatro funções principais: `captcha_dataset_oracle()`,  `net_captcha_oracle()`, `oracle_loss()` e `captcha_accuracy_oracle()`. Cada função desempenha um papel similar a seus pares do pacote `{captcha}`, mas conseguem lidar com a estrutura de dados fornecida pelo oráculo.
+O pacote possui quatro funções principais: a `captcha_dataset_oracle()`, a  `net_captcha_oracle()`, a `oracle_loss()` e a `captcha_accuracy_oracle()`. Cada função desempenha um papel similar a seus pares do pacote `{captcha}`, mas conseguem lidar com a estrutura de dados fornecida pelo oráculo.
 
 A primeira função a ser utilizada é a `captcha_dataset_oracle()`. Trata-se de uma função similar à `captcha_dataset()` do pacote `{captcha}`, mas com um parâmetro adicional, `path_logs=`, que recebe o caminho dos arquivos de *log*.
 
