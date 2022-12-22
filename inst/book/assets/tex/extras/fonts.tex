@@ -146,6 +146,7 @@
 %\else
 %  \setmonofont{inconsolatan}
 %\fi
+
 \usepackage[scale=.85]{sourcecodepro}
 
 % Ao invés da família Computer Modern, é possível usar outras como padrão.
@@ -189,6 +190,7 @@
         \setmathfontface\mathit{LinLibertine_RI.otf}
       \fi
     }
+
 \makeatother
 
 \ifPDFTeX
@@ -199,12 +201,20 @@
   \usepackage{libertinust1math}
 \fi
 
+\setmathfont{Latin Modern Math}
+
+% \setmathfont{NewCMMath-Book.otf}
+
+
+% \setmathfont{libertinusmath-regular.otf}
+% \setmathfontface\mathit{LinLibertine_RI.otf}
+
 % Ativa apenas a fonte biolinum, que é a fonte sem serifa da família.
-%\IfFileExists{libertinus.sty}
+% \IfFileExists{libertinus.sty}
 %  \usepackage[sans]{libertinus}
-%\else
+% \else
 %  \usepackage{biolinum}
-%\fi
+% \fi
 
 % Também é possível usar a Times como padrão; nesse caso, a fonte
 % sem serifa usualmente é a Helvetica. Mas provavelmente libertine
@@ -267,11 +277,11 @@
 % É possível escapar dessa limitação e acessar as fontes padrão do sistema
 % com XeTeX ou LuaTeX. Com eles, além dos pacotes de fontes "tradicionais",
 % pode-se usar o pacote fontspec para usar fontes do sistema.
-%\usepackage{fontspec}
-%\setmainfont{DejaVu Serif}
+% \usepackage{fontspec}
+% \setmainfont{DejaVu Serif}
 %\setmainfont{Charis SIL}
 %\setsansfont{DejaVu Sans}
-%\setsansfont{Libertinus Sans}[Scale=1.1]
+% \setsansfont{Libertinus Sans}[Scale=1.1]
 %\setmonofont{DejaVu Sans Mono}
 
 % fontspec oferece vários recursos interessantes para manipular fontes.
