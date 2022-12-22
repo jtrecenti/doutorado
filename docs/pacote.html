@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Captchas - Appendix A — Pacotes</title>
+<title>Resolvendo Captchas - Apêndice A — Pacotes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ div.csl-indent {
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
-<meta name="citation_title" content="[Appendix A — Pacotes]{#sec-pacote .quarto-section-identifier}">
+<meta name="citation_title" content="[Apêndice  A — Pacotes]{#sec-pacote .quarto-section-identifier}">
 <meta name="citation_language" content="pt">
 <meta name="citation_reference" content="citation_title=Recognizing objects in adversarial clutter: Breaking a visual CAPTCHA;,citation_author=Greg Mori;,citation_author=Jitendra Malik;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_volume=1;,citation_conference=IEEE;">
 <meta name="citation_reference" content="citation_title=Recognizing objects in adversarial clutter: Breaking a visual CAPTCHA;,citation_author=Greg Mori;,citation_author=Jitendra Malik;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_volume=1;,citation_conference=IEEE;">
@@ -222,6 +222,8 @@ div.csl-indent {
 <meta name="citation_reference" content="citation_title=piggyback: Managing Larger Data on a GitHub Repository;,citation_author=Carl Boettiger;,citation_author=Tan Ho;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://CRAN.R-project.org/package=piggyback;">
 <meta name="citation_reference" content="citation_title=usethis: Automate Package and Project Setup;,citation_author=Hadley Wickham;,citation_author=Jennifer Bryan;,citation_author=Malcolm Barrett;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://CRAN.R-project.org/package=usethis;">
 <meta name="citation_reference" content="citation_title=piggyback: Managing Larger Data on a GitHub Repository;,citation_author=Carl Boettiger;,citation_author=Tan Ho;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://CRAN.R-project.org/package=piggyback;">
+<meta name="citation_reference" content="citation_title=Hierarchical Text-Conditional Image Generation with CLIP Latents;,citation_author=Aditya Ramesh;,citation_author=Prafulla Dhariwal;,citation_author=Alex Nichol;,citation_author=Casey Chu;,citation_author=Mark Chen;,citation_doi=10.48550/arXiv.2204.06125;">
+<meta name="citation_reference" content="citation_title=AVA: A large-scale database for aesthetic visual analysis;,citation_author=Naila Murray;,citation_author=Luca Marchesotti;,citation_author=Florent Perronnin;,citation_publication_date=2012;,citation_cover_date=2012;,citation_year=2012;,citation_conference=IEEE;">
 </head>
 
 <body class="nav-sidebar floating">
@@ -230,7 +232,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Appendix A — Pacotes</h1>
+      <h1 class="quarto-secondary-nav-title">Apêndice A — Pacotes</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -243,9 +245,9 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Captchas</a> 
+      <a href="./">Resolvendo Captchas</a> 
         <div class="sidebar-tools-main">
-    <a href="./Captchas.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Resolvendo-Captchas.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -326,7 +328,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-pacote" class="quarto-section-identifier d-none d-lg-block">Appendix A — Pacotes</span></h1>
+<h1 class="title"><span id="sec-pacote" class="quarto-section-identifier d-none d-lg-block">Apêndice A — Pacotes</span></h1>
 </div>
 
 
@@ -394,12 +396,12 @@ div.csl-indent {
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ path: chr "assets/img/dados_tjmg.jpeg"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>A função <code>read_captcha()</code> possui um parâmetro <code>ans_in_path=</code>, que indica se o rótulo está contido no caminho da imagem. Se <code>ans_in_path=TRUE</code>, a função tentará extrair o rótulo do arquivo (obtendo o texto que vem depois do último <code>_</code> do caminho) e armazenar no elemento <code>$lab</code>.</p>
+<p>A função <code>read_captcha()</code> possui um parâmetro <code>lab_in_path=</code>, que indica se o rótulo está contido no caminho da imagem. Se <code>lab_in_path=TRUE</code>, a função tentará extrair o rótulo do arquivo (obtendo o texto que vem depois do último <code>_</code> do caminho) e armazenar no elemento <code>$lab</code>.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>exemplo <span class="ot">&lt;-</span> <span class="st">"assets/img/mnist128c49c36e13_6297.png"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(exemplo, <span class="at">ans_in_path =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(exemplo, <span class="at">lab_in_path =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(captcha)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Class 'captcha'  hidden list of 3</span></span>
@@ -513,7 +515,7 @@ div.csl-indent {
 <details>
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>exemplo <span class="ot">&lt;-</span> <span class="st">"assets/img/mnist128c49c36e13_6297.png"</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(exemplo, <span class="at">ans_in_path =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(exemplo, <span class="at">lab_in_path =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(captcha)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -627,9 +629,8 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 <li><code>04_share.R</code>: Contém funções para criar um repositório <em>git</em> da solução e disponibilizar o modelo ajustado. O modelo poderá ser lido e aplicado utilizando-se a função <code>captcha_load_model()</code>, para utilização em diferentes contextos, sem a necessidade de copiar arquivos localmente.</li>
 </ul>
 <p>Sobre a parte de modelagem, cabe uma descrição mais detalhada. O primeiro passo do <em>script</em> é criar objetos do tipo <em>dataset</em> (objeto que armazena os dados de forma consistente) e <em>dataloader</em> (objeto que obtém amostras do dataset, que são utilizadas como os <em>minibatches</em> do modelo), com uma estrutura orquestrada pelo pacote <code>{torch}</code>.</p>
-<p>A função <code>captcha_dataset()</code> cria o <em>dataset</em> recebe como parâmetro uma pasta de arquivos e gera um objeto com classes <code>my_captcha</code>, <code>dataset</code> e <code>R6</code>. A função é, na verdade, um objeto do tipo <code>dataset_generator</code>, criada utilizando-se a função <code>dataset()</code> do pacote <code>{torch}</code>. O objeto é chamado da mesma forma que uma função usual do R, aceitando alguns parâmetros adicionais:</p>
+<p>A função <code>captcha_dataset()</code> cria o <em>dataset</em> recebendo como parâmetro uma pasta de arquivos e gera um objeto com classes <code>my_captcha</code>, <code>dataset</code> e <code>R6</code>. A função é, na verdade, um objeto do tipo <code>dataset_generator</code>, criada utilizando-se a função <code>dataset()</code> do pacote <code>{torch}</code>. O objeto é chamado da mesma forma que uma função usual do R, aceitando alguns parâmetros adicionais:</p>
 <ul>
-<li><code>captcha=</code>: (opcional) fornecer um nome para o captcha.</li>
 <li><code>transform_image=</code>: operação de transformação a ser aplicada à imagem. Por padrão, utiliza a função <code>captcha_transform_image()</code>, que lê a imagem e redimensiona para ficar com dimensões <code>32x192</code>. A dimensão foi escolhida para facilitar a implementação das camadas convolucionais e para lidar com o fato de que usualmente os Captchas são imagens retangulares.</li>
 <li><code>transform_label=</code>: operação de transformação para gerar a variável resposta. Por padrão, utiliza a função <code>captcha_transform_label()</code>, que recebe um vetor de todos os possíveis caracteres do Captcha e aplica a operação <code>one_hot()</code>, obtendo-se a versão matricial da resposta com zeros e uns, como descrito na <a href="metodologia.html#sec-definicao-captcha"><span>Seção&nbsp;2.1.1</span></a>.</li>
 <li><code>augmentation=</code>: operações para aumentação de dados . Por exemplo, pode ser uma função que adiciona um ruído aleatório à imagem original para que, ao gerar uma nova amostra, os dados utilizados sejam sempre diferentes.</li>
@@ -681,12 +682,53 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 </div>
 <p>A função de <em>feed forward</em> foi descrita abaixo. A função aplica o passo-a-passo descrito na <a href="metodologia.html#sec-arquitetura-rede"><span>Seção&nbsp;2.1.2.1</span></a>, recebendo uma imagem <code>x</code> como entrada e retornando uma matriz de logitos, que dão os pesos do modelo para cada letra da resposta. O modelo retorna os logitos e não as probabilidades porque, no passo seguinte, a função de perda considera como entrada os logitos. Se o usuário decidir modificar o método <code>forward</code> para retornar probabilidades, precisará também adaptar a função de perda utilizada.</p>
 <div class="cell">
-
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># normalize</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">batchnorm0</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># layer 1</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">conv1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">nnf_relu</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">nnf_max_pool2d</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">batchnorm1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># layer 2</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">conv2</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">nnf_relu</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">nnf_max_pool2d</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">batchnorm2</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># layer 3</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">conv3</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">nnf_relu</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">nnf_max_pool2d</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">batchnorm3</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dense</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">torch_flatten</span>(<span class="at">start_dim =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">dropout1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">fc1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    torch<span class="sc">::</span><span class="fu">nnf_relu</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">batchnorm_dense</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">dropout2</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span><span class="fu">fc2</span>()</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  out<span class="sc">$</span><span class="fu">view</span>(<span class="fu">c</span>(</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dim</span>(out)[<span class="dv">1</span>],</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span>output_ndigits,</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">$</span>output_vocab_size</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Definida a arquitetura do modelo, o penúltimo passo é o ajuste. O ajuste do modelo é orquestrado pelo pacote <code>{luz}</code>, que facilita a criação do <em>loop</em> de ajuste dos parâmetros, desempenhando um papel similar ao que o <code>keras</code> realiza para o <code>tensorflow</code> puro.</p>
 <p>No caso dos Captchas, o código <code>{luz}</code> para ajuste do modelo segue quatro passos, encadeados pelo operador <em>pipe</em>, ou <code>|&gt;</code>:</p>
 <ul>
-<li><code>setup()</code>: serve para determinar a função de perda, o otimizador e as métricas a serem acompanhadas. No <em>script</em>, a função de perda utilizada é a <code>nn_multilabel_soft_margin_loss()</code> do <code>{torch}</code>, o otimizador é o <code>optim_adam()</code> do <code>{torch}</code> e a métrica é a <code>captcha_accuracy()</code>, desenvolvida no pacote <code>{captcha}</code> para apresentar a acurácia considerando a imagem completa do Captcha e não a acurácia de cada letra da imagem, que seria o resultado se fosse utilizada a função <code>luz_metric_accuracy()</code>, do pacote <code>{luz}</code></li>
+<li><code>setup()</code>: serve para determinar a função de perda, o otimizador e as métricas a serem acompanhadas. No <em>script</em>, a função de perda utilizada é a <code>nn_multilabel_soft_margin_loss()</code> do <code>{torch}</code>, o otimizador é o <code>optim_adam()</code> do <code>{torch}</code> e a métrica é a <code>captcha_accuracy()</code>, desenvolvida no pacote <code>{captcha}</code> para apresentar a acurácia considerando a imagem completa do Captcha e não a acurácia de cada letra da imagem, que seria o resultado se fosse utilizada a função <code>luz_metric_accuracy()</code>, do pacote <code>{luz}</code>.</li>
 <li><code>set_hparams()</code>: serve para informar os hiperparâmetros e outras informações do modelo. Os parâmetros colocados dentro dessa função são exatamente os parâmetros do método <code>initialize()</code> da rede neural criada no passo anterior.</li>
 <li><code>set_opt_hparams()</code>: serve para informar os hiperparâmetros da otimização. Os parâmetros colocados nessa função são passados para a função de otimização. No script, o único parâmetro informado é a taxa de aprendizado, fixada em <code>0.01</code>.</li>
 <li><code>fit()</code>: serve para inicializar o <em>loop</em> de ajuste do modelo. Aqui, é necessário passar os <em>dataloaders</em> de treino e validação, a quantidade de épocas (fixada em 100), e os <em>callbacks</em>, que são operações a serem aplicadas em diferentes momentos do ajuste (por exemplo, ao final de cada iteração). Por padrão, os <em>callbacks</em> são:
@@ -748,8 +790,8 @@ An `nn_module` containing 628,486 parameters.
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>acesso <span class="ot">&lt;-</span> captchaDownload<span class="sc">:::</span><span class="fu">captcha_access_trf5</span>(<span class="st">"assets/img"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>acesso</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>acesso <span class="ot">&lt;-</span> captchaDownload<span class="sc">:::</span><span class="fu">captcha_access_trf5</span>(<span class="st">"assets/img"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>acesso</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <pre><code>$f_captcha
@@ -767,12 +809,12 @@ $u
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># </span><span class="al">TODO</span><span class="co"> remove</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(acesso<span class="sc">$</span>f_captcha)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(captcha)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>modelo_trf5 <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"trf5"</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>(lab <span class="ot">&lt;-</span> <span class="fu">decrypt</span>(acesso<span class="sc">$</span>f_captcha, modelo_trf5))</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "949588"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># </span><span class="al">TODO</span><span class="co"> remove</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(acesso<span class="sc">$</span>f_captcha)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(captcha)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>modelo_trf5 <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"trf5"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>(lab <span class="ot">&lt;-</span> <span class="fu">decrypt</span>(acesso<span class="sc">$</span>f_captcha, modelo_trf5))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "969588"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-exemplo-acesso-trf5" class="quarto-figure quarto-figure-center anchored">
@@ -787,7 +829,7 @@ $u
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(acertou <span class="ot">&lt;-</span> captchaDownload<span class="sc">:::</span><span class="fu">captcha_test_trf5</span>(acesso, lab))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(acertou <span class="ot">&lt;-</span> captchaDownload<span class="sc">:::</span><span class="fu">captcha_test_trf5</span>(acesso, lab))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <pre><code>[1] TRUE</code></pre>
@@ -806,16 +848,16 @@ $u
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>modelo_trf5 <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"trf5"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>captchaDownload<span class="sc">::</span><span class="fu">captcha_oracle</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"assets/img/"</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> modelo_trf5, </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_ntry =</span> <span class="dv">1</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">manual =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_access =</span> captchaDownload<span class="sc">:::</span>captcha_access_trf5,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_test =</span> captchaDownload<span class="sc">:::</span>captcha_test_trf5</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>modelo_trf5 <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"trf5"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>captchaDownload<span class="sc">::</span><span class="fu">captcha_oracle</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"assets/img/"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> modelo_trf5, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_ntry =</span> <span class="dv">1</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">manual =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_access =</span> captchaDownload<span class="sc">:::</span>captcha_access_trf5,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_test =</span> captchaDownload<span class="sc">:::</span>captcha_test_trf5</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <pre><code>✔ Acertou!!!</code></pre>
@@ -826,16 +868,16 @@ $u
 <div class="cell">
 <details>
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"assets/modelo_ruim.pt"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>captchaDownload<span class="sc">::</span><span class="fu">captcha_oracle</span>(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"assets/img/"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> modelo, </span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_ntry =</span> <span class="dv">10</span>,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">manual =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_access =</span> captchaDownload<span class="sc">:::</span>captcha_access_trt,</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_test =</span> captchaDownload<span class="sc">:::</span>captcha_test_trt</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"assets/modelo_ruim.pt"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>captchaDownload<span class="sc">::</span><span class="fu">captcha_oracle</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"assets/img/"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> modelo, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_ntry =</span> <span class="dv">10</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">manual =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_access =</span> captchaDownload<span class="sc">:::</span>captcha_access_trt,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">captcha_test =</span> captchaDownload<span class="sc">:::</span>captcha_test_trt</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <pre><code>ℹ Temos 10 candidatos...
@@ -871,7 +913,7 @@ Label: v2xu7w</code></pre>
 <section id="sec-pacote-oracle" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pacote-oracle">Pacote captchaOracle</h2>
 <p>O pacote <code>{captchaOracle}</code>, assim como o <code>{captchaDownload}</code>, foi desenvolvido para a construção da tese. O pacote, portanto, não apresenta documentação extensiva e suas funções podem não estar com a sintaxe final. Futuramente, o pacote poderá funcionar como novo <em>backend</em> para o pacote <code>{captcha}</code>, aplicando o WAWL como uma alternativa no fluxo de resolução de Captchas definido na Subseção <a href="#sec-captcha-do-zero"><span>A.1.3</span></a>.</p>
-<p>O pacote possui quatro funções principais: <code>captcha_dataset_oracle()</code>, <code>net_captcha_oracle()</code>, <code>oracle_loss()</code> e <code>captcha_accuracy_oracle()</code>. Cada função desempenha um papel similar a seus pares do pacote <code>{captcha}</code>, mas conseguem lidar com a estrutura de dados fornecida pelo oráculo.</p>
+<p>O pacote possui quatro funções principais: a <code>captcha_dataset_oracle()</code>, a <code>net_captcha_oracle()</code>, a <code>oracle_loss()</code> e a <code>captcha_accuracy_oracle()</code>. Cada função desempenha um papel similar a seus pares do pacote <code>{captcha}</code>, mas conseguem lidar com a estrutura de dados fornecida pelo oráculo.</p>
 <p>A primeira função a ser utilizada é a <code>captcha_dataset_oracle()</code>. Trata-se de uma função similar à <code>captcha_dataset()</code> do pacote <code>{captcha}</code>, mas com um parâmetro adicional, <code>path_logs=</code>, que recebe o caminho dos arquivos de <em>log</em>.</p>
 <p>A estrutura de dados no caso do oráculo é mais complexa do que no caso canônico. Na resposta, ao invés de guardar uma matriz <em>one hot</em> para cada Captcha, é armazenada uma lista com várias matrizes <em>one hot</em>, uma para cada tentativa do Captcha. Além disso, é armazenado um vetor <code>z</code>, com zeros e uns, informando se algum rótulo está correto ou se todos os rótulos estão incorretos. A variável <code>z</code> é construída a partir dos nomes dos arquivos, que contém um <code>_1</code> caso o rótulo esteja correto e <code>_0</code> caso contrário. Por último, a imagem de entrada é armazenada da mesma forma que na função <code>captcha_dataset()</code>.</p>
 <p>O módulo <code>net_captcha_oracle()</code> faz poucos ajustes à estrutura inicial fornecida pelo módulo <code>net_captcha()</code> do pacote <code>{captcha}</code>. A única modificação da função é que ela recebe um modelo inicial de entrada, transferindo os pesos ajustados do modelo ao novo módulo. O módulo <code>net_captcha_oracle()</code>, inclusive, poderia ser utilizado fora do contexto do WAWL, já que só utiliza os dados de <em>input</em>, que não são alterados.</p>
