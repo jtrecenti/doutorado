@@ -129,8 +129,9 @@ Um exemplo de gerador é a função `captcha_generate()` criada no pacote `{capt
 #| fig-cap: Exemplo de captcha gerado pela função `captcha::captcha_generate()`
 #| out-width: 110px
 set.seed(5)
-par(mar = c(0,0,0,0))
-plot(captcha::captcha_generate()$image)
+gen <- captcha::captcha_generate()
+gen$lab <- NULL
+plot(gen)
 ```
 
 O gerador segue os passos abaixo, a partir do momento em que um rótulo $\mathbf c$ existe:

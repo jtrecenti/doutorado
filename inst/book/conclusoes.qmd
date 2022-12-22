@@ -3,11 +3,9 @@
 \epigrafe{Even robots need a break from the daily grind of solving captchas.}{ChatGPT}
 
 ::: {.content-visible when-format="html"}
-
 > Even robots need a break from the daily grind of solving captchas.
-> 
+>
 > -- ChatGPT
-
 :::
 
 Este trabalho de doutorado teve como objeto de estudo os Captchas, que são desafios utilizados para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. A pesquisa apresentou um breve histórico dos Captchas, os problemas de sua utilização em serviços públicos e as abordagens existentes para resolução automática de Captchas. Em seguida, apresentou-se como uma nova abordagem, o WAWL, poderia aliar técnicas de raspagem de dados e aprendizado estatístico com rótulos parciais para obter modelos poderosos de resolução de Captchas sem a necessidade de anotar vários casos manualmente. Por fim, foram apresentadas as propriedades do modelo proposto e os resultados empíricos através de uma série de simulações.

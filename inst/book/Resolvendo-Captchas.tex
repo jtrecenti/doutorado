@@ -3909,8 +3909,8 @@ ZHU, X. J. Semi-supervised learning literature survey. 2005.
 Este apêndice foi construído para mostrar a estrutura do pacote e suas
 funcionalidades, mas também um pouco da história. O pacote
 \texttt{\{captcha\}} é fruto de um trabalho da comunidade e o trabalho
-de modelagem de Captchas usando técnicas de \emph{deep learning} começou
-alguns anos antes do início da tese de doutorado.
+de modelagem de Captchas usando técnicas de \emph{deep learning}, que
+começou alguns anos antes do início da tese de doutorado.
 
 O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de
 2016. Como foi comentado na introdução da tese, é muito comum se deparar
@@ -3918,8 +3918,8 @@ com desafios de Captchas ao raspar dados do judiciário, já que os dados
 não são abertos.
 
 O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio
-era utlizado no site do TJSP que, depois de alguns anos, passou a
-utilizar o sistema reCaptcha. O Captcha do SAJ faz parte da tese, mas
+era utilizado no site do TJSP que, depois de alguns anos, passou a
+utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas
 tem como fonte de dados o TJBA, que continua utilizando o desafio até o
 momento que os sites foram investigados pela última vez, em setembro de
 2022.
@@ -3945,14 +3945,14 @@ processamento envolvendo engenharia de \emph{features} (KUHN; JOHNSON,
 2019). O trabalho teve contribuições importantes de Athos Damiani.
 
 Com o advento da ferramenta TensorFlow para o R (ALLAIRE; TANG, 2022),
-os modelos passaram a utilizar modelos de redes neurais. No início, por
-falta de conhecimento da área, a arquitetura das redes era
-demasiadamente complexa. Depois que os primeiros modelos começaram a
-funcionar, notou-se que as etapas de pré-processamento com segmentação e
-algumas camadas das redes eram desnecessárias para ajustar os modelos.
-Essa parte teve grande contribuição de Daniel Falbel, que foi a pessoa
-que introduziu o TensorFlow e a área de \emph{deep learning} aos
-colegas.
+os modelos para resolver Captchas passaram a utilizar modelos de redes
+neurais. No início, por falta de conhecimento da área, a arquitetura das
+redes era demasiadamente complexa. Depois que os primeiros modelos
+começaram a funcionar, notou-se que as etapas de pré-processamento com
+segmentação e algumas camadas das redes eram desnecessárias para ajustar
+os modelos. Essa parte teve grande contribuição de Daniel Falbel, que
+foi a pessoa que introduziu o TensorFlow e a área de \emph{deep
+learning} aos colegas.
 
 Depois de resolver com sucesso alguns Captchas, notou-se que seria
 possível criar um ambiente completo de modelagem de Captchas. Isso deu
@@ -3974,7 +3974,7 @@ envolveram contribuições principalmente de Caio Lente e Daniel Falbel.
 A construção do pacote \texttt{\{captcha\}} separada do
 \texttt{\{decryptr\}} se deu por dois motivos. Primeiro, o pacote
 \texttt{\{decryptr\}}, por ser o primeiro a tratar do assunto, possui
-muitos códigos legado e dificuldades de instalação por conta da
+muitos códigos legados e dificuldades de instalação por conta da
 dependência do python, necessário para o funcionamento do TensorFlow,
 que é chamado através do pacote \texttt{\{reticulate\}} (USHEY; ALLAIRE;
 TANG, 2022). Além disso, a implementação das técnicas do oráculo
@@ -4001,7 +4001,7 @@ Com o desenvolvimento da tese, notou-se a necessidade de construir
 alguns pacotes adicionais. Os pacote \texttt{\{captchaDownload\}} e
 \texttt{\{captchaOracle\}} foram desenvolvidos para facilitar a obtenção
 dos resultados da tese, enquanto o pacote \texttt{\{captcha\}} pode ser
-utilizado por qualquer pessoa interessada em visualizar, classificar e
+utilizado por qualquer pessoa interessada em visualizar, anotar e
 resolver Captchas. As próximas subseções do apêndice descrevem os três
 pacotes.
 
@@ -4010,11 +4010,10 @@ pacotes.
 
 O pacote \texttt{\{captcha\}} foi construído para funcionar como uma
 caixa de ferramentas para pessoas que desejam trabalhar com Captchas. O
-pacote possui funções de leitura, visualização, classificação,
-preparação de dados, modelagem, carregamento de modelos pré-treinados e
-predição. O pacote também permite a construção de um fluxo de trabalho
-para resolver um novo Captcha, criando um pacote para orquestrar o
-passo-a-passo.
+pacote possui funções de leitura, visualização, anotação, preparação de
+dados, modelagem, carregamento de modelos pré-treinados e predição. O
+pacote também permite a construção de um fluxo de trabalho para resolver
+um novo Captcha, criando um pacote para orquestrar o passo-a-passo.
 
 \hypertarget{uso-buxe1sico}{%
 \subsection{Uso básico}\label{uso-buxe1sico}}
@@ -4173,10 +4172,10 @@ disponibilizadas em duas colunas.}
 \end{figure}
 
 Quando o vetor de Captchas é muito grande, a função \texttt{plot()}
-mostra um número máximo d imagens, acompanhado de uma mensagem. Por
-padrão, esse número é 100, com 25 linhas e 4 colunas. A opção pode ser
-sobrescrita combinando as opções \texttt{captcha.print.cols=} e
-\texttt{captcha.print.rows=}. A
+mostra um número máximo de 100 imagens, acompanhado de uma mensagem. O
+padrão de 100 imagens está organizado em uma grade com 25 linhas e 4
+colunas, podendo ser sobrescrito ao combinar as opções
+\texttt{captcha.print.cols=} e \texttt{captcha.print.rows=}. A
 Figura~\ref{fig-exemplo-plot-multi-varias} mostra um exemplo do
 comportamento da função quando o número de imagens excede 100.
 
@@ -4254,8 +4253,8 @@ Figura~\ref{fig-exemplo-plot-rotulado} mostra um exemplo.
 
 \end{figure}
 
-A função \texttt{captcha\_annotate()} serve para classificar uma imagem
-de Captcha, manual ou automaticamente. Isso é feito modificando o
+A função \texttt{captcha\_annotate()} serve para anotar o rótulo de uma
+imagem de Captcha, manual ou automaticamente. Isso é feito modificando o
 caminho da imagem, adicionando o texto \texttt{\_rotulo} ao final do
 caminho do arquivo. A função possui os parâmetros listados abaixo:
 
@@ -4271,9 +4270,9 @@ caminho do arquivo. A função possui os parâmetros listados abaixo:
   valor é \texttt{NULL}, indicando que deve ser aberto um
   \texttt{prompt} para que o usuário insira a resposta manualmente.
 \item
-  \texttt{path=}: (opcional) caminho da pasta onde os arquivos
-  classificados serão salvos. Por padrão, salva os arquivos com nomes
-  modificados na mesma pasta dos arquivos originais.
+  \texttt{path=}: (opcional) caminho da pasta onde os arquivos anotados
+  serão salvos. Por padrão, salva os arquivos com nomes modificados na
+  mesma pasta dos arquivos originais.
 \item
   \texttt{rm\_old=}: (opcional) deletar ou não os arquivos originais.
   Por padrão, é \texttt{FALSE}.
@@ -4286,19 +4285,20 @@ de trabalho que utiliza o oráculo, pode ser que um modelo inicial já
 forneça o valor correto do rótulo.
 
 Quando não existe um rótulo, a função \texttt{captcha\_annotate()}, que
-abre o \texttt{prompt} para classificação e aplica \texttt{plot()} para
-visualizar a imagem. A Figura~\ref{fig-exemplo-classify} mostra um
+abre o \texttt{prompt} para anotação e aplica \texttt{plot()} para
+visualizar a imagem. A Figura~\ref{fig-exemplo-annotate} mostra um
 exemplo de aplicação da função \texttt{captcha\_annotate()} no software
 \href{https://posit.co/download/rstudio-desktop/}{RStudio}.
 
 \begin{figure}
 
-{\centering \includegraphics{./assets/img/exemplo_classify.png}
+{\centering \includegraphics{./assets/img/exemplo_annotate.png}
 
 }
 
-\caption{\label{fig-exemplo-classify}Exemplo de aplicação da função
-classify. O rótulo \texttt{bhusp5} foi inserido manualmente.}
+\caption{\label{fig-exemplo-annotate}Exemplo de aplicação da função
+\texttt{captcha\_annotate()}. O rótulo \texttt{bhusp5} foi inserido
+manualmente.}
 
 \end{figure}
 
@@ -4352,8 +4352,8 @@ básicas do pacote \texttt{\{captcha\}}}
 \subsection{Modelagem}\label{sec-ap-modelagem}}
 
 O pacote \texttt{\{captcha\}} também fornece uma interface básica para o
-desenvolvimento de modelos a partir de uma base completamente
-classificada. A classificação pode ser feita manualmente pela função
+desenvolvimento de modelos a partir de uma base completamente anotada. A
+anotação pode ser feita manualmente pela função
 \texttt{captcha\_annotate()}, apresentada anteriormente, ou por outro
 método desenvolvido pelo usuário.
 
@@ -4368,9 +4368,9 @@ onde:
   \texttt{\textless{}id\textgreater{}}: pode ser qualquer nome, de
   preferência sem acentuação ou outros caracteres especiais, para evitar
   problemas de \emph{encoding}. Geralmente, é um \emph{hash}
-  identificando o tipo e id do captcha. \textbf{Observação}: ao
-  classificar um caso, é importante que o \texttt{id} seja único, já que
-  dois Captchas podem ter o mesmo rótulo.
+  identificando o tipo e id do captcha. \textbf{Nota}: ao anotar um
+  caso, é importante que o \texttt{id} seja único, já que dois Captchas
+  podem ter o mesmo rótulo.
 \item
   \texttt{\textless{}lab\textgreater{}}: é o rótulo do Captcha. Pode ser
   um conjunto de caracteres entre \texttt{{[}a-zA-Z0-9{]}},
@@ -4385,23 +4385,23 @@ onde:
   por conta da transparência da imagem.
 \end{itemize}
 
-Atendidas as premissas da base classificada, é possível ajustar um
-modelo de redes neurais usando o pacote \texttt{\{captcha\}}. No
-entanto, como o ajuste de modelos de redes neurais envolve uma série de
-nuances e pequenas adaptações, optou-se por exportar funções em dois
-níveis de aprofundamento. A primeira é a \textbf{automatizada},
-utilizando a função \texttt{captcha\_fit\_model()} descrito a seguir,
-enquanto a segunda é a \textbf{procedimental}, utilizando o passo a
-passo descrito na Subseção \ref{sec-captcha-do-zero}.
+Atendidas as premissas da base anotada, é possível ajustar um modelo de
+redes neurais usando o pacote \texttt{\{captcha\}}. No entanto, como o
+ajuste de modelos de redes neurais envolve uma série de nuances e
+pequenas adaptações, optou-se por exportar funções em dois níveis de
+aprofundamento. A primeira é a \textbf{automatizada}, utilizando a
+função \texttt{captcha\_fit\_model()} descrito a seguir, enquanto a
+segunda é a \textbf{procedimental}, utilizando o passo a passo descrito
+na Subseção \ref{sec-captcha-do-zero}.
 
 A função \texttt{captcha\_fit\_model()} ajusta um modelo a partir de uma
-pasta com arquivos classificados. A função recebe os parâmetros:
-\texttt{dir=}, contendo o caminho dos arquivos classificados;
+pasta com arquivos anotados. A função recebe os parâmetros:
+\texttt{dir=}, contendo o caminho dos arquivos anotados;
 \texttt{dir\_valid=}, (opcional) contendo o caminho dos arquivos
-classificados para validação; \texttt{prop\_valid=}, contendo a
-proporção da base de treino a ser considerada como validação, ignorada
-quando \texttt{dir\_valid=} é fornecida (por padrão, considera-se 20\%
-da base para validação).
+anotados para validação; \texttt{prop\_valid=}, contendo a proporção da
+base de treino a ser considerada como validação, ignorada quando
+\texttt{dir\_valid=} é fornecida (por padrão, considera-se 20\% da base
+para validação).
 
 A função \texttt{captcha\_fit\_model()} também possui alguns parâmetros
 relacionados à modelagem. São eles: \texttt{dropout=}, especificando o
@@ -4425,9 +4425,9 @@ serialização pode ser encontrado na
 do pacote torch}.
 
 O pacote \texttt{\{captchaOracle\}} possui uma interface similar para
-trabalhar com bases parcialmente classificadas. Como a estrutura de
-dados nesse caso é mais complexa e pode evoluir no futuro, os códigos
-foram organizados em outro pacote. Mais detalhes na Seção
+trabalhar com bases com rótulos parciais. Como a estrutura de dados
+nesse caso é mais complexa e pode evoluir no futuro, os códigos foram
+organizados em outro pacote. Mais detalhes na Seção
 \ref{sec-pacote-oracle}.
 
 Na documentação do pacote \texttt{\{captcha\}}, foi adicionado um
@@ -4497,11 +4497,11 @@ disponibilização dos modelos. Um modelo pode ser utilizado localmente,
 mas a tarefa de disponibilizar as bases de dados e o modelo para outras
 pessoas não tem um procedimento bem definido.
 
-Para organizar o fluxo de trabalho, implementou-se um fluxo de
-classificação de Captchas dentro do pacote \texttt{\{captcha\}}. A
-função que orquestra esse fluxo é a \texttt{new\_captcha()}. A função
-possui apenas um parâmetro, \texttt{path=}, que é o caminho de uma nova
-pasta a ser criada.
+Para organizar o fluxo de trabalho, implementou-se um fluxo de anotação
+de Captchas dentro do pacote \texttt{\{captcha\}}. A função que
+orquestra esse fluxo é a \texttt{new\_captcha()}. A função possui apenas
+um parâmetro, \texttt{path=}, que é o caminho de uma nova pasta a ser
+criada.
 
 A função também pode ser chamada criando-se um projeto dentro do próprio
 RStudio. A Figura~\ref{fig-exemplo-rstudio-template} mostra um exemplo
@@ -4531,12 +4531,11 @@ arquivos:
   prática, as funções que baixam Captchas precisam ser adaptadas porque
   os sites são organizados de formas muito diferentes.
 \item
-  \texttt{02\_annotate.R}: Contém um \emph{template} para classificação
-  manual de Captchas. A classificação manual pode tanto ser realizada
-  usando a interface criada pelo pacote \texttt{\{captcha\}} quanto
-  externamente. No final, os arquivos classificados devem ser salvos na
-  pasta \texttt{img}, no formato descrito na Subseção
-  \ref{sec-ap-modelagem}.
+  \texttt{02\_annotate.R}: Contém um \emph{template} para anotação
+  manual de Captchas. A anotação manual pode tanto ser realizada usando
+  a interface criada pelo pacote \texttt{\{captcha\}} quanto
+  externamente. No final, os arquivos anotados devem ser salvos na pasta
+  \texttt{img}, no formato descrito na Subseção \ref{sec-ap-modelagem}.
 \item
   \texttt{03\_model.R}: Contém um \emph{template} para modelagem,
   permitindo a customização completa do procedimento de ajuste. O
@@ -4557,12 +4556,12 @@ primeiro passo do \emph{script} é criar objetos do tipo \emph{dataset}
 \emph{minibatches} do modelo), com uma estrutura orquestrada pelo pacote
 \texttt{\{torch\}}.
 
-A função \texttt{captcha\_dataset()} cria o \emph{dataset} recebendo
+A função \texttt{captcha\_dataset()} cria o \emph{dataset}, recebendo
 como parâmetro uma pasta de arquivos e gera um objeto com classes
 \texttt{my\_captcha}, \texttt{dataset} e \texttt{R6}. A função é, na
 verdade, um objeto do tipo \texttt{dataset\_generator}, criada
-utilizando-se a função \texttt{dataset()} do pacote \texttt{\{torch\}}.
-O objeto é chamado da mesma forma que uma função usual do R, aceitando
+utilizando a função \texttt{dataset()} do pacote \texttt{\{torch\}}. O
+objeto é chamado da mesma forma que uma função usual do R, aceitando
 alguns parâmetros adicionais:
 
 \begin{itemize}
@@ -4582,7 +4581,7 @@ alguns parâmetros adicionais:
   \texttt{one\_hot()}, obtendo-se a versão matricial da resposta com
   zeros e uns, como descrito na Seção~\ref{sec-definicao-captcha}.
 \item
-  \texttt{augmentation=}: operações para aumentação de dados . Por
+  \texttt{augmentation=}: operações para aumentação de dados. Por
   exemplo, pode ser uma função que adiciona um ruído aleatório à imagem
   original para que, ao gerar uma nova amostra, os dados utilizados
   sejam sempre diferentes.
@@ -4591,7 +4590,7 @@ alguns parâmetros adicionais:
 A função \texttt{captcha\_dataset()} deve ser aplicada duas vezes, uma
 para criar a base de treino e outra para criar a base de validação. A
 separação de bases de treino e validação deve ser feita de forma manual,
-copiando parte dos Captchas classificados para uma nova pasta, com
+copiando parte dos Captchas anotados para uma nova pasta, com
 aleatorização. É papel do usuário separar as bases em pastas distintas
 carregá-as em um \emph{dataset}.
 
@@ -4610,7 +4609,7 @@ modelagem, o modelo é fornecido pelo objeto \texttt{net\_captcha} do
 pacote \texttt{\{captcha\}}. Assim como no caso do \emph{dataset}, o
 \texttt{net\_captcha} é um objeto especial do \texttt{\{torch\}}, com
 classes \texttt{CAPTCHA-CNN}, \texttt{nn\_module} e
-\texttt{nn\_module\_generator}, O objeto pode ser utilizado como uma
+\texttt{nn\_module\_generator}. O objeto pode ser utilizado como uma
 função, gerando um módulo do \texttt{torch}, similar a uma função de
 predição. No entanto, por conta da forma que o objeto é utilizado em
 passos posteriores pelo pacote \texttt{\{luz\}}, o objeto a ser
@@ -4679,12 +4678,13 @@ preparados para funcionar bem com uma imagem de dimensões
 
 A função de \emph{feed forward} foi descrita abaixo. A função aplica o
 passo-a-passo descrito na Seção~\ref{sec-arquitetura-rede}, recebendo
-uma imagem \texttt{x} como entrada e retornando uma matriz de logitos,
-que dão os pesos do modelo para cada letra da resposta. O modelo retorna
-os logitos e não as probabilidades porque, no passo seguinte, a função
-de perda considera como entrada os logitos. Se o usuário decidir
-modificar o método \texttt{forward} para retornar probabilidades,
-precisará também adaptar a função de perda utilizada.
+uma imagem \texttt{x} como entrada e retornando uma matriz com números
+reais, que dão os pesos (positivos ou negativos) do modelo para cada
+letra da resposta. O modelo retorna os valores de forma irrestrita, e
+não os números no intervalo \([0,1]\) porque, no passo seguinte, a
+função de perda considera como entrada esses valores. Se o usuário
+decidir modificar o método \texttt{forward} para retornar
+probabilidades, precisará também adaptar a função de perda utilizada.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4852,7 +4852,7 @@ configurando o Git (software de versionamento de códigos) e o GitHub
 \emph{script} utiliza o pacote \texttt{\{piggyback\}} (BOETTIGER; HO,
 2022) para disponibilizar o modelo ajustado nos \emph{releases} do
 repositório criado. Opcionalmente, o usuário poderá também
-disponibilizar a base com os arquivos classificados em um arquivo
+disponibilizar a base com os arquivos anotados em um arquivo
 \texttt{.zip}, o que é recomendado, pois permite que outras pessoas
 possam trabalhar com os mesmos dados e aprimorar os modelos.
 
@@ -4880,7 +4880,7 @@ O pacote \texttt{\{captchaDownload\}} foi construído para armazenar os
 códigos de baixar dados de Captchas de forma consistente. O pacote
 também inclui funções para trabalhar com oráculos.
 
-O pacote não foi criado para ser usado por muitas pessoas. O intuito de
+O pacote não foi criado para ser usado pelo público geral. O intuito de
 criar o pacote foi o de organizar as funções utilizadas para realizar as
 simulações e obter os resultados empíricos da tese.
 
@@ -4973,8 +4973,8 @@ em resolver Captchas para acessar dados da \emph{internet}.
 
 A função principal do pacote \texttt{\{captchaDownload\}} é a
 \texttt{captcha\_oracle()}. A função é responsável por realizar a
-classificação parcial automática dos Captchas utilizando um modelo
-inicial e o oráculo. A função possui os seguintes parâmetros:
+anotação parcial automática dos Captchas utilizando um modelo inicial e
+o oráculo. A função possui os seguintes parâmetros:
 
 \begin{itemize}
 \tightlist
@@ -4986,7 +4986,7 @@ inicial e o oráculo. A função possui os seguintes parâmetros:
   \texttt{max\_ntry=}: quantidade máxima de chutes até desistir.
 \item
   \texttt{manual=}: caso o máximo de tentativas seja alcançado, abrir o
-  \emph{prompt} para classificar manualmente? Por padrão, sim.
+  \emph{prompt} para anotar manualmente? Por padrão, sim.
 \item
   \texttt{captcha\_access=}: função que baixa um Captcha e retorna dados
   da sessão para validar o Captcha, como mostrada anteriormente.
@@ -5002,7 +5002,7 @@ Por último, recebe as funções de acesso e de teste do Captcha. A função
 escreve um arquivo de \emph{log} com os resultados dos testes. O arquivo
 contém \texttt{max\_ntry} linhas, podendo ter uma linha adicional se
 \texttt{manual=TRUE}, já que, se o modelo errar todas os chutes, a
-classificação manual deve ser adicionada.
+anotação manual deve ser adicionada.
 
 No exemplo do TRF5, a chamada da função \texttt{captcha\_oracle()} com
 um chute ficaria da seguinte forma:
@@ -5158,10 +5158,9 @@ dados de \emph{input}, que não são alterados.
 A função \texttt{captcha\_accuracy\_oracle()} é utilizada para estimar a
 acurácia do modelo. Para isso, a função precisa lidar com o fato de que
 os dados de validação apresentam uma estrutura diferente dos dados de
-treino, já que estão completamente classificados. No treino, a acurácia
-é calculada considerando apenas os casos em que a resposta é conhecida.
-Na validação, a acurácia é calculada considerando-se todas as
-observações.
+treino, já que estão completamente anotados. No treino, a acurácia é
+calculada considerando apenas os casos em que a resposta é conhecida. Na
+validação, a acurácia é calculada considerando-se todas as observações.
 
 Por último, a função \texttt{oracle\_loss()} é a que contém a proposta
 de função de perda do método WAWL. Nos casos corretos, a função de perda

@@ -41,7 +41,7 @@ lang: pt
 execute:
   echo: false
   warning: false
-  freeze: true
+  freeze: false
 
 knitr:
   opts_chunk:
