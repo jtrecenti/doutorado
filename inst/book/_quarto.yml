@@ -3,7 +3,7 @@ project:
   output-dir: "../../docs"
 
 book:
-  title: "Captchas"
+  title: "Resolvendo Captchas"
   author: "Julio Trecenti"
   date: "2022-10-30"
   chapters:
@@ -18,6 +18,9 @@ book:
   downloads: [pdf]
   page-navigation: true
 
+crossref:
+  appendix-title: "Apêndice "
+
 number-depth: 1
 
 bibliography: [book.bib, captcha.bib, references.bib]
@@ -28,6 +31,7 @@ google-scholar: true
 format:
   html:
     code-fold: true
+    theme: [default, assets/css/quarto-book.scss]
   pdf:
     keep-tex: true
     template: assets/tex/template.tex
@@ -37,12 +41,13 @@ lang: pt
 execute:
   echo: false
   warning: false
-  freeze: false
+  freeze: true
 
 knitr:
   opts_chunk:
     collapse: true
     comment: "#>"
     out.width: \linewidth
+    dpi: 300
     R.options:
       knitr.graphics.auto_pdf: true
