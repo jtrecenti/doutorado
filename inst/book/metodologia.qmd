@@ -22,7 +22,7 @@ O capítulo está organizado em três seções: definição do problema, dados e
 
 <!-- Pode parecer incomum uma seção de definições no capítulo de metodologia. No entanto, ela é muito importante para as discussões que seguem. Como será mostrado mais adiante, a pesquisa também apresenta resultados teóricos da solução proposta, mas, para apresentá-los, é necessário colocar as definições do objeto matemático que está sendo estudado. -->
 
-Na parte de redes neurais, optou-se por trabalhar nas pontes entre os modelos clássicos de estatística e os modelos de redes neurais, mas sem tecer todos os detalhes técnicos que podem ser encontrados em livros didáticos. Antes de 2015, a pesquisa em redes neurais nos departamentos de estatística era uma novidade, sofrendo até certo preconceito por ser uma classe de modelos "caixa-preta". Com o passar do tempo, no entanto, a área está ficando cada vez mais popular, envolvendo até mesmo trabalhos de iniciação científica no tema. Por isso, optou-se por trazer poucos detalhes da área, focando nas pontes entre os modelos clássicos e as redes neurais. Espera-se que o conteúdo possa ser aproveitado por pessoas interessadas em ensinar redes neurais para estudantes de estatística.
+Na parte de redes neurais, optou-se por trabalhar nas pontes entre os modelos clássicos de estatística e os modelos de redes neurais, mas sem tecer todos os detalhes técnicos que podem ser encontrados em livros didáticos. Antes de 2015, a pesquisa em redes neurais nos departamentos de estatística era uma novidade, sofrendo até certo preconceito por ser uma classe de modelos "caixa preta". Com o passar do tempo, no entanto, a área está ficando cada vez mais popular, envolvendo até mesmo trabalhos de iniciação científica no tema. Por isso, optou-se por trazer poucos detalhes da área, focando nas pontes entre os modelos clássicos e as redes neurais. Espera-se que o conteúdo possa ser aproveitado por pessoas interessadas em ensinar redes neurais para estudantes de estatística.
 
 Na seção de dados, procurou-se apresentar a metodologia de coleta em detalhes. Isso foi feito porque a área de raspagem de dados não é comum para estudantes de estatística, existindo até uma percepção entre acadêmicos de que trata-se de uma área separada da estatística. Uma das hipóteses de pesquisa, bem como a solução técnica apresentada neste trabalho é justamente uma ponte entre as duas áreas, justificando um detalhamento maior dos conceitos.
 
@@ -42,7 +42,7 @@ Nesse sentido, uma área que ficou popular nos últimos anos, até por conta dos
 
 Mas isso também não representa todas as classes de problemas. Em muitas aplicações reais, obter uma anotação completa e correta pode ser custoso ou até impraticável. Além disso por envolver trabalho humano, é comum que classificações contenham erros. Para lidar com esses casos existe uma área, que generaliza as anteriores, que é o aprendizado fracamente supervisionado.
 
-Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área existem diversos tipos de problemas, como aprendizado semi-supervisionado, aprendizado de múltiplas instâncias [@blum1998] e o aprendizado com rótulos incorretos ou incompletos [@zhou2018]. O caso dos Captchas com o uso do oráculo será apresentado como outra classe de problemas, chamada ***aprendizado com rótulos parciais*** (*partial label learning*, PLL, [@jin2002]). Essa classe apresenta uma especialização ainda mais próxima do problema estudado, chamado ***aprendizado com rótulos complementares*** (*complementary label learning*, [@ishida2017a]).
+Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da área existem diversos tipos de problemas, como aprendizado semi-supervisionado, aprendizado de múltiplas instâncias [@blum1998] e o aprendizado com rótulos incorretos ou incompletos [@zhou2018]. O caso dos Captchas com o uso do oráculo será apresentado como outra classe de problemas, chamada ***aprendizado com rótulos parciais*** (*partial label learning*, PLL, [@jin2002]). Essa classe apresenta uma especialização ainda mais próxima do problema estudado, chamado ***aprendizado com rótulos complementares*** (*complementary label learning*, [@ishida2017]).
 
 A intepretação do Captcha como um problema de PLL será apresentada no final do capítulo. A jornada começa de onde deve começar, com aqueles que são objeto de análise deste trabalho: os Captchas.
 
@@ -122,7 +122,7 @@ A forma *dummy* da resposta facilita os trabalhos que seguem. Como será visto m
 
 O **gerador** é uma função $g$ que recebe um rótulo como entrada e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de gerar uma imagem fácil de interpretar por humanos, mas difícil de se resolver por máquinas.
 
-Um exemplo de gerador é a função `captcha_generate()` criada no pacote `{captcha}`, como descrito no @sec-pacote. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick-2], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
+Um exemplo de gerador é a função `captcha_generate()` criada no pacote `{captcha}`, como descrito no @sec-pacote. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
 
 ```{r}
 #| label: fig-captcha-r-exemplo
@@ -452,7 +452,7 @@ A imagem de entrada foi fixada na dimensão $32\times192$. O valor foi definido 
 
 A quantidade de canais gerados pelas camadas convolucionais foram fixadas em 32, 64 e 64. A utilização de números crescentes de canais nas camadas convolucionais é comum [@lecun1998], bem como a utilização de números que são potências de 2 [@lecun2015]. Nesse sentido, um possível valor para a terceira camada era de 128 canais, mas optou-se por 64 canais para que a quantidade de parâmetros não ficasse grande demais, já que isso exigiria mais tempo de computação e computadores mais poderosos.
 
-O total de parâmetros que podem ser otimizados até o final das camadas convolucionais é 56.646. Esse número pode parecer grande no contexto de modelos estatísticos tradicionais como uma regressão linear, que teria, considerando cada pixel como uma covariável, 4.401 parâmetros ($40\times110$ e o intercepto). No entanto, é uma quantidade relativamente pequena no contexto de redes neurais. Redes neurais recentes aplicadas a imagens, como o DALL-E 2 possui 3,5 bilhões de parâmetros [@ramesh].
+O total de parâmetros que podem ser otimizados até o final das camadas convolucionais é 56.646. Esse número pode parecer grande no contexto de modelos estatísticos tradicionais como uma regressão linear, que teria, considerando cada pixel como uma covariável, 4.401 parâmetros ($40\times110$ e o intercepto). No entanto, é uma quantidade relativamente pequena no contexto de redes neurais. Redes neurais recentes aplicadas a imagens, como o DALL-E 2 possui 3,5 bilhões de parâmetros [@rameshHierarchicalTextConditionalImage2022].
 
 Em seguida, o resultado é transformado para um formato retangular, similar ao que se encontra em modelos de regressão. Aqui, as dimensões da imagem não são mais importantes e os pixels de cada canal são tratados como variáveis preditoras. Esse passo pode ser interpretado da seguinte forma: as camadas convolucionais funcionam como um pré-processamento aplicado às imagens, como uma engenharia de variáveis [@kuhn2019] otimizada, já que os parâmetros são ajustados no modelo.
 
@@ -500,7 +500,7 @@ $$
 
 Vale notar que, dependendo da implementação, nem sempre é necessário aplicar a função *softmax*. Em alguns pacotes computacionais como o `torch`[^torch], utilizado nesta tese, a normalização pode ser feita diretamente na função de perda, que aproveita a expressão completa para realizar algumas simplificações matemáticas e, com isso, melhorar a precisão das computações. O uso da função de perda ficará claro na próxima subseção.
 
-[^torch]: Mais sobre o (py)torch: <https://pytorch.org/>. Último acesso em 22 de novembro de 2022.
+[^torch]: Mais sobre o (py)torch: <https://pytorch.org>. Último acesso em 22 de novembro de 2022.
 
 #### Perda
 
@@ -518,7 +518,7 @@ Ao trabalhar com o oráculo, a entropia cruzada passa a não fazer sentido nos c
 
 #### Otimizador {#sec-otimizador}
 
-O otimizador utilizado para os modelos ajustados na tese foi o ADAM [@kingma2014]. A sigla significa *Adaptive Moment Estimator* e funciona como uma extensão da descida de gradiente estocástica [@lecun2012], atualizando os parâmetros da seguinte forma:
+O otimizador utilizado para os modelos ajustados na tese foi o ADAM [@kingmaAdamMethodStochastic2017]. A sigla significa *Adaptive Moment Estimator* e funciona como uma extensão da descida de gradiente estocástica [@lecun2012], atualizando os parâmetros da seguinte forma:
 
 $$
 \begin{array}{cl}
@@ -536,7 +536,7 @@ onde $m$ e $v$ são médias moveis para atualização dos parâmetros, ponderand
 
 Apresentados o objeto de estudo, as redes neurais utilizadas e a proposta da pesquisa, passa-se a discutir o significado disso tudo no contexto de aprendizado estatístico. Essa parte foi escrita para proporcionar a base teórica e a notação para apresentar as propriedades do modelo WAWL.
 
-O aprendizado fracamente supervisionado pode ser dividido em três tipos principais. A supervisão com erros, a supervisão com rótulos incompletos e a supervisão de grupos de observações. O caso do Captcha pode ser entendido como uma sub-área do aprendizado fracamente supervisionado com rótulos incompletos chamada aprendizado com dados parcialmente rotulados (*partial label learning,* PLL*)*, já que uma parte da base pode ser anotada sem erros e uma parte da base é a resposta do oráculo indicando uma lista de rótulos possíveis incluindo o correto.
+O aprendizado fracamente supervisionado pode ser dividido em três tipos principais. A supervisão com erros, a supervisão com rótulos incompletos e a supervisão de grupos de observações. O caso do Captcha pode ser entendido como uma sub-área do aprendizado fracamente supervisionado com rótulos incompletos chamada aprendizado com dados parcialmente rotulados (PLL), já que uma parte da base pode ser anotada sem erros e uma parte da base é a resposta do oráculo indicando uma lista de rótulos possíveis incluindo o correto.
 
 A área de PLL não é nova [@grandvalet2002] e aparece com outros nomes, como aprendizado com rótulos ambíguos [@hullermeier2006] e aprendizado de rótulos em superconjuntos (*superset-label learning)* [@liu2012]. Um caso particular de PLL, aplicável ao tema do Captcha são rótulos complementares [@ishida2017], que considera os chutes errados na notação do problema.
 
@@ -584,7 +584,7 @@ $$
 f_{\text{adj}} (\mathbf X) = \mathbf Q ^{\top}f(\mathbf X)
 $$
 
-O tipo de problema apresentado acima é conhecido como *biased complementary label*, ou seja, rótulo complementar com viés. Também é possível considerar um caso sem viés, ou seja, quando $p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}$ para todos os valores de $\mathbf Y$. Esse caso também foi resolvido do ponto de vista teórico[@ishida2017a]. As conclusões são parecidas, ou seja, é possível encontrar taxas de convergência para que o problema com rótulos complementares se aproxime de um problema com observações completas.
+O tipo de problema apresentado acima é conhecido como *biased complementary label*, ou seja, rótulo complementar com viés. Também é possível considerar um caso sem viés, ou seja, quando $p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}$ para todos os valores de $\mathbf Y$. Esse caso também foi resolvido do ponto de vista teórico[@ishida2017]. As conclusões são parecidas, ou seja, é possível encontrar taxas de convergência para que o problema com rótulos complementares se aproxime de um problema com observações completas.
 
 Quando os rótulos complementares não apresentam viés, existe ainda uma extensão para rótulos complementares múltiplos [@feng2020a]. Neste caso, é possível derivar uma função de risco empírica que, novamente, converge para a função de risco do problema completamente supervisionado, além de apresentar taxas de convergência para essa função de risco.
 
@@ -628,11 +628,11 @@ $$
 
 No final, o valor que é passado para a função de perda é a soma das perdas para todas as observações do *minibatch*. A soma considera tanto as perdas calculadas com base nos rótulos corretos quanto as perdas calculadas com base nos rótulos incorretos.
 
-O otimizador que obtém novas estimativas dos parâmetros também não precisa ser modificado. Basta aplicar a mesma técnica utilizada na modelagem usual, como descida de gradiente estocástica ou métodos adaptativos, como *RMSProp* ou *Adam*.
+O otimizador que obtém novas estimativas dos parâmetros também não precisa ser modificado. Basta aplicar a mesma técnica utilizada na modelagem usual, como descida de gradiente estocástica ou métodos adaptativos, como o ADAM.
 
 Um detalhe importante sobre o método é sobre a implementação. Com a utilização de ferramentas que fazem diferenciação automática como o *torch* e o *TensorFlow*[^2], basta implementar a parte da arquitetura, a função de perda e especificar o otimizador, já que o processo de atualização dos parâmetros é feito automaticamente. No entanto, dependendo da implementação, não é possível fazer a atualização dos parâmetros usando o componente de computação gráfica, que potencialmente acelera o ajuste dos modelos de forma significativa. Na implementação atual, a função de perda apresentada não permite utilização desse componente, sendo uma melhoria possível em futuros trabalhos.
 
-[^2]: Mais detalhes em <https://www.tensorflow.org/>. Último acesso em 22 de novembro de 2022.
+[^2]: Mais detalhes em <https://www.tensorflow.org>. Último acesso em 22 de novembro de 2022.
 
 O ajuste dos modelos, tanto para simulações quanto para construção dos modelos finais, utilizou o pacote `{torch}` [@torch], que é uma implementação do PyTorch para a linguagem de programação R [@rcran]. O pacote `{luz}` [@luz] foi utilizado para organizar as funções de perda e hiperparâmetros, enquanto o pacote `{torchvision}` [@torchvision] foi utilizado para utilidades no tratamento de imagens.
 
@@ -649,7 +649,7 @@ Parte dos dados foram obtidos como um passo intermediário das simulações. A p
 Para selecionar os Captchas, foram adotados alguns critérios objetivos. Os critérios foram:
 
 1.  O site acessado é de um serviço público (governo federal, tribunal, etc).
-2.  O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com extensão jpeg ou png.
+2.  O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com extensão `jpeg` ou `png`.
 3.  O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma origem devem ter sempre o mesmo comprimento.
 
 A primeira restrição para escolha dos Captchas é de ordem principiológica. Um serviço público não deveria restringir o acesso aos dados para robôs. Como já discutido anteriormente, nesses casos, a existência do Captcha não tem como finalidade dar maior segurança ao serviço prestado, mas sim limitar o acesso aos servidores por robôs.
@@ -741,7 +741,7 @@ Por ser uma versão mais flexível e completa, optou-se por trabalhar principalm
 
 ### Construção dos dados
 
-Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem de dados [@zhao2017a]. A raspagem de dados é uma área da ciência da computação responsável por criar rotinas que automatizam a coleta de dados provenientes da web. Trata-se de uma atividade muito comum em pesquisas aplicadas, especialmente as que envolvem análise de dados públicos que não estão disponíveis de forma aberta, como os dados do Judiciário.
+Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem de dados [@zhao2017]. A raspagem de dados é uma área da ciência da computação responsável por criar rotinas que automatizam a coleta de dados provenientes da web. Trata-se de uma atividade muito comum em pesquisas aplicadas, especialmente as que envolvem análise de dados públicos que não estão disponíveis de forma aberta, como os dados do Judiciário.
 
 Dentro do ciclo da ciência de dados, pode-se considerar que a raspagem de dados está inserida nas tarefas de coleta e arrumação de dados. De certa forma, é possível comparar a raspagem com uma consulta a um banco de dados remoto, ou mesmo à obtenção de informações através de uma *Application Programming Interface* (API).
 
@@ -754,7 +754,7 @@ Para raspar uma página da web, usualmente se segue o fluxo descrito na @fig-flu
 knitr::include_graphics("assets/img/cycle.png")
 ```
 
-No caso da RFB, o trabalho é iniciado acessando-se a [página inicial de busca de CNPJ](http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp), como mostrado na @fig-raspagem-rfb-inicial. É possível notar que o desafio disponível é do tipo *hCaptcha*, que não é o Captcha de interesse da pesquisa. No entanto, ao clicar em "Captcha Sonoro", é possível acessar o Captcha de interesse, como mostrado na @fig-raspagem-rfb-sonoro. O motivo pelo qual o Captcha de texto em imagem foi mantido após a implementação do *hCaptcha* é desconhecido pelo autor.
+No caso da RFB, o trabalho é iniciado acessando-se a [página inicial de busca de CNPJ](http://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp), como mostrado na @fig-raspagem-rfb-inicial. É possível notar que o desafio disponível é do tipo *hCaptcha*, que não é o Captcha de interesse da pesquisa. No entanto, ao clicar em "Captcha Sonoro", é possível acessar o Captcha de interesse, como mostrado na @fig-raspagem-rfb-sonoro. O motivo pelo qual o Captcha de texto em imagem foi mantido após a implementação do *hCaptcha* não foi encontrado.
 
 ```{r}
 #| label: fig-raspagem-rfb-inicial
