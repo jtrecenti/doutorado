@@ -119,7 +119,7 @@
 % \br -> muda para o português
 % \texten{blah} -> o texto "blah" é em inglês
 % \textbr{blah} -> o texto "blah" é em português
-\babeltags{br = brazilian, en = english}
+\babeltags{br=brazilian,en=english}
 
 % Bibliografia
 \usepackage[
@@ -191,12 +191,12 @@
   % É qualificação?
   %quali,
   programa={Estatística},
-  membrobanca={Prof. Dr. Victor Fossaluza (orientadora) -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Victor Fossaluza (orientador) -- IME-USP},
   % Em inglês, não há o "ª"
   %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
-  membrobanca={Prof. Dr. Rafael Izbicki -- UFSCar [sem ponto final]},
-  membrobanca={Prof. Dr. Rafael Stern -- IME-USP [sem ponto final]},
-  membrobanca={Prof. Dr. Renato Vicente -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Rafael Izbicki -- UFSCar},
+  membrobanca={Prof. Dr. Rafael Stern -- IME-USP},
+  membrobanca={Prof. Dr. Renato Vicente -- IME-USP},
   % Se não houve bolsa, remova
   %
   % Norma sobre agradecimento por auxílios da FAPESP:
@@ -280,7 +280,6 @@
 %%%%%%%%%%%%%%%%%%%%%%% AQUI COMEÇA O CONTEÚDO DE FATO %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% CAPA E PÁGINAS INICIAIS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -301,6 +300,7 @@
 
 \begin{dedicatoria}
 Aos meus pais,
+Cidimir e Vera
 \end{dedicatoria}
 
 % Reinicia o contador de páginas (a próxima página recebe o número "i") para
@@ -337,6 +337,41 @@ Também gostaria de agradecer a uma instituição, o Instituto de Matemática e 
 Finalmente, agradeço aos meus pais, Cidimir e Vera, e ao meu irmão Lucas, por estarem sempre me apoiando e me cobrando sobre o doutorado. Sem esse apoio, provavelmente teria desistido no meio o caminho.
 
 % \input{conteudo/resumoabstract}
+
+% As palavras-chave são obrigatórias, em português e em inglês, e devem ser
+% definidas antes do resumo/abstract. Acrescente quantas forem necessárias.
+
+\palavrachave{captcha}
+\palavrachave{aprendizado de máquinas}
+\palavrachave{aprendizado estatístico}
+\palavrachave{aprendizado fracamente supervisionado}
+\palavrachave{rótulos parciais}
+\palavrachave{rótulos complementares}
+\palavrachave{raspagem de dados}
+
+\keyword{captcha}
+\keyword{machine learning}
+\keyword{statistical learning}
+\keyword{weak supervised learning}
+\keyword{partial label}
+\keyword{complementary label}
+\keyword{web scraping}
+
+% O resumo é obrigatório, em português e inglês. Estes comandos também
+% geram automaticamente a referência para o próprio documento, conforme
+% as normas sugeridas da USP
+
+
+\resumo{
+Captcha (Completely Automated Public Turing tests to tell Computers and Humans Apart), é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. A utilização de Captchas em serviços públicos pode ser prejudicial à população, limitando o acesso a dados e incentivando empresas a contratarem serviços que utilizam mão de obra humana para resolução dos Captchas. Este trabalho tem como foco os Captchas com textos (números e letras) em imagens. Já existem soluções para resolver Captchas deste tipo utilizando aprendizado de máquinas, sendo as redes neurais profundas os modelos com melhor desempenho. No entanto, esses modelos precisam de grandes bases de dados anotadas ou de procedimentos de ajuste intrincados e pouco acessíveis. Neste trabalho, é proposta um método inovador, chamado Web Automatic Weak Learning (WAWL), que alia técnicas de raspagem de dados e aprendizado de máquinas com rótulos parciais, que utiliza dados obtidos automaticamente da internet para acelerar o ajuste dos modelos. O método é agnóstico à arquitetura utilizada para o modelo, sendo necessário realizar apenas uma adaptação na função de perda. O método apresenta resultados significativos, aumentando a acurácia inicial de modelos fracos em mais de 30\% nos mais de 10 Captchas estudados, sem a necessidade de realizar uma nova rodada anotação manual. Adicionalmente, pacote computacional novo foi desenvolvido para resolver Captchas e disponibilizar os resultados para outras pessoas. Espera-se que o trabalho possa reduzir o incentivo econômico de contratar serviços que utilizam mão de obra humana para resolver Captchas.
+}
+
+\clearpage
+
+\abstract{
+Captchas, or Completely Automated Public Turing tests to tell Computers and Humans Apart, are challenges designed to differentiate between human and machine access to web pages. While Captchas are intended to be easy for humans to solve, they can pose a challenge for machines. Their use in public services can limit access to public data and incentivize companies to hire services that use human labor to solve them. In this work, we propose a new method called Web Automatic Weak Learning (WAWL), which combines web scraping and machine learning with partial labels techniques to quickly and accurately fit models to solve Captchas with text in images. Our method is agnostic to the model architecture and only requires a small adaptation of the loss function. By increasing the accuracy of weak initial models by more than 30\% on various Captchas studied, our method can reduce the economic incentive to hire services that use human labor to solve Captchas. We have also developed a computational package to easily solve Captchas and make our results available to the developer community.
+}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% LISTAS DE FIGURAS ETC. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -442,10 +477,42 @@ Finalmente, agradeço aos meus pais, Cidimir e Vera, e ao meu irmão Lucas, por 
    XML & eXtensible Markup Language
 \end{tabular}
 
-\clearpage
+\chapter*{Lista de símbolos}
+% \disablenewpage{\chapter*{Lista de símbolos}}
 
-%\chapter*{Lista de símbolos}
-\disablenewpage{\chapter*{Lista de símbolos}}
+\begin{displaymath}
+\begin{array}{ll}
+   x & \text{imagem (na forma de matriz)}\\
+   N & \text{linhas de uma imagem (altura)}\\
+   M & \text{colunas de uma imagem (largura)}\\
+   R & \text{canais de uma imagem (cores)}\\
+   c & \text{caractere}\\
+   L & \text{comprimento do Captcha}\\
+   \mathcal A & \text{alfabeto (quantidade de caracteres distintos possíveis)}\\
+   y & \text{variável resposta (observada), na forma de matriz}\\
+   \mathcal U & \text{distribuição uniforme}\\
+   X & \text{variável aleatória representando a imagem}\\
+   Y & \text{variável aleatória representando a matriz-resposta}\\
+   f, g, h & \text{função preditiva, que leva uma imagem a uma estimativa para } Y\\
+   \hat Y & \text{estimativa para } Y\\
+   \mathcal Y & \text{valores possíveis da variável resposta}\\
+   \mathcal O & \text{função do oráculo}\\
+   K & \text{Kernel (núcleo) em uma operação de convolução}\\
+   \epsilon & \text{erro ou valor pequeno}\\
+   \beta & \text{viés (intercepto) em um passo de batch normalization}\\
+   \gamma & \text{parâmetro em um passo de batch normalization}\\
+   I & \text{função indicadora}\\
+   \ell & \text{log-verossimilhança}\\
+   \theta & \text{parâmetros de um modelo}\\
+   \nabla & \text{gradiente (vetor de derivadas parciais)}\\
+   m,v,\hat m, \hat v, \beta_2, \beta_2, \epsilon & \text{parâmetros do otimizador ADAM}\\
+   \mathcal L & \text{função de perda}\\
+   \mathcal R & \text{função de risco}\\
+   Q & \text{matriz de transição em um modelo com rótulos complementares}\\
+   \hat f & \text{estimativa de uma função preditiva}\\
+   \bar y & \text{observação complementar de } y \text{ (ou seja, tudo menos } y \text{)}
+\end{array}
+\end{displaymath}
 
 % Quebra de página manual
 \clearpage
@@ -1855,7 +1922,7 @@ ativação, sendo igual à função identidade quando a entrada é positiva e
 zero caso contrário:
 
 \[
-\text{ReLU}(x) = x\mathbb I_{(x>0)}.
+\text{ReLU}(x) = xI_{(x>0)}.
 \]
 
 A função ReLU serve para tornar a arquitetura do modelo uma operação não
@@ -2037,7 +2104,7 @@ aparenta ter confiança nas respostas, já que dá probabilidades bem altas
 para alguns valores e quase zero para outros valores.
 
 \[
-\hat{\mathbf y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
+\hat{\mathbf Y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
   0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
   0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
   0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
@@ -2068,7 +2135,7 @@ Uma função de perda natural e popular nesse sentido é a de entropia
 cruzada, ou \emph{cross-entropy}. Trata-se de uma perda com a formulação
 
 \[
-\ell(g(x), y) = -\sum_{i=1}^c \mathbb I(y=i)\log(g_i(x)),
+\ell(g(x), y) = -\sum_{i=1}^c I(y=i)\log(g_i(x)),
 \]
 
 em que \(g_i(x)\) é a probabilidade dada ao rótulo \(i\) pela função
@@ -2152,13 +2219,13 @@ classificador acerta só uma parte do rótulo), utiliza-se uma função
 chamada 0-1:
 
 \begin{equation}\protect\hypertarget{eq-perda}{}{
-\mathcal L(g(\mathbf x),\mathbf y) = \mathbb I (g(\mathbf x) \neq \mathbf y),
+\mathcal L(g(\mathbf x),\mathbf y) = I (g(\mathbf x) \neq \mathbf y),
 }\label{eq-perda}\end{equation}
 
-em que \(\mathbb I(\cdot)\) é uma função indicadora. Como a função de
-perda é aplicada a apenas um par \((\mathbf x,y)\), define-se
-formalmente que o objetivo do problema de aprendizado é minimizar o
-\emph{risco}, que é o valor esperado da função de perda:
+em que \(I(\cdot)\) é uma função indicadora. Como a função de perda é
+aplicada a apenas um par \((\mathbf x,y)\), define-se formalmente que o
+objetivo do problema de aprendizado é minimizar o \emph{risco}, que é o
+valor esperado da função de perda:
 
 \begin{equation}\protect\hypertarget{eq-risco}{}{
 \mathcal R(g) = \mathbb E_{p(\mathbf X,Y)}[\mathcal L(g(\mathbf X),Y)].
@@ -2228,10 +2295,11 @@ O tipo de problema apresentado acima é conhecido como \emph{biased
 complementary label}, ou seja, rótulo complementar com viés. Também é
 possível considerar um caso sem viés, ou seja, quando
 \(p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}\) para todos os valores
-de \(\mathbf Y\). Esse caso também foi resolvido do ponto de vista
-teórico(ISHIDA et al., 2017). As conclusões são parecidas, ou seja, é
-possível encontrar taxas de convergência para que o problema com rótulos
-complementares se aproxime de um problema com observações completas.
+de \(\mathbf Y\) e uma constante \(c\). Esse caso também foi resolvido
+do ponto de vista teórico(ISHIDA et al., 2017). As conclusões são
+parecidas, ou seja, é possível encontrar taxas de convergência para que
+o problema com rótulos complementares se aproxime de um problema com
+observações completas.
 
 Quando os rótulos complementares não apresentam viés, existe ainda uma
 extensão para rótulos complementares múltiplos (FENG et al., 2020b).
@@ -2291,7 +2359,7 @@ pela rede neural, a fórmula para descrever a função de perda é descrita
 da seguinte forma:
 
 \[
-l(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y=\bar y)\right]
+\mathcal L(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y=\bar y)\right]
 \]
 
 A função de perda proposta pode ser explicada de maneira intuitiva
@@ -2302,7 +2370,7 @@ probabilidade, por exemplo, \(0.99\), para o valor \(i\), que o oráculo
 identificou como incorreta. Nesse caso, a função de perda é dada por
 
 \[
-l(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\mathcal L(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
 \]
 
 Como é possível ver no exemplo, quanto maior a probabilidade dada a um
@@ -2314,7 +2382,7 @@ Quando o Captcha aceita múltiplos chutes, a mesma conta é válida,
 bastando subtrair as probabilidades de todos os rótulos incorretos:
 
 \[
-l(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y \in \bar {\mathbf y})\right]
+\mathcal L(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y \in \bar {\mathbf y})\right]
 \]
 
 No final, o valor que é passado para a função de perda é a soma das
@@ -3453,7 +3521,7 @@ aparecer (JPEG, PNG, entre outros).
 
 \begin{figure}[H]
 
-{\centering \includegraphics{./resultados_files/figure-pdf/unnamed-chunk-11-1.png}
+{\centering \includegraphics[width=0.3\textwidth,height=\textheight]{./resultados_files/figure-pdf/unnamed-chunk-11-1.png}
 
 }
 
