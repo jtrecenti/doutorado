@@ -177,12 +177,14 @@
 
 
 %%%%%%%%%% INGLÊS %%%%%%%%%%
-% \expandafter\addto\csname captions\@IMEen\endcsname{%
+%%%%%%%%%% INGLÊS %%%%%%%%%%
+\expandafter\addto\csname captions\@IMEen\endcsname{%
 %   \DTMrenewdatestyle{month-year}{%
 %     \renewcommand*{\DTMdisplaydate}[4]
 %       {\DTMenglishmonthname{##2},\space##1}%
 %   }%
-%   \renewcommand\keywordsname{Keywords}%
+  \renewcommand\keywordsname{Keywords}%
+  \renewcommand\abstractname{Abstract}%
 %   \renewcommand\programname{Program}%
 %   \renewcommand\committeename{Examining Committee}
 %   \renewcommand\advisorname{%
@@ -214,36 +216,36 @@
 %   % * essay / report
 %   %     razoável, porque trata-se de um texto/relato
 %   %     sobre o projeto de TCC.
-%   \renewcommand\workname{%
-%     \iftoggle{@tcc}
-%       {Capstone Project Report}
-%       {\iftoggle{@qualificacao}
-%         {Qualifying Exam}
-%         {Thesis}%
-%       }%
-%   }%
-%   \renewcommand\degreename{%
-%     \iftoggle{@doutorado}
-%       {Doctorate}
-%       {\iftoggle{@mestrado}
-%         {Master's}
-%         {\iftoggle{@tcc}
-%           {Bachelor}
-%           {Nível não definido!}%
-%         }%
-%       }%
-%   }%
-%   \renewcommand\titlename{%
-%     \iftoggle{@doutorado}
-%       {Doctor}
-%       {\iftoggle{@mestrado}
-%         {Master}
-%         {\iftoggle{@tcc}
-%           {Bachelor}%
-%           {Nível não definido!}%
-%         }%
-%       }%
-%   }%
+  \renewcommand\workname{%
+    \iftoggle{@tcc}
+      {Capstone Project Report}
+      {\iftoggle{@qualificacao}
+        {Qualifying Exam}
+        {Thesis}%
+      }%
+  }%
+  \renewcommand\degreename{%
+    \iftoggle{@doutorado}
+      {Doctorate}
+      {\iftoggle{@mestrado}
+        {Master's}
+        {\iftoggle{@tcc}
+          {Bachelor}
+          {Nível não definido!}%
+        }%
+      }%
+  }%
+  \renewcommand\titlename{%
+    \iftoggle{@doutorado}
+      {Doctor}
+      {\iftoggle{@mestrado}
+        {Master}
+        {\iftoggle{@tcc}
+          {Bachelor}%
+          {Nível não definido!}%
+        }%
+      }%
+  }%
 %   %
 %   %
 %   \renewcommand\@coverTCCText{%
@@ -266,35 +268,35 @@
 %     for the degree of\\
 %     \titlename{} of Science%
 %   }%
-%   \renewcommand\@institutionBlockText{%
-%     University of São Paulo\\
-%     Institute of Mathematics and Statistics\\
-%     Bachelor of Computer Science%
-%   }%
+  \renewcommand\@institutionBlockText{%
+    University of São Paulo\\
+    Institute of Mathematics and Statistics\\
+    Bachelor of Computer Science%
+  }%
 %   \renewcommand\@provisionalFrontmatterText{%
 %     \iftoggle{@qualificacao}{%
 %       This is the original version of the qualifying text prepared
 %       by candidate \@author, as submitted to the Examining Committee.%
 %     }{%
-%       This is the original version of the \@IMElowercase{\workname} prepared
+%       This is the original version of the \MakeTextLowercase{\workname} prepared
 %       by candidate \@author, as submitted to the Examining Committee.%
 %     }%
 %   }%
 %   \renewcommand\@finalFrontmatterText{%
-%     This version of the \@IMElowercase{\workname} includes the corrections
+%     This version of the \MakeTextLowercase{\workname} includes the corrections
 %     and modifications suggested by the Examining Committee during
 %     the defense of the original version of the work, which took
 %     place on \DTMusedate{@defensedate}.\\[1\baselineskip]
 %     A copy of the original version is available at the Institute of
 %     Mathematics and Statistics of the University of São Paulo.%
 %   }%
-%   \renewcommand\@institution{%
-%     Institute of Mathematics and Statistics,
-%     University of São Paulo%
-%   }%
+  \renewcommand\@institution{%
+    Institute of Mathematics and Statistics,
+    University of São Paulo%
+  }%
 %   \renewcommand{\@assembleLicenseText}[1]{The content of this work is
 %                                           published under the #1 license}%
-% }
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -451,17 +453,17 @@
 % Não podemos usar \title ou \author aqui porque esses comandos
 % dependem de hyperref, que ainda não foi carregada.
 \providecommand\@author{Julio Adolfo Zucon Trecenti}
-\orientador{Victor Fossaluza}
+\orientador{}
 \DTMsavedate{@defensedate}{2023-01-05}
 \providecommand\@program{Estatística}
 \providecommand\@financing{}
-\providecommand\@defenselocation{São Paulo}
+\providecommand\@defenselocation{}
 \providecommand\@license{CC-BY 4.0}
-\providecommand\@title{Resolvendo Captchas}
-\providecommand\@titlept{Resolvendo Captchas}
-\providecommand\@titleen{Solving Captchas}
-\providecommand\@resumo{Resumo}
-\providecommand\@abstract{Resumo}
+\providecommand\@title{}
+\providecommand\@titlept{}
+\providecommand\@titleen{}
+\providecommand\@resumo{}
+\providecommand\@abstract{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -612,32 +614,70 @@
   \egroup\egroup
 }
 
+
+
+
 \DeclareDocumentCommand{\abstract}{+m}{%
   \long\gdef\@abstract{#1}%
 
   \bgroup
   \@IMEremoveLinebreaksEtc{\@abstract}
-  \IfLanguagePatterns{brazilian}
-    {
-      \XMPLangAlt{en}{pdfsubject={\@abstract}}
+  \XMPLangAlt{en}{pdfsubject={\@abstract}}
       % o item "keywords" não pode ser traduzido
 
       % XMPLangAlt undefines "\do"; this may cause
       % problems with biblatex, but we do not need
       % to worry here because we are in a group.
       % https://github.com/plk/biblatex/issues/1105
-    }
-    {
-      \hypersetup{
-        pdfsubject={\@abstract},
-        pdfkeywords={\@commakeywordsen},
-      }
-    }
+
   \egroup
 
   \bgroup\bgroup % Dois grupos aninhados, veja a documentação da package babel
   \expandafter\selectlanguage\expandafter{\@IMEen}
-  \begin{IMEabstract}\@abstract\end{IMEabstract}
+
+
+  % \begin{IMEabstract}\@abstract\end{IMEabstract}
+
+
+  \thispagestyle{empty}
+
+  \begin{center}\Large\bfseries Abstract\end{center}
+
+  \vspace*{2em plus 1em minus 1em}
+
+  \footnotesize
+
+  % Esse é o jeito mais simples de mudar as margens de um parágrafo:
+  % faz de conta que é uma lista
+  \begin{list}{}{\rightmargin 4em \leftmargin 4em}
+    \item \@author. \textbf{\@titleen\ifdefvoid{\@subtitleen}{}{: \textit{\@subtitleen}}}. \workname{} (\degreename). \@institution, São Paulo, \DTMfetchyear{@defensedate}.%
+  \end{list}
+
+  \vspace*{1em plus 1em minus 0em}
+
+  \@abstract
+
+  % Impede uma quebra de página entre esta linha e a próxima, ou seja,
+  % entre a última linha do resumo/abstract e as palavras-chave.
+  \@afterheading
+
+  \vspace*{1em plus 1em minus .5em}
+
+  \begingroup
+
+      \setlength{\leftmargini}{\widthof{\textbf{\keywordsname:}\quad}}
+      \setlength{\labelwidth}{\widthof{\textbf{\keywordsname:}}}
+      \setlength{\labelsep}{\widthof{\quad}}
+
+      \begin{description}
+        \item[\keywordsname:]\@keywordsen
+      \end{description}
+
+  \endgroup
+
+
+
+
   \egroup\egroup
 }
 
@@ -645,7 +685,7 @@
   \if@openright\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
 
-    \begin{center}\Large\bfseries\abstractname\end{center}
+    \begin{center}\Large\bfseries\IfLanguagePatterns{brazilian}{Resumo}{Abstract}\end{center}
 
   \vspace*{2em plus 1em minus 1em}
 
@@ -679,6 +719,7 @@
 
   \endgroup
 }
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -890,6 +931,7 @@
   São Paulo, \DTMfetchyear{@defensedate}.%
   \egroup
 }
+
 
 % Só para TCC
 \newcommand{\@institutionBlock}{
