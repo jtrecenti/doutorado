@@ -11,3 +11,11 @@ p {
   text-align: justify;
   text-justify: inter-word;
 }
+
+#refs {
+  text-align: justify;
+}
+
+#refs > * {
+  margin: 10px 0;
+}
