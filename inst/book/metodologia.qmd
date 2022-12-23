@@ -421,7 +421,7 @@ O valor $\epsilon$, geralmente um valor pequeno, é adicionado para evitar probl
 Após a aplicação da convolução, também é aplicada a função não linear **ReLU**. A transformação ReLU é a mais simples das funções da ativação, sendo igual à função identidade quando a entrada é positiva e zero caso contrário:
 
 $$
-\text{ReLU}(x) = x\mathbb I_{(x>0)}.
+\text{ReLU}(x) = xI_{(x>0)}.
 $$
 
 A função ReLU serve para tornar a arquitetura do modelo uma operação não linear. Qualquer operação não linear poderia ser utilizada, mas a mais simples e mais popular é a ReLU.
@@ -489,7 +489,7 @@ $$
 Note que a matriz apresenta valores negativos e positivos. Na primeira linha, por exemplo, o valor positivo está na sexta coluna, correspondendo ao algarismo "5". De fato, esse é o valor do primeiro elemento do rótulo para esta imagem. Após a aplicação do *softmax*, a matriz de predições obtida é a matriz abaixo. O modelo de exemplo aparenta ter confiança nas respostas, já que dá probabilidades bem altas para alguns valores e quase zero para outros valores.
 
 $$
-\hat{\mathbf y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
+\hat{\mathbf Y}\times 1000 = \left[\begin{array}{rrrrrrrrrr}
   0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
   0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
   0.00 & 0.00 & 0.00 & 0.00 & 1000.0 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
@@ -509,7 +509,7 @@ A função de perda utilizada em um problema de classificação deve levar em co
 Uma função de perda natural e popular nesse sentido é a de entropia cruzada, ou *cross-entropy*. Trata-se de uma perda com a formulação
 
 $$
-\ell(g(x), y) = -\sum_{i=1}^c \mathbb I(y=i)\log(g_i(x)),
+\ell(g(x), y) = -\sum_{i=1}^c I(y=i)\log(g_i(x)),
 $$
 
 em que $g_i(x)$ é a probabilidade dada ao rótulo $i$ pela função $g$. Se o rótulo $i$ é diferente do rótulo correto $y$, a função de perda vale zero por conta da função indicadora. Quando $i=y$, a perda é igual ao oposto do logaritmo da probabilidade associada ao rótulo $i$. Quanto menor a probabilidade, maior o valor da perda.
@@ -547,10 +547,10 @@ Em um problema de aprendizado supervisionado tradicional, tem-se um conjunto de 
 Para delimitar se o resultado da aplicação do classificador está bom ou ruim, utiliza-se uma função de perda. No caso do Captcha, como o interesse é simplesmente acertar o rótulo inteiro (não importa se o classificador acerta só uma parte do rótulo), utiliza-se uma função chamada 0-1:
 
 $$
-\mathcal L(g(\mathbf x),\mathbf y) = \mathbb I (g(\mathbf x) \neq \mathbf y),
+\mathcal L(g(\mathbf x),\mathbf y) = I (g(\mathbf x) \neq \mathbf y),
 $$ {#eq-perda}
 
-em que $\mathbb I(\cdot)$ é uma função indicadora. Como a função de perda é aplicada a apenas um par $(\mathbf x,y)$, define-se formalmente que o objetivo do problema de aprendizado é minimizar o *risco*, que é o valor esperado da função de perda:
+em que $I(\cdot)$ é uma função indicadora. Como a função de perda é aplicada a apenas um par $(\mathbf x,y)$, define-se formalmente que o objetivo do problema de aprendizado é minimizar o *risco*, que é o valor esperado da função de perda:
 
 $$
 \mathcal R(g) = \mathbb E_{p(\mathbf X,Y)}[\mathcal L(g(\mathbf X),Y)].
@@ -584,7 +584,7 @@ $$
 f_{\text{adj}} (\mathbf X) = \mathbf Q ^{\top}f(\mathbf X)
 $$
 
-O tipo de problema apresentado acima é conhecido como *biased complementary label*, ou seja, rótulo complementar com viés. Também é possível considerar um caso sem viés, ou seja, quando $p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}$ para todos os valores de $\mathbf Y$. Esse caso também foi resolvido do ponto de vista teórico[@ishida2017]. As conclusões são parecidas, ou seja, é possível encontrar taxas de convergência para que o problema com rótulos complementares se aproxime de um problema com observações completas.
+O tipo de problema apresentado acima é conhecido como *biased complementary label*, ou seja, rótulo complementar com viés. Também é possível considerar um caso sem viés, ou seja, quando $p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}$ para todos os valores de $\mathbf Y$ e uma constante $c$. Esse caso também foi resolvido do ponto de vista teórico[@ishida2017]. As conclusões são parecidas, ou seja, é possível encontrar taxas de convergência para que o problema com rótulos complementares se aproxime de um problema com observações completas.
 
 Quando os rótulos complementares não apresentam viés, existe ainda uma extensão para rótulos complementares múltiplos [@feng2020a]. Neste caso, é possível derivar uma função de risco empírica que, novamente, converge para a função de risco do problema completamente supervisionado, além de apresentar taxas de convergência para essa função de risco.
 
@@ -609,13 +609,13 @@ $$
 Considerando o rótulo complementar $\bar y$ e a função $\hat f$ dada pela rede neural, a fórmula para descrever a função de perda é descrita da seguinte forma:
 
 $$
-l(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y=\bar y)\right]
+\mathcal L(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y=\bar y)\right]
 $$
 
 A função de perda proposta pode ser explicada de maneira intuitiva através de um exemplo. Considere um problema com apenas $c$ possíveis valores para o rótulo (ou seja, uma resposta multinomial, sem ser multivariada). Considere também que a rede neural retorna uma alta probabilidade, por exemplo, $0.99$, para o valor $i$, que o oráculo identificou como incorreta. Nesse caso, a função de perda é dada por
 
 $$
-l(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\mathcal L(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
 $$
 
 Como é possível ver no exemplo, quanto maior a probabilidade dada a um rótulo identificado como incorreto pelo oráculo, mais a função de perda penaliza essa predição. Dessa forma, a função de perda consegue incorporar completamente a informação dada pelo oráculo.
@@ -623,7 +623,7 @@ Como é possível ver no exemplo, quanto maior a probabilidade dada a um rótulo
 Quando o Captcha aceita múltiplos chutes, a mesma conta é válida, bastando subtrair as probabilidades de todos os rótulos incorretos:
 
 $$
-l(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) \mathbb I(y \in \bar {\mathbf y})\right]
+\mathcal L(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y \in \bar {\mathbf y})\right]
 $$
 
 No final, o valor que é passado para a função de perda é a soma das perdas para todas as observações do *minibatch*. A soma considera tanto as perdas calculadas com base nos rótulos corretos quanto as perdas calculadas com base nos rótulos incorretos.
