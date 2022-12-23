@@ -276,9 +276,28 @@ Aos meus pais,
 % epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
 % não ser incluída no sumário.
 \chapter*{Agradecimentos}
-\epigrafe{Gratitude is not just a feeling, but a choice. We can choose to focus on the things we are grateful for, even in the midst of difficult circumstances. When we do this, we can experience a sense of peace and contentment that can help us to weather any storm.}{ChatGPT}
 
-Agradecer a todo mundo.
+Escrever a parte de agradecimento é uma tarefa muito fácil, pois o sentimento de gratidão que sinto a todas as pessoas queridas estiveram ao meu lado no processo de construção da tese é muito forte e verdadeiro. Ao mesmo tempo, é uma tarefa muito difícil, pois acredito não sou capaz de expressar em palavras o tamanho dessa gratidão e o quanto o apoio dessas pessoas significaram para mim.
+
+Primeiramente, gostaria de agradecer ao Victor Fossaluza, meu querido amigo e orientador. Victor foi um irmão mais velho, com a paciência necessária para lidar com minhas limitações por fazer um doutorado sem bolsa e trabalhando muito. Foi amigo, fazendo o trabalho motivacional para me convencer de que eu estava fazendo algo relevante. E foi um grande sábio, dando sugestões muito interessantes para resolver os desafios que foram postos.
+
+Agradeço ao Daniel Falbel, não só pela amizade, mas por ter me salvado este trabalho pelo menos duas vezes. Se não fosse pelo trabalho do Daniel, o trabalho nem teria começado, já que foi ele que deu a ideia de modelar Captchas usando deep learning pela primeira vez, usando o TensorFlow. E se não fosse pelo maravilhoso trabalho em na família de pacotes em torno do torch, como o próprio torch, luz e torchvision.
+
+Agradeço ao Caio Lente, por ser essa pessoa incrível, gentil e modesta, apesar da enorme capacidade. Caio é a única pessoa capaz de me aturar como sócio em duas empresas diferentes, a Curso-R e a Terranova. Caio foi a pessoa que desenvolveu o pacote e o site do decryptr, nossa primeira ferramenta geral de resolver Captchas. Caio também é meu influencer digital, sendo a pessoa por trás de coisas que acompanham minha vida até hoje, como o Todoist e o podcast Philosophize This.
+
+Agradeço à minha noiva Beatriz Milz, por todo o apoio, dedicação e paciência que teve comigo, especialmente nas etapas finais do desenvolvimento da tese. Beatriz é a melhor pessoa que conheço e tenho muita sorte de poder viver ao seu lado. Agradeço pelos excelentes comentários que colocou na tese (é possível visualizá-los no repositório da tese no GitHub), pela ajuda na tomada de várias decisões ao longo da construção da tese.
+
+Agradeço ao Fernando Corrêa, por tantas coisas que é difícil de expressar. Fernando foi quem me convenceu a desenvolver o doutorado em torno dos Captchas, em uma conversa que tivemos no carro. Cada conversa com Fernando é um aprendizado novo, seja sobre as filosofias mais profundas, os problemas mais importantes da humanidade ou sobre os personagens mais engraçados do BBB.
+
+Agradeço ao Athos Damiani, meu grande amigo, colega de TCC e roomate, pelas grandes discussões. O Athos é uma pessoa maravilhosa de discutir, pois ele não desiste! Isso fez com que eu precisasse entender mais dos assuntos para argumentar, percebento que na verdade eu não estava entendendo tanto. Além disso, Athos foi quem me ensinou a resolver Captchas de audio, o que me ajudou muito na construção das soluções.
+
+Para completar o grupo de sócios da Curso-R, agradeço imensamente ao William Amorim, meu grande amigo e parceiro no processo de doutoramento. Talvez ele não saiba, mas sempre o pilar que me apoiou nas horas difíceis, já que terminou o doutorado antes de mim e me mostrou empiricamente que isso era possível.
+
+Agradeço também a todas as pessoas das outras empresas que faço parte: ABJ, Insper e Terranova. O suporte de vocês foi fundamental para que eu conseguisse tempo para desenvolver a tese. Agradecimentos especiais à Barbara Tassoni, Igor Pretel, Marcelo Guedes Nunes, Ricardo Feliz e Renata Hirota.
+
+Também gostaria de agradecer a uma instituição, o Instituto de Matemática e Estatística da Universidade de São Paulo. Fazer a graduação, mestrado e doutorado nessa instituição foi uma experiência transformadora. Espero poder retribuir pelo menos em parte tudo o que o maravilhoso universo da estatística me proporcionou. Agradeço a todos os professores, alunos e funcionários que fizeram e continuam fazendo parte dessa história.
+
+Finalmente, agradeço aos meus pais, Cidimir e Vera, e ao meu irmão Lucas, por estarem sempre me apoiando e me cobrando sobre o doutorado. Sem esse apoio, provavelmente teria desistido no meio o caminho.
 
 % \input{conteudo/resumoabstract}
 
@@ -314,12 +333,79 @@ Agradecer a todo mundo.
 %%%%% Listas criadas manualmente
 
 %\chapter*{Lista de abreviaturas}
-\disablenewpage{\chapter*{Lista de abreviaturas}}
+\disablenewpage{\chapter*{Lista de siglas}}
 
 \begin{tabular}{rl}
+   ABJ & Associação Brasileira de Jurimetria\\
+   ADAM & ADaptive Moment Estimator\\
+   API & Application Programming Interface\\
+   CADESP & Centro de Apoio ao Desenvolvimento da Saúde Pública\\
+   Captcha & Completely Automated Public Turing test to tell Computers and Humans Apart\\
+   CF & Constituição Federal\\
+   CLT & Consolidação das Leis do Trabalho\\
+   CKAN & Comprehensive Knowledge Archive Network\\
+   CNJ & Conselho Nacional de Justiça\\
+   CNN & Convolutional Neural Networks\\
+   CNPJ & Cadastro Nacional da Pessoa Jurídica\\
+   CSV & Comma Separated Values\\
+   ENCE & Escola Nacional de Ciências Estatísticas\\
+   HIP & Human Interaction Proofs\\
+   HTTP & HypertText Transfer Protocol\\
+   HTML & HyperText Markup Language\\
+   IETF & Internet Engineering Task Force\\
+   JPEG & Join Photographic Experts Groups\\
+   GAN & Generative Adversarial Networks\\
+   GPT & Generative Pre-Training Transformer\\
+   JUCESP & Junta Comercial de São Paulo\\
+   LAI & Lei de Acesso à Informação\\
+   ICMC & Instituto de Ciências Matemáticas e de Computação\\
    IME & Instituto de Matemática e Estatística\\
-   USP & Universidade de São Paulo
+   LGPD & Lei Geral de Proteção de Dados\\
+   ME & Ministério da Economia\\
 \end{tabular}
+
+\begin{tabular}{rl}
+   MNIST & Modified National Institute of Standards and Technology Database\\
+   OCR & Optical Character Recognition\\
+   OKFN & Open Knowledge Foundation\\
+   PDF & Portable Document Format\\
+   PLL & Partial Label Learning\\
+   PNG & Portable Network Graphics\\
+   RCN & Recursive Cortical Network\\
+   RFB & Receita Federal do Brasil\\
+   ReLU & Rectified Linear Unit\\
+   SAJ & Sistema de Automação da Justiça\\
+   SEI & Sistema Eletrônico de Informações\\
+   SGT & Sistema de Gestão de Tabelas\\
+   SPAM & Sending and Posting Advertisement in Mass\\
+   TJBA & Tribunal de Justiça da Bahia\\
+   TJMG & Tribunal de Justiça de Minas Gerais\\
+   TJPE & Tribunal de Justiça de Pernambuco\\
+   TJRS & Tribunal de Justiça do Rio Grande do Sul\\
+   TJSP & Tribunal de Justiça de São Paulo\\
+   TRF & Tribunal Regional Federal\\
+   TRT & Tribunal Regional do Trabalho\\
+   UFAM & Universidade Federal do Amazonas\\
+   UFBA & Universidade Federal da Bahia\\
+   UFF & Universidade Federal Fluminense\\
+   UFG & Universidade Federal de Goiás\\
+   UFMG & Universidade Federal de Minas Gerais\\
+   UFPE & Universidade Federal de Pernambuco\\
+   UFPR & Universidade Federal do Paraná\\
+   UFRGS & Universidade Federal do Rio Grande do Sul\\
+   UFRJ & Universidade Federal do Rio de Janeiro\\
+   UFRN & Universidade Federal do Rio Grande do Norte\\
+   UFSCar & Universidade Federal de São Carlos\\
+   UnB & Universidade de Brasília\\
+   Unicamp & Universidade Estadual de Campinas\\
+   UNESP & Universidade Estadual de São Paulo\\
+   USP & Universidade de São Paulo\\
+   WAWL & Web Automatic Weak Learner\\
+   XPath & XML Path Language\\
+   XML & eXtensible Markup Language
+\end{tabular}
+
+\clearpage
 
 %\chapter*{Lista de símbolos}
 \disablenewpage{\chapter*{Lista de símbolos}}
