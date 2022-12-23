@@ -23,7 +23,7 @@ crossref:
 
 number-depth: 1
 
-bibliography: [book.bib, captcha.bib, references.bib]
+bibliography: [captcha.bib, references.bib]
 csl: /Users/julio/OneDrive/Documentos/jtrecenti/doutorado/inst/book/abnt.csl
 
 google-scholar: true

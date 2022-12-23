@@ -313,9 +313,28 @@ Aos meus pais,
 % epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
 % não ser incluída no sumário.
 \chapter*{Agradecimentos}
-\epigrafe{Gratitude is not just a feeling, but a choice. We can choose to focus on the things we are grateful for, even in the midst of difficult circumstances. When we do this, we can experience a sense of peace and contentment that can help us to weather any storm.}{ChatGPT}
 
-Agradecer a todo mundo.
+Escrever a parte de agradecimento é uma tarefa muito fácil, pois o sentimento de gratidão que sinto a todas as pessoas queridas estiveram ao meu lado no processo de construção da tese é muito forte e verdadeiro. Ao mesmo tempo, é uma tarefa muito difícil, pois acredito não sou capaz de expressar em palavras o tamanho dessa gratidão e o quanto o apoio dessas pessoas significaram para mim.
+
+Primeiramente, gostaria de agradecer ao Victor Fossaluza, meu querido amigo e orientador. Victor foi um irmão mais velho, com a paciência necessária para lidar com minhas limitações por fazer um doutorado sem bolsa e trabalhando muito. Foi amigo, fazendo o trabalho motivacional para me convencer de que eu estava fazendo algo relevante. E foi um grande sábio, dando sugestões muito interessantes para resolver os desafios que foram postos.
+
+Agradeço ao Daniel Falbel, não só pela amizade, mas por ter me salvado este trabalho pelo menos duas vezes. Se não fosse pelo trabalho do Daniel, o trabalho nem teria começado, já que foi ele que deu a ideia de modelar Captchas usando deep learning pela primeira vez, usando o TensorFlow. E se não fosse pelo maravilhoso trabalho em na família de pacotes em torno do torch, como o próprio torch, luz e torchvision.
+
+Agradeço ao Caio Lente, por ser essa pessoa incrível, gentil e modesta, apesar da enorme capacidade. Caio é a única pessoa capaz de me aturar como sócio em duas empresas diferentes, a Curso-R e a Terranova. Caio foi a pessoa que desenvolveu o pacote e o site do decryptr, nossa primeira ferramenta geral de resolver Captchas. Caio também é meu influencer digital, sendo a pessoa por trás de coisas que acompanham minha vida até hoje, como o Todoist e o podcast Philosophize This.
+
+Agradeço à minha noiva Beatriz Milz, por todo o apoio, dedicação e paciência que teve comigo, especialmente nas etapas finais do desenvolvimento da tese. Beatriz é a melhor pessoa que conheço e tenho muita sorte de poder viver ao seu lado. Agradeço pelos excelentes comentários que colocou na tese (é possível visualizá-los no repositório da tese no GitHub), pela ajuda na tomada de várias decisões ao longo da construção da tese.
+
+Agradeço ao Fernando Corrêa, por tantas coisas que é difícil de expressar. Fernando foi quem me convenceu a desenvolver o doutorado em torno dos Captchas, em uma conversa que tivemos no carro. Cada conversa com Fernando é um aprendizado novo, seja sobre as filosofias mais profundas, os problemas mais importantes da humanidade ou sobre os personagens mais engraçados do BBB.
+
+Agradeço ao Athos Damiani, meu grande amigo, colega de TCC e roomate, pelas grandes discussões. O Athos é uma pessoa maravilhosa de discutir, pois ele não desiste! Isso fez com que eu precisasse entender mais dos assuntos para argumentar, percebento que na verdade eu não estava entendendo tanto. Além disso, Athos foi quem me ensinou a resolver Captchas de audio, o que me ajudou muito na construção das soluções.
+
+Para completar o grupo de sócios da Curso-R, agradeço imensamente ao William Amorim, meu grande amigo e parceiro no processo de doutoramento. Talvez ele não saiba, mas sempre o pilar que me apoiou nas horas difíceis, já que terminou o doutorado antes de mim e me mostrou empiricamente que isso era possível.
+
+Agradeço também a todas as pessoas das outras empresas que faço parte: ABJ, Insper e Terranova. O suporte de vocês foi fundamental para que eu conseguisse tempo para desenvolver a tese. Agradecimentos especiais à Barbara Tassoni, Igor Pretel, Marcelo Guedes Nunes, Ricardo Feliz e Renata Hirota.
+
+Também gostaria de agradecer a uma instituição, o Instituto de Matemática e Estatística da Universidade de São Paulo. Fazer a graduação, mestrado e doutorado nessa instituição foi uma experiência transformadora. Espero poder retribuir pelo menos em parte tudo o que o maravilhoso universo da estatística me proporcionou. Agradeço a todos os professores, alunos e funcionários que fizeram e continuam fazendo parte dessa história.
+
+Finalmente, agradeço aos meus pais, Cidimir e Vera, e ao meu irmão Lucas, por estarem sempre me apoiando e me cobrando sobre o doutorado. Sem esse apoio, provavelmente teria desistido no meio o caminho.
 
 % \input{conteudo/resumoabstract}
 
@@ -351,12 +370,79 @@ Agradecer a todo mundo.
 %%%%% Listas criadas manualmente
 
 %\chapter*{Lista de abreviaturas}
-\disablenewpage{\chapter*{Lista de abreviaturas}}
+\disablenewpage{\chapter*{Lista de siglas}}
 
 \begin{tabular}{rl}
+   ABJ & Associação Brasileira de Jurimetria\\
+   ADAM & ADaptive Moment Estimator\\
+   API & Application Programming Interface\\
+   CADESP & Centro de Apoio ao Desenvolvimento da Saúde Pública\\
+   Captcha & Completely Automated Public Turing test to tell Computers and Humans Apart\\
+   CF & Constituição Federal\\
+   CLT & Consolidação das Leis do Trabalho\\
+   CKAN & Comprehensive Knowledge Archive Network\\
+   CNJ & Conselho Nacional de Justiça\\
+   CNN & Convolutional Neural Networks\\
+   CNPJ & Cadastro Nacional da Pessoa Jurídica\\
+   CSV & Comma Separated Values\\
+   ENCE & Escola Nacional de Ciências Estatísticas\\
+   HIP & Human Interaction Proofs\\
+   HTTP & HypertText Transfer Protocol\\
+   HTML & HyperText Markup Language\\
+   IETF & Internet Engineering Task Force\\
+   JPEG & Join Photographic Experts Groups\\
+   GAN & Generative Adversarial Networks\\
+   GPT & Generative Pre-Training Transformer\\
+   JUCESP & Junta Comercial de São Paulo\\
+   LAI & Lei de Acesso à Informação\\
+   ICMC & Instituto de Ciências Matemáticas e de Computação\\
    IME & Instituto de Matemática e Estatística\\
-   USP & Universidade de São Paulo
+   LGPD & Lei Geral de Proteção de Dados\\
+   ME & Ministério da Economia\\
 \end{tabular}
+
+\begin{tabular}{rl}
+   MNIST & Modified National Institute of Standards and Technology Database\\
+   OCR & Optical Character Recognition\\
+   OKFN & Open Knowledge Foundation\\
+   PDF & Portable Document Format\\
+   PLL & Partial Label Learning\\
+   PNG & Portable Network Graphics\\
+   RCN & Recursive Cortical Network\\
+   RFB & Receita Federal do Brasil\\
+   ReLU & Rectified Linear Unit\\
+   SAJ & Sistema de Automação da Justiça\\
+   SEI & Sistema Eletrônico de Informações\\
+   SGT & Sistema de Gestão de Tabelas\\
+   SPAM & Sending and Posting Advertisement in Mass\\
+   TJBA & Tribunal de Justiça da Bahia\\
+   TJMG & Tribunal de Justiça de Minas Gerais\\
+   TJPE & Tribunal de Justiça de Pernambuco\\
+   TJRS & Tribunal de Justiça do Rio Grande do Sul\\
+   TJSP & Tribunal de Justiça de São Paulo\\
+   TRF & Tribunal Regional Federal\\
+   TRT & Tribunal Regional do Trabalho\\
+   UFAM & Universidade Federal do Amazonas\\
+   UFBA & Universidade Federal da Bahia\\
+   UFF & Universidade Federal Fluminense\\
+   UFG & Universidade Federal de Goiás\\
+   UFMG & Universidade Federal de Minas Gerais\\
+   UFPE & Universidade Federal de Pernambuco\\
+   UFPR & Universidade Federal do Paraná\\
+   UFRGS & Universidade Federal do Rio Grande do Sul\\
+   UFRJ & Universidade Federal do Rio de Janeiro\\
+   UFRN & Universidade Federal do Rio Grande do Norte\\
+   UFSCar & Universidade Federal de São Carlos\\
+   UnB & Universidade de Brasília\\
+   Unicamp & Universidade Estadual de Campinas\\
+   UNESP & Universidade Estadual de São Paulo\\
+   USP & Universidade de São Paulo\\
+   WAWL & Web Automatic Weak Learner\\
+   XPath & XML Path Language\\
+   XML & eXtensible Markup Language
+\end{tabular}
+
+\clearpage
 
 %\chapter*{Lista de símbolos}
 \disablenewpage{\chapter*{Lista de símbolos}}
@@ -498,8 +584,7 @@ usuário, alterando a qualidade da sua experiência. Os sites devem levar
 esse fator de aborrecimento em conta para não reduzir a taxa de
 conversão. Em alguns casos, pode fazer mais sentido abandonar os
 Captchas e utilizar outros mecanismos de prevenção à fraude, como
-monitoramento da sessão do usuário ({«Inaccessibility of CAPTCHA»},
-{[}s.d.{]}).
+monitoramento da sessão do usuário (W3C, 2021).
 
 Também existem casos em que o uso de Captchas é prejudicial. Sua
 utilização em serviços públicos do Brasil, por exemplo, é problemática,
@@ -568,10 +653,10 @@ obter a lista\footnote{O CNJ só consegue listar os processos
   \href{https://www.cnj.jus.br/sgt/consulta_publica_classes.php}{Sistema
   de Gestão de Tabelas (SGT) do CNJ}. Processos relacionados a
   recuperação judicial, no entanto, não respeitam a taxonomia do SGT
-  ({«Observatório da insolvência»}, {[}s.d.{]}).} ou ii) expedir ofícios
-aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções
-e critérios de acesso aos dados, diferentes prazos para atendimento e
-diferentes formatos, podendo, inclusive, negar o pedido de acesso.
+  (ABJ, 2021).} ou ii) expedir ofícios aos 27 Tribunais Estaduais. Cada
+tribunal apresentaria diferentes opções e critérios de acesso aos dados,
+diferentes prazos para atendimento e diferentes formatos, podendo,
+inclusive, negar o pedido de acesso.
 
 A dificuldade para acessar os dados do judiciário é a principal barreira
 para realização de pesquisas pela Associação Brasileira de Jurimetria
@@ -583,20 +668,17 @@ Dos 16 projetos disponibilizados na
 \href{https://abj.org.br/pesquisas/}{página de pesquisas no site da
 ABJ}, pelo menos 12 (75\%) apresentaram dificuldades na obtenção dos
 dados via pedidos de acesso aos órgãos. Três exemplos icônicos são o da
-pesquisa sobre Tempo dos processos relacionados à adoção no Brasil
-({«Tempo dos processos relacionados à adoção»}, {[}s.d.{]}), o
-Observatório da Insolvência: Rio de Janeiro ({«Observatório da
-insolvência»}, {[}s.d.{]}) e o Diagnóstico do Contencioso Tributário
-Administrativo ({«Diagnóstico do Contencioso Tributário
-Administrativo»}, {[}s.d.{]}). No primeiro caso, dois tribunais enviaram
-os dados em arquivos em papel, sendo que um deles ultrapassou mil
-páginas com números de processos impressos. No segundo caso, o pedido
-foi respondido com uma planilha de contagens ao invés da lista de
-processos. No último caso, até mesmo órgãos que faziam parte do grupo de
-trabalho da pesquisa negaram pedido de acesso a dados de processos
-tributários em primeira instância, com argumentos que variavam desde a
-dificuldade técnica de levantar os dados até a Lei Geral de Proteção de
-Dados (LGPD).
+pesquisa sobre Tempo dos processos relacionados à adoção no Brasil (ABJ,
+2014), o Observatório da Insolvência: Rio de Janeiro (ABJ, 2021) e o
+Diagnóstico do Contencioso Tributário Administrativo (ABJ, 2022). No
+primeiro caso, dois tribunais enviaram os dados em arquivos em papel,
+sendo que um deles ultrapassou mil páginas com números de processos
+impressos. No segundo caso, o pedido foi respondido com uma planilha de
+contagens ao invés da lista de processos. No último caso, até mesmo
+órgãos que faziam parte do grupo de trabalho da pesquisa negaram pedido
+de acesso a dados de processos tributários em primeira instância, com
+argumentos que variavam desde a dificuldade técnica de levantar os dados
+até a Lei Geral de Proteção de Dados (LGPD).
 
 Em muitas situações, portanto, a única alternativa para realizar as
 pesquisas é acessando os dados via coleta automatizada nos sites. Todos
@@ -604,14 +686,15 @@ os tribunais possuem ferramentas de consulta individualizadas de
 processos, por conta do que está previsto na CF. A solução, portanto,
 passa a ser construir uma ferramenta que obtém todos os dados
 automaticamente. Tal conceito é conhecido como \emph{raspagem de dados}
-(ZHAO, 2017a) e será desenvolvido com maiores detalhes no Capítulo
+(ZHAO, 2017) e será desenvolvido com maiores detalhes no Capítulo
 Capítulo~\ref{sec-metodologia}.
 
 Os Captchas se tornam prejudiciais à sociedade quando o acesso
 automatizado é necessário para realizar pesquisas científicas.
 Infelizmente, vários tribunais utilizam a barreira do Captcha. Alguns
 tribunais, inclusive, têm o entendimento de que o acesso automatizado é
-prejudicial, como o TJRS, que emitiu um
+prejudicial, como o Tribunal de Justiça do Rio Grande do Sul (TJRS), que
+emitiu um
 \href{https://www.tjrs.jus.br/novo/processos-e-servicos/processo-eletronico/acesso-robotizado-a-dados-publicos-e-duplamente-arriscado/}{comunicado}
 sobre o tema.
 
@@ -717,7 +800,7 @@ científica avançou na área de inteligência artificial.
 Não demorou para surgirem os primeiros resolvedores de
 Captchas\footnote{Outro termo para \emph{resolver} Captchas é
   \emph{quebrar} Captchas. Nesta tese, optou-se por utilizar o termo
-  \emph{resolver,} para enfatizar a interpretação do Captcha como um
+  \emph{resolver}, para enfatizar a interpretação do Captcha como um
   desafio, não como um problema de criptografia.}. MORI; MALIK (2003)
 foi um dos primeiros trabalhos publicados sobre o tema e utiliza
 diversas técnicas de processamento de imagens para obter os rótulos
@@ -781,7 +864,7 @@ funcionamento do reCaptcha}
 Curiosamente, foi com a própria Google que os resolvedores ficaram em
 vantagem na luta. Os modelos de inteligência artificial continuaram
 avançando, notadamente com o avanço dos modelos de redes neurais
-profundas (LECUN; BENGIO; HINTON, 2015a). No trabalho de GOODFELLOW et
+profundas (LECUN; BENGIO; HINTON, 2015). No trabalho de GOODFELLOW et
 al. (2013), todos funcionários da Google na época, foi apresentado um
 modelo de redes neurais convolucionais que resolvia o reCaptcha v1 com
 99.8\% de acurácia. No ano seguinte, em 2014, a Google descontinuou o
@@ -837,13 +920,13 @@ v2 e seus concorrentes. No entanto, vários avanços apareceram no sentido
 de reduzir a quantidade de imagens rotuladas para criar candidatos a
 resolvedores. Dentre eles, o mais significativos são os baseados nas
 redes generativas adversariais (\emph{Generative Adversarial Networks,}
-ou GANs), propostas no famoso trabalho de GOODFELLOW et al.
-({[}s.d.{]}). O primeiro trabalho que utiliza modelos generativos no
-contexto de Captchas mostrou uma redução de 300x na quantidade de dados
+ou GANs), propostas no famoso trabalho de GOODFELLOW et al. (2014). O
+primeiro trabalho que utiliza modelos generativos no contexto de
+Captchas mostrou uma redução de 300x na quantidade de dados
 classificados necessária para resolver um Captcha (GEORGE et al. (2017);
 nesse caso, os autores propõem uma rede diferente do GAN, chamada
 \emph{Recursive Cortical Network}, ou RCN). Outros trabalhos mais
-recentes (WANG et al., 2021; YE et al., 2018a) avançam ainda mais na
+recentes (WANG et al., 2021; YE et al., 2018) avançam ainda mais na
 pesquisa, reduzindo o trabalho de classificação para um novo Captcha de
 texto para aproximadamente 2 horas.
 
@@ -1069,16 +1152,18 @@ detalhes, as simulações realizadas para obtenção dos resultados
 empíricos.
 
 O terceiro capítulo, ``resultados'', apresenta os resultados da
-pesquisa. Do ponto de vista teórico, são apresentadas as propriedades do
-modelo proposto. Do ponto de vista empírico, são apresentados os
-resultados das simulações e outros experimentos realizados com a técnica
-WAWL. O capítulo também apresenta uma breve discussão dos resultados
+pesquisa. Primeiro são apresentados os resultados das simulações e
+outros experimentos realizados com a técnica WAWL. Em seguida, descreve
+o pacote \texttt{\{captcha\}}, criado para atingir o objetivo 4 da
+pesquisa. O capítulo também apresenta uma breve discussão dos resultados
 obtidos.
 
 No quarto e último capítulo, ``conclusão'', a pesquisa é concluída, com
 apresentação das considerações finais e próximos passos. Também foi
-incluído um apêndice descrevendo e documentando o pacote
-\texttt{\{captcha\}}, criado atingir o objetivo 4 da pesquisa.
+incluído um apêndice descrevendo e documentando os pacotes
+\texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}}, criados para
+atuar em conjunto com o pacote \texttt{\{captcha\}} para implementar o
+método WAWL.
 
 \bookmarksetup{startatroot}
 
@@ -1099,7 +1184,7 @@ modelos clássicos de estatística e os modelos de redes neurais, mas sem
 tecer todos os detalhes técnicos que podem ser encontrados em livros
 didáticos. Antes de 2015, a pesquisa em redes neurais nos departamentos
 de estatística era uma novidade, sofrendo até certo preconceito por ser
-uma classe de modelos ``caixa-preta''. Com o passar do tempo, no
+uma classe de modelos ``caixa preta''. Com o passar do tempo, no
 entanto, a área está ficando cada vez mais popular, envolvendo até mesmo
 trabalhos de iniciação científica no tema. Por isso, optou-se por trazer
 poucos detalhes da área, focando nas pontes entre os modelos clássicos e
@@ -1180,7 +1265,7 @@ parciais}} (\emph{partial label learning}, PLL, (JIN; GHAHRAMANI,
 2002)). Essa classe apresenta uma especialização ainda mais próxima do
 problema estudado, chamado \textbf{\emph{aprendizado com rótulos
 complementares}} (\emph{complementary label learning}, (ISHIDA et al.,
-2017a)).
+2017)).
 
 A intepretação do Captcha como um problema de PLL será apresentada no
 final do capítulo. A jornada começa de onde deve começar, com aqueles
@@ -1520,7 +1605,7 @@ A técnica proposta pela tese pode utilizar diversas arquiteturas de
 redes neurais. A escolha de uma arquitetura mais simples foi feita para
 demonstrar a eficácia do procedimento de forma mais contundente. Outras
 arquiteturas mais rebuscadas, como as apresentadas no referencial
-teórico (GEORGE et al., 2017; YE et al., 2018b) podem melhorar a
+teórico (GEORGE et al., 2017; YE et al., 2018) podem melhorar a
 aplicação do modelo. A única restrição é que ela possa receber uma
 função de perda modificada, como será mostrado a seguir.
 
@@ -1838,7 +1923,7 @@ A quantidade de canais gerados pelas camadas convolucionais foram
 fixadas em 32, 64 e 64. A utilização de números crescentes de canais nas
 camadas convolucionais é comum (LECUN et al., 1998), bem como a
 utilização de números que são potências de 2 (LECUN; BENGIO; HINTON,
-2015b). Nesse sentido, um possível valor para a terceira camada era de
+2015). Nesse sentido, um possível valor para a terceira camada era de
 128 canais, mas optou-se por 64 canais para que a quantidade de
 parâmetros não ficasse grande demais, já que isso exigiria mais tempo de
 computação e computadores mais poderosos.
@@ -1850,7 +1935,7 @@ considerando cada pixel como uma covariável, 4.401 parâmetros
 (\(40\times110\) e o intercepto). No entanto, é uma quantidade
 relativamente pequena no contexto de redes neurais. Redes neurais
 recentes aplicadas a imagens, como o DALL-E 2 possui 3,5 bilhões de
-parâmetros (RAMESH et al., {[}s.d.{]}).
+parâmetros (RAMESH et al., 2022).
 
 Em seguida, o resultado é transformado para um formato retangular,
 similar ao que se encontra em modelos de regressão. Aqui, as dimensões
@@ -1964,7 +2049,7 @@ para alguns valores e quase zero para outros valores.
 Vale notar que, dependendo da implementação, nem sempre é necessário
 aplicar a função \emph{softmax}. Em alguns pacotes computacionais como o
 \texttt{torch}\footnote{Mais sobre o (py)torch:
-  \url{https://pytorch.org/}. Último acesso em 22 de novembro de 2022.},
+  \url{https://pytorch.org}. Último acesso em 22 de novembro de 2022.},
 utilizado nesta tese, a normalização pode ser feita diretamente na
 função de perda, que aproveita a expressão completa para realizar
 algumas simplificações matemáticas e, com isso, melhorar a precisão das
@@ -2000,10 +2085,9 @@ de ser adaptada no método WAWL.
 \subsubsection{Otimizador}\label{sec-otimizador}}
 
 O otimizador utilizado para os modelos ajustados na tese foi o ADAM
-(KINGMA; BA, {[}s.d.{]}). A sigla significa \emph{Adaptive Moment
-Estimator} e funciona como uma extensão da descida de gradiente
-estocástica (LECUN et al., 2012), atualizando os parâmetros da seguinte
-forma:
+(KINGMA; BA, 2017). A sigla significa \emph{Adaptive Moment Estimator} e
+funciona como uma extensão da descida de gradiente estocástica (LECUN et
+al., 2012), atualizando os parâmetros da seguinte forma:
 
 \[
 \begin{array}{cl}
@@ -2036,16 +2120,16 @@ principais. A supervisão com erros, a supervisão com rótulos incompletos
 e a supervisão de grupos de observações. O caso do Captcha pode ser
 entendido como uma sub-área do aprendizado fracamente supervisionado com
 rótulos incompletos chamada aprendizado com dados parcialmente rotulados
-(\emph{partial label learning,} PLL\emph{)}, já que uma parte da base
-pode ser anotada sem erros e uma parte da base é a resposta do oráculo
-indicando uma lista de rótulos possíveis incluindo o correto.
+(PLL), já que uma parte da base pode ser anotada sem erros e uma parte
+da base é a resposta do oráculo indicando uma lista de rótulos possíveis
+incluindo o correto.
 
 A área de PLL não é nova (GRANDVALET, 2002) e aparece com outros nomes,
 como aprendizado com rótulos ambíguos (HÜLLERMEIER; BERINGER, 2006) e
 aprendizado de rótulos em superconjuntos (\emph{superset-label
 learning)} (LIU; DIETTERICH, 2012). Um caso particular de PLL, aplicável
-ao tema do Captcha são rótulos complementares (ISHIDA et al., 2017b),
-que considera os chutes errados na notação do problema.
+ao tema do Captcha são rótulos complementares (ISHIDA et al., 2017), que
+considera os chutes errados na notação do problema.
 
 As definições seguem uma terminologia adaptada a partir da leitura de
 JIN; GHAHRAMANI (2002), COUR; SAPP; TASKAR (2011) e FENG et al. (2020a).
@@ -2145,7 +2229,7 @@ complementary label}, ou seja, rótulo complementar com viés. Também é
 possível considerar um caso sem viés, ou seja, quando
 \(p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}\) para todos os valores
 de \(\mathbf Y\). Esse caso também foi resolvido do ponto de vista
-teórico(ISHIDA et al., 2017a). As conclusões são parecidas, ou seja, é
+teórico(ISHIDA et al., 2017). As conclusões são parecidas, ou seja, é
 possível encontrar taxas de convergência para que o problema com rótulos
 complementares se aproxime de um problema com observações completas.
 
@@ -2241,12 +2325,12 @@ perdas calculadas com base nos rótulos incorretos.
 O otimizador que obtém novas estimativas dos parâmetros também não
 precisa ser modificado. Basta aplicar a mesma técnica utilizada na
 modelagem usual, como descida de gradiente estocástica ou métodos
-adaptativos, como \emph{RMSProp} ou \emph{Adam}.
+adaptativos, como o ADAM.
 
 Um detalhe importante sobre o método é sobre a implementação. Com a
 utilização de ferramentas que fazem diferenciação automática como o
 \emph{torch} e o \emph{TensorFlow}\footnote{Mais detalhes em
-  \url{https://www.tensorflow.org/}. Último acesso em 22 de novembro de
+  \url{https://www.tensorflow.org}. Último acesso em 22 de novembro de
   2022.}, basta implementar a parte da arquitetura, a função de perda e
 especificar o otimizador, já que o processo de atualização dos
 parâmetros é feito automaticamente. No entanto, dependendo da
@@ -2258,7 +2342,7 @@ melhoria possível em futuros trabalhos.
 
 O ajuste dos modelos, tanto para simulações quanto para construção dos
 modelos finais, utilizou o pacote \texttt{\{torch\}} (FALBEL; LURASCHI,
-2022a), que é uma implementação do PyTorch para a linguagem de
+2022), que é uma implementação do PyTorch para a linguagem de
 programação R (R CORE TEAM, 2021). O pacote \texttt{\{luz\}} (FALBEL,
 2022a) foi utilizado para organizar as funções de perda e
 hiperparâmetros, enquanto o pacote \texttt{\{torchvision\}} (FALBEL,
@@ -2300,7 +2384,7 @@ Os critérios foram:
   etc).
 \item
   O Captcha contém letras (A a Z) e números (0 a 9) em uma imagem com
-  extensão jpeg ou png.
+  extensão \texttt{jpeg} ou \texttt{png}.
 \item
   O comprimento do Captcha é fixo, ou seja, dois Captchas da mesma
   origem devem ter sempre o mesmo comprimento.
@@ -2491,7 +2575,7 @@ implementado mas não foi utilizado nas simulações.
 \subsection{Construção dos dados}\label{construuxe7uxe3o-dos-dados}}
 
 Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem
-de dados (ZHAO, 2017b). A raspagem de dados é uma área da ciência da
+de dados (ZHAO, 2017). A raspagem de dados é uma área da ciência da
 computação responsável por criar rotinas que automatizam a coleta de
 dados provenientes da web. Trata-se de uma atividade muito comum em
 pesquisas aplicadas, especialmente as que envolvem análise de dados
@@ -2531,8 +2615,8 @@ disponível é do tipo \emph{hCaptcha}, que não é o Captcha de interesse
 da pesquisa. No entanto, ao clicar em ``Captcha Sonoro'', é possível
 acessar o Captcha de interesse, como mostrado na
 Figura~\ref{fig-raspagem-rfb-sonoro}. O motivo pelo qual o Captcha de
-texto em imagem foi mantido após a implementação do \emph{hCaptcha} é
-desconhecido pelo autor.
+texto em imagem foi mantido após a implementação do \emph{hCaptcha} não
+foi encontrado.
 
 \begin{figure}
 
@@ -3095,9 +3179,15 @@ supervisionado.
 
 \epigrafe{I'm not a robot, I'm a human. But I'm pretty sure the robot is better at this than I am.}{ChatGPT}
 
-Neste capítulo, discute-se os resultados da metodologia WAWL. Para isso,
-são apresentadas resultados empíricos que demostram que os a proposta
-possui bons resultados.
+Neste capítulo, discute-se os resultados da metodologia WAWL e
+descreve-se pacote computacional desenvolvido para lidar com Captchas. A
+Seção~\ref{sec-result-sim} mostra os resultados empíricos e a
+Seção~\ref{sec-pacote-captcha} detalha o pacote \texttt{\{captcha\}}. No
+final, a Seção~\ref{sec-discussao} apresenta uma discussão dos
+resultados obtidos.
+
+\hypertarget{sec-result-sim}{%
+\section{Resultados empíricos}\label{sec-result-sim}}
 
 Os resultados foram obtidos a partir das simulações com diversos
 Captchas. Foram realizadas 65 simulações no total, variando no tipo de
@@ -3219,8 +3309,10 @@ simulação é dado por
 
 \[
 \text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
-\] A Figura~\ref{fig-simulacao-geral-inicial-absoluto-ajustado} mostra
-os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho
+\]
+
+A Figura~\ref{fig-simulacao-geral-inicial-absoluto-ajustado} mostra os
+ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho
 expressivo da técnica WAWL do oráculo para modelos iniciais com mais de
 10\% de acurácia com relação a modelos iniciais com até 10\% de
 acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a
@@ -3322,689 +3414,6 @@ técnica de aprendizado ativo com \emph{feedback} automático do oráculo
 pode dar bons resultados, já que a forma de obter os dados não introduz
 viés de seleção no ajuste do modelo.
 
-\hypertarget{sec-discussao}{%
-\section{Discussão}\label{sec-discussao}}
-
-Os resultados apresentados nas seções anteriores mostram que o método
-WAWL possui boas propriedades matemáticas e bons resultados empíricos.
-Nesta seção, os resultados foram confrontados com as hipóteses de
-pesquisa definidos na Seção~\ref{sec-hipoteses} de forma crítica.
-
-A primeira hipótese de pesquisa diz respeito à pertinência de utilizar
-do aprendizado fracamente supervisionado como forma de ajustar modelos
-para resolver Captchas. A hipótese foi verificada, tanto do ponto de
-vista teórico quanto do ponto de vista prático.
-
-Na parte teórica, várias pesquisas já apontam que o aprendizado com
-rótulos parciais ou rótulos complementares têm boas propriedades. Por
-isso, já seria esperado que uma nova função de perda, desde que pensada
-com cuidado, traria resultados positivos. O resultado foi verificado a
-partir da obtenção das propriedades da função de perda proposta,
-mostrando que a função de risco baseada nessa perda se aproxima da
-função de risco de um problema completamente supervisionado.
-
-Na parte prática, até o momento não existiam evidências de que a
-utilização de rótulos parciais ou rótulos complementares teriam bons
-resultados empíricos em Captchas. Isso foi verificado em todos os 12
-Captchas estudados, sendo 10 obtidos do mundo real. Em todos os casos, a
-função de perda proposta funcionou bem e trouxe ganhos significativos na
-acurácia do modelo, tanto em termos relativos quanto absolutos. Isso
-demonstra que a escolha do método se alia bem ao problema que deu origem
-à pesquisa, que são os Captchas.
-
-Sobre a parte de aplicação iterada do WAWL, cabe um comentário. O
-resultado encontrado, com 100\% de acurácia, pode sugerir que o método
-WAWL sempre chegará em um resultado de 100\% para qualquer Captcha que
-surgir. No entanto, pode ser que exista uma limitação na capacidade do
-modelo, que é habilidade do modelo para se ajustar aos dados a partir
-dos parâmetros. Pode ser que a arquitetura de rede neural escolhida para
-resolver o Captcha não seja capaz de chegar a um modelo com 100\% de
-acurácia, independente da quantidade de imagens observadas. É importante
-olhar o resultado apresentado de forma crítica e compreender que os
-resultados finais podem ser limitados, já que a arquitetura da rede
-neural não é parte do método WAWL.
-
-A segunda hipótese de pesquisa é a possibilidade de aliar a área de
-raspagem de dados com a área de modelagem estatística. Essa parte está
-bem mais relacionada com a parte prática da pesquisa, já que os
-conceitos de raspagem de dados não são utilizados para estudar a
-propriedade dos modelos. A hipótese também foi verificada, já que o
-método WAWL, que utiliza técnicas de raspagem de dados, apresentou bons
-resultados empíricos.
-
-Neste momento, cabe um comentário sobre o ineditismo da ponte entre
-raspagem de dados e estatística. É verdade que existem muitas pesquisas
-que são possibilitadas por conta dos dados obtidos via raspagem de
-dados: as pesquisas da ABJ, mencionadas na
-Seção~\ref{sec-captchas-publicos} são alguns exemplos. Também existem
-soluções que utilizam dados provenientes de raspagem de dados para
-construção de modelos: por exemplo, o
-\href{https://openai.com/dall-e-2/}{DALL-E-2}, que é parte de uma base
-de dados construída utilizando imagens baixadas da internet (MURRAY;
-MARCHESOTTI; PERRONNIN, 2012; RAMESH et al., {[}s.d.{]}). No entanto,
-até o momento da realização da pesquisa, não foi encontrado nenhum
-trabalho que utiliza a raspagem de dados como parte do processo de
-aprendizado estatístico. O método WAWL conecta as áreas de forma
-intrínseca, podendo ser entendida como uma nova variação de aumentação
-de dados aplicada a redes neurais convolucionais.
-
-O fato da raspagem de dados ser relevante para o ajuste de um modelo
-estatístico pode levar a algumas discussões sobre o ensino da
-estatística. Primeiro, é importante mencionar que:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Raspagem de dados não faz parte dos currículos de Bacharelado em
-  Estatística das principais universidades do país\footnote{Universidades
-    consultadas: USP Butantã (IME), UFSCar, UNESP, Unicamp, USP São
-    Carlos (ICMC), UFBA, UFPR, UFRGS, UFPE, UFAM, UFRN, UFF, ENCE, UFRJ,
-    UFMG, UnB e UFG.}. Logo, pode-se argumentar que raspagem de dados
-  não é uma área de interesse da estatística.
-\item
-  Raspagem de dados não é uma área de conhecimento bem definida, como
-  álgebra ou análise de sobrevivência. A área é melhor desenvolvida
-  através de aplicações práticas e utilização de ferramentas (como R ou
-  python) do que através de aulas teóricas.
-\end{enumerate}
-
-Os resultados levam, então, a um problema de balanceamento entre
-pertinência e oportunidade. De um lado, a área de raspagem não se
-encaixa muito bem no currículo de estatística. Por outro lado, a área
-expande as possibilidades de atuação de uma profissional da estatística.
-
-Para aliar a pertinência e a oportunidade, uma opção seria oferecer
-disciplinas optativas de raspagem de dados nos cursos de estatística.
-Para aumentar a quantidade de potenciais ministrantes, a disciplina
-poderia ser oferecida em parceria com outros cursos, como ciência da
-computação, matemática aplicada e engenharias. Dessa forma, as pessoas
-interessadas teriam a oportunidade de aprender um pouco sobre as
-técnicas principais, conectando a raspagem de dados com as áreas de
-conhecimento específicas, como é o caso do Captcha, que alia raspagem de
-dados com estatística e inteligência artificial.
-
-No final, as duas hipóteses de pesquisa foram verificadas. No processo
-de obtenção dos resultados, no entanto, um terceiro avanço muito
-importante foi realizado na parte computacional. O pacote
-\texttt{\{captcha\}} e os pacotes auxiliares
-\texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}} são frutos
-desse trabalho. Pela primeira vez, foi construída uma ferramenta aberta
-contendo um fluxo de trabalho adaptado para trabalhar com Captchas. Além
-disso, trata-se de uma das primeiras aplicações completas dos pacotes
-\texttt{\{torch\}} e \texttt{\{luz\}}, que têm potencial de revolucionar
-a forma em que os modelos estatísticos são desenvolvidos por pessoas que
-fazem pesquisa em estatística. Os pacotes foram descritos em detalhes no
-sec-pacote.
-
-Por fim, todos os modelos construídos foram disponibilizados no pacote
-\texttt{\{captcha\}}. Os códigos, dados e resultados das simulações
-estão disponíveis no pacote \texttt{\{captchaOracle\}}. Os dados
-utilizados para elaboraçõ da tese estão disponíveis no
-\href{https://github.com/jtrecenti/doutorado}{repositório da tese no
-GitHub}. Dessa forma, a pesquisa pode ser considerada como reprodutível,
-podendo servir como base para pesquisas futuras.
-
-\bookmarksetup{startatroot}
-
-\hypertarget{conclusao}{%
-\chapter{Conclusões}\label{conclusao}}
-
-\epigrafe{Even robots need a break from the daily grind of solving captchas.}{ChatGPT}
-
-Este trabalho de doutorado teve como objeto de estudo os Captchas, que
-são desafios utilizados para identificar se o acesso à uma página na
-internet é realizada por uma pessoa ou uma máquina. A pesquisa
-apresentou um breve histórico dos Captchas, os problemas de sua
-utilização em serviços públicos e as abordagens existentes para
-resolução automática de Captchas. Em seguida, apresentou-se como uma
-nova abordagem, o WAWL, poderia aliar técnicas de raspagem de dados e
-aprendizado estatístico com rótulos parciais para obter modelos
-poderosos de resolução de Captchas sem a necessidade de anotar vários
-casos manualmente. Por fim, foram apresentadas as propriedades do modelo
-proposto e os resultados empíricos através de uma série de simulações.
-
-Os resultados da pesquisa foram positivos. Na parte teórica, várias
-pesquisas já apontavam que o aprendizado com rótulos parciais ou rótulos
-complementares possuiam boas propriedades. O resultado foi verificado a
-estudando-se as propriedades da função de perda proposta. Na parte
-prática, o trabalho mostrou que a técnica apresenta bons resultados,
-aumentando a acurácia dos modelos iniciais em mais de 3 vezes, sem a
-necessidade de anotar novos dados. Além disso, foram encontradas
-evidências de que o método pode ser aplicado iterativamente, resultado
-em modelos com poder preditivo ainda maior.
-
-As contribuições do estudo podem ser organizadas em três tipos:
-contribuições para a sociedade em geral, contribuições para a pesquisa
-acadêmica e contribuições para a comunidade de programação. Os próximos
-parágrafos descrevem esses avanços.
-
-A contribuição para a sociedade em geral está na quebra de um mecanismo
-de incentivo nefasto, gerado pela utilização de Captchas em sites
-serviços públicos. Como comentado na introdução, o uso de Captchas gera
-um incentivo para que pessoas e empresas que fazem raspagem de dados
-utilizem serviços que se aproveitam de mão de obra humana com baixíssima
-remuneração. Ao disponibilizar os modelos para resolução de Captchas
-publicamente e uma ferramenta que facilita seu uso, as pessoas e
-empresas interessadas podem resolver Captchas gratuitamente, afastando a
-necessidade de utilizar esses serviços. Dessa forma, espera-se que o
-trabalho possa ter um impacto positivo, ainda que pequeno, na qualidade
-das relações de trabalho na sociedade.
-
-A contribuição para a pesquisa acadêmica pode ser separada em duas
-partes. A primeira é que a função de perda proposta apresenta boas
-propriedades matemáticas, mostrando que pode ser um bom ponto de partida
-para quem deseja trabalhar com aprendizado com rótulos parcialmente
-anotados. A segunda é relacionada ao uso da raspagem de dados como passo
-intermediário na construção de modelos estatísticos, que pode ser a base
-para o desenvolvimento de um novo campo de pesquisa. Espera-se que os
-resultados obtidos sirvam como incentivo para que as técnicas de
-raspagem de dados sejam ensinadas como disciplinas optativas em cursos
-de estatística e similares.
-
-A contribuição para a comunidade de programadoras e programadores está
-no pacote \texttt{\{captcha\}}. O pacote é uma caixa de ferramentas
-completa para quem tiver interesse em resolver Captchas, além de ser uma
-das primeiras aplicações que utilizam os pacotes \texttt{\{torch\}} e
-\texttt{\{luz\}} como motor computacional. O pacote possui uma interface
-que permite o compartilhamento de códigos, bases de dados e modelos de
-forma distribuída, possibilitando a criação de soluções que vão muito
-além do próprio pacote.
-
-Com isso, pode-se concluir que os quatro objetivos descritos na
-Seção~\ref{sec-objetivos} foram atendidos. O modelo proposto foi
-descrito e suas propriedades estudadas. Um repositório de dados completo
-foi construído e disponibilizado no repositório do pacote
-\href{https://github.com/decryptr/captcha/releases}{\texttt{\{captcha\}}},
-contendo dados e modelos ajustados. O método foi utilizado e testado
-para diferentes Captchas e diferentes situações, com sucesso.
-Finalmente, foi disponibilizado um pacote computacional aberto,
-possibilitando a resolução de novos Captchas que aparecerem em serviços
-públicos.
-
-É evidente, no entanto, que o trabalho apresenta algumas limitações. Na
-parte teórica, os resultados matemáticos podem ser desenvolvidos com
-maior detalhamento. Especificamente, outras propostas de função de perda
-podem ser apresentadas, bem como os testes empíricos com essas funções
-de perda. A escolha de apenas uma alternativa foi feita por conta do
-foco em resolver o problema de pesquisa (os Captchas) em detrimento da
-discussão detalhada do aprendizado com rótulos parciais, bem como da
-necessidade de fazer muito mais simulações se outras funções de perda
-fossem propostas.
-
-Outra limitação importante do estudo está na aplicação iterada. A
-pesquisa apresentou essa parte como um resultado adicional, mas os
-limites da aplicação iterada ainda não foram estudados de forma
-completa. Essa limitação pode ser entendida também como um próximo
-passo, que seria uma solução de \emph{online learning}
-
-Uma extensão possível desta pesquisa é a criação de um modelo que
-aprende diretamente da \emph{web}, sem a separação de passos descrita
-pelo WAWL. A técnica consiste em inserir as funções de acesso e teste do
-Captcha como método de obtenção de amostras do \emph{dataset} do Captcha
-(mais detalhes na Seção~\ref{sec-captcha-do-zero}). Dessa forma, o
-modelo poderia obter novos dados em cada \emph{minibatch},
-indefinidamente. A vanagem dessa abordagem é que ela seria menos
-burocrática que o WAWL, que precisa de uma pessoa para escrever as
-aplicações iteradas. A desvantagem é que o ajuste do modelo dependeria
-de uma conexão com a internet e seria mais suscetível a problemas de
-conexão, que precisariam ser tratados com cuidado.
-
-Outra extensão oportuna seria a criação de um modelo geral de resolução
-de Captchas, desenvolvido a partir das bases que foram construídas
-durante a pesquisa. Esse modelo poderia ser utilizado como modelo
-inicial para a resolução de novos Captchas e aprimorado com o oráculo,
-podendo até afastar completamente a necessidade de anotação manual. No
-momento, não é possível saber que esse modelo realmente funcionaria na
-prática, já que i) nada garante que ele tenha uma acurácia maior que
-10\% para um novo Captcha, mesmo se construído com base em Captchas de
-várias origens e ii) foram encontradas evidências de que os modelos com
-acurácia menor de 10\% têm mais dificuldades em melhorar com o método
-WAWL.
-
-A presente tese foi fruto de um longo processo de investigação e
-desenvolvimento, investigando os aspectos relevantes dos Captchas de
-textos em imagens. Espera-se que a metodologia proposta, os resultados
-obtidos e os pacotes computacionais desenvolvidos sejam úteis na luta
-pela abertura dos dados públicos, especialmente no judiciário. O uso de
-Captchas em sites de serviços públicos deve acabar.
-
-\bookmarksetup{startatroot}
-
-\hypertarget{bibliografia}{%
-\chapter*{Bibliografia}\label{bibliografia}}
-\addcontentsline{toc}{chapter}{Bibliografia}
-
-\markboth{Bibliografia}{Bibliografia}
-
-\hypertarget{refs}{}
-\begin{CSLReferences}{0}{1}
-\leavevmode\vadjust pre{\hypertarget{ref-vonahnReCAPTCHAHumanBasedCharacter2008}{}}%
-AHN, L. VON et al. reCAPTCHA: Human-Based Character Recognition via Web
-Security Measures. \textbf{Science}, v. 321, n. 5895, p. 1465--1468, 12
-set. 2008. Disponível em:
-\textless{}\url{https://www.science.org/doi/10.1126/science.1160379}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-vonahnTellingHumansComputers2002}{}}%
-AHN, L. VON; BLUM, M.; LANGFORD, J. \textbf{Telling humans and computers
-apart automatically or how lazy cryptographers do AI (Tech. Rep. No.
-CMU-CS-02-117)}. Disponível em:
-\textless{}\url{http://reports-archive.adm.cs.cmu.edu/anon/2002/CMU-CS-02-117.pdf}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-tensorflow}{}}%
-ALLAIRE, J.; TANG, Y. tensorflow: R Interface to 'TensorFlow'. 2022.
-Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=tensorflow}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-baldi2013}{}}%
-BALDI, P.; SADOWSKI, P. J. Understanding dropout. \textbf{Advances in
-neural information processing systems}, v. 26, 2013.
-
-\leavevmode\vadjust pre{\hypertarget{ref-blum1998}{}}%
-BLUM, A.; KALAI, A. A note on learning from multiple-instance examples.
-\textbf{Machine learning}, v. 30, n. 1, p. 2329, 1998.
-
-\leavevmode\vadjust pre{\hypertarget{ref-piggyback}{}}%
-BOETTIGER, C.; HO, T. piggyback: Managing Larger Data on a GitHub
-Repository. 2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=piggyback}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-chellapilla2005}{}}%
-CHELLAPILLA, K. et al. \textbf{Designing human friendly human
-interaction proofs (HIPs)}. : CHI '05.New York, NY, USA: Association for
-Computing Machinery, 2 abr. 2005. Disponível em:
-\textless{}\url{https://doi.org/10.1145/1054972.1055070}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-chellapilla2004}{}}%
-CHELLAPILLA, K.; SIMARD, P. Using machine learning to break visual human
-interaction proofs (HIPs). \textbf{Advances in neural information
-processing systems}, v. 17, 2004.
-
-\leavevmode\vadjust pre{\hypertarget{ref-colosimo2006}{}}%
-COLOSIMO, E. A.; GIOLO, S. R. \textbf{Análise de sobrevivência
-aplicada}. Editora Blucher, 2006.
-
-\leavevmode\vadjust pre{\hypertarget{ref-cour2011}{}}%
-COUR, T.; SAPP, B.; TASKAR, B. Learning from partial labels. \textbf{The
-Journal of Machine Learning Research}, v. 12, p. 15011536, 2011.
-
-\leavevmode\vadjust pre{\hypertarget{ref-diagnosticoABJ}{}}%
-\textbf{Diagnóstico do Contencioso Tributário Administrativo}.,
-{[}s.d.{]}. Disponível em:
-\textless{}\url{https://abj.org.br/pesquisas/bid-tributario/}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-luz}{}}%
-FALBEL, D. luz: Higher Level 'API' for 'torch'. a2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=luz}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-torchvision}{}}%
-FALBEL, D. torchvision: Models, Datasets and Transformations for Images.
-b2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=torchvision}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-torch}{}}%
-FALBEL, D.; LURASCHI, J. torch: Tensors and Neural Networks with 'GPU'
-Acceleration. a2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=torch}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-torch-2}{}}%
-FALBEL, D.; LURASCHI, J. torch: Tensors and Neural Networks with 'GPU'
-Acceleration. b2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=torch}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-feng2020}{}}%
-FENG, L. et al. Provably consistent partial-label learning.
-\textbf{Advances in Neural Information Processing Systems}, v. 33, p.
-1094810960, a2020.
-
-\leavevmode\vadjust pre{\hypertarget{ref-feng2020a}{}}%
-FENG, L. et al. \textbf{Learning with multiple complementary labels}.
-PMLR, b2020.
-
-\leavevmode\vadjust pre{\hypertarget{ref-galar2011}{}}%
-GALAR, M. et al. A review on ensembles for the class imbalance problem:
-bagging-, boosting-, and hybrid-based approaches. \textbf{IEEE
-Transactions on Systems, Man, and Cybernetics, Part C (Applications and
-Reviews)}, v. 42, n. 4, p. 463484, 2011.
-
-\leavevmode\vadjust pre{\hypertarget{ref-george2017}{}}%
-GEORGE, D. et al. A generative vision model that trains with high data
-efficiency and breaks text-based CAPTCHAs. \textbf{Science}, v. 358, n.
-6368, p. eaag2612, 2017.
-
-\leavevmode\vadjust pre{\hypertarget{ref-goodfellow2013}{}}%
-GOODFELLOW, I. J. et al. Multi-digit number recognition from street view
-imagery using deep convolutional neural networks. \textbf{arXiv preprint
-arXiv:1312.6082}, 2013.
-
-\leavevmode\vadjust pre{\hypertarget{ref-goodfellow}{}}%
-GOODFELLOW, I. J. et al.
-\href{https://doi.org/10.48550/arXiv.1406.2661}{Generative Adversarial
-Networks}. {[}s.d.{]}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-grandvalet2002}{}}%
-GRANDVALET, Y. \textbf{Logistic regression for partial labels}. 2002.
-
-\leavevmode\vadjust pre{\hypertarget{ref-hullermeier2006}{}}%
-HÜLLERMEIER, E.; BERINGER, J. Learning from ambiguously labeled
-examples. \textbf{Intelligent Data Analysis}, v. 10, n. 5, p. 419439,
-2006.
-
-\leavevmode\vadjust pre{\hypertarget{ref-inaccess}{}}%
-\textbf{Inaccessibility of CAPTCHA}., {[}s.d.{]}. Disponível em:
-\textless{}\url{https://www.w3.org/TR/turingtest/}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-ioffe2015}{}}%
-IOFFE, S.; SZEGEDY, C. \textbf{Batch normalization: Accelerating deep
-network training by reducing internal covariate shift}. PMLR, 2015.
-
-\leavevmode\vadjust pre{\hypertarget{ref-ishida2017}{}}%
-ISHIDA, T. et al. Learning from complementary labels. \textbf{Advances
-in neural information processing systems}, v. 30, b2017.
-
-\leavevmode\vadjust pre{\hypertarget{ref-ishida2017a}{}}%
-ISHIDA, T. et al. Learning from complementary labels. \textbf{Advances
-in neural information processing systems}, v. 30, a2017.
-
-\leavevmode\vadjust pre{\hypertarget{ref-jin2002}{}}%
-JIN, R.; GHAHRAMANI, Z. Learning with multiple labels. \textbf{Advances
-in neural information processing systems}, v. 15, 2002.
-
-\leavevmode\vadjust pre{\hypertarget{ref-kaur2014}{}}%
-KAUR, K.; BEHAL, S. Captcha and Its Techniques: A Review.
-\textbf{International Journal of Computer Science and Information
-Technologies,} v. 5, 1 jan. 2014.
-
-\leavevmode\vadjust pre{\hypertarget{ref-kingma2014}{}}%
-KINGMA, D. P.; BA, J.
-\href{https://doi.org/10.48550/arXiv.1412.6980}{Adam: A Method for
-Stochastic Optimization}. {[}s.d.{]}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-kuhn2019}{}}%
-KUHN, M.; JOHNSON, K. \textbf{Feature engineering and selection: A
-practical approach for predictive models}. CRC Press, 2019.
-
-\leavevmode\vadjust pre{\hypertarget{ref-lecun1998}{}}%
-LECUN, Y. et al. Gradient-based learning applied to document
-recognition. \textbf{Proceedings of the IEEE}, v. 86, n. 11, p.
-22782324, 1998.
-
-\leavevmode\vadjust pre{\hypertarget{ref-lecun2012}{}}%
-LECUN, Y. A. et al. Efficient backprop. Em: Springer, 2012. p. 948.
-
-\leavevmode\vadjust pre{\hypertarget{ref-lecun2015}{}}%
-LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning. \textbf{nature}, v.
-521, n. 7553, p. 436444, b2015.
-
-\leavevmode\vadjust pre{\hypertarget{ref-lecun2015a}{}}%
-LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning. \textbf{nature}, v.
-521, n. 7553, p. 436444, a2015.
-
-\leavevmode\vadjust pre{\hypertarget{ref-li2014}{}}%
-LI, J.; TSUNG, F.; ZOU, C. Multivariate binomial/multinomial control
-chart. \textbf{IIE Transactions}, v. 46, n. 5, p. 526542, 2014.
-
-\leavevmode\vadjust pre{\hypertarget{ref-lillibridgeMethodSelectivelyRestricting2001}{}}%
-LILLIBRIDGE, M. D. et al. \textbf{Method for Selectively Restricting
-Access to Computer Systems}., fev. 2001.
-
-\leavevmode\vadjust pre{\hypertarget{ref-liu2012}{}}%
-LIU, L.; DIETTERICH, T. A conditional multinomial mixture model for
-superset label learning. \textbf{Advances in neural information
-processing systems}, v. 25, 2012.
-
-\leavevmode\vadjust pre{\hypertarget{ref-michener2015}{}}%
-MICHENER, G.; MONCAU, L. F.; VELASCO, R. B. \textbf{Estado brasileiro e
-transparência avaliando a aplicação da Lei de Acesso à Informação}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-mori2003a}{}}%
-MORI, G.; MALIK, J. \textbf{Recognizing objects in adversarial clutter:
-Breaking a visual CAPTCHA}. IEEE, 2003.
-
-\leavevmode\vadjust pre{\hypertarget{ref-murray2012}{}}%
-MURRAY, N.; MARCHESOTTI, L.; PERRONNIN, F. \textbf{AVA: A large-scale
-database for aesthetic visual analysis}. IEEE, 2012.
-
-\leavevmode\vadjust pre{\hypertarget{ref-murray-rust2008}{}}%
-MURRAY-RUST, P. Open data in science. \textbf{Nature Precedings}, p. 11,
-2008.
-
-\leavevmode\vadjust pre{\hypertarget{ref-na2020}{}}%
-NA, B. et al. \textbf{Deep Generative Positive-Unlabeled Learning under
-Selection Bias}. : CIKM '20.New York, NY, USA: Association for Computing
-Machinery, 19 out. 2020. Disponível em:
-\textless{}\url{https://doi.org/10.1145/3340531.3411971}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-nelder1972}{}}%
-NELDER, J. A.; WEDDERBURN, R. W. Generalized linear models.
-\textbf{Journal of the Royal Statistical Society: Series A (General)},
-v. 135, n. 3, p. 370384, 1972.
-
-\leavevmode\vadjust pre{\hypertarget{ref-noh2017}{}}%
-NOH, H. et al. Regularizing deep neural networks by noise: Its
-interpretation and optimization. \textbf{Advances in Neural Information
-Processing Systems}, v. 30, 2017.
-
-\leavevmode\vadjust pre{\hypertarget{ref-observat}{}}%
-\textbf{Observatório da insolvência: Rio de Janeiro}., {[}s.d.{]}.
-Disponível em:
-\textless{}\url{https://abj.org.br/pesquisas/obsrjrj/}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-magick-2}{}}%
-OOMS, J. magick: Advanced Graphics and Image-Processing in R. 2021.
-Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=magick}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-rcran}{}}%
-R CORE TEAM. \textbf{R: A Language and Environment for Statistical
-Computing}. Vienna, Austria: R Foundation for Statistical Computing,
-2021. Disponível em:
-\textless{}\url{https://www.R-project.org/}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-ramesh}{}}%
-RAMESH, A. et al.
-\href{https://doi.org/10.48550/arXiv.2204.06125}{Hierarchical
-Text-Conditional Image Generation with CLIP Latents}. {[}s.d.{]}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-reshefMethodSystemDiscriminating2005}{}}%
-RESHEF, E.; RAANAN, G.; SOLAN, E. \textbf{Method and System for
-Discriminating a Human Action from a Computerized Action}., 2005.
-
-\leavevmode\vadjust pre{\hypertarget{ref-sutton2018}{}}%
-SUTTON, R. S.; BARTO, A. G. \textbf{Reinforcement learning: An
-introduction}. MIT press, 2018.
-
-\leavevmode\vadjust pre{\hypertarget{ref-tempodo}{}}%
-\textbf{Tempo dos processos relacionados à adoção}., {[}s.d.{]}.
-Disponível em:
-\textless{}\url{https://abj.org.br/pesquisas/adocao/}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-decryptr}{}}%
-TRECENTI, J. et al. decryptr: An extensible API for breaking captchas.
-2022.
-
-\leavevmode\vadjust pre{\hypertarget{ref-turing2009}{}}%
-TURING, A. M. Computing machinery and intelligence. Em: Springer, 2009.
-p. 2365.
-
-\leavevmode\vadjust pre{\hypertarget{ref-reticulate}{}}%
-USHEY, K.; ALLAIRE, J.; TANG, Y. reticulate: Interface to 'Python'.
-2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=reticulate}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-vonahnCaptchaTellingHumans2003}{}}%
-VON AHN, L. et al. \textbf{Captcha: {Telling} Humans and Computers Apart
-Automatically}. Proceedings of Eurocrypt. \textbf{Anais}...2003.
-
-\leavevmode\vadjust pre{\hypertarget{ref-vonahnTellingHumansComputers2004}{}}%
-VON AHN, L.; BLUM, M.; LANGFORD, J. Telling Humans and Computers Apart
-Automatically. \textbf{Communications of the ACM}, v. 47, n. 2, p.
-56--60, 2004.
-
-\leavevmode\vadjust pre{\hypertarget{ref-wang2021}{}}%
-WANG, Y. et al. Make complex captchas simple: a fast text captcha solver
-based on a small number of samples. \textbf{Information Sciences}, v.
-578, p. 181194, 2021.
-
-\leavevmode\vadjust pre{\hypertarget{ref-stringr}{}}%
-WICKHAM, H. stringr: Simple, Consistent Wrappers for Common String
-Operations. b2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=stringr}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-rvest}{}}%
-WICKHAM, H. rvest: Easily Harvest (Scrape) Web Pages. a2022. Disponível
-em:
-\textless{}\url{https://CRAN.R-project.org/package=rvest}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-usethis}{}}%
-WICKHAM, H.; BRYAN, J.; BARRETT, M. usethis: Automate Package and
-Project Setup. 2022. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=usethis}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-xml2}{}}%
-WICKHAM, H.; HESTER, J.; OOMS, J. xml2: Parse XML. 2021. Disponível em:
-\textless{}\url{https://CRAN.R-project.org/package=xml2}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-ye2018}{}}%
-YE, G. et al. \textbf{Yet another text captcha solver: A generative
-adversarial network based approach}. b2018.
-
-\leavevmode\vadjust pre{\hypertarget{ref-ye2018a}{}}%
-YE, G. et al. \textbf{Yet another text captcha solver: A generative
-adversarial network based approach}. a2018.
-
-\leavevmode\vadjust pre{\hypertarget{ref-yu2018}{}}%
-YU, X. et al. \textbf{Learning with biased complementary labels}. 2018.
-
-\leavevmode\vadjust pre{\hypertarget{ref-yuan2019}{}}%
-YUAN, X. et al. Adversarial examples: Attacks and defenses for deep
-learning. \textbf{IEEE transactions on neural networks and learning
-systems}, v. 30, n. 9, p. 28052824, 2019.
-
-\leavevmode\vadjust pre{\hypertarget{ref-zhao2017}{}}%
-ZHAO, B. Web scraping. \textbf{Encyclopedia of big data}, p. 13, a2017.
-Disponível em:
-\textless{}\url{https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-zhao2017a}{}}%
-ZHAO, B. Web scraping. \textbf{Encyclopedia of big data}, p. 13, b2017.
-Disponível em:
-\textless{}\url{https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf}\textgreater.
-
-\leavevmode\vadjust pre{\hypertarget{ref-zhou2018}{}}%
-ZHOU, Z.-H. A brief introduction to weakly supervised learning.
-\textbf{National science review}, v. 5, n. 1, p. 4453, 2018.
-
-\leavevmode\vadjust pre{\hypertarget{ref-zhu2005}{}}%
-ZHU, X. J. Semi-supervised learning literature survey. 2005.
-
-\end{CSLReferences}
-
-\appendix
-\addcontentsline{toc}{part}{Apêndices}
-
-\hypertarget{sec-pacote}{%
-\chapter{Pacotes}\label{sec-pacote}}
-
-Este apêndice foi construído para mostrar a estrutura do pacote e suas
-funcionalidades, mas também um pouco da história. O pacote
-\texttt{\{captcha\}} é fruto de um trabalho da comunidade e o trabalho
-de modelagem de Captchas usando técnicas de \emph{deep learning}, que
-começou alguns anos antes do início da tese de doutorado.
-
-O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de
-2016. Como foi comentado na introdução da tese, é muito comum se deparar
-com desafios de Captchas ao raspar dados do judiciário, já que os dados
-não são abertos.
-
-O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio
-era utilizado no site do TJSP que, depois de alguns anos, passou a
-utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas
-tem como fonte de dados o TJBA, que continua utilizando o desafio até o
-momento que os sites foram investigados pela última vez, em setembro de
-2022.
-
-A primeira abordagem para resolver o Captcha do e-SAJ foi utilizando
-heurísticas para separar as letras, em 2016. Infelizmente o pacote
-original, chamado \texttt{\{captchasaj\}}, foi removido da
-\emph{internet}, mas um código legado construído para o TJRS está
-disponível
-\href{https://github.com/decryptr/captchaTJRS/blob/master/R/tools.R}{neste
-link}. Nessa abordagem, as letras primeiro são segmentadas, alimentando
-um modelo de florestas aleatórias que considera os pixels da imagem como
-variáveis preditoras e a letra como resposta. Esses trabalhos tiveram
-contribuições importantes de Fernando Corrêa e Athos Damiani.
-
-A segunda abordagem para resolver os Captchas foi utilizando o áudio,
-também em 2016. O código para resolver o Captcha da RFB utilizando áudio
-está disponível
-\href{https://github.com/decryptr/captchaReceitaAudio}{neste link}. A
-ideia de resolução era parecida, passando pelo procedimento de
-segmentação e depois de modelagem, mas tinha um passo intermediário de
-processamento envolvendo engenharia de \emph{features} (KUHN; JOHNSON,
-2019). O trabalho teve contribuições importantes de Athos Damiani.
-
-Com o advento da ferramenta TensorFlow para o R (ALLAIRE; TANG, 2022),
-os modelos para resolver Captchas passaram a utilizar modelos de redes
-neurais. No início, por falta de conhecimento da área, a arquitetura das
-redes era demasiadamente complexa. Depois que os primeiros modelos
-começaram a funcionar, notou-se que as etapas de pré-processamento com
-segmentação e algumas camadas das redes eram desnecessárias para ajustar
-os modelos. Essa parte teve grande contribuição de Daniel Falbel, que
-foi a pessoa que introduziu o TensorFlow e a área de \emph{deep
-learning} aos colegas.
-
-Depois de resolver com sucesso alguns Captchas, notou-se que seria
-possível criar um ambiente completo de modelagem de Captchas. Isso deu
-origem ao pacote \texttt{\{decryptr\}} (TRECENTI et al., 2022), que foi
-construído em 2017 durante uma \emph{datathon} (uma maratona de
-programação), na casa de amigos. O trabalho teve grandes contribuições
-de Caio Lente, com participação das colegas de faculdade Milene Farhat e
-Beatriz Vianna.
-
-Com o passar do tempo, o pacote \texttt{\{decryptr\}} ficou cada vez
-mais estável, funcionando como dependência de várias ferramentas
-utilizadas nos trabalhos de jurimetria. O pacote também ganhou um site:
-\textless https://decryptr.xyz/\textgreater{} e uma API com acesso
-gratuito, precisando apenas de uma chave de acesso. A ferramenta ficou
-bastante popular, com \href{https://github.com/decryptr/decryptr}{178
-estrelas no GitHub} no mês de dezembro de 2022. Essas ferramentas
-envolveram contribuições principalmente de Caio Lente e Daniel Falbel.
-
-A construção do pacote \texttt{\{captcha\}} separada do
-\texttt{\{decryptr\}} se deu por dois motivos. Primeiro, o pacote
-\texttt{\{decryptr\}}, por ser o primeiro a tratar do assunto, possui
-muitos códigos legados e dificuldades de instalação por conta da
-dependência do python, necessário para o funcionamento do TensorFlow,
-que é chamado através do pacote \texttt{\{reticulate\}} (USHEY; ALLAIRE;
-TANG, 2022). Além disso, a implementação das técnicas do oráculo
-envolviam modificações na função de perda, que são difíceis de
-implementar no ambiente do \texttt{\{tensorflow\}}, justamente por conta
-da necessidade de conhecer o código python que roda por trás dos códigos
-mais usuais.
-
-Com o advento do pacote \texttt{\{torch\}}(FALBEL; LURASCHI, 2022b), no
-entanto, tudo foi facilitado. O pacote não possui dependências com o
-python, além de ser bastante transparente e flexível na construção da
-arquitetura do modelo, funções de perda e otimização. O pacote, também
-construído por Daniel Falbel, é um grande avanço científico e facilitou
-muito a construção dos códigos desta tese.
-
-O pacote \texttt{\{captcha\}}, apesar de ter sido construído do zero,
-foi desenvolvido durante \emph{lives} realizadas na plataforma
-\emph{Twitch}. A construção em \emph{lives} foi interessante porque era
-possível obter \emph{feedback} e ideias da comunidade durante a
-construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na
-arquitetura do pacote.
-
-Com o desenvolvimento da tese, notou-se a necessidade de construir
-alguns pacotes adicionais. Os pacote \texttt{\{captchaDownload\}} e
-\texttt{\{captchaOracle\}} foram desenvolvidos para facilitar a obtenção
-dos resultados da tese, enquanto o pacote \texttt{\{captcha\}} pode ser
-utilizado por qualquer pessoa interessada em visualizar, anotar e
-resolver Captchas. As próximas subseções do apêndice descrevem os três
-pacotes.
-
 \hypertarget{sec-pacote-captcha}{%
 \section{Pacote captcha}\label{sec-pacote-captcha}}
 
@@ -4035,14 +3444,16 @@ aparecer (JPEG, PNG, entre outros).
 \NormalTok{captcha }\OtherTok{\textless{}{-}} \FunctionTok{read\_captcha}\NormalTok{(exemplo)}
 
 \NormalTok{captcha}
+\CommentTok{\#\textgreater{} \# A tibble: 1 x 7}
 \CommentTok{\#\textgreater{}   format width height colorspace matte filesize density}
-\CommentTok{\#\textgreater{} 1   JPEG   100     50       sRGB FALSE     4530   72x72}
+\CommentTok{\#\textgreater{}   \textless{}chr\textgreater{}  \textless{}int\textgreater{}  \textless{}int\textgreater{} \textless{}chr\textgreater{}      \textless{}lgl\textgreater{}    \textless{}int\textgreater{} \textless{}chr\textgreater{}  }
+\CommentTok{\#\textgreater{} 1 JPEG     100     50 sRGB       FALSE     4530 72x72}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{./pacote_files/figure-pdf/unnamed-chunk-1-1.png}
+{\centering \includegraphics{./resultados_files/figure-pdf/unnamed-chunk-11-1.png}
 
 }
 
@@ -4108,7 +3519,7 @@ Figura~\ref{fig-exemplo-plot}.
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.3\textwidth,height=\textheight]{./pacote_files/figure-pdf/fig-exemplo-plot-1.pdf}
+{\centering \includegraphics[width=0.3\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-exemplo-plot-1.pdf}
 
 }
 
@@ -4120,7 +3531,7 @@ um objeto \texttt{captcha}.}
 Um aspecto interessante da função \texttt{plot()} é que ela lida com uma
 lista de Captchas. Isso é útil quando o interesse é visualizar vários
 Captchas de uma vez na imagem. A Figura~\ref{fig-exemplo-plot-multi}
-mostra um exemplo de aplicação
+mostra um exemplo de aplicação.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4137,7 +3548,7 @@ mostra um exemplo de aplicação
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{./pacote_files/figure-pdf/fig-exemplo-plot-multi-1.pdf}
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-exemplo-plot-multi-1.pdf}
 
 }
 
@@ -4161,7 +3572,7 @@ um exemplo com duas colunas.
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./pacote_files/figure-pdf/fig-exemplo-plot-multi-2col-1.pdf}
+{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-exemplo-plot-multi-2col-1.pdf}
 
 }
 
@@ -4193,7 +3604,7 @@ comportamento da função quando o número de imagens excede 100.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{./pacote_files/figure-pdf/fig-exemplo-plot-multi-varias-1.pdf}
+{\centering \includegraphics{./resultados_files/figure-pdf/fig-exemplo-plot-multi-varias-1.pdf}
 
 }
 
@@ -4220,7 +3631,7 @@ dessas operações.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{./pacote_files/figure-pdf/fig-exemplo-plot-multi-varias-subset-1.pdf}
+{\centering \includegraphics{./resultados_files/figure-pdf/fig-exemplo-plot-multi-varias-subset-1.pdf}
 
 }
 
@@ -4244,7 +3655,7 @@ Figura~\ref{fig-exemplo-plot-rotulado} mostra um exemplo.
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.3\textwidth,height=\textheight]{./pacote_files/figure-pdf/fig-exemplo-plot-rotulado-1.pdf}
+{\centering \includegraphics[width=0.3\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-exemplo-plot-rotulado-1.pdf}
 
 }
 
@@ -4335,7 +3746,7 @@ funções de objetos gerados por outras funções.
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=6.61in,height=2.38in]{./pacote_files/figure-latex/mermaid-figure-1.png}
+{\centering \includegraphics[width=6.61in,height=2.38in]{./resultados_files/figure-latex/mermaid-figure-1.png}
 
 }
 
@@ -4873,6 +4284,665 @@ resolvidos de forma colaborativa pelas pessoas interessadas. Utilizando
 o fluxo do \texttt{new\_captcha()}, as pessoas têm flexibilidade para
 construir modelos customizados e utilizá-los de forma eficiente.
 
+\hypertarget{sec-discussao}{%
+\section{Discussão}\label{sec-discussao}}
+
+Os resultados apresentados nas seções anteriores mostram que o método
+WAWL possui bons resultados empíricos. Nesta seção, os resultados foram
+confrontados com as hipóteses de pesquisa definidos na
+Seção~\ref{sec-hipoteses} de forma crítica.
+
+A primeira hipótese de pesquisa diz respeito à pertinência de utilizar
+do aprendizado fracamente supervisionado como forma de ajustar modelos
+para resolver Captchas. A hipótese foi verificada, já que os resultados
+mostram um incremento significativo na acurácia do modelo em
+praticamente todas as simulações.
+
+Do ponto de vista teórico, várias pesquisas já apontavam que o
+aprendizado com rótulos parciais ou rótulos complementares têm boas
+propriedades. Por isso, já seria esperado que uma nova função de perda,
+desde que pensada com cuidado, traria resultados positivos.
+
+No entanto, até o momento, não existiam evidências de que a utilização
+de rótulos parciais ou rótulos complementares teriam bons resultados
+empíricos em Captchas. Isso foi verificado em todos os 12 Captchas
+estudados, sendo 10 obtidos do mundo real. Em todos os casos, a função
+de perda proposta funcionou bem e trouxe ganhos significativos na
+acurácia do modelo, tanto em termos relativos quanto absolutos. Isso
+demonstra que a escolha do método se alia bem ao problema que deu origem
+à pesquisa, que são os Captchas.
+
+Sobre a parte de aplicação iterada do WAWL, cabe um comentário. O
+resultado encontrado, com 100\% de acurácia, pode sugerir que o método
+WAWL sempre chegará em um resultado de 100\% para qualquer Captcha que
+surgir. No entanto, pode ser que exista uma limitação na capacidade do
+modelo, que é habilidade do modelo para se ajustar aos dados a partir
+dos parâmetros. Pode ser que a arquitetura de rede neural escolhida para
+resolver o Captcha não seja capaz de chegar a um modelo com 100\% de
+acurácia, independente da quantidade de imagens observadas. É importante
+olhar o resultado apresentado de forma crítica e compreender que os
+resultados finais podem ser limitados, já que a arquitetura da rede
+neural não é parte do método WAWL.
+
+A segunda hipótese de pesquisa é a possibilidade de aliar a área de
+raspagem de dados com a área de modelagem estatística. A hipótese também
+foi verificada, já que o método WAWL, que utiliza técnicas de raspagem
+de dados, apresentou bons resultados empíricos.
+
+Neste momento, cabe um comentário sobre o ineditismo da ponte entre
+raspagem de dados e estatística. É verdade que existem muitas pesquisas
+que são possibilitadas por conta dos dados obtidos via raspagem de
+dados: as pesquisas da ABJ, mencionadas na
+Seção~\ref{sec-captchas-publicos} são alguns exemplos. Também existem
+soluções que utilizam dados provenientes de raspagem de dados para
+construção de modelos: por exemplo, o
+\href{https://openai.com/dall-e-2/}{DALL-E-2}, que é parte de uma base
+de dados construída utilizando imagens baixadas da internet (MURRAY;
+MARCHESOTTI; PERRONNIN, 2012; RAMESH et al., 2022). No entanto, até o
+momento da realização da pesquisa, não foi encontrado nenhum trabalho
+que utiliza a raspagem de dados como parte do processo de aprendizado
+estatístico. O método WAWL conecta as áreas de forma intrínseca, podendo
+ser entendida como uma nova variação de aumentação de dados aplicada a
+redes neurais convolucionais.
+
+O fato da raspagem de dados ser relevante para o ajuste de um modelo
+estatístico pode levar a algumas discussões sobre o ensino da
+estatística. Primeiro, é importante mencionar que:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Raspagem de dados não faz parte dos currículos de Bacharelado em
+  Estatística das principais universidades do país\footnote{Sites de
+    universidades buscados: USP Butantã (IME), UFSCar, UNESP, Unicamp,
+    USP São Carlos (ICMC), UFBA, UFPR, UFRGS, UFPE, UFAM, UFRN, UFF,
+    ENCE, UFRJ, UFMG, UnB e UFG.}. Logo, pode-se argumentar que raspagem
+  de dados não é uma área de interesse da estatística.
+\item
+  Raspagem de dados não é uma área de conhecimento bem definida, como
+  álgebra ou análise de sobrevivência. A área é melhor desenvolvida
+  através de aplicações práticas e utilização de ferramentas (como R ou
+  python) do que através de aulas teóricas.
+\end{enumerate}
+
+Os resultados levam, então, a um problema de balanceamento entre
+pertinência e oportunidade. De um lado, a área de raspagem não se
+encaixa muito bem no currículo de estatística. Por outro lado, a área
+expande as possibilidades de atuação de uma profissional da estatística.
+
+Para aliar a pertinência e a oportunidade, uma opção seria oferecer
+disciplinas optativas de raspagem de dados nos cursos de estatística.
+Para aumentar a quantidade de potenciais ministrantes, a disciplina
+poderia ser oferecida em parceria com outros cursos, como ciência da
+computação, matemática aplicada e engenharias. Dessa forma, as pessoas
+interessadas teriam a oportunidade de aprender um pouco sobre as
+técnicas principais, conectando a raspagem de dados com as áreas de
+conhecimento específicas, como é o caso do Captcha, que alia raspagem de
+dados com estatística e inteligência artificial.
+
+No final, as duas hipóteses de pesquisa foram verificadas. No processo
+de obtenção dos resultados, no entanto, um terceiro avanço muito
+importante foi realizado na parte computacional. O pacote
+\texttt{\{captcha\}} e os pacotes auxiliares
+\texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}} são frutos
+desse trabalho. Pela primeira vez, foi construída uma ferramenta aberta
+contendo um fluxo de trabalho adaptado para trabalhar com Captchas. Além
+disso, trata-se de uma das primeiras aplicações completas dos pacotes
+\texttt{\{torch\}} e \texttt{\{luz\}}, que têm potencial de revolucionar
+a forma em que os modelos estatísticos são desenvolvidos por pessoas que
+fazem pesquisa em estatística. Os pacotes foram descritos em detalhes no
+sec-pacote.
+
+Por fim, todos os modelos construídos foram disponibilizados no pacote
+\texttt{\{captcha\}}. Os códigos, dados e resultados das simulações
+estão disponíveis no pacote \texttt{\{captchaOracle\}}. Os dados
+utilizados para elaboração da tese estão disponíveis no
+\href{https://github.com/jtrecenti/doutorado}{repositório da tese no
+GitHub}. Dessa forma, a pesquisa pode ser considerada como reprodutível,
+podendo servir como base para pesquisas futuras.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{conclusao}{%
+\chapter{Conclusões}\label{conclusao}}
+
+\epigrafe{Even robots need a break from the daily grind of solving captchas.}{ChatGPT}
+
+Este trabalho de doutorado teve como objeto de estudo os Captchas, que
+são desafios utilizados para identificar se o acesso à uma página na
+internet é realizada por uma pessoa ou uma máquina. A pesquisa
+apresentou um breve histórico dos Captchas, os problemas de sua
+utilização em serviços públicos e as abordagens existentes para
+resolução automática de Captchas. Em seguida, apresentou-se como uma
+nova abordagem, o WAWL, poderia aliar técnicas de raspagem de dados e
+aprendizado estatístico com rótulos parciais para obter modelos
+poderosos de resolução de Captchas sem a necessidade de anotar vários
+casos manualmente. Por fim, foram apresentadas as propriedades do modelo
+proposto e os resultados empíricos através de uma série de simulações.
+
+Os resultados da pesquisa foram positivos. Na parte teórica, pesquisas
+já apontavam que o aprendizado com rótulos parciais ou rótulos
+complementares possuiam boas propriedades. O trabalho mostrou
+empiricamente que a técnica apresenta bons resultados, aumentando a
+acurácia dos modelos iniciais em mais de 3 vezes, sem a necessidade de
+anotar novos dados. Além disso, foram encontradas evidências de que o
+método pode ser aplicado iterativamente, resultado em modelos com poder
+preditivo ainda maior.
+
+As contribuições do estudo podem ser organizadas em três tipos:
+contribuições para a sociedade em geral, contribuições para a pesquisa
+acadêmica e contribuições para a comunidade de programação. Os próximos
+parágrafos descrevem esses avanços.
+
+A contribuição para a sociedade em geral está na quebra de um mecanismo
+de incentivo nefasto, gerado pela utilização de Captchas em sites
+serviços públicos. Como comentado na introdução, o uso de Captchas gera
+um incentivo para que pessoas e empresas que fazem raspagem de dados
+utilizem serviços que se aproveitam de mão de obra humana com baixíssima
+remuneração. Ao disponibilizar os modelos para resolução de Captchas
+publicamente e uma ferramenta que facilita seu uso, as pessoas e
+empresas interessadas podem resolver Captchas gratuitamente, afastando a
+necessidade de utilizar esses serviços. Dessa forma, espera-se que o
+trabalho possa ter um impacto positivo, ainda que pequeno, na qualidade
+das relações de trabalho na sociedade.
+
+A contribuição para a pesquisa acadêmica pode ser separada em duas
+partes. A primeira é que a função de perda proposta apresenta boas
+propriedades matemáticas, mostrando que pode ser um bom ponto de partida
+para quem deseja trabalhar com aprendizado com rótulos parcialmente
+anotados. A segunda é relacionada ao uso da raspagem de dados como passo
+intermediário na construção de modelos estatísticos, que pode ser a base
+para o desenvolvimento de um novo campo de pesquisa. Espera-se que os
+resultados obtidos sirvam como incentivo para que as técnicas de
+raspagem de dados sejam ensinadas como disciplinas optativas em cursos
+de estatística e similares.
+
+A contribuição para a comunidade de programadoras e programadores está
+no pacote \texttt{\{captcha\}}. O pacote é uma caixa de ferramentas
+completa para quem tiver interesse em resolver Captchas, além de ser uma
+das primeiras aplicações que utilizam os pacotes \texttt{\{torch\}} e
+\texttt{\{luz\}} como motor computacional. O pacote possui uma interface
+que permite o compartilhamento de códigos, bases de dados e modelos de
+forma distribuída, possibilitando a criação de soluções que vão muito
+além do próprio pacote.
+
+Com isso, pode-se concluir que os quatro objetivos descritos na
+Seção~\ref{sec-objetivos} foram atendidos. O modelo proposto foi
+descrito e suas propriedades estudadas. Um repositório de dados completo
+foi construído e disponibilizado no repositório do pacote
+\href{https://github.com/decryptr/captcha/releases}{\texttt{\{captcha\}}},
+contendo dados e modelos ajustados. O método foi utilizado e testado
+para diferentes Captchas e diferentes situações, com sucesso.
+Finalmente, foi disponibilizado um pacote computacional aberto,
+possibilitando a resolução de novos Captchas que aparecerem em serviços
+públicos.
+
+É evidente, no entanto, que o trabalho apresenta algumas limitações. Na
+parte teórica, os resultados matemáticos podem ser desenvolvidos com
+maior detalhamento. Especificamente, outras propostas de função de perda
+podem ser apresentadas, bem como os testes empíricos com essas funções
+de perda. A escolha de apenas uma alternativa foi feita por conta do
+foco em resolver o problema de pesquisa (os Captchas) em detrimento da
+discussão detalhada do aprendizado com rótulos parciais, bem como da
+necessidade de fazer muito mais simulações se outras funções de perda
+fossem propostas.
+
+Outra limitação importante do estudo está na aplicação iterada. A
+pesquisa apresentou essa parte como um resultado adicional, mas os
+limites da aplicação iterada ainda não foram estudados de forma
+completa. Essa limitação pode ser entendida também como um próximo
+passo, que seria uma solução de \emph{online learning}.
+
+Uma extensão possível desta pesquisa é a criação de um modelo que
+aprende diretamente da \emph{web}, sem a separação de passos descrita
+pelo WAWL. A técnica consiste em inserir as funções de acesso e teste do
+Captcha como método de obtenção de amostras do \emph{dataset} do Captcha
+(mais detalhes na Seção~\ref{sec-captcha-do-zero}). Dessa forma, o
+modelo poderia obter novos dados em cada \emph{minibatch},
+indefinidamente. A vanagem dessa abordagem é que ela seria menos
+burocrática que o WAWL, que precisa de uma pessoa para escrever as
+aplicações iteradas. A desvantagem é que o ajuste do modelo dependeria
+de uma conexão com a internet e seria mais suscetível a problemas de
+conexão, que precisariam ser tratados com cuidado.
+
+Outra extensão oportuna seria a criação de um modelo geral de resolução
+de Captchas, desenvolvido a partir das bases que foram construídas
+durante a pesquisa. Esse modelo poderia ser utilizado como modelo
+inicial para a resolução de novos Captchas e aprimorado com o oráculo,
+podendo até afastar completamente a necessidade de anotação manual. No
+momento, não é possível saber que esse modelo realmente funcionaria na
+prática, já que i) nada garante que ele tenha uma acurácia maior que
+10\% para um novo Captcha, mesmo se construído com base em Captchas de
+várias origens e ii) foram encontradas evidências de que os modelos com
+acurácia menor de 10\% têm mais dificuldades em melhorar com o método
+WAWL.
+
+A presente tese foi fruto de um longo processo de investigação e
+desenvolvimento, investigando os aspectos relevantes dos Captchas de
+textos em imagens. Espera-se que a metodologia proposta, os resultados
+obtidos e os pacotes computacionais desenvolvidos sejam úteis na luta
+pela abertura dos dados públicos, especialmente no judiciário. O uso de
+Captchas em sites de serviços públicos deve acabar.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{bibliografia}{%
+\chapter*{Bibliografia}\label{bibliografia}}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+\markboth{Bibliografia}{Bibliografia}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{1}
+\leavevmode\vadjust pre{\hypertarget{ref-tempodo}{}}%
+ABJ. \textbf{Tempo dos processos relacionados à adoção}., 2014.
+Disponível em:
+\textless{}\url{https://abj.org.br/pesquisas/adocao/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-observat}{}}%
+ABJ. \textbf{Observatório da insolvência: Rio de Janeiro}., 2021.
+Disponível em:
+\textless{}\url{https://abj.org.br/pesquisas/obsrjrj/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-diagnosticoABJ}{}}%
+ABJ. \textbf{Diagnóstico do Contencioso Tributário Administrativo}.,
+2022. Disponível em:
+\textless{}\url{https://abj.org.br/pesquisas/bid-tributario/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnReCAPTCHAHumanBasedCharacter2008}{}}%
+AHN, L. VON et al. reCAPTCHA: Human-Based Character Recognition via Web
+Security Measures. \textbf{Science}, v. 321, n. 5895, p. 1465--1468, 12
+set. 2008. Disponível em:
+\textless{}\url{https://www.science.org/doi/10.1126/science.1160379}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnTellingHumansComputers2002}{}}%
+AHN, L. VON; BLUM, M.; LANGFORD, J. \textbf{Telling humans and computers
+apart automatically or how lazy cryptographers do AI (Tech. Rep. No.
+CMU-CS-02-117)}. Disponível em:
+\textless{}\url{http://reports-archive.adm.cs.cmu.edu/anon/2002/CMU-CS-02-117.pdf}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-tensorflow}{}}%
+ALLAIRE, J.; TANG, Y. tensorflow: R Interface to 'TensorFlow'. 2022.
+Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=tensorflow}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-baldi2013}{}}%
+BALDI, P.; SADOWSKI, P. J. Understanding dropout. \textbf{Advances in
+neural information processing systems}, v. 26, 2013.
+
+\leavevmode\vadjust pre{\hypertarget{ref-blum1998}{}}%
+BLUM, A.; KALAI, A. A note on learning from multiple-instance examples.
+\textbf{Machine learning}, v. 30, n. 1, p. 2329, 1998.
+
+\leavevmode\vadjust pre{\hypertarget{ref-piggyback}{}}%
+BOETTIGER, C.; HO, T. piggyback: Managing Larger Data on a GitHub
+Repository. 2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=piggyback}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-chellapilla2005}{}}%
+CHELLAPILLA, K. et al. \textbf{Designing human friendly human
+interaction proofs (HIPs)}. : CHI '05.New York, NY, USA: Association for
+Computing Machinery, 2 abr. 2005. Disponível em:
+\textless{}\url{https://doi.org/10.1145/1054972.1055070}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-chellapilla2004}{}}%
+CHELLAPILLA, K.; SIMARD, P. Using machine learning to break visual human
+interaction proofs (HIPs). \textbf{Advances in neural information
+processing systems}, v. 17, 2004.
+
+\leavevmode\vadjust pre{\hypertarget{ref-colosimo2006}{}}%
+COLOSIMO, E. A.; GIOLO, S. R. \textbf{Análise de sobrevivência
+aplicada}. Editora Blucher, 2006.
+
+\leavevmode\vadjust pre{\hypertarget{ref-cour2011}{}}%
+COUR, T.; SAPP, B.; TASKAR, B. Learning from partial labels. \textbf{The
+Journal of Machine Learning Research}, v. 12, p. 15011536, 2011.
+
+\leavevmode\vadjust pre{\hypertarget{ref-luz}{}}%
+FALBEL, D. luz: Higher Level 'API' for 'torch'. a2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=luz}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-torchvision}{}}%
+FALBEL, D. torchvision: Models, Datasets and Transformations for Images.
+b2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=torchvision}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-torch}{}}%
+FALBEL, D.; LURASCHI, J. torch: Tensors and Neural Networks with 'GPU'
+Acceleration. 2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=torch}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-feng2020}{}}%
+FENG, L. et al. Provably consistent partial-label learning.
+\textbf{Advances in Neural Information Processing Systems}, v. 33, p.
+1094810960, a2020.
+
+\leavevmode\vadjust pre{\hypertarget{ref-feng2020a}{}}%
+FENG, L. et al. \textbf{Learning with multiple complementary labels}.
+PMLR, b2020.
+
+\leavevmode\vadjust pre{\hypertarget{ref-galar2011}{}}%
+GALAR, M. et al. A review on ensembles for the class imbalance problem:
+bagging-, boosting-, and hybrid-based approaches. \textbf{IEEE
+Transactions on Systems, Man, and Cybernetics, Part C (Applications and
+Reviews)}, v. 42, n. 4, p. 463484, 2011.
+
+\leavevmode\vadjust pre{\hypertarget{ref-george2017}{}}%
+GEORGE, D. et al. A generative vision model that trains with high data
+efficiency and breaks text-based CAPTCHAs. \textbf{Science}, v. 358, n.
+6368, p. eaag2612, 2017.
+
+\leavevmode\vadjust pre{\hypertarget{ref-goodfellow2013}{}}%
+GOODFELLOW, I. J. et al. Multi-digit number recognition from street view
+imagery using deep convolutional neural networks. \textbf{arXiv preprint
+arXiv:1312.6082}, 2013.
+
+\leavevmode\vadjust pre{\hypertarget{ref-goodfellowGenerativeAdversarialNetworks2014}{}}%
+GOODFELLOW, I. J. et al. \textbf{Generative {Adversarial Networks}}.
+{arXiv}, jun. 2014. Disponível em:
+\textless{}\url{https://arxiv.org/abs/1406.2661}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-grandvalet2002}{}}%
+GRANDVALET, Y. \textbf{Logistic regression for partial labels}. 2002.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hullermeier2006}{}}%
+HÜLLERMEIER, E.; BERINGER, J. Learning from ambiguously labeled
+examples. \textbf{Intelligent Data Analysis}, v. 10, n. 5, p. 419439,
+2006.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ioffe2015}{}}%
+IOFFE, S.; SZEGEDY, C. \textbf{Batch normalization: Accelerating deep
+network training by reducing internal covariate shift}. PMLR, 2015.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ishida2017}{}}%
+ISHIDA, T. et al. Learning from complementary labels. \textbf{Advances
+in neural information processing systems}, v. 30, 2017.
+
+\leavevmode\vadjust pre{\hypertarget{ref-jin2002}{}}%
+JIN, R.; GHAHRAMANI, Z. Learning with multiple labels. \textbf{Advances
+in neural information processing systems}, v. 15, 2002.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kaur2014}{}}%
+KAUR, K.; BEHAL, S. Captcha and Its Techniques: A Review.
+\textbf{International Journal of Computer Science and Information
+Technologies,} v. 5, 1 jan. 2014.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kingmaAdamMethodStochastic2017}{}}%
+KINGMA, D. P.; BA, J. Adam: {A Method} for {Stochastic Optimization}. n.
+arXiv:1412.6980, jan. 2017. Disponível em:
+\textless{}\url{https://arxiv.org/abs/1412.6980}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kuhn2019}{}}%
+KUHN, M.; JOHNSON, K. \textbf{Feature engineering and selection: A
+practical approach for predictive models}. CRC Press, 2019.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lecun1998}{}}%
+LECUN, Y. et al. Gradient-based learning applied to document
+recognition. \textbf{Proceedings of the IEEE}, v. 86, n. 11, p.
+22782324, 1998.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lecun2012}{}}%
+LECUN, Y. A. et al. Efficient backprop. Em: Springer, 2012. p. 948.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lecun2015}{}}%
+LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning. \textbf{nature}, v.
+521, n. 7553, p. 436444, 2015.
+
+\leavevmode\vadjust pre{\hypertarget{ref-li2014}{}}%
+LI, J.; TSUNG, F.; ZOU, C. Multivariate binomial/multinomial control
+chart. \textbf{IIE Transactions}, v. 46, n. 5, p. 526542, 2014.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lillibridgeMethodSelectivelyRestricting2001}{}}%
+LILLIBRIDGE, M. D. et al. \textbf{Method for Selectively Restricting
+Access to Computer Systems}., fev. 2001.
+
+\leavevmode\vadjust pre{\hypertarget{ref-liu2012}{}}%
+LIU, L.; DIETTERICH, T. A conditional multinomial mixture model for
+superset label learning. \textbf{Advances in neural information
+processing systems}, v. 25, 2012.
+
+\leavevmode\vadjust pre{\hypertarget{ref-michener2015}{}}%
+MICHENER, G.; MONCAU, L. F.; VELASCO, R. B. \textbf{Estado brasileiro e
+transparência avaliando a aplicação da Lei de Acesso à Informação}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mori2003a}{}}%
+MORI, G.; MALIK, J. \textbf{Recognizing objects in adversarial clutter:
+Breaking a visual CAPTCHA}. IEEE, 2003.
+
+\leavevmode\vadjust pre{\hypertarget{ref-murray2012}{}}%
+MURRAY, N.; MARCHESOTTI, L.; PERRONNIN, F. \textbf{AVA: A large-scale
+database for aesthetic visual analysis}. IEEE, 2012.
+
+\leavevmode\vadjust pre{\hypertarget{ref-murray-rust2008}{}}%
+MURRAY-RUST, P. Open data in science. \textbf{Nature Precedings}, p. 11,
+2008.
+
+\leavevmode\vadjust pre{\hypertarget{ref-na2020}{}}%
+NA, B. et al. \textbf{Deep Generative Positive-Unlabeled Learning under
+Selection Bias}. : CIKM '20.New York, NY, USA: Association for Computing
+Machinery, 19 out. 2020. Disponível em:
+\textless{}\url{https://doi.org/10.1145/3340531.3411971}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-nelder1972}{}}%
+NELDER, J. A.; WEDDERBURN, R. W. Generalized linear models.
+\textbf{Journal of the Royal Statistical Society: Series A (General)},
+v. 135, n. 3, p. 370384, 1972.
+
+\leavevmode\vadjust pre{\hypertarget{ref-noh2017}{}}%
+NOH, H. et al. Regularizing deep neural networks by noise: Its
+interpretation and optimization. \textbf{Advances in Neural Information
+Processing Systems}, v. 30, 2017.
+
+\leavevmode\vadjust pre{\hypertarget{ref-magick}{}}%
+OOMS, J. magick: Advanced Graphics and Image-Processing in R. 2021.
+Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=magick}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rcran}{}}%
+R CORE TEAM. \textbf{R: A Language and Environment for Statistical
+Computing}. Vienna, Austria: R Foundation for Statistical Computing,
+2021. Disponível em:
+\textless{}\url{https://www.R-project.org/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rameshHierarchicalTextConditionalImage2022}{}}%
+RAMESH, A. et al. Hierarchical {Text-Conditional Image Generation} with
+{CLIP Latents}. n. arXiv:2204.06125, abr. 2022. Disponível em:
+\textless{}\url{https://arxiv.org/abs/2204.06125}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-reshefMethodSystemDiscriminating2005}{}}%
+RESHEF, E.; RAANAN, G.; SOLAN, E. \textbf{Method and System for
+Discriminating a Human Action from a Computerized Action}., 2005.
+
+\leavevmode\vadjust pre{\hypertarget{ref-sutton2018}{}}%
+SUTTON, R. S.; BARTO, A. G. \textbf{Reinforcement learning: An
+introduction}. MIT press, 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-decryptr}{}}%
+TRECENTI, J. et al. decryptr: An extensible API for breaking captchas.
+2022.
+
+\leavevmode\vadjust pre{\hypertarget{ref-turing2009}{}}%
+TURING, A. M. Computing machinery and intelligence. Em: Springer, 2009.
+p. 2365.
+
+\leavevmode\vadjust pre{\hypertarget{ref-reticulate}{}}%
+USHEY, K.; ALLAIRE, J.; TANG, Y. reticulate: Interface to 'Python'.
+2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=reticulate}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnCaptchaTellingHumans2003}{}}%
+VON AHN, L. et al. \textbf{Captcha: {Telling} Humans and Computers Apart
+Automatically}. Proceedings of Eurocrypt. \textbf{Anais}...2003.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vonahnTellingHumansComputers2004}{}}%
+VON AHN, L.; BLUM, M.; LANGFORD, J. Telling Humans and Computers Apart
+Automatically. \textbf{Communications of the ACM}, v. 47, n. 2, p.
+56--60, 2004.
+
+\leavevmode\vadjust pre{\hypertarget{ref-inaccess}{}}%
+W3C. \textbf{Inaccessibility of CAPTCHA}., 2021. Disponível em:
+\textless{}\url{https://www.w3.org/TR/turingtest/}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-wang2021}{}}%
+WANG, Y. et al. Make complex captchas simple: a fast text captcha solver
+based on a small number of samples. \textbf{Information Sciences}, v.
+578, p. 181194, 2021.
+
+\leavevmode\vadjust pre{\hypertarget{ref-stringr}{}}%
+WICKHAM, H. stringr: Simple, Consistent Wrappers for Common String
+Operations. b2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=stringr}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rvest}{}}%
+WICKHAM, H. rvest: Easily Harvest (Scrape) Web Pages. a2022. Disponível
+em:
+\textless{}\url{https://CRAN.R-project.org/package=rvest}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-usethis}{}}%
+WICKHAM, H.; BRYAN, J.; BARRETT, M. usethis: Automate Package and
+Project Setup. 2022. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=usethis}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-xml2}{}}%
+WICKHAM, H.; HESTER, J.; OOMS, J. xml2: Parse XML. 2021. Disponível em:
+\textless{}\url{https://CRAN.R-project.org/package=xml2}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ye2018}{}}%
+YE, G. et al. \textbf{Yet another text captcha solver: A generative
+adversarial network based approach}. 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yu2018}{}}%
+YU, X. et al. \textbf{Learning with biased complementary labels}. 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yuan2019}{}}%
+YUAN, X. et al. Adversarial examples: Attacks and defenses for deep
+learning. \textbf{IEEE transactions on neural networks and learning
+systems}, v. 30, n. 9, p. 28052824, 2019.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhao2017}{}}%
+ZHAO, B. Web scraping. \textbf{Encyclopedia of big data}, p. 13, 2017.
+Disponível em:
+\textless{}\url{https://www.researchgate.net/profile/Bo-Zhao-3/publication/317177787_Web_Scraping/links/5c293f85a6fdccfc7073192f/Web-Scraping.pdf}\textgreater.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhou2018}{}}%
+ZHOU, Z.-H. A brief introduction to weakly supervised learning.
+\textbf{National science review}, v. 5, n. 1, p. 4453, 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhu2005}{}}%
+ZHU, X. J. Semi-supervised learning literature survey. 2005.
+
+\end{CSLReferences}
+
+\appendix
+\addcontentsline{toc}{part}{Apêndices}
+
+\hypertarget{sec-pacote}{%
+\chapter{Pacotes}\label{sec-pacote}}
+
+Este apêndice foi construído para mostrar a estrutura dos pacotes
+\texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}}, utilizados
+como auxiliares para implementação da metodologia WAWL, orquestradas
+pelo pacote \texttt{\{captcha\}}. Apresenta-se também um breve histórico
+sobre a construção das soluções desenvolvidas, descrevendo outras
+alternativas e projetos que foram aposentados.
+
+\hypertarget{sec-historico}{%
+\section{Histórico}\label{sec-historico}}
+
+O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de
+2016. Como foi comentado na introdução da tese, é muito comum se deparar
+com desafios de Captchas ao raspar dados do judiciário, já que os dados
+não são abertos.
+
+O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio
+era utilizado no site do TJSP que, depois de alguns anos, passou a
+utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas
+tem como fonte de dados o TJBA, que continua utilizando o desafio até o
+momento que os sites foram investigados pela última vez, em setembro de
+2022.
+
+A primeira abordagem para resolver o Captcha do e-SAJ foi utilizando
+heurísticas para separar as letras, em 2016. Infelizmente o pacote
+original, chamado \texttt{\{captchasaj\}}, foi removido da
+\emph{internet}, mas um código legado construído para o TJRS está
+disponível
+\href{https://github.com/decryptr/captchaTJRS/blob/master/R/tools.R}{neste
+link}. Nessa abordagem, as letras primeiro são segmentadas, alimentando
+um modelo de florestas aleatórias que considera os pixels da imagem como
+variáveis preditoras e a letra como resposta. Esses trabalhos tiveram
+contribuições importantes de Fernando Corrêa e Athos Damiani, ambos do
+IME-USP.
+
+A segunda abordagem para resolver os Captchas foi utilizando o áudio,
+também em 2016. O código para resolver o Captcha da RFB utilizando áudio
+está disponível
+\href{https://github.com/decryptr/captchaReceitaAudio}{neste link}. A
+ideia de resolução era parecida, passando pelo procedimento de
+segmentação e depois de modelagem, mas tinha um passo intermediário de
+processamento envolvendo engenharia de \emph{features} (KUHN; JOHNSON,
+2019). O trabalho teve contribuições importantes de Athos Damiani.
+
+Com o advento da ferramenta TensorFlow para o R (ALLAIRE; TANG, 2022),
+os modelos para resolver Captchas passaram a utilizar modelos de redes
+neurais. No início, por falta de conhecimento da área, a arquitetura das
+redes era demasiadamente complexa. Depois que os primeiros modelos
+começaram a funcionar, notou-se que as etapas de pré-processamento com
+segmentação e algumas camadas das redes eram desnecessárias para ajustar
+os modelos. Essa parte teve grande contribuição de Daniel Falbel, também
+do IME-USP, que foi a pessoa que introduziu o TensorFlow e a área de
+\emph{deep learning} para a comunidade brasileira de R.
+
+Depois de resolver com sucesso alguns Captchas, notou-se que seria
+possível criar um ambiente completo de modelagem de Captchas. Isso deu
+origem ao pacote \texttt{\{decryptr\}} (TRECENTI et al., 2022), que foi
+construído em 2017. O trabalho teve grandes contribuições de Caio Lente,
+do curso de Ciência da Computação do IME-USP e outros colegas de
+faculdade.
+
+Com o passar do tempo, o pacote \texttt{\{decryptr\}} ficou cada vez
+mais estável, funcionando como dependência de várias ferramentas
+utilizadas nos trabalhos de jurimetria. O pacote também ganhou um site:
+\url{https://decryptr.xyz} e uma API com acesso gratuito, precisando
+apenas de uma chave de acesso. A ferramenta ficou bastante popular, com
+\href{https://github.com/decryptr/decryptr}{178 estrelas no GitHub} no
+mês de dezembro de 2022. Essas ferramentas envolveram contribuições
+principalmente de Caio Lente e Daniel Falbel.
+
+A construção do pacote \texttt{\{captcha\}} separada do
+\texttt{\{decryptr\}} se deu por dois motivos. Primeiro, o pacote
+\texttt{\{decryptr\}}, por ser o primeiro a tratar do assunto, possui
+muitos códigos legados e dificuldades de instalação por conta da
+dependência do python, necessário para o funcionamento do TensorFlow,
+que é chamado através do pacote \texttt{\{reticulate\}} (USHEY; ALLAIRE;
+TANG, 2022). Além disso, a implementação das técnicas do oráculo
+envolviam modificações na função de perda, que são difíceis de
+implementar no ambiente do \texttt{\{tensorflow\}}, justamente por conta
+da necessidade de conhecer o código python que roda por trás dos códigos
+mais usuais.
+
+Com o advento do pacote \texttt{\{torch\}}(FALBEL; LURASCHI, 2022), no
+entanto, tudo foi facilitado. O pacote não possui dependências com o
+python, além de ser bastante transparente e flexível na construção da
+arquitetura do modelo, funções de perda e otimização. O pacote, também
+construído por Daniel Falbel, é um grande avanço científico e facilitou
+muito a construção dos códigos desta tese.
+
+O pacote \texttt{\{captcha\}}, apesar de ter sido construído do zero,
+foi desenvolvido durante \emph{lives} realizadas na plataforma
+\emph{Twitch}. A construção em \emph{lives} foi interessante porque era
+possível obter \emph{feedback} e ideias da comunidade durante a
+construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na
+arquitetura do pacote.
+
+Com o desenvolvimento da tese, notou-se a necessidade de construir
+alguns pacotes adicionais. Os pacote \texttt{\{captchaDownload\}} e
+\texttt{\{captchaOracle\}} foram desenvolvidos para facilitar a obtenção
+dos resultados da tese, enquanto o pacote \texttt{\{captcha\}} pode ser
+utilizado por qualquer pessoa interessada em visualizar, anotar e
+resolver Captchas. As próximas subseções do apêndice descrevem os
+pacotes.
+
 \hypertarget{sec-pacote-download}{%
 \section{Pacote captchaDownload}\label{sec-pacote-download}}
 
@@ -4924,7 +4994,7 @@ ou através de um modelo.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(magrittr) }\CommentTok{\# }\AlertTok{TODO}\CommentTok{ remove}
+\FunctionTok{library}\NormalTok{(captcha)}
 \NormalTok{captcha }\OtherTok{\textless{}{-}} \FunctionTok{read\_captcha}\NormalTok{(acesso}\SpecialCharTok{$}\NormalTok{f\_captcha)}
 \FunctionTok{plot}\NormalTok{(captcha)}
 \NormalTok{modelo\_trf5 }\OtherTok{\textless{}{-}} \FunctionTok{captcha\_load\_model}\NormalTok{(}\StringTok{"trf5"}\NormalTok{)}
