@@ -150,6 +150,9 @@
 % É possível personalizar os captions. Para versões de babel a partir
 % de 3.51 (lançada em outubro de 2020), basta fazer
 % \setlocalecaption{english}{contents}{Table of Contents}. Com versões
+
+% \setlocalecaption{english}{abstract}{..}
+
 % anteriores, por razões históricas há dois mecanismos para fazer isso,
 % então é preciso checar qual deve ser usado para cada língua (veja a
 % documentação de babel ou faça um teste). São eles:
@@ -168,17 +171,25 @@
 % necessário trocar os "captions", \captionslíngua (ou seja, os comandos
 % acima modificam \captionslíngua). Então, se você quiser executar algo a
 % mais quando uma língua é selecionada, faça \addto\extrasenglish{\blah}.
-\usepackage[brazilian]{babel}
+\usepackage{babel}
 \usepackage{iflang}
 
 % Por padrão, LaTeX utiliza maiúsculas no início de cada palavra nestas
 % expressões ("Lista de Figuras"); vamos usar maiúsculas apenas na primeira
 % palavra.
+
+\addto\captionsenglish{%
+  \renewcommand{\abstractname}{Abstract}
+}
+
 \addto\captionsbrazilian{%
   \renewcommand\listfigurename{Lista de figuras}%
   \renewcommand\listtablename{Lista de tabelas}%
   \renewcommand\indexname{Índice remissivo}%
+  \renewcommand\abstractname{Resumo}%
 }
+
+
 
 % Alguns pacotes (espeficicamente, tikz) usam, além de babel, este pacote
 % como auxiliar para a tradução de palavras-chave, como os meses do ano.
