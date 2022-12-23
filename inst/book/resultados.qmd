@@ -518,6 +518,7 @@ A função `read_captcha()` lê um vetor de arquivos de imagens e armazenar na m
 
 ```{r}
 #| echo: true
+#| out-width: 30%
 library(captcha)
 exemplo <- "assets/img/dados_tjmg.jpeg"
 captcha <- read_captcha(exemplo)
