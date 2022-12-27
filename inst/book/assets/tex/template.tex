@@ -118,7 +118,29 @@ $endif$
 % É possível definir como determinadas palavras podem (ou não) ser
 % hifenizadas; no entanto, a hifenização automática geralmente funciona bem
 % \babelhyphenation{documentclass latexmk soft-ware clsguide} % todas as línguas
-% \babelhyphenation[brazilian]{Fu-la-no}
+\babelhyphenation[brazilian]{cons-tru-í-da}
+\babelhyphenation[brazilian]{res-pon-sa-bi-li-da-de}
+\babelhyphenation[brazilian]{ins-ti-tui-ção}
+\babelhyphenation[brazilian]{de-mons-tra-da}
+\babelhyphenation[brazilian]{su-per-vi-sio-na-do}
+\babelhyphenation[brazilian]{a-pre-sen-tar}
+\babelhyphenation[brazilian]{mo-de-lo}
+\babelhyphenation[brazilian]{e-xis-tem}
+\babelhyphenation[brazilian]{i-ma-gem}
+\babelhyphenation[brazilian]{pro-ce-di-men-to}
+\babelhyphenation[brazilian]{des-ci-da}
+\babelhyphenation[brazilian]{pro-ble-ma}
+\babelhyphenation[brazilian]{re-a-li-za-das}
+\babelhyphenation[brazilian]{ma-nu-al}
+\babelhyphenation[brazilian]{fi-na-li-za-do}
+\babelhyphenation[brazilian]{con-si-de-ra-dos}
+\babelhyphenation[brazilian]{i-ma-gens}
+\babelhyphenation[brazilian]{a-no-tan-do}
+\babelhyphenation[brazilian]{hi-per-pa-râ-me-tros}
+\babelhyphenation[brazilian]{con-se-cu-ti-vas}
+\babelhyphenation[brazilian]{con-so-le}
+\babelhyphenation[brazilian]{mo-de-los}
+\babelhyphenation[brazilian]{má-xi-mo}
 % \babelhyphenation[english]{what-ever}
 
 % Estes comandos definem o título e autoria do trabalho e devem sempre ser
@@ -281,7 +303,7 @@ Escrever a parte de agradecimento é uma tarefa muito fácil, pois o sentimento 
 
 Primeiramente, gostaria de agradecer ao Victor Fossaluza, meu querido amigo e orientador. Victor foi um irmão mais velho, com a paciência necessária para lidar com minhas limitações por fazer um doutorado sem bolsa e trabalhando muito. Foi amigo, fazendo o trabalho motivacional para me convencer de que eu estava fazendo algo relevante. E foi um grande sábio, dando sugestões muito interessantes para resolver os desafios que foram postos.
 
-Agradeço ao Daniel Falbel, não só pela amizade, mas por ter me salvado este trabalho pelo menos duas vezes. Se não fosse pelo trabalho do Daniel, o trabalho nem teria começado, já que foi ele que deu a ideia de modelar Captchas usando deep learning pela primeira vez, usando o TensorFlow. E se não fosse pelo maravilhoso trabalho em na família de pacotes em torno do torch, como o próprio torch, luz e torchvision.
+Agradeço ao Daniel Falbel, não só pela amizade, mas por ter me salvado este trabalho pelo menos duas vezes. Se não fosse pelo trabalho do Daniel, o trabalho nem teria começado, já que foi ele que deu a ideia de modelar Captchas usando deep learning pela primeira vez, usando o TensorFlow. E se não fosse pelo maravilhoso trabalho na família de pacotes em torno do torch, como o próprio torch, luz e torchvision.
 
 Agradeço ao Caio Lente, por ser essa pessoa incrível, gentil e modesta, apesar da enorme capacidade. Caio é a única pessoa capaz de me aturar como sócio em duas empresas diferentes, a Curso-R e a Terranova. Caio foi a pessoa que desenvolveu o pacote e o site do decryptr, nossa primeira ferramenta geral de resolver Captchas. Caio também é meu influencer digital, sendo a pessoa por trás de coisas que acompanham minha vida até hoje, como o Todoist e o podcast Philosophize This.
 
@@ -291,7 +313,7 @@ Agradeço ao Fernando Corrêa, por tantas coisas que é difícil de expressar. F
 
 Agradeço ao Athos Damiani, meu grande amigo, colega de TCC e \textit{roomate}, pelas grandes discussões. O Athos é uma pessoa maravilhosa de discutir, pois ele não desiste! Isso fez com que eu precisasse entender mais dos assuntos para argumentar, percebendo que na verdade eu não estava entendendo tanto. Além disso, Athos foi quem me ensinou a resolver Captchas de audio, o que me ajudou muito na construção das soluções.
 
-Para completar o grupo de sócios da Curso-R, agradeço imensamente ao William Amorim, meu grande amigo e parceiro no processo de doutoramento. Talvez ele não saiba, mas sempre o pilar que me apoiou nas horas difíceis, já que terminou o doutorado antes de mim e me mostrou empiricamente que isso era possível.
+Para completar o grupo de sócios da Curso-R, agradeço imensamente ao William Amorim, meu grande amigo e parceiro no processo de doutoramento. Talvez ele não saiba, mas sempre foi o pilar que me apoiou nas horas difíceis, já que terminou o doutorado antes de mim e me mostrou empiricamente que isso era possível.
 
 Agradeço também a todas as pessoas das outras empresas que faço parte: ABJ, Insper e Terranova. O suporte de vocês foi fundamental para que eu conseguisse tempo para desenvolver a tese. Agradecimentos especiais à Barbara Tassoni, Igor Pretel, Marcelo Guedes Nunes, Ricardo Feliz e Renata Hirota.
 
@@ -326,7 +348,7 @@ Finalmente, agradeço aos meus pais, Cidimir e Vera, e ao meu irmão Lucas, por 
 
 
 \resumo{
-Captcha (Completely Automated Public Turing tests to tell Computers and Humans Apart), é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. A utilização de Captchas em serviços públicos pode ser prejudicial à população, limitando o acesso a dados e incentivando empresas a contratarem serviços que utilizam mão de obra humana para resolução dos Captchas. Este trabalho tem como foco os Captchas com textos (números e letras) em imagens. Já existem soluções para resolver Captchas deste tipo utilizando aprendizado de máquinas, sendo as redes neurais profundas os modelos com melhor desempenho. No entanto, esses modelos precisam de grandes bases de dados anotadas ou de procedimentos de ajuste intrincados e pouco acessíveis. Neste trabalho, é proposta um método inovador, chamado Web Automatic Weak Learning (WAWL), que alia técnicas de raspagem de dados e aprendizado de máquinas com rótulos parciais, que utiliza dados obtidos automaticamente da internet para acelerar o ajuste dos modelos. O método é agnóstico à arquitetura utilizada para o modelo, sendo necessário realizar apenas uma adaptação na função de perda. O método apresenta resultados significativos, aumentando a acurácia inicial de modelos fracos em mais de 30\% nos mais de 10 Captchas estudados, sem a necessidade de realizar uma nova rodada anotação manual. Adicionalmente, pacote computacional novo foi desenvolvido para resolver Captchas e disponibilizar os resultados para outras pessoas. Espera-se que o trabalho possa reduzir o incentivo econômico de contratar serviços que utilizam mão de obra humana para resolver Captchas.
+Captcha (Completely Automated Public Turing tests to tell Computers and Humans Apart), é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. A utilização de Captchas em serviços públicos pode ser prejudicial à população, limitando o acesso a dados e incentivando empresas a contratarem serviços que utilizam mão de obra humana para resolução dos Captchas. Este trabalho tem como foco os Captchas com textos (números e letras) em imagens. Já existem soluções para resolver Captchas deste tipo utilizando aprendizado de máquinas, sendo as redes neurais profundas os modelos com melhor desempenho. No entanto, esses modelos precisam de grandes bases de dados anotadas ou de procedimentos de ajuste intrincados e pouco acessíveis. Neste trabalho, é proposto um método inovador, chamado Web Automatic Weak Learning (WAWL), que alia técnicas de raspagem de dados e aprendizado de máquinas com rótulos parciais, utilizando dados obtidos automaticamente da internet para acelerar o ajuste dos modelos. O método é agnóstico à arquitetura utilizada para o modelo, sendo necessário realizar apenas uma adaptação na função de perda. O método apresenta resultados significativos, aumentando a acurácia inicial de modelos fracos em mais de 30\% nos mais de 10 Captchas estudados, sem a necessidade de realizar uma nova rodada anotação manual. Adicionalmente, um novo pacote computacional de uso livre foi desenvolvido para resolver Captchas e disponibilizar os resultados publicamente. Espera-se que o trabalho possa reduzir o incentivo econômico de contratar serviços que utilizam mão de obra humana para resolver Captchas.
 }
 
 \clearpage

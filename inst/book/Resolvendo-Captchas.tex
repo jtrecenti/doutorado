@@ -155,7 +155,29 @@
 % É possível definir como determinadas palavras podem (ou não) ser
 % hifenizadas; no entanto, a hifenização automática geralmente funciona bem
 % \babelhyphenation{documentclass latexmk soft-ware clsguide} % todas as línguas
-% \babelhyphenation[brazilian]{Fu-la-no}
+\babelhyphenation[brazilian]{cons-tru-í-da}
+\babelhyphenation[brazilian]{res-pon-sa-bi-li-da-de}
+\babelhyphenation[brazilian]{ins-ti-tui-ção}
+\babelhyphenation[brazilian]{de-mons-tra-da}
+\babelhyphenation[brazilian]{su-per-vi-sio-na-do}
+\babelhyphenation[brazilian]{a-pre-sen-tar}
+\babelhyphenation[brazilian]{mo-de-lo}
+\babelhyphenation[brazilian]{e-xis-tem}
+\babelhyphenation[brazilian]{i-ma-gem}
+\babelhyphenation[brazilian]{pro-ce-di-men-to}
+\babelhyphenation[brazilian]{des-ci-da}
+\babelhyphenation[brazilian]{pro-ble-ma}
+\babelhyphenation[brazilian]{re-a-li-za-das}
+\babelhyphenation[brazilian]{ma-nu-al}
+\babelhyphenation[brazilian]{fi-na-li-za-do}
+\babelhyphenation[brazilian]{con-si-de-ra-dos}
+\babelhyphenation[brazilian]{i-ma-gens}
+\babelhyphenation[brazilian]{a-no-tan-do}
+\babelhyphenation[brazilian]{hi-per-pa-râ-me-tros}
+\babelhyphenation[brazilian]{con-se-cu-ti-vas}
+\babelhyphenation[brazilian]{con-so-le}
+\babelhyphenation[brazilian]{mo-de-los}
+\babelhyphenation[brazilian]{má-xi-mo}
 % \babelhyphenation[english]{what-ever}
 
 % Estes comandos definem o título e autoria do trabalho e devem sempre ser
@@ -318,7 +340,7 @@ Escrever a parte de agradecimento é uma tarefa muito fácil, pois o sentimento 
 
 Primeiramente, gostaria de agradecer ao Victor Fossaluza, meu querido amigo e orientador. Victor foi um irmão mais velho, com a paciência necessária para lidar com minhas limitações por fazer um doutorado sem bolsa e trabalhando muito. Foi amigo, fazendo o trabalho motivacional para me convencer de que eu estava fazendo algo relevante. E foi um grande sábio, dando sugestões muito interessantes para resolver os desafios que foram postos.
 
-Agradeço ao Daniel Falbel, não só pela amizade, mas por ter me salvado este trabalho pelo menos duas vezes. Se não fosse pelo trabalho do Daniel, o trabalho nem teria começado, já que foi ele que deu a ideia de modelar Captchas usando deep learning pela primeira vez, usando o TensorFlow. E se não fosse pelo maravilhoso trabalho em na família de pacotes em torno do torch, como o próprio torch, luz e torchvision.
+Agradeço ao Daniel Falbel, não só pela amizade, mas por ter me salvado este trabalho pelo menos duas vezes. Se não fosse pelo trabalho do Daniel, o trabalho nem teria começado, já que foi ele que deu a ideia de modelar Captchas usando deep learning pela primeira vez, usando o TensorFlow. E se não fosse pelo maravilhoso trabalho na família de pacotes em torno do torch, como o próprio torch, luz e torchvision.
 
 Agradeço ao Caio Lente, por ser essa pessoa incrível, gentil e modesta, apesar da enorme capacidade. Caio é a única pessoa capaz de me aturar como sócio em duas empresas diferentes, a Curso-R e a Terranova. Caio foi a pessoa que desenvolveu o pacote e o site do decryptr, nossa primeira ferramenta geral de resolver Captchas. Caio também é meu influencer digital, sendo a pessoa por trás de coisas que acompanham minha vida até hoje, como o Todoist e o podcast Philosophize This.
 
@@ -328,7 +350,7 @@ Agradeço ao Fernando Corrêa, por tantas coisas que é difícil de expressar. F
 
 Agradeço ao Athos Damiani, meu grande amigo, colega de TCC e \textit{roomate}, pelas grandes discussões. O Athos é uma pessoa maravilhosa de discutir, pois ele não desiste! Isso fez com que eu precisasse entender mais dos assuntos para argumentar, percebendo que na verdade eu não estava entendendo tanto. Além disso, Athos foi quem me ensinou a resolver Captchas de audio, o que me ajudou muito na construção das soluções.
 
-Para completar o grupo de sócios da Curso-R, agradeço imensamente ao William Amorim, meu grande amigo e parceiro no processo de doutoramento. Talvez ele não saiba, mas sempre o pilar que me apoiou nas horas difíceis, já que terminou o doutorado antes de mim e me mostrou empiricamente que isso era possível.
+Para completar o grupo de sócios da Curso-R, agradeço imensamente ao William Amorim, meu grande amigo e parceiro no processo de doutoramento. Talvez ele não saiba, mas sempre foi o pilar que me apoiou nas horas difíceis, já que terminou o doutorado antes de mim e me mostrou empiricamente que isso era possível.
 
 Agradeço também a todas as pessoas das outras empresas que faço parte: ABJ, Insper e Terranova. O suporte de vocês foi fundamental para que eu conseguisse tempo para desenvolver a tese. Agradecimentos especiais à Barbara Tassoni, Igor Pretel, Marcelo Guedes Nunes, Ricardo Feliz e Renata Hirota.
 
@@ -363,7 +385,7 @@ Finalmente, agradeço aos meus pais, Cidimir e Vera, e ao meu irmão Lucas, por 
 
 
 \resumo{
-Captcha (Completely Automated Public Turing tests to tell Computers and Humans Apart), é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. A utilização de Captchas em serviços públicos pode ser prejudicial à população, limitando o acesso a dados e incentivando empresas a contratarem serviços que utilizam mão de obra humana para resolução dos Captchas. Este trabalho tem como foco os Captchas com textos (números e letras) em imagens. Já existem soluções para resolver Captchas deste tipo utilizando aprendizado de máquinas, sendo as redes neurais profundas os modelos com melhor desempenho. No entanto, esses modelos precisam de grandes bases de dados anotadas ou de procedimentos de ajuste intrincados e pouco acessíveis. Neste trabalho, é proposta um método inovador, chamado Web Automatic Weak Learning (WAWL), que alia técnicas de raspagem de dados e aprendizado de máquinas com rótulos parciais, que utiliza dados obtidos automaticamente da internet para acelerar o ajuste dos modelos. O método é agnóstico à arquitetura utilizada para o modelo, sendo necessário realizar apenas uma adaptação na função de perda. O método apresenta resultados significativos, aumentando a acurácia inicial de modelos fracos em mais de 30\% nos mais de 10 Captchas estudados, sem a necessidade de realizar uma nova rodada anotação manual. Adicionalmente, pacote computacional novo foi desenvolvido para resolver Captchas e disponibilizar os resultados para outras pessoas. Espera-se que o trabalho possa reduzir o incentivo econômico de contratar serviços que utilizam mão de obra humana para resolver Captchas.
+Captcha (Completely Automated Public Turing tests to tell Computers and Humans Apart), é um desafio utilizado para identificar se o acesso à uma página na internet é realizada por uma pessoa ou uma máquina. O desafio é projetado para ser fácil de resolver por humanos, mas difícil de resolver por máquinas. A utilização de Captchas em serviços públicos pode ser prejudicial à população, limitando o acesso a dados e incentivando empresas a contratarem serviços que utilizam mão de obra humana para resolução dos Captchas. Este trabalho tem como foco os Captchas com textos (números e letras) em imagens. Já existem soluções para resolver Captchas deste tipo utilizando aprendizado de máquinas, sendo as redes neurais profundas os modelos com melhor desempenho. No entanto, esses modelos precisam de grandes bases de dados anotadas ou de procedimentos de ajuste intrincados e pouco acessíveis. Neste trabalho, é proposto um método inovador, chamado Web Automatic Weak Learning (WAWL), que alia técnicas de raspagem de dados e aprendizado de máquinas com rótulos parciais, utilizando dados obtidos automaticamente da internet para acelerar o ajuste dos modelos. O método é agnóstico à arquitetura utilizada para o modelo, sendo necessário realizar apenas uma adaptação na função de perda. O método apresenta resultados significativos, aumentando a acurácia inicial de modelos fracos em mais de 30\% nos mais de 10 Captchas estudados, sem a necessidade de realizar uma nova rodada anotação manual. Adicionalmente, um novo pacote computacional de uso livre foi desenvolvido para resolver Captchas e disponibilizar os resultados publicamente. Espera-se que o trabalho possa reduzir o incentivo econômico de contratar serviços que utilizam mão de obra humana para resolver Captchas.
 }
 
 \clearpage
@@ -604,15 +626,18 @@ Todos os códigos e textos da tese podem ser acessados publicamente
 
 Captcha (\emph{Completely Automated Public Turing test to tell Computers
 and Humans Apart}) é um desafio utilizado para identificar se o acesso à
-uma página na internet é realizada por uma pessoa ou uma máquina. O
+uma página na internet é realizada por uma pessoa ou um robô\footnote{Para
+  os fins dessa tese, a menos que mencionado de forma explícita, os
+  termos ``máquina'' e ``robô'', ou ainda ``procedimento automatizado''
+  serão tratados como sinônimos, geralmente com o nome ``robô''.}. O
 desafio é projetado para ser fácil de resolver por humanos, mas difícil
 de resolver por máquinas. Outro nome para os Captchas é \emph{Human
 Interaction Proofs,} ou HIPs (CHELLAPILLA et al., 2005).
 
 Um Captcha pode ser classificado como uma variação do teste de Turing
 (TURING, 2009). A diferença no caso do Captcha é que a avaliação da
-humanidade do agente é feita por uma máquina ao invés de uma pessoa --
-por isso o termo \emph{automated}. Captchas podem ser classificados em
+humanidade do agente é feita por um robô ao invés de uma pessoa -- por
+isso o termo \emph{automated}. Captchas podem ser classificados em
 algumas situações com os chamados \textbf{testes de Turing reversos},
 apesar dos autores originais afastarem essa caracterização (AHN; BLUM;
 LANGFORD, 2002).
@@ -633,8 +658,6 @@ utilizados como forma de evitar evitar o uso indevido de aplicações da
 \item
   Operações automatizadas, como compra de ingressos para eventos e voto
   automático em sites de votação.
-\item
-  Voto automático em ferramentas de votação na internet.
 \item
   Consulta automatizada em sites para obtenção de dados.
 \end{itemize}
@@ -693,7 +716,7 @@ Uma forma de evitar os problemas de esforço e formato em pedidos de LAI
 \emph{Open Knowledge Foundation} (OKFN), a base de dados ``deve ser
 fornecida em uma forma conveniente e modificável isento de obstáculos
 tecnológicos desnecessários para a realização dos direitos licenciados.
-Especificamente, os dados devem ser legíveis-por-máquina, disponíveis
+Especificamente, os dados devem ser legíveis por máquina, disponíveis em
 todo o seu volume, e fornecidos em um formato aberto (ou seja, um
 formato com sua especificação livremente disponível, e publicada sem
 qualquer restrições, monetárias ou não, da sua utilização) ou, no
@@ -753,7 +776,7 @@ os tribunais possuem ferramentas de consulta individualizadas de
 processos, por conta do que está previsto na CF. A solução, portanto,
 passa a ser construir uma ferramenta que obtém todos os dados
 automaticamente. Tal conceito é conhecido como \emph{raspagem de dados}
-(ZHAO, 2017) e será desenvolvido com maiores detalhes no Capítulo
+(ZHAO, 2017) e será desenvolvido com maiores detalhes no
 Capítulo~\ref{sec-metodologia}.
 
 Os Captchas se tornam prejudiciais à sociedade quando o acesso
@@ -887,10 +910,11 @@ tentando desenvolver novas técnicas para avançar nos modelos de
 reconhecimento de imagens, quanto \emph{spammers} buscando novas formas
 de realizar ataques cibernéticos.
 
-Um dos geradores de Captchas mais conhecidos é Luis von Ahn, que também
-é um dos criadores do Captcha. Um pedaço da história está disponível nos
-primeiros cinco minutos da entrevista com Luis Von Ahn em um programa
-chamado \emph{Spark}\footnote{Spark, 2011.
+Uma das pessoas envolvidas com geradores de Captchas mais conhecidas é
+Luis von Ahn, que um dos criadores do artigo original do Captcha. Um
+pedaço da história está disponível nos primeiros cinco minutos da
+entrevista com Luis Von Ahn em um programa chamado
+\emph{Spark}\footnote{Spark, 2011.
   \href{https://web.archive.org/web/20120603142110/http://www.cbc.ca/spark/2011/11/full-interview-luis-von-ahn-on-duolingo/}{Link
   no Web Archive}. Último acesso em 01/11/2022.}. Na entrevista, Von Ahn
 conta um pouco da origem dos Captchas em Carnegie Mellon, contando que
@@ -911,11 +935,16 @@ eram resolvidos diariamente.
 O reCaptcha v1 foi uma solução de aproveitar o tempo das pessoas que
 resolvem Captchas para digitalizar livros (AHN et al., 2008). A ideia do
 reCaptcha, como demonstrada na Figura~\ref{fig-recaptcha-v1}, foi
-apresentar duas palavras distorcidas para a pessoa: a primeira seria
-utilizada para verificar se a pessoa era um humano, e a segunda seria
-utilizada para decifrar um texto que os robôs na época não conseguiam
-ler. Em 2009, a empresa foi comprada pela Google, que utilizou o
-reCaptcha para digitalizar os Google Books.
+apresentar duas palavras distorcidas para a pessoa. A primeira palavra
+seria uma palavra que as ferramentas de OCR (\emph{Optical Character
+Recognition}) conseguiram ler com sucesso (no caso da imagem, a palavra
+``upon''), enquanto a segunda seria uma palavra em que a ferramenta de
+OCR falhou (no caso da imagem, a palavra ``between''). A primeira
+palavra seria utilizada para verificar se o agente era ou não humano, e
+a segunda seria utilizada para decifrar a palavra e aprimorar as
+ferramentas de OCR. Em 2009, a empresa foi comprada pela Google, que
+utilizou o reCaptcha v1 para digitalizar os livros que estão presentes
+no site \href{https://books.google.com.br/}{Google Books}.
 
 \begin{figure}
 
@@ -947,21 +976,21 @@ assemelha com um robô ou humano. O segundo foi a mudança no tipo de
 tarefa: ao invés de rotular um texto distorcido, o desafio passou a ser
 identificar objetos e animais, como na Figura~\ref{fig-turkey}.
 
-A mudança do tipo de tarefa de visão computacional mudança foi
-importante para o sucesso do reCaptcha v2. Isso ocorre porque o desafio
-é mais difícil, já que existem muito mais objetos e imagens do que
-letras e números, aumentando significativamente o suporte da variável
-resposta. Por exemplo, um modelo para identificar um reCaptcha de gatos
-pode ser facilmente desenvolvido a partir de uma base pré-classificada,
-potencialmente custosa para ser construída. O reCaptcha v2, no entanto,
-pode facilmente mudar a tarefa para identificar leões, cães, hidrantes e
-semáforos, inutilizando o modelo criado para classificar gatos. O
-reCaptcha v2 também foi um sucesso para treinar os modelos desenvolvidos
-pela própria Google: usando o mesmo princípio do reCaptcha v1, a
-humanidade era verificada com apenas uma parte das imagens. As outras
-imagens eram utilizadas para rotular imagens, utilizadas para aprimorar
-os modelos utilizados nos projetos de carros autônomos, Google Street
-View e outras iniciativas da empresa.
+A mudança do tipo de tarefa de visão computacional foi importante para o
+sucesso do reCaptcha v2. Isso ocorre porque o desafio é mais difícil, já
+que existem muito mais objetos e imagens do que letras e números,
+aumentando significativamente o suporte da variável resposta. Por
+exemplo, um modelo para identificar um reCaptcha de gatos pode ser
+facilmente desenvolvido a partir de uma base anotada, potencialmente
+custosa para ser construída. O reCaptcha v2, no entanto, pode facilmente
+mudar a tarefa para identificar leões, cães, hidrantes e semáforos,
+inutilizando o modelo criado para classificar gatos. O reCaptcha v2
+também foi um sucesso para treinar os modelos desenvolvidos pela própria
+Google: usando o mesmo princípio do reCaptcha v1, a humanidade era
+verificada com apenas uma parte das imagens. As outras imagens eram
+utilizadas para rotular imagens, utilizadas para aprimorar os modelos
+utilizados nos projetos de carros autônomos, Google Street View e outras
+iniciativas da empresa.
 
 \begin{figure}
 
@@ -984,18 +1013,18 @@ e ii) uma nova forma de vencer a luta.
 Até o momento de escrita da tese, não existia um modelo geral que
 resolvesse com alta acurácia todos os desafios colocados pelo reCaptcha
 v2 e seus concorrentes. No entanto, vários avanços apareceram no sentido
-de reduzir a quantidade de imagens rotuladas para criar candidatos a
+de reduzir a quantidade de imagens anotadas para criar candidatos a
 resolvedores. Dentre eles, o mais significativos são os baseados nas
 redes generativas adversariais (\emph{Generative Adversarial Networks,}
 ou GANs), propostas no famoso trabalho de GOODFELLOW et al. (2014). O
 primeiro trabalho que utiliza modelos generativos no contexto de
-Captchas mostrou uma redução de 300x na quantidade de dados
-classificados necessária para resolver um Captcha (GEORGE et al. (2017);
-nesse caso, os autores propõem uma rede diferente do GAN, chamada
-\emph{Recursive Cortical Network}, ou RCN). Outros trabalhos mais
-recentes (WANG et al., 2021; YE et al., 2018) avançam ainda mais na
-pesquisa, reduzindo o trabalho de classificação para um novo Captcha de
-texto para aproximadamente 2 horas.
+Captchas mostrou uma redução de 300x na quantidade de dados anotados
+necessária para resolver um Captcha (GEORGE et al. (2017); nesse caso,
+os autores propõem uma rede diferente do GAN, chamada \emph{Recursive
+Cortical Network}, ou RCN). Outros trabalhos mais recentes (WANG et al.,
+2021; YE et al., 2018) avançam ainda mais na pesquisa, reduzindo o
+trabalho de classificação para um novo Captcha de texto para
+aproximadamente 2 horas.
 
 Mas foi em 2018, com o reCaptcha v3, que a Google deu a palavra final.
 Com a nova versão, as verificações de navegador passaram a ser muito
@@ -1062,7 +1091,7 @@ desafios.
 Outra alternativa é desenvolver modelos que aprendem com poucos dados
 anotados. Como comentado anteriormente, GANs e modelos relacionados
 podem apresentar bons resultados na resolução de tarefas de imagens,
-mesmo com uma base de dados anotada. Nesse sentido, ainda que um site
+mesmo com uma base de dados pequena. Nesse sentido, ainda que um site
 mude seu Captcha, é possível ajustar um modelo que resolve esse Captcha
 sem a necessidade de anotar muitos exemplos para construir uma nova base
 de treino.
@@ -1103,12 +1132,12 @@ acerto e que apresenta o histórico de erros no caso de erro. O modelo
 inicial poderia ser ajustado com as técnicas usuais de modelagem, ou
 utilizando um modelo mais sofisticado como GAN.
 
-Infelizmente, utilizar somente os casos classificados corretamente,
-obtidos dos acertos no teste do oráculo, induz viés de seleção na
-amostra (NA et al., 2020). Como o modelo só tem acesso aos casos em que
-já funciona bem, a informação obtida não é tão relevante. O desafio de
-modelagem da tese reside em como considerar a informação fornecida pelo
-oráculo nos casos em que o modelo inicial erra.
+Infelizmente, utilizar somente os casos anotados corretamente, obtidos
+dos acertos no teste do oráculo, induz viés de seleção na amostra (NA et
+al., 2020). Como o modelo só tem acesso aos casos em que já funciona
+bem, a informação obtida não é tão relevante. O desafio de modelagem da
+tese reside em como considerar a informação fornecida pelo oráculo nos
+casos em que o modelo inicial erra.
 
 Do ponto de vista estatístico, a informação produzida pelo oráculo pode
 ser entendida como uma informação censurada (COLOSIMO; GIOLO, 2006).
@@ -1120,11 +1149,11 @@ gerada por acaso.
 Na área de aprendizado de máquinas, um modelo apresenta resposta
 censurada ou incompleta é colocado na classe de problemas do aprendizado
 fracamente supervisionado (ZHOU, 2018). Trata-se de uma área ainda pouco
-investigada estudada na literatura, mas bastante ampla, englobando não
-só os métodos supervisionados como também os métodos
-semi-supervisionados. A tese apresentará os conceitos de aprendizado
-fracamente supervisionado, com foco na classe de problemas que a
-modelagem utilizando Captchas representa.
+investigada na literatura, mas bastante ampla, englobando não só os
+métodos supervisionados como também os métodos semi-supervisionados. A
+tese apresentará os conceitos de aprendizado fracamente supervisionado,
+com foco na classe de problemas que a modelagem utilizando Captchas
+representa.
 
 Para criar uma base de dados usando o oráculo, é necessário utilizar
 técnicas de raspagem de dados, imitando repetidamente o que um usuário
@@ -2803,9 +2832,9 @@ uma lista de CNPJs.
 No contexto dos Captchas, o interesse está nos passos de Replicar e
 Validar. Estes são os passos em que a imagem é baixado e o rótulo é
 anotado e testado no servidor. Esses são os passos relacionados à
-classificação manual, e também à implementação do oráculo.
+anotação manual, e também à implementação do oráculo.
 
-A classificação manual dos Captchas envolve o trabalho de baixar, anotar
+A anotação manual dos Captchas envolve o trabalho de baixar, anotar
 (manualmente) e verificar se a anotação está correta. Trata-se de um
 trabalho repetitivo e dispendioso, utilizado para gerar as simulações do
 trabalho.
@@ -2832,7 +2861,7 @@ os passos a seguir.
   Baixar a imagem do Captcha da busca.
 \item
   Obter o rótulo da imagem, aplicando um modelo na imagem baixada ou
-  classificado manualmente.
+  anotado manualmente.
 \item
   Submeter a consulta no site, informando o rótulo.
 \item
@@ -2893,25 +2922,24 @@ semi-automático, definido a seguir. No pacote
 \texttt{\{captchaDownload\}} (ver Apêndice \ref{sec-pacote-download}),
 foram desenvolvidas ferramentas para baixar e organizar cada Captcha,
 utilizando o oráculo para garantir que as imagens eram corretamente
-classificadas.
+anotadas.
 
-Cada Captcha teve as primeiras 100 observações classificadas
-manualmente. Isso foi feito a partir do próprio RStudio, utilizando a
-ferramenta de classificação manual do pacote \texttt{\{captcha\}}.
+Cada Captcha teve as primeiras 100 observações anotadas manualmente.
+Isso foi feito a partir do próprio RStudio, utilizando a ferramenta de
+anotação manual do pacote \texttt{\{captcha\}}.
 
-A partir das classificações iniciais, um modelo foi ajustado com a
-quantidade de observações disponível. Esse passo também foi feito a
-partir do pacote \texttt{\{captcha\}}, que cria um projeto de
-classificação para um Captcha específico.
+A partir das anotações iniciais, um modelo inicial foi ajustado. Esse
+passo também foi feito com o pacote \texttt{\{captcha\}}, que possui uma
+função de ajuste de modelos.
 
 O modelo, então, foi utilizado como uma ferramenta para otimizar a
-classificação manual, funcionando da seguinte forma. Primeiro, o modelo
-tenta realizar a predição automaticamente e o oráculo avisa se a
-predição está correta ou não. Se estiver incorreto e o site aceitar
-várias tentativas, o modelo tenta novamente, mas com uma segunda
-alternativa de predição. Caso o site não aceite várias tentativas ou o
-modelo não consiga acertar o Captcha em \(N\) tentativas (abritrado como
-dez), a imagem do Captcha aparece para classificação manual.
+anotação manual, funcionando da seguinte forma. Primeiro, o modelo tenta
+realizar a predição automaticamente e o oráculo avisa se a predição está
+correta ou não. Se estiver incorreto e o site aceitar várias tentativas,
+o modelo tenta novamente, mas com uma segunda alternativa de predição.
+Caso o site não aceite várias tentativas ou o modelo não consiga acertar
+o Captcha em \(N\) tentativas (abritrado como dez), a imagem do Captcha
+aparece para anotação manual.
 
 Com o procedimento destacado acima, é criada uma nova base de dados, que
 por sua vez é utilizada para ajustar um novo modelo. O modelo,
@@ -2919,18 +2947,17 @@ atualizado, é utilizado para classificar novos Captchas, e assim por
 diante, até que o modelo ajustado alcance uma acurácia razoável, que foi
 arbitrada em 80\%. Com isso o procedimento de anotação é finalizado.
 
-O único problema do procedimento de classificação diz respeito aos
-Captchas que não aceitam várias tentativas. Nesses casos, não é possível
-verificar com certeza absoluta que um caso classificado manualmente
-(após a tentativa do modelo) foi classificado corretamente, já que a
-classificação manual seria a segunda tentativa. No entanto, esse
-problema aparece somente em três Captchas (\texttt{cadesp},
-\texttt{jucesp} e \texttt{trf5}). A classificação manual dos 100
-primeiros Captchas, no entanto, mostrou que pelo menos 95\% dos Captchas
-foram classificados corretamente quando classificados manualmente. A
-proporção máxima de 5\% de erro é negligenciável considerando que a
-maior parte das bases de dados foi construída com verificação do
-oráculo.
+O único problema do procedimento de anotação diz respeito aos Captchas
+que não aceitam várias tentativas. Nesses casos, não é possível
+verificar com certeza absoluta que um caso anotado manualmente (após a
+tentativa do modelo) foi anotado corretamente, já que a anotação manual
+seria a segunda tentativa. No entanto, esse problema aparece somente em
+três Captchas (\texttt{cadesp}, \texttt{jucesp} e \texttt{trf5}). A
+anotação manual dos 100 primeiros Captchas, no entanto, mostrou que pelo
+menos 95\% dos Captchas foram anotados corretamente quando anotados
+manualmente. A proporção máxima de 5\% de erro é negligenciável
+considerando que a maior parte das bases de dados foi construída com
+verificação do oráculo.
 
 Em alguns casos, os rótulos dos Captchas podem ser obtidos sem
 intervenção humana, utilizando técnicas de raspagem de dados e
@@ -3187,7 +3214,7 @@ utilizar informações de bases anteriores. Para construir as bases,
 utilizou-se a mesma técnica semi-automática definida anteriormente,
 usando o melhor modelo disponível para classificar a maioria das imagens
 e classificando manualmente em caso de falha. Em alguns casos, como TJMG
-e TJRS, a classificação humana quase não foi necessária, pois os
+e TJRS, a anotação humana quase não foi necessária, pois os
 classificadores obtidos apresentaram acurácia próxima de 100\%.
 
 Como o único objetivo da base de teste foi o de estimar a acurácia dos
@@ -3201,9 +3228,9 @@ cada Captcha.
 O modelo final foi ajustado para cada uma das 65 bases de treino
 disponíveis após a realização dos passos 1 e 2. Nesse caso, utilizou-se
 o modelo proposto na Seção~\ref{sec-wawl}. Caso a imagem tenha sido
-corretamente classificada, a função de perda é calculada normalmente.
-Caso ela tenha sido classificada incorretamente, considera-se a
-probabilidade de não observar nenhum dos chutes.
+corretamente anotada, a função de perda é calculada normalmente. Caso
+ela tenha sido anotada incorretamente, considera-se a probabilidade de
+não observar nenhum dos chutes.
 
 Além de modificar a forma de calcular a função de perda do modelo, foi
 necessário realizar uma nova busca de hiperparâmetros. Optou-se por
