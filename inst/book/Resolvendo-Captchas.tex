@@ -637,10 +637,10 @@ Interaction Proofs,} ou HIPs (CHELLAPILLA et al., 2005).
 Um Captcha pode ser classificado como uma variação do teste de Turing
 (TURING, 2009). A diferença no caso do Captcha é que a avaliação da
 humanidade do agente é feita por um robô ao invés de uma pessoa -- por
-isso o termo \emph{automated}. Captchas podem ser classificados em
-algumas situações com os chamados \textbf{testes de Turing reversos},
-apesar dos autores originais afastarem essa caracterização (AHN; BLUM;
-LANGFORD, 2002).
+isso o termo \emph{automated}. Em algumas situações, Captchas também
+podem ser entendidos como \textbf{testes de Turing reversos}, apesar dos
+autores originais afastarem essa caracterização (AHN; BLUM; LANGFORD,
+2002).
 
 Captchas estão presentes em toda a internet. Inicialmente criados para
 prevenir \emph{spam} (\emph{Sending and Posting Advertisement in Mass}),
@@ -662,46 +662,50 @@ utilizados como forma de evitar evitar o uso indevido de aplicações da
   Consulta automatizada em sites para obtenção de dados.
 \end{itemize}
 
-O uso de Captchas tem, por princípio, o objetivo de aumentar a segurança
+Por princípio, o uso de Captchas tem como objetivos aumentar a segurança
 das pessoas que acessam a internet e proteger os sistemas \emph{web} de
 uso abusivo. Para pessoas que acessam os sites pontualmente, a presença
 de Captchas representa um mero dissabor; para quem realiza acessos
 massivos, uma grande dificuldade.
 
 No entanto, o uso de Captchas não é adequado em todas as situações. Um
-exemplo são os sites de vendas: o uso dos desafios pode aborrecer o
-usuário, alterando a qualidade da sua experiência. Os sites devem levar
-esse fator de aborrecimento em conta para não reduzir a taxa de
-conversão. Em alguns casos, pode fazer mais sentido abandonar os
-Captchas e utilizar outros mecanismos de prevenção à fraude, como
-monitoramento da sessão do usuário (W3C, 2021).
+exemplo são os sites de vendas: o uso dos desafios pode aborrecer
+usuários, reduzindo a qualidade da experiência ao consumir nesses sites.
+Os sites devem levar esse fator de aborrecimento em conta para não
+reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido
+abandonar os Captchas e utilizar outros mecanismos de prevenção à
+fraude, como monitoramento da sessão do usuário (W3C, 2021).
 
-Também existem casos em que o uso de Captchas é prejudicial. Sua
-utilização em serviços públicos do Brasil, por exemplo, é problemática,
-como discutido na próxima seção.
+Também existem casos em que o uso de Captchas é prejudicial. Por
+exemplo, sua utilização em serviços públicos do Brasil é problemática.
+Para explicar esse problema, no entanto, é necessário descrever o
+contexto jurídico e como pesquisas aplicadas podem ser prejudicadas com
+o uso de Captchas.
 
 \hypertarget{sec-captchas-publicos}{%
 \section{Captchas em serviços públicos}\label{sec-captchas-publicos}}
 
-A Constituição Federal de 1988 (CF), em seu inciso XXXIII do art. 5º,
-prevê que ``todos têm direito a receber dos órgãos públicos informações
-de seu interesse particular, ou de interesse coletivo ou geral, que
-serão prestadas no prazo da lei, sob pena de responsabilidade,
-ressalvadas aquelas cujo sigilo seja imprescindível à segurança da
-sociedade e do Estado;''. Essa previsão é implementada pela Lei de
-Acesso à Informação (Lei 12.527/2011; LAI), que se aplica ``aos órgãos
-públicos integrantes da administração direta dos Poderes Executivo,
-Legislativo, incluindo as Cortes de Contas, e Judiciário e do Ministério
-Público'', bem como ``as autarquias, as fundações públicas, as empresas
-públicas, as sociedades de economia mista e demais entidades controladas
-direta ou indiretamente pela União, Estados, Distrito Federal e
-Municípios'' (Art. 1º).
+A Constituição Federal de 1988 (CF), em seu
+\href{https://constituicao.stf.jus.br/dispositivo/cf-88-parte-1-titulo-2-capitulo-1-artigo-5-inciso-33}{inciso
+XXXIII do art. 5º}, prevê que ``todos têm direito a receber dos órgãos
+públicos informações de seu interesse particular, ou de interesse
+coletivo ou geral, que serão prestadas no prazo da lei, sob pena de
+responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à
+segurança da sociedade e do Estado;''. Essa previsão é implementada pela
+Lei de Acesso à Informação
+(\href{https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm}{Lei
+12.527/2011}; LAI), que se aplica ``aos órgãos públicos integrantes da
+administração direta dos Poderes Executivo, Legislativo, incluindo as
+Cortes de Contas, e Judiciário e do Ministério Público'', bem como ``as
+autarquias, as fundações públicas, as empresas públicas, as sociedades
+de economia mista e demais entidades controladas direta ou indiretamente
+pela União, Estados, Distrito Federal e Municípios'' (Art. 1º).
 
 A LAI, apesar de trazer diversos benefícios à sociedade, tem dois
-problemas. A primeira é o \textbf{esforço}: tanto a pessoa/órgão que
+problemas. O primeiro é o \textbf{esforço}: tanto a pessoa/órgão que
 solicita os dados, quanto o órgão que retorna os dados precisam
 trabalhar para disponibilizar as informações, sendo necessário deslocar
-equipes para realizar os levantamentos pedidos. A segunda é o
+equipes para realizar os levantamentos pedidos. O segundo é o
 \textbf{formato}: os dados enviados como resultado de pedidos de LAI
 podem chegar em formatos inadequados para consumo da solicitante, muitas
 vezes em \emph{Portable Document Format} (PDF), que dificulta a leitura
@@ -711,24 +715,25 @@ pedido feito em diferentes períodos (e.g.~uma atualização mensal dos
 dados) pode vir em formatos diferentes, dificultando a leitura e
 arrumação dos dados.
 
-Uma forma de evitar os problemas de esforço e formato em pedidos de LAI
-é disponibilizar os dados de \textbf{forma aberta}. Como definido pela
-\emph{Open Knowledge Foundation} (OKFN), a base de dados ``deve ser
-fornecida em uma forma conveniente e modificável isento de obstáculos
-tecnológicos desnecessários para a realização dos direitos licenciados.
-Especificamente, os dados devem ser legíveis por máquina, disponíveis em
-todo o seu volume, e fornecidos em um formato aberto (ou seja, um
-formato com sua especificação livremente disponível, e publicada sem
-qualquer restrições, monetárias ou não, da sua utilização) ou, no
-mínimo, podem ser processados com pelo menos uma ferramenta de software
-livre e gratuita.''\footnote{Link: \url{https://okfn.org/opendata/}.
-  Último acesso em 01/11/2022.}
+Uma forma eficiente de evitar os problemas de esforço e formato em
+pedidos de LAI é disponibilizar os dados de \textbf{forma aberta}. Como
+definido pela \emph{Open Knowledge Foundation} (OKFN), a base de dados
+``deve ser fornecida em uma forma conveniente e modificável isento de
+obstáculos tecnológicos desnecessários para a realização dos direitos
+licenciados. Especificamente, os dados devem ser legíveis por máquina,
+disponíveis em todo o seu volume, e fornecidos em um formato aberto (ou
+seja, um formato com sua especificação livremente disponível, e
+publicada sem qualquer restrições, monetárias ou não, da sua utilização)
+ou, no mínimo, podem ser processados com pelo menos uma ferramenta de
+software livre e gratuita.''\footnote{Link:
+  \url{https://okfn.org/opendata/}. Último acesso em 01/11/2022.}
 
 As vantagens ao disponibilizar dados públicos de forma aberta para a
 sociedade é um tema pacífico na comunidade científica (MURRAY-RUST,
-2008). Infelizmente, existem diversos dados públicos que não estão
-disponíveis de forma aberta, em plataformas como o
-\href{https://dados.gov.br}{dados.gov.br}.
+2008). No Brasil, existem plataformas dedicadas à abertura de dados
+governamentais, como o \href{https://dados.gov.br}{dados.gov.br}. No
+entanto, existem diversos dados públicos que ainda não estão disponíveis
+de forma aberta.
 
 A dificuldade de acesso é particularmente evidente no Poder Judiciário,
 que além de não disponibilizar um portal de dados abertos, impõe
@@ -751,16 +756,16 @@ inclusive, negar o pedido de acesso.
 A dificuldade para acessar os dados do judiciário é a principal barreira
 para realização de pesquisas pela Associação Brasileira de Jurimetria
 (ABJ), empresa na qual o autor desta tese trabalha. A entidade tem como
-missão principal a realização de estudos para implementar políticas
+missão principal realizar estudos empíricos para implementar políticas
 públicas utilizando dados do judiciário.
 
 Dos 16 projetos disponibilizados na
 \href{https://abj.org.br/pesquisas/}{página de pesquisas no site da
 ABJ}, pelo menos 12 (75\%) apresentaram dificuldades na obtenção dos
-dados via pedidos de acesso aos órgãos. Três exemplos icônicos são o da
-pesquisa sobre Tempo dos processos relacionados à adoção no Brasil (ABJ,
-2014), o Observatório da Insolvência: Rio de Janeiro (ABJ, 2021) e o
-Diagnóstico do Contencioso Tributário Administrativo (ABJ, 2022). No
+dados via pedidos de acesso aos órgãos. Três exemplos emblemáticos são o
+da pesquisa sobre Tempo dos processos relacionados à adoção no Brasil
+(ABJ, 2014), o Observatório da Insolvência: Rio de Janeiro (ABJ, 2021) e
+o Diagnóstico do Contencioso Tributário Administrativo (ABJ, 2022). No
 primeiro caso, dois tribunais enviaram os dados em arquivos em papel,
 sendo que um deles ultrapassou mil páginas com números de processos
 impressos. No segundo caso, o pedido foi respondido com uma planilha de
@@ -770,14 +775,13 @@ de acesso a dados de processos tributários em primeira instância, com
 argumentos que variavam desde a dificuldade técnica de levantar os dados
 até a Lei Geral de Proteção de Dados (LGPD).
 
-Em muitas situações, portanto, a única alternativa para realizar as
-pesquisas é acessando os dados via coleta automatizada nos sites. Todos
-os tribunais possuem ferramentas de consulta individualizadas de
-processos, por conta do que está previsto na CF. A solução, portanto,
-passa a ser construir uma ferramenta que obtém todos os dados
-automaticamente. Tal conceito é conhecido como \emph{raspagem de dados}
-(ZHAO, 2017) e será desenvolvido com maiores detalhes no
-Capítulo~\ref{sec-metodologia}.
+Em muitas situações a única alternativa para realizar as pesquisas é
+acessando os dados via coleta automatizada nos sites. Todos os tribunais
+possuem ferramentas de consulta individualizadas de processos, por conta
+do que está previsto na CF. A solução, portanto, passa a ser construir
+uma ferramenta que obtém todos os dados automaticamente. Tal conceito é
+conhecido como \emph{raspagem de dados} (ZHAO, 2017) e será desenvolvido
+com maiores detalhes no Capítulo~\ref{sec-metodologia}.
 
 Os Captchas se tornam prejudiciais à sociedade quando o acesso
 automatizado é necessário para realizar pesquisas científicas.
@@ -790,65 +794,68 @@ sobre o tema.
 
 Uma justificativa comum para implementar Captchas em consultas públicas
 é a estabilidade dos sistemas. Ao realizar muitas consultas de forma
-automática, um robô pode tornar o sistema instável e, em algumas
-situações, até mesmo derrubar o servidor que disponibiliza as consultas.
+automática, um robô que faz consultas automatizadas pode tornar o
+sistema instável e, em algumas situações, até mesmo derrubar o servidor
+ou banco de dados que disponibiliza as consultas.
 
 O problema é que utilizar Captchas não impede o acesso automatizado. As
 empresas que fazem acesso automatizado em tribunais podem construir
 ferramentas ou utilizar serviços externos de resolução de Captchas. Ou
-seja, ao utilizar Captchas, o acesso não é impedido, e sim
+seja, ao utilizar Captchas, o acesso não é impedido, apenas
 especializado.
 
-Além disso, utilizar Captchas é uma solução ineficiente. Do ponto de
-vista técnico, a solução mais eficiente para disponibilizar os dados é
-através de ferramentas de dados abertos como o \emph{Comprehensive
-Knowledge Archive Network} (CKAN). Ao disponibilizar os dados de forma
-aberta, as consultas automatizadas ficariam isoladas dos sites de
-consulta pública, o que garantiria o acesso das pessoas sem problemas de
-indisponibilidade.
+Utilizar Captchas também é uma solução ineficiente. Do ponto de vista
+técnico, a solução mais eficiente para disponibilizar os dados é através
+de ferramentas de dados abertos como o
+\href{https://ckan.org/}{\emph{Comprehensive Knowledge Archive Network}
+(CKAN)}. Ao disponibilizar os dados de forma aberta, as consultas
+automatizadas ficariam isoladas dos sites de consulta pública, o que
+garantiria o acesso das pessoas sem problemas de indisponibilidade.
 
-Não é só para as pessoas que fazem pesquisa com dados públicos que o uso
-de Captchas pode ser prejudicial. No mercado, existem serviços de
-resolução de Captcha que utilizam mão de obra humana, em regimes que
-pagam muito menos do que um salário mínimo a 8 horas de trabalho. Um
-exemplo é o 2Captcha\footnote{\href{https://2captcha.com/make-money-online}{Link
-  do 2Captcha}. Último acesso em 01/11/2022.}, que funciona como um Uber
+Não é só quem faz pesquisa com dados públicos que o uso de Captchas pode
+ser prejudicial. No mercado, existem serviços de resolução de Captchas
+que utilizam mão de obra humana, em regimes que pagam muito menos do que
+um salário mínimo a 8 horas de trabalho. Um exemplo é o
+2Captcha\footnote{\href{https://2captcha.com/make-money-online}{Link do
+  2Captcha}. Último acesso em 01/11/2022.}, que funciona como um Uber
 dos Captchas: o algoritmo automatizado envia o Captcha para a
 plataforma, que é acessado e resolvido por uma pessoa, retornando a
 solução para o algoritmo. O 2Captcha é operado pela ALTWEB LLC-FZ, uma
 empresa com base em Dubai\footnote{\href{https://2captcha.com/terms-of-service}{Link
   dos termos de serviço do 2Captcha}. Último acesso em 01/11/2022.}.
 
-Segundo o site, o valor pago pelo 2Captcha é de US\$ 0.5 para 1 a 2
+Segundo o site, o valor pago pelo 2Captcha é de US\$ 0,5 para 1 a 2
 horas de trabalho. No regime da Consolidação das Leis do Trabalho
-(Decreto-Lei 5.452/1943, CLT) as horas mensais de trabalho são 220.
-Trabalhando continuamente no 2Captcha, isso daria um salário de 55 a 110
-dólares por mês, valor bem abaixo do salário mínimo, que no ano de 2022
+(\href{https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm}{Decreto-Lei
+5.452/1943}, CLT) as horas mensais de trabalho são 220. Trabalhando
+continuamente no 2Captcha, isso daria um salário de 55 a 110 dólares por
+mês, valor bem abaixo do salário mínimo do Brasil, que no ano de 2022
 era de R\$ 1.100,00\footnote{Fonte:
   \href{http://www.ipeadata.gov.br/exibeserie.aspx?stub=1\&serid1739471028=1739471028}{IPEA}.
-  Último acesso em 01/11/2022.}. Ou seja, os serviços públicos acabam,
+  Último acesso em 01/11/2022.}, mesmo considerando os valores mais
+altos de taxa de câmbio. Ou seja, os serviços públicos acabam,
 indiretamente, incentivando um mercado que paga abaixo do salário
 mínimo. Luis von Ahn, um dos criadores dos Captchas, define o 2Captcha
 como um \emph{sweatshop}, um termo utilizado para caracterizar empresas
 que têm condições de trabalho inaceitáveis.
 
-A solução definitiva para os problemas gerado pelos Captchas é a
+A solução definitiva para os problemas gerados pelos Captchas é a
 disponibilização dos dados públicos de forma aberta. Na ausência dessa
 solução, seja por falta de interesse ou iniciativa dos órgãos públicos,
 a alternativa é desenvolver uma solução para resolver Captchas que seja
 gratuita e aberta. Tal solução desincentivaria economicamente o uso de
 sistemas como o 2Captcha, protegendo as pessoas que fazem as resoluções
-e permitindo que as pessoas pesquisadoras realizem seus levantamentos.
+e auxiliando pesquisadores em seus estudos.
 
 O presente trabalho busca avançar nesse sentido. A solução desenvolvida
 envolve um modelo que resolve alguns Captchas automaticamente, reduzindo
-significativamente a necessidade de rotulação manual.
+significativamente a necessidade de anotação manual.
 
 Para compreender completamente o avanço que a tese representa, no
 entanto, é necessário apresentar o histórico de desenvolvimento dos
-Captchas. O histórico é apresentado na próxima Seção, através da luta de
-geradores e resolvedores de Captchas, que pode ser dada como encerrada
-no ano de 2018, com o advento do \emph{reCaptcha v3}.
+Captchas. A descrição é feita através de uma luta entre geradores e
+resolvedores de Captchas, que pode ser dada como encerrada no ano de
+2018, com o advento do \emph{reCaptcha v3}.
 
 \hypertarget{sec-historia}{%
 \section{Uma luta entre geradores e resolvedores}\label{sec-historia}}
@@ -858,28 +865,28 @@ LANGFORD (2002). O texto apresenta o Captcha e seu significado através
 do problema de geração de \emph{emails} automáticos no Yahoo. Em
 seguida, apresenta alguns exemplos de candidatos a Captcha, com tarefas
 de reconhecimento de padrões ou textos. Uma característica interessante
-que os autores colocam sobre o Captcha é que suas imagens devem ser
-disponíveis publicamente. O texto também faz a conexão entre a tarefa
-dos Captchas e os desafios da inteligência artificial. Um ponto a
-destacar é que os autores defendem que os Captchas devem ser resolvidos,
-pois isso implica em avanços na inteligência artificial. O site original
-do projeto, \emph{The Captcha Project}, foi lançado em 2000.
+dos autores sobre o Captcha é que suas imagens devem ser disponíveis
+publicamente. O texto também faz a conexão entre a tarefa dos Captchas e
+os desafios da inteligência artificial. Um ponto a destacar é que os
+autores incentivam pesquisas para resolver Captchas, pois isso implica
+em avanços na inteligência artificial. O site original do projeto,
+\href{https://web.archive.org/web/20010723114217/http://www.captcha.net/}{\emph{The
+Captcha Project}}, foi lançado em 2000.
 
 O relatório técnico de AHN; BLUM; LANGFORD (2002) não foi o primeiro a
 apresentar o nome Captcha, nem suas aplicações. RESHEF; RAANAN; SOLAN
 (2005) foi o primeiro registro de patente com o termo e LILLIBRIDGE et
 al. (2001) foi o primeiro registro de patente que implementou uma
-solução aos sistemas de Captchas. No entanto, o relatório de 2002 é o
-primeiro que reconhecidamente trata do tema como um problema de
+solução aos sistemas de Captchas. No entanto, o relatório técnico de
+2002 é o primeiro que reconhecidamente trata do tema como um problema de
 inteligência artificial como um teste de Turing automatizado.
 
 Os artigos mais conhecidos de introdução aos Captchas são VON AHN et al.
 (2003) e VON AHN; BLUM; LANGFORD (2004). O conteúdo dos trabalhos é o
 mesmo, sendo o primeiro deles na forma de apresentação e o segundo na
-forma de relatório. A apresentação é a primeira a mostrar o projeto
-reCaptcha, que será comentado em uma subseção própria. Um detalhe
-interessante é a ênfase dos autores no termo \emph{Public} dos Captchas,
-mostrando a preocupação em manter os códigos públicos.
+forma de relatório. Um detalhe interessante é a ênfase dos autores no
+termo \emph{Public} dos Captchas, mostrando a preocupação em manter os
+códigos públicos.
 
 Os autores também defendem que o Captcha é uma forma de fazer com que
 pessoas mal intencionadas contribuam com os avanços da inteligência
@@ -904,24 +911,24 @@ A partir desse ponto, foi iniciada uma luta entre geradores e
 resolvedores de Captchas. Do lado dos geradores, as pessoas envolvidas
 foram tanto acadêmicos tentando desenvolver desafios cada vez mais
 difíceis para avançar na pesquisa em inteligência artificial, quanto
-empresas de tecnologia tentando se proteger contra programas avançados.
+empresas de tecnologia tentando se proteger contra robôs sofisticados.
 Do lado dos resolvedores, as pessoas envolvidas foram tanto acadêmicos
 tentando desenvolver novas técnicas para avançar nos modelos de
 reconhecimento de imagens, quanto \emph{spammers} buscando novas formas
 de realizar ataques cibernéticos.
 
 Uma das pessoas envolvidas com geradores de Captchas mais conhecidas é
-Luis von Ahn, que um dos criadores do artigo original do Captcha. Um
-pedaço da história está disponível nos primeiros cinco minutos da
-entrevista com Luis Von Ahn em um programa chamado
-\emph{Spark}\footnote{Spark, 2011.
+Luis von Ahn, um dos criadores do artigo original do Captcha. Um pedaço
+da história dos Captchas está disponível nos primeiros cinco minutos de
+sua entrevista em um programa britânico chamado \emph{Spark}\footnote{Spark,
+  2011.
   \href{https://web.archive.org/web/20120603142110/http://www.cbc.ca/spark/2011/11/full-interview-luis-von-ahn-on-duolingo/}{Link
   no Web Archive}. Último acesso em 01/11/2022.}. Na entrevista, Von Ahn
-conta um pouco da origem dos Captchas em Carnegie Mellon, contando que
-ficou frustrado com o fato das pessoas perderem tempo de inteligência
-humana ao resolver Captchas, o que deu origem ao reCaptcha. Outro vídeo
-instrutivo é uma palestra de Von Ahn na \emph{Thinking Digital
-Conference} sobre a história do reCaptcha\footnote{\href{https://www.youtube.com/watch?v=i_5ew4btJiQ}{Link
+conta um pouco sobre origem dos Captchas em Carnegie Mellon, contando
+que ficou frustrado com o fato das pessoas perderem tempo de
+inteligência humana ao resolver Captchas, o que deu origem ao reCaptcha.
+Outro vídeo instrutivo é uma palestra de Von Ahn na \emph{Thinking
+Digital Conference} sobre a história do reCaptcha\footnote{\href{https://www.youtube.com/watch?v=i_5ew4btJiQ}{Link
   do vídeo no YouTube}. Último acesso em 01/11/2022.}. Segundo ele, a
 \emph{startup} foi criada em maio de 2007\footnote{Segundo o
   \href{https://www.wired.com/2007/06/ff-humancomp/}{texto da Wired}:
@@ -929,22 +936,24 @@ Conference} sobre a história do reCaptcha\footnote{\href{https://www.youtube.co
   reCaptcha, a service that he believes is the toughest Captcha yet
   devised. ReCaptcha presents users with two stretched and skewed words,
   each bisected by a diagonal line''.} Último acesso em 01/11/2022.},
-depois de von Ahn perceber que aproximadamente 200 milhões de Captchas
+depois de Von Ahn verificar que aproximadamente 200 milhões de Captchas
 eram resolvidos diariamente.
 
-O reCaptcha v1 foi uma solução de aproveitar o tempo das pessoas que
-resolvem Captchas para digitalizar livros (AHN et al., 2008). A ideia do
-reCaptcha, como demonstrada na Figura~\ref{fig-recaptcha-v1}, foi
-apresentar duas palavras distorcidas para a pessoa. A primeira palavra
-seria uma palavra que as ferramentas de OCR (\emph{Optical Character
-Recognition}) conseguiram ler com sucesso (no caso da imagem, a palavra
-``upon''), enquanto a segunda seria uma palavra em que a ferramenta de
-OCR falhou (no caso da imagem, a palavra ``between''). A primeira
-palavra seria utilizada para verificar se o agente era ou não humano, e
-a segunda seria utilizada para decifrar a palavra e aprimorar as
-ferramentas de OCR. Em 2009, a empresa foi comprada pela Google, que
-utilizou o reCaptcha v1 para digitalizar os livros que estão presentes
-no site \href{https://books.google.com.br/}{Google Books}.
+O reCaptcha v1 aproveitou o tempo das pessoas que resolvem Captchas para
+digitalizar livros (AHN et al., 2008). A ideia do reCaptcha, como
+demonstrada na Figura~\ref{fig-recaptcha-v1}, foi apresentar duas
+palavras distorcidas para a pessoa. Imagine que uma ferramenta de OCR
+(\emph{Optical Character Recognition}) está digitalizando a página de um
+livro que foi escaneada de um documento físico, ou seja, está
+transformando a foto da página do livro em um arquivo de texto. Na
+Figura, ``upon'' seria uma palavra que a ferramenta de OCR conseguiu
+transformar a imagem em texto com sucesso, enquanto ``between'' seria
+uma palavra em que a ferramenta de OCR falhou. A primeira palavra seria
+utilizada para verificar se o agente era ou não humano, e a segunda
+seria utilizada para decifrar a palavra e aprimorar as ferramentas de
+OCR. Em 2009, a empresa foi comprada pela Google, que utilizou o
+reCaptcha v1 para digitalizar os livros que estão presentes no site
+\href{https://books.google.com.br/}{Google Books}.
 
 \begin{figure}
 
@@ -958,14 +967,14 @@ funcionamento do reCaptcha}
 \end{figure}
 
 Curiosamente, foi com a própria Google que os resolvedores ficaram em
-vantagem na luta. Os modelos de inteligência artificial continuaram
-avançando, notadamente com o avanço dos modelos de redes neurais
-profundas (LECUN; BENGIO; HINTON, 2015). No trabalho de GOODFELLOW et
-al. (2013), todos funcionários da Google na época, foi apresentado um
-modelo de redes neurais convolucionais que resolvia o reCaptcha v1 com
-99.8\% de acurácia. No ano seguinte, em 2014, a Google descontinuou o
-reCaptcha v1, lançando o reCaptcha v2.\footnote{\emph{Are you a robot?
-  Introducing No Captcha reCaptcha.} Acessível no
+vantagem na luta contra geradores. Os modelos de inteligência artificial
+continuaram avançando, notadamente com o avanço dos modelos de redes
+neurais profundas (LECUN; BENGIO; HINTON, 2015). No trabalho de
+GOODFELLOW et al. (2013), todos funcionários da Google na época, foi
+apresentado um modelo de redes neurais convolucionais que resolvia o
+reCaptcha v1 com 99,8\% de acurácia. No ano seguinte, em 2014, a Google
+descontinuou o reCaptcha v1, lançando o reCaptcha v2.\footnote{\emph{Are
+  you a robot? Introducing No Captcha reCaptcha.} Acessível no
   \href{https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html}{blog
   da Google}. Último acesso em 01/11/2022.}
 
@@ -975,22 +984,6 @@ que utiliza heurísticas para detectar se o padrão de acesso ao site se
 assemelha com um robô ou humano. O segundo foi a mudança no tipo de
 tarefa: ao invés de rotular um texto distorcido, o desafio passou a ser
 identificar objetos e animais, como na Figura~\ref{fig-turkey}.
-
-A mudança do tipo de tarefa de visão computacional foi importante para o
-sucesso do reCaptcha v2. Isso ocorre porque o desafio é mais difícil, já
-que existem muito mais objetos e imagens do que letras e números,
-aumentando significativamente o suporte da variável resposta. Por
-exemplo, um modelo para identificar um reCaptcha de gatos pode ser
-facilmente desenvolvido a partir de uma base anotada, potencialmente
-custosa para ser construída. O reCaptcha v2, no entanto, pode facilmente
-mudar a tarefa para identificar leões, cães, hidrantes e semáforos,
-inutilizando o modelo criado para classificar gatos. O reCaptcha v2
-também foi um sucesso para treinar os modelos desenvolvidos pela própria
-Google: usando o mesmo princípio do reCaptcha v1, a humanidade era
-verificada com apenas uma parte das imagens. As outras imagens eram
-utilizadas para rotular imagens, utilizadas para aprimorar os modelos
-utilizados nos projetos de carros autônomos, Google Street View e outras
-iniciativas da empresa.
 
 \begin{figure}
 
@@ -1003,12 +996,29 @@ perus}
 
 \end{figure}
 
-Com o advento do reCaptcha v2, a pergunta dos resolvedores de Captcha
-passou a ser: como criar modelos que funcionam razoavelmente bem nos
-Captchas sem a necessidade de rotular vários casos? Se esse desafio
-fosse resolvido, dois avanços aconteceriam: i) um grande avanço na
+A mudança do tipo de tarefa de visão computacional foi importante para o
+sucesso do reCaptcha v2. O desafio é mais difícil, já que existem muito
+mais objetos e imagens do que letras e números, aumentando
+significativamente o suporte da variável resposta. Por exemplo, um
+modelo para identificar perus pode ser facilmente desenvolvido a partir
+de uma base anotada, potencialmente custosa para ser construída. O
+reCaptcha v2, no entanto, pode facilmente mudar a tarefa para
+identificar leões, cães, hidrantes e semáforos, inutilizando o modelo
+criado para classificar perus.
+
+O reCaptcha v2 também foi usado para gerar novas bases de dados para a
+Google, usando o mesmo princípio do reCaptcha v1. A humanidade do agente
+é verificada apenas com uma parte das imagens. As outras imagens eram
+utilizadas para anotar imagens, utilizadas para aprimorar modelos
+utilizados nos projetos de carros autônomos, Google Street View e outras
+iniciativas da empresa.
+
+Com o advento do reCaptcha v2, a pergunta de interesse dos resolvedores
+de Captcha passou a ser: como criar modelos que funcionam razoavelmente
+bem sem a necessidade de anotar muitas imagens? Se esse desafio fosse
+resolvido, dois avanços aconteceriam: i) um grande avanço na
 inteligência artificial, especificamente na área de visão computacional,
-e ii) uma nova forma de vencer a luta.
+e ii) uma nova forma de vencer a luta de geradores e resolvedores.
 
 Até o momento de escrita da tese, não existia um modelo geral que
 resolvesse com alta acurácia todos os desafios colocados pelo reCaptcha
@@ -1019,74 +1029,81 @@ redes generativas adversariais (\emph{Generative Adversarial Networks,}
 ou GANs), propostas no famoso trabalho de GOODFELLOW et al. (2014). O
 primeiro trabalho que utiliza modelos generativos no contexto de
 Captchas mostrou uma redução de 300x na quantidade de dados anotados
-necessária para resolver um Captcha (GEORGE et al. (2017); nesse caso,
+necessária para resolver um Captcha (GEORGE et al., 2017). Nesse caso,
 os autores propõem uma rede diferente do GAN, chamada \emph{Recursive
-Cortical Network}, ou RCN). Outros trabalhos mais recentes (WANG et al.,
+Cortical Network}, ou RCN. Outros trabalhos mais recentes (WANG et al.,
 2021; YE et al., 2018) avançam ainda mais na pesquisa, reduzindo o
 trabalho de classificação para um novo Captcha de texto para
 aproximadamente 2 horas.
 
-Mas foi em 2018, com o reCaptcha v3, que a Google deu a palavra final.
-Com a nova versão, as verificações de navegador passaram a ser muito
-mais poderosas, sendo raros os casos em que o site fica em dúvidas se a
-pessoa é ou não um robô. Versões mais recentes, como o reCaptcha
-\emph{Enterprise,} de 2020, ainda permitem que as pessoas que mantêm os
-sites façam o ajuste de modelos de detecção de robôs. Os desafios de
-reconhecimento de texto, objetos ou imagens perderam a importância.
+Mas foi em 2018, com o reCaptcha v3, que a Google fez um passo
+definitivo. Com a nova versão, as verificações do navegador \emph{web}
+passaram a ser muito mais poderosas, sendo raros os casos em que o site
+fica em dúvidas se a pessoa é ou não um robô. Versões mais recentes,
+como o reCaptcha \emph{Enterprise}, de 2020, ainda permitem que as
+mantenedoras os sites façam o ajuste fino de modelos de detecção de
+robôs. Dessa forma, desafios de reconhecimento de texto e objetos em
+imagens perderam a importância.
 
 Então, no final, quem venceu a luta de geradores e resolvedores? Na
 verdade, nenhuma das duas! O que ocorreu com o reCaptcha v3 e seus
 sucessores foi, no fundo, uma mudança de perspectiva: o Captcha deixou
 de ser um sistema \textbf{passivo} e passou a ser um sistema
-\textbf{ativo} de verificação. Ao invés de criar uma tarefa difícil de
-resolver por robôs e fácil de resolver por pessoas, os sistemas criaram
-uma camada de verificação da sessão de acesso do usuário, incluindo
-análises do navegador, dos \emph{cookies} e dos padrões de cliques.
-Antes mesmo de chegar no desafio de reconhecimento, o algoritmo de
-acesso precisa enganar os verificadores. Essa tarefa é muito mais
-parecida com um problema de \emph{cyberataque} do que uma tarefa de
-inteligência artificial.
+\textbf{ativo} de verificação do agente. Ao invés de criar uma tarefa
+difícil de resolver por robôs e fácil de resolver por pessoas, os
+sistemas criaram uma camada de verificação da sessão de acesso do
+usuário, incluindo análises do navegador, dos \emph{cookies} e dos
+padrões de cliques. Antes mesmo de chegar no desafio de reconhecimento,
+o algoritmo de acesso precisa enganar os verificadores. Essa tarefa é
+muito mais parecida com um problema de \emph{cyberataque} do que uma
+tarefa de inteligência artificial.
 
-A guerra entre sites e \emph{spammers} continua, mas não é mais uma luta
+A luta entre sites e \emph{spammers} continua, mas não é mais uma luta
 entre geradores e resolvedores. Por conta disso, os desafios dos
 Captchas, sejam de texto ou de imagem, são hoje muito mais uma questão
 acadêmica do que uma questão de segurança. A pesquisa sobre Captchas
 ainda é promissora e pode gerar muitos resultados importantes para a
 área de inteligência artificial.
 
-Infelizmente, Captchas de textos em imagens continuam sendo populares na
-\emph{internet}. Isso é especialmente evidente nos serviços públicos --
-objeto deste trabalho --, já que os serviços raramente são atualizados
-com ferramentas mais recentes. Desenvolver uma ferramenta que facilita a
-resolução de Captchas em sites públicos é uma forma de incentivar os
-sites a serem atualizados. Se o Captcha inseguro parar de fazer efeito
-prático, os sites terão de atualizar a tecnologia, seja colocando
-Captchas mais poderosos, que é o resultado indesejado, ou
-disponibilizando os dados públicos de forma aberta, que é o resultado
-desejado.
+Apesar dos avanços do reCaptcha v3, Captchas de textos em imagens
+continuam sendo populares na \emph{internet}. Isso é especialmente
+evidente nos serviços públicos -- objeto deste trabalho --, já que os
+serviços raramente são atualizados com ferramentas mais recentes.
+Desenvolver uma ferramenta que facilita a resolução de Captchas em sites
+públicos é uma forma de incentivar os sites a serem atualizados,
+disponibilizando os dados públicos de forma mais eficiente.
 
-Essa é a lacuna identificada a partir da observação do estado atual dos
-serviços públicos e dos trabalhos acadêmicos analisados. Nesta pesquisa,
-será apresentado um fluxo de trabalho que pode ser facilmente aplicado a
-diferentes modelos de resolução de Captchas, incluindo arquiteturas que
-ainda não foram desenvolvidas. O fluxo de trabalho funcionará como um
-acelerador do aprendizado, possibilitando a criação de modelos que não
-precisam de intervenção humana. O resultado será encontrado explorando o
-potencial de uso do \textbf{oráculo}, apresentado na próxima seção.
+Desenvolver e disponibilizar novos métodos para resolução de Captchas de
+textos em imagens pode ter um impacto positivo na transparência dos
+serviços públicos. Essa é a lacuna identificada a partir da observação
+do estado atual dos serviços públicos e dos trabalhos acadêmicos
+analisados.
+
+A pesquisa apresenta um fluxo de trabalho que pode ser facilmente
+aplicado a diferentes modelos de resolução de Captchas, incluindo
+arquiteturas que ainda não foram desenvolvidas. O fluxo de trabalho
+funcionará como um acelerador do aprendizado, possibilitando a criação
+de modelos que não precisam de intervenção humana.
+
+O resultado será encontrado explorando o potencial de uso do
+\textbf{oráculo}, disponível em todos os Captchas de textos em imagens.
+Para definir e contextualizar o uso do oráculo, no entanto, é necessário
+apresentar algumas características sobre o problema estudado.
 
 \hypertarget{sec-intro-oraculo}{%
 \section{Oráculo}\label{sec-intro-oraculo}}
 
-Modelos de aprendizagem profunda usuais, quando ajustados sem cuidado,
-são muito sensíveis a perturbações pequenas nas imagens (YUAN et al.,
-2019). Por isso, se o site de um tribunal, por exemplo, mudar o Captcha
-utilizado, seria necessário baixar e anotar uma nova base de dados para
-treinar o modelo. Os avanços em técnicas de regularização fazem com que
-o modelo seja menos afetado por mudanças nos desafios gerados. Uma
-técnica de regularização que ajuda na capacidade de generalização é a
-aumentação de dados com adição de ruídos (NOH et al., 2017). No entanto,
-nenhuma técnica garante que o modelo terá excelentes resultados em novos
-desafios.
+Modelos de aprendizagem profunda usuais podem ser sensíveis a
+perturbações pequenas nas imagens (YUAN et al., 2019). Por isso, para
+resolver o Captcha de um tribunal, um modelo que resolve o Captcha de
+outro tribunal pode não ser eficaz, sendo necessário baixar e anotar uma
+nova base e treinar um novo modelo.
+
+Avanços em técnicas de regularização fazem com que o modelo seja menos
+afetado por mudanças nos desafios gerados. Uma técnica de regularização
+que ajuda na capacidade de generalização é a aumentação de dados com
+adição de ruídos (NOH et al., 2017). No entanto, nenhuma técnica garante
+que o modelo terá excelentes resultados em novos desafios.
 
 Outra alternativa é desenvolver modelos que aprendem com poucos dados
 anotados. Como comentado anteriormente, GANs e modelos relacionados
@@ -1097,21 +1114,20 @@ sem a necessidade de anotar muitos exemplos para construir uma nova base
 de treino.
 
 Nessa tese, apresenta-se uma nova técnica para resolver Captchas com
-poucos dados anotados, chamada de \emph{oráculo}. A técnica consiste em
-aproveitar o fato de que o Captcha aplica um teste de Turing automático
-para gerar bases de dados automaticamente. Ou seja, a técnica resolve o
-problema não com modelos mais sofisticados, mas com a utilização
-eficiente dos recursos disponíveis. Qualquer modelo pode se aproveitar
-dessa característica dos Catpchas, incluindo arquiteturas que ainda não
-foram desenvolvidas.
+poucas ou nenhuma imagem anotada, chamada \emph{Web Automatic Weak
+Learning} (WAWL). A técnica alia técnicas de raspagem de dados com
+técnicas de aprendizado fracamente supervisionado, especificamente o
+aprendizado com rótulos parciais, explorando uma característica
+específica dos Captchas, que é a presença de um \emph{oráculo}.
 
 Oráculo é a resposta do site pesquisado, afirmando se o rótulo enviado
-está correto. Eles estão disponíveis em todos os sites com Captchas, já
-que, por definição, o Captcha precisa apresentar o resultado do teste
-para o usuário. O nome ``oráculo'' foi inspirado na mitologia grega,
-partindo do fato de que o site já possui a informação correta, como um
-deus. O site, no entanto, se comunica com o usuário através de um
-intermediário (o oráculo) que apresenta a resposta de forma limitada.
+está correto ou errado. Eles estão disponíveis em todos os sites com
+Captchas, já que, por definição, o Captcha precisa apresentar o
+resultado do teste para o usuário. O nome ``oráculo'' foi inspirado na
+mitologia grega, partindo do fato de que o site já possui a informação
+correta, como um deus. O site, no entanto, se comunica com o usuário
+através de um intermediário (o oráculo) que apresenta a resposta de
+forma limitada.
 
 Oráculos se manifestam de diversas formas nos sites com Captchas. Por
 exemplo, pode dar a possibilidade de realizar apenas um teste por
@@ -1120,20 +1136,31 @@ ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode
 retornar com um ``bom o suficiente'' quando o rótulo não está totalmente
 correto (AHN et al., 2008).
 
-O oráculo é uma forma de obter uma base virtualmente infinita. Do ponto
-de vista de modelagem, é similar a um problema de aprendizado por
-reforço (SUTTON; BARTO, 2018), mas com uma resposta binária (acertou ou
-errou) no lugar de um escore.
+O oráculo é uma forma de obter uma base de dados virtualmente infinita.
+Do ponto de vista de modelagem, é similar a um problema de aprendizado
+por reforço (SUTTON; BARTO, 2018), mas com uma resposta binária (acertou
+ou errou) no lugar de um escore.
 
-A técnica consiste em utilizar um modelo inicial, possivelmente fraco.
-Em seguida, o site é acessado múltiplas vezes, gerando uma nova base de
-dados virtualmente infinita, que é completamente anotada nos casos de
-acerto e que apresenta o histórico de erros no caso de erro. O modelo
-inicial poderia ser ajustado com as técnicas usuais de modelagem, ou
-utilizando um modelo mais sofisticado como GAN.
+A técnica WAWL consiste em aproveitar o fato de que o Captcha, por
+definição, aplica um teste de Turing automático para gerar bases de
+dados parcialmente anotadas. Ou seja, a técnica resolve o problema não
+com modelos mais sofisticados, mas com a utilização eficiente dos
+recursos disponíveis. Qualquer modelo pode se aproveitar dessa
+característica dos Captchas, incluindo as arquiteturas mais sofisticadas
+ou técnicas que ainda não foram desenvolvidas.
 
-Infelizmente, utilizar somente os casos anotados corretamente, obtidos
-dos acertos no teste do oráculo, induz viés de seleção na amostra (NA et
+A metodologia parte de um modelo inicial, que pode ter baixo poder
+preditivo. O modelo inicial pode ser ajustado com as técnicas usuais de
+modelagem, ou utilizando um modelo mais sofisticado como GAN. Em
+seguida, o site na \emph{web} é acessado múltiplas vezes, gerando uma
+nova base de dados virtualmente infinita, que é completamente anotada
+nos casos de acerto e que apresenta o histórico de erros no caso de
+erro. Os dados gerados automaticamente são então aproveitados para
+aprimorar o modelo inicial.
+
+Um ponto importante do WAWL é como aproveitar a informação oferecida
+pelo oráculo. Utilizar somente os casos anotados corretamente, obtidos
+de acertos no teste do oráculo, induz viés de seleção na amostra (NA et
 al., 2020). Como o modelo só tem acesso aos casos em que já funciona
 bem, a informação obtida não é tão relevante. O desafio de modelagem da
 tese reside em como considerar a informação fornecida pelo oráculo nos
@@ -1146,20 +1173,34 @@ completa. No entanto, como a informação é resultado do teste de um
 rótulo produzido por um modelo, faz sentido afirmar que a censura não é
 gerada por acaso.
 
-Na área de aprendizado de máquinas, um modelo apresenta resposta
-censurada ou incompleta é colocado na classe de problemas do aprendizado
-fracamente supervisionado (ZHOU, 2018). Trata-se de uma área ainda pouco
-investigada na literatura, mas bastante ampla, englobando não só os
-métodos supervisionados como também os métodos semi-supervisionados. A
-tese apresentará os conceitos de aprendizado fracamente supervisionado,
-com foco na classe de problemas que a modelagem utilizando Captchas
-representa.
+Na área de aprendizado de máquinas, um modelo que apresenta resposta
+censurada ou incompleta faz parte da classe de \textbf{aprendizado
+fracamente supervisionado} (ZHOU, 2018). Trata-se de uma área ainda
+pouco investigada na literatura, mas bastante ampla, englobando não só
+os métodos supervisionados como também os métodos semi-supervisionados.
+A tese apresentará os conceitos de aprendizado fracamente
+supervisionado, com foco na classe de problemas que a modelagem
+utilizando Captchas representa.
 
-Para criar uma base de dados usando o oráculo, é necessário utilizar
-técnicas de raspagem de dados, imitando repetidamente o que um usuário
-faria para acessar o site. Por isso, a raspagem de dados se torna
-fundamental para a construção do modelo, tornando-se um dos objetivos da
-pesquisa.
+O custo técnico de implementar o WAWL está na necessidade de utilizar
+técnicas de raspagem de dados para criar uma nova base usando o oráculo.
+Essas técnicas imitam repetidamente o que um humano faria para acessar o
+site, precisando ser desenvolvidas de forma customizada para cada
+Captcha analisado.
+
+No entanto, resolver Captchas é uma tarefa meio, não uma tarefa fim. Na
+prática, o interesse é construir ferramentas que acessam os sites e
+realizar pesquisas com os dados obtidos. E as ferramentas que acessam os
+sites para obter dados já envolvem a construção de raspadores de dados.
+Como o desenvolvimento de raspadores de dados é necessário em todas as
+pesquisas, a parte de raspagem de dados no método WAWL possui tempo de
+desenvolvimento negligenciável.
+
+A tese tem como foco principal descrever e testar a eficácia do método
+WAWL. Mas a tese também tem objetivos práticos, relacionados à resolução
+de Captchas que estão presentes em serviços públicos e disponibilização
+das soluções desenvolvidas para a comunidade de programadores. A seguir,
+apresenta-se a lista de objetivos completa, de forma concisa.
 
 \hypertarget{sec-objetivos}{%
 \section{Objetivo}\label{sec-objetivos}}
@@ -1175,45 +1216,46 @@ Especificamente, a pesquisa tem como objetivos:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Descrever o modelo proposto e estudar suas propriedades.
+  Descrever o método proposto e estudar suas características.
 \item
   Construir e disponibilizar um repositório de dados para realização de
   mais pesquisas no ramo.
 \item
-  Ajustar e testar a eficácia do modelo proposto.
+  Ajustar modelos e testar a eficácia do método.
 \item
-  Disponibilizar um pacote computacional aberto, possibilitando a
-  resolução de Captchas presentes em serviços públicos.
+  Disponibilizar um pacote computacional aberto que possibilita a
+  implementação de soluções para resolver Captchas presentes em serviços
+  públicos.
 \end{enumerate}
 
 \hypertarget{sec-justificativa}{%
 \section{Justificativa}\label{sec-justificativa}}
 
-O presente trabalho é relevante para a ciência por conta de sua
-importância prática, importância teórica e viabilidade técnica. Os
+O presente trabalho é relevante para a ciência por três motivos:
+importância teórica, viabilidade técnica e importância prática. Os
 pontos são explicados abaixo.
 
-Captchas em serviços públicos causam desequilíbrio de mercado e
-incentivam o uso de serviços com formas de remuneração duvidosas. O
-objetivo 4 vai de encontro direto com esse problema, disponibilizando
-uma ferramenta gratuita e aberta para resolução de Captchas que, pelo
-menos até a escrita da tese, pode ser utilizada em dezenas de serviços
-públicos.
-
 Do ponto de vista teórico, a tese é importante por apresentar uma
-aplicação muito elegante do aprendizado fracamente supervisionado. No
+aplicação muito especial do aprendizado fracamente supervisionado. No
 caso do Captcha, como a base de dados fracamente supervisionada é
 virtualmente infinita, trata-se de uma excelente oportunidade para
-testar novas técnicas e como elas se comportam empiricamente. Os
-objetivos 1 e 2 estão relacionadas a essa justificativa.
+testar novas técnicas e verificar como elas se comportam empiricamente.
+Os objetivos 1 e 2 estão relacionadas a essa justificativa.
 
-Finalmente, com relação à viabilidade técnica, o trabalho parte de uma
-lista de Captchas que já foram resolvidos utilizando aprendizado
-profundo. Como os Captchas já estão resolvidos, mesmo que a WAWL não
-apresentasse bons resultados -- e apresenta -- o projeto ainda teria
-como subprodutos as bases de dados e o pacote computacional
-disponibilizados abertamente. O objetivo 3 é o que torna a proposta
-tecnicamente viável.
+Com relação à viabilidade técnica, o trabalho parte de uma lista de
+Captchas que já foram resolvidos utilizando técnicas tradicionais
+aprendizado profundo. Como os Captchas já foram resolvidos previamente,
+mesmo que a WAWL não apresentasse bons resultados -- e apresenta -- o
+projeto ainda teria como subprodutos as bases de dados e o pacote
+computacional disponibilizados abertamente. O objetivo 3 é o que torna a
+proposta tecnicamente viável.
+
+Finalmente, do ponto de vista prático, Captchas em serviços públicos
+causam desequilíbrio de mercado e incentivam o uso de serviços com
+formas de remuneração duvidosas. O objetivo 4 vai de encontro direto com
+esse problema, ao dispoinibilizar uma ferramenta gratuita e aberta para
+resolução de Captchas que pode ser utilizada em diversos serviços
+públicos.
 
 \hypertarget{sec-hipoteses}{%
 \section{Hipóteses}\label{sec-hipoteses}}
@@ -1226,9 +1268,8 @@ projetos de pesquisa aplicados.
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  A utilização de aprendizado fracamente supervisionado permite a
-  criação de modelos que resolvem Captchas de textos em imagens sem a
-  necessidade de criar grandes bases anotadas.
+  A utilização do WAWL gera modelos que resolvem Captchas de textos em
+  imagens sem a necessidade de criar grandes bases anotadas.
 \item
   É possível aliar a área de raspagem de dados com a área de modelagem
   estatística.
@@ -1244,19 +1285,18 @@ neurais e a classe problema trabalhada de forma ampla. Em seguida,
 apresenta-se o método WAWL e suas características. Depois, a base de
 dados é descrita, mostrando as fontes de dados consideradas e as
 técnicas de raspagem de dados utilizadas. Por último, descreve-se, com
-detalhes, as simulações realizadas para obtenção dos resultados
-empíricos.
+detalhes, as simulações realizadas para obter os resultados empíricos.
 
 O terceiro capítulo, ``resultados'', apresenta os resultados da
 pesquisa. Primeiro são apresentados os resultados das simulações e
-outros experimentos realizados com a técnica WAWL. Em seguida, descreve
-o pacote \texttt{\{captcha\}}, criado para atingir o objetivo 4 da
-pesquisa. O capítulo também apresenta uma breve discussão dos resultados
-obtidos.
+outros experimentos realizados com a técnica WAWL. Em seguida,
+descreve-se o pacote \texttt{\{captcha\}}, criado para atingir o
+objetivo 4 da pesquisa. O capítulo também apresenta uma breve discussão
+dos resultados obtidos.
 
 No quarto e último capítulo, ``conclusão'', a pesquisa é concluída, com
-apresentação das considerações finais e próximos passos. Também foi
-incluído um apêndice descrevendo e documentando os pacotes
+apresentação das considerações finais e próximos passos. No final,
+também foi incluído um apêndice descrevendo e documentando os pacotes
 \texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}}, criados para
 atuar em conjunto com o pacote \texttt{\{captcha\}} para implementar o
 método WAWL.
@@ -2151,8 +2191,8 @@ função de perda, que aproveita a expressão completa para realizar
 algumas simplificações matemáticas e, com isso, melhorar a precisão das
 computações. O uso da função de perda ficará claro na próxima subseção.
 
-\hypertarget{perda}{%
-\subsubsection{Perda}\label{perda}}
+\hypertarget{sec-funcao-perda-original}{%
+\subsubsection{Perda}\label{sec-funcao-perda-original}}
 
 A função de perda utilizada em um problema de classificação deve levar
 em conta as probabilidades (ou log-probabilidades) associadas aos
@@ -2163,9 +2203,9 @@ ao rótulo correto for baixa.
 Uma função de perda natural e popular nesse sentido é a de entropia
 cruzada, ou \emph{cross-entropy}. Trata-se de uma perda com a formulação
 
-\[
-\ell(g(x), y) = -\sum_{i=1}^c I(y=i)\log(g_i(x)),
-\]
+\begin{equation}\protect\hypertarget{eq-perda-crossentropy}{}{
+\mathcal L(g(x), y) = -\sum_{i=1}^c I(y=i)\log(g_i(x)),
+}\label{eq-perda-crossentropy}\end{equation}
 
 em que \(g_i(x)\) é a probabilidade dada ao rótulo \(i\) pela função
 \(g\). Se o rótulo \(i\) é diferente do rótulo correto \(y\), a função
@@ -2236,16 +2276,14 @@ genérica e depois a formulação para o Captcha.
 Em um problema de aprendizado supervisionado tradicional, tem-se um
 conjunto de casos rotulados \(S=\{(\mathbf x_i,y_i), i=1,\dots, m\}\)
 com uma distribuição \(p(\mathbf X,Y)\) desconhecida, onde
-\(\mathbf X\in \mathcal X\) é uma imagem e \(\mathbf Y\) é o rótulo, que
-possui \(|A|^L\) possíveis valores. O objetivo é obter um classificador
-\(g\) que leva um valor de \(\mathbf x\) para o rótulo correto
-\(\mathbf y\).
+\(\mathbf X\in \mathcal X\) é uma imagem e \(Y\) é o rótulo, que possui
+\(|\mathcal A|\) possíveis valores. O objetivo é obter um classificador
+\(g\) que leva um valor de \(\mathbf x\) para o rótulo correto \(y\).
 
-Para delimitar se o resultado da aplicação do classificador está bom ou
-ruim, utiliza-se uma função de perda. No caso do Captcha, como o
-interesse é simplesmente acertar o rótulo inteiro (não importa se o
-classificador acerta só uma parte do rótulo), utiliza-se uma função
-chamada 0-1:
+Para delimitar se o classificador está bom ou ruim, utiliza-se uma
+função de perda. No caso do Captcha, como o interesse é simplesmente
+acertar o rótulo inteiro (não importa se o classificador acerta só uma
+parte do rótulo), utiliza-se uma função chamada 0-1:
 
 \begin{equation}\protect\hypertarget{eq-perda}{}{
 \mathcal L(g(\mathbf x),\mathbf y) = I (g(\mathbf x) \neq \mathbf y),
@@ -2261,21 +2299,21 @@ valor esperado da função de perda:
 }\label{eq-risco}\end{equation}
 
 A função de risco, no entanto, não é observada, já que depende da
-distribuição desconhecida de \(p(\mathbf X,Y)\). Para lidar com esse
-problema, usualmente é utilizado um estimador do risco, calculado tanto
-em bases usadas na validação cruzada quanto na base de teste.
+distribuição desconhecida de \(p(\mathbf X,Y)\). Por isso utiliza-se um
+estimador do risco, que pode ser calculado em bases usadas na validação
+cruzada e na base de teste.
 
 \[
-\hat{\mathcal R}(g) = \sum_{i=1}^n \ell(g(\mathbf x),y))
+\hat{\mathcal R}(g) = \sum_{i=1}^n \mathcal L(g(\mathbf x_i),y_i))
 \]
 
 Na base de teste, utilizada para estimar o risco, a função de perda 0-1
 é apropriada. Na etapa de validação cruzada de um modelo de aprendizado
-profundo, é útil considerar uma aproximação da função de perda que seja
-contínua e derivável, funcionando como uma versão suavizada da perda
-0-1. A partir de um vetor de parâmetros \(\boldsymbol \theta\)
-originados da arquitetura do modelo, uma escolha de função de perda é a
-entropia cruzada, como mostrado anteriormente. Os parâmetros são
+profundo, é útil considerar uma função de perda que seja contínua e
+derivável, funcionando como uma versão suavizada da perda 0-1. A partir
+de um vetor de parâmetros \(\boldsymbol \theta\) originados da
+arquitetura do modelo, uma escolha de função de perda é a entropia
+cruzada, como na Equação~\ref{eq-perda-crossentropy}. Os parâmetros são
 estimados a partir de um otimizador, como o ADAM, apresentado na
 Seção~\ref{sec-otimizador}.
 
@@ -2325,7 +2363,7 @@ complementary label}, ou seja, rótulo complementar com viés. Também é
 possível considerar um caso sem viés, ou seja, quando
 \(p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}\) para todos os valores
 de \(\mathbf Y\) e uma constante \(c\). Esse caso também foi resolvido
-do ponto de vista teórico(ISHIDA et al., 2017). As conclusões são
+do ponto de vista teórico (ISHIDA et al., 2017). As conclusões são
 parecidas, ou seja, é possível encontrar taxas de convergência para que
 o problema com rótulos complementares se aproxime de um problema com
 observações completas.
@@ -2383,12 +2421,12 @@ base na probabilidade do rótulo estar incorreto:
 1 - p(\mathbf y|\boldsymbol \theta),
 \]
 
-Considerando o rótulo complementar \(\bar y\) e a função \(\hat f\) dada
-pela rede neural, a fórmula para descrever a função de perda é descrita
-da seguinte forma:
+Considerando o rótulo complementar \(\bar y\) e a função \(f\) dada pela
+rede neural, a fórmula para descrever a função de perda é descrita da
+seguinte forma:
 
 \[
-\mathcal L(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y=\bar y)\right]
+\mathcal L(\bar y, f(\mathbf x)) = -\log\left[1 - \sum_{y} {f_y}(\mathbf x) I(y=\bar y)\right]
 \]
 
 A função de perda proposta pode ser explicada de maneira intuitiva
@@ -2399,7 +2437,7 @@ probabilidade, por exemplo, \(0.99\), para o valor \(i\), que o oráculo
 identificou como incorreta. Nesse caso, a função de perda é dada por
 
 \[
-\mathcal L(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\mathcal L(i,f(\mathbf x)) = -\log\left[1-{f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
 \]
 
 Como é possível ver no exemplo, quanto maior a probabilidade dada a um
@@ -2411,7 +2449,7 @@ Quando o Captcha aceita múltiplos chutes, a mesma conta é válida,
 bastando subtrair as probabilidades de todos os rótulos incorretos:
 
 \[
-\mathcal L(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y \in \bar {\mathbf y})\right]
+\mathcal L(\bar {\mathbf y}, f(\mathbf x)) = -\log\left[1 - \sum_{y} {f_y}(\mathbf x) I(y \in \bar {\mathbf y})\right]
 \]
 
 No final, o valor que é passado para a função de perda é a soma das
@@ -3324,7 +3362,7 @@ realizar tantos chutes para aproveitar essa oportunidade.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-ntry-relativo-1.pdf}
+{\centering \includegraphics[width=0.75\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-ntry-relativo-1.pdf}
 
 }
 
@@ -3343,7 +3381,7 @@ mostrando que a técnica é efetiva de forma consistente.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-ntry-absoluto-1.pdf}
+{\centering \includegraphics[width=0.75\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-ntry-absoluto-1.pdf}
 
 }
 
@@ -3370,7 +3408,7 @@ aumentar muito de forma absoluta.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-relativo-1.pdf}
+{\centering \includegraphics[width=0.75\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-relativo-1.pdf}
 
 }
 
@@ -3388,7 +3426,7 @@ inicial de até 10\%.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-absoluto-1.pdf}
+{\centering \includegraphics[width=0.75\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-absoluto-1.pdf}
 
 }
 
@@ -3422,7 +3460,7 @@ resultads mais expressivos.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-absoluto-ajustado-1.pdf}
+{\centering \includegraphics[width=0.75\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-simulacao-geral-inicial-absoluto-ajustado-1.pdf}
 
 }
 
@@ -3494,7 +3532,7 @@ uma acurácia de 100\%.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-aplicacao-iterada-1.pdf}
+{\centering \includegraphics[width=0.75\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-aplicacao-iterada-1.pdf}
 
 }
 

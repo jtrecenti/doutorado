@@ -4,6 +4,7 @@ project:
 
 book:
   title: "Resolvendo Captchas"
+  subtitle: "Usando aprendizado parcialmente supervisionado"
   author: "Julio Trecenti"
   date: "2022-10-30"
   chapters:

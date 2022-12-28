@@ -6,7 +6,7 @@ bibliography: references.bib
 
 <!-- Este apêndice foi construído para mostrar a estrutura do pacote e suas funcionalidades, mas também um pouco da história. O pacote `{captcha}` é fruto de um trabalho da comunidade e o trabalho de modelagem de Captchas usando técnicas de *deep learning*, que começou alguns anos antes do início da tese de doutorado. -->
 
-Este apêndice foi construído para mostrar a estrutura dos pacotes `{captchaDownload}` e `{captchaOracle}`, utilizados como auxiliares para implementação da metodologia WAWL, orquestradas pelo pacote `{captcha}`. Apresenta-se também um breve histórico sobre a construção das soluções desenvolvidas, descrevendo outras alternativas e projetos que foram aposentados.
+Este apêndice foi construído para mostrar a estrutura dos pacotes `{captchaDownload}` e `{captchaOracle}`, utilizados como auxiliares para implementação do WAWL, orquestradas pelo pacote `{captcha}`. Apresenta-se também um breve histórico sobre a construção das soluções desenvolvidas, descrevendo outras alternativas e projetos que foram aposentados.
 
 ## Histórico {#sec-historico}
 

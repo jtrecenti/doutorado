@@ -26,7 +26,7 @@ bibliography: references.bib
 
 <!-- Nesta seção, buscou-se demonstrar que o uso dos dados fornecidos pelo oráculo com adaptação da função de perda i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, é necessário retomar algumas definições para avançar. -->
 
-Neste capítulo, discute-se os resultados da metodologia WAWL e descreve-se pacote computacional desenvolvido para lidar com Captchas. A @sec-result-sim mostra os resultados empíricos e a @sec-pacote-captcha detalha o pacote `{captcha}`. No final, a @sec-discussao apresenta uma discussão dos resultados obtidos.
+Neste capítulo, discute-se os resultados empíricos do método WAWL e descreve-se pacote computacional desenvolvido para lidar com Captchas. A @sec-result-sim mostra os resultados empíricos e a @sec-pacote-captcha detalha o pacote `{captcha}`. No final, a @sec-discussao apresenta uma discussão dos resultados obtidos.
 
 ## Resultados empíricos {#sec-result-sim}
 
@@ -88,7 +88,7 @@ Na @fig-simulacao-geral-ntry-relativo, é possível notar que os ganhos em acur�
 #| fig-width: 5
 #| fig-height: 4
 #| fig-cap: Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas.
-#| out-width: 60%
+#| out-width: 75%
 
 tab_stats_correta <- tab_stats  |> 
   dplyr::filter(name == "Percentual") |> 
@@ -148,7 +148,7 @@ A Figura @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra 
 #| fig-width: 5
 #| fig-height: 4
 #| fig-cap: "Ganhos absolutos ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."
-#| out-width: 60%
+#| out-width: 75%
 
 tab_stats  |> 
   dplyr::filter(name == "Absoluto") |> 
@@ -236,7 +236,7 @@ A @fig-simulacao-geral-inicial-relativo mostra os ganhos relativos. É possível
 #| fig-width: 5
 #| fig-height: 4
 #| fig-cap: "Ganho percentual ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
-#| out-width: 60%
+#| out-width: 75%
 
 tab_stats_inicial  |> 
   dplyr::filter(name == "Percentual") |> 
@@ -294,7 +294,7 @@ A @fig-simulacao-geral-inicial-absoluto mostra os ganhos absolutos. O gráfico a
 #| fig-width: 5
 #| fig-height: 4
 #| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
-#| out-width: 60%
+#| out-width: 75%
 
 tab_stats_inicial  |> 
   dplyr::filter(name == "Absoluto") |> 
@@ -358,7 +358,7 @@ A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pel
 #| fig-width: 5
 #| fig-height: 4
 #| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
-#| out-width: 60%
+#| out-width: 75%
 
 tab_stats_inicial  |> 
   dplyr::filter(name == "Absoluto (ajustado)") |> 
@@ -447,7 +447,7 @@ doutorado::da_results_simulacao |>
   ggplot2::scale_colour_viridis_d(begin = .2, end = .8, option = "A") +
   ggplot2::scale_y_continuous(labels = scales::percent) +
   ggplot2::facet_wrap(~captcha) +
-  ggthemes::theme_hc() +
+  ggthemes::theme_hc(base_size = 13) +
   ggplot2::labs(
     x = "Técnica",
     y = "Acurácia",
@@ -476,7 +476,7 @@ A @fig-aplicacao-iterada mostra os resultados da aplicação iterada. A utiliza�
 #| fig-cap: "Resultados da aplicação iterada da técnica."
 #| fig-width: 7
 #| fig-height: 4
-#| out-width: 60%
+#| out-width: 75%
 
 dados_iteracao_trf5 <- tibble::tribble(
   ~n, ~ntry,         ~tempo,              ~acc,

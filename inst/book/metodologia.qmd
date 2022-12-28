@@ -48,7 +48,7 @@ A intepretação do Captcha como um problema de PLL será apresentada no final d
 
 ### Captcha {#sec-definicao-captcha}
 
-Captcha é um *desafio* do tipo *desafio-resposta* usado para determinar se a usuário do sistema é um humano. Existem diversos tipos de Captcha diferentes, que envolvem desde identificar textos em imagens até resolver expressões matemáticas complexas.
+Captcha é um *desafio* do tipo *desafio-resposta* usado para determinar se o usuário do sistema é um humano. Existem diversos tipos de Captcha diferentes, que envolvem desde identificar textos em imagens até resolver expressões matemáticas complexas.
 
 O foco deste trabalho reside nos Captchas baseados em imagens rotuladas, que é o tipo mais comum. Em seguida, a menos que se mencione ao contrário, todos os Captchas apresentados são desse tipo.
 
@@ -90,7 +90,7 @@ A @fig-exemplo-tjmg mostra um exemplo Captcha do Tribunal de Justiça de Minas G
 knitr::include_graphics("assets/img/tjmg16283c1e6d06.jpeg")
 ```
 
-A **variável resposta** é uma matriz binária $\mathbf y_{L \times |\mathcal A|}$, em que cada linha representa um dos valores do vetor $\mathbf c$, enquanto as colunas possuem um representante para cada elemento de $\mathcal A$. Um elemento $y_{ij}$ vale 1 se o elemento $i$ do rótulo $\mathbf c$ corresponde ao elemento $j$ do alfabeto $\mathcal A$, valendo zero caso contrário. A variável resposta pode ser pensada também como o *one-hot encoding* do rótulo.
+A **variável resposta** é uma matriz binária $\mathbf y_{L \times |\mathcal A|}$, em que cada linha representa um dos valores do vetor $\mathbf c$, enquanto as colunas possuem um representante para cada elemento de $\mathcal A$. Um elemento $y_{ij}$ vale 1 se o elemento $i$ do rótulo $\mathbf c$ corresponde ao elemento $j$ do alfabeto $\mathcal A$, valendo zero caso contrário. A variável resposta é uma transformação do rótulo conhecida comumente na área de aprendizado estatístico como *one-hot encoding*.
 
 Uma maneira alternativa de definir a variável resposta seria com um vetor de índices representando cada elemento do alfabeto em um vetor. O problema de trabalhar dessa forma é que a variável resposta $\mathbf y$ tem um número exponencial de combinações: o rótulo possui $L$ caracteres, sendo que cada caractere pode ter $|\mathcal A|$ valores, totalizando $|\mathcal A|^L$ combinações.
 
@@ -122,7 +122,7 @@ A forma *dummy* da resposta facilita os trabalhos que seguem. Como será visto m
 
 O **gerador** é uma função $g$ que recebe um rótulo como entrada e devolve uma imagem como saída. Um bom gerador é aquele que é capaz de gerar uma imagem fácil de interpretar por humanos, mas difícil de se resolver por máquinas.
 
-Um exemplo de gerador é a função `captcha_generate()` criada no pacote `{captcha}`, como descrito no @sec-pacote. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
+Um exemplo de gerador é a função `captcha_generate()` criada no pacote `{captcha}`, como descrito na @sec-pacote-captcha. A função foi criada para realizar simulações do sistema de resolução proposto na tese, a partir do pacote `{magick}` [@magick], que utiliza o software *ImageMagick*. A função aplica uma série de distorções e efeitos comuns no contexto de Captchas, gerando imagens como a da @fig-captcha-r-exemplo.
 
 ```{r}
 #| label: fig-captcha-r-exemplo
@@ -157,7 +157,7 @@ $$
 \end{array}\right.
 $$
 
-Quando o classificador $g$ acerta o rótulo, o oráculo retorna uma lista que contém apenas um elemento: o próprio rótulo. Para simplificar, também é possível utilizar a notação de *rótulo complementar* $\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}$. Quando o classificador $g$ retorna o rótulo errado, o oráculo retorna uma lista com todos os outros possíveis rótulos do rótulo, o que inclui o verdadeiro valor $\mathbf Y_{n+1}$.
+Quando o classificador $g$ acerta o rótulo, o oráculo retorna o valor "1", acompanhado de uma lista que contém apenas um elemento: o próprio rótulo. Quando o classificador $g$ retorna o rótulo errado, o oráculo retorna o valor "0", acompanhado de uma lista com todos os outros possíveis rótulos do rótulo, o que inclui o verdadeiro valor $\mathbf Y_{n+1}$. Para simplificar, também é possível utilizar a notação de *rótulo complementar* $\{\mathcal Y \setminus \hat {\mathbf Y}_{n+1}\} = \bar{\mathbf Y}$
 
 A @fig-esquema-oraculo mostra o funcionamento do oráculo no exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado apresentado é o valor um, indicando que o rótulo está correto. Quando a predição é diferente do rótulo, o resultado apresentado é o valor zero, indicando que o valor testado está incorreto e que, portanto, o rótulo real é um dentre todos os outros possíveis rótulos.
 
@@ -502,15 +502,15 @@ Vale notar que, dependendo da implementação, nem sempre é necessário aplicar
 
 [^torch]: Mais sobre o (py)torch: <https://pytorch.org>. Último acesso em 22 de novembro de 2022.
 
-#### Perda
+#### Perda {#sec-funcao-perda-original}
 
 A função de perda utilizada em um problema de classificação deve levar em conta as probabilidades (ou log-probabilidades) associadas aos rótulos. A perda deve ser pequena se a probabilidade associada ao rótulo correto for alta e a perda deve ser grande se a probabilidade associada ao rótulo correto for baixa.
 
 Uma função de perda natural e popular nesse sentido é a de entropia cruzada, ou *cross-entropy*. Trata-se de uma perda com a formulação
 
 $$
-\ell(g(x), y) = -\sum_{i=1}^c I(y=i)\log(g_i(x)),
-$$
+\mathcal L(g(x), y) = -\sum_{i=1}^c I(y=i)\log(g_i(x)),
+$$ {#eq-perda-crossentropy}
 
 em que $g_i(x)$ é a probabilidade dada ao rótulo $i$ pela função $g$. Se o rótulo $i$ é diferente do rótulo correto $y$, a função de perda vale zero por conta da função indicadora. Quando $i=y$, a perda é igual ao oposto do logaritmo da probabilidade associada ao rótulo $i$. Quanto menor a probabilidade, maior o valor da perda.
 
@@ -542,9 +542,9 @@ A área de PLL não é nova [@grandvalet2002] e aparece com outros nomes, como a
 
 As definições seguem uma terminologia adaptada a partir da leitura de @jin2002, @cour2011 e @feng2020. Sempre que possível, os casos são adaptados para o problema do Captcha diretamente. Quando necessário, apresenta-se primeiro a definição genérica e depois a formulação para o Captcha.
 
-Em um problema de aprendizado supervisionado tradicional, tem-se um conjunto de casos rotulados $S=\{(\mathbf x_i,y_i), i=1,\dots, m\}$ com uma distribuição $p(\mathbf X,Y)$ desconhecida, onde $\mathbf X\in \mathcal X$ é uma imagem e $\mathbf Y$ é o rótulo, que possui $|A|^L$ possíveis valores. O objetivo é obter um classificador $g$ que leva um valor de $\mathbf x$ para o rótulo correto $\mathbf y$.
+Em um problema de aprendizado supervisionado tradicional, tem-se um conjunto de casos rotulados $S=\{(\mathbf x_i,y_i), i=1,\dots, m\}$ com uma distribuição $p(\mathbf X,Y)$ desconhecida, onde $\mathbf X\in \mathcal X$ é uma imagem e $Y$ é o rótulo, que possui $|\mathcal A|$ possíveis valores. O objetivo é obter um classificador $g$ que leva um valor de $\mathbf x$ para o rótulo correto $y$.
 
-Para delimitar se o resultado da aplicação do classificador está bom ou ruim, utiliza-se uma função de perda. No caso do Captcha, como o interesse é simplesmente acertar o rótulo inteiro (não importa se o classificador acerta só uma parte do rótulo), utiliza-se uma função chamada 0-1:
+Para delimitar se o classificador está bom ou ruim, utiliza-se uma função de perda. No caso do Captcha, como o interesse é simplesmente acertar o rótulo inteiro (não importa se o classificador acerta só uma parte do rótulo), utiliza-se uma função chamada 0-1:
 
 $$
 \mathcal L(g(\mathbf x),\mathbf y) = I (g(\mathbf x) \neq \mathbf y),
@@ -556,13 +556,13 @@ $$
 \mathcal R(g) = \mathbb E_{p(\mathbf X,Y)}[\mathcal L(g(\mathbf X),Y)].
 $$ {#eq-risco}
 
-A função de risco, no entanto, não é observada, já que depende da distribuição desconhecida de $p(\mathbf X,Y)$. Para lidar com esse problema, usualmente é utilizado um estimador do risco, calculado tanto em bases usadas na validação cruzada quanto na base de teste.
+A função de risco, no entanto, não é observada, já que depende da distribuição desconhecida de $p(\mathbf X,Y)$. Por isso utiliza-se um estimador do risco, que pode ser calculado em bases usadas na validação cruzada e na base de teste.
 
 $$
-\hat{\mathcal R}(g) = \sum_{i=1}^n \ell(g(\mathbf x),y))
+\hat{\mathcal R}(g) = \sum_{i=1}^n \mathcal L(g(\mathbf x_i),y_i))
 $$
 
-Na base de teste, utilizada para estimar o risco, a função de perda 0-1 é apropriada. Na etapa de validação cruzada de um modelo de aprendizado profundo, é útil considerar uma aproximação da função de perda que seja contínua e derivável, funcionando como uma versão suavizada da perda 0-1. A partir de um vetor de parâmetros $\boldsymbol \theta$ originados da arquitetura do modelo, uma escolha de função de perda é a entropia cruzada, como mostrado anteriormente. Os parâmetros são estimados a partir de um otimizador, como o ADAM, apresentado na @sec-otimizador.
+Na base de teste, utilizada para estimar o risco, a função de perda 0-1 é apropriada. Na etapa de validação cruzada de um modelo de aprendizado profundo, é útil considerar uma função de perda que seja contínua e derivável, funcionando como uma versão suavizada da perda 0-1. A partir de um vetor de parâmetros $\boldsymbol \theta$ originados da arquitetura do modelo, uma escolha de função de perda é a entropia cruzada, como na @eq-perda-crossentropy. Os parâmetros são estimados a partir de um otimizador, como o ADAM, apresentado na @sec-otimizador.
 
 As definições começam a precisar de ajustes quando $y$ deixa de ser um rótulo fixado. Como descrito na @sec-oraculo, a base de dados observada contém tanto rótulos observados de forma exata quanto rótulos apenas parcialmente informados. Nesse caso, os dados são gerados por uma distribuição
 
@@ -584,7 +584,7 @@ $$
 f_{\text{adj}} (\mathbf X) = \mathbf Q ^{\top}f(\mathbf X)
 $$
 
-O tipo de problema apresentado acima é conhecido como *biased complementary label*, ou seja, rótulo complementar com viés. Também é possível considerar um caso sem viés, ou seja, quando $p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}$ para todos os valores de $\mathbf Y$ e uma constante $c$. Esse caso também foi resolvido do ponto de vista teórico[@ishida2017]. As conclusões são parecidas, ou seja, é possível encontrar taxas de convergência para que o problema com rótulos complementares se aproxime de um problema com observações completas.
+O tipo de problema apresentado acima é conhecido como *biased complementary label*, ou seja, rótulo complementar com viés. Também é possível considerar um caso sem viés, ou seja, quando $p(\bar{\mathbf Y}|\mathbf Y) = \frac{1}{c-1}$ para todos os valores de $\mathbf Y$ e uma constante $c$. Esse caso também foi resolvido do ponto de vista teórico [@ishida2017]. As conclusões são parecidas, ou seja, é possível encontrar taxas de convergência para que o problema com rótulos complementares se aproxime de um problema com observações completas.
 
 Quando os rótulos complementares não apresentam viés, existe ainda uma extensão para rótulos complementares múltiplos [@feng2020a]. Neste caso, é possível derivar uma função de risco empírica que, novamente, converge para a função de risco do problema completamente supervisionado, além de apresentar taxas de convergência para essa função de risco.
 
@@ -606,16 +606,16 @@ $$
 1 - p(\mathbf y|\boldsymbol \theta),
 $$
 
-Considerando o rótulo complementar $\bar y$ e a função $\hat f$ dada pela rede neural, a fórmula para descrever a função de perda é descrita da seguinte forma:
+Considerando o rótulo complementar $\bar y$ e a função $f$ dada pela rede neural, a fórmula para descrever a função de perda é descrita da seguinte forma:
 
 $$
-\mathcal L(\bar y, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y=\bar y)\right]
+\mathcal L(\bar y, f(\mathbf x)) = -\log\left[1 - \sum_{y} {f_y}(\mathbf x) I(y=\bar y)\right]
 $$
 
 A função de perda proposta pode ser explicada de maneira intuitiva através de um exemplo. Considere um problema com apenas $c$ possíveis valores para o rótulo (ou seja, uma resposta multinomial, sem ser multivariada). Considere também que a rede neural retorna uma alta probabilidade, por exemplo, $0.99$, para o valor $i$, que o oráculo identificou como incorreta. Nesse caso, a função de perda é dada por
 
 $$
-\mathcal L(i,\hat f(\mathbf x)) = -\log\left[1-\hat {f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\mathcal L(i,f(\mathbf x)) = -\log\left[1-{f_i}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
 $$
 
 Como é possível ver no exemplo, quanto maior a probabilidade dada a um rótulo identificado como incorreto pelo oráculo, mais a função de perda penaliza essa predição. Dessa forma, a função de perda consegue incorporar completamente a informação dada pelo oráculo.
@@ -623,7 +623,7 @@ Como é possível ver no exemplo, quanto maior a probabilidade dada a um rótulo
 Quando o Captcha aceita múltiplos chutes, a mesma conta é válida, bastando subtrair as probabilidades de todos os rótulos incorretos:
 
 $$
-\mathcal L(\bar {\mathbf y}, \hat f(\mathbf x)) = -\log\left[1 - \sum_{y}\hat {f_y}(\mathbf x) I(y \in \bar {\mathbf y})\right]
+\mathcal L(\bar {\mathbf y}, f(\mathbf x)) = -\log\left[1 - \sum_{y} {f_y}(\mathbf x) I(y \in \bar {\mathbf y})\right]
 $$
 
 No final, o valor que é passado para a função de perda é a soma das perdas para todas as observações do *minibatch*. A soma considera tanto as perdas calculadas com base nos rótulos corretos quanto as perdas calculadas com base nos rótulos incorretos.
