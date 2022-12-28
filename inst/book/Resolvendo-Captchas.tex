@@ -456,6 +456,7 @@ Captchas, or Completely Automated Public Turing tests to tell Computers and Huma
    JPEG & Join Photographic Experts Groups\\
    GAN & Generative Adversarial Networks\\
    GPT & Generative Pre-Training Transformer\\
+   GPU & Graphical Processing Unit\\
    JUCESP & Junta Comercial de São Paulo\\
    LAI & Lei de Acesso à Informação\\
    ICMC & Instituto de Ciências Matemáticas e de Computação\\
@@ -4585,15 +4586,15 @@ podendo servir como base para pesquisas futuras.
 
 Este trabalho de doutorado teve como objeto de estudo os Captchas, que
 são desafios utilizados para identificar se o acesso à uma página na
-internet é realizado por uma pessoa ou uma máquina. A pesquisa
-apresentou um breve histórico dos Captchas, os problemas de sua
-utilização em serviços públicos e as abordagens existentes para
-resolução automática de Captchas. Em seguida, apresentou-se como uma
-nova abordagem, o WAWL, poderia aliar técnicas de raspagem de dados e
-aprendizado estatístico com rótulos parciais para obter modelos
-poderosos de resolução de Captchas sem a necessidade de anotar vários
-casos manualmente. Por fim, foram apresentadas as propriedades do modelo
-proposto e os resultados empíricos através de uma série de simulações.
+internet é realizado por uma pessoa ou um robô. A pesquisa apresentou um
+breve histórico dos Captchas, os problemas de sua utilização em serviços
+públicos e as abordagens existentes para resolução automática de
+Captchas. Em seguida, apresentou-se como um novo método, o WAWL, que
+alia técnicas de raspagem de dados e aprendizado estatístico com rótulos
+parciais para obter modelos poderosos de resolução de Captchas sem a
+necessidade de anotar vários casos manualmente. Por fim, foram
+apresentadas as propriedades do modelo proposto e os resultados
+empíricos através de uma série de simulações.
 
 Os resultados da pesquisa foram positivos. Na parte teórica, pesquisas
 já apontavam que o aprendizado com rótulos parciais ou rótulos
@@ -4601,7 +4602,7 @@ complementares possuíam boas propriedades. O trabalho mostrou
 empiricamente que a técnica apresenta bons resultados, aumentando a
 acurácia dos modelos iniciais em mais de 3 vezes, sem a necessidade de
 anotar novos dados. Além disso, foram encontradas evidências de que o
-método pode ser aplicado iterativamente, resultado em modelos com poder
+método pode ser aplicado iterativamente, resultando em modelos com poder
 preditivo ainda maior.
 
 As contribuições do estudo podem ser organizadas em três tipos:
@@ -4622,10 +4623,10 @@ trabalho possa ter um impacto positivo, ainda que pequeno, na qualidade
 das relações de trabalho na sociedade.
 
 A contribuição para a pesquisa acadêmica pode ser separada em duas
-partes. A primeira é que a função de perda proposta apresenta boas
-propriedades matemáticas, mostrando que pode ser um bom ponto de partida
-para quem deseja trabalhar com aprendizado com rótulos parcialmente
-anotados. A segunda é relacionada ao uso da raspagem de dados como passo
+partes. A primeira é que o método proposto apresenta bons resultados
+empíricos, mostrando que pode ser um ponto de partida interessante para
+quem deseja trabalhar com aprendizado com rótulos parcialmente anotados.
+A segunda é relacionada ao uso da raspagem de dados como passo
 intermediário na construção de modelos estatísticos, que pode ser a base
 para o desenvolvimento de um novo campo de pesquisa. Espera-se que os
 resultados obtidos sirvam como incentivo para que as técnicas de
@@ -4637,9 +4638,9 @@ no pacote \texttt{\{captcha\}}. O pacote é uma caixa de ferramentas
 completa para quem tiver interesse em resolver Captchas, além de ser uma
 das primeiras aplicações que utilizam os pacotes \texttt{\{torch\}} e
 \texttt{\{luz\}} como motor computacional. O pacote possui uma interface
-que permite o compartilhamento de códigos, bases de dados e modelos de
-forma distribuída, possibilitando a criação de soluções que vão muito
-além do próprio pacote.
+que permite o compartilhamento de códigos, bases de dados e modelos
+publicamente, possibilitando a criação de soluções que vão muito além do
+próprio pacote.
 
 Com isso, pode-se concluir que os quatro objetivos descritos na
 Seção~\ref{sec-objetivos} foram atendidos. O modelo proposto foi
@@ -4654,13 +4655,13 @@ públicos.
 
 É evidente, no entanto, que o trabalho apresenta algumas limitações. Na
 parte teórica, os resultados matemáticos podem ser desenvolvidos com
-maior detalhamento. Especificamente, outras propostas de função de perda
-podem ser apresentadas, bem como os testes empíricos com essas funções
-de perda. A escolha de apenas uma alternativa foi feita por conta do
-foco em resolver o problema de pesquisa (os Captchas) em detrimento da
-discussão detalhada do aprendizado com rótulos parciais, bem como da
-necessidade de fazer muito mais simulações se outras funções de perda
-fossem propostas.
+maior detalhamento. Especificamente, podem ser apresentadas e testadas
+outras propostas de função de perda, eventualmente com implementações
+que aceitem a utilização de placas de vídeo. A escolha de apenas uma
+alternativa foi feita por conta da escolha em resolver o problema de
+pesquisa (os Captchas) em detrimento da discussão mais aprofundada do
+aprendizado com rótulos parciais, bem como da necessidade de fazer muito
+mais simulações se outras funções de perda fossem propostas.
 
 Outra limitação importante do estudo está na aplicação iterada. A
 pesquisa apresentou essa parte como um resultado adicional, mas os
@@ -4682,17 +4683,17 @@ conexão, que precisariam ser tratados com cuidado.
 
 Outra extensão oportuna seria a criação de um modelo geral de resolução
 de Captchas, desenvolvido a partir das bases que foram construídas
-durante a pesquisa. Esse modelo poderia ser utilizado como modelo
-inicial para a resolução de novos Captchas e aprimorado com o oráculo,
-podendo até afastar completamente a necessidade de anotação manual. No
-momento, não é possível saber se esse modelo funcionaria na prática de
-forma consistente, já que i) nada garante que ele tenha uma acurácia
-maior que 10\% para um novo Captcha, mesmo se construído com base em
-Captchas de várias origens e ii) foram encontradas evidências de que os
-modelos com acurácia menor de 10\% têm mais dificuldades em melhorar com
-o método WAWL.
+durante a pesquisa. Esse modelo poderia ser utilizado como passo inicial
+do WAWL para a resolução de novos Captchas, podendo até afastar
+completamente a necessidade de anotação manual. No momento, não é
+possível saber se esse modelo funcionaria na prática de forma
+consistente, já que i) nada garante que ele tenha uma acurácia maior que
+10\% para um novo Captcha, mesmo se construído com base em Captchas de
+várias origens e ii) foram encontradas evidências de que os modelos com
+acurácia menor de 10\% têm mais dificuldades em melhorar com o método
+WAWL quando o Captcha não aceita vários chutes.
 
-A presente tese foi fruto de um longo processo de investigação e
+A presente tese foi fruto de um longo processo de análise e
 desenvolvimento, investigando os aspectos relevantes dos Captchas de
 textos em imagens. Espera-se que a metodologia proposta, os resultados
 obtidos e os pacotes computacionais desenvolvidos sejam úteis na luta
@@ -5026,8 +5027,8 @@ projetos que foram aposentados.
 
 O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de
 2016. Como foi comentado na introdução da tese, é muito comum se deparar
-com desafios de Captchas ao raspar dados do judiciário, já que os dados
-não são abertos.
+com desafios de Captchas ao raspar dados do judiciário, já que estes
+dados não são abertos.
 
 O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio
 era utilizado no site do TJSP que, depois de alguns anos, passou a
@@ -5076,7 +5077,7 @@ faculdade.
 
 Com o passar do tempo, o pacote \texttt{\{decryptr\}} ficou cada vez
 mais estável, funcionando como dependência de várias ferramentas
-utilizadas nos trabalhos de jurimetria. O pacote também ganhou um site:
+utilizadas em trabalhos de jurimetria. O pacote também ganhou um site:
 \url{https://decryptr.xyz} e uma API com acesso gratuito, precisando
 apenas de uma chave de acesso. A ferramenta ficou bastante popular, com
 \href{https://github.com/decryptr/decryptr}{178 estrelas no GitHub} no
@@ -5090,10 +5091,10 @@ muitos códigos legados e dificuldades de instalação por conta da
 dependência do python, necessário para o funcionamento do TensorFlow,
 que é chamado através do pacote \texttt{\{reticulate\}} (USHEY; ALLAIRE;
 TANG, 2022). Além disso, a implementação das técnicas do oráculo
-envolviam modificações na função de perda, que são difíceis de
+envolviam modificações na função de perda, que são mais difíceis de
 implementar no ambiente do \texttt{\{tensorflow\}}, justamente por conta
 da necessidade de conhecer o código python que roda por trás dos códigos
-mais usuais.
+em R.
 
 Com o advento do pacote \texttt{\{torch\}} (FALBEL; LURASCHI, 2022), no
 entanto, tudo foi facilitado. O pacote não possui dependências com o
@@ -5110,12 +5111,12 @@ construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na
 arquitetura do pacote.
 
 Com o desenvolvimento da tese, notou-se a necessidade de construir
-alguns pacotes adicionais. Os pacote \texttt{\{captchaDownload\}} e
+alguns pacotes adicionais. Os pacotes \texttt{\{captchaDownload\}} e
 \texttt{\{captchaOracle\}} foram desenvolvidos para facilitar a obtenção
 dos resultados da tese, enquanto o pacote \texttt{\{captcha\}} pode ser
 utilizado por qualquer pessoa interessada em visualizar, anotar e
 resolver Captchas. As próximas subseções do apêndice descrevem os
-pacotes.
+pacotes \texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}}.
 
 \hypertarget{sec-pacote-download}{%
 \section{Pacote captchaDownload}\label{sec-pacote-download}}
@@ -5126,7 +5127,9 @@ também inclui funções para trabalhar com oráculos.
 
 O pacote não foi criado para ser usado pelo público geral. O intuito de
 criar o pacote foi o de organizar as funções utilizadas para realizar as
-simulações e obter os resultados empíricos da tese.
+simulações e obter os resultados empíricos da tese. Apesar disso, o
+código está disponível publicamente para quem tiver interesse em usar
+como referência para construir funções que acessam o oráculo.
 
 As funções do pacote \texttt{\{captchaDownload\}} são organizadas em
 dois tipos principais. As funções de \emph{acesso}, identificadas pelo
@@ -5207,7 +5210,7 @@ função de acesso; e \texttt{label=}, o rótulo obtido. A função retorna
 
 Cada Captcha possui uma função de acesso e uma função de teste. Na
 prática, se uma pessoa desejar resolver um novo Captcha usando a técnica
-do oráculo, são essas funções que ela precisar desenvolver. Todas as
+do oráculo, são essas funções que ela precisaria desenvolver. Todas as
 outras operações podem ser generalizadas para diferentes casos de uso e
 estão implementadas nos pacotes \texttt{\{captchaDownload\}} e
 \texttt{\{captchaOracle\}}. Vale notar que a construção dessas funções
@@ -5271,7 +5274,8 @@ um chute ficaria da seguinte forma:
 \end{verbatim}
 
 No teste do exemplo, a função acertou, salvando o seguinte arquivo de
-\emph{log}. Espaços foram adicionados para facilitar a visualização.
+\emph{log}\footnote{Espaços foram adicionados manualmente para facilitar
+  a visualização.}.
 
 \begin{verbatim}
 ntry, label , type, result
@@ -5279,7 +5283,7 @@ ntry, label , type, result
 \end{verbatim}
 
 Abaixo, foi colocado um modelo ruim para o TRT, para forçar o modelo a
-errar todos os chutes. O resultado é o log abaixo
+errar todos os chutes. O resultado é o \emph{log} abaixo
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5311,8 +5315,8 @@ Label: v2xu7w
 \end{verbatim}
 
 No novo exemplo, a função errou todos os dez chutes, salvando o seguinte
-arquivo de \emph{log}. Espaços foram adicionados para facilitar a
-visualização. O último valor é um rótulo inserido manualmente.
+arquivo de \emph{log}\footnote{Espaços foram adicionados para facilitar
+  a visualização.}. O último valor é um rótulo inserido manualmente.
 
 \begin{verbatim}
 ntry,  label,   type, result

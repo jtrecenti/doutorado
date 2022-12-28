@@ -335,22 +335,22 @@ div.csl-indent {
 <p>Este apêndice foi construído para mostrar a estrutura dos pacotes <code>{captchaDownload}</code> e <code>{captchaOracle}</code>, utilizados como auxiliares para implementação do WAWL, orquestradas pelo pacote <code>{captcha}</code>. Apresenta-se também um breve histórico sobre a construção das soluções desenvolvidas, descrevendo alternativas e projetos que foram aposentados.</p>
 <section id="sec-historico" class="level2">
 <h2 class="anchored" data-anchor-id="sec-historico">Histórico</h2>
-<p>O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de 2016. Como foi comentado na introdução da tese, é muito comum se deparar com desafios de Captchas ao raspar dados do judiciário, já que os dados não são abertos.</p>
+<p>O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de 2016. Como foi comentado na introdução da tese, é muito comum se deparar com desafios de Captchas ao raspar dados do judiciário, já que estes dados não são abertos.</p>
 <p>O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio era utilizado no site do TJSP que, depois de alguns anos, passou a utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas tem como fonte de dados o TJBA, que continua utilizando o desafio até o momento que os sites foram investigados pela última vez, em setembro de 2022.</p>
 <p>A primeira abordagem para resolver o Captcha do e-SAJ foi utilizando heurísticas para separar as letras, em 2016. Infelizmente o pacote original, chamado <code>{captchasaj}</code>, foi removido da <em>internet</em>, mas um código legado construído para o TJRS está disponível <a href="https://github.com/decryptr/captchaTJRS/blob/master/R/tools.R">neste link</a>. Nessa abordagem, as letras primeiro são segmentadas, alimentando um modelo de florestas aleatórias que considera os pixels da imagem como variáveis preditoras e a letra como resposta. Esses trabalhos tiveram contribuições importantes de Fernando Corrêa e Athos Damiani, ambos do IME-USP.</p>
 <p>A segunda abordagem para resolver os Captchas foi utilizando o áudio, também em 2016. O código para resolver o Captcha da RFB utilizando áudio está disponível <a href="https://github.com/decryptr/captchaReceitaAudio">neste link</a>. A ideia de resolução era parecida, passando pelo procedimento de segmentação e depois de modelagem, mas tinha um passo intermediário de processamento envolvendo engenharia de <em>features</em> <span class="citation" data-cites="kuhn2019">(<a href="bibliografia.html#ref-kuhn2019" role="doc-biblioref">KUHN; JOHNSON, 2019</a>)</span>. O trabalho teve contribuições importantes de Athos Damiani.</p>
 <p>Com o advento da ferramenta TensorFlow para o R <span class="citation" data-cites="tensorflow">(<a href="bibliografia.html#ref-tensorflow" role="doc-biblioref">ALLAIRE; TANG, 2022</a>)</span>, os modelos para resolver Captchas passaram a utilizar modelos de redes neurais. No início, por falta de conhecimento da área, a arquitetura das redes era demasiadamente complexa. Depois que os primeiros modelos começaram a funcionar, notou-se que as etapas de pré-processamento com segmentação e algumas camadas das redes eram desnecessárias para ajustar os modelos. Essa parte teve grande contribuição de Daniel Falbel, também do IME-USP, que foi a pessoa que introduziu o TensorFlow e a área de <em>deep learning</em> para a comunidade brasileira de R.</p>
 <p>Depois de resolver com sucesso alguns Captchas, notou-se que seria possível criar um ambiente completo de modelagem de Captchas. Isso deu origem ao pacote <code>{decryptr}</code> <span class="citation" data-cites="decryptr">(<a href="bibliografia.html#ref-decryptr" role="doc-biblioref">TRECENTI et al., 2022</a>)</span>, que foi construído em 2017. O trabalho teve grandes contribuições de Caio Lente, do curso de Ciência da Computação do IME-USP e outros colegas de faculdade.</p>
-<p>Com o passar do tempo, o pacote <code>{decryptr}</code> ficou cada vez mais estável, funcionando como dependência de várias ferramentas utilizadas nos trabalhos de jurimetria. O pacote também ganhou um site: <a href="https://decryptr.xyz" class="uri">https://decryptr.xyz</a> e uma API com acesso gratuito, precisando apenas de uma chave de acesso. A ferramenta ficou bastante popular, com <a href="https://github.com/decryptr/decryptr">178 estrelas no GitHub</a> no mês de dezembro de 2022. Essas ferramentas envolveram contribuições principalmente de Caio Lente e Daniel Falbel.</p>
-<p>A construção do pacote <code>{captcha}</code> separada do <code>{decryptr}</code> se deu por dois motivos. Primeiro, o pacote <code>{decryptr}</code>, por ser o primeiro a tratar do assunto, possui muitos códigos legados e dificuldades de instalação por conta da dependência do python, necessário para o funcionamento do TensorFlow, que é chamado através do pacote <code>{reticulate}</code> <span class="citation" data-cites="reticulate">(<a href="bibliografia.html#ref-reticulate" role="doc-biblioref">USHEY; ALLAIRE; TANG, 2022</a>)</span>. Além disso, a implementação das técnicas do oráculo envolviam modificações na função de perda, que são difíceis de implementar no ambiente do <code>{tensorflow}</code>, justamente por conta da necessidade de conhecer o código python que roda por trás dos códigos mais usuais.</p>
+<p>Com o passar do tempo, o pacote <code>{decryptr}</code> ficou cada vez mais estável, funcionando como dependência de várias ferramentas utilizadas em trabalhos de jurimetria. O pacote também ganhou um site: <a href="https://decryptr.xyz" class="uri">https://decryptr.xyz</a> e uma API com acesso gratuito, precisando apenas de uma chave de acesso. A ferramenta ficou bastante popular, com <a href="https://github.com/decryptr/decryptr">178 estrelas no GitHub</a> no mês de dezembro de 2022. Essas ferramentas envolveram contribuições principalmente de Caio Lente e Daniel Falbel.</p>
+<p>A construção do pacote <code>{captcha}</code> separada do <code>{decryptr}</code> se deu por dois motivos. Primeiro, o pacote <code>{decryptr}</code>, por ser o primeiro a tratar do assunto, possui muitos códigos legados e dificuldades de instalação por conta da dependência do python, necessário para o funcionamento do TensorFlow, que é chamado através do pacote <code>{reticulate}</code> <span class="citation" data-cites="reticulate">(<a href="bibliografia.html#ref-reticulate" role="doc-biblioref">USHEY; ALLAIRE; TANG, 2022</a>)</span>. Além disso, a implementação das técnicas do oráculo envolviam modificações na função de perda, que são mais difíceis de implementar no ambiente do <code>{tensorflow}</code>, justamente por conta da necessidade de conhecer o código python que roda por trás dos códigos em R.</p>
 <p>Com o advento do pacote <code>{torch}</code> <span class="citation" data-cites="torch">(<a href="bibliografia.html#ref-torch" role="doc-biblioref">FALBEL; LURASCHI, 2022</a>)</span>, no entanto, tudo foi facilitado. O pacote não possui dependências com o python, além de ser bastante transparente e flexível na construção da arquitetura do modelo, funções de perda e otimização. O pacote, também construído por Daniel Falbel, é um grande avanço científico e facilitou muito a construção dos códigos desta tese.</p>
 <p>O pacote <code>{captcha}</code>, apesar de ter sido construído do zero, foi desenvolvido durante <em>lives</em> realizadas na plataforma <em>Twitch</em>. A construção em <em>lives</em> foi interessante porque era possível obter <em>feedback</em> e ideias da comunidade durante a construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na arquitetura do pacote.</p>
-<p>Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacotes adicionais. Os pacote <code>{captchaDownload}</code> e <code>{captchaOracle}</code> foram desenvolvidos para facilitar a obtenção dos resultados da tese, enquanto o pacote <code>{captcha}</code> pode ser utilizado por qualquer pessoa interessada em visualizar, anotar e resolver Captchas. As próximas subseções do apêndice descrevem os pacotes.</p>
+<p>Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacotes adicionais. Os pacotes <code>{captchaDownload}</code> e <code>{captchaOracle}</code> foram desenvolvidos para facilitar a obtenção dos resultados da tese, enquanto o pacote <code>{captcha}</code> pode ser utilizado por qualquer pessoa interessada em visualizar, anotar e resolver Captchas. As próximas subseções do apêndice descrevem os pacotes <code>{captchaDownload}</code> e <code>{captchaOracle}</code>.</p>
 </section>
 <section id="sec-pacote-download" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pacote-download">Pacote captchaDownload</h2>
 <p>O pacote <code>{captchaDownload}</code> foi construído para armazenar os códigos de baixar dados de Captchas de forma consistente. O pacote também inclui funções para trabalhar com oráculos.</p>
-<p>O pacote não foi criado para ser usado pelo público geral. O intuito de criar o pacote foi o de organizar as funções utilizadas para realizar as simulações e obter os resultados empíricos da tese.</p>
+<p>O pacote não foi criado para ser usado pelo público geral. O intuito de criar o pacote foi o de organizar as funções utilizadas para realizar as simulações e obter os resultados empíricos da tese. Apesar disso, o código está disponível publicamente para quem tiver interesse em usar como referência para construir funções que acessam o oráculo.</p>
 <p>As funções do pacote <code>{captchaDownload}</code> são organizadas em dois tipos principais. As funções de <em>acesso</em>, identificadas pelo termo <code>_access</code>, fazem o <em>download</em> da imagem do Captcha e retornam todas as informações necessárias para fazer a verificação do oráculo, como, por exemplo, <em>cookies</em> e dados da sessão do usuário. Já as funções de <em>teste</em>, identificadas pelo termo <code>_test</code>, servem para verificar se um rótulo fornecido para o Captcha está correto ou não.</p>
 <p>As funções ficam mais claras através de um exemplo. No caso do TRF5, por exemplo, o acesso é feito pela página do <a href="https://pje.trf5.jus.br/pjeconsulta/ConsultaPublica/listView.seam">sistema PJe</a>. A função <code>captcha_access_trf5()</code> recebe o parâmetro <code>path=</code>, que é a pasta para salvar a imagem, retornando uma lista com o caminho da imagem que foi salva e de componentes da sessão do usuário.</p>
 <div class="cell">
@@ -399,7 +399,7 @@ $u
 </details>
 </div>
 <pre><code>[1] TRUE</code></pre>
-<p>Cada Captcha possui uma função de acesso e uma função de teste. Na prática, se uma pessoa desejar resolver um novo Captcha usando a técnica do oráculo, são essas funções que ela precisar desenvolver. Todas as outras operações podem ser generalizadas para diferentes casos de uso e estão implementadas nos pacotes <code>{captchaDownload}</code> e <code>{captchaOracle}</code>. Vale notar que a construção dessas funções geralmente é necessária para a construção de <em>web scrapers</em>, ou seja, elas não criam dificuldades adicionais para pessoas interessadas em resolver Captchas para acessar dados da <em>internet</em>.</p>
+<p>Cada Captcha possui uma função de acesso e uma função de teste. Na prática, se uma pessoa desejar resolver um novo Captcha usando a técnica do oráculo, são essas funções que ela precisaria desenvolver. Todas as outras operações podem ser generalizadas para diferentes casos de uso e estão implementadas nos pacotes <code>{captchaDownload}</code> e <code>{captchaOracle}</code>. Vale notar que a construção dessas funções geralmente é necessária para a construção de <em>web scrapers</em>, ou seja, elas não criam dificuldades adicionais para pessoas interessadas em resolver Captchas para acessar dados da <em>internet</em>.</p>
 <p>A função principal do pacote <code>{captchaDownload}</code> é a <code>captcha_oracle()</code>. A função é responsável por realizar a anotação parcial automática dos Captchas utilizando um modelo inicial e o oráculo. A função possui os seguintes parâmetros:</p>
 <ul>
 <li><code>path=</code>: caminho em que os arquivos serão salvos.</li>
@@ -427,10 +427,10 @@ $u
 </details>
 </div>
 <pre><code>✔ Acertou!!!</code></pre>
-<p>No teste do exemplo, a função acertou, salvando o seguinte arquivo de <em>log</em>. Espaços foram adicionados para facilitar a visualização.</p>
+<p>No teste do exemplo, a função acertou, salvando o seguinte arquivo de <em>log</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <pre><code>ntry, label , type, result
 1,    569328, auto, TRUE</code></pre>
-<p>Abaixo, foi colocado um modelo ruim para o TRT, para forçar o modelo a errar todos os chutes. O resultado é o log abaixo</p>
+<p>Abaixo, foi colocado um modelo ruim para o TRT, para forçar o modelo a errar todos os chutes. O resultado é o <em>log</em> abaixo</p>
 <div class="cell">
 <details open="">
 <summary>Código</summary>
@@ -457,7 +457,7 @@ $u
 ℹ Errou! O chute foi: y2su7y
 ℹ Errou! O chute foi: v2wu7w
 Label: v2xu7w</code></pre>
-<p>No novo exemplo, a função errou todos os dez chutes, salvando o seguinte arquivo de <em>log</em>. Espaços foram adicionados para facilitar a visualização. O último valor é um rótulo inserido manualmente.</p>
+<p>No novo exemplo, a função errou todos os dez chutes, salvando o seguinte arquivo de <em>log</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. O último valor é um rótulo inserido manualmente.</p>
 <pre><code>ntry,  label,   type, result
    1, v2su7w,   auto,  FALSE
    2, t2su7w,   auto,  FALSE
@@ -512,6 +512,13 @@ TRECENTI, J. et al. decryptr: An extensible API for breaking captchas. 2022.
 USHEY, K.; ALLAIRE, J.; TANG, Y. reticulate: Interface to ’Python’. 2022. Disponível em: &lt;<a href="https://CRAN.R-project.org/package=reticulate">https://CRAN.R-project.org/package=reticulate</a>&gt;.
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Espaços foram adicionados manualmente para facilitar a visualização.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Espaços foram adicionados para facilitar a visualização.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
