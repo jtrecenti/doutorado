@@ -340,7 +340,7 @@ div.csl-indent {
 <p>Depois de resolver com sucesso alguns Captchas, notou-se que seria possível criar um ambiente completo de modelagem de Captchas. Isso deu origem ao pacote <code>{decryptr}</code> <span class="citation" data-cites="decryptr">(<a href="bibliografia.html#ref-decryptr" role="doc-biblioref">TRECENTI et al., 2022</a>)</span>, que foi construído em 2017. O trabalho teve grandes contribuições de Caio Lente, do curso de Ciência da Computação do IME-USP e outros colegas de faculdade.</p>
 <p>Com o passar do tempo, o pacote <code>{decryptr}</code> ficou cada vez mais estável, funcionando como dependência de várias ferramentas utilizadas nos trabalhos de jurimetria. O pacote também ganhou um site: <a href="https://decryptr.xyz" class="uri">https://decryptr.xyz</a> e uma API com acesso gratuito, precisando apenas de uma chave de acesso. A ferramenta ficou bastante popular, com <a href="https://github.com/decryptr/decryptr">178 estrelas no GitHub</a> no mês de dezembro de 2022. Essas ferramentas envolveram contribuições principalmente de Caio Lente e Daniel Falbel.</p>
 <p>A construção do pacote <code>{captcha}</code> separada do <code>{decryptr}</code> se deu por dois motivos. Primeiro, o pacote <code>{decryptr}</code>, por ser o primeiro a tratar do assunto, possui muitos códigos legados e dificuldades de instalação por conta da dependência do python, necessário para o funcionamento do TensorFlow, que é chamado através do pacote <code>{reticulate}</code> <span class="citation" data-cites="reticulate">(<a href="bibliografia.html#ref-reticulate" role="doc-biblioref">USHEY; ALLAIRE; TANG, 2022</a>)</span>. Além disso, a implementação das técnicas do oráculo envolviam modificações na função de perda, que são difíceis de implementar no ambiente do <code>{tensorflow}</code>, justamente por conta da necessidade de conhecer o código python que roda por trás dos códigos mais usuais.</p>
-<p>Com o advento do pacote <code>{torch}</code><span class="citation" data-cites="torch">(<a href="bibliografia.html#ref-torch" role="doc-biblioref">FALBEL; LURASCHI, 2022</a>)</span>, no entanto, tudo foi facilitado. O pacote não possui dependências com o python, além de ser bastante transparente e flexível na construção da arquitetura do modelo, funções de perda e otimização. O pacote, também construído por Daniel Falbel, é um grande avanço científico e facilitou muito a construção dos códigos desta tese.</p>
+<p>Com o advento do pacote <code>{torch}</code> <span class="citation" data-cites="torch">(<a href="bibliografia.html#ref-torch" role="doc-biblioref">FALBEL; LURASCHI, 2022</a>)</span>, no entanto, tudo foi facilitado. O pacote não possui dependências com o python, além de ser bastante transparente e flexível na construção da arquitetura do modelo, funções de perda e otimização. O pacote, também construído por Daniel Falbel, é um grande avanço científico e facilitou muito a construção dos códigos desta tese.</p>
 <p>O pacote <code>{captcha}</code>, apesar de ter sido construído do zero, foi desenvolvido durante <em>lives</em> realizadas na plataforma <em>Twitch</em>. A construção em <em>lives</em> foi interessante porque era possível obter <em>feedback</em> e ideias da comunidade durante a construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na arquitetura do pacote.</p>
 <p>Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacotes adicionais. Os pacote <code>{captchaDownload}</code> e <code>{captchaOracle}</code> foram desenvolvidos para facilitar a obtenção dos resultados da tese, enquanto o pacote <code>{captcha}</code> pode ser utilizado por qualquer pessoa interessada em visualizar, anotar e resolver Captchas. As próximas subseções do apêndice descrevem os pacotes.</p>
 </section>
@@ -351,7 +351,7 @@ div.csl-indent {
 <p>As funções do pacote <code>{captchaDownload}</code> são organizadas em dois tipos principais. As funções de <em>acesso</em>, identificadas pelo termo <code>_access</code>, fazem o <em>download</em> da imagem do Captcha e retornam todas as informações necessárias para fazer a verificação do oráculo, como, por exemplo, <em>cookies</em> e dados da sessão do usuário. Já as funções de <em>teste</em>, identificadas pelo termo <code>_test</code>, servem para verificar se um rótulo fornecido para o Captcha está correto ou não.</p>
 <p>As funções ficam mais claras através de um exemplo. No caso do TRF5, por exemplo, o acesso é feito pela página do <a href="https://pje.trf5.jus.br/pjeconsulta/ConsultaPublica/listView.seam">sistema PJe</a>. A função <code>captcha_access_trf5()</code> recebe o parâmetro <code>path=</code>, que é a pasta para salvar a imagem, retornando uma lista com o caminho da imagem que foi salva e de componentes da sessão do usuário.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>acesso <span class="ot">&lt;-</span> captchaDownload<span class="sc">:::</span><span class="fu">captcha_access_trf5</span>(<span class="st">"assets/img"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>acesso</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -370,7 +370,7 @@ $u
 </div>
 <p>Em seguida, obtém-se o rótulo do modelo. Isso pode ser feito manualmente ou através de um modelo.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(captcha)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(acesso<span class="sc">$</span>f_captcha)</span>
@@ -390,7 +390,7 @@ $u
 </div>
 <p>Agora, aplica-se a função <code>captcha_test_trf5()</code> para verificar se o rótulo está correto ou incorreto. A verificação é feita de forma automática, diretamente da <em>internet</em>, através do oráculo. A função recebe dois parâmetros: <code>obj=</code> com as informações obtidas da função de acesso; e <code>label=</code>, o rótulo obtido. A função retorna <code>TRUE</code> se o rótulo está correto e <code>FALSE</code> caso contrário.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(acertou <span class="ot">&lt;-</span> captchaDownload<span class="sc">:::</span><span class="fu">captcha_test_trf5</span>(acesso, lab))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -409,7 +409,7 @@ $u
 <p>A função amarra todos os conceitos necessários para criar novas bases de dados de forma automática. Primeiro, considera o caminho para salvar os dados. Em seguida, considera o modelo e formas de lidar com o oráculo. Por último, recebe as funções de acesso e de teste do Captcha. A função escreve um arquivo de <em>log</em> com os resultados dos testes. O arquivo contém <code>max_ntry</code> linhas, podendo ter uma linha adicional se <code>manual=TRUE</code>, já que, se o modelo errar todas os chutes, a anotação manual deve ser adicionada.</p>
 <p>No exemplo do TRF5, a chamada da função <code>captcha_oracle()</code> com um chute ficaria da seguinte forma:</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>modelo_trf5 <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"trf5"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -429,7 +429,7 @@ $u
 1,    569328, auto, TRUE</code></pre>
 <p>Abaixo, foi colocado um modelo ruim para o TRT, para forçar o modelo a errar todos os chutes. O resultado é o log abaixo</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">captcha_load_model</span>(<span class="st">"assets/modelo_ruim.pt"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>

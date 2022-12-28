@@ -31,7 +31,7 @@ google-scholar: true
 
 format:
   html:
-    code-fold: true
+    code-fold: show
     theme: [default, assets/css/quarto-book.scss]
   pdf:
     keep-tex: true

@@ -750,6 +750,7 @@ Para raspar uma página da web, usualmente se segue o fluxo descrito na @fig-flu
 ```{r}
 #| label: fig-fluxo-web-scraping
 #| fig-cap: "Ciclo da raspagem de dados. Fonte: [curso de Web Scraping da Curso-R](https://curso-r.github.io/main-web-scraping)."
+#| out-width: 80%
 
 knitr::include_graphics("assets/img/cycle.png")
 ```
@@ -851,7 +852,8 @@ A @tbl-lista-captcha-carac caracteriza os Captchas anotados. Todos os Captchas p
 da_tab <- doutorado::da_captchas |> 
   dplyr::mutate(
     link = stringr::str_extract(site, "(?<=\\()[^)]+"),
-    nm = stringr::str_extract(site, "(?<=\\[)[^\\]]+")
+    nm = stringr::str_extract(site, "(?<=\\[)[^\\]]+"),
+    caracteres = stringr::str_replace_all(caracteres, ":", "-")
   ) |> 
   dplyr::select(nm, chutes, caracteres, comprimento, colorido, n_total, link)
 
@@ -892,7 +894,7 @@ da_tab |>
 
 ```
 
-As bases de dados com imagens anotadas foram disponibilizadas na aba de lançamentos (*releases*) do [repositório principal do projeto de pesquisa](https://github.com/jtrecenti/doutorado/releases). As bases com imagens e modelos ajustados estão disponíveis para quem tiver interesse em fazer novas pesquisas e utilizar os resultados em suas aplicações, sem restrições de uso.
+As bases de dados com imagens anotadas foram disponibilizadas na aba de lançamentos (*releases*) do [repositório principal do projeto de pesquisa](https://github.com/decryptr/captcha/releases). As bases com imagens e modelos ajustados estão disponíveis para quem tiver interesse em fazer novas pesquisas e utilizar os resultados em suas aplicações, sem restrições de uso.
 
 <!-- ---------------------------------------------------------------------- -->
 

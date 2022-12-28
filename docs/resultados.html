@@ -463,7 +463,7 @@ div.csl-indent {
 <p>A utilização básica do <code>{captcha}</code> envolve as funções <code>read_captcha()</code>, <code>plot()</code>, <code>captcha_annotate()</code>, <code>captcha_load_model()</code> e <code>decrypt()</code>. As funções são explicadas abaixo.</p>
 <p>A função <code>read_captcha()</code> lê um vetor de arquivos de imagens e armazenar na memória. Por trás, a função utiliza o pacote <code>{magick}</code> para lidar com os tipos de arquivos que podem aparecer (JPEG, PNG, entre outros).</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(captcha)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>exemplo <span class="ot">&lt;-</span> <span class="st">"assets/img/dados_tjmg.jpeg"</span></span>
@@ -486,7 +486,7 @@ div.csl-indent {
 </div>
 <p>A função retorna um objeto com a classe <code>captcha</code>, que pode ser utilizada por outros métodos.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(captcha)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "captcha"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -494,7 +494,7 @@ div.csl-indent {
 </div>
 <p>O objeto é uma lista com três elementos: <code>$img</code>, que contém imagem lida com o pacote <code>{magick}</code>, <code>$lab</code>, que contém o rótulo da imagem (por padrão, <code>NULL</code>) e <code>$path</code>, que contém o caminho da imagem que foi lida.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(captcha)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Class 'captcha'  hidden list of 3</span></span>
@@ -505,7 +505,7 @@ div.csl-indent {
 </div>
 <p>A função <code>read_captcha()</code> possui um parâmetro <code>lab_in_path=</code>, que indica se o rótulo está contido no caminho da imagem. Se <code>lab_in_path=TRUE</code>, a função tentará extrair o rótulo do arquivo (obtendo o texto que vem depois do último <code>_</code> do caminho) e armazenar no elemento <code>$lab</code>.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>exemplo <span class="ot">&lt;-</span> <span class="st">"assets/img/mnist128c49c36e13_6297.png"</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(exemplo, <span class="at">lab_in_path =</span> <span class="cn">TRUE</span>)</span>
@@ -519,7 +519,7 @@ div.csl-indent {
 </div>
 <p>A função plot <code>plot()</code> é um método de classe S3 do R básico. A função foi implementada para facilitar a visualização de Captchas. A função recebe uma lista de imagens obtida pela função <code>read_captcha()</code> e mostra o Captcha visualmente, como na <a href="#fig-exemplo-plot">Figura&nbsp;<span>3.9</span></a>.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>exemplo <span class="ot">&lt;-</span> <span class="st">"assets/img/dados_tjmg.jpeg"</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(exemplo)</span>
@@ -536,7 +536,7 @@ div.csl-indent {
 </div>
 <p>Um aspecto interessante da função <code>plot()</code> é que ela lida com uma lista de Captchas. Isso é útil quando o interesse é visualizar vários Captchas de uma vez na imagem. A <a href="#fig-exemplo-plot-multi">Figura&nbsp;<span>3.10</span></a> mostra um exemplo de aplicação.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>exemplos <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"assets/img/"</span>, <span class="fu">c</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados_tjmg.jpeg"</span>,</span>
@@ -561,7 +561,7 @@ div.csl-indent {
 
 </div>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">captcha.print.cols =</span> <span class="dv">2</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(captchas)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -580,7 +580,7 @@ div.csl-indent {
 </div>
 <p>Quando o vetor de Captchas é muito grande, a função <code>plot()</code> mostra um número máximo de 100 imagens, acompanhado de uma mensagem. O padrão de 100 imagens está organizado em uma grade com 25 linhas e 4 colunas, podendo ser sobrescrito ao combinar as opções <code>captcha.print.cols=</code> e <code>captcha.print.rows=</code>. A <a href="#fig-exemplo-plot-multi-varias">Figura&nbsp;<span>3.12</span></a> mostra um exemplo do comportamento da função quando o número de imagens excede 100.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mais de 100 imagens:</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>exemplos <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">"assets/img/dados_tjmg.jpeg"</span>, <span class="dv">110</span>)</span>
@@ -601,7 +601,7 @@ div.csl-indent {
 </div>
 <p>Um detalhe interessante é que é possível criar subconjuntos de um objeto de classe <code>captcha</code> simplesmente utilizando o operador <code>[</code>. A função <code>length()</code> também pode ser utilizada para medir a quantidade de imagens lidas. A <a href="#fig-exemplo-plot-multi-varias-subset">Figura&nbsp;<span>3.13</span></a> mostra um exemplo dessas operações.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>captchas_subset <span class="ot">&lt;-</span> captchas[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(captchas_subset) <span class="co"># 20</span></span>
@@ -619,7 +619,7 @@ div.csl-indent {
 </div>
 <p>Por fim, se a imagem possui um rótulo, por padrão, a função <code>plot()</code> mostra o rótulo no canto da imagem. A <a href="#fig-exemplo-plot-rotulado">Figura&nbsp;<span>3.14</span></a> mostra um exemplo.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>exemplo <span class="ot">&lt;-</span> <span class="st">"assets/img/mnist128c49c36e13_6297.png"</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>captcha <span class="ot">&lt;-</span> <span class="fu">read_captcha</span>(exemplo, <span class="at">lab_in_path =</span> <span class="cn">TRUE</span>)</span>
@@ -748,7 +748,7 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 <p>Para customizar o modelo, o usuário deve modificar os métodos <code>initialize()</code> e <code>forward()</code>, acessados dentro do objeto <code>net_captcha$public_methods</code>. O primeiro é responsável pela inicialização do modelo, contendo a descrição das operações que são realizadas, como convoluções. O segundo é a função <em>feed forward</em> das redes neurais, que recebe uma imagem e retorna um objeto contendo os <em>logitos</em> ou probabilidades, no formato da variável resposta.</p>
 <p>Por padrão, o código de inicialização do modelo é o descrito abaixo. Os parâmetros <code>input_dim=</code>, <code>output_ndigits=</code>, <code>output_vocab_size=</code> e <code>vocab=</code> descrevem, respectivamente, as dimensões da imagem, o comprimeiro da resposta, o comprimento do alfabeto e os elementos do alfabeto. Os parâmetros <code>transform=</code>, <code>dropout=</code> e <code>dense_units=</code> controlam, respectivamente, a função de transformação da imagem, os hiperparâmetros de <em>dropout</em> e a quantidade de unidades na camada densa. É possível notar que os parâmetros das convoluções são fixos, já preparados para funcionar bem com uma imagem de dimensões <code>32x192</code>.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>initialize <span class="ot">=</span> <span class="cf">function</span>(input_dim,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                      output_ndigits,</span>
@@ -789,7 +789,7 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 </div>
 <p>A função de <em>feed forward</em> foi descrita abaixo. A função aplica o passo-a-passo descrito na <a href="metodologia.html#sec-arquitetura-rede"><span>Seção&nbsp;2.1.2.1</span></a>, recebendo uma imagem <code>x</code> como entrada e retornando uma matriz com números reais, que dão os pesos (positivos ou negativos) do modelo para cada letra da resposta. O modelo retorna os valores de forma irrestrita, e não os números no intervalo <span class="math inline">\([0,1]\)</span> porque, no passo seguinte, a função de perda considera como entrada esses valores. Se o usuário decidir modificar o método <code>forward</code> para retornar probabilidades, precisará também adaptar a função de perda utilizada.</p>
 <div class="cell">
-<details>
+<details open="">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
