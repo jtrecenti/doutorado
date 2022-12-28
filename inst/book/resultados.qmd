@@ -476,7 +476,7 @@ A @fig-aplicacao-iterada mostra os resultados da aplicação iterada. A utiliza�
 #| fig-cap: "Resultados da aplicação iterada da técnica."
 #| fig-width: 7
 #| fig-height: 4
-#| out-width: 75%
+#| out-width: 85%
 
 dados_iteracao_trf5 <- tibble::tribble(
   ~n, ~ntry,         ~tempo,              ~acc,
@@ -517,6 +517,7 @@ A utilização básica do `{captcha}` envolve as funções `read_captcha()`, `pl
 A função `read_captcha()` lê um vetor de arquivos de imagens e armazenar na memória. Por trás, a função utiliza o pacote `{magick}` para lidar com os tipos de arquivos que podem aparecer (JPEG, PNG, entre outros).
 
 ```{r}
+#| label: fig-uso-basico-captcha
 #| echo: true
 #| out-width: 30%
 library(captcha)

@@ -447,7 +447,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div id="fig-aplicacao-iterada" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="resultados_files/figure-html/fig-aplicacao-iterada-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<p><img src="resultados_files/figure-html/fig-aplicacao-iterada-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
 <p></p><figcaption class="figure-caption">Figura&nbsp;3.7: Resultados da aplicação iterada da técnica.</figcaption><p></p>
 </figure>
 </div>
@@ -476,7 +476,12 @@ div.csl-indent {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 JPEG     100     50 sRGB       FALSE     4530 72x72</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="resultados_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" style="width:30.0%"></p>
+<div id="fig-uso-basico-captcha" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="resultados_files/figure-html/fig-uso-basico-captcha-1.png" class="img-fluid figure-img" style="width:30.0%"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.8: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A função retorna um objeto com a classe <code>captcha</code>, que pode ser utilizada por outros métodos.</p>
@@ -512,7 +517,7 @@ div.csl-indent {
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ path: chr "assets/img/mnist128c49c36e13_6297.png"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>A função plot <code>plot()</code> é um método de classe S3 do R básico. A função foi implementada para facilitar a visualização de Captchas. A função recebe uma lista de imagens obtida pela função <code>read_captcha()</code> e mostra o Captcha visualmente, como na <a href="#fig-exemplo-plot">Figura&nbsp;<span>3.8</span></a>.</p>
+<p>A função plot <code>plot()</code> é um método de classe S3 do R básico. A função foi implementada para facilitar a visualização de Captchas. A função recebe uma lista de imagens obtida pela função <code>read_captcha()</code> e mostra o Captcha visualmente, como na <a href="#fig-exemplo-plot">Figura&nbsp;<span>3.9</span></a>.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
@@ -524,12 +529,12 @@ div.csl-indent {
 <div id="fig-exemplo-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="resultados_files/figure-html/fig-exemplo-plot-1.png" class="img-fluid figure-img" style="width:30.0%"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.8: Exemplo de aplicação da função plot a um objeto <code>captcha</code>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.9: Exemplo de aplicação da função plot a um objeto <code>captcha</code>.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Um aspecto interessante da função <code>plot()</code> é que ela lida com uma lista de Captchas. Isso é útil quando o interesse é visualizar vários Captchas de uma vez na imagem. A <a href="#fig-exemplo-plot-multi">Figura&nbsp;<span>3.9</span></a> mostra um exemplo de aplicação.</p>
+<p>Um aspecto interessante da função <code>plot()</code> é que ela lida com uma lista de Captchas. Isso é útil quando o interesse é visualizar vários Captchas de uma vez na imagem. A <a href="#fig-exemplo-plot-multi">Figura&nbsp;<span>3.10</span></a> mostra um exemplo de aplicação.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
@@ -546,12 +551,12 @@ div.csl-indent {
 <div id="fig-exemplo-plot-multi" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="resultados_files/figure-html/fig-exemplo-plot-multi-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.9: Exemplo de aplicação da função plot a um objeto <code>captcha</code> com várias imagens.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.10: Exemplo de aplicação da função plot a um objeto <code>captcha</code> com várias imagens.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Por padrão, a função plot dispõe as imagens em quatro colunas. Para mudar o padrão, é possível modificar as opções usando <code>options(captcha.print.cols = N)</code>, onde <code>N</code> é o número de colunas desejado. A <a href="#fig-exemplo-plot-multi-2col">Figura&nbsp;<span>3.10</span></a> mostra um exemplo com duas colunas.</p>
+<p>Por padrão, a função plot dispõe as imagens em quatro colunas. Para mudar o padrão, é possível modificar as opções usando <code>options(captcha.print.cols = N)</code>, onde <code>N</code> é o número de colunas desejado. A <a href="#fig-exemplo-plot-multi-2col">Figura&nbsp;<span>3.11</span></a> mostra um exemplo com duas colunas.</p>
 <div class="cell">
 
 </div>
@@ -565,7 +570,7 @@ div.csl-indent {
 <div id="fig-exemplo-plot-multi-2col" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="resultados_files/figure-html/fig-exemplo-plot-multi-2col-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.10: Exemplo de aplicação da função plot a um objeto <code>captcha</code> com várias imagens, disponibilizadas em duas colunas.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.11: Exemplo de aplicação da função plot a um objeto <code>captcha</code> com várias imagens, disponibilizadas em duas colunas.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -573,7 +578,7 @@ div.csl-indent {
 <div class="cell">
 
 </div>
-<p>Quando o vetor de Captchas é muito grande, a função <code>plot()</code> mostra um número máximo de 100 imagens, acompanhado de uma mensagem. O padrão de 100 imagens está organizado em uma grade com 25 linhas e 4 colunas, podendo ser sobrescrito ao combinar as opções <code>captcha.print.cols=</code> e <code>captcha.print.rows=</code>. A <a href="#fig-exemplo-plot-multi-varias">Figura&nbsp;<span>3.11</span></a> mostra um exemplo do comportamento da função quando o número de imagens excede 100.</p>
+<p>Quando o vetor de Captchas é muito grande, a função <code>plot()</code> mostra um número máximo de 100 imagens, acompanhado de uma mensagem. O padrão de 100 imagens está organizado em uma grade com 25 linhas e 4 colunas, podendo ser sobrescrito ao combinar as opções <code>captcha.print.cols=</code> e <code>captcha.print.rows=</code>. A <a href="#fig-exemplo-plot-multi-varias">Figura&nbsp;<span>3.12</span></a> mostra um exemplo do comportamento da função quando o número de imagens excede 100.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
@@ -589,12 +594,12 @@ div.csl-indent {
 <div id="fig-exemplo-plot-multi-varias" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="resultados_files/figure-html/fig-exemplo-plot-multi-varias-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.11: Demonstração da função <code>plot()</code> com muitas imagens.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.12: Demonstração da função <code>plot()</code> com muitas imagens.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Um detalhe interessante é que é possível criar subconjuntos de um objeto de classe <code>captcha</code> simplesmente utilizando o operador <code>[</code>. A função <code>length()</code> também pode ser utilizada para medir a quantidade de imagens lidas. A <a href="#fig-exemplo-plot-multi-varias-subset">Figura&nbsp;<span>3.12</span></a> mostra um exemplo dessas operações.</p>
+<p>Um detalhe interessante é que é possível criar subconjuntos de um objeto de classe <code>captcha</code> simplesmente utilizando o operador <code>[</code>. A função <code>length()</code> também pode ser utilizada para medir a quantidade de imagens lidas. A <a href="#fig-exemplo-plot-multi-varias-subset">Figura&nbsp;<span>3.13</span></a> mostra um exemplo dessas operações.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
@@ -607,12 +612,12 @@ div.csl-indent {
 <div id="fig-exemplo-plot-multi-varias-subset" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="resultados_files/figure-html/fig-exemplo-plot-multi-varias-subset-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.12: Demonstração das funções de subset e length aplicadas a um objeto do tipo <code>captcha</code>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.13: Demonstração das funções de subset e length aplicadas a um objeto do tipo <code>captcha</code>.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Por fim, se a imagem possui um rótulo, por padrão, a função <code>plot()</code> mostra o rótulo no canto da imagem. A <a href="#fig-exemplo-plot-rotulado">Figura&nbsp;<span>3.13</span></a> mostra um exemplo.</p>
+<p>Por fim, se a imagem possui um rótulo, por padrão, a função <code>plot()</code> mostra o rótulo no canto da imagem. A <a href="#fig-exemplo-plot-rotulado">Figura&nbsp;<span>3.14</span></a> mostra um exemplo.</p>
 <div class="cell">
 <details>
 <summary>Código</summary>
@@ -624,7 +629,7 @@ div.csl-indent {
 <div id="fig-exemplo-plot-rotulado" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="resultados_files/figure-html/fig-exemplo-plot-rotulado-1.png" class="img-fluid figure-img" style="width:30.0%"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.13: Demonstração da função <code>plot()</code> quando o Captcha possui um rótulo</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.14: Demonstração da função <code>plot()</code> quando o Captcha possui um rótulo</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -637,20 +642,20 @@ div.csl-indent {
 <li><code>rm_old=</code>: (opcional) deletar ou não os arquivos originais. Por padrão, é <code>FALSE</code>.</li>
 </ul>
 <p>A função, depois de aplicada, retorna um vetor com os caminhos dos arquivos modificados. O parâmetro <code>labels=</code> é útil para lidar com situações em que sabemos o rótulo do Captcha. Por exemplo, em um fluxo de trabalho que utiliza o oráculo, pode ser que um modelo inicial já forneça o valor correto do rótulo.</p>
-<p>Quando não existe um rótulo, a função <code>captcha_annotate()</code>, que abre o <code>prompt</code> para anotação e aplica <code>plot()</code> para visualizar a imagem. A <a href="#fig-exemplo-annotate">Figura&nbsp;<span>3.14</span></a> mostra um exemplo de aplicação da função <code>captcha_annotate()</code> no software <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>.</p>
+<p>Quando não existe um rótulo, a função <code>captcha_annotate()</code>, que abre o <code>prompt</code> para anotação e aplica <code>plot()</code> para visualizar a imagem. A <a href="#fig-exemplo-annotate">Figura&nbsp;<span>3.15</span></a> mostra um exemplo de aplicação da função <code>captcha_annotate()</code> no software <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-exemplo-annotate" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="assets/img/exemplo_annotate.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.14: Exemplo de aplicação da função <code>captcha_annotate()</code>. O rótulo <code>bhusp5</code> foi inserido manualmente.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.15: Exemplo de aplicação da função <code>captcha_annotate()</code>. O rótulo <code>bhusp5</code> foi inserido manualmente.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Por último, a função <code>decrypt()</code> tem o papel de obter o rótulo de uma imagem utilizando um modelo já treinado para aquele tipo de imagem. A função recebe dois argumentos: <code>file=</code> que pode ser tanto o caminho do arquivo quanto um objeto de classe <code>captcha</code>, e um argumento <code>model=</code>, que contém um modelo de classe <code>luz_module_fitted</code>, ajustado utilizando as ferramentas que serão apresentadas na próxima subseção.</p>
 <p>Para a tese, foram desenvolvidos modelos para vários Captchas diferentes. É possível carregar um modelo já treinado usando a função <code>captcha_load_model()</code>, podendo receber em seu único parâmetro <code>path=</code> o caminho de um arquivo contendo um modelo ajustado ou uma <em>string</em> com o nome de um modelo já treinado, como <code>"rfb"</code>, por exemplo. Os modelos treinados são armazenados nos <a href="https://github.com/decryptr/captcha/releases">releases do repositório do pacote captcha</a>, são baixados e controlados pelo pacote <code>{piggyback}</code> <span class="citation" data-cites="piggyback">(<a href="bibliografia.html#ref-piggyback" role="doc-biblioref">BOETTIGER; HO, 2022</a>)</span> e são lidos utilizando o pacote <code>{luz}</code>, que será descrito em maiores detalhes na próxima subseção. No momento de submissão da tese, os Captchas com modelos desenvolvidos eram <code>trf5</code>, <code>tjmg</code>, <code>trt</code>, <code>esaj</code>, <code>jucesp</code>, <code>tjpe</code>, <code>tjrs</code>, <code>cadesp</code>, <code>sei</code> e <code>rfb</code>.</p>
-<p>A <a href="#fig-diagrama-captcha-simples">Figura&nbsp;<span>3.15</span></a> resume visualmente as funções apresentadas até o momento. As setas indicam a dependência das funções de objetos gerados por outras funções.</p>
+<p>A <a href="#fig-diagrama-captcha-simples">Figura&nbsp;<span>3.16</span></a> resume visualmente as funções apresentadas até o momento. As setas indicam a dependência das funções de objetos gerados por outras funções.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-diagrama-captcha-simples" class="quarto-figure quarto-figure-center anchored">
@@ -668,7 +673,7 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 
 </div>
 <p></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.15: Diagrama das funções básicas do pacote <code>{captcha}</code></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.16: Diagrama das funções básicas do pacote <code>{captcha}</code></figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -712,13 +717,13 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 <p>A função <code>captcha_fit_model()</code>, apresentada na subseção anterior, é engessada. Ela aceita alguns parâmetros para estruturar o modelo, mas não possui elementos suficientes para customização. É para isso que pacotes como <code>{torch}</code> e <code>{luz}</code> existem, pois criam ambientes de computação mais flexíveis para operar os modelos de aprendizado profundo.</p>
 <p>Outra desvantagem da utilização do <code>captcha_fit_model()</code> é a disponibilização dos modelos. Um modelo pode ser utilizado localmente, mas a tarefa de disponibilizar as bases de dados e o modelo para outras pessoas não tem um procedimento bem definido.</p>
 <p>Para organizar o fluxo de trabalho, implementou-se um fluxo de anotação de Captchas dentro do pacote <code>{captcha}</code>. A função que orquestra esse fluxo é a <code>new_captcha()</code>. A função possui apenas um parâmetro, <code>path=</code>, que é o caminho de uma nova pasta a ser criada.</p>
-<p>A função também pode ser chamada criando-se um projeto dentro do próprio RStudio. A <a href="#fig-exemplo-rstudio-template">Figura&nbsp;<span>3.16</span></a> mostra um exemplo de utilização do template dentro do RStudio, após clicar em <code>Novo Projeto &gt; Novo Diretório</code>.</p>
+<p>A função também pode ser chamada criando-se um projeto dentro do próprio RStudio. A <a href="#fig-exemplo-rstudio-template">Figura&nbsp;<span>3.17</span></a> mostra um exemplo de utilização do template dentro do RStudio, após clicar em <code>Novo Projeto &gt; Novo Diretório</code>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-exemplo-rstudio-template" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="assets/img/exemplo-rstudio-template.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;3.16: Exemplo de criação de um novo projeto de Captcha utilizando o RStudio.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3.17: Exemplo de criação de um novo projeto de Captcha utilizando o RStudio.</figcaption><p></p>
 </figure>
 </div>
 </div>

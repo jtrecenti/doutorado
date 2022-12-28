@@ -328,7 +328,7 @@ as partes destacadas são as laterais dos números, conforme @fig-tjmg-exemplo-c
 
 ```{r}
 #| label: fig-tjmg-exemplo-conv-vertical
-#| fig-cap: Aplicação de uma convolução com kernel horizontal.
+#| fig-cap: Aplicação de uma convolução com kernel vertical.
 #| out-width: 110px
 knitr::include_graphics("assets/img/tjmg_conv_vertical.jpeg")
 ```
@@ -341,7 +341,7 @@ A @fig-tjmg-exemplo-conv-vertical-bias mostra o efeito de adicionar um viés de 
 
 ```{r}
 #| label: fig-tjmg-exemplo-conv-vertical-bias
-#| fig-cap: Aplicação de uma convolução com kernel horizontal. 
+#| fig-cap: Aplicação de uma convolução com kernel vertical e viés. 
 #| out-width: 110px
 knitr::include_graphics("assets/img/tjmg_conv_vertical_bias.jpeg")
 ```
