@@ -10,7 +10,7 @@ Este apêndice foi construído para mostrar a estrutura dos pacotes `{captchaDow
 
 ## Histórico {#sec-historico}
 
-O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de 2016. Como foi comentado na introdução da tese, é muito comum se deparar com desafios de Captchas ao raspar dados do judiciário, já que os dados não são abertos.
+O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de 2016. Como foi comentado na introdução da tese, é muito comum se deparar com desafios de Captchas ao raspar dados do judiciário, já que estes dados não são abertos.
 
 O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio era utilizado no site do TJSP que, depois de alguns anos, passou a utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas tem como fonte de dados o TJBA, que continua utilizando o desafio até o momento que os sites foram investigados pela última vez, em setembro de 2022.
 
@@ -22,21 +22,21 @@ Com o advento da ferramenta TensorFlow para o R [@tensorflow], os modelos para r
 
 Depois de resolver com sucesso alguns Captchas, notou-se que seria possível criar um ambiente completo de modelagem de Captchas. Isso deu origem ao pacote `{decryptr}` [@decryptr], que foi construído em 2017. O trabalho teve grandes contribuições de Caio Lente, do curso de Ciência da Computação do IME-USP e outros colegas de faculdade.
 
-Com o passar do tempo, o pacote `{decryptr}` ficou cada vez mais estável, funcionando como dependência de várias ferramentas utilizadas nos trabalhos de jurimetria. O pacote também ganhou um site: <https://decryptr.xyz> e uma API com acesso gratuito, precisando apenas de uma chave de acesso. A ferramenta ficou bastante popular, com [178 estrelas no GitHub](https://github.com/decryptr/decryptr) no mês de dezembro de 2022. Essas ferramentas envolveram contribuições principalmente de Caio Lente e Daniel Falbel.
+Com o passar do tempo, o pacote `{decryptr}` ficou cada vez mais estável, funcionando como dependência de várias ferramentas utilizadas em trabalhos de jurimetria. O pacote também ganhou um site: <https://decryptr.xyz> e uma API com acesso gratuito, precisando apenas de uma chave de acesso. A ferramenta ficou bastante popular, com [178 estrelas no GitHub](https://github.com/decryptr/decryptr) no mês de dezembro de 2022. Essas ferramentas envolveram contribuições principalmente de Caio Lente e Daniel Falbel.
 
-A construção do pacote `{captcha}` separada do `{decryptr}` se deu por dois motivos. Primeiro, o pacote `{decryptr}`, por ser o primeiro a tratar do assunto, possui muitos códigos legados e dificuldades de instalação por conta da dependência do python, necessário para o funcionamento do TensorFlow, que é chamado através do pacote `{reticulate}` [@reticulate]. Além disso, a implementação das técnicas do oráculo envolviam modificações na função de perda, que são difíceis de implementar no ambiente do `{tensorflow}`, justamente por conta da necessidade de conhecer o código python que roda por trás dos códigos mais usuais.
+A construção do pacote `{captcha}` separada do `{decryptr}` se deu por dois motivos. Primeiro, o pacote `{decryptr}`, por ser o primeiro a tratar do assunto, possui muitos códigos legados e dificuldades de instalação por conta da dependência do python, necessário para o funcionamento do TensorFlow, que é chamado através do pacote `{reticulate}` [@reticulate]. Além disso, a implementação das técnicas do oráculo envolviam modificações na função de perda, que são mais difíceis de implementar no ambiente do `{tensorflow}`, justamente por conta da necessidade de conhecer o código python que roda por trás dos códigos em R.
 
 Com o advento do pacote `{torch}` [@torch], no entanto, tudo foi facilitado. O pacote não possui dependências com o python, além de ser bastante transparente e flexível na construção da arquitetura do modelo, funções de perda e otimização. O pacote, também construído por Daniel Falbel, é um grande avanço científico e facilitou muito a construção dos códigos desta tese.
 
 O pacote `{captcha}`, apesar de ter sido construído do zero, foi desenvolvido durante *lives* realizadas na plataforma *Twitch*. A construção em *lives* foi interessante porque era possível obter *feedback* e ideias da comunidade durante a construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na arquitetura do pacote.
 
-Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacotes adicionais. Os pacote `{captchaDownload}` e `{captchaOracle}` foram desenvolvidos para facilitar a obtenção dos resultados da tese, enquanto o pacote `{captcha}` pode ser utilizado por qualquer pessoa interessada em visualizar, anotar e resolver Captchas. As próximas subseções do apêndice descrevem os pacotes.
+Com o desenvolvimento da tese, notou-se a necessidade de construir alguns pacotes adicionais. Os pacotes `{captchaDownload}` e `{captchaOracle}` foram desenvolvidos para facilitar a obtenção dos resultados da tese, enquanto o pacote `{captcha}` pode ser utilizado por qualquer pessoa interessada em visualizar, anotar e resolver Captchas. As próximas subseções do apêndice descrevem os pacotes `{captchaDownload}` e `{captchaOracle}`.
 
 ## Pacote captchaDownload {#sec-pacote-download}
 
 O pacote `{captchaDownload}` foi construído para armazenar os códigos de baixar dados de Captchas de forma consistente. O pacote também inclui funções para trabalhar com oráculos.
 
-O pacote não foi criado para ser usado pelo público geral. O intuito de criar o pacote foi o de organizar as funções utilizadas para realizar as simulações e obter os resultados empíricos da tese.
+O pacote não foi criado para ser usado pelo público geral. O intuito de criar o pacote foi o de organizar as funções utilizadas para realizar as simulações e obter os resultados empíricos da tese. Apesar disso, o código está disponível publicamente para quem tiver interesse em usar como referência para construir funções que acessam o oráculo.
 
 As funções do pacote `{captchaDownload}` são organizadas em dois tipos principais. As funções de *acesso*, identificadas pelo termo `_access`, fazem o *download* da imagem do Captcha e retornam todas as informações necessárias para fazer a verificação do oráculo, como, por exemplo, *cookies* e dados da sessão do usuário. Já as funções de *teste*, identificadas pelo termo `_test`, servem para verificar se um rótulo fornecido para o Captcha está correto ou não.
 
@@ -92,7 +92,7 @@ Agora, aplica-se a função `captcha_test_trf5()` para verificar se o rótulo es
 
     [1] TRUE
 
-Cada Captcha possui uma função de acesso e uma função de teste. Na prática, se uma pessoa desejar resolver um novo Captcha usando a técnica do oráculo, são essas funções que ela precisar desenvolver. Todas as outras operações podem ser generalizadas para diferentes casos de uso e estão implementadas nos pacotes `{captchaDownload}` e `{captchaOracle}`. Vale notar que a construção dessas funções geralmente é necessária para a construção de *web scrapers*, ou seja, elas não criam dificuldades adicionais para pessoas interessadas em resolver Captchas para acessar dados da *internet*. 
+Cada Captcha possui uma função de acesso e uma função de teste. Na prática, se uma pessoa desejar resolver um novo Captcha usando a técnica do oráculo, são essas funções que ela precisaria desenvolver. Todas as outras operações podem ser generalizadas para diferentes casos de uso e estão implementadas nos pacotes `{captchaDownload}` e `{captchaOracle}`. Vale notar que a construção dessas funções geralmente é necessária para a construção de *web scrapers*, ou seja, elas não criam dificuldades adicionais para pessoas interessadas em resolver Captchas para acessar dados da *internet*. 
 
 A função principal do pacote `{captchaDownload}` é a `captcha_oracle()`. A função é responsável por realizar a anotação parcial automática dos Captchas utilizando um modelo inicial e o oráculo. A função possui os seguintes parâmetros:
 
@@ -125,12 +125,14 @@ captchaDownload::captcha_oracle(
 
     ✔ Acertou!!!
 
-No teste do exemplo, a função acertou, salvando o seguinte arquivo de *log*. Espaços foram adicionados para facilitar a visualização.
+No teste do exemplo, a função acertou, salvando o seguinte arquivo de *log*[^espacos-adicionados-1].
 
     ntry, label , type, result
     1,    569328, auto, TRUE
 
-Abaixo, foi colocado um modelo ruim para o TRT, para forçar o modelo a errar todos os chutes. O resultado é o log abaixo
+[^espacos-adicionados-1]: Espaços foram adicionados manualmente para facilitar a visualização.
+
+Abaixo, foi colocado um modelo ruim para o TRT, para forçar o modelo a errar todos os chutes. O resultado é o *log* abaixo
 
 ```{r}
 #| eval: false
@@ -159,7 +161,7 @@ captchaDownload::captcha_oracle(
     ℹ Errou! O chute foi: v2wu7w
     Label: v2xu7w
 
-No novo exemplo, a função errou todos os dez chutes, salvando o seguinte arquivo de *log*. Espaços foram adicionados para facilitar a visualização. O último valor é um rótulo inserido manualmente.
+No novo exemplo, a função errou todos os dez chutes, salvando o seguinte arquivo de *log*[^espacos-adicionados-2]. O último valor é um rótulo inserido manualmente.
 
     ntry,  label,   type, result
        1, v2su7w,   auto,  FALSE
@@ -173,6 +175,8 @@ No novo exemplo, a função errou todos os dez chutes, salvando o seguinte arqui
        9, v2wu7w,   auto,  FALSE
       10, 92su7w,   auto,  FALSE
       NA, v2xu7w, manual,   TRUE
+
+[^espacos-adicionados-2]: Espaços foram adicionados para facilitar a visualização.
 
 Se o parâmetro `manual=FALSE` e o modelo não consegue acertar o rótulo, a função também adiciona a mensagem:
 
