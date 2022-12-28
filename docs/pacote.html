@@ -329,7 +329,7 @@ div.csl-indent {
 </header>
 
 <!-- Este apêndice foi construído para mostrar a estrutura do pacote e suas funcionalidades, mas também um pouco da história. O pacote `{captcha}` é fruto de um trabalho da comunidade e o trabalho de modelagem de Captchas usando técnicas de *deep learning*, que começou alguns anos antes do início da tese de doutorado. -->
-<p>Este apêndice foi construído para mostrar a estrutura dos pacotes <code>{captchaDownload}</code> e <code>{captchaOracle}</code>, utilizados como auxiliares para implementação do WAWL, orquestradas pelo pacote <code>{captcha}</code>. Apresenta-se também um breve histórico sobre a construção das soluções desenvolvidas, descrevendo outras alternativas e projetos que foram aposentados.</p>
+<p>Este apêndice foi construído para mostrar a estrutura dos pacotes <code>{captchaDownload}</code> e <code>{captchaOracle}</code>, utilizados como auxiliares para implementação do WAWL, orquestradas pelo pacote <code>{captcha}</code>. Apresenta-se também um breve histórico sobre a construção das soluções desenvolvidas, descrevendo alternativas e projetos que foram aposentados.</p>
 <section id="sec-historico" class="level2">
 <h2 class="anchored" data-anchor-id="sec-historico">Histórico</h2>
 <p>O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de 2016. Como foi comentado na introdução da tese, é muito comum se deparar com desafios de Captchas ao raspar dados do judiciário, já que os dados não são abertos.</p>
@@ -406,7 +406,7 @@ $u
 <li><code>captcha_access=</code>: função que baixa um Captcha e retorna dados da sessão para validar o Captcha, como mostrada anteriormente.</li>
 <li><code>captcha_test=</code>: função que testa se um Captcha está correto a partir de um rótulo específico, como mostrado anteriormente.</li>
 </ul>
-<p>A função amarra todos os conceitos necessários para criar novas bases de dados de forma automática. Primeiro, considera o caminho para salvar os dados. Em seguida, considera o modelo e formas de lidar com o oráculo. Por último, recebe as funções de acesso e de teste do Captcha. A função escreve um arquivo de <em>log</em> com os resultados dos testes. O arquivo contém <code>max_ntry</code> linhas, podendo ter uma linha adicional se <code>manual=TRUE</code>, já que, se o modelo errar todas os chutes, a anotação manual deve ser adicionada.</p>
+<p>A função amarra todos os conceitos necessários para criar bases de dados de forma automática. Primeiro, considera o caminho para salvar os dados. Em seguida, considera o modelo e formas de lidar com o oráculo. Por último, recebe as funções de acesso e de teste do Captcha. A função escreve um arquivo de <em>log</em> com os resultados dos testes. O arquivo contém <code>max_ntry</code> linhas, podendo ter uma linha adicional se <code>manual=TRUE</code>, já que, se o modelo errar todos os chutes, a anotação manual deve ser adicionada.</p>
 <p>No exemplo do TRF5, a chamada da função <code>captcha_oracle()</code> com um chute ficaria da seguinte forma:</p>
 <div class="cell">
 <details open="">
@@ -469,7 +469,7 @@ Label: v2xu7w</code></pre>
   NA, v2xu7w, manual,   TRUE</code></pre>
 <p>Se o parâmetro <code>manual=FALSE</code> e o modelo não consegue acertar o rótulo, a função também adiciona a mensagem:</p>
 <pre><code>✖ Errado depois de todas as tentativas...</code></pre>
-<p>Em alguns casos, é possível que a função realize menos do que <code>max_ntry</code> chutes. Isso acontece quando a probabilidade do melhor rótulo depois do chute errado é muito pequena, segundo o modelo. Isso é feito pela função <code>captcha_candidates()</code>, que considera como padrão o corte de <code>0.01</code> de probabilidade. Ou seja, na prática, a função testa no máximo os <code>max_ntry</code> rótulos com probabilidades maior que <code>0.01</code> segundo o modelo.</p>
+<p>Em alguns casos, é possível que a função realize menos do que <code>max_ntry</code> chutes. Isso acontece quando a probabilidade do melhor rótulo depois do chute errado é muito pequena, segundo o modelo. Isso é feito pela função <code>captcha_candidates()</code>, que considera como padrão o corte de <code>0.01</code> de probabilidade. Ou seja, na prática, a função testa no máximo os <code>max_ntry</code> rótulos com probabilidades maiores que <code>0.01</code> segundo o modelo.</p>
 <p>Em resumo, o pacote <code>{captchaDownload}</code> contém toda a parte de <em>web scraping</em> utilizada no desenvolvimento da tese. Adicionalmente, o pacote contém funções para orquestrar o <em>download</em> automático de Captchas parcialmente rotulados, a partir de um modelo inicial e um oráculo.</p>
 <p>Os dados fornecidos pelo pacote ficam tanto na forma de imagens rotuladas quanto na forma de arquivos de <em>log</em>, disponibilizados em arquivos <em>CSV</em>. Para lidar com essa estrutura de dados, mais um pacote foi desenvolvido: o <code>{captchaOracle}</code>, definido a seguir.</p>
 </section>
