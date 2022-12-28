@@ -6,7 +6,7 @@ bibliography: references.bib
 
 <!-- Este apêndice foi construído para mostrar a estrutura do pacote e suas funcionalidades, mas também um pouco da história. O pacote `{captcha}` é fruto de um trabalho da comunidade e o trabalho de modelagem de Captchas usando técnicas de *deep learning*, que começou alguns anos antes do início da tese de doutorado. -->
 
-Este apêndice foi construído para mostrar a estrutura dos pacotes `{captchaDownload}` e `{captchaOracle}`, utilizados como auxiliares para implementação do WAWL, orquestradas pelo pacote `{captcha}`. Apresenta-se também um breve histórico sobre a construção das soluções desenvolvidas, descrevendo outras alternativas e projetos que foram aposentados.
+Este apêndice foi construído para mostrar a estrutura dos pacotes `{captchaDownload}` e `{captchaOracle}`, utilizados como auxiliares para implementação do WAWL, orquestradas pelo pacote `{captcha}`. Apresenta-se também um breve histórico sobre a construção das soluções desenvolvidas, descrevendo alternativas e projetos que foram aposentados.
 
 ## Histórico {#sec-historico}
 
@@ -103,7 +103,7 @@ A função principal do pacote `{captchaDownload}` é a `captcha_oracle()`. A fu
 - `captcha_access=`: função que baixa um Captcha e retorna dados da sessão para validar o Captcha, como mostrada anteriormente.
 - `captcha_test=`: função que testa se um Captcha está correto a partir de um rótulo específico, como mostrado anteriormente.
 
-A função amarra todos os conceitos necessários para criar novas bases de dados de forma automática. Primeiro, considera o caminho para salvar os dados. Em seguida, considera o modelo e formas de lidar com o oráculo. Por último, recebe as funções de acesso e de teste do Captcha. A função escreve um arquivo de *log* com os resultados dos testes. O arquivo contém `max_ntry` linhas, podendo ter uma linha adicional se `manual=TRUE`, já que, se o modelo errar todas os chutes, a anotação manual deve ser adicionada.
+A função amarra todos os conceitos necessários para criar bases de dados de forma automática. Primeiro, considera o caminho para salvar os dados. Em seguida, considera o modelo e formas de lidar com o oráculo. Por último, recebe as funções de acesso e de teste do Captcha. A função escreve um arquivo de *log* com os resultados dos testes. O arquivo contém `max_ntry` linhas, podendo ter uma linha adicional se `manual=TRUE`, já que, se o modelo errar todos os chutes, a anotação manual deve ser adicionada.
 
 No exemplo do TRF5, a chamada da função `captcha_oracle()` com um chute ficaria da seguinte forma:
 
@@ -178,7 +178,7 @@ Se o parâmetro `manual=FALSE` e o modelo não consegue acertar o rótulo, a fun
 
     ✖ Errado depois de todas as tentativas...
 
-Em alguns casos, é possível que a função realize menos do que `max_ntry` chutes. Isso acontece quando a probabilidade do melhor rótulo depois do chute errado é muito pequena, segundo o modelo. Isso é feito pela função `captcha_candidates()`, que considera como padrão o corte de `0.01` de probabilidade. Ou seja, na prática, a função testa no máximo os `max_ntry` rótulos com probabilidades maior que `0.01` segundo o modelo.
+Em alguns casos, é possível que a função realize menos do que `max_ntry` chutes. Isso acontece quando a probabilidade do melhor rótulo depois do chute errado é muito pequena, segundo o modelo. Isso é feito pela função `captcha_candidates()`, que considera como padrão o corte de `0.01` de probabilidade. Ou seja, na prática, a função testa no máximo os `max_ntry` rótulos com probabilidades maiores que `0.01` segundo o modelo.
 
 Em resumo, o pacote `{captchaDownload}` contém toda a parte de *web scraping* utilizada no desenvolvimento da tese. Adicionalmente, o pacote contém funções para orquestrar o *download* automático de Captchas parcialmente rotulados, a partir de um modelo inicial e um oráculo. 
 

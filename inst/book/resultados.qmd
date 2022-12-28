@@ -53,7 +53,7 @@ Os resultados foram obtidos a partir das simulações com diversos Captchas. For
 
 Para realizar os cálculos, montou-se uma base de dados com os resultados das simulações. A base está disponível publicamente no [repositório da tese](https://github.com/jtrecenti/doutorado) e contém informações do Captcha ajustado (`captcha`), da quantidade de observações do modelo inicial (`n`), da quantidade de tentativas do oráculo (`ntry`), da etapa de simulação (`fase`, inicial ou WAWL), do caminho do modelo ajustado (`model`) e da acurácia obtida (`acc`).
 
-Os resultados gerais mostram um ganho de `r ganho_medio` na acurácia após a aplicação da metodologia WAWL. Ou seja, em média, a acurácia do modelo no terceiro passo da simulação (ver @sec-modelo-final) foi de mais de **três vezes** a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de `r ganho_absoluto`, ou seja, após o terceiro passo modelos ganharam, em média, `r ganho_absoluto` de acurácia.
+Os resultados gerais mostram um ganho de `r ganho_medio` na acurácia após a aplicação da metodologia WAWL. Ou seja, em média, a acurácia do modelo no terceiro passo da simulação (ver @sec-modelo-final) foi de mais de **três vezes** a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de `r ganho_absoluto`, ou seja, após o terceiro passo, os modelos ganharam, em média, `r ganho_absoluto` de acurácia.
 
 ```{r}
 #| echo: false
@@ -141,7 +141,7 @@ tab_stats_correta |>
   )
 ```
 
-A Figura @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em sites que permitem mais de um chute ficou em torno de 40%, enquanto que o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do model em casos que com apenas um chute, mostrando que a técnica é efetiva de forma consistente.
+A @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em sites que permitem mais de um chute ficou em torno de 40%, enquanto o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do model em casos que com apenas um chute, mostrando que a técnica é efetiva de forma consistente.
 
 ```{r}
 #| label: fig-simulacao-geral-ntry-absoluto
@@ -345,13 +345,13 @@ tab_stats_inicial  |>
   )
 ```
 
-Para lidar com o fato da acurácia ser um número limitado, fizemos o mesmo gráficos de antes, mas ajustado pelo máximo possível que a técnica do oráculo poderia proporcionar. O ganho absoluto ajustado de uma simulação é dado por
+Para lidar com o fato de a acurácia ser um número limitado, fizemos o mesmo gráficos de antes, mas ajustado pelo máximo possível que a técnica do oráculo poderia proporcionar. O ganho absoluto ajustado de uma simulação é dado por
 
 $$
 \text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
 $$ 
 
-A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica WAWL do oráculo para modelos iniciais com mais de 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para um estado com acurácia maior, de onde seria possível aplicar a técnica novamente para obter resultads mais expressivos.
+A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica WAWL do oráculo para modelos iniciais com mais de 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para um estado com acurácia maior, de onde seria possível aplicar a técnica novamente para obter resultados mais expressivos.
 
 ```{r}
 #| label: fig-simulacao-geral-inicial-absoluto-ajustado
@@ -409,7 +409,7 @@ tab_stats_inicial  |>
   )
 ```
 
-Na @fig-simulacao-captcha, são apresentados os resultados separando por Captcha. Cada linha é uma combinação de Captcha, quantidade de tentativas e acurácia modelo inicial, classificados nas três categorias mostradas anteriormente. As linhas pontilhadas indicam modelos ajustados com mais de uma tentativa, enquanto as linhas contínuas mostram modelos ajustados com apenas uma tentativa. A primeira extremidade de cada linha, do lado esquerdo, indica a acurácia do modelo inicial e a segunda extremidade, do lado direito, a acurácia do modelo usando o método WAWL.
+Na @fig-simulacao-captcha, são apresentados os resultados separados por Captcha. Cada linha é uma combinação de Captcha, quantidade de tentativas e acurácia modelo inicial, classificados nas três categorias mostradas anteriormente. As linhas pontilhadas indicam modelos ajustados com mais de uma tentativa, enquanto as linhas contínuas mostram modelos ajustados com apenas uma tentativa. A primeira extremidade de cada linha, do lado esquerdo, indica a acurácia do modelo inicial e a segunda extremidade, do lado direito, a acurácia do modelo usando o método WAWL.
 
 ```{r}
 #| label: fig-simulacao-captcha
@@ -459,21 +459,21 @@ doutorado::da_results_simulacao |>
   )
 ```
 
-Pelo gráfico, é possível identificar duas informações relevantes. Como já verificado anteriormente, os modelos ajustados com mais de uma tentativa apresentam maiores ganhos do que os modelos ajustados com apenas uma tentativa. Verifica-se também que modelos com acurácia inicial de até 10% só apresentam ganhos menores que os modelos com acurácia inicial maior que 10% nos casos em que apenas uma tentativa é definda. Ou seja, existe interação entre a quantidade de tentativas e a acurácia do modelo inicial ao avaliar o impacto nos ganhos empíricos do método WAWL.
+Pelo gráfico, é possível identificar duas informações relevantes. Como já verificado anteriormente, os modelos ajustados com mais de uma tentativa apresentam maiores ganhos do que os modelos ajustados com apenas uma tentativa. Verifica-se também que modelos com acurácia inicial de até 10% só apresentam ganhos menores que os modelos com acurácia inicial maior que 10% nos casos em que apenas uma tentativa é definida. Ou seja, existe interação entre a quantidade de tentativas e a acurácia do modelo inicial ao avaliar o impacto nos ganhos empíricos do método WAWL.
 
-Pelos resultados das simulações, é possível concluir que o método WAWL foi bem sucedido. Primeiro, o método apresenta resultados expressivos e de forma consistente, sem realizar novas anotações manuais. Além disso, a técnica aproveita a oportunidade oferecida pelos sites de obter o *feedback* oráculo múltiplas vezes na mesma imagem. Finalmente, o método apresenta, em média, resultados positivos mesmo para modelos iniciais muito fracos (com acurácia de até 10%), indicando que sua aplicação é possível para qualquer modelo inicial, o que é bastante factível de atingir com bases pequenas ou com modelos generalistas para resolver Captchas.
+Pelos resultados das simulações, é possível concluir que o método WAWL foi bem-sucedido. Primeiro, o método apresenta resultados expressivos e de forma consistente, sem realizar novas anotações manuais. Além disso, a técnica aproveita a oportunidade oferecida pelos sites de obter o *feedback* oráculo múltiplas vezes na mesma imagem. Finalmente, o método apresenta, em média, resultados positivos mesmo para modelos iniciais muito fracos (com acurácia de até 10%), indicando que sua aplicação é possível para qualquer modelo inicial, o que é bastante factível de atingir com bases pequenas ou com modelos generalistas para resolver Captchas.
 
 <!-- ### Aplicação iterada -->
 
-Um possível problema em aplicar o WAWL é que a técnica poderia introduzir viés de seleção no modelo, impedindo-o de ser aprimorado indefinidamente. Mesmo que os resultados teóricos dêem uma boa base para acreditar que isso não seja verdade, foi feito um experimento adicional, com apenas um dos Captchas, para verificar se a aplicação da técnica múltiplas vezes apresenta bons resultados.
+Um possível problema em aplicar o WAWL é que a técnica poderia introduzir viés de seleção no modelo, impedindo-o de ser aprimorado indefinidamente. Mesmo que os resultados teóricos deem uma boa base para acreditar que isso não seja verdade, foi feito um experimento adicional, com apenas um dos Captchas, para verificar se a aplicação da técnica múltiplas vezes apresenta bons resultados.
 
 O Captcha escolhido para a simulação foi o `trf5`, por ser um Captcha que não aceita múltiplos chutes, em uma tentativa de obter um pior caso. Para esse Captcha, o melhor modelo obtido com a técnica do oráculo foi considerado como modelo inicial, sendo usado para baixar novos dados do site do Tribunal. Os novos dados foram adicionados à base de treino, ajustando-se um novo modelo.
 
-A @fig-aplicacao-iterada mostra os resultados da aplicação iterada. A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.
+A @fig-aplicacao-iterada mostra os resultados da aplicação iterativa. A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.
 
 ```{r}
 #| label: fig-aplicacao-iterada
-#| fig-cap: "Resultados da aplicação iterada da técnica."
+#| fig-cap: "Resultados da aplicação iterativa da técnica."
 #| fig-width: 7
 #| fig-height: 4
 #| out-width: 85%
@@ -520,6 +520,7 @@ A função `read_captcha()` lê um vetor de arquivos de imagens e armazenar na m
 #| label: fig-uso-basico-captcha
 #| echo: true
 #| out-width: 30%
+#| fig-cap: "Resultado observado ao imprimir um objeto de classe captcha"
 library(captcha)
 exemplo <- "assets/img/dados_tjmg.jpeg"
 captcha <- read_captcha(exemplo)
@@ -751,9 +752,9 @@ Em seguida, os *dataloaders* são criados utilizando-se a função `dataloader()
 
 A próxima etapa é a especificação do modelo. No *script* de modelagem, o modelo é fornecido pelo objeto `net_captcha` do pacote `{captcha}`. Assim como no caso do *dataset*, o `net_captcha` é um objeto especial do `{torch}`, com classes `CAPTCHA-CNN`, `nn_module` e `nn_module_generator`. O objeto pode ser utilizado como uma função, gerando um módulo do `torch`, similar a uma função de predição. No entanto, por conta da forma que o objeto é utilizado em passos posteriores pelo pacote `{luz}`, o objeto a ser considerado é mesmo o `nn_module_generator`, como colocado no *script*.
 
-Para customizar o modelo, o usuário deve modificar os métodos `initialize()` e `forward()`, acessados dentro do objeto `net_captcha$public_methods`. O primeiro é responsável pela inicialização do modelo, contendo a descrição das operações que são realizadas, como convoluções. O segundo é a função *feed forward* das redes neurais, que recebe uma imagem e retorna um objeto contendo os *logitos* ou probabilidades, no formato da variável resposta.
+Para customizar o modelo, o usuário deve modificar os métodos `initialize()` e `forward()`, acessados dentro do objeto `net_captcha$public_methods`. O primeiro é responsável pela inicialização do modelo, contendo a descrição das operações que são realizadas, como convoluções. O segundo é a função *feed forward* das redes neurais, que recebe uma imagem e retorna um objeto contendo os escores ou probabilidades, no formato da variável resposta.
 
-Por padrão, o código de inicialização do modelo é o descrito abaixo. Os parâmetros `input_dim=`, `output_ndigits=`, `output_vocab_size=` e `vocab=` descrevem, respectivamente, as dimensões da imagem, o comprimeiro da resposta, o comprimento do alfabeto e os elementos do alfabeto. Os parâmetros `transform=`, `dropout=` e `dense_units=` controlam, respectivamente, a função de transformação da imagem, os hiperparâmetros de *dropout* e a quantidade de unidades na camada densa. É possível notar que os parâmetros das convoluções são fixos, já preparados para funcionar bem com uma imagem de dimensões `32x192`.
+Por padrão, o código de inicialização do modelo é o descrito abaixo. Os parâmetros `input_dim=`, `output_ndigits=`, `output_vocab_size=` e `vocab=` descrevem, respectivamente, as dimensões da imagem, o comprimento da resposta, o comprimento do alfabeto e os elementos do alfabeto. Os parâmetros `transform=`, `dropout=` e `dense_units=` controlam, respectivamente, a função de transformação da imagem, os hiperparâmetros de *dropout* e a quantidade de unidades na camada densa. É possível notar que os parâmetros das convoluções são fixos, já preparados para funcionar bem com uma imagem de dimensões `32x192`.
 
 ```{r}
 #| echo: true
@@ -918,13 +919,13 @@ Do ponto de vista teórico, várias pesquisas já apontavam que o aprendizado co
 
 No entanto, até o momento, não existiam evidências de que a utilização de rótulos parciais ou rótulos complementares teriam bons resultados empíricos em Captchas. Isso foi verificado em todos os 12 Captchas estudados, sendo 10 obtidos do mundo real. Em todos os casos, a função de perda proposta funcionou bem e trouxe ganhos significativos na acurácia do modelo, tanto em termos relativos quanto absolutos. Isso demonstra que a escolha do método se alia bem ao problema que deu origem à pesquisa, que são os Captchas.
 
-Sobre a parte de aplicação iterada do WAWL, cabe um comentário. O resultado encontrado, com 100% de acurácia, pode sugerir que o método WAWL sempre chegará em um resultado de 100% para qualquer Captcha que surgir. No entanto, pode ser que exista uma limitação na capacidade do modelo, que é habilidade do modelo para se ajustar aos dados a partir dos parâmetros. Pode ser que a arquitetura de rede neural escolhida para resolver o Captcha não seja capaz de chegar a um modelo com 100% de acurácia, independente da quantidade de imagens observadas. É importante olhar o resultado apresentado de forma crítica e compreender que os resultados finais podem ser limitados, já que a arquitetura da rede neural não é parte do método WAWL.
+Sobre a parte de aplicação iterada do WAWL, cabe um comentário. O resultado encontrado, com 100% de acurácia, pode sugerir que o método WAWL sempre chegará em um resultado de 100% para qualquer Captcha que surgir. No entanto, pode ser que exista uma limitação na capacidade do modelo, que é habilidade do modelo para se ajustar aos dados a partir dos parâmetros. Pode ser que a arquitetura de rede neural escolhida para resolver o Captcha não seja capaz de chegar a um modelo com 100% de acurácia, independente da quantidade de imagens observadas. É importante olhar o resultado apresentado de forma crítica e compreender que estes podem ser limitados, já que a arquitetura da rede neural não é parte do método WAWL.
 
 A segunda hipótese de pesquisa é a possibilidade de aliar a área de raspagem de dados com a área de modelagem estatística. A hipótese também foi verificada, já que o método WAWL, que utiliza técnicas de raspagem de dados, apresentou bons resultados empíricos.
 
 Neste momento, cabe um comentário sobre o ineditismo da ponte entre raspagem de dados e estatística. É verdade que existem muitas pesquisas que são possibilitadas por conta dos dados obtidos via raspagem de dados: as pesquisas da ABJ, mencionadas na @sec-captchas-publicos são alguns exemplos. Também existem soluções que utilizam dados provenientes de raspagem de dados para construção de modelos: por exemplo, o [DALL-E-2](https://openai.com/dall-e-2/), que é parte de uma base de dados construída utilizando imagens baixadas da internet [@rameshHierarchicalTextConditionalImage2022; @murray2012]. No entanto, até o momento da realização da pesquisa, não foi encontrado nenhum trabalho que utiliza a raspagem de dados como parte do processo de aprendizado estatístico. O método WAWL conecta as áreas de forma intrínseca, podendo ser entendida como uma nova variação de aumentação de dados aplicada a redes neurais convolucionais.
 
-O fato da raspagem de dados ser relevante para o ajuste de um modelo estatístico pode levar a algumas discussões sobre o ensino da estatística. Primeiro, é importante mencionar que:
+O fato de a raspagem de dados ser relevante para o ajuste de um modelo estatístico pode levar a algumas discussões sobre o ensino da estatística. Primeiro, é importante mencionar que:
 
 1.  Raspagem de dados não faz parte dos currículos de Bacharelado em Estatística das principais universidades do país[^universidades]. Logo, pode-se argumentar que raspagem de dados não é uma área de interesse da estatística.
 2.  Raspagem de dados não é uma área de conhecimento bem definida, como álgebra ou análise de sobrevivência. A área é melhor desenvolvida através de aplicações práticas e utilização de ferramentas (como R ou python) do que através de aulas teóricas.
@@ -935,6 +936,6 @@ Os resultados levam, então, a um problema de balanceamento entre pertinência e
 
 Para aliar a pertinência e a oportunidade, uma opção seria oferecer disciplinas optativas de raspagem de dados nos cursos de estatística. Para aumentar a quantidade de potenciais ministrantes, a disciplina poderia ser oferecida em parceria com outros cursos, como ciência da computação, matemática aplicada e engenharias. Dessa forma, as pessoas interessadas teriam a oportunidade de aprender um pouco sobre as técnicas principais, conectando a raspagem de dados com as áreas de conhecimento específicas, como é o caso do Captcha, que alia raspagem de dados com estatística e inteligência artificial.
 
-No final, as duas hipóteses de pesquisa foram verificadas. No processo de obtenção dos resultados, no entanto, um terceiro avanço muito importante foi realizado na parte computacional. O pacote `{captcha}` e os pacotes auxiliares `{captchaDownload}` e `{captchaOracle}` são frutos desse trabalho. Pela primeira vez, foi construída uma ferramenta aberta contendo um fluxo de trabalho adaptado para trabalhar com Captchas. Além disso, trata-se de uma das primeiras aplicações completas dos pacotes `{torch}` e `{luz}`, que têm potencial de revolucionar a forma em que os modelos estatísticos são desenvolvidos por pessoas que fazem pesquisa em estatística. Os pacotes foram descritos em detalhes no sec-pacote.
+No final, as duas hipóteses de pesquisa foram verificadas. No processo de obtenção dos resultados, no entanto, um terceiro avanço muito importante foi realizado na parte computacional. O pacote `{captcha}` e os pacotes auxiliares `{captchaDownload}` e `{captchaOracle}` são frutos desse trabalho. Pela primeira vez, foi construída uma ferramenta aberta contendo um fluxo de trabalho adaptado para trabalhar com Captchas. Além disso, trata-se de uma das primeiras aplicações completas dos pacotes `{torch}` e `{luz}`, que têm potencial de revolucionar a forma em que os modelos estatísticos são desenvolvidos por pessoas que fazem pesquisa em estatística. Os pacotes foram descritos em detalhes no @sec-pacote.
 
 Por fim, todos os modelos construídos foram disponibilizados no pacote `{captcha}`. Os códigos, dados e resultados das simulações estão disponíveis no pacote `{captchaOracle}`. Os dados utilizados para elaboração da tese estão disponíveis no [repositório da tese no GitHub](https://github.com/jtrecenti/doutorado). Dessa forma, a pesquisa pode ser considerada como reprodutível, podendo servir como base para pesquisas futuras.
