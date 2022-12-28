@@ -32,7 +32,9 @@ google-scholar: true
 format:
   html:
     code-fold: show
-    theme: [default, assets/css/quarto-book.scss]
+    theme:
+      light: [default, assets/css/quarto-book.scss]
+      dark: [darkly, assets/css/quarto-book.scss]
   pdf:
     keep-tex: true
     template: assets/tex/template.tex
