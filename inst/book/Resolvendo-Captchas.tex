@@ -178,6 +178,12 @@
 \babelhyphenation[brazilian]{con-so-le}
 \babelhyphenation[brazilian]{mo-de-los}
 \babelhyphenation[brazilian]{má-xi-mo}
+\babelhyphenation[brazilian]{pa-râ-me-tros}
+\babelhyphenation[brazilian]{a-no-ta-ção}
+\babelhyphenation[brazilian]{va-li-da-ção}
+\babelhyphenation[brazilian]{mo-di-fi-ca-ções}
+\babelhyphenation[brazilian]{re-pre-sen-tar}
+\babelhyphenation[brazilian]{a-pre-sen-ta-das}
 % \babelhyphenation[english]{what-ever}
 
 % Estes comandos definem o título e autoria do trabalho e devem sempre ser
@@ -1141,7 +1147,7 @@ Do ponto de vista de modelagem, é similar a um problema de aprendizado
 por reforço (SUTTON; BARTO, 2018), mas com uma resposta binária (acertou
 ou errou) no lugar de um escore.
 
-A técnica WAWL consiste em aproveitar o fato de que o Captcha, por
+O método WAWL consiste em aproveitar o fato de que o Captcha, por
 definição, aplica um teste de Turing automático para gerar bases de
 dados parcialmente anotadas. Ou seja, a técnica resolve o problema não
 com modelos mais sofisticados, mas com a utilização eficiente dos
@@ -1205,10 +1211,10 @@ apresenta-se a lista de objetivos completa, de forma concisa.
 \hypertarget{sec-objetivos}{%
 \section{Objetivo}\label{sec-objetivos}}
 
-O objetivo geral da tese é desenvolver uma solução inovadora, chamada
-WAWL (\emph{Web Automatic Weak Learning}) para resolver Captchas,
-misturando técnicas de aprendizado profundo com raspagem de dados e
-aproveitando os dados fornecidos pelo oráculo.
+O objetivo geral da tese é desenvolver um método inovador, chamado WAWL
+(\emph{Web Automatic Weak Learning}) para resolver Captchas, misturando
+técnicas de aprendizado profundo com raspagem de dados e aproveitando os
+dados fornecidos pelo oráculo.
 
 Especificamente, a pesquisa tem como objetivos:
 
@@ -1411,7 +1417,7 @@ que são objeto de análise deste trabalho: os Captchas.
 \subsection{Captcha}\label{sec-definicao-captcha}}
 
 Captcha é um \emph{desafio} do tipo \emph{desafio-resposta} usado para
-determinar se a usuário do sistema é um humano. Existem diversos tipos
+determinar se o usuário do sistema é um humano. Existem diversos tipos
 de Captcha diferentes, que envolvem desde identificar textos em imagens
 até resolver expressões matemáticas complexas.
 
@@ -1514,8 +1520,9 @@ dos valores do vetor \(\mathbf c\), enquanto as colunas possuem um
 representante para cada elemento de \(\mathcal A\). Um elemento
 \(y_{ij}\) vale 1 se o elemento \(i\) do rótulo \(\mathbf c\)
 corresponde ao elemento \(j\) do alfabeto \(\mathcal A\), valendo zero
-caso contrário. A variável resposta pode ser pensada também como o
-\emph{one-hot encoding} do rótulo.
+caso contrário. A variável resposta é uma transformação do rótulo
+conhecida comumente na área de aprendizado estatístico como
+\emph{one-hot encoding}.
 
 Uma maneira alternativa de definir a variável resposta seria com um
 vetor de índices representando cada elemento do alfabeto em um vetor. O
@@ -1572,12 +1579,13 @@ gerar uma imagem fácil de interpretar por humanos, mas difícil de se
 resolver por máquinas.
 
 Um exemplo de gerador é a função \texttt{captcha\_generate()} criada no
-pacote \texttt{\{captcha\}}, como descrito no Apêndice~\ref{sec-pacote}.
-A função foi criada para realizar simulações do sistema de resolução
-proposto na tese, a partir do pacote \texttt{\{magick\}} (OOMS, 2021),
-que utiliza o software \emph{ImageMagick}. A função aplica uma série de
-distorções e efeitos comuns no contexto de Captchas, gerando imagens
-como a da Figura~\ref{fig-captcha-r-exemplo}.
+pacote \texttt{\{captcha\}}, como descrito na
+Seção~\ref{sec-pacote-captcha}. A função foi criada para realizar
+simulações do sistema de resolução proposto na tese, a partir do pacote
+\texttt{\{magick\}} (OOMS, 2021), que utiliza o software
+\emph{ImageMagick}. A função aplica uma série de distorções e efeitos
+comuns no contexto de Captchas, gerando imagens como a da
+Figura~\ref{fig-captcha-r-exemplo}.
 
 \begin{figure}
 
@@ -1640,13 +1648,14 @@ forma:
 \end{array}\right.
 \]
 
-Quando o classificador \(g\) acerta o rótulo, o oráculo retorna uma
-lista que contém apenas um elemento: o próprio rótulo. Para simplificar,
-também é possível utilizar a notação de \emph{rótulo complementar}
-\(\mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1} = \bar{\mathbf Y}\).
-Quando o classificador \(g\) retorna o rótulo errado, o oráculo retorna
-uma lista com todos os outros possíveis rótulos do rótulo, o que inclui
-o verdadeiro valor \(\mathbf Y_{n+1}\).
+Quando o classificador \(g\) acerta o rótulo, o oráculo retorna o valor
+``1'', acompanhado de uma lista que contém apenas um elemento: o próprio
+rótulo. Quando o classificador \(g\) retorna o rótulo errado, o oráculo
+retorna o valor ``0'', acompanhado de uma lista com todos os outros
+possíveis rótulos do rótulo, o que inclui o verdadeiro valor
+\(\mathbf Y_{n+1}\). Para simplificar, também é possível utilizar a
+notação de \emph{rótulo complementar}
+\(\{\mathcal Y \setminus \hat {\mathbf Y}_{n+1}\} = \bar{\mathbf Y}\)
 
 A Figura~\ref{fig-esquema-oraculo} mostra o funcionamento do oráculo no
 exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado
@@ -3312,7 +3321,7 @@ supervisionado.
 
 \epigrafe{I'm not a robot, I'm a human. But I'm pretty sure the robot is better at this than I am.}{ChatGPT}
 
-Neste capítulo, discute-se os resultados da metodologia WAWL e
+Neste capítulo, discute-se os resultados empíricos do método WAWL e
 descreve-se pacote computacional desenvolvido para lidar com Captchas. A
 Seção~\ref{sec-result-sim} mostra os resultados empíricos e a
 Seção~\ref{sec-pacote-captcha} detalha o pacote \texttt{\{captcha\}}. No
@@ -4975,10 +4984,10 @@ ZHU, X. J. Semi-supervised learning literature survey. 2005.
 
 Este apêndice foi construído para mostrar a estrutura dos pacotes
 \texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}}, utilizados
-como auxiliares para implementação da metodologia WAWL, orquestradas
-pelo pacote \texttt{\{captcha\}}. Apresenta-se também um breve histórico
-sobre a construção das soluções desenvolvidas, descrevendo outras
-alternativas e projetos que foram aposentados.
+como auxiliares para implementação do WAWL, orquestradas pelo pacote
+\texttt{\{captcha\}}. Apresenta-se também um breve histórico sobre a
+construção das soluções desenvolvidas, descrevendo outras alternativas e
+projetos que foram aposentados.
 
 \hypertarget{sec-historico}{%
 \section{Histórico}\label{sec-historico}}
