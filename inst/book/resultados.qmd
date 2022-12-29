@@ -510,13 +510,13 @@ O resultado sugere que o método WAWL pode ser aplicado iterativamente para apri
 
 ## Pacote captcha {#sec-pacote-captcha}
 
-O pacote `{captcha}` foi construído para funcionar como uma caixa de ferramentas para pessoas que desejam trabalhar com Captchas. O pacote possui funções de leitura, visualização, anotação, preparação de dados, modelagem, carregamento de modelos pré-treinados e predição. O pacote também permite a construção de um fluxo de trabalho para resolver um novo Captcha, criando um pacote para orquestrar o passo-a-passo.
+O pacote `{captcha}` foi construído para funcionar como uma caixa de ferramentas para quem deseja trabalhar com Captchas. O pacote possui funções de leitura, visualização, anotação, preparação de dados, modelagem, carregamento de modelos pré-treinados e predição. O pacote também permite a construção de um fluxo de trabalho para resolver um novo Captcha, criando um novo repositório para orquestrar o passo-a-passo.
 
 ### Uso básico
 
 A utilização básica do `{captcha}` envolve as funções `read_captcha()`, `plot()`, `captcha_annotate()`, `captcha_load_model()` e `decrypt()`. As funções são explicadas abaixo.
 
-A função `read_captcha()` lê um vetor de arquivos de imagens e armazenar na memória. Por trás, a função utiliza o pacote `{magick}` para lidar com os tipos de arquivos que podem aparecer (JPEG, PNG, entre outros).
+A função `read_captcha()` lê um vetor de arquivos de imagens e armazena na memória do computador. Por trás, a função utiliza o pacote `{magick}` para lidar com os tipos de arquivos mais comuns (JPEG, PNG, entre outros).
 
 ```{r}
 #| label: fig-uso-basico-captcha
@@ -530,21 +530,21 @@ captcha <- read_captcha(exemplo)
 captcha
 ```
 
-A função retorna um objeto com a classe `captcha`, que pode ser utilizada por outros métodos.
+A função retorna um objeto com a classe `captcha`, que pode ser utilizada por outros métodos do pacote.
 
 ```{r}
 #| echo: true
 class(captcha)
 ```
 
-O objeto é uma lista com três elementos: `$img`, que contém imagem lida com o pacote `{magick}`, `$lab`, que contém o rótulo da imagem (por padrão, `NULL`) e `$path`, que contém o caminho da imagem que foi lida.
+O objeto de classe `captcha` é uma lista com três elementos: `$img`, que contém imagem lida com o pacote `{magick}`, `$lab`, que contém o rótulo da imagem (por padrão, `NULL`) e `$path`, que contém o caminho da imagem que foi lida.
 
 ```{r}
 #| echo: true
 str(captcha)
 ```
 
-A função `read_captcha()` possui um parâmetro `lab_in_path=`, que indica se o rótulo está contido no caminho da imagem. Se `lab_in_path=TRUE`, a função tentará extrair o rótulo do arquivo (obtendo o texto que vem depois do último `_` do caminho) e armazenar no elemento `$lab`.
+A função `read_captcha()` possui um parâmetro `lab_in_path=`, que indica se o rótulo está contido no caminho da imagem. Se `lab_in_path=TRUE`, a função tentará extrair o rótulo do arquivo, obtendo o texto que vem depois do último `_` do caminho, armazenando o resultado no elemento `$lab`.
 
 ```{r}
 #| echo: true
@@ -554,7 +554,7 @@ captcha <- read_captcha(exemplo, lab_in_path = TRUE)
 str(captcha)
 ```
 
-A função plot `plot()` é um método de classe S3 do R básico. A função foi implementada para facilitar a visualização de Captchas. A função recebe uma lista de imagens obtida pela função `read_captcha()` e mostra o Captcha visualmente, como na @fig-exemplo-plot.
+A função `plot()` é um método de classe S3 do R básico. A função foi implementada para facilitar a visualização de Captchas. A função recebe uma lista de imagens obtida pela função `read_captcha()` e mostra o Captcha visualmente, como na @fig-exemplo-plot.
 
 ```{r}
 #| label: fig-exemplo-plot
@@ -608,7 +608,7 @@ Quando o vetor de Captchas é muito grande, a função `plot()` mostra um númer
 
 ```{r}
 #| label: fig-exemplo-plot-multi-varias
-#| fig-cap: Demonstração da função `plot()` com muitas imagens.
+#| fig-cap: Demonstração da função `plot()` com muitas imagens
 #| message: true
 #| echo: true
 # mais de 100 imagens:
@@ -617,18 +617,18 @@ captchas <- read_captcha(exemplos)
 plot(captchas)
 ```
 
-Um detalhe interessante é que é possível criar subconjuntos de um objeto de classe `captcha` simplesmente utilizando o operador `[`. A função `length()` também pode ser utilizada para medir a quantidade de imagens lidas. A @fig-exemplo-plot-multi-varias-subset mostra um exemplo dessas operações.
+É possível criar subconjuntos de um objeto de classe `captcha` utilizando o operador `[`. A função `length()` também pode ser utilizada para medir a quantidade de imagens lidas. A @fig-exemplo-plot-multi-varias-subset mostra um exemplo dessas operações.
 
 ```{r}
 #| label: fig-exemplo-plot-multi-varias-subset
-#| fig-cap: Demonstração das funções de subset e length aplicadas a um objeto do tipo `captcha`.
+#| fig-cap: Demonstração das funções de subset e length aplicadas a um objeto do tipo `captcha`
 #| echo: true
 captchas_subset <- captchas[1:20]
 length(captchas_subset) # 20
 plot(captchas_subset)
 ```
 
-Por fim, se a imagem possui um rótulo, por padrão, a função `plot()` mostra o rótulo no canto da imagem. A @fig-exemplo-plot-rotulado mostra um exemplo.
+Se a imagem possui um rótulo, por padrão, a função `plot()` mostra o rótulo no canto da imagem. A @fig-exemplo-plot-rotulado mostra um exemplo.
 
 ```{r}
 #| label: fig-exemplo-plot-rotulado
@@ -654,20 +654,21 @@ Quando não existe um rótulo, a função `captcha_annotate()`, que abre o `prom
 
 ```{r}
 #| label: fig-exemplo-annotate
-#| fig-cap: "Exemplo de aplicação da função `captcha_annotate()`. O rótulo `bhusp5` foi inserido manualmente."
+#| fig-cap: "Exemplo de aplicação da função `captcha_annotate()`. O rótulo `bhusp5` foi inserido manualmente"
 
 knitr::include_graphics("assets/img/exemplo_annotate.png")
 ```
 
 Por último, a função `decrypt()` tem o papel de obter o rótulo de uma imagem utilizando um modelo já treinado para aquele tipo de imagem. A função recebe dois argumentos: `file=` que pode ser tanto o caminho do arquivo quanto um objeto de classe `captcha`, e um argumento `model=`, que contém um modelo de classe `luz_module_fitted`, ajustado utilizando as ferramentas que serão apresentadas na próxima subseção.
 
-Para a tese, foram desenvolvidos modelos para vários Captchas diferentes. É possível carregar um modelo já treinado usando a função `captcha_load_model()`, podendo receber em seu único parâmetro `path=` o caminho de um arquivo contendo um modelo ajustado ou uma *string* com o nome de um modelo já treinado, como `"rfb"`, por exemplo. Os modelos treinados são armazenados nos [releases do repositório do pacote captcha](https://github.com/decryptr/captcha/releases), são baixados e controlados pelo pacote `{piggyback}` [@piggyback] e são lidos utilizando o pacote `{luz}`, que será descrito em maiores detalhes na próxima subseção. No momento de submissão da tese, os Captchas com modelos desenvolvidos eram `trf5`, `tjmg`, `trt`, `esaj`, `jucesp`, `tjpe`, `tjrs`, `cadesp`, `sei` e `rfb`.
+Para a tese, foram desenvolvidos modelos para vários Captchas diferentes. É possível carregar um modelo já treinado usando a função `captcha_load_model()`, podendo receber em seu único parâmetro `path=` o caminho de um arquivo contendo um modelo ajustado ou uma *string* com o nome de um modelo já treinado, como `"rfb"`, por exemplo. Os modelos treinados são armazenados nos [releases do repositório do pacote captcha](https://github.com/decryptr/captcha/releases), são baixados e controlados pelo pacote `{piggyback}` [@piggyback] e são lidos utilizando o pacote `{luz}`, que será descrito em maiores detalhes na próxima subseção. No momento de submissão da tese, os Captchas com modelos desenvolvidos eram `trf5`, `tjmg`, `trt`, `esaj`, `jucesp`, `tjpe`, `tjrs`, `cadesp`, `sei` e `rfb`. Mais modelos serão adicionados no futuro.
 
 A @fig-diagrama-captcha-simples resume visualmente as funções apresentadas até o momento. As setas indicam a dependência das funções de objetos gerados por outras funções.
 
 ```{mermaid}
 %%| label: fig-diagrama-captcha-simples
 %%| fig-cap: Diagrama das funções básicas do pacote `{captcha}`
+%%| out-width: 80%
 %%| fig-align: center
 flowchart LR
   B("<b><span style='color:blue;'>captcha</span></b> <- <b>read_captcha</b>('path/to/file.png')")
@@ -688,11 +689,11 @@ A parte de modelagem parte de algumas premissas sobre a base de dados. As imagen
 -   `<lab>`: é o rótulo do Captcha. Pode ser um conjunto de caracteres entre `[a-zA-Z0-9]`, diferenciando maiúsculas e minúsculas se necessário. No momento, todos os arquivos em uma pasta devem ter a mesma quantidade de caracteres (comprimento homogêneo). Futuramente, o pacote poderá considerar Captchas de comprimento heterogêneo.
 -   `<ext>`: extensão do arquivo. Pode ser `.png`, `.jpeg` ou `.jpg`. As operações também funcionam para o formato `.svg`, mas pode apresentar problemas por conta da transparência da imagem.
 
-Atendidas as premissas da base anotada, é possível ajustar um modelo de redes neurais usando o pacote `{captcha}`. No entanto, como o ajuste de modelos de redes neurais envolve uma série de nuances e pequenas adaptações, optou-se por exportar funções em dois níveis de aprofundamento. A primeira é a **automatizada**, utilizando a função `captcha_fit_model()` descrito a seguir, enquanto a segunda é a **procedimental**, utilizando o passo a passo descrito na Subseção [-@sec-captcha-do-zero].
+Atendidas as premissas da base anotada, é possível ajustar um modelo de redes neurais usando o pacote `{captcha}`. No entanto, como o ajuste de modelos de redes neurais tem uma série de nuances e pequenas adaptações, optou-se por exportar funções em dois níveis de aprofundamento. A primeira é a **automatizada**, utilizando a função `captcha_fit_model()` descrita a seguir, enquanto a segunda é a **procedimental**, utilizando o passo a passo descrito na Subseção [-@sec-captcha-do-zero].
 
 A função `captcha_fit_model()` ajusta um modelo a partir de uma pasta com arquivos anotados. A função recebe os parâmetros: `dir=`, contendo o caminho dos arquivos anotados; `dir_valid=`, (opcional) contendo o caminho dos arquivos anotados para validação; `prop_valid=`, contendo a proporção da base de treino a ser considerada como validação, ignorada quando `dir_valid=` é fornecida (por padrão, considera-se 20% da base para validação).
 
-A função `captcha_fit_model()` também possui alguns parâmetros relacionados à modelagem. São eles: `dropout=`, especificando o percentual de *dropout* aplicado às camadas ocultas da rede (por padrão, `0.25`); `dense_units=`, especificando a quantidade de unidades na camada oculta que vem depois das camadas convolucionais (por padrão, 200); `decay=`, especificando o percentual de decaimento da taxa de aprendizado (por padrão, `0.99`); `epochs=` número de épocas para ajuste do modelo (por padrão 100). Uma observação importante é que o modelo está configurado para parar o ajuste após 20 iterações sem redução significativa na função de perda (arbitrado em 1%; para mais detalhes ver a Subseção [-@sec-captcha-do-zero]).
+A função `captcha_fit_model()` também possui alguns parâmetros relacionados à modelagem. São eles: `dropout=`, especificando o percentual de *dropout* aplicado às camadas ocultas da rede (por padrão, `0.25`); `dense_units=`, especificando a quantidade de unidades na camada oculta que vem depois das camadas convolucionais (por padrão, 200); `decay=`, especificando o percentual de decaimento da taxa de aprendizado (por padrão, `0.99`); `epochs=` número de épocas (voltas completas na base de treino) para ajuste do modelo (por padrão 100). O modelo está configurado para parar o ajuste após 20 iterações sem redução significativa na função de perda (arbitrado em 1%; para mais detalhes ver a Subseção [-@sec-captcha-do-zero]).
 
 No final, a função retorna um modelo ajustado com classe `luz_module_fitted`, que pode ser salvo em disco utilizando-se a função `luz_save()`. O modelo também pode ser serializado para utilização em outros pacotes como pytorch. Um tutorial sobre serialização pode ser encontrado na [documentação do pacote torch](https://torch.mlverse.org/docs/articles/serialization.html).
 
@@ -717,13 +718,13 @@ Na documentação do pacote `{captcha}`, foi adicionado um exemplo de aplicaçã
 
 ### Resolvendo um novo Captcha do zero {#sec-captcha-do-zero}
 
-Em algumas situações, pode ser desejável rodar modelos de forma customizada. Isso acontece pois modelos de aprendizagem profunda costumam precisar de diversos pequenos ajustes, como a taxa de aprendizado, utilização de outras funções de otimização, camadas computacionais e funções de pré-processamento.
+Em algumas situações, pode ser desejável rodar modelos de forma customizada. Isso acontece pois modelos de aprendizagem profunda costumam precisar de diversos pequenos ajustes, como na taxa de aprendizado, funções de otimização, camadas computacionais e funções de pré-processamento.
 
 A função `captcha_fit_model()`, apresentada na subseção anterior, é engessada. Ela aceita alguns parâmetros para estruturar o modelo, mas não possui elementos suficientes para customização. É para isso que pacotes como `{torch}` e `{luz}` existem, pois criam ambientes de computação mais flexíveis para operar os modelos de aprendizado profundo.
 
-Outra desvantagem da utilização do `captcha_fit_model()` é a disponibilização dos modelos. Um modelo pode ser utilizado localmente, mas a tarefa de disponibilizar as bases de dados e o modelo para outras pessoas não tem um procedimento bem definido.
+Outra desvantagem da utilização do `captcha_fit_model()` é possibilidade de disponibilizar modelos. Um modelo pode ser utilizado localmente, mas a tarefa de disponibilizar as bases de dados e o modelo publicamente não tem um procedimento bem definido.
 
-Para organizar o fluxo de trabalho, implementou-se um fluxo de anotação de Captchas dentro do pacote `{captcha}`. A função que orquestra esse fluxo é a `new_captcha()`. A função possui apenas um parâmetro, `path=`, que é o caminho de uma nova pasta a ser criada.
+Para organizar o fluxo de trabalho, implementou-se passo-a-passo de anotação e modelagem de Captchas dentro do pacote `{captcha}`. A função que orquestra as atividades é a `new_captcha()`. A função possui apenas um parâmetro, `path=`, que é o caminho de uma nova pasta a ser criada.
 
 A função também pode ser chamada criando-se um projeto dentro do próprio RStudio. A @fig-exemplo-rstudio-template mostra um exemplo de utilização do template dentro do RStudio, após clicar em `Novo Projeto > Novo Diretório`.
 
@@ -735,12 +736,12 @@ knitr::include_graphics("assets/img/exemplo-rstudio-template.png")
 
 Ao criar um novo projeto, pelo comando `new_captcha()` ou pela interface do RStudio, uma nova janela é aberta. O projeto contém quatro arquivos:
 
--   `01_download.R`: Contém algumas funções para auxiliar no desenvolvimento de funções que baixam Captchas em um caso real. Na prática, as funções que baixam Captchas precisam ser adaptadas porque os sites são organizados de formas muito diferentes.
+-   `01_download.R`: Contém códigos que auxiliam no desenvolvimento de funções para baixar Captchas de um site. Na prática, as funções que baixam Captchas precisam ser adaptadas porque os sites são organizados de formas muito diferentes.
 -   `02_annotate.R`: Contém um *template* para anotação manual de Captchas. A anotação manual pode tanto ser realizada usando a interface criada pelo pacote `{captcha}` quanto externamente. No final, os arquivos anotados devem ser salvos na pasta `img`, no formato descrito na Subseção [-@sec-ap-modelagem].
 -   `03_model.R`: Contém um *template* para modelagem, permitindo a customização completa do procedimento de ajuste. O *script* contém comandos para carregar os dados, especificar o modelo, realizar o ajuste e salvar o modelo ajustado.
--   `04_share.R`: Contém funções para criar um repositório *git* da solução e disponibilizar o modelo ajustado. O modelo poderá ser lido e aplicado utilizando-se a função `captcha_load_model()`, para utilização em diferentes contextos, sem a necessidade de copiar arquivos localmente.
+-   `04_share.R`: Contém funções para criar um repositório *git* da solução e disponibilizar o modelo ajustado. O modelo poderá ser lido e aplicado utilizando-se a função `captcha_load_model()`, que pode ser aplicado em diferentes contextos, sem a necessidade de copiar arquivos localmente.
 
-Sobre a parte de modelagem, cabe uma descrição mais detalhada. O primeiro passo do *script* é criar objetos do tipo *dataset* (objeto que armazena os dados de forma consistente) e *dataloader* (objeto que obtém amostras do dataset, que são utilizadas como os *minibatches* do modelo), com uma estrutura orquestrada pelo pacote `{torch}`.
+Sobre a parte de modelagem, cabe uma descrição mais detalhada com apresentação de parte do código. O primeiro passo do *script* é criar objetos do tipo *dataset* (objeto que armazena os dados de forma consistente) e *dataloader* (objeto que obtém amostras do dataset, que são utilizadas como os *minibatches* do modelo), com uma estrutura orquestrada pelo pacote `{torch}`.
 
 A função `captcha_dataset()` cria o *dataset*, recebendo como parâmetro uma pasta de arquivos e gera um objeto com classes `my_captcha`, `dataset` e `R6`. A função é, na verdade, um objeto do tipo `dataset_generator`, criada utilizando a função `dataset()` do pacote `{torch}`. O objeto é chamado da mesma forma que uma função usual do R, aceitando alguns parâmetros adicionais:
 
@@ -750,11 +751,40 @@ A função `captcha_dataset()` cria o *dataset*, recebendo como parâmetro uma p
 
 A função `captcha_dataset()` deve ser aplicada duas vezes, uma para criar a base de treino e outra para criar a base de validação. A separação de bases de treino e validação deve ser feita de forma manual, copiando parte dos Captchas anotados para uma nova pasta, com aleatorização. É papel do usuário separar as bases em pastas distintas carregá-as em um *dataset*.
 
+```{r}
+#| echo: true
+#| eval: false
+# datasets
+captcha_ds <- captcha::captcha_dataset(
+  root = parm$path_img,
+  captcha = NULL,
+  download = FALSE
+)
+```
+
 Em seguida, os *dataloaders* são criados utilizando-se a função `dataloader()` do pacote `{torch}`. Nessa parte é definido o tamanho do *minibatch*, além de outros possíveis parâmetros disponíveis na função do `{torch}`. Para mais detalhes, o usuário pode [acessar a documentação da função neste link](https://torch.mlverse.org/docs/reference/dataloader.html). Devem ser criados *dataloaders* tanto para a base de treino quanto para a base de validação.
 
-A próxima etapa é a especificação do modelo. No *script* de modelagem, o modelo é fornecido pelo objeto `net_captcha` do pacote `{captcha}`. Assim como no caso do *dataset*, o `net_captcha` é um objeto especial do `{torch}`, com classes `CAPTCHA-CNN`, `nn_module` e `nn_module_generator`. O objeto pode ser utilizado como uma função, gerando um módulo do `torch`, similar a uma função de predição. No entanto, por conta da forma que o objeto é utilizado em passos posteriores pelo pacote `{luz}`, o objeto a ser considerado é mesmo o `nn_module_generator`, como colocado no *script*.
+```{r}
+#| echo: true
+#| eval: false
 
-Para customizar o modelo, o usuário deve modificar os métodos `initialize()` e `forward()`, acessados dentro do objeto `net_captcha$public_methods`. O primeiro é responsável pela inicialização do modelo, contendo a descrição das operações que são realizadas, como convoluções. O segundo é a função *feed forward* das redes neurais, que recebe uma imagem e retorna um objeto contendo os escores ou probabilidades, no formato da variável resposta.
+# dataloaders (training and validation)
+captcha_dl_train <- torch::dataloader(
+  dataset = torch::dataset_subset(captcha_ds, id_train),
+  batch_size = parm$batch_size,
+  shuffle = TRUE
+)
+
+captcha_dl_valid <- torch::dataloader(
+  dataset = torch::dataset_subset(captcha_ds, id_valid),
+  batch_size = parm$batch_size
+)
+```
+
+
+A próxima etapa é a especificação do modelo. No *script* de modelagem, o modelo é fornecido pelo objeto `net_captcha` do pacote `{captcha}`. Assim como no caso do *dataset*, o `net_captcha` é um objeto especial do `{torch}`, com classes `CAPTCHA-CNN`, `nn_module` e `nn_module_generator`. O objeto pode ser utilizado como uma função, gerando um módulo do `{torch}`, similar a uma função de predição. No entanto, por conta da forma que o objeto é utilizado em passos posteriores pelo pacote `{luz}`, o objeto a ser considerado é mesmo o `nn_module_generator`, como colocado no *script*.
+
+Para customizar o modelo, o usuário deve criar um novo módulo modificando os métodos `initialize()` e `forward()`, acessados dentro do objeto `net_captcha$public_methods`. O primeiro é responsável pela inicialização do modelo, contendo a descrição das operações que são realizadas, como convoluções. O segundo é a função *feed forward* das redes neurais, que recebe uma imagem e retorna um objeto contendo os escores ou probabilidades, no formato da variável resposta.
 
 Por padrão, o código de inicialização do modelo é o descrito abaixo. Os parâmetros `input_dim=`, `output_ndigits=`, `output_vocab_size=` e `vocab=` descrevem, respectivamente, as dimensões da imagem, o comprimento da resposta, o comprimento do alfabeto e os elementos do alfabeto. Os parâmetros `transform=`, `dropout=` e `dense_units=` controlam, respectivamente, a função de transformação da imagem, os hiperparâmetros de *dropout* e a quantidade de unidades na camada densa. É possível notar que os parâmetros das convoluções são fixos, já preparados para funcionar bem com uma imagem de dimensões `32x192`.
 
@@ -847,7 +877,7 @@ forward = function(x) {
 
 ```
 
-Definida a arquitetura do modelo, o penúltimo passo é o ajuste. O ajuste do modelo é orquestrado pelo pacote `{luz}`, que facilita a criação do *loop* de ajuste dos parâmetros, desempenhando um papel similar ao que o `keras` realiza para o `tensorflow` puro.
+Definida a arquitetura do modelo, o penúltimo passo é o ajuste. O ajuste do modelo é conduzido pelo pacote `{luz}`, que facilita a criação do *loop* de ajuste dos parâmetros, desempenhando um papel similar ao que o `keras` realiza para o `tensorflow` puro.
 
 No caso dos Captchas, o código `{luz}` para ajuste do modelo segue quatro passos, encadeados pelo operador *pipe*, ou `|>`:
 
@@ -855,11 +885,11 @@ No caso dos Captchas, o código `{luz}` para ajuste do modelo segue quatro passo
 -   `set_hparams()`: serve para informar os hiperparâmetros e outras informações do modelo. Os parâmetros colocados dentro dessa função são exatamente os parâmetros do método `initialize()` da rede neural criada no passo anterior.
 -   `set_opt_hparams()`: serve para informar os hiperparâmetros da otimização. Os parâmetros colocados nessa função são passados para a função de otimização. No script, o único parâmetro informado é a taxa de aprendizado, fixada em `0.01`.
 -   `fit()`: serve para inicializar o *loop* de ajuste do modelo. Aqui, é necessário passar os *dataloaders* de treino e validação, a quantidade de épocas (fixada em 100), e os *callbacks*, que são operações a serem aplicadas em diferentes momentos do ajuste (por exemplo, ao final de cada iteração). Por padrão, os *callbacks* são:
-    -   O decaimento da taxa de aprendizado utilizando uma taxa multiplicativa. A cada iteração, a taxa de aprendizado decai em um fator determinado pela função definida em `lr_lambda`, que por padrão é `0.99`. Ou seja, em cada época, a taxa de aprendizado fica 1% menor.
-    -   A parada precoce, ou *early stopping*. Por padrão, está configurado para parar o ajuste do modelo se forem passadas 20 épocas sem que o modelo melhore a acurácia em 1% na base de validação. Por exemplo, se em 20 épocas consecutivas o modelo permanecer com acurácia em 53%, o ajuste será encerrado, mesmo que não tenha passado pelas 100 épocas.
+    -   O decaimento da taxa de aprendizado, utilizando uma taxa multiplicativa. A cada iteração, a taxa de aprendizado decai em um fator determinado pela função definida em `lr_lambda`, que por padrão é `0.99`. Ou seja, em cada época, a taxa de aprendizado fica 1% menor.
+    -   A parada adiantada, ou *early stopping*. Por padrão, está configurado para parar o ajuste do modelo se forem passadas 20 épocas sem que o modelo melhore a acurácia em 1% na base de validação. Por exemplo, se em 20 épocas consecutivas o modelo permanecer com acurácia em 53%, o ajuste será encerrado, mesmo que não tenha passado pelas 100 épocas.
     -   O arquivo de `log`. Por padrão, o modelo guarda o histórico de ajuste em um arquivo do tipo *comma separated values* (CSV), contendo a perda e a acurácia do modelo na base de treino e na base de validação, ao final de cada época. O arquivo de `log` é importante para acompanhar o ajuste do modelo e verificar sua performance ao longo das épocas, podendo dar *insights* sobre possíveis ajustes nos hiperparâmetros.
 
-No final do fluxo definido pelo pacote `{luz}`, será obtido um modelo ajustado. O modelo possui a classe `luz_module_fitted` e pode ser investigado ao rodar o objeto no console do R. No exemplo do `R-Captcha` apresentado na subseção anterior, o objeto possui as características abaixo. O objeto contém um relatório conciso e bastante informativo, mostrando o tempo de ajuste, as métricas obtidas no treino e na validação e a arquitetura do modelo ajustado.
+No final do fluxo definido pelo pacote `{luz}`, é obtido um modelo ajustado. O modelo possui a classe `luz_module_fitted` e pode ser investigado ao rodar o objeto no console do R. No exemplo do `R-Captcha` apresentado na subseção anterior, o objeto possui as características abaixo. O objeto contém um relatório conciso e bastante informativo, mostrando o tempo de ajuste, as métricas obtidas no treino e na validação e a arquitetura do modelo.
 
     A `luz_module_fitted`
     ── Time ────────────────────────────────────────────────
@@ -896,18 +926,20 @@ No final do fluxo definido pelo pacote `{luz}`, será obtido um modelo ajustado.
 
 Por último, o modelo deve ser salvo em um arquivo local. Isso é feito utilizando-se a função `luz_save()` do pacote `{luz}`, guardando um objeto com extensão `.pt`, que será disponibilizado no `04_share.R`.
 
-Cabe também um detalhamento do *script* disponibilizado em `04_share.R`. O script utiliza o pacote `{usethis}` [@usethis] para organizar o repositório, configurando o Git (software de versionamento de códigos) e o GitHub (sistema *web* de organização de repositórios). Além disso, o *script* utiliza o pacote `{piggyback}` [@piggyback] para disponibilizar o modelo ajustado nos *releases* do repositório criado. Opcionalmente, o usuário poderá também disponibilizar a base com os arquivos anotados em um arquivo `.zip`, o que é recomendado, pois permite que outras pessoas possam trabalhar com os mesmos dados e aprimorar os modelos.
+Cabe também um detalhamento do *script* disponibilizado em `04_share.R`. O script utiliza o pacote `{usethis}` [@usethis] para organizar o repositório, configurando o Git (*software* de versionamento de códigos) e o GitHub (sistema *web* de organização de repositórios). Além disso, o *script* utiliza o pacote `{piggyback}` [@piggyback] para disponibilizar o modelo ajustado nos *releases* do repositório criado[^sobre-releases]. Opcionalmente, o usuário poderá também disponibilizar a base com os arquivos anotados em um arquivo `.zip`, o que é recomendado, pois permite que outras pessoas possam trabalhar com os mesmos dados e aprimorar os modelos.
 
-Um detalhe importante é sobre a inserção de arquivos pesados no repositório. O *script* utiliza *releases* para disponibilizar as soluções porque não é uma boa prática subir arquivos como modelos ajustados ou arquivos brutos (imagens) diretamente no repositório. Isso acontece porque o repositório pode ficar demasiadamente pesado e o histórico do *Git* fica alterado.
+[^sobre-releases]: O *script* utiliza *releases* para disponibilizar as soluções porque não é uma boa prática subir arquivos como modelos ajustados ou arquivos brutos de imagens diretamente no repositório. Isso acontece porque o repositório pode ficar demasiadamente pesado e o histórico do *Git* fica alterado.
 
-Uma vez compartilhado nos releases do repositório, o modelo poderá ser lido por qualquer pessoa, em outras máquinas utilizando o pacote `{captcha}`. Basta rodar o código abaixo e o modelo será carregado.
+Uma vez compartilhado nos *releases* do repositório, o modelo poderá ser lido por qualquer pessoa, em outras máquinas utilizando o pacote `{captcha}`. Basta rodar o código abaixo e o modelo será carregado.
 
 ```{r}
 #| eval: false
 model <- captcha_load_model("<name>", "<user>/<repo>")
 ```
 
-Com isso, o trabalho pode ser compartilhado e Captchas podem ser resolvidos de forma colaborativa pelas pessoas interessadas. Utilizando o fluxo do `new_captcha()`, as pessoas têm flexibilidade para construir modelos customizados e utilizá-los de forma eficiente.
+Com isso, o trabalho pode ser compartilhado e Captchas podem ser resolvidos de forma colaborativa. O fluxo do `new_captcha()` é flexível o suficiente para construir modelos customizados e consumidos com o pacote `{captcha}`.
+
+O fluxo também permite uma adaptação fácil ao método WAWL. Para isso, basta substituir a função de perda e de leitura dos dados pelas funções oferecidas pelo pacote `{captchaOracle}`, descrito no @sec-pacote.
 
 ## Discussão {#sec-discussao}
 
@@ -915,17 +947,17 @@ Os resultados apresentados nas seções anteriores mostram que o método WAWL po
 
 A primeira hipótese de pesquisa diz respeito à pertinência de utilizar do aprendizado fracamente supervisionado como forma de ajustar modelos para resolver Captchas. A hipótese foi verificada, já que os resultados mostram um incremento significativo na acurácia do modelo em praticamente todas as simulações.
 
-Do ponto de vista teórico, várias pesquisas já apontavam que o aprendizado com rótulos parciais ou rótulos complementares têm boas propriedades. Por isso, já seria esperado que uma nova função de perda, desde que pensada com cuidado, traria resultados positivos. 
+Do ponto de vista teórico, várias pesquisas já apontavam que o aprendizado com rótulos parciais ou rótulos complementares têm boas propriedades. Por isso, já seria esperado que uma nova função de perda, desde que pensada com cuidado, traria resultados positivos.
 
 <!-- da obtenção das propriedades da função de perda proposta, mostrando que a função de risco baseada nessa perda se aproxima da função de risco de um problema completamente supervisionado. -->
 
 No entanto, até o momento, não existiam evidências de que a utilização de rótulos parciais ou rótulos complementares teriam bons resultados empíricos em Captchas. Isso foi verificado em todos os 12 Captchas estudados, sendo 10 obtidos do mundo real. Em todos os casos, a função de perda proposta funcionou bem e trouxe ganhos significativos na acurácia do modelo, tanto em termos relativos quanto absolutos. Isso demonstra que a escolha do método se alia bem ao problema que deu origem à pesquisa, que são os Captchas.
 
-Sobre a parte de aplicação iterada do WAWL, cabe um comentário. O resultado encontrado, com 100% de acurácia, pode sugerir que o método WAWL sempre chegará em um resultado de 100% para qualquer Captcha que surgir. No entanto, pode ser que exista uma limitação na capacidade do modelo, que é habilidade do modelo para se ajustar aos dados a partir dos parâmetros. Pode ser que a arquitetura de rede neural escolhida para resolver o Captcha não seja capaz de chegar a um modelo com 100% de acurácia, independente da quantidade de imagens observadas. É importante olhar o resultado apresentado de forma crítica e compreender que estes podem ser limitados, já que a arquitetura da rede neural não é parte do método WAWL.
+Sobre a parte de aplicação iterada do WAWL, o resultado é positivo, mas inconclusivo. A acurácia de 100% encontrada pode sugerir que o método WAWL sempre chegará em um resultado de 100% para qualquer Captcha que surgir. No entanto, pode ser que exista uma limitação na capacidade do modelo, que é habilidade do modelo para se ajustar aos dados a partir dos parâmetros. Pode ser que a arquitetura de rede neural escolhida para resolver o Captcha não seja capaz de chegar a um modelo com 100% de acurácia, independente da quantidade de imagens observadas. É importante olhar o resultado apresentado de forma crítica e compreender que estes podem ser limitados, já que a arquitetura da rede neural não é parte do método WAWL.
 
 A segunda hipótese de pesquisa é a possibilidade de aliar a área de raspagem de dados com a área de modelagem estatística. A hipótese também foi verificada, já que o método WAWL, que utiliza técnicas de raspagem de dados, apresentou bons resultados empíricos.
 
-Neste momento, cabe um comentário sobre o ineditismo da ponte entre raspagem de dados e estatística. É verdade que existem muitas pesquisas que são possibilitadas por conta dos dados obtidos via raspagem de dados: as pesquisas da ABJ, mencionadas na @sec-captchas-publicos são alguns exemplos. Também existem soluções que utilizam dados provenientes de raspagem de dados para construção de modelos: por exemplo, o [DALL-E-2](https://openai.com/dall-e-2/), que é parte de uma base de dados construída utilizando imagens baixadas da internet [@rameshHierarchicalTextConditionalImage2022; @murray2012]. No entanto, até o momento da realização da pesquisa, não foi encontrado nenhum trabalho que utiliza a raspagem de dados como parte do processo de aprendizado estatístico. O método WAWL conecta as áreas de forma intrínseca, podendo ser entendida como uma nova variação de aumentação de dados aplicada a redes neurais convolucionais.
+Neste momento, cabe um comentário sobre o ineditismo da utilização de raspagem de dados em estudos estatísticos. É verdade que existem muitas pesquisas que são possibilitadas por conta dos dados obtidos via raspagem de dados: as pesquisas da ABJ, mencionadas na @sec-captchas-publicos são alguns exemplos. Também existem soluções que utilizam dados provenientes de raspagem de dados para construção de modelos: por exemplo, o [DALL-E-2](https://openai.com/dall-e-2/), que é parte de uma base de dados construída utilizando imagens baixadas da internet [@rameshHierarchicalTextConditionalImage2022; @murray2012]. No entanto, até o momento da realização da pesquisa, não foi encontrado nenhum trabalho que utiliza a raspagem de dados como parte do processo de aprendizado estatístico. O método WAWL conecta as áreas de forma intrínseca, podendo ser entendida como uma nova variação de aumentação de dados aplicada a redes neurais convolucionais.
 
 O fato de a raspagem de dados ser relevante para o ajuste de um modelo estatístico pode levar a algumas discussões sobre o ensino da estatística. Primeiro, é importante mencionar que:
 
@@ -934,10 +966,10 @@ O fato de a raspagem de dados ser relevante para o ajuste de um modelo estatíst
 
 [^universidades]: Sites de universidades buscados: USP Butantã (IME), UFSCar, UNESP, Unicamp, USP São Carlos (ICMC), UFBA, UFPR, UFRGS, UFPE, UFAM, UFRN, UFF, ENCE, UFRJ, UFMG, UnB e UFG.
 
-Os resultados levam, então, a um problema de balanceamento entre pertinência e oportunidade. De um lado, a área de raspagem não se encaixa muito bem no currículo de estatística. Por outro lado, a área expande as possibilidades de atuação de uma profissional da estatística.
+Os resultados levam, então, a um problema de equilíbrio entre pertinência e oportunidade. De um lado, a área de raspagem não se encaixa muito bem no currículo de estatística. Por outro lado, a área expande as possibilidades de atuação de uma profissional da estatística.
 
-Para aliar a pertinência e a oportunidade, uma opção seria oferecer disciplinas optativas de raspagem de dados nos cursos de estatística. Para aumentar a quantidade de potenciais ministrantes, a disciplina poderia ser oferecida em parceria com outros cursos, como ciência da computação, matemática aplicada e engenharias. Dessa forma, as pessoas interessadas teriam a oportunidade de aprender um pouco sobre as técnicas principais, conectando a raspagem de dados com as áreas de conhecimento específicas, como é o caso do Captcha, que alia raspagem de dados com estatística e inteligência artificial.
+Para aliar a pertinência e a oportunidade, uma opção seria oferecer disciplinas optativas de raspagem de dados nos cursos de estatística. Para aumentar a quantidade de potenciais ministrantes, a disciplina poderia ser oferecida em parceria com outros cursos, como ciência da computação, matemática aplicada e engenharias. Dessa forma, as pessoas interessadas teriam a oportunidade de aprender um pouco sobre as técnicas principais, conectando a raspagem de dados com as áreas de conhecimento específicas, como é o caso do Captcha, que alia raspagem de dados com estatística e inteligência artificial. Com isso, conclui-se a discussão sobre a segunda hipótese de pesquisa.
 
-No final, as duas hipóteses de pesquisa foram verificadas. No processo de obtenção dos resultados, no entanto, um terceiro avanço muito importante foi realizado na parte computacional. O pacote `{captcha}` e os pacotes auxiliares `{captchaDownload}` e `{captchaOracle}` são frutos desse trabalho. Pela primeira vez, foi construída uma ferramenta aberta contendo um fluxo de trabalho adaptado para trabalhar com Captchas. Além disso, trata-se de uma das primeiras aplicações completas dos pacotes `{torch}` e `{luz}`, que têm potencial de revolucionar a forma em que os modelos estatísticos são desenvolvidos por pessoas que fazem pesquisa em estatística. Os pacotes foram descritos em detalhes no @sec-pacote.
+Portanto, as duas hipóteses de pesquisa foram verificadas. No processo de construção do trabalho, no entanto, um terceiro avanço muito importante foi realizado na parte computacional. O pacote `{captcha}` e os pacotes auxiliares `{captchaDownload}` e `{captchaOracle}` são frutos desse trabalho. Pela primeira vez, foi construída uma ferramenta aberta contendo um fluxo de trabalho adaptado para trabalhar com Captchas. Além disso, trata-se de uma das primeiras aplicações completas dos pacotes `{torch}` e `{luz}`, que têm potencial de revolucionar a forma em que os modelos estatísticos são desenvolvidos por pessoas que fazem pesquisa em estatística. Os pacotes foram descritos em detalhes no @sec-pacote.
 
 Por fim, todos os modelos construídos foram disponibilizados no pacote `{captcha}`. Os códigos, dados e resultados das simulações estão disponíveis no pacote `{captchaOracle}`. Os dados utilizados para elaboração da tese estão disponíveis no [repositório da tese no GitHub](https://github.com/jtrecenti/doutorado). Dessa forma, a pesquisa pode ser considerada como reprodutível, podendo servir como base para pesquisas futuras.
