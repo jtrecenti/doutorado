@@ -917,7 +917,7 @@ As bases de dados com imagens anotadas foram disponibilizadas na aba de lançame
 
 <!-- ---------------------------------------------------------------------- -->
 
-## Simulações {#simulacoes}
+## Simulações {#sec-simulacoes}
 
 Para verificar o poder do uso do oráculo para o aprendizado do modelo, uma série de simulações foram desenvolvidas. As simulações foram organizadas em três passos: modelo inicial, dados e modelo final. Os passos foram descritos em maior detalhe a seguir.
 
