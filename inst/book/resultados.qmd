@@ -26,7 +26,7 @@ bibliography: references.bib
 
 <!-- Nesta seção, buscou-se demonstrar que o uso dos dados fornecidos pelo oráculo com adaptação da função de perda i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, é necessário retomar algumas definições para avançar. -->
 
-Neste capítulo, discute-se os resultados empíricos do método WAWL e descreve-se pacote computacional desenvolvido para lidar com Captchas. A @sec-result-sim mostra os resultados empíricos e a @sec-pacote-captcha detalha o pacote `{captcha}`. No final, a @sec-discussao apresenta uma discussão dos resultados obtidos.
+Neste capítulo, discute-se os resultados empíricos do método WAWL e descreve-se pacote computacional desenvolvido para trabalhar com Captchas. A @sec-result-sim mostra os resultados empíricos e a @sec-pacote-captcha detalha o pacote `{captcha}`. No final, a @sec-discussao apresenta uma discussão dos resultados obtidos.
 
 ## Resultados empíricos {#sec-result-sim}
 
@@ -49,11 +49,13 @@ ganho_absoluto <- doutorado::da_results_simulacao |>
   scales::percent()
 ```
 
-Os resultados foram obtidos a partir das simulações com diversos Captchas. Foram realizadas `r total_sim` simulações no total, variando no tipo de Captcha, a acurácia do modelo inicial e a quantidade de tentativas no oráculo.
+Os resultados foram obtidos a partir das simulações com diversos Captchas. Foram realizadas `r total_sim` simulações no total, variando o tipo de Captcha, a acurácia do modelo inicial e a quantidade de tentativas no oráculo, como descrito na @sec-simulacoes.
 
-Para realizar os cálculos, montou-se uma base de dados com os resultados das simulações. A base está disponível publicamente no [repositório da tese](https://github.com/jtrecenti/doutorado) e contém informações do Captcha ajustado (`captcha`), da quantidade de observações do modelo inicial (`n`), da quantidade de tentativas do oráculo (`ntry`), da etapa de simulação (`fase`, inicial ou WAWL), do caminho do modelo ajustado (`model`) e da acurácia obtida (`acc`).
+A base de dados com os resultados das simulações está disponível publicamente no [repositório da tese](https://github.com/jtrecenti/doutorado)[^infos-repositorio]. A base contém informações do Captcha ajustado (`captcha`), da quantidade de observações do modelo inicial (`n`), da quantidade de tentativas do oráculo (`ntry`), da etapa de simulação (`fase`, inicial ou WAWL), do caminho do modelo ajustado (`model`) e da acurácia obtida (`acc`).
 
-Os resultados gerais mostram um ganho de `r ganho_medio` na acurácia após a aplicação da metodologia WAWL. Ou seja, em média, a acurácia do modelo no terceiro passo da simulação (ver @sec-modelo-final) foi de mais de **três vezes** a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de `r ganho_absoluto`, ou seja, após o terceiro passo, os modelos ganharam, em média, `r ganho_absoluto` de acurácia.
+[^infos-repositorio]: Para acessar a base, é necessário rodar `remotes::install_github("jtrecenti/doutorado")` e depois acessar a base rodando `doutorado::da_results_simulacao`.
+
+Os resultados gerais mostram um ganho de `r ganho_medio` na acurácia após a aplicação do método WAWL. Ou seja, em média, a acurácia do modelo no terceiro passo da simulação (ver a @sec-modelo-final) foi de mais de **três vezes** a acurácia do modelo inicial. Em termos absolutos (diferença entre as acurácias), o ganho foi de `r ganho_absoluto`, ou seja, após o terceiro passo, os modelos ganharam, em média, `r ganho_absoluto` de acurácia.
 
 ```{r}
 #| echo: false
@@ -81,13 +83,13 @@ tab_lines <- tibble::tibble(
 
 As [Figuras @fig-simulacao-geral-ntry-relativo] e [-@fig-simulacao-geral-ntry-absoluto] mostram os ganhos relativos e absolutos, separando os resultados gerais por quantidade de tentativas. Cada ponto é o resultado de uma simulação e o ponto em destaque é o valor médio, acompanhado de intervalo $m \mp 2*s/\sqrt(n)$, com $m$ sendo a média, $s$ o desvio padrão e $n$ a quantidade de dados. A linha pontilhada indica se a acurácia aumentou ou diminuiu após a aplicação da técnica.
 
-Na @fig-simulacao-geral-ntry-relativo, é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante e que não há necessidade de realizar tantos chutes para aproveitar essa oportunidade.
+Na @fig-simulacao-geral-ntry-relativo, é possível notar que os ganhos em acurácia apresentam alta variabilidade, mas que apresentam uma tendência positiva com relação ao número de tentativas. O ganho entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por sites que aceitam vários chutes é relevante, mas não há necessidade de realizar tantos chutes para aproveitar essa oportunidade. Uma possível explicação para isso é que o modelo ficaria indeciso entre poucas opções.
 
 ```{r}
 #| label: fig-simulacao-geral-ntry-relativo
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas.
+#| fig-cap: Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas
 #| out-width: 75%
 
 tab_stats_correta <- tab_stats  |> 
@@ -134,14 +136,14 @@ tab_stats_correta |>
   ) +
   # ggplot2::facet_wrap(~name, scales = "free_y") +
   ggplot2::scale_y_continuous(labels = scales::percent) +
-  ggplot2::theme_minimal(12) +
+  ggthemes::theme_hc(12) +
   ggplot2::labs(
     x = "Quantidade de tentativas",
     y = "Ganho relativo"
   )
 ```
 
-A @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra a mesma informação mas em quantidades mais fáceis de interpretar. O ganho médio absoluto em sites que permitem mais de um chute ficou em torno de 40%, enquanto o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do model em casos que com apenas um chute, mostrando que a técnica é efetiva de forma consistente.
+A @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra a mesma informação, mas em valores com interpretação mais direta. O ganho médio absoluto em sites que permitem mais de um chute ficou em torno de 40%, enquanto o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do model em casos que com apenas um chute, mostrando que a técnica é efetiva de forma consistente.
 
 ```{r}
 #| label: fig-simulacao-geral-ntry-absoluto
@@ -193,7 +195,7 @@ tab_stats  |>
   dplyr::filter(name == "Absoluto")
   ) +
   ggplot2::scale_y_continuous(labels = scales::percent) +
-  ggplot2::theme_minimal(12) +
+  ggthemes::theme_hc(12) +
   ggplot2::labs(
     x = "Quantidade de tentativas",
     y = "Ganho absoluto"
@@ -229,7 +231,7 @@ tab_stats_inicial <- doutorado::da_results_simulacao |>
 
 As [Figuras @fig-simulacao-geral-inicial-relativo] e [-@fig-simulacao-geral-inicial-absoluto] apresentam os resultados gerais separando por acurácia inicial do modelo. A estrutura do gráfico é similar às visualizações anteriores, que separaram os resultados por quantidade de tentativas. As categorias escolhidas foram: até 10%, mais de 10% até 35% e mais de 35% de acurácia no modelo inicial. A escolha dos intervalos se deram pela quantidade de observações em cada categoria.
 
-A @fig-simulacao-geral-inicial-relativo mostra os ganhos relativos. É possível notar uma tendência de queda no ganho de acurácia com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse resultado é esperado, pois, como a acurácia é um número entre zero e um, um modelo que já possui alta acurácia não tem a possibilidade de aumentar muito de forma absoluta.
+A @fig-simulacao-geral-inicial-relativo mostra os ganhos relativos. É possível notar uma tendência de queda no ganho de acurácia com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse resultado é esperado, pois, como a acurácia é um número entre zero e um, um modelo que já possui alta acurácia não tem a possibilidade de aumentar muito de forma relativa.
 
 ```{r}
 #| label: fig-simulacao-geral-inicial-relativo
@@ -280,7 +282,7 @@ tab_stats_inicial  |>
   ) +
   # ggplot2::facet_wrap(~name, scales = "free_y") +
   ggplot2::scale_y_continuous(labels = scales::percent) +
-  ggplot2::theme_minimal(12) +
+  ggthemes::theme_hc(12) +
   ggplot2::labs(
     x = "Acurácia do modelo inicial",
     y = "Ganho relativo"
@@ -338,7 +340,7 @@ tab_stats_inicial  |>
   ) +
   # ggplot2::facet_wrap(~name, scales = "free_y") +
   ggplot2::scale_y_continuous(labels = scales::percent) +
-  ggplot2::theme_minimal(12) +
+  ggthemes::theme_hc(12) +
   ggplot2::labs(
     x = "Acurácia do modelo inicial",
     y = "Ganho absoluto"
@@ -348,10 +350,10 @@ tab_stats_inicial  |>
 Para lidar com o fato de a acurácia ser um número limitado, fizemos o mesmo gráficos de antes, mas ajustado pelo máximo possível que a técnica do oráculo poderia proporcionar. O ganho absoluto ajustado de uma simulação é dado por
 
 $$
-\text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
+\text{ganho} = \frac{\text{wawl } - \text{ inicial}}{1\; - \text{ inicial}}.
 $$ 
 
-A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo da técnica WAWL do oráculo para modelos iniciais com mais de 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a técnica é menor. É importante notar, no entanto, que as simulações mostram a aplicação da técnica apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito da técnica para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para um estado com acurácia maior, de onde seria possível aplicar a técnica novamente para obter resultados mais expressivos.
+A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo do WAWL para modelos iniciais com mais de 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar o método é um pouco menor. É importante notar, no entanto, que as simulações consideram a aplicação do WAWL apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito do método para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para um estado com acurácia maior, de onde seria possível aplicar a técnica novamente para obter resultados mais expressivos.
 
 ```{r}
 #| label: fig-simulacao-geral-inicial-absoluto-ajustado
@@ -402,7 +404,7 @@ tab_stats_inicial  |>
   ) +
   # ggplot2::facet_wrap(~name, scales = "free_y") +
   ggplot2::scale_y_continuous(labels = scales::percent) +
-  ggplot2::theme_minimal(12) +
+  ggthemes::theme_hc(12) +
   ggplot2::labs(
     x = "Acurácia do modelo inicial",
     y = "Ganho absoluto (ajustado)"
@@ -459,13 +461,13 @@ doutorado::da_results_simulacao |>
   )
 ```
 
-Pelo gráfico, é possível identificar duas informações relevantes. Como já verificado anteriormente, os modelos ajustados com mais de uma tentativa apresentam maiores ganhos do que os modelos ajustados com apenas uma tentativa. Verifica-se também que modelos com acurácia inicial de até 10% só apresentam ganhos menores que os modelos com acurácia inicial maior que 10% nos casos em que apenas uma tentativa é definida. Ou seja, existe interação entre a quantidade de tentativas e a acurácia do modelo inicial ao avaliar o impacto nos ganhos empíricos do método WAWL.
+Pelo gráfico, é possível identificar duas informações relevantes. Como já verificado anteriormente, os modelos ajustados com mais de uma tentativa apresentam maiores ganhos do que os modelos ajustados com apenas uma tentativa. Verifica-se também que modelos com acurácia inicial de até 10% só apresentam ganhos menores que os modelos com acurácia inicial maior que 10% nos casos com apenas um chute. Ou seja, existe interação entre a quantidade de chutes e a acurácia do modelo inicial ao avaliar o impacto nos ganhos empíricos do método WAWL.
 
-Pelos resultados das simulações, é possível concluir que o método WAWL foi bem-sucedido. Primeiro, o método apresenta resultados expressivos e de forma consistente, sem realizar novas anotações manuais. Além disso, a técnica aproveita a oportunidade oferecida pelos sites de obter o *feedback* oráculo múltiplas vezes na mesma imagem. Finalmente, o método apresenta, em média, resultados positivos mesmo para modelos iniciais muito fracos (com acurácia de até 10%), indicando que sua aplicação é possível para qualquer modelo inicial, o que é bastante factível de atingir com bases pequenas ou com modelos generalistas para resolver Captchas.
+Pelos resultados das simulações, é possível concluir que o método WAWL foi bem-sucedido. Primeiro, o método apresenta resultados expressivos e de forma consistente, mesmo sem realizar novas anotações manuais. Além disso, a técnica consegue aproveitar oportunidade oferecida pelos sites de obter o *feedback* oráculo múltiplas vezes na mesma imagem. Finalmente, o método apresenta, em média, resultados positivos mesmo para modelos iniciais muito fracos (com acurácia de até 10%), indicando que sua aplicação é possível para qualquer modelo inicial, o que é bastante factível de atingir com bases pequenas ou com modelos generalistas para resolver Captchas.
 
 <!-- ### Aplicação iterada -->
 
-Um possível problema em aplicar o WAWL é que a técnica poderia introduzir viés de seleção no modelo, impedindo-o de ser aprimorado indefinidamente. Mesmo que os resultados teóricos deem uma boa base para acreditar que isso não seja verdade, foi feito um experimento adicional, com apenas um dos Captchas, para verificar se a aplicação da técnica múltiplas vezes apresenta bons resultados.
+Um possível problema em aplicar o WAWL é que a técnica poderia introduzir viés de seleção no modelo, impedindo-o de ser aprimorado indefinidamente. Mesmo que os resultados teóricos deem uma boa base para concluir que isso não seja verdade, foi feito um experimento adicional, com apenas um dos Captchas, para verificar se a aplicação da técnica múltiplas vezes apresenta bons resultados.
 
 O Captcha escolhido para a simulação foi o `trf5`, por ser um Captcha que não aceita múltiplos chutes, em uma tentativa de obter um pior caso. Para esse Captcha, o melhor modelo obtido com a técnica do oráculo foi considerado como modelo inicial, sendo usado para baixar novos dados do site do Tribunal. Os novos dados foram adicionados à base de treino, ajustando-se um novo modelo.
 
@@ -504,7 +506,7 @@ dados_iteracao_trf5 |>
 
 ```
 
-O resultado sugere que a técnica pode ser utilizada em várias iterações para auxiliar no aprendizado do modelo. Ela sugere, ainda, que uma técnica de aprendizado ativo com *feedback* automático do oráculo pode dar bons resultados, já que a forma de obter os dados não introduz viés de seleção no ajuste do modelo.
+O resultado sugere que o método WAWL pode ser aplicado iterativamente para aprimorar o aprendizado do modelo. Ele sugere, ainda, que uma técnica de aprendizado ativo com *feedback* automático do oráculo pode dar bons resultados, já que a forma de obter os dados não introduz viés de seleção no ajuste do modelo.
 
 ## Pacote captcha {#sec-pacote-captcha}
 
