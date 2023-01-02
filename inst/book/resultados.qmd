@@ -475,7 +475,7 @@ A @fig-aplicacao-iterada mostra os resultados da aplicação iterativa. A utiliz
 
 ```{r}
 #| label: fig-aplicacao-iterada
-#| fig-cap: "Resultados da aplicação iterativa da técnica."
+#| fig-cap: "Resultados da aplicação iterativa do WAWL"
 #| fig-width: 7
 #| fig-height: 4
 #| out-width: 85%
@@ -508,7 +508,58 @@ dados_iteracao_trf5 |>
 
 O resultado sugere que o método WAWL pode ser aplicado iterativamente para aprimorar o aprendizado do modelo. Ele sugere, ainda, que uma técnica de aprendizado ativo com *feedback* automático do oráculo pode dar bons resultados, já que a forma de obter os dados não introduz viés de seleção no ajuste do modelo.
 
+Nesse sentido, foi aplicado também um experimento de uma ferramenta de *online learning*. A ferramenta funciona da seguinte forma: ao invés de aplicar os passos do WAWL (baixar dados e ajustar novo modelo) de forma separada, obtêm-se amostras do oráculo em cada passo do ajuste do modelo. Ou seja, as técnicas de raspagem de dados entram de forma direta no ciclo de aprendizagem.
+
+O experimento foi feito utilizando o Captcha do TJRS com os passos a seguir. O modelo, função de perda e base de testes são exatamente os mesmos utilizados na simulação completa. No entanto, os dados baixados pelo oráculo não são considerados. Ao invés disso, o *minibatch* é construído baixando dados diretamente da internet e aplicando o modelo inicial. 
+
+Para permitir que o modelo aproveite casos baixados em *minibatches* anteriores, o modelo considera uma probabilidade de baixar novos casos, arbitrada em 80%. Assim, para cada elemento do *minibatch*, com 80% de probabilidade, a observação é baixada da internet, e com 20% de probabilidade, a observação é uma amostra dos casos anteriores já baixados. Como forma de obter um pior caso, o modelo não considera nem mesmo os dados utilizados para construir o modelo inicial.
+
+O valor do *minibatch* foi arbitrado em 40 observações, como na etapa de simulação. O número de *minibatches* de uma época é indefinido, porque não existe um número máximo de amostras. A época foi arbitrada como sendo a passagem de 2 *minibatches*, para permitir a atualização do modelo inicial.
+
+A atualização do modelo inicial é realizada ao fim de cada época. Se ao fim do ciclo (ou seja, ao fim de 2 *minibatches*) o modelo ajustado possui uma acurácia melhor na base de teste do que o modelo inicial, o modelo é atualizado para a versão atual. Se não, o modelo inicial é mantido. Dessa forma, os *minibatches* construídos ficam cada vez mais informativos, uma vez que vão acertar mais o rótulo da imagem. 
+
+O experimento considerou um modelo inicial com apenas 11% de acurácia. O TJRS foi escolhido como exemplo porque o site é relativamente estável, além de permitir múltiplos chutes. O número de chutes permitidos ao modelo foi arbitrado em 5. Na parte dos hiperparâmetros, como a época é curta (apenas 80 observações por época), o decaimento na taxa de aprendizado considerado foi 0.999. Os valores de *dropout* e quantidade de unidades na camada densa foram as mesmas do modelo inicial.
+
+O resultado do experimento foi promissor. A partir do modelo inicial 11% de acurácia, após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87% na base de teste. A @fig-online-learning mostra a evolução da acurácia do modelo ao longo das épocas. Como as épocas são relativamente curtas (apenas 80 observações), o ganho em acurácia é pequeno e apresenta variabilidade. 
+
+```{r}
+#| label: fig-online-learning
+#| fig-cap: "Resultados do experimento com aprendizado online"
+#| fig-width: 7
+#| fig-height: 4
+#| out-width: 80%
+doutorado::da_online |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(x = epoch, y = captcha.acc) +
+  ggplot2::geom_line(linewidth = 1.3) +
+  ggthemes::theme_hc(14) +
+  ggplot2::scale_y_continuous(labels = scales::percent, limits = c(0,1)) +
+  ggplot2::labs(x = "Época", y = "Acurácia (base de validação)")
+```
+
+Um possível motivo do Captcha não ter chegado no máximo de acurácia (100% no caso do TJRS) é que a arquitetura e os hiperparâmetros considerados não eram poderosos o suficiente para alcançar o melhor modelo. De qualquer forma, a partir do experimento, conclui-se que a utilização de *online learning* também é muito promissora. A principal vantagem do método é ser menos burocrático para desenvolvedores, no sentido de que basta passar o modelo inicial e funções para baixar e testar os Captchas para aprimorar o modelo. A desvantagem é que o procedimento precisa de conexão ativa com a internet e o aprendizado é mais lento, já que os dados são baixados no processo de construção dos *minibatches*.
+
 ## Pacote captcha {#sec-pacote-captcha}
+
+O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de 2016. Como foi comentado na introdução da tese, é muito comum se deparar com desafios de Captchas ao raspar dados do judiciário, já que estes dados não são abertos.
+
+O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio era utilizado no site do TJSP que, depois de alguns anos, passou a utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas tem como fonte de dados o TJBA, que continua utilizando o desafio até o momento que os sites foram investigados pela última vez, em setembro de 2022.
+
+A primeira abordagem para resolver o Captcha do e-SAJ foi utilizando heurísticas para separar as letras, em 2016. Infelizmente o pacote original, chamado `{captchasaj}`, foi removido da *internet*, mas um código legado construído para o TJRS está disponível [neste link](https://github.com/decryptr/captchaTJRS/blob/master/R/tools.R). Nessa abordagem, as letras primeiro são segmentadas, alimentando um modelo de florestas aleatórias que considera os pixels da imagem como variáveis preditoras e a letra como resposta. Esses trabalhos tiveram contribuições importantes de Fernando Corrêa e Athos Damiani, ambos do IME-USP.
+
+A segunda abordagem para resolver os Captchas foi utilizando o áudio, também em 2016. O código para resolver o Captcha da RFB utilizando áudio está disponível [neste link](https://github.com/decryptr/captchaReceitaAudio). A ideia de resolução era parecida, passando pelo procedimento de segmentação e depois de modelagem, mas tinha um passo intermediário de processamento envolvendo engenharia de *features* [@kuhn2019]. O trabalho teve contribuições importantes de Athos Damiani.
+
+Com o advento da ferramenta TensorFlow para o R [@tensorflow], os modelos para resolver Captchas passaram a utilizar modelos de redes neurais. No início, por falta de conhecimento da área, a arquitetura das redes era demasiadamente complexa. Depois que os primeiros modelos começaram a funcionar, notou-se que as etapas de pré-processamento com segmentação e algumas camadas das redes eram desnecessárias para ajustar os modelos. Essa parte teve grande contribuição de Daniel Falbel, também do IME-USP, que foi a pessoa que introduziu o TensorFlow e a área de *deep learning* para a comunidade brasileira de R.
+
+Depois de resolver com sucesso alguns Captchas, notou-se que seria possível criar um ambiente completo de modelagem de Captchas. Isso deu origem ao pacote `{decryptr}` [@decryptr], que foi construído em 2017. O trabalho teve grandes contribuições de Caio Lente, do curso de Ciência da Computação do IME-USP e outros colegas de faculdade.
+
+Com o passar do tempo, o pacote `{decryptr}` ficou cada vez mais estável, funcionando como dependência de várias ferramentas utilizadas em trabalhos de jurimetria. O pacote também ganhou um site: <https://decryptr.xyz> e uma API com acesso gratuito, precisando apenas de uma chave de acesso. A ferramenta ficou bastante popular, com [178 estrelas no GitHub](https://github.com/decryptr/decryptr) no mês de dezembro de 2022. Essas ferramentas envolveram contribuições principalmente de Caio Lente e Daniel Falbel.
+
+A construção do pacote `{captcha}` separada do `{decryptr}` se deu por dois motivos. Primeiro, o pacote `{decryptr}`, por ser o primeiro a tratar do assunto, possui muitos códigos legados e dificuldades de instalação por conta da dependência do python, necessário para o funcionamento do TensorFlow, que é chamado através do pacote `{reticulate}` [@reticulate]. Além disso, a implementação das técnicas do oráculo envolviam modificações na função de perda, que são mais difíceis de implementar no ambiente do `{tensorflow}`, justamente por conta da necessidade de conhecer o código python que roda por trás dos códigos em R.
+
+Com o advento do pacote `{torch}` [@torch], no entanto, tudo foi facilitado. O pacote não possui dependências com o python, além de ser bastante transparente e flexível na construção da arquitetura do modelo, funções de perda e otimização. O pacote, também construído por Daniel Falbel, é um grande avanço científico e facilitou muito a construção dos códigos desta tese.
+
+O pacote `{captcha}`, apesar de ter sido construído do zero, foi desenvolvido durante *lives* realizadas na plataforma *Twitch*. A construção em *lives* foi interessante porque era possível obter *feedback* e ideias da comunidade durante a construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na arquitetura do pacote.
 
 O pacote `{captcha}` foi construído para funcionar como uma caixa de ferramentas para quem deseja trabalhar com Captchas. O pacote possui funções de leitura, visualização, anotação, preparação de dados, modelagem, carregamento de modelos pré-treinados e predição. O pacote também permite a construção de um fluxo de trabalho para resolver um novo Captcha, criando um novo repositório para orquestrar o passo-a-passo.
 
@@ -934,6 +985,7 @@ Uma vez compartilhado nos *releases* do repositório, o modelo poderá ser lido 
 
 ```{r}
 #| eval: false
+#| echo: true
 model <- captcha_load_model("<name>", "<user>/<repo>")
 ```
 
