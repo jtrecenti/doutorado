@@ -521,11 +521,11 @@ Captchas, or Completely Automated Public Turing tests to tell Computers and Huma
    L & \text{comprimento do Captcha}\\
    \mathcal A & \text{alfabeto (quantidade de caracteres distintos possíveis)}\\
    y & \text{variável resposta (observada), na forma de matriz}\\
+   \mathbf y & \text{variável resposta na forma de rótulo parcial}\\
    \mathcal U & \text{distribuição uniforme}\\
    X & \text{variável aleatória representando a imagem}\\
    Y & \text{variável aleatória representando a matriz-resposta}\\
-   f, g, h & \text{função preditiva, que leva uma imagem a uma estimativa para } Y\\
-   \hat Y & \text{estimativa para } Y\\
+   f, g, h & \text{função que leva uma imagem a uma estimativa para } y\\
    \mathcal Y & \text{valores possíveis da variável resposta}\\
    \mathcal O & \text{função do oráculo}\\
    K & \text{Kernel (núcleo) em uma operação de convolução}\\
@@ -538,8 +538,6 @@ Captchas, or Completely Automated Public Turing tests to tell Computers and Huma
    m,v,\hat m, \hat v, \beta_2, \beta_2, \epsilon & \text{parâmetros do otimizador ADAM}\\
    \mathcal L & \text{função de perda}\\
    \mathcal R & \text{função de risco}\\
-   Q & \text{matriz de transição em um modelo com rótulos complementares}\\
-   \hat f & \text{estimativa de uma função preditiva}\\
    \bar y & \text{observação complementar de } y \text{ (ou seja, tudo menos } y \text{)}
 \end{array}
 \end{displaymath}
@@ -1636,35 +1634,38 @@ ao agente. O rótulo fica escondido para verificação do oráculo.
 \subsubsection{Oráculo}\label{sec-oraculo}}
 
 Para definir o oráculo, utilizou-se uma terminologia que é facilmente
-encaixada com a teoria de aprendizado fracamente supervisionado. Seja
-\(g\) um classificador utilizado para predizer o rótulo de uma imagem e
+encaixada com a teoria de aprendizado fracamente supervisionado. Neste
+caso, para facilitar a notação, considera-se uma resposta como uma
+variável multinomial, sem ser multivariada, denotada por \(y\). Seja
+\(f\) um classificador utilizado para predizer o rótulo de uma imagem e
 seja \(\mathbf x_{n+1}\) uma nova imagem que é observada, com sua
-resposta \(\mathbf Y_{n+1}\), desconhecida. A operação
-\(g(\mathbf x_{n+1}) = \hat {\mathbf Y}_{n+1}\) retorna um candidato
-para \(\mathbf Y_{n+1}\), que pode estar correto ou errado.
+resposta \(y_{n+1}\), desconhecida. A operação \(f(\mathbf x_{n+1})\)
+retorna um candidato para \(y_{n+1}\), que pode estar correto ou errado.
 
 O oráculo é uma função
 \(\mathcal O: \mathcal Y \rightarrow 2^{\mathcal Y}\), que recebe um
 elemento do domínio da resposta \(\mathcal Y\) (do conjunto de todas as
 combinações de rótulos) para o conjunto de subconjuntos (partes) de
 \(\mathcal Y\). Na prática, a função retorna uma lista de possíveis
-valores de \({\mathbf Y}_{n+1}\), da seguinte forma:
+valores de \({y}_{n+1}\), da seguinte forma:
 
 \[
-\mathcal O(g(\mathbf x_{n+1})) = \left\{\begin{array}{ll}
-    \{\mathbf Y_{n+1}\}, & \text{ se } \mathbf Y_{n+1} = \hat {\mathbf Y}_{n+1}  \\
-    \mathcal Y \setminus \{\hat {\mathbf Y}_{n+1}\}, & \text{ se } \mathbf Y_{n+1} \neq \hat {\mathbf Y}_{n+1}
+\mathcal O(f(\mathbf x_{n+1})) = \left\{\begin{array}{ll}
+    \{ y_{n+1}\}, & \text{ se } y_{n+1} = f(\mathbf x_{n+1})  \\
+    \mathcal Y \setminus \{f(\mathbf x_{n+1})\}, & \text{ se } y_{n+1} \neq f(\mathbf x_{n+1})
 \end{array}\right.
 \]
 
-Quando o classificador \(g\) acerta o rótulo, o oráculo retorna o valor
+Quando o classificador \(f\) acerta o rótulo, o oráculo retorna o valor
 ``1'', acompanhado de uma lista que contém apenas um elemento: o próprio
-rótulo. Quando o classificador \(g\) retorna o rótulo errado, o oráculo
+rótulo. Quando o classificador \(f\) retorna o rótulo errado, o oráculo
 retorna o valor ``0'', acompanhado de uma lista com todos os outros
 possíveis rótulos do rótulo, o que inclui o verdadeiro valor
-\(\mathbf Y_{n+1}\). Para simplificar, também é possível utilizar a
-notação de \emph{rótulo complementar}
-\(\bar{\mathbf Y} = \mathcal Y \setminus \{ \hat {\mathbf Y}_{n+1}\}\)
+\(y_{n+1}\). Para simplificar a notação, também é possível chamar essa
+informação como o \emph{rótulo complementar}
+\(\bar{\mathbf y} = \mathcal Y \setminus \{ \hat {y}_{n+1}\}\). Neste
+caso utiliza-se o símbolo \(\bar{\mathbf y}\), indicando que é uma lista
+valores possíveis de \(y\).
 
 A Figura~\ref{fig-esquema-oraculo} mostra o funcionamento do oráculo no
 exemplo do TJMG. Quando a predição é igual ao rótulo, o resultado
@@ -1686,22 +1687,22 @@ oráculo.}
 
 É possível generalizar naturalmente o oráculo para Captchas que aceitam
 múltiplos chutes mudando a definição da função que faz predições. Seja
-\(h\) uma função que retorna um conjunto de \(k\) respostas possíveis,
-\(k\in \mathbb N\), \(k\geq 1\), com \(\mathbf x_{n+1}\) e
-\(\mathbf y_{n+1}\) iguais aos definidos anteriormente. Então o oráculo
-tem o funcionamento definido abaixo:
+\(\mathbf f\) uma função que retorna um conjunto de \(k\) respostas
+possíveis, \(k\in \mathbb N\), \(k\geq 1\), com \(\mathbf x_{n+1}\) e
+\(y_{n+1}\) iguais aos definidos anteriormente. Então o oráculo tem o
+funcionamento definido abaixo:
 
 \[
-\mathcal O(h(\mathbf x_{n+1})) = \left\{\begin{array}{ll}
-    \{\mathbf Y_{n+1}\}, & \text{ se } \mathbf Y_{n+1} \in h(\mathbf x_{n+1})  \\
-   \mathcal Y \setminus h(\mathbf x_{n+1}), & \text{ se } \mathbf Y_{n+1} \notin h(\mathbf x_{n+1})
+\mathcal O(\mathbf f(\mathbf x_{n+1})) = \left\{\begin{array}{ll}
+    \{y_{n+1}\}, & \text{ se } y_{n+1} \in \mathbf f(\mathbf x_{n+1})  \\
+   \mathcal Y \setminus \mathbf f(\mathbf x_{n+1}), & \text{ se } y_{n+1} \notin \mathbf f(\mathbf x_{n+1})
 \end{array}\right..
 \]
 
-Nesse caso, o oráculo também retorna uma lista com a resposta
-\(\mathbf Y_{n+1}\). A única diferença é que, quando o Captcha aceita
-múltiplos chutes, a lista retornada em caso de erro tem um comprimento
-menor.
+Nesse caso, o oráculo também retorna uma lista contendo a resposta
+\(y_{n+1}\), além de outros valores. A única diferença é que, quando o
+Captcha aceita múltiplos chutes, a lista retornada em caso de erro tem
+um comprimento menor.
 
 O oráculo tem um papel fundamental na elaboração do método WAWL. O fato
 do oráculo sempre retornar a resposta correta na lista de opções faz com
@@ -2298,8 +2299,8 @@ trabalho, foram consideradas alguns valores de decaimento na taxa de
 aprendizado, como \texttt{1\%} ou \texttt{3\%} de decaimento ao final de
 cada época.
 
-\hypertarget{aprendizado-estatuxedstico}{%
-\subsection{Aprendizado estatístico}\label{aprendizado-estatuxedstico}}
+\hypertarget{sec-aprendizado-estatistico}{%
+\subsection{Aprendizado estatístico}\label{sec-aprendizado-estatistico}}
 
 Apresentados o objeto de estudo e as redes neurais utilizadas, passa-se
 a discutir o significado disso tudo no contexto de aprendizado
@@ -2325,15 +2326,18 @@ considera os chutes errados na notação do problema.
 As definições seguem uma terminologia adaptada a partir da leitura de
 JIN; GHAHRAMANI (2002), COUR; SAPP; TASKAR (2011) e FENG et al. (2020a).
 Sempre que possível, os casos são adaptados para o problema do Captcha
-diretamente. Quando necessário, apresenta-se primeiro a definição
-genérica e depois a formulação para o Captcha.
+diretamente. Para simplificar a notação, no entanto, foi considerado o
+problema univariado do Captcha, ou seja, como se uma imagem tivesse
+apenas uma letra. Não há perda de generalidade nessa escolha, já que o
+problema do Captcha pode ser, de fato, separado em vários problemas, um
+para cada letra da imagem.
 
 Em um problema de aprendizado supervisionado tradicional, tem-se um
-conjunto de casos rotulados \(S=\{(\mathbf x_i,y_i), i=1,\dots, m\}\)
-com uma distribuição \(p(\mathbf x,y)\) desconhecida, onde
-\(\mathbf x\in \mathcal X\) é uma imagem e \(y \in \mathcal Y\) é o
-rótulo, que possui \(|\mathcal A|^L\) possíveis valores. O objetivo é
-obter um classificador \(g\) que leva um valor de \(\mathbf x\) para o
+conjunto de \(S\) casos rotulados
+\(\{(\mathbf x_i,y_i), i=1,\dots, S\}\) com uma distribuição
+\(p(\mathbf x,y)\) desconhecida, onde \(\mathbf x\) é uma imagem e \(y\)
+é o rótulo, que possui \(|\mathcal A|\) possíveis valores. O objetivo é
+obter um classificador \(f\) que leva um valor de \(\mathbf x\) para o
 rótulo correto \(y\).
 
 Para delimitar se o classificador está bom ou ruim, utiliza-se uma
@@ -2342,13 +2346,14 @@ acertar o rótulo inteiro (não importa se o classificador acerta só uma
 parte do rótulo), utiliza-se uma função chamada 0-1:
 
 \begin{equation}\protect\hypertarget{eq-perda}{}{
-\mathcal L(g(\mathbf x),\mathbf y) = I (g(\mathbf x) \neq \mathbf y),
+\mathcal L(f(\mathbf x),y) = I (f(\mathbf x) \neq y),
 }\label{eq-perda}\end{equation}
 
 em que \(I(\cdot)\) é uma função indicadora. Como a função de perda é
-aplicada a apenas um par \((\mathbf x,y)\), define-se formalmente que o
-objetivo do problema de aprendizado é minimizar o \emph{risco}, que é o
-valor esperado da função de perda:
+aplicada a apenas um par \((\mathbf x,y)\), define-se que o objetivo do
+problema de aprendizado é minimizar o \emph{risco}, que é o valor
+esperado da função de perda, calculado para as variáveis aleatórias
+\(\mathbf X\) e \(Y\):
 
 \begin{equation}\protect\hypertarget{eq-risco}{}{
 \mathcal R(g) = \mathbb E_{p(\mathbf x,y)}[\mathcal L(g(\mathbf X),Y)].
@@ -2356,8 +2361,9 @@ valor esperado da função de perda:
 
 A função de risco, no entanto, não é observada, já que depende da
 distribuição desconhecida de \(p(\mathbf x,y)\). Por isso, utiliza-se um
-estimador do risco, que pode ser calculado em bases usadas na validação
-cruzada e na base de teste. Para uma base com \(S\) observações, tem-se
+estimador do risco, que pode ser calculado em uma amostra, como uma base
+usada na validação cruzada ou na base de teste. Para uma amostra com
+\(S\) observações, tem-se
 
 \[
 \hat{\mathcal R}(g) = \sum_{s=1}^S \mathcal L(g(\mathbf x_s),y_s))
@@ -2374,61 +2380,172 @@ estimados a partir de um otimizador, como o ADAM, apresentado na
 Seção~\ref{sec-otimizador}.
 
 As definições começam a precisar de ajustes quando \(y\) deixa de ser um
-rótulo fixado. Como descrito na Seção~\ref{sec-oraculo}, a base de dados
-observada contém tanto rótulos observados de forma exata quanto rótulos
-apenas parcialmente informados. Nesse caso, os dados são gerados por uma
-distribuição
+rótulo fixado. Como descrito na Seção~\ref{sec-oraculo}, quando o modelo
+inicial erra, o que se observa é uma lista de possíveis valores para
+\(y\), que contém o rótulo correto e outros incorretos. Se o Captcha
+aceita apenas um chute, essa lista contém todos os possíveis valores do
+rótulo, menos o valor incorreto que foi utilizado no oráculo. Se o
+Captcha aceita vários chutes, a lista contém todos os valores possíveis
+de \(y\) menos os valores que foram testados.
+
+Para isso, utiliza-se a notação do \(\bar {\mathbf y}\). A notação
+utiliza negrito para enfatizar que o objeto contém uma lista de
+possíveis valores, e não apenas um valor. Por exemplo, considere
+\(\mathcal A = \{0,1,\dots,9\}\) um alfabeto com os algarismos de zero
+até nove, como no MNIST, e um Captcha que aceita múltiplos chutes. Nesse
+caso,
+
+Para uma imagem \(\mathbf x\) com rótulo \(3\), seguindo as definições
+da Seção~\ref{sec-definicao-captcha}, o valor de \(y\) seria dado pela
+matriz
 
 \[
-p(\mathbf x, y,\bar{\mathbf y})=p(\mathbf x, y)p(\bar{\mathbf y}|\mathbf x, y),
+y = [0\;0\;0\;1\;0\;0\;0\;0\;0\;0],
 \]
 
-em que \(\bar{\mathbf y}\) é um conjunto de rótulos \emph{incorretos}.
-Nesse caso observam-se, além das instâncias \((\mathbf x_s, y_s)\)
-quando o modelo inicial acerta, as instâncias
-\((\mathbf x_v, \bar{\mathbf {y}}_v)\) quando o modelo inicial erra.
-Supondo que \(\bar{\mathbf y}\) é condicionalmente independente de
-\({\mathbf x}\) dado \({\mathbf y}\), temos que
+sendo o valor \(3\) colocado na quarta posição da primeira (e única)
+linha da matriz. Como o problema está sendo trabalhado na forma
+univariada, para simplificar a notação, pode-se considerar apenas os
+valores dos rótulos, ou seja, \(y=3\).
+
+Considere, agora, que o modelo inicial produziu as tentativas incorretas
+\(\mathbf h(\mathbf x) = \{6,8\}\). O valor observado
+\(\bar{\mathbf y}\) envolve todos os valores de \(y\) menos as
+tentativas incorretas:
 
 \[
-p(\mathbf x, y,\bar{\mathbf y})=p(\mathbf x, y)p(\bar{\mathbf y}| y).
+\bar{\mathbf y} = \{0,1,2,3,4,5,7,9\}.
 \]
 
-No caso dos Captchas, essa suposição é verificada. A probabilidade do
-modelo inicial errar depende apenas do rótulo e não das distorções
-realizadas pela imagem gerada a partir do rótulo. Além disso, a partir
-do modelo inicial, é possível estimar os valores de
-\(p(\bar{\mathbf y}| y)\) a partir da base de teste utilizada para medir
-a acurácia do modelo.
+Na prática, o que se observa, então, são pares \((\mathbf x,y)\), nos
+casos corretos, ou pares \((\mathbf x,\bar{\mathbf y})\), nos casos
+incorretos. Para generalizar a notação, é possível considerar uma
+variável indicadora de acerto do modelo inicial \(z\) e a lista
+\(\mathbf y\), definida da seguinte forma:
 
-Em Captchas que aceitam apenas um chute, as probabilidades
-\(p(\bar{\mathbf y}| y)\) podem ser organizadas em uma matriz de
-transição \(\mathbf Q\), contendo as probabilidades de se obter um
-rótulo incorreto para cada possível valor do rótulo. Para resolver
-problemas desse tipo, é possível realizar um ajuste na função de
-predição que a torna a função de perda consistente e com taxa de
-convergência conhecida (YU et al., 2018):
+\[
+\mathbf y = \left\{\begin{array}{cl}\{y\}&,\text{ se }z=1\\\bar{\mathbf y}&,\text{ se }z=0\end{array}\right.
+\]
+
+Assim, observa-se uma amostra de
+\(\{(\mathbf x_s,\mathbf y_s, z_s)\}, s = 1,\dots,S\). A distribuição
+desses dados está diretamente relacionada com a acurácia do modelo
+inicial. Por exemplo, se o modelo inicial acerta todos os chutes, o
+resultado será sempre o valor correto \(y\), e o problema recai em um
+caso supervisionado tradicional. Quando o modelo inicial erra todos os
+casos, todos os rótulos são parciais e o problema recai em um caso de
+PLL puro. Na prática, o que se espera é que a amostra tenha uma mistura
+de rótulos corretos e de rótulos parciais.
+
+É possível desconsiderar o valor \(z\) na notação. Como os rótulos
+parciais sempre incluem o rótulo correto \(y\), quanto o conjunto contém
+apenas um elemento, este é o rótulo correto. Ou seja:
+
+\[
+z=1 \iff |\mathbf y|=1.
+\]
+
+Portanto, basta considerar os pares \((\mathbf x_s, \mathbf y_s)\) da
+amostra para definir o problema. Definida a estrutura de dados da
+amostra, passa-se a discutir a forma de obter um classificador com boas
+propriedades.
+
+Uma estratégia eficaz para derivar propriedades de classificadores na
+área de PLL é escrever a distribuição dos dados de forma explícita FENG
+et al. (2020b). A partir dessa distribuição, a função de risco do
+problema completamente supervisionado é reescrita em termos da função de
+risco do problema com rótulos parciais. Depois, é criado um estimador
+para essa função de risco, a partir de uma amostra observada.
+Finalmente, utilizando funções de perda adequadas, demonstra-se que a
+função de risco do problema com rótulos parciais se aproxima da função
+de risco com dados completamente supervisionados, conforme a base de
+dados aumenta.
+
+A forma mais fácil de definir a distribuição dos dados com rótulos
+parciais é considerando que os valores dos rótulos parciais aparecem ao
+acaso. Por exemplo, considere que as imagens são geradas com uma
+distribuição \(p(\mathbf x, y)\), que não precisa ser conhecida. Então a
+distribuição dos rótulos parciais \(\tilde p (\mathbf x, \mathbf y)\) é
+dada por (FENG et al., 2020a):
+
+\begin{equation}\protect\hypertarget{eq-distribuicao}{}{
+\tilde p (\mathbf x, \mathbf y) = \sum_{y}p(\mathbf y|y)p(\mathbf x, y), \text{ onde } p(\mathbf y|y)=\left\{\begin{array}{ll}\frac{1}{2^{|\mathcal A|-1}-1},&\text{ se } y\in\mathbf y,\\0,&\text{ se } y\notin \mathbf y\end{array}\right..
+}\label{eq-distribuicao}\end{equation}
+
+A distribuição pode ser interpretada da seguinte forma. Os valores
+possíveis de \(\mathbf y\) são todos os possíveis subconjuntos do
+alfabeto, menos os casos extremos (vazio e o alfabeto completo). Por
+exemplo, no caso de um alfabeto com os 10 algarismos, os valores de
+\(\mathbf y\) podem ser todas as combinações dos algarismos, menos o
+conjunto vazio e o conjunto \(\{0,\dots,9\}\). Isso dá
+\(2^{|\mathcal A|}-2\) combinações no total.
+
+Considerando a restrição de PLL de que a resposta \(\mathbf y\) sempre
+contém o verdadeiro rótulo, é intuitivo que \(p(\mathbf y|y)=0\) quando
+\(y\notin \mathbf y\). Ou seja, a probabilidade de observar
+\(\mathbf y\) quando se sabe que um \(y\) foi observado e este \(y\) não
+está no conjunto \(\mathbf y\) é zero. Agora, quando
+\(y \in \mathbf y\), a probabilidade é calculada considerando todos os
+possíveis subconjuntos do alfabeto que contêm \(y\), que são
+\(2^{|\mathcal A|-1}-1\). Por exemplo, de todos os subconjuntos válidos
+do conjunto \(\{0,\dots,2\}\), ou seja,
+\(\{0\},\{1\},\{2\}, \{0,1\}, \{0,2\}\) e \(\{1,2\}\), tem-se
+\(2^{3-1}-1=3\) conjuntos que contêm o valor \(2\). Por isso, a
+probabilidade atribuída a \(p(\mathbf y|y)\) é uma uniforme, dando pesos
+iguais para todos os possíveis rótulos.
+
+Uma suposição implícita da distribuição na Equação~\ref{eq-distribuicao}
+é que \({\mathbf y}\) é condicionalmente independente de \({\mathbf x}\)
+dado \({\mathbf y}\). Ou seja,
+
+\[
+p(\mathbf y|\mathbf x, y) = p(\mathbf y| y),
+\]
+
+para qualquer valor de \(y\). Essa suposição significa que o valor do
+rótulo complementar não depende da imagem quando se sabe o rótulo da
+imagem. No caso dos Captchas, essa suposição é verificada, porque a
+imagem é simplesmente uma representação do rótulo, então a probabilidade
+do modelo inicial errar depende apenas do rótulo e não das distorções
+realizadas pela imagem gerada a partir do rótulo.
+
+Como comentado anteriormente, a partir da distribuição dos dados é
+possível reescrever a função de risco do problema completamente
+supervisionado em termos do problema de rótulos parciais (FENG et al.,
+2020a, eq (6)). A partir de um estimador desse risco, utiliza-se um
+método de aprendizado de máquinas (como redes neurais) para obter um
+classificador \(\hat f\). Considerando que \(f^*\) é a função obtida em
+um problema completamente supervisionado e seguindo algumas suposições
+adicionais, é possível demonstrar que
+
+\[
+|\mathcal R(\hat f) - \mathcal R(f^*)|
+\] é limitada e converge para zero quando tamanho da amostra vai para
+infinito. Mais do que isso, é possível obter a taxa de convergência do
+risco, em função da complexidade de Rademacher. Os detalhes e a
+demonstração podem ser encontrados no artigo de FENG et al. (2020a).
+
+Nas descrições dadas acima, a única suposição que não é satisfeita é a
+de que os valores de \(\mathbf y\) são distribuídos uniformemente. Essa
+suposição é inválida porque os valores observados de \(\mathbf y\) são
+resultado dos erros do modelo inicial aplicado ao oráculo e porque o
+número de tentativas geralmente é limitado. Como o modelo inicial não
+tem distribuição uniforme, o resultado também não é uniforme.
+
+O tipo de problema nesse caso é conhecido como \emph{biased partial
+label}. Um dos artigos estudados apresenta uma solução para o caso em
+que o rótulo parcial é um rótulo complementar (ou seja, quando o Captcha
+aceita apenas um chute). Nesse caso as probabilidades
+\(p(\mathbf y| y)\) podem ser organizadas em uma matriz de transição
+\(\mathbf Q\), contendo as probabilidades de se obter um rótulo
+incorreto para cada possível valor do rótulo. Para resolver problemas
+desse tipo, é possível realizar um ajuste na função de predição que a
+torna a função de perda consistente e com taxa de convergência conhecida
+(YU et al., 2018):
 
 \[
 f_{\text{adj}} (\mathbf x) = \mathbf Q ^{\top}f(\mathbf x)
 \]
-
-O tipo de problema apresentado acima é conhecido como \emph{biased
-complementary label}, ou seja, rótulo complementar com viés. Também é
-possível considerar um caso sem viés, ou seja, quando
-\(p(\bar{\mathbf y}| y) = \frac{1}{|\mathcal A|^L-1}\) para todos os
-valores de \(\mathbf y\). Esse caso também foi resolvido do ponto de
-vista teórico (ISHIDA et al., 2017). As conclusões são parecidas, ou
-seja, é possível encontrar taxas de convergência para que o problema com
-rótulos complementares se aproxime de um problema com observações
-completas.
-
-Quando os rótulos complementares não apresentam viés, existe ainda uma
-extensão para rótulos complementares múltiplos (FENG et al., 2020b).
-Neste caso, é possível derivar uma função de risco empírica que,
-novamente, converge para a função de risco do problema completamente
-supervisionado, além de apresentar taxas de convergência para essa
-função de risco.
 
 O caso do oráculo e dos Captchas é um problema com múltiplos rótulos
 complementares e com viés. Até o momento, não existe uma solução geral
@@ -2477,32 +2594,44 @@ base na probabilidade do rótulo estar incorreto:
 1 - p(y|\boldsymbol \theta),
 \]
 
-Considerando o rótulo complementar \(\bar {\mathbf y}\) e a função \(f\)
-dada pela rede neural que retorna um vetor
-\([f_y: y \in 1,\dots,|\mathcal A|^L]^\top\), a fórmula para descrever a
-função de perda é descrita da seguinte forma:
+Considere o rótulo parcial \({\mathbf y}\) e a função \(g\), dada pela
+rede neural, que retorna um vetor de probabilidades
+\([g_y], y \in \mathcal A\). Os valores de \(g_y\) somam 1 e têm os
+pesos relacionados a cada possível rótulo a partir da imagem
+\(\mathbf x\). A fórmula para descrever a função de perda é descrita da
+seguinte forma:
 
 \[
-\mathcal L(f(\mathbf x), \bar {\mathbf y}) = -\log\left[1 - \sum_{y} {f_y}(\mathbf x) I(y\notin\bar {\mathbf y})\right]
-\]
-
-A função de perda proposta pode ser explicada de maneira intuitiva
-através de um exemplo. Considere um problema com apenas \(10\) possíveis
-valores para o rótulo, com uma resposta multinomial, sem ser
-multivariada. Considere também que a rede neural retorna uma alta
-probabilidade, por exemplo, \(0.99\), para o valor \(j\), que o oráculo
-identificou como incorreta. Logo,
+\mathcal L(g(\mathbf x), {\mathbf y}) = -\log\left[1 - \sum_{y \in \mathcal A} {g_y}(\mathbf x) I(y\notin {\mathbf y})\right]
+\] Por conta da função indicadora, a perda só é calculada nos pontos que
+estão de fora do rótulo parcial observado \(\mathbf y\). Ou seja, o
+valor é calculado somente nos casos que o modelo inicial errou. A função
+de perda proposta pode ser explicada de maneira intuitiva através de
+exemplos. Considere um problema com apenas \(10\) possíveis valores para
+o rótulo e uma resposta multinomial, sem ser multivariada, como
+considerado na Seção~\ref{sec-aprendizado-estatistico}. Considere também
+que a rede neural retorna uma alta probabilidade, por exemplo, \(0.99\),
+para o valor \(j\), que o oráculo identificou como incorreta. Logo,
 \(\mathbf {\bar y} = \{1,\dots,10\}\setminus j\), e a função de perda é
 dada por
 
 \[
-\mathcal L(f(\mathbf x), \{1,\dots,10\}\setminus j) = -\log\left[1-{f_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus j) = -\log\left[1-{g_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
 \]
 
 Como é possível ver no exemplo, quanto maior a probabilidade dada a um
 rótulo identificado como incorreto pelo oráculo, mais a função de perda
 penaliza essa predição. Dessa forma, a função de perda consegue
 incorporar a informação dada pelo oráculo adequadamente.
+
+Considere, agora, que a rede neural retorna uma probabilidade pequena,
+por exemplo, \(0.01\), para o valor \(k\), que o oráculo identificou
+como incorreta. Logo, \(\mathbf {\bar y} = \{1,\dots,10\}\setminus k\),
+e a função de perda é um valor pequeno:
+
+\[
+\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus k) = -\log\left[1-{g_k}(\mathbf x)\right] = -\log\left[1-0.01 \right] = 0.01.
+\]
 
 Quando o Captcha aceita múltiplos chutes, a mesma conta é válida,
 bastando subtrair as probabilidades de todos os rótulos incorretos. No
@@ -2754,7 +2883,7 @@ e minúsculos e distorções.
 
 }
 
-\caption{\label{fig-captcha-r}Exemplo de MNIST-Captcha}
+\caption{\label{fig-captcha-r}Exemplo de R-Captcha}
 
 \end{figure}
 
@@ -2982,12 +3111,12 @@ imagens de Captchas e aplicar o oráculo, pelo menos duas operações devem
 ser implementadas: \textbf{acesso} e \textbf{teste}. A operação de
 acesso é responsável por preencher o formulário de busca e baixar o
 Captcha (passos 1, 2 e 3 da lista acima). A operação de teste é
-responsável por submeter um rótulo do Captcha e verificar retornar se o
-rótulo está correto ou incorreto (passos 5 e 6 da lista acima). O passo
-4 pode ser realizado de forma unificada, pois não depende de interação
-com o site específico. Em alguns casos, as funções de acesso e teste
-precisam compartilhar parâmetros que contêm a sessão do usuário, para
-garantir que o teste envolva o mesmo Captcha da etapa de acesso.
+responsável por submeter um rótulo do Captcha e verificar se o rótulo
+está correto ou incorreto (passos 5 e 6 da lista acima). O passo 4 pode
+ser realizado de forma unificada, pois não depende de interação com o
+site específico. Em alguns casos, as funções de acesso e teste precisam
+compartilhar parâmetros que contêm a sessão do usuário, para garantir
+que o teste envolva o mesmo Captcha da etapa de acesso.
 
 Os Captchas foram anotados manualmente com um procedimento que foi
 chamado de semi-automático, definido a seguir. No pacote
@@ -3140,8 +3269,8 @@ ajustados estão disponíveis para quem tiver interesse em fazer novas
 pesquisas e utilizar os resultados em suas aplicações, sem restrições de
 uso.
 
-\hypertarget{simulacoes}{%
-\section{Simulações}\label{simulacoes}}
+\hypertarget{sec-simulacoes}{%
+\section{Simulações}\label{sec-simulacoes}}
 
 Para verificar o poder do uso do oráculo para o aprendizado do modelo,
 uma série de simulações foram desenvolvidas. As simulações foram
@@ -3352,32 +3481,35 @@ supervisionado.
 \epigrafe{I'm not a robot, I'm a human. But I'm pretty sure the robot is better at this than I am.}{ChatGPT}
 
 Neste capítulo, discute-se os resultados empíricos do método WAWL e
-descreve-se pacote computacional desenvolvido para lidar com Captchas. A
-Seção~\ref{sec-result-sim} mostra os resultados empíricos e a
-Seção~\ref{sec-pacote-captcha} detalha o pacote \texttt{\{captcha\}}. No
-final, a Seção~\ref{sec-discussao} apresenta uma discussão dos
+descreve-se pacote computacional desenvolvido para trabalhar com
+Captchas. A Seção~\ref{sec-result-sim} mostra os resultados empíricos e
+a Seção~\ref{sec-pacote-captcha} detalha o pacote \texttt{\{captcha\}}.
+No final, a Seção~\ref{sec-discussao} apresenta uma discussão dos
 resultados obtidos.
 
 \hypertarget{sec-result-sim}{%
 \section{Resultados empíricos}\label{sec-result-sim}}
 
 Os resultados foram obtidos a partir das simulações com diversos
-Captchas. Foram realizadas 65 simulações no total, variando no tipo de
+Captchas. Foram realizadas 65 simulações no total, variando o tipo de
 Captcha, a acurácia do modelo inicial e a quantidade de tentativas no
-oráculo.
+oráculo, como descrito na Seção~\ref{sec-simulacoes}.
 
-Para realizar os cálculos, montou-se uma base de dados com os resultados
-das simulações. A base está disponível publicamente no
-\href{https://github.com/jtrecenti/doutorado}{repositório da tese} e
-contém informações do Captcha ajustado (\texttt{captcha}), da quantidade
-de observações do modelo inicial (\texttt{n}), da quantidade de
-tentativas do oráculo (\texttt{ntry}), da etapa de simulação
+A base de dados com os resultados das simulações está disponível
+publicamente no
+\href{https://github.com/jtrecenti/doutorado}{repositório da
+tese}\footnote{Para acessar a base, é necessário rodar
+  \texttt{remotes::install\_github("jtrecenti/doutorado")} e depois
+  acessar a base rodando \texttt{doutorado::da\_results\_simulacao}.}. A
+base contém informações do Captcha ajustado (\texttt{captcha}), da
+quantidade de observações do modelo inicial (\texttt{n}), da quantidade
+de tentativas do oráculo (\texttt{ntry}), da etapa de simulação
 (\texttt{fase}, inicial ou WAWL), do caminho do modelo ajustado
 (\texttt{model}) e da acurácia obtida (\texttt{acc}).
 
 Os resultados gerais mostram um ganho de 333\% na acurácia após a
-aplicação da metodologia WAWL. Ou seja, em média, a acurácia do modelo
-no terceiro passo da simulação (ver Seção~\ref{sec-modelo-final}) foi de
+aplicação do método WAWL. Ou seja, em média, a acurácia do modelo no
+terceiro passo da simulação (ver a Seção~\ref{sec-modelo-final}) foi de
 mais de \textbf{três vezes} a acurácia do modelo inicial. Em termos
 absolutos (diferença entre as acurácias), o ganho foi de 33\%, ou seja,
 após o terceiro passo, os modelos ganharam, em média, 33\% de acurácia.
@@ -3396,8 +3528,10 @@ os ganhos em acurácia apresentam alta variabilidade, mas que apresentam
 uma tendência positiva com relação ao número de tentativas. O ganho
 entre aplicar 5 e 10 tentativas é menos expressivo do que o ganho entre
 aplicar 1 e 5 tentativas, indicando que a oportunidade oferecida por
-sites que aceitam vários chutes é relevante e que não há necessidade de
-realizar tantos chutes para aproveitar essa oportunidade.
+sites que aceitam vários chutes é relevante, mas não há necessidade de
+realizar tantos chutes para aproveitar essa oportunidade. Uma possível
+explicação para isso é que o modelo ficaria indeciso entre poucas
+opções.
 
 \begin{figure}
 
@@ -3406,13 +3540,13 @@ realizar tantos chutes para aproveitar essa oportunidade.
 }
 
 \caption{\label{fig-simulacao-geral-ntry-relativo}Ganho percentual ao
-utilizar a técnica do oráculo, dividido por quantidade de tentativas.}
+utilizar a técnica do oráculo, dividido por quantidade de tentativas}
 
 \end{figure}
 
 A Figura~\ref{fig-simulacao-geral-ntry-absoluto}, com as os ganhos
-absolutos, mostra a mesma informação mas em quantidades mais fáceis de
-interpretar. O ganho médio absoluto em sites que permitem mais de um
+absolutos, mostra a mesma informação, mas em valores com interpretação
+mais direta. O ganho médio absoluto em sites que permitem mais de um
 chute ficou em torno de 40\%, enquanto o ganho com apenas um chute ficou
 um pouco acima de 25\%. Importante notar também que o uso do oráculo só
 piorou a acurácia do model em casos que com apenas um chute, mostrando
@@ -3443,7 +3577,7 @@ relativos. É possível notar uma tendência de queda no ganho de acurácia
 com uso do oráculo conforme aumenta a acurácia do modelo inicial. Esse
 resultado é esperado, pois, como a acurácia é um número entre zero e um,
 um modelo que já possui alta acurácia não tem a possibilidade de
-aumentar muito de forma absoluta.
+aumentar muito de forma relativa.
 
 \begin{figure}
 
@@ -3480,22 +3614,22 @@ do oráculo poderia proporcionar. O ganho absoluto ajustado de uma
 simulação é dado por
 
 \[
-\text{ganho} = \frac{\text{oráculo } - \text{ inicial}}{1\; - \text{ inicial}}.
+\text{ganho} = \frac{\text{wawl } - \text{ inicial}}{1\; - \text{ inicial}}.
 \]
 
 A Figura~\ref{fig-simulacao-geral-inicial-absoluto-ajustado} mostra os
 ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho
-expressivo da técnica WAWL do oráculo para modelos iniciais com mais de
-10\% de acurácia com relação a modelos iniciais com até 10\% de
-acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar a
-técnica é menor. É importante notar, no entanto, que as simulações
-mostram a aplicação da técnica apenas uma vez -- é possível baixar mais
-dados e atualizar o modelo indefinidamente. O menor efeito da técnica
-para modelos iniciais fracos não significa, portanto, que a técnica não
-funciona para modelos iniciais fracos; pelo contrário: ela ajuda o
-modelo a sair do estado inicial e o leva para um estado com acurácia
-maior, de onde seria possível aplicar a técnica novamente para obter
-resultados mais expressivos.
+expressivo do WAWL para modelos iniciais com mais de 10\% de acurácia
+com relação a modelos iniciais com até 10\% de acurácia. Ou seja, quando
+o modelo inicial é fraco, o ganho ao usar o método é um pouco menor. É
+importante notar, no entanto, que as simulações consideram a aplicação
+do WAWL apenas uma vez -- é possível baixar mais dados e atualizar o
+modelo indefinidamente. O menor efeito do método para modelos iniciais
+fracos não significa, portanto, que a técnica não funciona para modelos
+iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado
+inicial e o leva para um estado com acurácia maior, de onde seria
+possível aplicar a técnica novamente para obter resultados mais
+expressivos.
 
 \begin{figure}
 
@@ -3535,26 +3669,25 @@ já verificado anteriormente, os modelos ajustados com mais de uma
 tentativa apresentam maiores ganhos do que os modelos ajustados com
 apenas uma tentativa. Verifica-se também que modelos com acurácia
 inicial de até 10\% só apresentam ganhos menores que os modelos com
-acurácia inicial maior que 10\% nos casos em que apenas uma tentativa é
-definida. Ou seja, existe interação entre a quantidade de tentativas e a
-acurácia do modelo inicial ao avaliar o impacto nos ganhos empíricos do
-método WAWL.
+acurácia inicial maior que 10\% nos casos com apenas um chute. Ou seja,
+existe interação entre a quantidade de chutes e a acurácia do modelo
+inicial ao avaliar o impacto nos ganhos empíricos do método WAWL.
 
 Pelos resultados das simulações, é possível concluir que o método WAWL
 foi bem-sucedido. Primeiro, o método apresenta resultados expressivos e
-de forma consistente, sem realizar novas anotações manuais. Além disso,
-a técnica aproveita a oportunidade oferecida pelos sites de obter o
-\emph{feedback} oráculo múltiplas vezes na mesma imagem. Finalmente, o
-método apresenta, em média, resultados positivos mesmo para modelos
-iniciais muito fracos (com acurácia de até 10\%), indicando que sua
-aplicação é possível para qualquer modelo inicial, o que é bastante
-factível de atingir com bases pequenas ou com modelos generalistas para
-resolver Captchas.
+de forma consistente, mesmo sem realizar novas anotações manuais. Além
+disso, a técnica consegue aproveitar oportunidade oferecida pelos sites
+de obter o \emph{feedback} oráculo múltiplas vezes na mesma imagem.
+Finalmente, o método apresenta, em média, resultados positivos mesmo
+para modelos iniciais muito fracos (com acurácia de até 10\%), indicando
+que sua aplicação é possível para qualquer modelo inicial, o que é
+bastante factível de atingir com bases pequenas ou com modelos
+generalistas para resolver Captchas.
 
 Um possível problema em aplicar o WAWL é que a técnica poderia
 introduzir viés de seleção no modelo, impedindo-o de ser aprimorado
 indefinidamente. Mesmo que os resultados teóricos deem uma boa base para
-acreditar que isso não seja verdade, foi feito um experimento adicional,
+concluir que isso não seja verdade, foi feito um experimento adicional,
 com apenas um dos Captchas, para verificar se a aplicação da técnica
 múltiplas vezes apresenta bons resultados.
 
@@ -3576,25 +3709,186 @@ a uma acurácia de 100\%.
 }
 
 \caption{\label{fig-aplicacao-iterada}Resultados da aplicação iterativa
-da técnica.}
+do WAWL}
 
 \end{figure}
 
-O resultado sugere que a técnica pode ser utilizada em várias iterações
-para auxiliar no aprendizado do modelo. Ela sugere, ainda, que uma
+O resultado sugere que o método WAWL pode ser aplicado iterativamente
+para aprimorar o aprendizado do modelo. Ele sugere, ainda, que uma
 técnica de aprendizado ativo com \emph{feedback} automático do oráculo
 pode dar bons resultados, já que a forma de obter os dados não introduz
 viés de seleção no ajuste do modelo.
 
+Nesse sentido, foi aplicado também um experimento de uma ferramenta de
+\emph{online learning}. A ferramenta funciona da seguinte forma: ao
+invés de aplicar os passos do WAWL (baixar dados e ajustar novo modelo)
+de forma separada, obtêm-se amostras do oráculo em cada passo do ajuste
+do modelo. Ou seja, as técnicas de raspagem de dados entram de forma
+direta no ciclo de aprendizagem.
+
+O experimento foi feito utilizando o Captcha do TJRS com os passos a
+seguir. O modelo, função de perda e base de testes são exatamente os
+mesmos utilizados na simulação completa. No entanto, os dados baixados
+pelo oráculo não são considerados. Ao invés disso, o \emph{minibatch} é
+construído baixando dados diretamente da internet e aplicando o modelo
+inicial.
+
+Para permitir que o modelo aproveite casos baixados em
+\emph{minibatches} anteriores, o modelo considera uma probabilidade de
+baixar novos casos, arbitrada em 80\%. Assim, para cada elemento do
+\emph{minibatch}, com 80\% de probabilidade, a observação é baixada da
+internet, e com 20\% de probabilidade, a observação é uma amostra dos
+casos anteriores já baixados. Como forma de obter um pior caso, o modelo
+não considera nem mesmo os dados utilizados para construir o modelo
+inicial.
+
+O valor do \emph{minibatch} foi arbitrado em 40 observações, como na
+etapa de simulação. O número de \emph{minibatches} de uma época é
+indefinido, porque não existe um número máximo de amostras. A época foi
+arbitrada como sendo a passagem de 2 \emph{minibatches}, para permitir a
+atualização do modelo inicial.
+
+A atualização do modelo inicial é realizada ao fim de cada época. Se ao
+fim do ciclo (ou seja, ao fim de 2 \emph{minibatches}) o modelo ajustado
+possui uma acurácia melhor na base de teste do que o modelo inicial, o
+modelo é atualizado para a versão atual. Se não, o modelo inicial é
+mantido. Dessa forma, os \emph{minibatches} construídos ficam cada vez
+mais informativos, uma vez que vão acertar mais o rótulo da imagem.
+
+O experimento considerou um modelo inicial com apenas 11\% de acurácia.
+O TJRS foi escolhido como exemplo porque o site é relativamente estável,
+além de permitir múltiplos chutes. O número de chutes permitidos ao
+modelo foi arbitrado em 5. Na parte dos hiperparâmetros, como a época é
+curta (apenas 80 observações por época), o decaimento na taxa de
+aprendizado considerado foi 0.999. Os valores de \emph{dropout} e
+quantidade de unidades na camada densa foram as mesmas do modelo
+inicial.
+
+O resultado do experimento foi promissor. A partir do modelo inicial
+11\% de acurácia, após 100 épocas, o modelo baixou 6391 imagens e chegou
+em uma acurácia de 87\% na base de teste. A
+Figura~\ref{fig-online-learning} mostra a evolução da acurácia do modelo
+ao longo das épocas. Como as épocas são relativamente curtas (apenas 80
+observações), o ganho em acurácia é pequeno e apresenta variabilidade.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{./resultados_files/figure-pdf/fig-online-learning-1.pdf}
+
+}
+
+\caption{\label{fig-online-learning}Resultados do experimento com
+aprendizado online}
+
+\end{figure}
+
+Um possível motivo do Captcha não ter chegado no máximo de acurácia
+(100\% no caso do TJRS) é que a arquitetura e os hiperparâmetros
+considerados não eram poderosos o suficiente para alcançar o melhor
+modelo. De qualquer forma, a partir do experimento, conclui-se que a
+utilização de \emph{online learning} também é muito promissora. A
+principal vantagem do método é ser menos burocrático para
+desenvolvedores, no sentido de que basta passar o modelo inicial e
+funções para baixar e testar os Captchas para aprimorar o modelo. A
+desvantagem é que o procedimento precisa de conexão ativa com a internet
+e o aprendizado é mais lento, já que os dados são baixados no processo
+de construção dos \emph{minibatches}.
+
 \hypertarget{sec-pacote-captcha}{%
 \section{Pacote captcha}\label{sec-pacote-captcha}}
 
+O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de
+2016. Como foi comentado na introdução da tese, é muito comum se deparar
+com desafios de Captchas ao raspar dados do judiciário, já que estes
+dados não são abertos.
+
+O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio
+era utilizado no site do TJSP que, depois de alguns anos, passou a
+utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas
+tem como fonte de dados o TJBA, que continua utilizando o desafio até o
+momento que os sites foram investigados pela última vez, em setembro de
+2022.
+
+A primeira abordagem para resolver o Captcha do e-SAJ foi utilizando
+heurísticas para separar as letras, em 2016. Infelizmente o pacote
+original, chamado \texttt{\{captchasaj\}}, foi removido da
+\emph{internet}, mas um código legado construído para o TJRS está
+disponível
+\href{https://github.com/decryptr/captchaTJRS/blob/master/R/tools.R}{neste
+link}. Nessa abordagem, as letras primeiro são segmentadas, alimentando
+um modelo de florestas aleatórias que considera os pixels da imagem como
+variáveis preditoras e a letra como resposta. Esses trabalhos tiveram
+contribuições importantes de Fernando Corrêa e Athos Damiani, ambos do
+IME-USP.
+
+A segunda abordagem para resolver os Captchas foi utilizando o áudio,
+também em 2016. O código para resolver o Captcha da RFB utilizando áudio
+está disponível
+\href{https://github.com/decryptr/captchaReceitaAudio}{neste link}. A
+ideia de resolução era parecida, passando pelo procedimento de
+segmentação e depois de modelagem, mas tinha um passo intermediário de
+processamento envolvendo engenharia de \emph{features} (KUHN; JOHNSON,
+2019). O trabalho teve contribuições importantes de Athos Damiani.
+
+Com o advento da ferramenta TensorFlow para o R (ALLAIRE; TANG, 2022),
+os modelos para resolver Captchas passaram a utilizar modelos de redes
+neurais. No início, por falta de conhecimento da área, a arquitetura das
+redes era demasiadamente complexa. Depois que os primeiros modelos
+começaram a funcionar, notou-se que as etapas de pré-processamento com
+segmentação e algumas camadas das redes eram desnecessárias para ajustar
+os modelos. Essa parte teve grande contribuição de Daniel Falbel, também
+do IME-USP, que foi a pessoa que introduziu o TensorFlow e a área de
+\emph{deep learning} para a comunidade brasileira de R.
+
+Depois de resolver com sucesso alguns Captchas, notou-se que seria
+possível criar um ambiente completo de modelagem de Captchas. Isso deu
+origem ao pacote \texttt{\{decryptr\}} (TRECENTI et al., 2022), que foi
+construído em 2017. O trabalho teve grandes contribuições de Caio Lente,
+do curso de Ciência da Computação do IME-USP e outros colegas de
+faculdade.
+
+Com o passar do tempo, o pacote \texttt{\{decryptr\}} ficou cada vez
+mais estável, funcionando como dependência de várias ferramentas
+utilizadas em trabalhos de jurimetria. O pacote também ganhou um site:
+\url{https://decryptr.xyz} e uma API com acesso gratuito, precisando
+apenas de uma chave de acesso. A ferramenta ficou bastante popular, com
+\href{https://github.com/decryptr/decryptr}{178 estrelas no GitHub} no
+mês de dezembro de 2022. Essas ferramentas envolveram contribuições
+principalmente de Caio Lente e Daniel Falbel.
+
+A construção do pacote \texttt{\{captcha\}} separada do
+\texttt{\{decryptr\}} se deu por dois motivos. Primeiro, o pacote
+\texttt{\{decryptr\}}, por ser o primeiro a tratar do assunto, possui
+muitos códigos legados e dificuldades de instalação por conta da
+dependência do python, necessário para o funcionamento do TensorFlow,
+que é chamado através do pacote \texttt{\{reticulate\}} (USHEY; ALLAIRE;
+TANG, 2022). Além disso, a implementação das técnicas do oráculo
+envolviam modificações na função de perda, que são mais difíceis de
+implementar no ambiente do \texttt{\{tensorflow\}}, justamente por conta
+da necessidade de conhecer o código python que roda por trás dos códigos
+em R.
+
+Com o advento do pacote \texttt{\{torch\}} (FALBEL; LURASCHI, 2022), no
+entanto, tudo foi facilitado. O pacote não possui dependências com o
+python, além de ser bastante transparente e flexível na construção da
+arquitetura do modelo, funções de perda e otimização. O pacote, também
+construído por Daniel Falbel, é um grande avanço científico e facilitou
+muito a construção dos códigos desta tese.
+
+O pacote \texttt{\{captcha\}}, apesar de ter sido construído do zero,
+foi desenvolvido durante \emph{lives} realizadas na plataforma
+\emph{Twitch}. A construção em \emph{lives} foi interessante porque era
+possível obter \emph{feedback} e ideias da comunidade durante a
+construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na
+arquitetura do pacote.
+
 O pacote \texttt{\{captcha\}} foi construído para funcionar como uma
-caixa de ferramentas para pessoas que desejam trabalhar com Captchas. O
-pacote possui funções de leitura, visualização, anotação, preparação de
-dados, modelagem, carregamento de modelos pré-treinados e predição. O
-pacote também permite a construção de um fluxo de trabalho para resolver
-um novo Captcha, criando um pacote para orquestrar o passo-a-passo.
+caixa de ferramentas para quem deseja trabalhar com Captchas. O pacote
+possui funções de leitura, visualização, anotação, preparação de dados,
+modelagem, carregamento de modelos pré-treinados e predição. O pacote
+também permite a construção de um fluxo de trabalho para resolver um
+novo Captcha, criando um novo repositório para orquestrar o
+passo-a-passo.
 
 \hypertarget{uso-buxe1sico}{%
 \subsection{Uso básico}\label{uso-buxe1sico}}
@@ -3605,9 +3899,9 @@ A utilização básica do \texttt{\{captcha\}} envolve as funções
 explicadas abaixo.
 
 A função \texttt{read\_captcha()} lê um vetor de arquivos de imagens e
-armazenar na memória. Por trás, a função utiliza o pacote
-\texttt{\{magick\}} para lidar com os tipos de arquivos que podem
-aparecer (JPEG, PNG, entre outros).
+armazena na memória do computador. Por trás, a função utiliza o pacote
+\texttt{\{magick\}} para lidar com os tipos de arquivos mais comuns
+(JPEG, PNG, entre outros).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3635,7 +3929,7 @@ um objeto de classe captcha}
 \end{figure}
 
 A função retorna um objeto com a classe \texttt{captcha}, que pode ser
-utilizada por outros métodos.
+utilizada por outros métodos do pacote.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3644,10 +3938,11 @@ utilizada por outros métodos.
 \end{Highlighting}
 \end{Shaded}
 
-O objeto é uma lista com três elementos: \texttt{\$img}, que contém
-imagem lida com o pacote \texttt{\{magick\}}, \texttt{\$lab}, que contém
-o rótulo da imagem (por padrão, \texttt{NULL}) e \texttt{\$path}, que
-contém o caminho da imagem que foi lida.
+O objeto de classe \texttt{captcha} é uma lista com três elementos:
+\texttt{\$img}, que contém imagem lida com o pacote \texttt{\{magick\}},
+\texttt{\$lab}, que contém o rótulo da imagem (por padrão,
+\texttt{NULL}) e \texttt{\$path}, que contém o caminho da imagem que foi
+lida.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3662,8 +3957,8 @@ contém o caminho da imagem que foi lida.
 A função \texttt{read\_captcha()} possui um parâmetro
 \texttt{lab\_in\_path=}, que indica se o rótulo está contido no caminho
 da imagem. Se \texttt{lab\_in\_path=TRUE}, a função tentará extrair o
-rótulo do arquivo (obtendo o texto que vem depois do último \texttt{\_}
-do caminho) e armazenar no elemento \texttt{\$lab}.
+rótulo do arquivo, obtendo o texto que vem depois do último \texttt{\_}
+do caminho, armazenando o resultado no elemento \texttt{\$lab}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3678,11 +3973,10 @@ do caminho) e armazenar no elemento \texttt{\$lab}.
 \end{Highlighting}
 \end{Shaded}
 
-A função plot \texttt{plot()} é um método de classe S3 do R básico. A
-função foi implementada para facilitar a visualização de Captchas. A
-função recebe uma lista de imagens obtida pela função
-\texttt{read\_captcha()} e mostra o Captcha visualmente, como na
-Figura~\ref{fig-exemplo-plot}.
+A função \texttt{plot()} é um método de classe S3 do R básico. A função
+foi implementada para facilitar a visualização de Captchas. A função
+recebe uma lista de imagens obtida pela função \texttt{read\_captcha()}
+e mostra o Captcha visualmente, como na Figura~\ref{fig-exemplo-plot}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3784,14 +4078,13 @@ comportamento da função quando o número de imagens excede 100.
 }
 
 \caption{\label{fig-exemplo-plot-multi-varias}Demonstração da função
-\texttt{plot()} com muitas imagens.}
+\texttt{plot()} com muitas imagens}
 
 \end{figure}
 
-Um detalhe interessante é que é possível criar subconjuntos de um objeto
-de classe \texttt{captcha} simplesmente utilizando o operador
-\texttt{{[}}. A função \texttt{length()} também pode ser utilizada para
-medir a quantidade de imagens lidas. A
+É possível criar subconjuntos de um objeto de classe \texttt{captcha}
+utilizando o operador \texttt{{[}}. A função \texttt{length()} também
+pode ser utilizada para medir a quantidade de imagens lidas. A
 Figura~\ref{fig-exemplo-plot-multi-varias-subset} mostra um exemplo
 dessas operações.
 
@@ -3812,12 +4105,12 @@ dessas operações.
 
 \caption{\label{fig-exemplo-plot-multi-varias-subset}Demonstração das
 funções de subset e length aplicadas a um objeto do tipo
-\texttt{captcha}.}
+\texttt{captcha}}
 
 \end{figure}
 
-Por fim, se a imagem possui um rótulo, por padrão, a função
-\texttt{plot()} mostra o rótulo no canto da imagem. A
+Se a imagem possui um rótulo, por padrão, a função \texttt{plot()}
+mostra o rótulo no canto da imagem. A
 Figura~\ref{fig-exemplo-plot-rotulado} mostra um exemplo.
 
 \begin{Shaded}
@@ -3884,7 +4177,7 @@ exemplo de aplicação da função \texttt{captcha\_annotate()} no software
 
 \caption{\label{fig-exemplo-annotate}Exemplo de aplicação da função
 \texttt{captcha\_annotate()}. O rótulo \texttt{bhusp5} foi inserido
-manualmente.}
+manualmente}
 
 \end{figure}
 
@@ -3909,7 +4202,8 @@ pacote \texttt{\{luz\}}, que será descrito em maiores detalhes na
 próxima subseção. No momento de submissão da tese, os Captchas com
 modelos desenvolvidos eram \texttt{trf5}, \texttt{tjmg}, \texttt{trt},
 \texttt{esaj}, \texttt{jucesp}, \texttt{tjpe}, \texttt{tjrs},
-\texttt{cadesp}, \texttt{sei} e \texttt{rfb}.
+\texttt{cadesp}, \texttt{sei} e \texttt{rfb}. Mais modelos serão
+adicionados no futuro.
 
 A Figura~\ref{fig-diagrama-captcha-simples} resume visualmente as
 funções apresentadas até o momento. As setas indicam a dependência das
@@ -3973,10 +4267,10 @@ onde:
 
 Atendidas as premissas da base anotada, é possível ajustar um modelo de
 redes neurais usando o pacote \texttt{\{captcha\}}. No entanto, como o
-ajuste de modelos de redes neurais envolve uma série de nuances e
-pequenas adaptações, optou-se por exportar funções em dois níveis de
+ajuste de modelos de redes neurais tem uma série de nuances e pequenas
+adaptações, optou-se por exportar funções em dois níveis de
 aprofundamento. A primeira é a \textbf{automatizada}, utilizando a
-função \texttt{captcha\_fit\_model()} descrito a seguir, enquanto a
+função \texttt{captcha\_fit\_model()} descrita a seguir, enquanto a
 segunda é a \textbf{procedimental}, utilizando o passo a passo descrito
 na Subseção \ref{sec-captcha-do-zero}.
 
@@ -3996,8 +4290,8 @@ padrão, \texttt{0.25}); \texttt{dense\_units=}, especificando a
 quantidade de unidades na camada oculta que vem depois das camadas
 convolucionais (por padrão, 200); \texttt{decay=}, especificando o
 percentual de decaimento da taxa de aprendizado (por padrão,
-\texttt{0.99}); \texttt{epochs=} número de épocas para ajuste do modelo
-(por padrão 100). Uma observação importante é que o modelo está
+\texttt{0.99}); \texttt{epochs=} número de épocas (voltas completas na
+base de treino) para ajuste do modelo (por padrão 100). O modelo está
 configurado para parar o ajuste após 20 iterações sem redução
 significativa na função de perda (arbitrado em 1\%; para mais detalhes
 ver a Subseção \ref{sec-captcha-do-zero}).
@@ -4067,9 +4361,9 @@ zero}\label{sec-captcha-do-zero}}
 
 Em algumas situações, pode ser desejável rodar modelos de forma
 customizada. Isso acontece pois modelos de aprendizagem profunda
-costumam precisar de diversos pequenos ajustes, como a taxa de
-aprendizado, utilização de outras funções de otimização, camadas
-computacionais e funções de pré-processamento.
+costumam precisar de diversos pequenos ajustes, como na taxa de
+aprendizado, funções de otimização, camadas computacionais e funções de
+pré-processamento.
 
 A função \texttt{captcha\_fit\_model()}, apresentada na subseção
 anterior, é engessada. Ela aceita alguns parâmetros para estruturar o
@@ -4078,16 +4372,16 @@ isso que pacotes como \texttt{\{torch\}} e \texttt{\{luz\}} existem,
 pois criam ambientes de computação mais flexíveis para operar os modelos
 de aprendizado profundo.
 
-Outra desvantagem da utilização do \texttt{captcha\_fit\_model()} é a
-disponibilização dos modelos. Um modelo pode ser utilizado localmente,
-mas a tarefa de disponibilizar as bases de dados e o modelo para outras
-pessoas não tem um procedimento bem definido.
+Outra desvantagem da utilização do \texttt{captcha\_fit\_model()} é
+possibilidade de disponibilizar modelos. Um modelo pode ser utilizado
+localmente, mas a tarefa de disponibilizar as bases de dados e o modelo
+publicamente não tem um procedimento bem definido.
 
-Para organizar o fluxo de trabalho, implementou-se um fluxo de anotação
-de Captchas dentro do pacote \texttt{\{captcha\}}. A função que
-orquestra esse fluxo é a \texttt{new\_captcha()}. A função possui apenas
-um parâmetro, \texttt{path=}, que é o caminho de uma nova pasta a ser
-criada.
+Para organizar o fluxo de trabalho, implementou-se passo-a-passo de
+anotação e modelagem de Captchas dentro do pacote \texttt{\{captcha\}}.
+A função que orquestra as atividades é a \texttt{new\_captcha()}. A
+função possui apenas um parâmetro, \texttt{path=}, que é o caminho de
+uma nova pasta a ser criada.
 
 A função também pode ser chamada criando-se um projeto dentro do próprio
 RStudio. A Figura~\ref{fig-exemplo-rstudio-template} mostra um exemplo
@@ -4112,8 +4406,8 @@ arquivos:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{01\_download.R}: Contém algumas funções para auxiliar no
-  desenvolvimento de funções que baixam Captchas em um caso real. Na
+  \texttt{01\_download.R}: Contém códigos que auxiliam no
+  desenvolvimento de funções para baixar Captchas de um site. Na
   prática, as funções que baixam Captchas precisam ser adaptadas porque
   os sites são organizados de formas muito diferentes.
 \item
@@ -4131,16 +4425,16 @@ arquivos:
   \texttt{04\_share.R}: Contém funções para criar um repositório
   \emph{git} da solução e disponibilizar o modelo ajustado. O modelo
   poderá ser lido e aplicado utilizando-se a função
-  \texttt{captcha\_load\_model()}, para utilização em diferentes
+  \texttt{captcha\_load\_model()}, que pode ser aplicado em diferentes
   contextos, sem a necessidade de copiar arquivos localmente.
 \end{itemize}
 
-Sobre a parte de modelagem, cabe uma descrição mais detalhada. O
-primeiro passo do \emph{script} é criar objetos do tipo \emph{dataset}
-(objeto que armazena os dados de forma consistente) e \emph{dataloader}
-(objeto que obtém amostras do dataset, que são utilizadas como os
-\emph{minibatches} do modelo), com uma estrutura orquestrada pelo pacote
-\texttt{\{torch\}}.
+Sobre a parte de modelagem, cabe uma descrição mais detalhada com
+apresentação de parte do código. O primeiro passo do \emph{script} é
+criar objetos do tipo \emph{dataset} (objeto que armazena os dados de
+forma consistente) e \emph{dataloader} (objeto que obtém amostras do
+dataset, que são utilizadas como os \emph{minibatches} do modelo), com
+uma estrutura orquestrada pelo pacote \texttt{\{torch\}}.
 
 A função \texttt{captcha\_dataset()} cria o \emph{dataset}, recebendo
 como parâmetro uma pasta de arquivos e gera um objeto com classes
@@ -4180,6 +4474,17 @@ copiando parte dos Captchas anotados para uma nova pasta, com
 aleatorização. É papel do usuário separar as bases em pastas distintas
 carregá-as em um \emph{dataset}.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# datasets}
+\NormalTok{captcha\_ds }\OtherTok{\textless{}{-}}\NormalTok{ captcha}\SpecialCharTok{::}\FunctionTok{captcha\_dataset}\NormalTok{(}
+  \AttributeTok{root =}\NormalTok{ parm}\SpecialCharTok{$}\NormalTok{path\_img,}
+  \AttributeTok{captcha =} \ConstantTok{NULL}\NormalTok{,}
+  \AttributeTok{download =} \ConstantTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 Em seguida, os \emph{dataloaders} são criados utilizando-se a função
 \texttt{dataloader()} do pacote \texttt{\{torch\}}. Nessa parte é
 definido o tamanho do \emph{minibatch}, além de outros possíveis
@@ -4190,25 +4495,42 @@ a documentação da função neste link}. Devem ser criados
 \emph{dataloaders} tanto para a base de treino quanto para a base de
 validação.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# dataloaders (training and validation)}
+\NormalTok{captcha\_dl\_train }\OtherTok{\textless{}{-}}\NormalTok{ torch}\SpecialCharTok{::}\FunctionTok{dataloader}\NormalTok{(}
+  \AttributeTok{dataset =}\NormalTok{ torch}\SpecialCharTok{::}\FunctionTok{dataset\_subset}\NormalTok{(captcha\_ds, id\_train),}
+  \AttributeTok{batch\_size =}\NormalTok{ parm}\SpecialCharTok{$}\NormalTok{batch\_size,}
+  \AttributeTok{shuffle =} \ConstantTok{TRUE}
+\NormalTok{)}
+
+\NormalTok{captcha\_dl\_valid }\OtherTok{\textless{}{-}}\NormalTok{ torch}\SpecialCharTok{::}\FunctionTok{dataloader}\NormalTok{(}
+  \AttributeTok{dataset =}\NormalTok{ torch}\SpecialCharTok{::}\FunctionTok{dataset\_subset}\NormalTok{(captcha\_ds, id\_valid),}
+  \AttributeTok{batch\_size =}\NormalTok{ parm}\SpecialCharTok{$}\NormalTok{batch\_size}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 A próxima etapa é a especificação do modelo. No \emph{script} de
 modelagem, o modelo é fornecido pelo objeto \texttt{net\_captcha} do
 pacote \texttt{\{captcha\}}. Assim como no caso do \emph{dataset}, o
 \texttt{net\_captcha} é um objeto especial do \texttt{\{torch\}}, com
 classes \texttt{CAPTCHA-CNN}, \texttt{nn\_module} e
 \texttt{nn\_module\_generator}. O objeto pode ser utilizado como uma
-função, gerando um módulo do \texttt{torch}, similar a uma função de
+função, gerando um módulo do \texttt{\{torch\}}, similar a uma função de
 predição. No entanto, por conta da forma que o objeto é utilizado em
 passos posteriores pelo pacote \texttt{\{luz\}}, o objeto a ser
 considerado é mesmo o \texttt{nn\_module\_generator}, como colocado no
 \emph{script}.
 
-Para customizar o modelo, o usuário deve modificar os métodos
-\texttt{initialize()} e \texttt{forward()}, acessados dentro do objeto
-\texttt{net\_captcha\$public\_methods}. O primeiro é responsável pela
-inicialização do modelo, contendo a descrição das operações que são
-realizadas, como convoluções. O segundo é a função \emph{feed forward}
-das redes neurais, que recebe uma imagem e retorna um objeto contendo os
-escores ou probabilidades, no formato da variável resposta.
+Para customizar o modelo, o usuário deve criar um novo módulo
+modificando os métodos \texttt{initialize()} e \texttt{forward()},
+acessados dentro do objeto \texttt{net\_captcha\$public\_methods}. O
+primeiro é responsável pela inicialização do modelo, contendo a
+descrição das operações que são realizadas, como convoluções. O segundo
+é a função \emph{feed forward} das redes neurais, que recebe uma imagem
+e retorna um objeto contendo os escores ou probabilidades, no formato da
+variável resposta.
 
 Por padrão, o código de inicialização do modelo é o descrito abaixo. Os
 parâmetros \texttt{input\_dim=}, \texttt{output\_ndigits=},
@@ -4317,7 +4639,7 @@ probabilidades, precisará também adaptar a função de perda utilizada.
 \end{Shaded}
 
 Definida a arquitetura do modelo, o penúltimo passo é o ajuste. O ajuste
-do modelo é orquestrado pelo pacote \texttt{\{luz\}}, que facilita a
+do modelo é conduzido pelo pacote \texttt{\{luz\}}, que facilita a
 criação do \emph{loop} de ajuste dos parâmetros, desempenhando um papel
 similar ao que o \texttt{keras} realiza para o \texttt{tensorflow} puro.
 
@@ -4359,13 +4681,13 @@ segue quatro passos, encadeados pelo operador \emph{pipe}, ou
   \begin{itemize}
   \tightlist
   \item
-    O decaimento da taxa de aprendizado utilizando uma taxa
+    O decaimento da taxa de aprendizado, utilizando uma taxa
     multiplicativa. A cada iteração, a taxa de aprendizado decai em um
     fator determinado pela função definida em \texttt{lr\_lambda}, que
     por padrão é \texttt{0.99}. Ou seja, em cada época, a taxa de
     aprendizado fica 1\% menor.
   \item
-    A parada precoce, ou \emph{early stopping}. Por padrão, está
+    A parada adiantada, ou \emph{early stopping}. Por padrão, está
     configurado para parar o ajuste do modelo se forem passadas 20
     épocas sem que o modelo melhore a acurácia em 1\% na base de
     validação. Por exemplo, se em 20 épocas consecutivas o modelo
@@ -4382,13 +4704,13 @@ segue quatro passos, encadeados pelo operador \emph{pipe}, ou
   \end{itemize}
 \end{itemize}
 
-No final do fluxo definido pelo pacote \texttt{\{luz\}}, será obtido um
+No final do fluxo definido pelo pacote \texttt{\{luz\}}, é obtido um
 modelo ajustado. O modelo possui a classe \texttt{luz\_module\_fitted} e
 pode ser investigado ao rodar o objeto no console do R. No exemplo do
 \texttt{R-Captcha} apresentado na subseção anterior, o objeto possui as
 características abaixo. O objeto contém um relatório conciso e bastante
 informativo, mostrando o tempo de ajuste, as métricas obtidas no treino
-e na validação e a arquitetura do modelo ajustado.
+e na validação e a arquitetura do modelo.
 
 \begin{verbatim}
 A `luz_module_fitted`
@@ -4433,31 +4755,40 @@ no \texttt{04\_share.R}.
 Cabe também um detalhamento do \emph{script} disponibilizado em
 \texttt{04\_share.R}. O script utiliza o pacote \texttt{\{usethis\}}
 (WICKHAM; BRYAN; BARRETT, 2022) para organizar o repositório,
-configurando o Git (software de versionamento de códigos) e o GitHub
-(sistema \emph{web} de organização de repositórios). Além disso, o
-\emph{script} utiliza o pacote \texttt{\{piggyback\}} (BOETTIGER; HO,
+configurando o Git (\emph{software} de versionamento de códigos) e o
+GitHub (sistema \emph{web} de organização de repositórios). Além disso,
+o \emph{script} utiliza o pacote \texttt{\{piggyback\}} (BOETTIGER; HO,
 2022) para disponibilizar o modelo ajustado nos \emph{releases} do
-repositório criado. Opcionalmente, o usuário poderá também
-disponibilizar a base com os arquivos anotados em um arquivo
-\texttt{.zip}, o que é recomendado, pois permite que outras pessoas
-possam trabalhar com os mesmos dados e aprimorar os modelos.
+repositório criado\footnote{O \emph{script} utiliza \emph{releases} para
+  disponibilizar as soluções porque não é uma boa prática subir arquivos
+  como modelos ajustados ou arquivos brutos de imagens diretamente no
+  repositório. Isso acontece porque o repositório pode ficar
+  demasiadamente pesado e o histórico do \emph{Git} fica alterado.}.
+Opcionalmente, o usuário poderá também disponibilizar a base com os
+arquivos anotados em um arquivo \texttt{.zip}, o que é recomendado, pois
+permite que outras pessoas possam trabalhar com os mesmos dados e
+aprimorar os modelos.
 
-Um detalhe importante é sobre a inserção de arquivos pesados no
-repositório. O \emph{script} utiliza \emph{releases} para disponibilizar
-as soluções porque não é uma boa prática subir arquivos como modelos
-ajustados ou arquivos brutos (imagens) diretamente no repositório. Isso
-acontece porque o repositório pode ficar demasiadamente pesado e o
-histórico do \emph{Git} fica alterado.
-
-Uma vez compartilhado nos releases do repositório, o modelo poderá ser
-lido por qualquer pessoa, em outras máquinas utilizando o pacote
-\texttt{\{captcha\}}. Basta rodar o código abaixo e o modelo será
+Uma vez compartilhado nos \emph{releases} do repositório, o modelo
+poderá ser lido por qualquer pessoa, em outras máquinas utilizando o
+pacote \texttt{\{captcha\}}. Basta rodar o código abaixo e o modelo será
 carregado.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{captcha\_load\_model}\NormalTok{(}\StringTok{"\textless{}name\textgreater{}"}\NormalTok{, }\StringTok{"\textless{}user\textgreater{}/\textless{}repo\textgreater{}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 Com isso, o trabalho pode ser compartilhado e Captchas podem ser
-resolvidos de forma colaborativa pelas pessoas interessadas. Utilizando
-o fluxo do \texttt{new\_captcha()}, as pessoas têm flexibilidade para
-construir modelos customizados e utilizá-los de forma eficiente.
+resolvidos de forma colaborativa. O fluxo do \texttt{new\_captcha()} é
+flexível o suficiente para construir modelos customizados e consumidos
+com o pacote \texttt{\{captcha\}}.
+
+O fluxo também permite uma adaptação fácil ao método WAWL. Para isso,
+basta substituir a função de perda e de leitura dos dados pelas funções
+oferecidas pelo pacote \texttt{\{captchaOracle\}}, descrito no
+Apêndice~\ref{sec-pacote}.
 
 \hypertarget{sec-discussao}{%
 \section{Discussão}\label{sec-discussao}}
@@ -4487,8 +4818,8 @@ acurácia do modelo, tanto em termos relativos quanto absolutos. Isso
 demonstra que a escolha do método se alia bem ao problema que deu origem
 à pesquisa, que são os Captchas.
 
-Sobre a parte de aplicação iterada do WAWL, cabe um comentário. O
-resultado encontrado, com 100\% de acurácia, pode sugerir que o método
+Sobre a parte de aplicação iterada do WAWL, o resultado é positivo, mas
+inconclusivo. A acurácia de 100\% encontrada pode sugerir que o método
 WAWL sempre chegará em um resultado de 100\% para qualquer Captcha que
 surgir. No entanto, pode ser que exista uma limitação na capacidade do
 modelo, que é habilidade do modelo para se ajustar aos dados a partir
@@ -4504,10 +4835,10 @@ raspagem de dados com a área de modelagem estatística. A hipótese também
 foi verificada, já que o método WAWL, que utiliza técnicas de raspagem
 de dados, apresentou bons resultados empíricos.
 
-Neste momento, cabe um comentário sobre o ineditismo da ponte entre
-raspagem de dados e estatística. É verdade que existem muitas pesquisas
-que são possibilitadas por conta dos dados obtidos via raspagem de
-dados: as pesquisas da ABJ, mencionadas na
+Neste momento, cabe um comentário sobre o ineditismo da utilização de
+raspagem de dados em estudos estatísticos. É verdade que existem muitas
+pesquisas que são possibilitadas por conta dos dados obtidos via
+raspagem de dados: as pesquisas da ABJ, mencionadas na
 Seção~\ref{sec-captchas-publicos} são alguns exemplos. Também existem
 soluções que utilizam dados provenientes de raspagem de dados para
 construção de modelos: por exemplo, o
@@ -4541,7 +4872,7 @@ estatística. Primeiro, é importante mencionar que:
   python) do que através de aulas teóricas.
 \end{enumerate}
 
-Os resultados levam, então, a um problema de balanceamento entre
+Os resultados levam, então, a um problema de equilíbrio entre
 pertinência e oportunidade. De um lado, a área de raspagem não se
 encaixa muito bem no currículo de estatística. Por outro lado, a área
 expande as possibilidades de atuação de uma profissional da estatística.
@@ -4554,10 +4885,11 @@ computação, matemática aplicada e engenharias. Dessa forma, as pessoas
 interessadas teriam a oportunidade de aprender um pouco sobre as
 técnicas principais, conectando a raspagem de dados com as áreas de
 conhecimento específicas, como é o caso do Captcha, que alia raspagem de
-dados com estatística e inteligência artificial.
+dados com estatística e inteligência artificial. Com isso, conclui-se a
+discussão sobre a segunda hipótese de pesquisa.
 
-No final, as duas hipóteses de pesquisa foram verificadas. No processo
-de obtenção dos resultados, no entanto, um terceiro avanço muito
+Portanto, as duas hipóteses de pesquisa foram verificadas. No processo
+de construção do trabalho, no entanto, um terceiro avanço muito
 importante foi realizado na parte computacional. O pacote
 \texttt{\{captcha\}} e os pacotes auxiliares
 \texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}} são frutos
@@ -4579,8 +4911,8 @@ podendo servir como base para pesquisas futuras.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{conclusao}{%
-\chapter{Conclusões}\label{conclusao}}
+\hypertarget{sec-conclusao}{%
+\chapter{Conclusões}\label{sec-conclusao}}
 
 \epigrafe{Even robots need a break from the daily grind of solving captchas.}{ChatGPT}
 
@@ -4622,7 +4954,7 @@ necessidade de utilizar esses serviços. Dessa forma, espera-se que o
 trabalho possa ter um impacto positivo, ainda que pequeno, na qualidade
 das relações de trabalho na sociedade.
 
-A contribuição para a pesquisa acadêmica pode ser separada em duas
+A contribuição para a pesquisa acadêmica pode ser separada em três
 partes. A primeira é que o método proposto apresenta bons resultados
 empíricos, mostrando que pode ser um ponto de partida interessante para
 quem deseja trabalhar com aprendizado com rótulos parcialmente anotados.
@@ -4631,7 +4963,12 @@ intermediário na construção de modelos estatísticos, que pode ser a base
 para o desenvolvimento de um novo campo de pesquisa. Espera-se que os
 resultados obtidos sirvam como incentivo para que as técnicas de
 raspagem de dados sejam ensinadas como disciplinas optativas em cursos
-de estatística e similares.
+de estatística e similares. A terceira é que a ideia de explorar um
+oráculo, ou seja, de obter informações parciais automaticamente pode
+abrir um novo campo de estudos estatísticos: é possível encontrar,
+futuramente, outras áreas do conhecimento em que oráculos estão
+disponíveis, e este trabalho pode ajudar a utilizar a informação
+fornecida pelo oráculo.
 
 A contribuição para a comunidade de programadoras e programadores está
 no pacote \texttt{\{captcha\}}. O pacote é uma caixa de ferramentas
@@ -4657,29 +4994,30 @@ públicos.
 parte teórica, os resultados matemáticos podem ser desenvolvidos com
 maior detalhamento. Especificamente, podem ser apresentadas e testadas
 outras propostas de função de perda, eventualmente com implementações
-que aceitem a utilização de placas de vídeo. A escolha de apenas uma
-alternativa foi feita por conta da escolha em resolver o problema de
-pesquisa (os Captchas) em detrimento da discussão mais aprofundada do
-aprendizado com rótulos parciais, bem como da necessidade de fazer muito
-mais simulações se outras funções de perda fossem propostas.
+que aceitem o uso de aceleradores com placas de vídeo. A escolha de
+apenas uma alternativa foi feita por conta do foco em resolver o
+problema de pesquisa (os Captchas), no lugar da discussão mais
+aprofundada do aprendizado com rótulos parciais.
 
 Outra limitação importante do estudo está na aplicação iterada. A
 pesquisa apresentou essa parte como um resultado adicional, mas os
 limites da aplicação iterada ainda não foram estudados de forma
 completa. Essa limitação pode ser entendida também como um próximo
-passo, que seria uma solução de \emph{online learning}.
+passo, que seria a solução de \emph{online learning}.
 
 Uma extensão possível desta pesquisa é a criação de um modelo que
 aprende diretamente da \emph{web}, sem a separação de passos descrita
 pelo WAWL. A técnica consiste em inserir as funções de acesso e teste do
 Captcha como método de obtenção de amostras do \emph{dataset} do Captcha
 (mais detalhes na Seção~\ref{sec-captcha-do-zero}). Dessa forma, o
-modelo poderia obter novos dados em cada \emph{minibatch},
-indefinidamente. A vantagem dessa abordagem é que ela seria menos
-burocrática que o WAWL, que precisa de uma pessoa para escrever as
-aplicações iteradas. A desvantagem é que o ajuste do modelo dependeria
-de uma conexão com a internet e seria mais suscetível a problemas de
-conexão, que precisariam ser tratados com cuidado.
+modelo pode obter novos dados em cada \emph{minibatch}, indefinidamente.
+O experimento realizado com \emph{online learning} apresentou resultados
+promissores, mas ainda carece de uma investigação sistemática. Se
+funcionar bem, a vantagem dessa abordagem é que não precisa de uma
+pessoa para escrever as aplicações iteradas, facilitando o método WAWL.
+A desvantagem é que o ajuste do modelo depende de uma conexão com a
+internet, mais suscetível a problemas de conexão, que precisam ser
+tratados com cuidado.
 
 Outra extensão oportuna seria a criação de um modelo geral de resolução
 de Captchas, desenvolvido a partir das bases que foram construídas
@@ -5018,100 +5356,7 @@ ZHU, X. J. Semi-supervised learning literature survey. 2005.
 Este apêndice foi construído para mostrar a estrutura dos pacotes
 \texttt{\{captchaDownload\}} e \texttt{\{captchaOracle\}}, utilizados
 como auxiliares para implementação do WAWL, orquestradas pelo pacote
-\texttt{\{captcha\}}. Apresenta-se também um breve histórico sobre a
-construção das soluções desenvolvidas, descrevendo alternativas e
-projetos que foram aposentados.
-
-\hypertarget{sec-historico}{%
-\section{Histórico}\label{sec-historico}}
-
-O trabalho de resolução de Captchas pelo autor da tese surgiu no ano de
-2016. Como foi comentado na introdução da tese, é muito comum se deparar
-com desafios de Captchas ao raspar dados do judiciário, já que estes
-dados não são abertos.
-
-O primeiro Captcha a ser investigado foi o do sistema e-SAJ. O desafio
-era utilizado no site do TJSP que, depois de alguns anos, passou a
-utilizar o sistema reCaptcha. O Captcha do e-SAJ faz parte da tese, mas
-tem como fonte de dados o TJBA, que continua utilizando o desafio até o
-momento que os sites foram investigados pela última vez, em setembro de
-2022.
-
-A primeira abordagem para resolver o Captcha do e-SAJ foi utilizando
-heurísticas para separar as letras, em 2016. Infelizmente o pacote
-original, chamado \texttt{\{captchasaj\}}, foi removido da
-\emph{internet}, mas um código legado construído para o TJRS está
-disponível
-\href{https://github.com/decryptr/captchaTJRS/blob/master/R/tools.R}{neste
-link}. Nessa abordagem, as letras primeiro são segmentadas, alimentando
-um modelo de florestas aleatórias que considera os pixels da imagem como
-variáveis preditoras e a letra como resposta. Esses trabalhos tiveram
-contribuições importantes de Fernando Corrêa e Athos Damiani, ambos do
-IME-USP.
-
-A segunda abordagem para resolver os Captchas foi utilizando o áudio,
-também em 2016. O código para resolver o Captcha da RFB utilizando áudio
-está disponível
-\href{https://github.com/decryptr/captchaReceitaAudio}{neste link}. A
-ideia de resolução era parecida, passando pelo procedimento de
-segmentação e depois de modelagem, mas tinha um passo intermediário de
-processamento envolvendo engenharia de \emph{features} (KUHN; JOHNSON,
-2019). O trabalho teve contribuições importantes de Athos Damiani.
-
-Com o advento da ferramenta TensorFlow para o R (ALLAIRE; TANG, 2022),
-os modelos para resolver Captchas passaram a utilizar modelos de redes
-neurais. No início, por falta de conhecimento da área, a arquitetura das
-redes era demasiadamente complexa. Depois que os primeiros modelos
-começaram a funcionar, notou-se que as etapas de pré-processamento com
-segmentação e algumas camadas das redes eram desnecessárias para ajustar
-os modelos. Essa parte teve grande contribuição de Daniel Falbel, também
-do IME-USP, que foi a pessoa que introduziu o TensorFlow e a área de
-\emph{deep learning} para a comunidade brasileira de R.
-
-Depois de resolver com sucesso alguns Captchas, notou-se que seria
-possível criar um ambiente completo de modelagem de Captchas. Isso deu
-origem ao pacote \texttt{\{decryptr\}} (TRECENTI et al., 2022), que foi
-construído em 2017. O trabalho teve grandes contribuições de Caio Lente,
-do curso de Ciência da Computação do IME-USP e outros colegas de
-faculdade.
-
-Com o passar do tempo, o pacote \texttt{\{decryptr\}} ficou cada vez
-mais estável, funcionando como dependência de várias ferramentas
-utilizadas em trabalhos de jurimetria. O pacote também ganhou um site:
-\url{https://decryptr.xyz} e uma API com acesso gratuito, precisando
-apenas de uma chave de acesso. A ferramenta ficou bastante popular, com
-\href{https://github.com/decryptr/decryptr}{178 estrelas no GitHub} no
-mês de dezembro de 2022. Essas ferramentas envolveram contribuições
-principalmente de Caio Lente e Daniel Falbel.
-
-A construção do pacote \texttt{\{captcha\}} separada do
-\texttt{\{decryptr\}} se deu por dois motivos. Primeiro, o pacote
-\texttt{\{decryptr\}}, por ser o primeiro a tratar do assunto, possui
-muitos códigos legados e dificuldades de instalação por conta da
-dependência do python, necessário para o funcionamento do TensorFlow,
-que é chamado através do pacote \texttt{\{reticulate\}} (USHEY; ALLAIRE;
-TANG, 2022). Além disso, a implementação das técnicas do oráculo
-envolviam modificações na função de perda, que são mais difíceis de
-implementar no ambiente do \texttt{\{tensorflow\}}, justamente por conta
-da necessidade de conhecer o código python que roda por trás dos códigos
-em R.
-
-Com o advento do pacote \texttt{\{torch\}} (FALBEL; LURASCHI, 2022), no
-entanto, tudo foi facilitado. O pacote não possui dependências com o
-python, além de ser bastante transparente e flexível na construção da
-arquitetura do modelo, funções de perda e otimização. O pacote, também
-construído por Daniel Falbel, é um grande avanço científico e facilitou
-muito a construção dos códigos desta tese.
-
-O pacote \texttt{\{captcha\}}, apesar de ter sido construído do zero,
-foi desenvolvido durante \emph{lives} realizadas na plataforma
-\emph{Twitch}. A construção em \emph{lives} foi interessante porque era
-possível obter \emph{feedback} e ideias da comunidade durante a
-construção da ferramenta, o que acelerou o desenvolvimento e auxiliou na
-arquitetura do pacote.
-
-Com o desenvolvimento da tese, notou-se a necessidade de construir
-alguns pacotes adicionais. Os pacotes \texttt{\{captchaDownload\}} e
+\texttt{\{captcha\}}. Os pacotes \texttt{\{captchaDownload\}} e
 \texttt{\{captchaOracle\}} foram desenvolvidos para facilitar a obtenção
 dos resultados da tese, enquanto o pacote \texttt{\{captcha\}} pode ser
 utilizado por qualquer pessoa interessada em visualizar, anotar e
