@@ -686,18 +686,18 @@ Considere o rótulo parcial ${\mathbf y}$ e a função $g$, dada pela rede neura
 $$
 \mathcal L(g(\mathbf x), {\mathbf y}) = -\log\left[1 - \sum_{y \in \mathcal A} {g_y}(\mathbf x) I(y\notin {\mathbf y})\right]
 $$
-Por conta da função indicadora, a perda só é calculada nos pontos que estão de fora do rótulo parcial observado $\mathbf y$. Ou seja, o valor é calculado somente nos casos que o modelo inicial errou. A função de perda proposta pode ser explicada de maneira intuitiva através de exemplos. Considere um problema com apenas $10$ possíveis valores para o rótulo e uma resposta multinomial, sem ser multivariada, como considerado na @sec-aprendizado-estatistico. Considere também que a rede neural retorna uma alta probabilidade, por exemplo, $0.99$, para o valor $j$, que o oráculo identificou como incorreta. Logo, $\mathbf {\bar y} = \{1,\dots,10\}\setminus j$, e a função de perda é dada por
+Por conta da função indicadora, a perda só é calculada nos pontos que estão de fora do rótulo parcial observado $\mathbf y$. Ou seja, o valor é calculado somente nos casos que o modelo inicial errou. A função de perda proposta pode ser explicada de maneira intuitiva através de exemplos. Considere um problema com apenas $10$ possíveis valores para o rótulo e uma resposta multinomial, sem ser multivariada, como considerado na @sec-aprendizado-estatistico. Considere também que a rede neural retorna uma alta probabilidade, por exemplo, $0.99$, para o valor $j$, que o oráculo identificou como incorreta. Logo, $\mathbf {\bar y} = \{1,\dots,10\}\setminus \{j\}$, e a função de perda é dada por
 
 $$
-\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus j) = -\log\left[1-{g_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{j\}) = -\log\left[1-{g_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
 $$
 
 Como é possível ver no exemplo, quanto maior a probabilidade dada a um rótulo identificado como incorreto pelo oráculo, mais a função de perda penaliza essa predição. Dessa forma, a função de perda consegue incorporar a informação dada pelo oráculo adequadamente.
 
-Considere, agora, que a rede neural retorna uma probabilidade pequena, por exemplo, $0.01$, para o valor $k$, que o oráculo identificou como incorreta. Logo, $\mathbf {\bar y} = \{1,\dots,10\}\setminus k$, e a função de perda é um valor pequeno:
+Considere, agora, que a rede neural retorna uma probabilidade pequena, por exemplo, $0.01$, para o valor $k$, que o oráculo identificou como incorreta. Logo, $\mathbf {\bar y} = \{1,\dots,10\}\setminus \{k\}$, e a função de perda é um valor pequeno:
 
 $$
-\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus k) = -\log\left[1-{g_k}(\mathbf x)\right] = -\log\left[1-0.01 \right] = 0.01.
+\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{k\}) = -\log\left[1-{g_k}(\mathbf x)\right] = -\log\left[1-0.01 \right] = 0.01.
 $$
 
 Quando o Captcha aceita múltiplos chutes, a mesma conta é válida, bastando subtrair as probabilidades de todos os rótulos incorretos. No final, o valor da função de perda é a soma das perdas para todas as observações do *minibatch*. A soma considera tanto as perdas calculadas com base nos rótulos corretos quanto as perdas calculadas com base nos rótulos incorretos.

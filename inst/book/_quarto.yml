@@ -37,14 +37,16 @@ format:
       dark: [darkly, assets/css/quarto-book.scss]
   pdf:
     keep-tex: true
+    pdf-engine: lualatex
     template: assets/tex/template.tex
+    link-citations: true
 
 lang: pt
 
 execute:
   echo: false
   warning: false
-  freeze: true
+  freeze: false
 
 knitr:
   opts_chunk:

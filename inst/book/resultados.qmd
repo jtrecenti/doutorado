@@ -531,10 +531,26 @@ O resultado do experimento foi promissor. A partir do modelo inicial 11% de acur
 doutorado::da_online |> 
   ggplot2::ggplot() +
   ggplot2::aes(x = epoch, y = captcha.acc) +
+  ggplot2::geom_hline(
+    yintercept = max(doutorado::da_online$captcha.acc),
+    colour = "purple", linetype = 2
+  ) +
   ggplot2::geom_line(linewidth = 1.3) +
+  ggplot2::geom_point(alpha = .8) +
   ggthemes::theme_hc(14) +
   ggplot2::scale_y_continuous(labels = scales::percent, limits = c(0,1)) +
-  ggplot2::labs(x = "Época", y = "Acurácia (base de validação)")
+  ggplot2::scale_x_continuous(limits = c(0, 104)) +
+  ggplot2::labs(x = "Época", y = "Acurácia (base de validação)") +
+  ggplot2::annotate(
+    "text",
+    x = 100,
+    y = max(doutorado::da_online$captcha.acc),
+    label = scales::percent(max(doutorado::da_online$captcha.acc)),
+    vjust = -.4,
+    hjust = -.1,
+    size = 3.5,
+    colour = "purple"
+  )
 ```
 
 Um possível motivo do Captcha não ter chegado no máximo de acurácia (100% no caso do TJRS) é que a arquitetura e os hiperparâmetros considerados não eram poderosos o suficiente para alcançar o melhor modelo. De qualquer forma, a partir do experimento, conclui-se que a utilização de *online learning* também é muito promissora. A principal vantagem do método é ser menos burocrático para desenvolvedores, no sentido de que basta passar o modelo inicial e funções para baixar e testar os Captchas para aprimorar o modelo. A desvantagem é que o procedimento precisa de conexão ativa com a internet e o aprendizado é mais lento, já que os dados são baixados no processo de construção dos *minibatches*.

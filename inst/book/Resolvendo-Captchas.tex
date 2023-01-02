@@ -194,8 +194,8 @@
     titlept={Resolvendo Captchas},
     titleen={Solving Captchas},
     % Opcional, mas se houver deve existir nas duas línguas
-    subtitlept={usando aprendizado parcialmente supervisionado},
-    subtitleen={using partial supervised learning},
+    subtitlept={usando raspagem de dados e aprendizado fracamente supervisionado},
+    subtitleen={using web scraping and weak supervised learning},
 }
 
 \author{Julio Adolfo Zucon Trecenti}
@@ -538,7 +538,7 @@ Captchas, or Completely Automated Public Turing tests to tell Computers and Huma
    m,v,\hat m, \hat v, \beta_2, \beta_2, \epsilon & \text{parâmetros do otimizador ADAM}\\
    \mathcal L & \text{função de perda}\\
    \mathcal R & \text{função de risco}\\
-   \bar y & \text{observação complementar de } y \text{ (ou seja, tudo menos } y \text{)}
+   \bar {\mathbf y} & \text{observação complementar de } y \text{ (ou seja, tudo menos } y \text{)}
 \end{array}
 \end{displaymath}
 
@@ -638,21 +638,26 @@ uma página na internet é realizada por uma pessoa ou um robô\footnote{Para
   serão tratados como sinônimos, geralmente com o nome ``robô''.}. O
 desafio é projetado para ser fácil de resolver por humanos, mas difícil
 de resolver por máquinas. Outro nome para os Captchas é \emph{Human
-Interaction Proofs,} ou HIPs (CHELLAPILLA et al., 2005).
+Interaction Proofs,} ou HIPs
+(\protect\hyperlink{ref-chellapilla2005}{CHELLAPILLA et al., 2005}).
 
 Um Captcha pode ser classificado como uma variação do teste de Turing
-(TURING, 2009). A diferença no caso do Captcha é que a avaliação da
-humanidade do agente é feita por um robô ao invés de uma pessoa -- por
-isso o termo \emph{automated}. Em algumas situações, Captchas também
-podem ser entendidos como \textbf{testes de Turing reversos}, apesar dos
-autores originais afastarem essa caracterização (AHN; BLUM; LANGFORD,
-2002).
+(\protect\hyperlink{ref-turing2009}{TURING, 2009}). A diferença no caso
+do Captcha é que a avaliação da humanidade do agente é feita por um robô
+ao invés de uma pessoa -- por isso o termo \emph{automated}. Em algumas
+situações, Captchas também podem ser entendidos como \textbf{testes de
+Turing reversos}, apesar dos autores originais afastarem essa
+caracterização
+(\protect\hyperlink{ref-vonahnTellingHumansComputers2002}{AHN; BLUM;
+LANGFORD, 2002}).
 
 Captchas estão presentes em toda a internet. Inicialmente criados para
 prevenir \emph{spam} (\emph{Sending and Posting Advertisement in Mass}),
-os desafios se tornaram populares rapidamente (AHN et al., 2008), sendo
-utilizados como forma de evitar o uso indevido de aplicações da
-\emph{web}. Algumas ações que os desafios podem ajudar a evitar são:
+os desafios se tornaram populares rapidamente
+(\protect\hyperlink{ref-vonahnReCAPTCHAHumanBasedCharacter2008}{AHN et
+al., 2008}), sendo utilizados como forma de evitar o uso indevido de
+aplicações da \emph{web}. Algumas ações que os desafios podem ajudar a
+evitar são:
 
 \begin{itemize}
 \tightlist
@@ -680,7 +685,8 @@ usuários, reduzindo a qualidade da experiência ao consumir nesses sites.
 Os sites devem levar esse fator de aborrecimento em conta para não
 reduzir a taxa de conversão. Em alguns casos, pode fazer mais sentido
 abandonar os Captchas e utilizar outros mecanismos de prevenção à
-fraude, como monitoramento da sessão do usuário (W3C, 2021).
+fraude, como monitoramento da sessão do usuário
+(\protect\hyperlink{ref-inaccess}{W3C, 2021}).
 
 Também existem casos em que o uso de Captchas é prejudicial. Por
 exemplo, sua utilização em serviços públicos do Brasil é problemática.
@@ -715,11 +721,11 @@ equipes para realizar os levantamentos pedidos. O segundo é o
 \textbf{formato}: os dados enviados como resultado de pedidos de LAI
 podem chegar em formatos inadequados para consumo da solicitante, muitas
 vezes em \emph{Portable Document Format} (PDF), que dificulta a leitura
-e análise dos dados (MICHENER; MONCAU; VELASCO, 2015, pág. 55); além
-disso, como o levantamento é realizado de forma individualizada, o mesmo
-pedido feito em diferentes períodos (e.g.~uma atualização mensal dos
-dados) pode vir em formatos diferentes, dificultando a leitura e
-arrumação dos dados.
+e análise dos dados (\protect\hyperlink{ref-michener2015}{MICHENER;
+MONCAU; VELASCO, 2015}, pág. 55); além disso, como o levantamento é
+realizado de forma individualizada, o mesmo pedido feito em diferentes
+períodos (e.g.~uma atualização mensal dos dados) pode vir em formatos
+diferentes, dificultando a leitura e arrumação dos dados.
 
 Uma forma eficiente de evitar os problemas de esforço e formato em
 pedidos de LAI é disponibilizar os dados de \textbf{forma aberta}. Como
@@ -735,11 +741,11 @@ ferramenta de software livre e gratuita.''\footnote{Link:
   \url{https://okfn.org/opendata/}. Último acesso em 01/11/2022.}
 
 As vantagens ao disponibilizar dados públicos de forma aberta para a
-sociedade é um tema pacífico na comunidade científica (MURRAY-RUST,
-2008). No Brasil, existem plataformas dedicadas à abertura de dados
-governamentais, como o \href{https://dados.gov.br}{dados.gov.br}. No
-entanto, existem diversos dados públicos que ainda não estão disponíveis
-de forma aberta.
+sociedade é um tema pacífico na comunidade científica
+(\protect\hyperlink{ref-murray-rust2008}{MURRAY-RUST, 2008}). No Brasil,
+existem plataformas dedicadas à abertura de dados governamentais, como o
+\href{https://dados.gov.br}{dados.gov.br}. No entanto, existem diversos
+dados públicos que ainda não estão disponíveis de forma aberta.
 
 A dificuldade de acesso é particularmente evidente no Poder Judiciário,
 que além de não disponibilizar um portal de dados abertos, impõe
@@ -754,10 +760,10 @@ obter a lista\footnote{O CNJ só consegue listar os processos
   \href{https://www.cnj.jus.br/sgt/consulta_publica_classes.php}{Sistema
   de Gestão de Tabelas (SGT) do CNJ}. Processos relacionados a
   recuperação judicial, no entanto, não respeitam a taxonomia do SGT
-  (ABJ, 2021).} ou ii) expedir ofícios aos 27 Tribunais Estaduais. Cada
-tribunal apresentaria diferentes opções e critérios de acesso aos dados,
-diferentes prazos para atendimento e diferentes formatos, podendo,
-inclusive, negar o pedido de acesso.
+  (\protect\hyperlink{ref-observat}{ABJ, 2021}).} ou ii) expedir ofícios
+aos 27 Tribunais Estaduais. Cada tribunal apresentaria diferentes opções
+e critérios de acesso aos dados, diferentes prazos para atendimento e
+diferentes formatos, podendo, inclusive, negar o pedido de acesso.
 
 A dificuldade para acessar os dados do judiciário é a principal barreira
 para realização de pesquisas pela Associação Brasileira de Jurimetria
@@ -770,24 +776,27 @@ Dos 16 projetos disponibilizados na
 ABJ}, pelo menos 12 (75\%) apresentaram dificuldades na obtenção dos
 dados via pedidos de acesso aos órgãos. Três exemplos emblemáticos são o
 da pesquisa sobre Tempo dos processos relacionados à adoção no Brasil
-(ABJ, 2014), o Observatório da Insolvência: Rio de Janeiro (ABJ, 2021) e
-o Diagnóstico do Contencioso Tributário Administrativo (ABJ, 2022). No
-primeiro caso, dois tribunais enviaram os dados em arquivos em papel,
-sendo que um deles ultrapassou mil páginas com números de processos
-impressos. No segundo caso, o pedido foi respondido com uma planilha de
-contagens ao invés da lista de processos. No último caso, até mesmo
-órgãos que faziam parte do grupo de trabalho da pesquisa negaram pedido
-de acesso a dados de processos tributários em primeira instância, com
-argumentos que variavam desde a dificuldade técnica de levantar os dados
-até a Lei Geral de Proteção de Dados (LGPD).
+(\protect\hyperlink{ref-tempodo}{ABJ, 2014}), o Observatório da
+Insolvência: Rio de Janeiro (\protect\hyperlink{ref-observat}{ABJ,
+2021}) e o Diagnóstico do Contencioso Tributário Administrativo
+(\protect\hyperlink{ref-diagnosticoABJ}{ABJ, 2022}). No primeiro caso,
+dois tribunais enviaram os dados em arquivos em papel, sendo que um
+deles ultrapassou mil páginas com números de processos impressos. No
+segundo caso, o pedido foi respondido com uma planilha de contagens ao
+invés da lista de processos. No último caso, até mesmo órgãos que faziam
+parte do grupo de trabalho da pesquisa negaram pedido de acesso a dados
+de processos tributários em primeira instância, com argumentos que
+variavam desde a dificuldade técnica de levantar os dados até a Lei
+Geral de Proteção de Dados (LGPD).
 
 Em muitas situações a única alternativa para realizar as pesquisas é
 acessando os dados via coleta automatizada nos sites. Todos os tribunais
 possuem ferramentas de consulta individualizadas de processos, por conta
 do que está previsto na CF. A solução, portanto, passa a ser construir
 uma ferramenta que obtém todos os dados automaticamente. Tal conceito é
-conhecido como \emph{raspagem de dados} (ZHAO, 2017) e será desenvolvido
-com maiores detalhes no Capítulo~\ref{sec-metodologia}.
+conhecido como \emph{raspagem de dados}
+(\protect\hyperlink{ref-zhao2017}{ZHAO, 2017}) e será desenvolvido com
+maiores detalhes no Capítulo~\ref{sec-metodologia}.
 
 Os Captchas se tornam prejudiciais à sociedade quando o acesso
 automatizado é necessário para realizar pesquisas científicas.
@@ -867,32 +876,40 @@ resolvedores de Captchas, que pode ser dada como encerrada no ano de
 \section{Uma luta entre geradores e resolvedores}\label{sec-historia}}
 
 O primeiro texto técnico sobre Captchas foi publicado por AHN; BLUM;
-LANGFORD (2002). O texto apresenta o Captcha e seu significado através
-do problema de geração de \emph{emails} automáticos no Yahoo. Em
-seguida, apresenta alguns exemplos de candidatos a Captcha, com tarefas
-de reconhecimento de padrões ou textos. Uma característica interessante
-dos autores sobre o Captcha é que suas imagens devem ser disponíveis
-publicamente. O texto também faz a conexão entre a tarefa dos Captchas e
-os desafios da inteligência artificial. Um ponto a destacar é que os
-autores incentivam pesquisas para resolver Captchas, pois isso implica
-em avanços na inteligência artificial. O site original do projeto,
+LANGFORD
+(\protect\hyperlink{ref-vonahnTellingHumansComputers2002}{2002}). O
+texto apresenta o Captcha e seu significado através do problema de
+geração de \emph{emails} automáticos no Yahoo. Em seguida, apresenta
+alguns exemplos de candidatos a Captcha, com tarefas de reconhecimento
+de padrões ou textos. Uma característica interessante dos autores sobre
+o Captcha é que suas imagens devem ser disponíveis publicamente. O texto
+também faz a conexão entre a tarefa dos Captchas e os desafios da
+inteligência artificial. Um ponto a destacar é que os autores incentivam
+pesquisas para resolver Captchas, pois isso implica em avanços na
+inteligência artificial. O site original do projeto,
 \href{https://web.archive.org/web/20010723114217/http://www.captcha.net/}{\emph{The
 Captcha Project}}, foi lançado em 2000.
 
-O relatório técnico de AHN; BLUM; LANGFORD (2002) não foi o primeiro a
-apresentar o nome Captcha, nem suas aplicações. RESHEF; RAANAN; SOLAN
-(2005) foi o primeiro registro de patente com o termo e LILLIBRIDGE et
-al. (2001) foi o primeiro registro de patente que implementou uma
-solução aos sistemas de Captchas. No entanto, o relatório técnico de
-2002 é o primeiro que reconhecidamente trata do tema como um problema de
+O relatório técnico de AHN; BLUM; LANGFORD
+(\protect\hyperlink{ref-vonahnTellingHumansComputers2002}{2002}) não foi
+o primeiro a apresentar o nome Captcha, nem suas aplicações. RESHEF;
+RAANAN; SOLAN
+(\protect\hyperlink{ref-reshefMethodSystemDiscriminating2005}{2005}) foi
+o primeiro registro de patente com o termo e LILLIBRIDGE et al.
+(\protect\hyperlink{ref-lillibridgeMethodSelectivelyRestricting2001}{2001})
+foi o primeiro registro de patente que implementou uma solução aos
+sistemas de Captchas. No entanto, o relatório técnico de 2002 é o
+primeiro que reconhecidamente trata do tema como um problema de
 inteligência artificial como um teste de Turing automatizado.
 
 Os artigos mais conhecidos de introdução aos Captchas são VON AHN et al.
-(2003) e VON AHN; BLUM; LANGFORD (2004). O conteúdo dos trabalhos é o
-mesmo, sendo o primeiro deles na forma de apresentação e o segundo na
-forma de relatório. Um detalhe interessante é a ênfase dos autores no
-termo \emph{Public} dos Captchas, mostrando a preocupação em manter os
-códigos públicos.
+(\protect\hyperlink{ref-vonahnCaptchaTellingHumans2003}{2003}) e VON
+AHN; BLUM; LANGFORD
+(\protect\hyperlink{ref-vonahnTellingHumansComputers2004}{2004}). O
+conteúdo dos trabalhos é o mesmo, sendo o primeiro deles na forma de
+apresentação e o segundo na forma de relatório. Um detalhe interessante
+é a ênfase dos autores no termo \emph{Public} dos Captchas, mostrando a
+preocupação em manter os códigos públicos.
 
 Os autores também defendem que o Captcha é uma forma de fazer com que
 pessoas mal-intencionadas contribuam com os avanços da inteligência
@@ -904,14 +921,15 @@ Não demorou para surgirem os primeiros resolvedores de
 Captchas\footnote{Outro termo para \emph{resolver} Captchas é
   \emph{quebrar} Captchas. Nesta tese, optou-se por utilizar o termo
   \emph{resolver}, para enfatizar a interpretação do Captcha como um
-  desafio, não como um problema de criptografia.}. MORI; MALIK (2003)
-foi um dos primeiros trabalhos publicados sobre o tema e utiliza
-diversas técnicas de processamento de imagens para obter os rótulos
-corretos. Também não demorou para a comunidade científica perceber que
-redes neurais eram úteis nesse contexto (CHELLAPILLA; SIMARD, 2004). No
-artigo de 2004, Chellapilla e Simard desenvolvem um algoritmo baseado em
-heurísticas para segmentar a imagem e redes neurais para identificar as
-imagens individuais.
+  desafio, não como um problema de criptografia.}. MORI; MALIK
+(\protect\hyperlink{ref-mori2003a}{2003}) foi um dos primeiros trabalhos
+publicados sobre o tema e utiliza diversas técnicas de processamento de
+imagens para obter os rótulos corretos. Também não demorou para a
+comunidade científica perceber que redes neurais eram úteis nesse
+contexto (\protect\hyperlink{ref-chellapilla2004}{CHELLAPILLA; SIMARD,
+2004}). No artigo de 2004, Chellapilla e Simard desenvolvem um algoritmo
+baseado em heurísticas para segmentar a imagem e redes neurais para
+identificar as imagens individuais.
 
 A partir desse ponto, foi iniciada uma luta entre geradores e
 resolvedores de Captchas. Do lado dos geradores, as pessoas envolvidas
@@ -946,19 +964,21 @@ depois de Von Ahn verificar que aproximadamente 200 milhões de Captchas
 eram resolvidos diariamente.
 
 O reCaptcha v1 aproveitou o tempo das pessoas que resolvem Captchas para
-digitalizar livros (AHN et al., 2008). A ideia do reCaptcha, como
-demonstrada na Figura~\ref{fig-recaptcha-v1}, foi apresentar duas
-palavras distorcidas para a pessoa. Imagine que uma ferramenta de OCR
-(\emph{Optical Character Recognition}) está digitalizando a página de um
-livro que foi escaneada de um documento físico, ou seja, está
-transformando a foto da página do livro em um arquivo de texto. Na
-Figura, ``upon'' seria uma palavra que a ferramenta de OCR conseguiu
-transformar a imagem em texto com sucesso, enquanto ``between'' seria
-uma palavra em que a ferramenta de OCR falhou. A primeira palavra seria
-utilizada para verificar se o agente era ou não humano, e a segunda
-seria utilizada para decifrar a palavra e aprimorar as ferramentas de
-OCR. Em 2009, a empresa foi comprada pela Google, que utilizou o
-reCaptcha v1 para digitalizar os livros que estão presentes no site
+digitalizar livros
+(\protect\hyperlink{ref-vonahnReCAPTCHAHumanBasedCharacter2008}{AHN et
+al., 2008}). A ideia do reCaptcha, como demonstrada na
+Figura~\ref{fig-recaptcha-v1}, foi apresentar duas palavras distorcidas
+para a pessoa. Imagine que uma ferramenta de OCR (\emph{Optical
+Character Recognition}) está digitalizando a página de um livro que foi
+escaneada de um documento físico, ou seja, está transformando a foto da
+página do livro em um arquivo de texto. Na Figura, ``upon'' seria uma
+palavra que a ferramenta de OCR conseguiu transformar a imagem em texto
+com sucesso, enquanto ``between'' seria uma palavra em que a ferramenta
+de OCR falhou. A primeira palavra seria utilizada para verificar se o
+agente era ou não humano, e a segunda seria utilizada para decifrar a
+palavra e aprimorar as ferramentas de OCR. Em 2009, a empresa foi
+comprada pela Google, que utilizou o reCaptcha v1 para digitalizar os
+livros que estão presentes no site
 \href{https://books.google.com.br/}{Google Books}.
 
 \begin{figure}
@@ -975,12 +995,14 @@ funcionamento do reCaptcha}
 Curiosamente, foi com a própria Google que os resolvedores ficaram em
 vantagem na luta contra geradores. Os modelos de inteligência artificial
 continuaram avançando, notadamente com o avanço dos modelos de redes
-neurais profundas (LECUN; BENGIO; HINTON, 2015). No trabalho de
-GOODFELLOW et al. (2013), todos funcionários da Google na época, foi
-apresentado um modelo de redes neurais convolucionais que resolvia o
-reCaptcha v1 com 99,8\% de acurácia. No ano seguinte, em 2014, a Google
-descontinuou o reCaptcha v1, lançando o reCaptcha v2.\footnote{\emph{Are
-  you a robot? Introducing No Captcha reCaptcha.} Acessível no
+neurais profundas (\protect\hyperlink{ref-lecun2015}{LECUN; BENGIO;
+HINTON, 2015}). No trabalho de GOODFELLOW et al.
+(\protect\hyperlink{ref-goodfellow2013}{2013}), todos funcionários da
+Google na época, foi apresentado um modelo de redes neurais
+convolucionais que resolvia o reCaptcha v1 com 99,8\% de acurácia. No
+ano seguinte, em 2014, a Google descontinuou o reCaptcha v1, lançando o
+reCaptcha v2.\footnote{\emph{Are you a robot? Introducing No Captcha
+  reCaptcha.} Acessível no
   \href{https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html}{blog
   da Google}. Último acesso em 01/11/2022.}
 
@@ -1032,15 +1054,18 @@ v2 e seus concorrentes. No entanto, vários avanços apareceram no sentido
 de reduzir a quantidade de imagens anotadas para criar candidatos a
 resolvedores. Dentre eles, os mais significativos são os baseados nas
 redes generativas adversariais (\emph{Generative Adversarial Networks,}
-ou GANs), propostas no famoso trabalho de GOODFELLOW et al. (2014). O
-primeiro trabalho que utiliza modelos generativos no contexto de
+ou GANs), propostas no famoso trabalho de GOODFELLOW et al.
+(\protect\hyperlink{ref-goodfellowGenerativeAdversarialNetworks2014}{2014}).
+O primeiro trabalho que utiliza modelos generativos no contexto de
 Captchas mostrou uma redução de 300x na quantidade de dados anotados
-necessários para resolver um Captcha (GEORGE et al., 2017). Nesse caso,
+necessários para resolver um Captcha
+(\protect\hyperlink{ref-george2017}{GEORGE et al., 2017}). Nesse caso,
 os autores propõem uma rede diferente do GAN, chamada \emph{Recursive
-Cortical Network}, ou RCN. Outros trabalhos mais recentes (WANG et al.,
-2021; YE et al., 2018) avançam ainda mais na pesquisa, reduzindo o
-trabalho de classificação para um novo Captcha de texto para
-aproximadamente 2 horas.
+Cortical Network}, ou RCN. Outros trabalhos mais recentes
+(\protect\hyperlink{ref-wang2021}{WANG et al., 2021};
+\protect\hyperlink{ref-ye2018}{YE et al., 2018}) avançam ainda mais na
+pesquisa, reduzindo o trabalho de classificação para um novo Captcha de
+texto para aproximadamente 2 horas.
 
 Mas foi em 2018, com o reCaptcha v3, que a Google fez um passo
 definitivo. Com a nova versão, as verificações do navegador \emph{web}
@@ -1100,16 +1125,17 @@ apresentar algumas características sobre o problema estudado.
 \section{Oráculo}\label{sec-intro-oraculo}}
 
 Modelos de aprendizagem profunda usuais podem ser sensíveis a
-perturbações pequenas nas imagens (YUAN et al., 2019). Por isso, para
-resolver o Captcha de um tribunal, um modelo que resolve o Captcha de
-outro tribunal pode não ser eficaz, sendo necessário baixar e anotar uma
-nova base e treinar um novo modelo.
+perturbações pequenas nas imagens (\protect\hyperlink{ref-yuan2019}{YUAN
+et al., 2019}). Por isso, para resolver o Captcha de um tribunal, um
+modelo que resolve o Captcha de outro tribunal pode não ser eficaz,
+sendo necessário baixar e anotar uma nova base e treinar um novo modelo.
 
 Avanços em técnicas de regularização fazem com que o modelo seja menos
 afetado por mudanças nos desafios gerados. Uma técnica de regularização
 que ajuda na capacidade de generalização é a aumentação de dados com
-adição de ruídos (NOH et al., 2017). No entanto, nenhuma técnica garante
-que o modelo terá excelentes resultados em novos desafios.
+adição de ruídos (\protect\hyperlink{ref-noh2017}{NOH et al., 2017}). No
+entanto, nenhuma técnica garante que o modelo terá excelentes resultados
+em novos desafios.
 
 Uma alternativa é desenvolver modelos que aprendem com poucos dados
 anotados. Como comentado anteriormente, GANs e modelos relacionados
@@ -1140,12 +1166,14 @@ exemplo, pode dar a possibilidade de realizar apenas um teste por
 imagem, vários testes por imagem, ou ainda retornar informações
 ruidosas. Um exemplo de oráculo ruidoso é o reCaptcha v1, que pode
 retornar com um ``bom o suficiente'' quando o rótulo não está totalmente
-correto (AHN et al., 2008).
+correto
+(\protect\hyperlink{ref-vonahnReCAPTCHAHumanBasedCharacter2008}{AHN et
+al., 2008}).
 
 O oráculo é uma forma de obter uma base de dados virtualmente infinita.
 Do ponto de vista de modelagem, é similar a um problema de aprendizado
-por reforço (SUTTON; BARTO, 2018), mas com uma resposta binária (acertou
-ou errou) no lugar de um escore.
+por reforço (\protect\hyperlink{ref-sutton2018}{SUTTON; BARTO, 2018}),
+mas com uma resposta binária (acertou ou errou) no lugar de um escore.
 
 O método WAWL consiste em aproveitar o fato de que o Captcha, por
 definição, aplica um teste de Turing automático para gerar bases de
@@ -1166,27 +1194,28 @@ aprimorar o modelo inicial.
 
 Um ponto importante do WAWL é como aproveitar a informação oferecida
 pelo oráculo. Utilizar somente os casos anotados corretamente, obtidos
-de acertos no teste do oráculo, induz viés de seleção na amostra (NA et
-al., 2020). Como o modelo só tem acesso aos casos em que já funciona
-bem, a informação obtida não é tão relevante. O desafio de modelagem da
-tese reside em como considerar a informação fornecida pelo oráculo nos
-casos em que o modelo inicial erra.
+de acertos no teste do oráculo, induz viés de seleção na amostra
+(\protect\hyperlink{ref-na2020}{NA et al., 2020}). Como o modelo só tem
+acesso aos casos em que já funciona bem, a informação obtida não é tão
+relevante. O desafio de modelagem da tese reside em como considerar a
+informação fornecida pelo oráculo nos casos em que o modelo inicial
+erra.
 
 Do ponto de vista estatístico, a informação produzida pelo oráculo pode
-ser entendida como uma informação censurada (COLOSIMO; GIOLO, 2006).
-Isso acontece pois a informação existe e é correta, mas não está
-completa. No entanto, como a informação é resultado do teste de um
-rótulo produzido por um modelo, faz sentido afirmar que a censura não é
-gerada por acaso.
+ser entendida como uma informação censurada
+(\protect\hyperlink{ref-colosimo2006}{COLOSIMO; GIOLO, 2006}). Isso
+acontece pois a informação existe e é correta, mas não está completa. No
+entanto, como a informação é resultado do teste de um rótulo produzido
+por um modelo, faz sentido afirmar que a censura não é gerada por acaso.
 
 Na área de aprendizado de máquinas, um modelo que apresenta resposta
 censurada ou incompleta faz parte da classe de \textbf{aprendizado
-fracamente supervisionado} (ZHOU, 2018). Trata-se de uma área ainda
-pouco investigada na literatura, mas bastante ampla, englobando não só
-os métodos supervisionados como também os métodos semi-supervisionados.
-A tese apresentará os conceitos de aprendizado fracamente
-supervisionado, com foco na classe de problemas que a modelagem
-utilizando Captchas representa.
+fracamente supervisionado} (\protect\hyperlink{ref-zhou2018}{ZHOU,
+2018}). Trata-se de uma área ainda pouco investigada na literatura, mas
+bastante ampla, englobando não só os métodos supervisionados como também
+os métodos semi-supervisionados. A tese apresentará os conceitos de
+aprendizado fracamente supervisionado, com foco na classe de problemas
+que a modelagem utilizando Captchas representa.
 
 O custo técnico de implementar o WAWL está na necessidade de utilizar
 técnicas de raspagem de dados para criar uma nova base usando o oráculo.
@@ -1364,13 +1393,13 @@ sugerir melhorias.
 \section{Definição do problema}\label{definiuxe7uxe3o-do-problema}}
 
 O problema a ser trabalhado é um caso de \emph{aprendizado fracamente
-supervisionado} (ZHOU, 2018). Trata-se de uma generalização do
-aprendizado supervisionado e do aprendizado \emph{semi-supervisionado}.
-Usualmente, a área de aprendizado estatístico (ou aprendizado de
-máquinas) se concentra em dois tipos de problemas principais: o
-aprendizado supervisionado e o aprendizado não supervisionado. Isso
-ocorre principalmente por fins didáticos, pois é mais fácil passar os
-modelos que fazem parte de cada área.
+supervisionado} (\protect\hyperlink{ref-zhou2018}{ZHOU, 2018}). Trata-se
+de uma generalização do aprendizado supervisionado e do aprendizado
+\emph{semi-supervisionado}. Usualmente, a área de aprendizado
+estatístico (ou aprendizado de máquinas) se concentra em dois tipos de
+problemas principais: o aprendizado supervisionado e o aprendizado não
+supervisionado. Isso ocorre principalmente por fins didáticos, pois é
+mais fácil passar os modelos que fazem parte de cada área.
 
 No entanto, a estatística evolui com os problemas que ocorrem no mundo.
 No mundo, os problemas nem sempre recaem em uma ou outra categoria. O
@@ -1380,13 +1409,13 @@ predizer valores (regressão) ou categorias (classificação).
 
 Nesse sentido, uma área que ficou popular nos últimos anos, até por
 conta dos avanços na área de \emph{deep learning}, é o \emph{aprendizado
-semi-supervisionado} (ZHU, 2005). Trata-se de uma classe de problemas
-contendo uma amostra completamente anotada e uma amostra sem anotações.
-A amostra sem anotações é usada para compreender como os dados foram
-gerados, e os parâmetros podem ser compartilhados com a parte
-supervisionada do modelo. Isso poderia indicar que existem três classes
-de problemas: o não supervisionado, o supervisionado e o
-semi-supervisionado.
+semi-supervisionado} (\protect\hyperlink{ref-zhu2005}{ZHU, 2005}).
+Trata-se de uma classe de problemas contendo uma amostra completamente
+anotada e uma amostra sem anotações. A amostra sem anotações é usada
+para compreender como os dados foram gerados, e os parâmetros podem ser
+compartilhados com a parte supervisionada do modelo. Isso poderia
+indicar que existem três classes de problemas: o não supervisionado, o
+supervisionado e o semi-supervisionado.
 
 Mas isso também não representa todas as classes de problemas. Em muitas
 aplicações reais, obter uma anotação completa e correta pode ser custoso
@@ -1396,14 +1425,17 @@ anteriores é o aprendizado fracamente supervisionado.
 
 Aprendizado fracamente supervisionado é um termo guarda-chuva. Dentro da
 área existem diversos tipos de problemas, como aprendizado
-semi-supervisionado, aprendizado de múltiplas instâncias (BLUM; KALAI,
-1998) e o aprendizado com rótulos incorretos ou incompletos (ZHOU,
-2018). O método WAWL é um exemplo de aplicação de uma classe chamada
-\textbf{\emph{aprendizado com rótulos parciais}} (\emph{partial label
-learning}, PLL, JIN; GHAHRAMANI (2002)). Essa classe apresenta uma
+semi-supervisionado, aprendizado de múltiplas instâncias
+(\protect\hyperlink{ref-blum1998}{BLUM; KALAI, 1998}) e o aprendizado
+com rótulos incorretos ou incompletos
+(\protect\hyperlink{ref-zhou2018}{ZHOU, 2018}). O método WAWL é um
+exemplo de aplicação de uma classe chamada \textbf{\emph{aprendizado com
+rótulos parciais}} (\emph{partial label learning}, PLL, JIN; GHAHRAMANI
+(\protect\hyperlink{ref-jin2002}{2002})). Essa classe apresenta uma
 especialização ainda mais próxima do problema estudado, chamado
 \textbf{\emph{aprendizado com rótulos complementares}}
-(\emph{complementary label learning}, ISHIDA et al. (2017)).
+(\emph{complementary label learning}, ISHIDA et al.
+(\protect\hyperlink{ref-ishida2017}{2017})).
 
 A interpretação do Captcha como um problema de PLL será apresentada no
 final do capítulo. A jornada começa descrevendo um pouco melhor os
@@ -1502,9 +1534,10 @@ imagem. Na maioria dos casos, \(\mathcal A\) corresponde a uma
 combinação de algarismos arábicos (0-9) e letras do alfabeto latino
 (a-z), podendo diferenciar ou não as letras maiúsculas e
 minúsculas\footnote{existem exemplos de Captchas baseados em imagens que
-  não são limitados a letras e números para constituir o rótulo (KAUR;
-  BEHAL, 2014). Como esses casos não aparecem nas aplicações práticas de
-  interesse, estão fora do escopo do trabalho.}.
+  não são limitados a letras e números para constituir o rótulo
+  (\protect\hyperlink{ref-kaur2014}{KAUR; BEHAL, 2014}). Como esses
+  casos não aparecem nas aplicações práticas de interesse, estão fora do
+  escopo do trabalho.}.
 
 A Figura~\ref{fig-exemplo-tjmg} mostra um exemplo Captcha do Tribunal de
 Justiça de Minas Gerais (TJMG). Nesse caso, tem-se \(L=5\) e
@@ -1545,14 +1578,14 @@ isso, modelar as imagens diretamente através de uma única variável
 resposta categórica é tecnicamente inviável.
 
 A forma \emph{one-hot} da resposta pode ser entendida como uma
-\textbf{multinomial} \textbf{multivariada} (LI; TSUNG; ZOU, 2014). A
-resposta é multivariada porque existem \(L\) caracteres na imagem e
-multinomial porque existem \(|\mathcal A|\) possíveis caracteres em cada
-posição. Dessa forma, é possível pensar que um modelo que resolve o
-Captcha envolve \(L\) classificadores com resposta multinomial, cada um
-dando conta de um dos caracteres. Os classificadores podem ser
-independentes e podem até contar com etapas de pré-processamento
-separadas.
+\textbf{multinomial} \textbf{multivariada}
+(\protect\hyperlink{ref-li2014}{LI; TSUNG; ZOU, 2014}). A resposta é
+multivariada porque existem \(L\) caracteres na imagem e multinomial
+porque existem \(|\mathcal A|\) possíveis caracteres em cada posição.
+Dessa forma, é possível pensar que um modelo que resolve o Captcha
+envolve \(L\) classificadores com resposta multinomial, cada um dando
+conta de um dos caracteres. Os classificadores podem ser independentes e
+podem até contar com etapas de pré-processamento separadas.
 
 Seguindo o exemplo da Figura~\ref{fig-exemplo-tjmg}, é possível
 representar o rótulo da seguinte forma:
@@ -1590,10 +1623,10 @@ Um exemplo de gerador é a função \texttt{captcha\_generate()} criada no
 pacote \texttt{\{captcha\}}, que foi descrito em maiores detalhes na
 Seção~\ref{sec-pacote-captcha}. A função foi criada para realizar
 simulações do sistema de resolução proposto na tese, a partir do pacote
-\texttt{\{magick\}} (OOMS, 2021), que utiliza o \emph{software}
-\emph{ImageMagick}. A função aplica uma série de distorções e efeitos
-comuns no contexto de Captchas, gerando imagens como a da
-Figura~\ref{fig-captcha-r-exemplo}.
+\texttt{\{magick\}} (\protect\hyperlink{ref-magick}{OOMS, 2021}), que
+utiliza o \emph{software} \emph{ImageMagick}. A função aplica uma série
+de distorções e efeitos comuns no contexto de Captchas, gerando imagens
+como a da Figura~\ref{fig-captcha-r-exemplo}.
 
 \begin{figure}
 
@@ -1760,15 +1793,18 @@ operação de convolução no contexto de Captchas.
 O método WAWL pode utilizar diversas arquiteturas de redes neurais. A
 escolha de uma arquitetura mais simples foi feita para demonstrar a
 eficácia do procedimento de forma mais contundente. Outras arquiteturas
-mais rebuscadas, como as apresentadas na introdução (GEORGE et al.,
-2017; YE et al., 2018) podem melhorar os resultados do modelo. A única
-restrição é que ela possa receber uma função de perda modificada, como
-será mostrado na na Seção~\ref{sec-wawl}.
+mais rebuscadas, como as apresentadas na introdução
+(\protect\hyperlink{ref-george2017}{GEORGE et al., 2017};
+\protect\hyperlink{ref-ye2018}{YE et al., 2018}) podem melhorar os
+resultados do modelo. A única restrição é que ela possa receber uma
+função de perda modificada, como será mostrado na na
+Seção~\ref{sec-wawl}.
 
 A seguir, apresenta-se como funcionam as redes neurais no contexto de
 Captchas. O modelo descrito é o que foi utilizado nas simulações, que é
 um modelo de redes neurais convolucionais simples, similar ao LeNet, com
-três camadas convolucionais e duas camadas densas (LECUN et al., 1998).
+três camadas convolucionais e duas camadas densas
+(\protect\hyperlink{ref-lecun1998}{LECUN et al., 1998}).
 
 É possível organizar a estrutura de uma rede neural em três componentes:
 a \textbf{arquitetura da rede}, a \textbf{função de perda} e o
@@ -1803,9 +1839,9 @@ apresentados de forma esquemática}
 A arquitetura da rede é uma função que leva os dados de entrada na
 estrutura de dados (dimensões) da variável resposta. A arquitetura tem
 papel similar ao exercido pelo componente sistemático em um modelo
-linear generalizado (NELDER; WEDDERBURN, 1972). Trata-se da parte mais
-complexa da rede neural, carregando todos os parâmetros que serão
-otimizados.
+linear generalizado (\protect\hyperlink{ref-nelder1972}{NELDER;
+WEDDERBURN, 1972}). Trata-se da parte mais complexa da rede neural,
+carregando todos os parâmetros que serão otimizados.
 
 A arquitetura da rede possui três componentes principais, com algumas
 subdivisões:
@@ -2004,8 +2040,8 @@ parâmetros \(\gamma\) e \(\beta\) podem ser adicionados no passo da
 normalização, fazendo parte do fluxo de aprendizagem do modelo. Apesar
 de não ser uma teoria fechada, alguns resultados indicam que o uso de
 \emph{batch normalization} reduz o tempo de aprendizado dos modelos
-(IOFFE; SZEGEDY, 2015). O passo foi adicionado nos modelos por
-apresentar bons resultados nas simulações.
+(\protect\hyperlink{ref-ioffe2015}{IOFFE; SZEGEDY, 2015}). O passo foi
+adicionado nos modelos por apresentar bons resultados nas simulações.
 
 Após a aplicação da convolução, também é aplicada a função não linear
 \textbf{ReLU}. A transformação ReLU é a mais simples das funções da
@@ -2098,13 +2134,15 @@ Federal do Brasil (RFB), possui 6 letras e porque \(32*6=192\). Ou seja,
 
 A quantidade de canais gerados pelas camadas convolucionais foram
 fixadas em 32, 64 e 64, respectivamente. A utilização de números
-não-decrescentes de canais nas camadas convolucionais é comum (LECUN et
-al., 1998), bem como a utilização de números que são potências de 2
-(LECUN; BENGIO; HINTON, 2015), apesar dessa última escolha não ser
-necessária. Nesse sentido, um possível valor para a terceira camada era
-de 128 canais, mas optou-se por 64 canais para que a quantidade de
-parâmetros não ficasse grande demais, já que isso exigiria mais tempo de
-computação ou computadores mais poderosos.
+não-decrescentes de canais nas camadas convolucionais é comum
+(\protect\hyperlink{ref-lecun1998}{LECUN et al., 1998}), bem como a
+utilização de números que são potências de 2
+(\protect\hyperlink{ref-lecun2015}{LECUN; BENGIO; HINTON, 2015}), apesar
+dessa última escolha não ser necessária. Nesse sentido, um possível
+valor para a terceira camada era de 128 canais, mas optou-se por 64
+canais para que a quantidade de parâmetros não ficasse grande demais, já
+que isso exigiria mais tempo de computação ou computadores mais
+poderosos.
 
 O total de parâmetros que podem ser otimizados até o final das camadas
 convolucionais é 56.646. Esse número pode parecer grande no contexto de
@@ -2113,7 +2151,9 @@ considerando cada pixel como uma covariável, 4.401 parâmetros
 (\(40\times110\) e o intercepto). No entanto, é uma quantidade
 relativamente pequena no contexto de redes neurais. Redes neurais
 recentes aplicadas a imagens, como o DALL-E 2 possui 3,5 bilhões de
-parâmetros (RAMESH et al., 2022).
+parâmetros
+(\protect\hyperlink{ref-rameshHierarchicalTextConditionalImage2022}{RAMESH
+et al., 2022}).
 
 Em seguida, o resultado é transformado para um formato retangular,
 similar ao que se encontra em modelos de regressão. Aqui, as dimensões
@@ -2121,9 +2161,9 @@ da imagem não são mais importantes e os pixels de cada canal são
 tratados como variáveis preditoras. Esse passo pode ser interpretado da
 seguinte forma: as camadas convolucionais funcionam como um
 pré-processamento aplicado às imagens, aplicando uma engenharia de
-variáveis (KUHN; JOHNSON, 2019). No entanto, trata-se de uma engenharia
-de variáveis otimizada, já que os parâmetros da operação fazem parte do
-ajuste do modelo.
+variáveis (\protect\hyperlink{ref-kuhn2019}{KUHN; JOHNSON, 2019}). No
+entanto, trata-se de uma engenharia de variáveis otimizada, já que os
+parâmetros da operação fazem parte do ajuste do modelo.
 
 Uma vez obtidas as variáveis preditoras com o pré-processamento, é hora
 de aplicar as camadas densas. Tais camadas são as mais comuns no
@@ -2148,20 +2188,21 @@ foi variada para produzir modelos com mais ou menos parâmetros de
 ajuste.
 
 É no contexto da grande quantidade de parâmetros que entra o conceito do
-\emph{dropout} (BALDI; SADOWSKI, 2013). Muitos parâmetros podem levar a
-sobreajuste do modelo, que acaba precisando de técnicas de regularização
-para funcionar bem. O \emph{dropout} é uma regra de regularização
-simples de implementar, mas que possui boas propriedades de
-regularização. A técnica consiste em selecionar uma amostra dos
-parâmetros em uma das camadas e apagá-los, forçando que os valores sejam
-fixados em zero. Na prática, essa técnica obriga o modelo a ser ajustado
-de forma que amostras aleatórias dos parâmetros sejam boas para predizer
-a variável resposta. Quando o modelo é usado para predições, o
-\emph{dropout} é desativado e o modelo pode utilizar todos os
-parâmetros, obtendo-se, na prática, uma média ponderada das predições de
-cada submodelo. Dessa forma, o dropout tem um efeito similar à aplicação
-da técnica de \emph{bagging} (GALAR et al., 2011), muito utilizada na
-área de árvores de decisão.
+\emph{dropout} (\protect\hyperlink{ref-baldi2013}{BALDI; SADOWSKI,
+2013}). Muitos parâmetros podem levar a sobreajuste do modelo, que acaba
+precisando de técnicas de regularização para funcionar bem. O
+\emph{dropout} é uma regra de regularização simples de implementar, mas
+que possui boas propriedades de regularização. A técnica consiste em
+selecionar uma amostra dos parâmetros em uma das camadas e apagá-los,
+forçando que os valores sejam fixados em zero. Na prática, essa técnica
+obriga o modelo a ser ajustado de forma que amostras aleatórias dos
+parâmetros sejam boas para predizer a variável resposta. Quando o modelo
+é usado para predições, o \emph{dropout} é desativado e o modelo pode
+utilizar todos os parâmetros, obtendo-se, na prática, uma média
+ponderada das predições de cada submodelo. Dessa forma, o dropout tem um
+efeito similar à aplicação da técnica de \emph{bagging}
+(\protect\hyperlink{ref-galar2011}{GALAR et al., 2011}), muito utilizada
+na área de árvores de decisão.
 
 O \emph{dropout} é aplicado após a finalização das camadas
 convolucionais. Em seguida, vem a primeira camada densa, um ReLU e um
@@ -2270,9 +2311,11 @@ necessária para aplicar o método.
 \subsubsection{Otimizador}\label{sec-otimizador}}
 
 O otimizador utilizado para os modelos ajustados na tese foi o ADAM
-(KINGMA; BA, 2017). A sigla significa \emph{Adaptive Moment Estimator} e
-funciona como uma extensão da descida de gradiente estocástica (LECUN et
-al., 2012), atualizando os parâmetros da seguinte forma:
+(\protect\hyperlink{ref-kingmaAdamMethodStochastic2017}{KINGMA; BA,
+2017}). A sigla significa \emph{Adaptive Moment Estimator} e funciona
+como uma extensão da descida de gradiente estocástica
+(\protect\hyperlink{ref-lecun2012}{LECUN et al., 2012}), atualizando os
+parâmetros da seguinte forma:
 
 \[
 \begin{array}{cl}
@@ -2316,21 +2359,25 @@ rótulos incompletos chamada aprendizado com dados parcialmente rotulados
 da base é a resposta do oráculo indicando uma lista de rótulos
 possíveis, incluindo o correto.
 
-A área de PLL não é nova (GRANDVALET, 2002) e aparece com outros nomes,
-como aprendizado com rótulos ambiguos (HÜLLERMEIER; BERINGER, 2006) e
+A área de PLL não é nova
+(\protect\hyperlink{ref-grandvalet2002}{GRANDVALET, 2002}) e aparece com
+outros nomes, como aprendizado com rótulos ambiguos
+(\protect\hyperlink{ref-hullermeier2006}{HÜLLERMEIER; BERINGER, 2006}) e
 aprendizado de rótulos em superconjuntos (\emph{superset-label
-learning)} (LIU; DIETTERICH, 2012). Um caso particular de PLL, aplicável
-ao tema do Captcha são rótulos complementares (ISHIDA et al., 2017), que
-considera os chutes errados na notação do problema.
+learning)} (\protect\hyperlink{ref-liu2012}{LIU; DIETTERICH, 2012}). Um
+caso particular de PLL, aplicável ao tema do Captcha são rótulos
+complementares (\protect\hyperlink{ref-ishida2017}{ISHIDA et al.,
+2017}), que considera os chutes errados na notação do problema.
 
 As definições seguem uma terminologia adaptada a partir da leitura de
-JIN; GHAHRAMANI (2002), COUR; SAPP; TASKAR (2011) e FENG et al. (2020a).
-Sempre que possível, os casos são adaptados para o problema do Captcha
-diretamente. Para simplificar a notação, no entanto, foi considerado o
-problema univariado do Captcha, ou seja, como se uma imagem tivesse
-apenas uma letra. Não há perda de generalidade nessa escolha, já que o
-problema do Captcha pode ser, de fato, separado em vários problemas, um
-para cada letra da imagem.
+JIN; GHAHRAMANI (\protect\hyperlink{ref-jin2002}{2002}), COUR; SAPP;
+TASKAR (\protect\hyperlink{ref-cour2011}{2011}) e FENG et al.
+(\protect\hyperlink{ref-feng2020}{2020a}). Sempre que possível, os casos
+são adaptados para o problema do Captcha diretamente. Para simplificar a
+notação, no entanto, foi considerado o problema univariado do Captcha,
+ou seja, como se uma imagem tivesse apenas uma letra. Não há perda de
+generalidade nessa escolha, já que o problema do Captcha pode ser, de
+fato, separado em vários problemas, um para cada letra da imagem.
 
 Em um problema de aprendizado supervisionado tradicional, tem-se um
 conjunto de \(S\) casos rotulados
@@ -2452,21 +2499,21 @@ propriedades.
 
 Uma estratégia eficaz para derivar propriedades de classificadores na
 área de PLL é escrever a distribuição dos dados de forma explícita FENG
-et al. (2020b). A partir dessa distribuição, a função de risco do
-problema completamente supervisionado é reescrita em termos da função de
-risco do problema com rótulos parciais. Depois, é criado um estimador
-para essa função de risco, a partir de uma amostra observada.
-Finalmente, utilizando funções de perda adequadas, demonstra-se que a
-função de risco do problema com rótulos parciais se aproxima da função
-de risco com dados completamente supervisionados, conforme a base de
-dados aumenta.
+et al. (\protect\hyperlink{ref-feng2020a}{2020b}). A partir dessa
+distribuição, a função de risco do problema completamente supervisionado
+é reescrita em termos da função de risco do problema com rótulos
+parciais. Depois, é criado um estimador para essa função de risco, a
+partir de uma amostra observada. Finalmente, utilizando funções de perda
+adequadas, demonstra-se que a função de risco do problema com rótulos
+parciais se aproxima da função de risco com dados completamente
+supervisionados, conforme a base de dados aumenta.
 
 A forma mais fácil de definir a distribuição dos dados com rótulos
 parciais é considerando que os valores dos rótulos parciais aparecem ao
 acaso. Por exemplo, considere que as imagens são geradas com uma
 distribuição \(p(\mathbf x, y)\), que não precisa ser conhecida. Então a
 distribuição dos rótulos parciais \(\tilde p (\mathbf x, \mathbf y)\) é
-dada por (FENG et al., 2020a):
+dada por (\protect\hyperlink{ref-feng2020}{FENG et al., 2020a}):
 
 \begin{equation}\protect\hypertarget{eq-distribuicao}{}{
 \tilde p (\mathbf x, \mathbf y) = \sum_{y}p(\mathbf y|y)p(\mathbf x, y), \text{ onde } p(\mathbf y|y)=\left\{\begin{array}{ll}\frac{1}{2^{|\mathcal A|-1}-1},&\text{ se } y\in\mathbf y,\\0,&\text{ se } y\notin \mathbf y\end{array}\right..
@@ -2511,19 +2558,21 @@ realizadas pela imagem gerada a partir do rótulo.
 
 Como comentado anteriormente, a partir da distribuição dos dados é
 possível reescrever a função de risco do problema completamente
-supervisionado em termos do problema de rótulos parciais (FENG et al.,
-2020a, eq (6)). A partir de um estimador desse risco, utiliza-se um
-método de aprendizado de máquinas (como redes neurais) para obter um
-classificador \(\hat f\). Considerando que \(f^*\) é a função obtida em
-um problema completamente supervisionado e seguindo algumas suposições
-adicionais, é possível demonstrar que
+supervisionado em termos do problema de rótulos parciais
+(\protect\hyperlink{ref-feng2020}{FENG et al., 2020a}, eq (6)). A partir
+de um estimador desse risco, utiliza-se um método de aprendizado de
+máquinas (como redes neurais) para obter um classificador \(\hat f\).
+Considerando que \(f^*\) é a função obtida em um problema completamente
+supervisionado e seguindo algumas suposições adicionais, é possível
+demonstrar que
 
 \[
 |\mathcal R(\hat f) - \mathcal R(f^*)|
 \] é limitada e converge para zero quando tamanho da amostra vai para
 infinito. Mais do que isso, é possível obter a taxa de convergência do
 risco, em função da complexidade de Rademacher. Os detalhes e a
-demonstração podem ser encontrados no artigo de FENG et al. (2020a).
+demonstração podem ser encontrados no artigo de FENG et al.
+(\protect\hyperlink{ref-feng2020}{2020a}).
 
 Nas descrições dadas acima, a única suposição que não é satisfeita é a
 de que os valores de \(\mathbf y\) são distribuídos uniformemente. Essa
@@ -2541,7 +2590,7 @@ aceita apenas um chute). Nesse caso as probabilidades
 incorreto para cada possível valor do rótulo. Para resolver problemas
 desse tipo, é possível realizar um ajuste na função de predição que a
 torna a função de perda consistente e com taxa de convergência conhecida
-(YU et al., 2018):
+(\protect\hyperlink{ref-yu2018}{YU et al., 2018}):
 
 \[
 f_{\text{adj}} (\mathbf x) = \mathbf Q ^{\top}f(\mathbf x)
@@ -2612,11 +2661,11 @@ o rótulo e uma resposta multinomial, sem ser multivariada, como
 considerado na Seção~\ref{sec-aprendizado-estatistico}. Considere também
 que a rede neural retorna uma alta probabilidade, por exemplo, \(0.99\),
 para o valor \(j\), que o oráculo identificou como incorreta. Logo,
-\(\mathbf {\bar y} = \{1,\dots,10\}\setminus j\), e a função de perda é
-dada por
+\(\mathbf {\bar y} = \{1,\dots,10\}\setminus \{j\}\), e a função de
+perda é dada por
 
 \[
-\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus j) = -\log\left[1-{g_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
+\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{j\}) = -\log\left[1-{g_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61
 \]
 
 Como é possível ver no exemplo, quanto maior a probabilidade dada a um
@@ -2626,11 +2675,12 @@ incorporar a informação dada pelo oráculo adequadamente.
 
 Considere, agora, que a rede neural retorna uma probabilidade pequena,
 por exemplo, \(0.01\), para o valor \(k\), que o oráculo identificou
-como incorreta. Logo, \(\mathbf {\bar y} = \{1,\dots,10\}\setminus k\),
-e a função de perda é um valor pequeno:
+como incorreta. Logo,
+\(\mathbf {\bar y} = \{1,\dots,10\}\setminus \{k\}\), e a função de
+perda é um valor pequeno:
 
 \[
-\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus k) = -\log\left[1-{g_k}(\mathbf x)\right] = -\log\left[1-0.01 \right] = 0.01.
+\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{k\}) = -\log\left[1-{g_k}(\mathbf x)\right] = -\log\left[1-0.01 \right] = 0.01.
 \]
 
 Quando o Captcha aceita múltiplos chutes, a mesma conta é válida,
@@ -2659,12 +2709,15 @@ perda apresentada não permite utilização deste componente, sendo uma
 melhoria possível em futuros trabalhos.
 
 O ajuste dos modelos, tanto para simulações quanto para construção dos
-modelos finais, utilizou o pacote \texttt{\{torch\}} (FALBEL; LURASCHI,
-2022), que é uma implementação do PyTorch para a linguagem de
-programação R (R CORE TEAM, 2021). O pacote \texttt{\{luz\}} (FALBEL,
-2022a) foi utilizado para organizar as funções de perda e
-hiperparâmetros, enquanto o pacote \texttt{\{torchvision\}} (FALBEL,
-2022b) foi utilizado para utilidades no tratamento de imagens.
+modelos finais, utilizou o pacote \texttt{\{torch\}}
+(\protect\hyperlink{ref-torch}{FALBEL; LURASCHI, 2022}), que é uma
+implementação do PyTorch para a linguagem de programação R
+(\protect\hyperlink{ref-rcran}{R CORE TEAM, 2021}). O pacote
+\texttt{\{luz\}} (\protect\hyperlink{ref-luz}{FALBEL, 2022a}) foi
+utilizado para organizar as funções de perda e hiperparâmetros, enquanto
+o pacote \texttt{\{torchvision\}}
+(\protect\hyperlink{ref-torchvision}{FALBEL, 2022b}) foi utilizado para
+utilidades no tratamento de imagens.
 
 \hypertarget{dados}{%
 \section{Dados}\label{dados}}
@@ -2895,12 +2948,12 @@ implementado mas não foi utilizado nas simulações.
 \subsection{Construção dos dados}\label{sec-construcao-dados}}
 
 Para obter os dados da pesquisa, foram utilizadas técnicas de raspagem
-de dados (ZHAO, 2017). A raspagem de dados é uma área da ciência da
-computação responsável por criar rotinas que automatizam a coleta de
-dados provenientes da web. Trata-se de uma atividade muito comum em
-pesquisas aplicadas, especialmente as que envolvem análise de dados
-públicos que não estão disponíveis de forma aberta, como os dados do
-Judiciário.
+de dados (\protect\hyperlink{ref-zhao2017}{ZHAO, 2017}). A raspagem de
+dados é uma área da ciência da computação responsável por criar rotinas
+que automatizam a coleta de dados provenientes da web. Trata-se de uma
+atividade muito comum em pesquisas aplicadas, especialmente as que
+envolvem análise de dados públicos que não estão disponíveis de forma
+aberta, como os dados do Judiciário.
 
 Dentro do ciclo da ciência de dados, pode-se considerar que a raspagem
 de dados está inserida nas tarefas de coleta e arrumação de dados. É
@@ -3038,10 +3091,11 @@ a responsável pelo nome ``raspagem'' nesta área do conhecimento. O nome
 \emph{parsear} aparece porque os arquivos baixados estão em um formato
 bruto, inadequado para realização de análises. Os dados precisam ser
 então extraídos -- raspados -- do arquivo HTML, utilizando ferramentas
-como a \emph{libxml2} (WICKHAM; HESTER; OOMS, 2021) para acessar pedaços
-do documento, como o XPath (WICKHAM, 2022a) e posteriormente aplicar
-técnicas de manipulação de textos, como expressões regulares (WICKHAM,
-2022b).
+como a \emph{libxml2} (\protect\hyperlink{ref-xml2}{WICKHAM; HESTER;
+OOMS, 2021}) para acessar pedaços do documento, como o XPath
+(\protect\hyperlink{ref-rvest}{WICKHAM, 2022a}) e posteriormente aplicar
+técnicas de manipulação de textos, como expressões regulares
+(\protect\hyperlink{ref-stringr}{WICKHAM, 2022b}).
 
 A iteração encerra o fluxo da raspagem de dados. Nessa etapa, as
 operações de replicar, parsear e validar o resultado são repetidas, com
@@ -3827,22 +3881,25 @@ está disponível
 \href{https://github.com/decryptr/captchaReceitaAudio}{neste link}. A
 ideia de resolução era parecida, passando pelo procedimento de
 segmentação e depois de modelagem, mas tinha um passo intermediário de
-processamento envolvendo engenharia de \emph{features} (KUHN; JOHNSON,
-2019). O trabalho teve contribuições importantes de Athos Damiani.
+processamento envolvendo engenharia de \emph{features}
+(\protect\hyperlink{ref-kuhn2019}{KUHN; JOHNSON, 2019}). O trabalho teve
+contribuições importantes de Athos Damiani.
 
-Com o advento da ferramenta TensorFlow para o R (ALLAIRE; TANG, 2022),
-os modelos para resolver Captchas passaram a utilizar modelos de redes
-neurais. No início, por falta de conhecimento da área, a arquitetura das
-redes era demasiadamente complexa. Depois que os primeiros modelos
-começaram a funcionar, notou-se que as etapas de pré-processamento com
-segmentação e algumas camadas das redes eram desnecessárias para ajustar
-os modelos. Essa parte teve grande contribuição de Daniel Falbel, também
-do IME-USP, que foi a pessoa que introduziu o TensorFlow e a área de
-\emph{deep learning} para a comunidade brasileira de R.
+Com o advento da ferramenta TensorFlow para o R
+(\protect\hyperlink{ref-tensorflow}{ALLAIRE; TANG, 2022}), os modelos
+para resolver Captchas passaram a utilizar modelos de redes neurais. No
+início, por falta de conhecimento da área, a arquitetura das redes era
+demasiadamente complexa. Depois que os primeiros modelos começaram a
+funcionar, notou-se que as etapas de pré-processamento com segmentação e
+algumas camadas das redes eram desnecessárias para ajustar os modelos.
+Essa parte teve grande contribuição de Daniel Falbel, também do IME-USP,
+que foi a pessoa que introduziu o TensorFlow e a área de \emph{deep
+learning} para a comunidade brasileira de R.
 
 Depois de resolver com sucesso alguns Captchas, notou-se que seria
 possível criar um ambiente completo de modelagem de Captchas. Isso deu
-origem ao pacote \texttt{\{decryptr\}} (TRECENTI et al., 2022), que foi
+origem ao pacote \texttt{\{decryptr\}}
+(\protect\hyperlink{ref-decryptr}{TRECENTI et al., 2022}), que foi
 construído em 2017. O trabalho teve grandes contribuições de Caio Lente,
 do curso de Ciência da Computação do IME-USP e outros colegas de
 faculdade.
@@ -3861,19 +3918,20 @@ A construção do pacote \texttt{\{captcha\}} separada do
 \texttt{\{decryptr\}}, por ser o primeiro a tratar do assunto, possui
 muitos códigos legados e dificuldades de instalação por conta da
 dependência do python, necessário para o funcionamento do TensorFlow,
-que é chamado através do pacote \texttt{\{reticulate\}} (USHEY; ALLAIRE;
-TANG, 2022). Além disso, a implementação das técnicas do oráculo
-envolviam modificações na função de perda, que são mais difíceis de
-implementar no ambiente do \texttt{\{tensorflow\}}, justamente por conta
-da necessidade de conhecer o código python que roda por trás dos códigos
-em R.
+que é chamado através do pacote \texttt{\{reticulate\}}
+(\protect\hyperlink{ref-reticulate}{USHEY; ALLAIRE; TANG, 2022}). Além
+disso, a implementação das técnicas do oráculo envolviam modificações na
+função de perda, que são mais difíceis de implementar no ambiente do
+\texttt{\{tensorflow\}}, justamente por conta da necessidade de conhecer
+o código python que roda por trás dos códigos em R.
 
-Com o advento do pacote \texttt{\{torch\}} (FALBEL; LURASCHI, 2022), no
-entanto, tudo foi facilitado. O pacote não possui dependências com o
-python, além de ser bastante transparente e flexível na construção da
-arquitetura do modelo, funções de perda e otimização. O pacote, também
-construído por Daniel Falbel, é um grande avanço científico e facilitou
-muito a construção dos códigos desta tese.
+Com o advento do pacote \texttt{\{torch\}}
+(\protect\hyperlink{ref-torch}{FALBEL; LURASCHI, 2022}), no entanto,
+tudo foi facilitado. O pacote não possui dependências com o python, além
+de ser bastante transparente e flexível na construção da arquitetura do
+modelo, funções de perda e otimização. O pacote, também construído por
+Daniel Falbel, é um grande avanço científico e facilitou muito a
+construção dos códigos desta tese.
 
 O pacote \texttt{\{captcha\}}, apesar de ter sido construído do zero,
 foi desenvolvido durante \emph{lives} realizadas na plataforma
@@ -4197,13 +4255,13 @@ uma \emph{string} com o nome de um modelo já treinado, como
 \texttt{"rfb"}, por exemplo. Os modelos treinados são armazenados nos
 \href{https://github.com/decryptr/captcha/releases}{releases do
 repositório do pacote captcha}, são baixados e controlados pelo pacote
-\texttt{\{piggyback\}} (BOETTIGER; HO, 2022) e são lidos utilizando o
-pacote \texttt{\{luz\}}, que será descrito em maiores detalhes na
-próxima subseção. No momento de submissão da tese, os Captchas com
-modelos desenvolvidos eram \texttt{trf5}, \texttt{tjmg}, \texttt{trt},
-\texttt{esaj}, \texttt{jucesp}, \texttt{tjpe}, \texttt{tjrs},
-\texttt{cadesp}, \texttt{sei} e \texttt{rfb}. Mais modelos serão
-adicionados no futuro.
+\texttt{\{piggyback\}} (\protect\hyperlink{ref-piggyback}{BOETTIGER; HO,
+2022}) e são lidos utilizando o pacote \texttt{\{luz\}}, que será
+descrito em maiores detalhes na próxima subseção. No momento de
+submissão da tese, os Captchas com modelos desenvolvidos eram
+\texttt{trf5}, \texttt{tjmg}, \texttt{trt}, \texttt{esaj},
+\texttt{jucesp}, \texttt{tjpe}, \texttt{tjrs}, \texttt{cadesp},
+\texttt{sei} e \texttt{rfb}. Mais modelos serão adicionados no futuro.
 
 A Figura~\ref{fig-diagrama-captcha-simples} resume visualmente as
 funções apresentadas até o momento. As setas indicam a dependência das
@@ -4754,11 +4812,12 @@ no \texttt{04\_share.R}.
 
 Cabe também um detalhamento do \emph{script} disponibilizado em
 \texttt{04\_share.R}. O script utiliza o pacote \texttt{\{usethis\}}
-(WICKHAM; BRYAN; BARRETT, 2022) para organizar o repositório,
-configurando o Git (\emph{software} de versionamento de códigos) e o
-GitHub (sistema \emph{web} de organização de repositórios). Além disso,
-o \emph{script} utiliza o pacote \texttt{\{piggyback\}} (BOETTIGER; HO,
-2022) para disponibilizar o modelo ajustado nos \emph{releases} do
+(\protect\hyperlink{ref-usethis}{WICKHAM; BRYAN; BARRETT, 2022}) para
+organizar o repositório, configurando o Git (\emph{software} de
+versionamento de códigos) e o GitHub (sistema \emph{web} de organização
+de repositórios). Além disso, o \emph{script} utiliza o pacote
+\texttt{\{piggyback\}} (\protect\hyperlink{ref-piggyback}{BOETTIGER; HO,
+2022}) para disponibilizar o modelo ajustado nos \emph{releases} do
 repositório criado\footnote{O \emph{script} utiliza \emph{releases} para
   disponibilizar as soluções porque não é uma boa prática subir arquivos
   como modelos ajustados ou arquivos brutos de imagens diretamente no
@@ -4843,13 +4902,15 @@ Seção~\ref{sec-captchas-publicos} são alguns exemplos. Também existem
 soluções que utilizam dados provenientes de raspagem de dados para
 construção de modelos: por exemplo, o
 \href{https://openai.com/dall-e-2/}{DALL-E-2}, que é parte de uma base
-de dados construída utilizando imagens baixadas da internet (MURRAY;
-MARCHESOTTI; PERRONNIN, 2012; RAMESH et al., 2022). No entanto, até o
-momento da realização da pesquisa, não foi encontrado nenhum trabalho
-que utiliza a raspagem de dados como parte do processo de aprendizado
-estatístico. O método WAWL conecta as áreas de forma intrínseca, podendo
-ser entendida como uma nova variação de aumentação de dados aplicada a
-redes neurais convolucionais.
+de dados construída utilizando imagens baixadas da internet
+(\protect\hyperlink{ref-murray2012}{MURRAY; MARCHESOTTI; PERRONNIN,
+2012};
+\protect\hyperlink{ref-rameshHierarchicalTextConditionalImage2022}{RAMESH
+et al., 2022}). No entanto, até o momento da realização da pesquisa, não
+foi encontrado nenhum trabalho que utiliza a raspagem de dados como
+parte do processo de aprendizado estatístico. O método WAWL conecta as
+áreas de forma intrínseca, podendo ser entendida como uma nova variação
+de aumentação de dados aplicada a redes neurais convolucionais.
 
 O fato de a raspagem de dados ser relevante para o ajuste de um modelo
 estatístico pode levar a algumas discussões sobre o ensino da
