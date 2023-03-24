@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="pt"><head>
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/tabby.min.js"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
@@ -10,7 +10,8 @@
   <meta name="generator" content="quarto-1.2.335">
 
   <meta name="author" content="Julio Trecenti">
-  <title>Captchas</title>
+  <meta name="author" content="Orientador: Victor Fossaluza">
+  <title>Resolvendo Captchas</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,6 +28,25 @@
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
+    }
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
     }
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css" id="theme">
@@ -318,37 +338,51 @@
       margin-right: 0; 
     }
   </style>
-  <script src="index_files/libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="index_files/libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="index_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+  <script src="index_files/libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+  <link href="index_files/libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+  <script src="index_files/libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script>
+  <link href="index_files/libs/timeline-0.4/timevis.css" rel="stylesheet">
+  <script src="index_files/libs/timevis-binding-2.1.0/timevis.js"></script>
+  <script src="index_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Captchas</h1>
-  <p class="subtitle">(esqueleto)</p>
+<section id="title-slide" data-background-image="./assets/img/walle-capa.jpg" data-background-opacity="0.2" data-background-size="fill" class="quarto-title-block center">
+  <h1 class="title">Resolvendo Captchas</h1>
+  <p class="subtitle">usando Raspagem de Dados e Aprendizado Fracamente Supervisionado</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Julio Trecenti 
+Julio Trecenti <a href="https://orcid.org/0000-0002-1680-6389" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
+        <p class="quarto-title-affiliation">
+            Instituto de Matemática e Estatística
+          </p>
+    </div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Orientador: Victor Fossaluza <a href="https://orcid.org/0000-0002-9328-0210" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
+        <p class="quarto-title-affiliation">
+            Universidade de São Paulo
+          </p>
+    </div>
 </div>
 
 </section>
 <section id="resumo" class="slide level2">
 <h2>Resumo</h2>
 <div>
-<ul>
-<li class="fragment">Ninguém gosta de Captchas</li>
-<li class="fragment">Criamos uma nova técnica para resolvê-los!</li>
-<li class="fragment">Construímos o <strong>WAWL</strong>, que une técnicas <strong>raspagem de dados</strong> e <strong>aprendizado fracamente supervisionado</strong></li>
-<li class="fragment">A técnica baixa dados da internet, classificados automaticamente pelo <strong>oráculo</strong></li>
-<li class="fragment">Os resultados são bons!</li>
-<li class="fragment">E mais! Criamos um novo pacote em R, bases de dados públicas e modelos para incentivar a pesquisa na área!</li>
+<ul class="task-list">
+<li class="fragment"><input type="checkbox" disabled="">Queremos resolver Captchas: <img src="assets/img/dados_tjrs.jpg" style="margin:0px;margin: 0px 0px -15px 0px;"> -&gt; <code>"1158"</code></li>
+<li class="fragment"><input type="checkbox" disabled="">Criamos uma nova técnica para isso!</li>
+<li class="fragment"><input type="checkbox" disabled="">A proposta une conceitos de <strong>raspagem de dados</strong> e <strong>aprendizado fracamente supervisionado</strong></li>
+<li class="fragment"><input type="checkbox" disabled="">A técnica baixa dados da internet e usa os dados para treinar o modelo</li>
+<li class="fragment"><input type="checkbox" disabled="">Os resultados são bons!</li>
+<li class="fragment"><input type="checkbox" disabled="">Criamos um <a href="https://github.com/decryptr/captcha">novo pacote em R</a>, bases de dados públicas e modelos para incentivar pesquisas na área!</li>
 </ul>
 </div>
 <aside class="notes">
@@ -400,20 +434,21 @@ Julio Trecenti
       }</style></aside>
 </section>
 <section>
-<section id="motivação" class="title-slide slide level1 center">
+<section id="motivação" class="title-slide slide level1 center" data-background-image="./assets/img/dados_tjmg.jpeg" data-background-size="200px" data-background-repeat="repeat" data-background-opacity="0.1">
 <h1>Motivação</h1>
 
 </section>
 <section id="o-que-é-captcha" class="slide level2">
 <h2>O que é Captcha?</h2>
 <ul>
-<li>Desafio para identificar humanos e robôs</li>
-<li>Criado em 2002 em Carnegie Mellon</li>
+<li><em>Completely Automated Public Turing Test to Tell Computers and Humans Apart</em></li>
 <li>O desafio deve ser fácil de resolver para humanos, mas difícil para máquinas</li>
-<li>É uma variação do teste de Turing, sendo que a avaliação da humanidade é feita pelo robô</li>
+<li>Criado em 2002 em Carnegie Mellon</li>
+<li>É uma variação do teste de Turing: a avaliação da humanidade é feita pelo robô</li>
 </ul>
-<p>TODO: Imagem de um Captcha, se possível engraçada</p>
-</section>
+<p>Nosso foco está em Captchas de <strong>texto em imagem</strong>, porque é um dos mais utilizados em serviços públicos.</p>
+
+<img data-src="assets/img/captcha.gif" class="r-stretch quarto-figure-center"></section>
 <section id="para-que-eles-servem" class="slide level2">
 <h2>Para que eles servem?</h2>
 <ul>
@@ -421,57 +456,49 @@ Julio Trecenti
 <li>Evitar criação de contas falsas</li>
 <li>Bloquear envio automático de mensagens</li>
 <li>Impedir operações e consultas automatizadas</li>
+<li>reCaptcha: usado para digitalizar livros!</li>
 </ul>
-</section>
-<section id="quais-são-os-tipos-de-captcha" class="slide level2">
-<h2>Quais são os tipos de Captcha?</h2>
-<ul>
-<li>Audio</li>
-<li>Texto em imagem</li>
-<li>Padrão em imagem</li>
-<li>Miscelânea</li>
-</ul>
-<p>TODO: Imagens dos tipos de Captcha</p>
-<p>Nosso foco é o de <strong>texto em imagem</strong>, porque é um dos mais utilizados em serviços públicos.</p>
-</section>
+
+<img data-src="assets/img/recaptcha-example.gif" class="r-stretch quarto-figure-center"></section>
 <section id="uso-indevido-em-serviços-públicos" class="slide level2">
 <h2>Uso indevido em serviços públicos</h2>
 <ul>
 <li>A Constituição Federal e Lei de Acesso à Informação (LAI) garantem acesso a informações públicas</li>
-<li>Problemas da LAI: esforço e formato dos dados.</li>
-<li>Solução: disponibilizar dados de forma aberta</li>
+<li>Problema da LAI: esforço e formato dos dados: transparência passiva.</li>
+<li><strong>Solução</strong>: disponibilizar dados de forma aberta: transparência ativa</li>
 </ul>
-<p>TODO: Imagem da OKFN sobre open data</p>
-</section>
-<section id="judiciário-e-dados-abertos" class="slide level2">
-<h2>Judiciário e dados abertos</h2>
+<p><br></p>
+<div class="fragment fade-in">
+<!-- -->
+<h3 id="judiciário-e-dados-abertos">Judiciário e dados abertos</h3>
 <ul>
 <li>Os dados são públicos, mas não são abertos</li>
 <li>Boa parte dos tribunais possuem Captchas</li>
-<li>Dificulta a atividade fim da Associação Brasileira de Jurimetria (ABJ)</li>
+<li>Dificulta a atividade fim da <a href="https://abj.org.br">Associação Brasileira de Jurimetria (ABJ)</a></li>
 <li>Tribunais dificilmente respondem a pedidos de LAI</li>
-<li>Raspagem de dados é a única alternativa</li>
+<li>Raspagem de dados é a <strong>única alternativa</strong></li>
 </ul>
+</div>
 </section>
-<section id="o-mercado-de-captcha-explora-pessoas" class="slide level2">
-<h2>O mercado de Captcha explora pessoas</h2>
+<section id="queremos-resolver-captchas" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Queremos resolver Captchas?</h2>
+<p><br></p>
+<h3 id="o-mercado-de-captcha-explora-pessoas">O mercado de Captcha explora pessoas</h3>
 <ul>
 <li><strong>Captchas <del>impedem</del> especializam o acesso automatizado</strong></li>
 <li>É possível passar a imagem do Captcha para outra pessoa resolver…</li>
 </ul>
-<p>TODO diagrama de funcionamento dessas ferramentas</p>
-<div class="fragment">
-<p><strong>Exemplo</strong>: 2Captcha</p>
+
+<img data-src="assets/img/2captcha.gif" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.f5.com/labs/articles/cisotociso/i-was-a-human-captcha-solver">Fonte: F5</a></p></section>
+<section id="queremos-resolver-captchas-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Queremos resolver Captchas?</h2>
+<p><br></p>
+<h3 id="o-mercado-de-captcha-explora-pessoas-1">O mercado de Captcha explora pessoas</h3>
 <ul>
-<li>Pagamento: US$ 0,5 por 1 a 2 horas de trabalho</li>
-<li>Salário mensal em jornada 8h/22d: US$ 55 a 110.</li>
-<li>Ou seja, menos de R$ 600 reais por mês!</li>
+<li><strong>Captchas <del>impedem</del> especializam o acesso automatizado</strong></li>
+<li>É possível passar a imagem do Captcha para outra pessoa resolver…</li>
 </ul>
-<p>TODO gráfico comparando salário mínimo e 2Captcha</p>
-</div>
-</section>
-<section id="resolver-captchas-é-bom-para-a-ciência" class="slide level2">
-<h2>Resolver Captchas é bom para a ciência</h2>
+<h3 id="resolver-captchas-é-bom-para-a-ciência">Resolver Captchas é bom para a ciência</h3>
 <ul>
 <li>Captcha e inteligência artificial estão conectados</li>
 <li>Quando se resolvem Captchas, a ciência se desenvolve</li>
@@ -479,7 +506,7 @@ Julio Trecenti
 <!-- ---------------------------------------------- -->
 </section></section>
 <section>
-<section id="estado-da-arte" class="title-slide slide level1 center">
+<section id="estado-da-arte" class="title-slide slide level1 center" data-background-image="./assets/img/dados_tjmg.jpeg" data-background-size="200px" data-background-repeat="repeat" data-background-opacity="0.1">
 <h1>Estado da arte</h1>
 
 </section>
@@ -506,14 +533,24 @@ Julio Trecenti
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>TODO linha do tempo com Captchas</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-af548e005a3c99958c51" class="timevis html-widget " style="width:100%;height:500px;">
+<div class="btn-group zoom-menu">
+<button type="button" class="btn btn-default btn-lg zoom-in" title="Zoom in">+</button>
+<button type="button" class="btn btn-default btn-lg zoom-out" title="Zoom out">-</button>
+</div>
+</div>
+<script type="application/json" data-for="htmlwidget-af548e005a3c99958c51">{"x":{"items":[{"id":"1","content":"Criação<br/>do site","start":"2000-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"2","content":"Tech. report","start":"2002-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"3","content":"Paper original","start":"2003-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"4","content":"Primeiro resolvedor","start":"2003-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"5","content":"Aplicação de<br/>redes neurais","start":"2004-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"6","content":"reCaptcha V1","start":"2008-01-01","style":"font-size: .7em;background-color:lightgreen"},{"id":"7","content":"reCaptcha comprada<br/>pela Google","start":"2009-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"8","content":"resolvendo reCaptcha V1<br/>com 99,8% de acurácia","start":"2013-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"9","content":"reCaptcha V2","start":"2014-01-01","style":"font-size: .7em;background-color:lightgreen"},{"id":"10","content":"resolvendo<br/>reCaptcha V2","start":"2017-01-01","style":"font-size: .7em;background-color:lightblue"},{"id":"11","content":"reCaptcha V3<br/>(fim da necessidade<br/>de usar Captchas)","start":"2018-01-01","style":"font-size: .7em;background-color:lightgreen"}],"groups":null,"showZoom":true,"zoomFactor":0.5,"fit":true,"options":[],"height":500,"timezone":null,"api":[]},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
 </section>
 <section id="a-luta-acabou-mas-os-captchas-não" class="slide level2">
 <h2>A luta acabou, mas os Captchas não</h2>
 <ul>
-<li>Captchas praticamente não são mais necessários</li>
-<li>Ninguém venceu a luta; ela mudou de foco para verificação ativa</li>
-<li>Captchas se tornaram obsoletos, servindo principalmente para
+<li>Captchas praticamente <strong>não são necessários</strong> nos dias de hoje</li>
+<li>Ninguém venceu a luta; ela mudou de foco para <strong>verificação ativa</strong></li>
+<li>Captchas se tornaram obsoletos, servindo principalmente para:
 <ul>
 <li>Pesquisa científica em inteligência artificial</li>
 <li>Atrapalhar a vida de quem faz pesquisa com dados públicos</li>
@@ -523,215 +560,212 @@ Julio Trecenti
 <section id="desafios-atuais-de-pesquisa" class="slide level2">
 <h2>Desafios atuais de pesquisa</h2>
 <ul>
-<li>Reduzir a quantidade anotações necessárias para resolver um Captcha</li>
-<li>Criar resolvedores de Captcha universais</li>
+<li><strong>Reduzir</strong> a quantidade <strong>anotações necessárias</strong> para resolver um Captcha</li>
+<li>Criar <strong>resolvedores</strong> de Captcha <strong>universais</strong></li>
 <li>Abordagens recentes: redes generativas adversariais (GANs) e similares</li>
-<li>Trabalhos recentes: <span class="citation" data-cites="ye2018">@ye2018</span>; <span class="citation" data-cites="wang2021">@wang2021</span></li>
+<li>Trabalhos recentes: <span class="citation" data-cites="yeAnotherTextCaptcha2018">Ye et al. (<a href="#/referências-da-apresentação" role="doc-biblioref" onclick="">2018</a>)</span>; <span class="citation" data-cites="wangMakeComplexCaptchas2021">Wang et al. (<a href="#/referências-da-apresentação" role="doc-biblioref" onclick="">2021</a>)</span>.</li>
 </ul>
 <!-- ---------------------------------------------- -->
 </section></section>
 <section>
-<section id="uma-nova-abordagem" class="title-slide slide level1 center">
-<h1>Uma nova abordagem</h1>
+<section id="nova-abordagem" class="title-slide slide level1 center" data-background-image="./assets/img/dados_tjmg.jpeg" data-background-size="200px" data-background-repeat="repeat" data-background-opacity="0.1">
+<h1>Nova abordagem</h1>
 
 </section>
-<section id="a-oportunidade" class="slide level2">
-<h2>A oportunidade</h2>
-<ul>
-<li>Quando preenchemos um Captcha no site, ele diz para nós se acertamos o rótulo ou não</li>
-<li>Mas a informação é limitada: o site só diz de acertamos ou erramos.</li>
-<li>É como um <strong>oráculo</strong>, que sempre nos diz verdade, mas de forma incompleta.</li>
-</ul>
-<p>TODO imagem oráculo de Delphos ou Matrix</p>
-</section>
-<section id="o-que-é-oráculo" class="slide level2">
-<h2>O que é oráculo?</h2>
-<p>TODO gif</p>
-<ul>
-<li>Conceito de oráculo: resposta do site sobre acerto/erro</li>
-<li>Oráculos existem em todos os sites com Captchas, por construção</li>
-<li>Podem fornecer mais ou menos informação, dependendo da <strong>quantidade de chutes</strong> permitida para um mesmo Captcha</li>
-</ul>
-</section>
-<section id="nossa-solução" class="slide level2">
-<h2>Nossa solução</h2>
-<ul>
-<li>Técnica proposta: Web Automatic Weak Learning (WAWL)</li>
-<li>Obtém novos dados automaticamente</li>
-<li>Combina raspagem de dados e aprendizado fracamente supervisionado</li>
-</ul>
-<p>TODO WAWL-e</p>
-</section>
-<section id="como-funciona" class="slide level2">
-<h2>Como funciona?</h2>
-<p>TODO Diagrama: Modelo inicial -&gt; novos dados -&gt; modelo final</p>
-</section>
-<section id="vantagens-do-wawl" class="slide level2">
-<h2>Vantagens do WAWL</h2>
-<ul>
-<li>Aproveita os recursos disponíveis: base de dados virtualmente infinita</li>
-<li>Fácil de implementar: só precisa de uma mudança na função de perda</li>
-<li>Depende de um raspador, mas tempo de desenvolvimento é negligenciável devido à necessidade de construí-los na prática</li>
-</ul>
-</section>
-<section id="objetivo" class="slide level2">
-<h2>Objetivo</h2>
-<div style="margin-top: 200px; font-size: 1em; color: royalblue;">
+<section id="objetivo" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Objetivo</h2>
+<div style="margin-top: 200px; font-size: 1.3em; color: royalblue;">
 <p>Desenvolver um método <strong>inovador</strong>, chamado WAWL (<em>Web Automatic Weak Learning</em>) para resolver Captchas, misturando técnicas de <strong>aprendizado profundo</strong> com <strong>raspagem de dados</strong> e aproveitando os dados fornecidos pelo oráculo.</p>
 </div>
 </section>
-<section id="objetivos-específicos" class="slide level2">
-<h2>Objetivos específicos</h2>
+<section id="objetivos-específicos" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Objetivos específicos</h2>
+<p>Desenvolver um método <strong>inovador</strong>, chamado WAWL (<em>Web Automatic Weak Learning</em>) para resolver Captchas, misturando técnicas de <strong>aprendizado profundo</strong> com <strong>raspagem de dados</strong> e aproveitando os dados fornecidos pelo oráculo.</p>
 <ol type="1">
 <li>Descrever o método proposto e estudar suas características.</li>
 <li>Construir e disponibilizar um repositório de dados para realização de mais pesquisas no ramo.</li>
 <li>Ajustar modelos e testar a eficácia do método.</li>
 <li>Disponibilizar um pacote computacional aberto que possibilita a implementação de soluções para resolver Captchas presentes em serviços públicos.</li>
 </ol>
-</section>
-<section id="hipóteses" class="slide level2">
-<h2>Hipóteses</h2>
+<div class="fragment">
+<!-- -->
+<h3 id="hipóteses">Hipóteses</h3>
 <ol type="1">
 <li><p>A utilização do WAWL gera modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.</p></li>
 <li><p>É possível aliar a área de raspagem de dados com a área de modelagem estatística.</p></li>
 </ol>
+</div>
 </section>
-<section id="contribuições" class="slide level2">
+<section id="contribuições" class="slide level2 center center-x">
 <h2>Contribuições</h2>
-<div class="r-stack">
-<div class="fragment fade-in-then-out">
-<!-- -->
+<div class="columns">
+<div class="column" style="width:33%;">
 <h3 id="pesquisa">Pesquisa</h3>
 <ul>
-<li>União entre áreas de aprendizado de máquinas e raspagem de dados</li>
-<li>Aplicação inovadora do aprendizado fracamente supervisionado com base potencialmente infinita</li>
+<li class="fragment">União entre áreas de aprendizado de máquinas e raspagem de dados</li>
+<li class="fragment">Aplicação inovadora do aprendizado fracamente supervisionado com base potencialmente infinita</li>
 </ul>
-</div>
-<div class="fragment fade-in-then-out">
-<!-- -->
+</div><div class="column" style="width:33%;">
 <h3 id="aplicações">Aplicações</h3>
 <ul>
-<li>O WAWL traz bons resultados empíricos</li>
-<li>Novos modelos disponíveis</li>
-<li>Destravamos algumas pesquisas aplicada no Brasil</li>
+<li class="fragment">O WAWL traz bons resultados empíricos</li>
+<li class="fragment">Novos modelos disponíveis</li>
+<li class="fragment">Destravamos algumas pesquisas aplicada no Brasil</li>
 </ul>
-</div>
-<div class="fragment fade-in">
-<!-- -->
+</div><div class="column" style="width:33%;">
 <h3 id="sociedade">Sociedade</h3>
 <ul>
-<li>Novo pacote <code>{captcha}</code> disponível para comunidade</li>
-<li>Novas bases de dados disponíveis</li>
-<li>Desincentivo aos mercados</li>
+<li class="fragment">Novo pacote <code>{captcha}</code> disponível para comunidade</li>
+<li class="fragment">Novas bases de dados disponíveis</li>
+<li class="fragment">Desincentivo aos mercados que exploram pessoas</li>
 </ul>
 </div>
 </div>
+</section>
+<section id="a-oportunidade" class="slide level2">
+<h2>A oportunidade</h2>
+<ul>
+<li>Quando preenchemos um Captcha no site, ele nos diz se acertamos ou não</li>
+<li>Mas a informação é limitada: o site só diz de <strong>acertamos</strong> ou <strong>erramos</strong>.</li>
+<li>É como um <strong>oráculo</strong>, que sempre nos diz verdade, mas de forma incompleta.</li>
+</ul>
+<div width="80%">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/img/cookie.gif" style="width:50.0%"></p>
+<p></p><figcaption>Fonte: The Matrix</figcaption><p></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="o-que-é-oráculo" class="slide level2">
+<h2>O que é oráculo?</h2>
+
+<img data-src="assets/img/esquema-oraculo.png" class="r-stretch quarto-figure-center"><ul>
+<li>Conceito de oráculo: resposta do site sobre acerto/erro</li>
+<li>Oráculos existem em todos os sites com Captchas, por construção</li>
+<li>Podem fornecer mais ou menos informação, dependendo da <strong>quantidade de chutes</strong> permitida para um mesmo Captcha</li>
+</ul>
+</section>
+<section id="nossa-solução" class="slide level2 center center-x" data-background-image="./assets/img/walle.webp" data-background-opacity="0.2">
+<h2>Nossa solução</h2>
+<div style="margin-top: 200px; font-size: 1.4em">
+<ul>
+<li><p>Técnica proposta: Web Automatic Weak Learning (WAWL)</p></li>
+<li><p>Obtém novos dados automaticamente</p></li>
+<li><p>Combina <strong>raspagem de dados</strong> e <strong>aprendizado fracamente supervisionado</strong></p></li>
+</ul>
+</div>
+</section>
+<section id="como-funciona" class="slide level2">
+<h2>Como funciona?</h2>
+
+<img data-src="assets/img/wawl.png" class="r-stretch quarto-figure-center"><ul>
+<li>Modelo inicial: pode ser ajustado com uma base completamente anotada</li>
+<li>Também pode ser um super-modelo generalista</li>
+</ul>
+</section>
+<section id="vantagens-do-wawl" class="slide level2">
+<h2>Vantagens do WAWL</h2>
+<ul>
+<li>Aproveita os recursos disponíveis: <strong>base de dados</strong> virtualmente <strong>infinita</strong></li>
+<li>Fácil de implementar: só precisa de uma <strong>mudança na função de perda</strong></li>
+<li><strong>Depende de um raspador</strong>, cujo tempo de desenvolvimento é <strong>negligenciável</strong> devido à necessidade de construí-los na prática</li>
+</ul>
 </section>
 <section id="arquitetura-da-rede-neural" class="slide level2">
 <h2>Arquitetura da rede neural</h2>
 
-<img data-src="assets/img/diagrama-modelo-cnn.png" width="350" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Diagrama representando o modelo utilizado de forma genérica, com todos os componentes e subcomponentes apresentados de forma esquemática</p></section>
+<img data-src="assets/img/diagrama-modelo-cnn.png" width="350" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;1: Diagrama representando o modelo utilizado de forma genérica, com todos os componentes e subcomponentes apresentados de forma esquemática</p></section>
 <section id="adaptação-da-função-de-perda" class="slide level2">
 <h2>Adaptação da função de perda</h2>
 <ul>
 <li>Função de perda adaptada para informação limitada do oráculo</li>
 <li>Considera rótulos corretos e incorretos</li>
 </ul>
+<p><span class="math display">\[\mathcal L(g(\mathbf x), {\mathbf y}) = -\log\left[1 - \sum_{y \in \mathcal A} {g_y}(\mathbf x) I(y\notin {\mathbf y})\right]\]</span></p>
+<ul>
+<li>Função indicadora para rótulos fora do conjunto observado</li>
+</ul>
 </section>
-<section id="função-de-perda-proposta" class="slide level2">
-<h2>Função de perda proposta</h2>
-<p><span class="math display">\[\mathcal L(g(\mathbf x), {\mathbf y}) = -\log\left[1 - \sum_{y \in \mathcal A} {g_y}(\mathbf x) I(y\notin {\mathbf y})\right]\]</span> - Função indicadora para rótulos fora do conjunto observado</p>
-</section>
-<section id="exemplo-1" class="slide level2">
-<h2>Exemplo 1</h2>
-<p>Rótulo incorreto com alta probabilidade</p>
+<section id="exemplo" class="slide level2">
+<h2>Exemplo</h2>
+<div class="fragment">
+<p>Rótulo incorreto com <strong>alta</strong> probabilidade</p>
 <ul>
 <li>Rede neural retorna 0.99 para rótulo incorreto <span class="math inline">\(j\)</span></li>
-<li>Função de perda:</li>
 </ul>
 <p><span class="math display">\[\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{j\}) = -\log\left[1-{g_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61\]</span></p>
 <ul>
-<li>Penalização maior para predição incorreta</li>
+<li>Penalização <strong>maior</strong> para predição incorreta</li>
 </ul>
-</section>
-<section id="exemplo-2" class="slide level2">
-<h2>Exemplo 2</h2>
-<p>Rótulo incorreto com alta probabilidade</p>
+</div>
+<hr>
+<div class="fragment">
+<p>Rótulo incorreto com <strong>baixa</strong> probabilidade</p>
 <ul>
 <li>Rede neural retorna 0.01 para rótulo incorreto <span class="math inline">\(k\)</span></li>
-<li>Função de perda:</li>
 </ul>
 <p><span class="math display">\[\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{k\}) = -\log\left[1-{g_k}(\mathbf x)\right] = -\log\left[1-0.01 \right] = 0.01\]</span></p>
 <ul>
 <li>Penalização menor para predição menos provável</li>
 </ul>
+</div>
 </section>
 <section id="aprendizado-fracamente-supervisionado" class="slide level2">
 <h2>Aprendizado fracamente supervisionado</h2>
-<p>TODO imagem com tipos de aprendizado fracamente supervisionado</p>
+<p>Generalização do aprendizado estatístico: contempla aprendizado supervisionado, aprendizado semi-supervisionado e vários tipos de supervisão fraca (rótulos incorretos, rótulos incompletos, etc) e sem supervisão.</p>
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/img/office.gif"></p>
+<p></p><figcaption>Exemplo de supervisor fraco</figcaption><p></p>
+</figure>
+</div>
+</div>
 <ul>
-<li>Aprendizado com dados parcialmente rotulados (PLL): parte da base anotada sem erros, parte com lista de rótulos possíveis.</li>
-<li>Rótulos parciais: lista de possíveis valores para <span class="math inline">\(y\)</span>, incluindo o correto.</li>
-<li>Rótulos complementares: a lista de possíveis valores inclui todos os valores menos 1. No nosso caso, a tentativa errada que vem do oráculo.</li>
+<li><p><strong>Nosso caso</strong>: Aprendizado com dados parcialmente rotulados (PLL): parte da base anotada sem erros, parte com lista de rótulos possíveis.</p></li>
+<li><p><strong>Rótulos parciais</strong>: lista de possíveis valores para <span class="math inline">\(y\)</span>, incluindo o correto.</p></li>
+<li><p><strong>Rótulos complementares</strong>: a lista de possíveis valores inclui todos os valores menos 1. No nosso caso, a tentativa errada que vem do oráculo.</p></li>
 </ul>
 </section>
-<section id="como-demonstrar-que-uma-solução-funciona" class="slide level2">
-<h2>Como demonstrar que uma solução funciona?</h2>
+<section id="como-demonstrar-que-funciona" class="slide level2">
+<h2>Como demonstrar que funciona?</h2>
 <ul>
-<li><p>Passo-a-passo: escrever distribuição dos dados, reescrever função de risco, criar estimador e demonstrar convergência</p></li>
+<li><p><strong>Passo-a-passo</strong>: escrever distribuição dos dados, reescrever função de risco, criar estimador e demonstrar convergência</p></li>
 <li><p>A partir da distribuição dos dados, reescreve-se a função de risco do problema completamente supervisionado em termos do problema de rótulos parciais.</p></li>
-</ul>
-</section>
-<section id="como-demonstrar-que-uma-solução-funciona-1" class="slide level2">
-<h2>Como demonstrar que uma solução funciona?</h2>
-<ul>
-<li>Considerando que <span class="math inline">\(f^*\)</span> é a função obtida em um problema completamente supervisionado, <span class="math inline">\(\hat{f}\)</span> é a função obtida no problema com rótulos parciais e seguindo algumas suposições adicionais, demonstra-se que</li>
+<li><p>Considerando que <span class="math inline">\(f^*\)</span> é a função obtida em um problema completamente supervisionado, <span class="math inline">\(\hat{f}\)</span> é a função obtida no problema com rótulos parciais e seguindo algumas suposições adicionais, demonstra-se que</p></li>
 </ul>
 <p><span class="math display">\[|\mathcal R(\hat f) - \mathcal R(f^*)|\]</span></p>
-<p>é limitada e converge para zero quando tamanho da amostra vai para infinito. Geralmente, utiliza-se a teoria de complexidade de Rademacher na demonstração.</p>
+<p>é limitada e converge para zero quando tamanho da amostra vai para infinito. Geralmente, utiliza-se a <em>teoria de complexidade de Rademacher</em> na demonstração <span class="citation" data-cites="fengProvablyConsistentPartiallabel2020">(<a href="#/referências-da-apresentação" role="doc-biblioref" onclick="">Feng et al. 2020</a>)</span>.</p>
 </section>
 <section id="situação-atual" class="slide level2">
 <h2>Situação atual</h2>
 <ul>
 <li><p>Os trabalhos existentes demonstram convergência independentemente da função de perda (sob certas suposições), para algumas distribuições específicas dos dados rotulados parcialmente.</p></li>
 <li><p>Também existem demonstrações para funções de perda específicas (diferentes da nossa), que independem da distribuição dos dados. No entanto, essas soluções envolvem apenas rótulos complementares, não rótulos complementares múltiplos.</p></li>
-</ul>
-</section>
-<section id="situação-atual-1" class="slide level2">
-<h2>Situação atual</h2>
-<ul>
-<li><p>Até o momento, não existe uma demonstração que aborde exatamente os dados da metodologia WAWL. No entanto, a função de perda proposta é bastante natural e provavelmente é uma adaptação de <span class="citation" data-cites="yu2018">@yu2018</span>.</p></li>
+<li><p>Até o momento, não existe uma demonstração que aborde exatamente os dados da metodologia WAWL. No entanto, a função de perda proposta é bastante natural e pode ser adaptada de <span class="citation" data-cites="yuLearningBiasedComplementary2018">Yu et al. (<a href="#/referências-da-apresentação" role="doc-biblioref" onclick="">2018</a>)</span>.</p></li>
 <li><p>Adicionalmente, o fato de observarmos rótulos complementares múltiplos tende a proporcionar resultados melhores, já que nesse caso temos mais informação.</p></li>
 </ul>
 </section></section>
 <section>
-<section id="dados" class="title-slide slide level1 center">
-<h1>Dados</h1>
+<section id="simulação" class="title-slide slide level1 center" data-background-image="./assets/img/dados_tjmg.jpeg" data-background-size="200px" data-background-repeat="repeat" data-background-opacity="0.1">
+<h1>Simulação</h1>
 
 </section>
-<section id="critérios-para-seleção-de-captchas" class="slide level2">
-<h2>Critérios para seleção de Captchas:</h2>
-<ul>
-<li>Serviço público (governo federal, tribunal, etc.)</li>
-<li>Letras (A-Z) e números (0-9) em imagem <code>jpeg</code> ou <code>png</code></li>
-<li>Comprimento fixo</li>
-</ul>
-</section>
-<section id="lista-dos-captchas" class="slide level2">
-<h2>Lista dos Captchas</h2>
+<section id="lista-de-captchas" class="slide level2 scrollable">
+<h2>Lista de Captchas</h2>
 <table>
 <colgroup>
-<col style="width: 7%">
-<col style="width: 22%">
-<col style="width: 59%">
-<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 25%">
+<col style="width: 65%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Nome</th>
 <th style="text-align: left;">Exemplo</th>
 <th style="text-align: left;">Descrição</th>
-<th style="text-align: left;">Acurácia</th>
 </tr>
 </thead>
 <tbody>
@@ -739,128 +773,137 @@ Julio Trecenti
 <td style="text-align: left;">cadesp</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_cadesp.jpg" height="80" alt="cadesp"></td>
 <td style="text-align: left;">Centro de Apoio ao Desenvolvimento da Saude Publica</td>
-<td style="text-align: left;">96.37%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">esaj</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_esaj.png" height="80" alt="esaj"></td>
 <td style="text-align: left;">Tribunal de Justica da Bahia</td>
-<td style="text-align: left;">94.50%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">jucesp</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_jucesp.jpg" height="80" alt="jucesp"></td>
 <td style="text-align: left;">Junta Comercial de Sao Paulo</td>
-<td style="text-align: left;">89.88%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">rfb</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_rfb.png" height="80" alt="rfb"></td>
 <td style="text-align: left;">Receita Federal</td>
-<td style="text-align: left;">95.70%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">sei</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_sei.png" height="80" alt="sei"></td>
 <td style="text-align: left;">Sistema Eletronico de Informacoes - ME</td>
-<td style="text-align: left;">77.25%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">tjmg</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_tjmg.jpeg" height="80" alt="tjmg"></td>
 <td style="text-align: left;">Tribunal de Justica de Minas Gerais</td>
-<td style="text-align: left;">98.35%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">tjpe</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_tjpe.png" height="80" alt="tjpe"></td>
 <td style="text-align: left;">Tribunal de Justica de Pernambuco</td>
-<td style="text-align: left;">91.88%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">tjrs</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_tjrs.jpg" height="80" alt="tjrs"></td>
 <td style="text-align: left;">Tribunal de Justica do Rio Grande do Sul</td>
-<td style="text-align: left;">99.57%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">trf5</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_trf5.jpg" height="80" alt="trf5"></td>
 <td style="text-align: left;">Tribunal Regional Federal 5</td>
-<td style="text-align: left;">98.77%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">trt</td>
 <td style="text-align: left;"><img data-src="assets/img/dados_trt.jpeg" height="80" alt="trt"></td>
 <td style="text-align: left;">Tribunal Regional do Trabalho 3</td>
-<td style="text-align: left;">98.50%</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="uso-de-captchas-artificiais" class="slide level2">
-<h2>Uso de Captchas artificiais:</h2>
+<section id="captchas-artificiais" class="slide level2">
+<h2>Captchas artificiais</h2>
 <ul>
 <li>Facilita testes e simulações</li>
 <li>Evita necessidade de acesso à internet e construção de bases de dados específicas</li>
 </ul>
+<div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-captcha-r-exemplo" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/fig-captcha-r-exemplo-1.png" style="width:50.0%"></p>
+<p></p><figcaption>Figura&nbsp;2: Exemplo de captcha gerado pela função <code>captcha::captcha_generate()</code></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="para-baixar-os-dados" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Para baixar os dados</h2>
+<h3 id="raspagem-de-dados">Raspagem de dados</h3>
 
-<img data-src="index_files/figure-revealjs/fig-captcha-r-exemplo-1.png" width="150" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Exemplo de captcha gerado pela função <code>captcha::captcha_generate()</code></p></section>
-<section id="raspagem-de-dados" class="slide level2">
-<h2>Raspagem de dados</h2>
-
-<img data-src="assets/img/cycle.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;3: Ciclo da raspagem de dados. Fonte: <a href="https://curso-r.github.io/main-web-scraping">curso de Web Scraping da Curso-R</a>.</p></section>
-<section id="bases-disponíveis" class="slide level2">
-<h2>Bases disponíveis!</h2>
+<img data-src="assets/img/cycle.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;3: Ciclo da raspagem de dados. Fonte: <a href="https://curso-r.github.io/main-web-scraping">curso de Web Scraping da Curso-R</a>.</p><ul>
+<li>Cada Captcha ganhou uma função <code>captcha_access()</code> e outra <code>captcha_test()</code>.</li>
+<li>Códigos disponíveis no pacote <a href="https://github.com/jtrecenti/captchaDownload"><code>{captchaDownload}</code></a>.</li>
+</ul>
+</section>
+<section id="para-baixar-os-dados-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Para baixar os dados</h2>
+<h3 id="raspagem-de-dados-1">Raspagem de dados</h3>
+<ul>
+<li>Cada Captcha ganhou uma função <code>captcha_access()</code> e outra <code>captcha_test()</code>.</li>
+<li>Códigos disponíveis no pacote <a href="https://github.com/jtrecenti/captchaDownload"><code>{captchaDownload}</code></a>.</li>
+</ul>
+<h3 id="bases-disponíveis">Bases disponíveis</h3>
 <ul>
 <li><p>As bases de dados com imagens anotadas foram disponibilizadas na aba de lançamentos (<em>releases</em>) do <a href="https://github.com/decryptr/captcha/releases">repositório principal do projeto de pesquisa</a>.</p></li>
 <li><p>As bases e modelos ajustados estão disponíveis para quem tiver interesse em fazer novas pesquisas e utilizar os resultados em suas aplicações.</p></li>
 </ul>
-</section></section>
-<section>
-<section id="simulação" class="title-slide slide level1 center">
-<h1>Simulação</h1>
-
 </section>
-<section id="passo-1-modelo-inicial" class="slide level2">
-<h2>Passo 1: Modelo Inicial</h2>
+<section id="simulação-em-3-passos" class="slide level2">
+<h2>Simulação em 3 passos</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<h4 id="modelo-inicial">1. Modelo Inicial</h4>
+<p><strong>Objetivo</strong>: Obter modelos preditivos de Captchas com diferentes acurácias</p>
 <ul>
-<li><strong>Objetivo</strong>: Obter modelos preditivos de Captchas com diferentes acurácias</li>
-<li>Construção de 10 amostras de dados com subconjuntos das bases completas</li>
-<li>Aplicação de 27 modelos com diferentes hiperparâmetros</li>
-<li>Seleção do melhor modelo para cada tamanho de amostra</li>
+<li class="fragment">Construção de 10 amostras de dados com subconjuntos das bases completas</li>
+<li class="fragment">Aplicação de 27 modelos com diferentes hiperparâmetros</li>
+<li class="fragment">Seleção do melhor modelo para cada tamanho de amostra</li>
 </ul>
-</section>
-<section id="passo-2-dados" class="slide level2">
-<h2>Passo 2: Dados</h2>
+</div><div class="column" style="width:33%;">
+<h4 id="dados">2. Dados</h4>
+<p><strong>Objetivo</strong>: Construir bases de dados utilizando o oráculo</p>
 <ul>
-<li><strong>Objetivo</strong>: Construir bases de dados utilizando o oráculo</li>
-<li>Filtro de modelos com acurácia entre 5% e 50%</li>
-<li>Definição do tamanho da base a ser obtida</li>
-<li>Coleta de imagens com diferentes quantidades de tentativas (1, 5 e 10)</li>
-<li>Construção de bases de teste com 1000 imagens para cada Captcha</li>
+<li class="fragment">Filtro de modelos com acurácia entre 5% e 50%</li>
+<li class="fragment">Definição do tamanho da base a ser obtida</li>
+<li class="fragment">Coleta de imagens com diferentes quantidades de tentativas (1, 5 e 10)</li>
+<li class="fragment">Construção de bases de teste com 1000 imagens para cada Captcha</li>
 </ul>
-</section>
-<section id="passo-3-modelo-final" class="slide level2">
-<h2>Passo 3: Modelo Final</h2>
+</div><div class="column" style="width:33%;">
+<h4 id="modelo-final">3. Modelo Final</h4>
+<p><strong>Objetivo</strong>: Ajustar modelo final para as 65 bases de treino disponíveis</p>
 <ul>
-<li><strong>Objetivo</strong>: Ajustar modelo final para as 65 bases de treino disponíveis</li>
-<li>Modificação da função de perda do modelo</li>
-<li>Busca de hiperparâmetros e ajuste de 9 modelos para cada base de dados</li>
-<li>Seleção dos classificadores com melhor acurácia</li>
-<li>Comparação de acurácias iniciais e finais através de gráficos de barras e dispersão</li>
+<li class="fragment">Modificação da função de perda do modelo</li>
+<li class="fragment">Busca de hiperparâmetros e ajuste de 9 modelos para cada base de dados</li>
+<li class="fragment">Comparação de acurácias iniciais e finais através de gráficos de barras e dispersão</li>
 </ul>
+</div>
+</div>
 </section>
 <section id="experimentos-adicionais" class="slide level2">
 <h2>Experimentos adicionais</h2>
 <ul>
-<li>Aplicação iterativa da técnica do oráculo para verificar melhorias contínuas</li>
+<li>Aplicação iterada do WAWL para verificar melhorias contínuas</li>
 <li>Aprendizado online: incorporação do download de dados dentro da construção do <em>minibatch</em></li>
 <li>Disponibilização das bases de dados para futuras pesquisas e testes de outras arquiteturas de redes neurais</li>
 </ul>
 </section></section>
 <section>
-<section id="resultados" class="title-slide slide level1 center">
+<section id="resultados" class="title-slide slide level1 center" data-background-image="./assets/img/dados_tjmg.jpeg" data-background-size="200px" data-background-repeat="repeat" data-background-opacity="0.1">
 <h1>Resultados</h1>
 
 </section>
@@ -872,33 +915,45 @@ Julio Trecenti
 <ul>
 <li><p>Total de simulações<sup>1</sup>: 65</p></li>
 <li><p>Variação: tipo de Captcha, acurácia do modelo inicial, tentativas no oráculo</p></li>
-<li><p>Ganho médio: 333%: mais de 3 vezes a acurácia do modelo inicial.</p></li>
-<li><p>Ganho absoluto: 33%. Aumento médio na acurácia de 33%.</p></li>
+<li><p><strong>Ganho médio</strong>: 333%: mais de 3 vezes a acurácia do modelo inicial.</p></li>
+<li><p><strong>Ganho absoluto</strong>: 33%. Aumento médio na acurácia de 33%.</p></li>
 </ul>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Base de dados: <a href="https://github.com/jtrecenti/doutorado">Repositório da tese</a>. Contém: Captcha ajustado, observações do modelo inicial, tentativas do oráculo, etapa de simulação, caminho do modelo ajustado, acurácia obtida</p></li></ol></aside></section>
 <section id="resultados-por-captcha" class="slide level2">
 <h2>Resultados por Captcha</h2>
-<div class="r-stack">
-<div class="fragment fade-out">
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-simulacao-captcha" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="index_files/figure-revealjs/fig-simulacao-captcha-1.png" style="width:100.0%"></p>
-<p></p><figcaption>Figure&nbsp;4: Resultados da simulação por captcha, quantidade de tentativas e modelo inicial.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment fade-in">
+
+<img data-src="index_files/figure-revealjs/fig-simulacao-captcha-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;4: Resultados da simulação por captcha, quantidade de tentativas e modelo inicial.</p></section>
+<section id="aplicação-iterada" class="slide level2">
+<h2>Aplicação iterada</h2>
+<p>A utilização da técnica levou o modelo a uma acurácia de 100%.</p>
+
+<img data-src="index_files/figure-revealjs/fig-aplicacao-iterada-1.png" style="width:85.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;5: Resultados da aplicação iterativa do WAWL</p><p>O resultado sugere que o método WAWL pode ser aplicado iterativamente para aprimorar o aprendizado do modelo.</p>
+</section>
+<section id="aprendizado-online" class="slide level2">
+<h2>Aprendizado online</h2>
+<p>A partir do modelo inicial 11% de acurácia, após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87% na base de teste.</p>
+
+<img data-src="index_files/figure-revealjs/fig-online-learning-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figura&nbsp;6: Resultados do experimento com aprendizado online</p><p>Como as épocas são relativamente curtas (apenas 80 observações), o ganho em acurácia é pequeno e apresenta variabilidade.</p>
+<aside class="notes">
 <ul>
-<li>Modelos com mais tentativas apresentam maiores ganhos</li>
-<li>Acurácia inicial de até 10%: ganhos menores com apenas um chute</li>
-<li>Interação entre quantidade de chutes e acurácia do modelo inicial</li>
+<li>Integração direta da raspagem de dados no ciclo de aprendizagem</li>
+<li>Modelo, função de perda e base de testes idênticos à simulação completa</li>
+<li>Minibatch construído baixando dados diretamente da internet</li>
+<li>Probabilidade de 80% para baixar novos casos</li>
+<li>Minibatch de 40 observações</li>
+<li>Época definida como 2 minibatches</li>
 </ul>
-</div>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="conclusões-sobre-o-método-wawl" class="slide level2">
 <h2>Conclusões sobre o Método WAWL</h2>
@@ -909,125 +964,67 @@ Julio Trecenti
 <li>Factível para bases pequenas ou modelos generalistas</li>
 </ul>
 </section>
-<section id="aplicação-iterada" class="slide level2">
-<h2>Aplicação iterada</h2>
-<p>A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.</p>
+<section id="pacote-captcha" class="slide level2">
+<h2>Pacote <code>{captcha}</code></h2>
 
-<img data-src="index_files/figure-revealjs/fig-aplicacao-iterada-1.png" style="width:85.0%" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;5: Resultados da aplicação iterativa do WAWL</p><p>O resultado sugere que o método WAWL pode ser aplicado iterativamente para aprimorar o aprendizado do modelo.</p>
-</section>
-<section id="aprendizado-online" class="slide level2">
-<h2>Aprendizado online</h2>
-<ul>
-<li>Integração direta da raspagem de dados no ciclo de aprendizagem</li>
-<li>Modelo, função de perda e base de testes idênticos à simulação completa</li>
-<li>Minibatch construído baixando dados diretamente da internet</li>
-<li>Probabilidade de 80% para baixar novos casos</li>
-<li>Minibatch de 40 observações</li>
-<li>Época definida como 2 minibatches</li>
-</ul>
-</section>
-<section id="aprendizado-online-1" class="slide level2">
-<h2>Aprendizado online</h2>
-<p>A partir do modelo inicial 11% de acurácia, após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87% na base de teste.</p>
-
-<img data-src="index_files/figure-revealjs/fig-online-learning-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;6: Resultados do experimento com aprendizado online</p><p>Como as épocas são relativamente curtas (apenas 80 observações), o ganho em acurácia é pequeno e apresenta variabilidade.</p>
-</section></section>
-<section>
-<section id="pacote-captcha" class="title-slide slide level1 center">
-<h1>Pacote <code>{captcha}</code></h1>
-
-</section>
-<section id="utilização-do-pacote" class="slide level2">
-<h2>Utilização do pacote</h2>
-<div class="cell" data-reveal="true" data-out-width="100%">
-<div class="cell-output-display">
-<div id="fig-diagrama-captcha-simples" class="quarto-figure quarto-figure-center">
-<figure>
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
-  B("&lt;b&gt;&lt;span style='color:blue;'&gt;captcha&lt;/span&gt;&lt;/b&gt; &lt;- &lt;b&gt;read_captcha&lt;/b&gt;('path/to/file.png')")
-  B --&gt; C("&lt;b&gt;plot&lt;/b&gt;(&lt;b&gt;&lt;span style='color:blue;'&gt;captcha&lt;/span&gt;&lt;/b&gt;)")
-  B --&gt; D("&lt;b&gt;captcha_annotate&lt;/b&gt;(&lt;b&gt;&lt;span style='color:blue;'&gt;captcha&lt;/span&gt;&lt;/b&gt;)")
-  B --&gt; F("&lt;b&gt;decrypt&lt;/b&gt;(&lt;b&gt;&lt;span style='color:blue;'&gt;captcha&lt;/span&gt;&lt;/b&gt;, &lt;b&gt;&lt;span style='color:green;'&gt;model&lt;/span&gt;&lt;/b&gt;)")  
-  G("&lt;b&gt;&lt;span style='color:green;'&gt;model&lt;/span&gt;&lt;/b&gt; &lt;- &lt;b&gt;captcha_load_model&lt;/b&gt;('model_name')") --&gt; F
-style B fill:#d3ddf1,stroke:#333,stroke-width:2px
-</pre>
-<div id="mermaid-tooltip-1" class="mermaidTooltip">
-
-</div>
-<p></p>
-<p></p><figcaption>Figure&nbsp;7: Diagrama das funções básicas do pacote <code>{captcha}</code></figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="resolvendo-novos-captchas" class="slide level2">
-<h2>Resolvendo novos Captchas</h2>
-</section>
-<section id="discussão" class="slide level2">
-<h2>Discussão</h2>
-<ul>
-<li>Método WAWL: Resultados empíricos positivos</li>
-<li>Conexão entre raspagem de dados e modelagem estatística</li>
-<li>Ineditismo da abordagem: Raspagem de dados no processo de aprendizado</li>
-<li>Ensino de estatística: Disciplinas optativas de raspagem de dados</li>
-<li>Pacotes desenvolvidos: <code>{captcha}</code>, <code>{captchaDownload}</code> e <code>{captchaOracle}</code></li>
-<li>Reprodutibilidade da pesquisa</li>
-<li>Códigos, dados e resultados disponíveis no GitHub</li>
-<li>Base para pesquisas futuras</li>
+<img data-src="assets/img/diagram.png" class="r-stretch quarto-figure-center"><ul>
+<li>Pacote submetido ao <strong>Journal of Open Source Software (JOSS)</strong>.</li>
+<li>Atualmente, é uma revista conceito B1 no sistema Sucupira (CAPES).</li>
+<li>No momento, <a href="https://github.com/openjournals/joss-reviews/issues/5286">estão avaliando se o tema está dentro do escopo da revista</a>.</li>
 </ul>
 </section></section>
 <section>
-<section id="conclusões" class="title-slide slide level1 center">
+<section id="conclusões" class="title-slide slide level1 center" data-background-image="./assets/img/dados_tjmg.jpeg" data-background-size="200px" data-background-repeat="repeat" data-background-opacity="0.1">
 <h1>Conclusões</h1>
 
 </section>
-<section id="pesquisa-bibliográfica" class="slide level2">
-<h2>Pesquisa bibliográfica</h2>
+<section id="principais-avanços" class="slide level2 center center-x">
+<h2>Principais avanços</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<h4 id="pesquisa-bibliográfica">Pesquisa bibliográfica</h4>
 <ul>
 <li>Histórico dos Captchas</li>
 <li>Uso em serviços públicos</li>
 <li>Incentivo para mão de obra precária</li>
+<li>Estado da arte na parte estatística</li>
 </ul>
-</section>
-<section id="avanço-metodológico" class="slide level2">
-<h2>Avanço metodológico</h2>
+</div><div class="column" style="width:30%;">
+<h4 id="avanço-metodológico">Avanço metodológico</h4>
 <ul>
 <li>Método WAWL</li>
 <li>Raspagem de dados</li>
 <li>Aprendizado estatístico com rótulos parciais</li>
 <li>Aumento de acurácia sem anotação manual</li>
 </ul>
-</section>
-<section id="resultados-empíricos" class="slide level2">
-<h2>Resultados Empíricos</h2>
+</div><div class="column" style="width:30%;">
+<h4 id="resultados-empíricos">Resultados Empíricos</h4>
 <ul>
-<li>Acurácia dos modelos iniciais aumentada em 3x</li>
-<li>Possibilidade de aplicação iterativa para maior poder preditivo</li>
+<li>Acurácia do modelo aumentada em 3x</li>
+<li>Possibilidade de aplicação iterada para maior poder preditivo</li>
 <li>Possibilidade de aplicação de aprendizado online</li>
 </ul>
+</div>
+</div>
 </section>
-<section id="resumo-das-contribuições" class="slide level2">
-<h2>Resumo das contribuições</h2>
-<div class="r-stack">
-<div class="fragment fade-in-then-out">
-<p><strong>Pesquisa acadêmica</strong></p>
+<section id="principais-contribuições" class="slide level2 center center-x">
+<h2>Principais contribuições</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<h4 id="pesquisa-acadêmica">Pesquisa acadêmica</h4>
 <ul>
 <li>Aprendizado com rótulos parciais</li>
 <li>Raspagem de dados em estatística</li>
 <li>Exploração de oráculos</li>
 </ul>
-</div>
-<div class="fragment fade-in-then-out">
-<p><strong>Comunidade de programação</strong></p>
+</div><div class="column" style="width:33%;">
+<h4 id="comunidade-de-programação">Comunidade de programação</h4>
 <ul>
 <li>Pacote <code>{captcha}</code></li>
 <li>Disponibilização de dados e modelos</li>
 </ul>
-</div>
-<div class="fragment fade-in-then-out">
-<p><strong>Sociedade em geral</strong></p>
+</div><div class="column" style="width:33%;">
+<h4 id="sociedade-em-geral">Sociedade em geral</h4>
 <ul>
 <li>Quebra de incentivo nefasto</li>
 <li>Impacto positivo nas relações de trabalho</li>
@@ -1037,14 +1034,12 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 </section>
 <section id="próximos-passos" class="slide level2">
 <h2>Próximos passos</h2>
-<div class="fragment">
 <p><strong>Aprimoramentos</strong></p>
 <ul>
 <li>Resultados matemáticos mais robustos</li>
 <li>Estudo mais completo da aplicação iterada</li>
 <li>Estudo mais completo do aprendizado online</li>
 </ul>
-</div>
 <div class="fragment">
 <p><strong>Extensões</strong></p>
 <ul>
@@ -1053,13 +1048,37 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
 </ul>
 </div>
 </section></section>
+<section>
 <section id="obrigado" class="title-slide slide level1 center">
 <h1>Obrigado!</h1>
+<div class="walle">
+<p><img data-src="assets/img/walle.gif"></p>
+</div>
+</section>
+<section id="referências-da-apresentação" class="slide level2 smaller scrollable">
+<h2>Referências da apresentação</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-fengProvablyConsistentPartiallabel2020" class="csl-entry" role="doc-biblioentry">
+Feng, Lei, Jiaqi Lv, Bo Han, Miao Xu, Gang Niu, Xin Geng, Bo An, e Masashi Sugiyama. 2020. <span>"Provably Consistent Partial-Label Learning"</span>. <em>Advances in Neural Information Processing Systems</em> 33: 10948–60.
+</div>
+<div id="ref-wangMakeComplexCaptchas2021" class="csl-entry" role="doc-biblioentry">
+Wang, Yao, Yuliang Wei, Mingjin Zhang, Yang Liu, e Bailing Wang. 2021. <span>"Make Complex Captchas Simple: A Fast Text Captcha Solver Based on a Small Number of Samples"</span>. <em>Information Sciences</em> 578: 181–94.
+</div>
+<div id="ref-yeAnotherTextCaptcha2018" class="csl-entry" role="doc-biblioentry">
+Ye, Guixin, Zhanyong Tang, Dingyi Fang, Zhanxing Zhu, Yansong Feng, Pengfei Xu, Xiaojiang Chen, e Zheng Wang. 2018. <span>"Yet Another Text Captcha Solver: <span>A</span> Generative Adversarial Network Based Approach"</span>. Em <em>Proceedings of the 2018 <span>ACM SIGSAC</span> Conference on Computer and Communications Security</em>, 332–48.
+</div>
+<div id="ref-yuLearningBiasedComplementary2018" class="csl-entry" role="doc-biblioentry">
+Yu, Xiyu, Tongliang Liu, Mingming Gong, e Dacheng Tao. 2018. <span>"Learning with Biased Complementary Labels"</span>. Em <em>Proceedings of the <span>European</span> Conference on Computer Vision (<span>ECCV</span>)</em>, 68–83.
+</div>
+</div>
+<hr>
+<div class="footnote">
+<p>Para uma lista completa de referências, ver o <a href="https://jtrecenti.github.io/doutorado/bibliografia.html">repositório da tese</a>.</p>
+</div>
 <div class="footer footer-default">
 
 </div>
-</section>
-
+</section></section>
 
     </div>
   </div>
@@ -1347,12 +1366,12 @@ style B fill:#d3ddf1,stroke:#333,stroke-width:2px
         // flash "checked"
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
+        button.setAttribute("title", "Copiada");
         let tooltip;
         if (window.bootstrap) {
           button.setAttribute("data-bs-toggle", "tooltip");
           button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
+          button.setAttribute("data-bs-title", "Copiada");
           tooltip = new bootstrap.Tooltip(button, 
             { trigger: "manual", 
               customClass: "code-copy-button-tooltip",

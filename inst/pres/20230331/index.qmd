@@ -1,22 +1,36 @@
 ---
-title: "Captchas"
-subtitle: "(esqueleto)"
-author: "Julio Trecenti"
+title: "Resolvendo Captchas"
+subtitle: "usando Raspagem de Dados e Aprendizado Fracamente Supervisionado"
+author: 
+  - name: "Julio Trecenti"
+    orcid: 0000-0002-1680-6389
+  - name: "Orientador: Victor Fossaluza"
+    orcid: 0000-0002-9328-0210
+institute: 
+  - "Instituto de Matemática e Estatística"
+  - "Universidade de São Paulo"
+title-slide-attributes: 
+  data-background-image: "./assets/img/walle-capa.jpg"
+  data-background-opacity: "0.2"
+  data-background-size: "fill"
+lang: pt
 format: 
   revealjs:
     slide-number: true
+    theme: ["assets/css/styles.scss"]
+    bibliography: "assets/bib/captcha.bib"
 ---
 
 ## Resumo
 
 ::: {.incremental}
 
-- Ninguém gosta de Captchas
-- Criamos uma nova técnica para resolvê-los! 
-- Construímos o __WAWL__, que une técnicas __raspagem de dados__ e __aprendizado fracamente supervisionado__
-- A técnica baixa dados da internet, classificados automaticamente pelo __oráculo__
-- Os resultados são bons!
-- E mais! Criamos um novo pacote em R, bases de dados públicas e modelos para incentivar a pesquisa na área!
+- [ ] Queremos resolver Captchas: <img src="assets/img/dados_tjrs.jpg" style='margin:0px;margin: 0px 0px -15px 0px;'> -> `"1158"`
+- [ ] Criamos uma nova técnica para isso!
+- [ ] A proposta une conceitos de __raspagem de dados__ e __aprendizado fracamente supervisionado__
+- [ ] A técnica baixa dados da internet e usa os dados para treinar o modelo
+- [ ] Os resultados são bons!
+- [ ] Criamos um [novo pacote em R](https://github.com/decryptr/captcha), bases de dados públicas e modelos para incentivar pesquisas na área!
 
 :::
 
@@ -48,16 +62,18 @@ format:
 
 :::
 
-# Motivação
+# Motivação {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
 
 ## O que é Captcha?
 
-- Desafio para identificar humanos e robôs
-- Criado em 2002 em Carnegie Mellon
+- *Completely Automated Public Turing Test to Tell Computers and Humans Apart*
 - O desafio deve ser fácil de resolver para humanos, mas difícil para máquinas
-- É uma variação do teste de Turing, sendo que a avaliação da humanidade é feita pelo robô
+- Criado em 2002 em Carnegie Mellon
+- É uma variação do teste de Turing: a avaliação da humanidade é feita pelo robô
 
-TODO: Imagem de um Captcha, se possível engraçada
+Nosso foco está em Captchas de __texto em imagem__, porque é um dos mais utilizados em serviços públicos.
+
+![](assets/img/captcha.gif){fig-align="center"}
 
 ## Para que eles servem?
 
@@ -65,61 +81,60 @@ TODO: Imagem de um Captcha, se possível engraçada
 - Evitar criação de contas falsas
 - Bloquear envio automático de mensagens
 - Impedir operações e consultas automatizadas
+- reCaptcha: usado para digitalizar livros!
 
-## Quais são os tipos de Captcha?
+![](assets/img/recaptcha-example.gif){fig-align="center"}
 
-- Audio
-- Texto em imagem
-- Padrão em imagem
-- Miscelânea
-
-TODO: Imagens dos tipos de Captcha
-
-Nosso foco é o de __texto em imagem__, porque é um dos mais utilizados em serviços públicos.
 
 ## Uso indevido em serviços públicos
 
 - A Constituição Federal e Lei de Acesso à Informação (LAI) garantem acesso a informações públicas
-- Problemas da LAI: esforço e formato dos dados. 
-- Solução: disponibilizar dados de forma aberta
+- Problema da LAI: esforço e formato dos dados: transparência passiva.
+- __Solução__: disponibilizar dados de forma aberta: transparência ativa
 
-TODO: Imagem da OKFN sobre open data
+<br/>
 
-## Judiciário e dados abertos
+:::{.fragment .fade-in}
+
+### Judiciário e dados abertos
 
 - Os dados são públicos, mas não são abertos
 - Boa parte dos tribunais possuem Captchas
-- Dificulta a atividade fim da Associação Brasileira de Jurimetria (ABJ)
+- Dificulta a atividade fim da [Associação Brasileira de Jurimetria (ABJ)](https://abj.org.br)
 - Tribunais dificilmente respondem a pedidos de LAI
-- Raspagem de dados é a única alternativa
+- Raspagem de dados é a __única alternativa__
 
-## O mercado de Captcha explora pessoas
+:::
+
+## Queremos resolver Captchas? {auto-animate=true}
+
+<br/>
+
+### O mercado de Captcha explora pessoas
 
 - __Captchas ~~impedem~~ especializam o acesso automatizado__
 - É possível passar a imagem do Captcha para outra pessoa resolver...
 
-TODO diagrama de funcionamento dessas ferramentas
+![[Fonte: F5](https://www.f5.com/labs/articles/cisotociso/i-was-a-human-captcha-solver)](assets/img/2captcha.gif){width=60%}
 
-::: {.fragment}
+## Queremos resolver Captchas? {auto-animate=true}
 
-__Exemplo__: 2Captcha
+<br/>
 
-- Pagamento: US$ 0,5 por 1 a 2 horas de trabalho
-- Salário mensal em jornada 8h/22d: US$ 55 a 110. 
-- Ou seja, menos de R\$ 600 reais por mês!
+### O mercado de Captcha explora pessoas
 
-TODO gráfico comparando salário mínimo e 2Captcha
+- __Captchas ~~impedem~~ especializam o acesso automatizado__
+- É possível passar a imagem do Captcha para outra pessoa resolver...
 
-:::
-
-## Resolver Captchas é bom para a ciência
+### Resolver Captchas é bom para a ciência
 
 - Captcha e inteligência artificial estão conectados
 - Quando se resolvem Captchas, a ciência se desenvolve
 
+
 <!-- ---------------------------------------------- -->
 
-# Estado da arte
+# Estado da arte {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
 
 ## Uma luta de geradores e resolvedores
 
@@ -133,85 +148,89 @@ TODO gráfico comparando salário mínimo e 2Captcha
 - reCaptcha v3: verificação ativa do agente, foco em padrões de acesso
 :::
 
-TODO linha do tempo com Captchas
+
+```{r}
+#| out-width: 100%
+#| out-height: 800px
+library(timevis)
+tibble::tribble(
+  ~id,                                     ~content, ~start, ~end,
+    1,                            "Criação<br/>do site",   "2000-01-01", NA,
+    2,                                "Tech. report",   "2002-01-01",   NA,
+    3,                              "Paper original",   "2003-01-01",   NA,
+    4,                        "Primeiro resolvedor",   "2003-01-01",   NA,
+    5,                 "Aplicação de<br/>redes neurais",   "2004-01-01",   NA,
+    6,                               "reCaptcha V1",   "2008-01-01", NA,
+    7,             "reCaptcha comprada<br/>pela Google",   "2009-01-01",   NA,
+    8, "resolvendo reCaptcha V1<br/>com 99,8% de acurácia",   "2013-01-01",   NA,
+    9,                               "reCaptcha V2",   "2014-01-01", NA,
+   10,                    "resolvendo<br/>reCaptcha V2",   "2017-01-01",   NA,
+   11,                               "reCaptcha V3<br/>(fim da necessidade<br/>de usar Captchas)",   "2018-01-01", NA
+  ) |> 
+  dplyr::mutate(
+    style = paste0(
+      "font-size: .7em;background-color:", 
+      c(rep("lightblue", 5), "lightgreen", "lightblue", "lightblue",
+        "lightgreen", "lightblue", "lightgreen")
+    ),
+    # type = c(rep("box", 5), "range", "box", "box", "range", "box", "range"),
+    # group = c(rep(2, 5), 1, 2, 2, 1, 2, 1)
+  ) |> 
+timevis::timevis(
+  height = 500
+)
+```
+
 
 ## A luta acabou, mas os Captchas não
 
-- Captchas praticamente não são mais necessários
-- Ninguém venceu a luta; ela mudou de foco para verificação ativa
-- Captchas se tornaram obsoletos, servindo principalmente para
+- Captchas praticamente __não são necessários__ nos dias de hoje
+- Ninguém venceu a luta; ela mudou de foco para __verificação ativa__
+- Captchas se tornaram obsoletos, servindo principalmente para:
     - Pesquisa científica em inteligência artificial
     - Atrapalhar a vida de quem faz pesquisa com dados públicos
 
 ## Desafios atuais de pesquisa
 
-- Reduzir a quantidade anotações necessárias para resolver um Captcha
-- Criar resolvedores de Captcha universais
+- __Reduzir__ a quantidade __anotações necessárias__ para resolver um Captcha
+- Criar __resolvedores__ de Captcha __universais__
 - Abordagens recentes: redes generativas adversariais (GANs) e similares
-- Trabalhos recentes: @ye2018; @wang2021
+- Trabalhos recentes: @yeAnotherTextCaptcha2018; @wangMakeComplexCaptchas2021.
 
 <!-- ---------------------------------------------- -->
 
-# Uma nova abordagem
+# Nova abordagem {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
 
-## A oportunidade
+## Objetivo {auto-animate=true}
 
-- Quando preenchemos um Captcha no site, ele diz para nós se acertamos o rótulo ou não
-- Mas a informação é limitada: o site só diz de acertamos ou erramos.
-- É como um __oráculo__, que sempre nos diz verdade, mas de forma incompleta.
-
-TODO imagem oráculo de Delphos ou Matrix
-
-## O que é oráculo?
-
-TODO gif
-
-- Conceito de oráculo: resposta do site sobre acerto/erro
-- Oráculos existem em todos os sites com Captchas, por construção
-- Podem fornecer mais ou menos informação, dependendo da __quantidade de chutes__ permitida para um mesmo Captcha
-
-## Nossa solução
-
-- Técnica proposta: Web Automatic Weak Learning (WAWL)
-- Obtém novos dados automaticamente
-- Combina raspagem de dados e aprendizado fracamente supervisionado
-
-TODO WAWL-e
-
-## Como funciona?
-
-TODO Diagrama: Modelo inicial -> novos dados -> modelo final
-
-## Vantagens do WAWL
-
-- Aproveita os recursos disponíveis: base de dados virtualmente infinita
-- Fácil de implementar: só precisa de uma mudança na função de perda
-- Depende de um raspador, mas tempo de desenvolvimento é negligenciável devido à necessidade de construí-los na prática
-
-## Objetivo
-
-::: {style="margin-top: 200px; font-size: 1em; color: royalblue;"}
+::: {style="margin-top: 200px; font-size: 1.3em; color: royalblue;"}
 Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de __aprendizado profundo__ com __raspagem de dados__ e aproveitando os dados fornecidos pelo oráculo.
 :::
 
-## Objetivos específicos
+## Objetivos específicos {auto-animate=true}
+
+Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de __aprendizado profundo__ com __raspagem de dados__ e aproveitando os dados fornecidos pelo oráculo.
 
 1.  Descrever o método proposto e estudar suas características.
 2.  Construir e disponibilizar um repositório de dados para realização de mais pesquisas no ramo.
 3.  Ajustar modelos e testar a eficácia do método.
 4.  Disponibilizar um pacote computacional aberto que possibilita a implementação de soluções para resolver Captchas presentes em serviços públicos.
 
-## Hipóteses
+::: {.fragment}
+
+### Hipóteses
 
 1. A utilização do WAWL gera modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.
 
 2. É possível aliar a área de raspagem de dados com a área de modelagem estatística.
 
-## Contribuições
+:::
 
-::: {.r-stack}
+## Contribuições {.center .center-x}
 
-::: {.fragment .fade-in-then-out}
+:::{.columns}
+
+:::{.column width="33%" .incremental}
 
 ### Pesquisa
 
@@ -220,27 +239,74 @@ Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*
 
 :::
 
-::: {.fragment .fade-in-then-out}
+:::{.column width="33%" .incremental}
 
 ### Aplicações
 
 - O WAWL traz bons resultados empíricos
 - Novos modelos disponíveis
 - Destravamos algumas pesquisas aplicada no Brasil
-    
+
+
 :::
 
-::: {.fragment .fade-in}
+:::{.column width="33%" .incremental}
 
 ### Sociedade
 
 - Novo pacote `{captcha}` disponível para comunidade
 - Novas bases de dados disponíveis
-- Desincentivo aos mercados
+- Desincentivo aos mercados que exploram pessoas
+
 
 :::
 
 :::
+
+## A oportunidade
+
+- Quando preenchemos um Captcha no site, ele nos diz se acertamos ou não
+- Mas a informação é limitada: o site só diz de __acertamos__ ou __erramos__.
+- É como um __oráculo__, que sempre nos diz verdade, mas de forma incompleta.
+
+:::{width="80%"}
+
+![Fonte: The Matrix](assets/img/cookie.gif){fig-align="center" width="50%"}
+
+:::
+
+## O que é oráculo?
+
+![](assets/img/esquema-oraculo.png){fig-align="center"}
+
+- Conceito de oráculo: resposta do site sobre acerto/erro
+- Oráculos existem em todos os sites com Captchas, por construção
+- Podem fornecer mais ou menos informação, dependendo da __quantidade de chutes__ permitida para um mesmo Captcha
+
+## Nossa solução {background-image="./assets/img/walle.webp" background-opacity="0.2" .center .center-x}
+
+::: {style="margin-top: 200px; font-size: 1.4em"}
+
+- Técnica proposta: Web Automatic Weak Learning (WAWL)
+
+- Obtém novos dados automaticamente
+
+- Combina __raspagem de dados__ e __aprendizado fracamente supervisionado__
+
+:::
+
+## Como funciona?
+
+![](assets/img/wawl.png){fig-align="center"}
+
+- Modelo inicial: pode ser ajustado com uma base completamente anotada
+- Também pode ser um super-modelo generalista
+
+## Vantagens do WAWL
+
+- Aproveita os recursos disponíveis: __base de dados__ virtualmente __infinita__
+- Fácil de implementar: só precisa de uma __mudança na função de perda__
+- __Depende de um raspador__, cujo tempo de desenvolvimento é __negligenciável__ devido à necessidade de construí-los na prática
 
 
 ## Arquitetura da rede neural
@@ -256,54 +322,61 @@ knitr::include_graphics("assets/img/diagrama-modelo-cnn.png")
 - Função de perda adaptada para informação limitada do oráculo
 - Considera rótulos corretos e incorretos
 
-## Função de perda proposta
-
 $$\mathcal L(g(\mathbf x), {\mathbf y}) = -\log\left[1 - \sum_{y \in \mathcal A} {g_y}(\mathbf x) I(y\notin {\mathbf y})\right]$$
+
 - Função indicadora para rótulos fora do conjunto observado
 
-## Exemplo 1
+## Exemplo
 
-Rótulo incorreto com alta probabilidade
+:::{.fragment}
+Rótulo incorreto com __alta__ probabilidade
 
 - Rede neural retorna 0.99 para rótulo incorreto $j$
-- Função de perda: 
 
 $$\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{j\}) = -\log\left[1-{g_j}(\mathbf x)\right] = -\log\left[1-0.99 \right] = 4.61$$
 
-- Penalização maior para predição incorreta
+- Penalização __maior__ para predição incorreta
 
-## Exemplo 2
+:::
 
-Rótulo incorreto com alta probabilidade
+<hr/>
+
+:::{.fragment}
+Rótulo incorreto com __baixa__ probabilidade
 
 - Rede neural retorna 0.01 para rótulo incorreto $k$
-- Função de perda: 
 
 $$\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{k\}) = -\log\left[1-{g_k}(\mathbf x)\right] = -\log\left[1-0.01 \right] = 0.01$$
 
 - Penalização menor para predição menos provável
 
+:::
+
 ## Aprendizado fracamente supervisionado
 
-TODO imagem com tipos de aprendizado fracamente supervisionado
+Generalização do aprendizado estatístico: contempla aprendizado supervisionado, aprendizado semi-supervisionado e vários tipos de supervisão fraca (rótulos incorretos, rótulos incompletos, etc) e sem supervisão.
 
-- Aprendizado com dados parcialmente rotulados (PLL): parte da base anotada sem erros, parte com lista de rótulos possíveis.
-- Rótulos parciais: lista de possíveis valores para $y$, incluindo o correto.
-- Rótulos complementares: a lista de possíveis valores inclui todos os valores menos 1. No nosso caso, a tentativa errada que vem do oráculo.
+:::{}
+![Exemplo de supervisor fraco](assets/img/office.gif)
+:::
 
-## Como demonstrar que uma solução funciona?
+- __Nosso caso__: Aprendizado com dados parcialmente rotulados (PLL): parte da base anotada sem erros, parte com lista de rótulos possíveis.
 
-- Passo-a-passo: escrever distribuição dos dados, reescrever função de risco, criar estimador e demonstrar convergência
+- __Rótulos parciais__: lista de possíveis valores para $y$, incluindo o correto.
+
+- __Rótulos complementares__: a lista de possíveis valores inclui todos os valores menos 1. No nosso caso, a tentativa errada que vem do oráculo.
+
+## Como demonstrar que funciona?
+
+- __Passo-a-passo__: escrever distribuição dos dados, reescrever função de risco, criar estimador e demonstrar convergência
 
 - A partir da distribuição dos dados, reescreve-se a função de risco do problema completamente supervisionado em termos do problema de rótulos parciais.
-
-## Como demonstrar que uma solução funciona?
 
 - Considerando que $f^*$ é a função obtida em um problema completamente supervisionado, $\hat{f}$ é a função obtida no problema com rótulos parciais e seguindo algumas suposições adicionais, demonstra-se que 
 
 $$|\mathcal R(\hat f) - \mathcal R(f^*)|$$
 
-é limitada e converge para zero quando tamanho da amostra vai para infinito. Geralmente, utiliza-se a teoria de complexidade de Rademacher na demonstração.
+é limitada e converge para zero quando tamanho da amostra vai para infinito. Geralmente, utiliza-se a *teoria de complexidade de Rademacher* na demonstração [@fengProvablyConsistentPartiallabel2020].
 
 ## Situação atual
 
@@ -311,52 +384,50 @@ $$|\mathcal R(\hat f) - \mathcal R(f^*)|$$
 
 - Também existem demonstrações para funções de perda específicas (diferentes da nossa), que independem da distribuição dos dados. No entanto, essas soluções envolvem apenas rótulos complementares, não rótulos complementares múltiplos. 
 
-## Situação atual
-
-- Até o momento, não existe uma demonstração que aborde exatamente os dados da metodologia WAWL. No entanto, a função de perda proposta é bastante natural e provavelmente é uma adaptação de @yu2018.
+- Até o momento, não existe uma demonstração que aborde exatamente os dados da metodologia WAWL. No entanto, a função de perda proposta é bastante natural e pode ser adaptada de @yuLearningBiasedComplementary2018.
 
 - Adicionalmente, o fato de observarmos rótulos complementares múltiplos tende a proporcionar resultados melhores, já que nesse caso temos mais informação.
 
-# Dados
+# Simulação {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
 
-## Critérios para seleção de Captchas:
+## Lista de Captchas {.scrollable}
 
-- Serviço público (governo federal, tribunal, etc.)
-- Letras (A-Z) e números (0-9) em imagem `jpeg` ou `png`
-- Comprimento fixo
-
-## Lista dos Captchas
-
-|Nome   |Exemplo             |Descrição                                         |Acurácia |
-|:------|:-------------------|:---------------------------------------------------|:--------|
-|cadesp |![cadesp](assets/img/dados_cadesp.jpg){height=80px}|Centro de Apoio ao Desenvolvimento da Saude Publica |96.37%   |
-|esaj   |![esaj](assets/img/dados_esaj.png){height=80px}|Tribunal de Justica da Bahia                        |94.50%   |
-|jucesp |![jucesp](assets/img/dados_jucesp.jpg){height=80px}|Junta Comercial de Sao Paulo                        |89.88%   |
-|rfb    |![rfb](assets/img/dados_rfb.png){height=80px}|Receita Federal                                     |95.70%   |
-|sei    |![sei](assets/img/dados_sei.png){height=80px}|Sistema Eletronico de Informacoes - ME              |77.25%   |
-|tjmg   |![tjmg](assets/img/dados_tjmg.jpeg){height=80px}|Tribunal de Justica de Minas Gerais                 |98.35%   |
-|tjpe   |![tjpe](assets/img/dados_tjpe.png){height=80px}|Tribunal de Justica de Pernambuco                   |91.88%   |
-|tjrs   |![tjrs](assets/img/dados_tjrs.jpg){height=80px}|Tribunal de Justica do Rio Grande do Sul            |99.57%   |
-|trf5   |![trf5](assets/img/dados_trf5.jpg){height=80px}|Tribunal Regional Federal 5                         |98.77%   |
-|trt    |![trt](assets/img/dados_trt.jpeg){height=80px}|Tribunal Regional do Trabalho 3                     |98.50%   |
+|Nome   |Exemplo             |Descrição                                         
+|:------|:-------------------|:---------------------------------------------------|
+|cadesp |![cadesp](assets/img/dados_cadesp.jpg){height=80px}|Centro de Apoio ao Desenvolvimento da Saude Publica |
+|esaj   |![esaj](assets/img/dados_esaj.png){height=80px}|Tribunal de Justica da Bahia                        |
+|jucesp |![jucesp](assets/img/dados_jucesp.jpg){height=80px}|Junta Comercial de Sao Paulo                        |
+|rfb    |![rfb](assets/img/dados_rfb.png){height=80px}|Receita Federal                                     |
+|sei    |![sei](assets/img/dados_sei.png){height=80px}|Sistema Eletronico de Informacoes - ME              |
+|tjmg   |![tjmg](assets/img/dados_tjmg.jpeg){height=80px}|Tribunal de Justica de Minas Gerais                 |
+|tjpe   |![tjpe](assets/img/dados_tjpe.png){height=80px}|Tribunal de Justica de Pernambuco                   |
+|tjrs   |![tjrs](assets/img/dados_tjrs.jpg){height=80px}|Tribunal de Justica do Rio Grande do Sul            |
+|trf5   |![trf5](assets/img/dados_trf5.jpg){height=80px}|Tribunal Regional Federal 5                         |
+|trt    |![trt](assets/img/dados_trt.jpeg){height=80px}|Tribunal Regional do Trabalho 3                     |
 
 
-## Uso de Captchas artificiais:
+## Captchas artificiais
 
 - Facilita testes e simulações
 - Evita necessidade de acesso à internet e construção de bases de dados específicas
 
+:::{}
+
 ```{r}
 #| label: fig-captcha-r-exemplo
 #| fig-cap: Exemplo de captcha gerado pela função `captcha::captcha_generate()`
-#| out-width: 150px
+#| out-width: 50%
 set.seed(5)
 gen <- captcha::captcha_generate()
 gen$lab <- NULL
 plot(gen)
 ```   
+
+:::
    
-## Raspagem de dados
+## Para baixar os dados {auto-animate=true}
+
+### Raspagem de dados
 
 ```{r}
 #| label: fig-fluxo-web-scraping
@@ -366,44 +437,71 @@ plot(gen)
 knitr::include_graphics("assets/img/cycle.png")
 ```
 
-## Bases disponíveis!
+- Cada Captcha ganhou uma função `captcha_access()` e outra `captcha_test()`. 
+- Códigos disponíveis no pacote [`{captchaDownload}`](https://github.com/jtrecenti/captchaDownload).
+
+
+## Para baixar os dados {auto-animate=true}
+
+### Raspagem de dados
+
+- Cada Captcha ganhou uma função `captcha_access()` e outra `captcha_test()`. 
+- Códigos disponíveis no pacote [`{captchaDownload}`](https://github.com/jtrecenti/captchaDownload).
+
+### Bases disponíveis
 
 - As bases de dados com imagens anotadas foram disponibilizadas na aba de lançamentos (*releases*) do [repositório principal do projeto de pesquisa](https://github.com/decryptr/captcha/releases). 
 
 - As bases e modelos ajustados estão disponíveis para quem tiver interesse em fazer novas pesquisas e utilizar os resultados em suas aplicações.
 
-# Simulação
+## Simulação em 3 passos
 
-## Passo 1: Modelo Inicial
+:::{.columns}
+:::{.column width=33% .incremental}
+#### 1. Modelo Inicial
 
-- __Objetivo__: Obter modelos preditivos de Captchas com diferentes acurácias
+__Objetivo__: Obter modelos preditivos de Captchas com diferentes acurácias
+
 - Construção de 10 amostras de dados com subconjuntos das bases completas
 - Aplicação de 27 modelos com diferentes hiperparâmetros
 - Seleção do melhor modelo para cada tamanho de amostra
 
-## Passo 2: Dados
+:::
 
-- __Objetivo__: Construir bases de dados utilizando o oráculo
+:::{.column width=33% .incremental}
+
+#### 2. Dados
+
+__Objetivo__: Construir bases de dados utilizando o oráculo
+
 - Filtro de modelos com acurácia entre 5% e 50%
 - Definição do tamanho da base a ser obtida
 - Coleta de imagens com diferentes quantidades de tentativas (1, 5 e 10)
 - Construção de bases de teste com 1000 imagens para cada Captcha
 
-## Passo 3: Modelo Final
+:::
 
-- __Objetivo__: Ajustar modelo final para as 65 bases de treino disponíveis
+:::{.column width=33% .incremental}
+
+#### 3. Modelo Final
+
+__Objetivo__: Ajustar modelo final para as 65 bases de treino disponíveis
+
 - Modificação da função de perda do modelo
 - Busca de hiperparâmetros e ajuste de 9 modelos para cada base de dados
-- Seleção dos classificadores com melhor acurácia
 - Comparação de acurácias iniciais e finais através de gráficos de barras e dispersão
+
+:::
+
+:::
 
 ## Experimentos adicionais
 
-- Aplicação iterativa da técnica do oráculo para verificar melhorias contínuas
+- Aplicação iterada do WAWL para verificar melhorias contínuas
 - Aprendizado online: incorporação do download de dados dentro da construção do *minibatch*
 - Disponibilização das bases de dados para futuras pesquisas e testes de outras arquiteturas de redes neurais
 
-# Resultados
+# Resultados {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
 
 ## Resultado geral
 
@@ -426,20 +524,15 @@ ganho_absoluto <- doutorado::da_results_simulacao |>
   scales::percent()
 ```
 
-
 - Total de simulações[^1]: `r total_sim`
 - Variação: tipo de Captcha, acurácia do modelo inicial, tentativas no oráculo
 
-- Ganho médio: `r ganho_medio`: mais de 3 vezes a acurácia do modelo inicial.
-- Ganho absoluto: `r ganho_absoluto`. Aumento médio na acurácia de 33%.
+- __Ganho médio__: `r ganho_medio`: mais de 3 vezes a acurácia do modelo inicial.
+- __Ganho absoluto__: `r ganho_absoluto`. Aumento médio na acurácia de 33%.
 
 [^1]: Base de dados: [Repositório da tese](https://github.com/jtrecenti/doutorado). Contém: Captcha ajustado, observações do modelo inicial, tentativas do oráculo, etapa de simulação, caminho do modelo ajustado, acurácia obtida
 
 ## Resultados por Captcha
-
-::: {.r-stack}
-
-::: {.fragment .fade-out}
 
 ```{r}
 #| label: fig-simulacao-captcha
@@ -489,26 +582,9 @@ doutorado::da_results_simulacao |>
   )
 ```
 
-:::
-
-::: {.fragment .fade-in}
-- Modelos com mais tentativas apresentam maiores ganhos
-- Acurácia inicial de até 10%: ganhos menores com apenas um chute
-- Interação entre quantidade de chutes e acurácia do modelo inicial
-:::
-
-:::
-
-## Conclusões sobre o Método WAWL
-
-- Resultados expressivos e consistentes
-- Aproveita oportunidade de feedback oráculo múltiplo
-- Aplicação possível para modelos iniciais fracos (acurácia até 10%)
-- Factível para bases pequenas ou modelos generalistas
-
 ## Aplicação iterada
 
-A utilização da técnica não só funcionou como levou o modelo a uma acurácia de 100%.
+A utilização da técnica levou o modelo a uma acurácia de 100%.
 
 ```{r}
 #| label: fig-aplicacao-iterada
@@ -547,15 +623,6 @@ O resultado sugere que o método WAWL pode ser aplicado iterativamente para apri
 
 ## Aprendizado online
 
-- Integração direta da raspagem de dados no ciclo de aprendizagem
-- Modelo, função de perda e base de testes idênticos à simulação completa
-- Minibatch construído baixando dados diretamente da internet
-- Probabilidade de 80% para baixar novos casos
-- Minibatch de 40 observações
-- Época definida como 2 minibatches
-
-## Aprendizado online
-
 A partir do modelo inicial 11% de acurácia, após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87% na base de teste.  
 
 ```{r}
@@ -591,81 +658,92 @@ doutorado::da_online |>
 
 Como as épocas são relativamente curtas (apenas 80 observações), o ganho em acurácia é pequeno e apresenta variabilidade.
 
-# Pacote `{captcha}`
+:::{.notes}
 
-## Utilização do pacote
+- Integração direta da raspagem de dados no ciclo de aprendizagem
+- Modelo, função de perda e base de testes idênticos à simulação completa
+- Minibatch construído baixando dados diretamente da internet
+- Probabilidade de 80% para baixar novos casos
+- Minibatch de 40 observações
+- Época definida como 2 minibatches
 
-```{mermaid}
-%%| label: fig-diagrama-captcha-simples
-%%| fig-cap: Diagrama das funções básicas do pacote `{captcha}`
-%%| out-width: 100%
-%%| fig-align: center
-flowchart LR
-  B("<b><span style='color:blue;'>captcha</span></b> <- <b>read_captcha</b>('path/to/file.png')")
-  B --> C("<b>plot</b>(<b><span style='color:blue;'>captcha</span></b>)")
-  B --> D("<b>captcha_annotate</b>(<b><span style='color:blue;'>captcha</span></b>)")
-  B --> F("<b>decrypt</b>(<b><span style='color:blue;'>captcha</span></b>, <b><span style='color:green;'>model</span></b>)")  
-  G("<b><span style='color:green;'>model</span></b> <- <b>captcha_load_model</b>('model_name')") --> F
-style B fill:#d3ddf1,stroke:#333,stroke-width:2px
-```
+:::
 
-## Resolvendo novos Captchas
+## Conclusões sobre o Método WAWL
 
-## Discussão
+- Resultados expressivos e consistentes
+- Aproveita oportunidade de feedback oráculo múltiplo
+- Aplicação possível para modelos iniciais fracos (acurácia até 10%)
+- Factível para bases pequenas ou modelos generalistas
 
-- Método WAWL: Resultados empíricos positivos
-- Conexão entre raspagem de dados e modelagem estatística
-- Ineditismo da abordagem: Raspagem de dados no processo de aprendizado
-- Ensino de estatística: Disciplinas optativas de raspagem de dados
-- Pacotes desenvolvidos: `{captcha}`, `{captchaDownload}` e `{captchaOracle}`
-- Reprodutibilidade da pesquisa
-- Códigos, dados e resultados disponíveis no GitHub
-- Base para pesquisas futuras
 
-# Conclusões
+## Pacote `{captcha}`
 
-## Pesquisa bibliográfica
+![](assets/img/diagram.png){fig-align="center"}
+
+- Pacote submetido ao __Journal of Open Source Software (JOSS)__.
+- Atualmente, é uma revista conceito B1 no sistema Sucupira (CAPES).
+- No momento, [estão avaliando se o tema está dentro do escopo da revista](https://github.com/openjournals/joss-reviews/issues/5286).
+
+# Conclusões {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
+
+## Principais avanços {.center .center-x}
+
+:::{.columns}
+:::{.column width=30%}
+
+#### Pesquisa bibliográfica
 
 - Histórico dos Captchas
 - Uso em serviços públicos
 - Incentivo para mão de obra precária
+- Estado da arte na parte estatística
 
-## Avanço metodológico
+:::
+:::{.column width=30%}
+
+#### Avanço metodológico
 
 - Método WAWL
 - Raspagem de dados
 - Aprendizado estatístico com rótulos parciais
 - Aumento de acurácia sem anotação manual
 
-## Resultados Empíricos
+:::
+:::{.column width=30%}
 
-- Acurácia dos modelos iniciais aumentada em 3x
-- Possibilidade de aplicação iterativa para maior poder preditivo
+#### Resultados Empíricos
+
+- Acurácia do modelo aumentada em 3x
+- Possibilidade de aplicação iterada para maior poder preditivo
 - Possibilidade de aplicação de aprendizado online
 
-## Resumo das contribuições
+:::
+:::
 
-::: {.r-stack}
+## Principais contribuições {.center .center-x}
 
-::: {.fragment .fade-in-then-out}
-__Pesquisa acadêmica__
+::: {.columns}
+
+::: {.column width=33%}
+#### Pesquisa acadêmica
 
 - Aprendizado com rótulos parciais
 - Raspagem de dados em estatística
 - Exploração de oráculos
 :::
 
-::: {.fragment .fade-in-then-out}
+::: {.column width=33%}
 
-__Comunidade de programação__
+#### Comunidade de programação
 
 - Pacote `{captcha}`
 - Disponibilização de dados e modelos
 
 :::
 
-::: {.fragment .fade-in-then-out}
-__Sociedade em geral__
+::: {.column width=33%}
+#### Sociedade em geral
 
 - Quebra de incentivo nefasto
 - Impacto positivo nas relações de trabalho
@@ -675,15 +753,12 @@ __Sociedade em geral__
 
 ## Próximos passos
 
-::: {.fragment}
-
 __Aprimoramentos__
 
 - Resultados matemáticos mais robustos
 - Estudo mais completo da aplicação iterada
 - Estudo mais completo do aprendizado online
 
-:::
 
 ::: {.fragment}
 
@@ -696,3 +771,19 @@ __Extensões__
 
 # Obrigado!
 
+:::{.walle}
+![](assets/img/walle.gif)
+:::
+
+## Referências usadas na apresentação
+
+::: {#refs}
+:::
+
+<hr/>
+
+:::{.footnote}
+
+Para uma lista completa de referências, ver o [repositório da tese](https://jtrecenti.github.io/doutorado/bibliografia.html).
+
+:::
