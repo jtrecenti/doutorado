@@ -1,0 +1,113 @@
+/*-- scss:defaults --*/
+// importing fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Lato&display=swap');
+
+
+// fonts
+$font-family-sans-serif: 'Lato', Tahoma, sans-serif !default;
+
+// headings
+$presentation-heading-font: 'Montserrat',  Tahoma, sans-serif  !default;
+$presentation-heading-color: #00008b !default;
+$h1-font-size: 1.3em !default;
+$h2-font-size: 1.1em !default;
+$h3-font-size: 1.05em !default;
+
+//code
+$code-color: #88398A !default;
+$font-family-monospace: 'Inconsolata', monospace  !default;
+
+// general
+$body-bg: #fff;
+$link-color: #2a547c;
+$presentation-font-size-root: 22pt;
+$body-color: #222222;
+
+$presentation-h1-font-size: 2.3em;
+
+/*-- scss:rules --*/
+.reveal pre code {
+  background-color: #f8f8f8;
+  font-size: 1.5em;
+  padding: 0em;
+  line-height: 1.1em;
+}
+
+.codeyml {
+  font-size: 14pt !important;
+  line-height: 1em !important;
+}
+
+.reveal pre.sourceCode code {
+    background-color: #fff;
+    padding: 0px 0px;
+    max-height: 100%;
+    white-space: pre;
+}
+
+.reveal .footer > * {
+  color: #383c41;
+}
+
+.subtitle {
+  color: $presentation-heading-color;
+  font-size: $h2-font-size;
+}
+
+.date {
+  font-size: 1em;
+}
+
+h1 {
+  font-size: 3.5em !important;
+}
+
+.center-y{
+  text-align: center;
+}
+
+
+h1 strong{
+  color: #0f4d87;
+  font-family: 'Fira Code', monospace;
+}
+
+.date strong{
+  color: #2f7bc2;
+  font-family: 'Fira Code', monospace;
+  font-size: 1em;
+}
+
+.reveal code {
+  font-family: 'Fira Code', monospace;
+}
+
+.reveal a{
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 0.04em;
+}
+
+.aboutmeslide{
+  font-size: 0.8em;
+}
+
+.rstudioslide{
+  font-size: 30pt;
+}
+
+li::marker .wow {
+  content: "🤯";
+  padding-inline-start: 1ch;
+}
+
+.center-x{
+    text-align: center;
+}
+
+.walle{
+  position: relative;
+  left: 600px;
+  opacity: 0.3;
+}

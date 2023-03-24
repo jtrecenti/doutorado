@@ -15,6 +15,8 @@ mais recente.
 [Versão
 PDF](https://jtrecenti.github.io/doutorado/Resolvendo-Captchas.pdf)
 
+[Apresentação da defesa](https://jtrecenti.github.io/doutorado/defesa/)
+
 ## Resumo
 
 Captcha (Completely Automated Public Turing tests to tell Computers and
