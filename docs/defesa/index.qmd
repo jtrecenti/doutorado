@@ -19,7 +19,9 @@ format:
     slide-number: true
     theme: ["assets/css/styles.scss"]
     bibliography: "assets/bib/captcha.bib"
+    
 ---
+
 
 ## Resumo
 
@@ -33,6 +35,12 @@ format:
 - [ ] Criamos um [novo pacote em R](https://github.com/decryptr/captcha), bases de dados públicas e modelos para incentivar pesquisas na área!
 
 :::
+
+```{r}
+#| echo: false
+type <- "hidden"
+```
+
 
 ::: {.notes}
 
@@ -62,7 +70,7 @@ format:
 
 :::
 
-# Motivação {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
+# Motivação {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1" visibility="uncounted"}
 
 ## O que é Captcha?
 
@@ -75,7 +83,7 @@ Nosso foco está em Captchas de __texto em imagem__, porque é um dos mais utili
 
 ![](assets/img/captcha.gif){fig-align="center"}
 
-## Para que eles servem?
+## Para que eles servem? {visibility='`r type`'}
 
 - Evitar SPAM
 - Evitar criação de contas falsas
@@ -134,7 +142,7 @@ Nosso foco está em Captchas de __texto em imagem__, porque é um dos mais utili
 
 <!-- ---------------------------------------------- -->
 
-# Estado da arte {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
+# Estado da arte {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1" visibility="uncounted"}
 
 ## Uma luta de geradores e resolvedores
 
@@ -182,7 +190,7 @@ timevis::timevis(
 ```
 
 
-## A luta acabou, mas os Captchas não
+## A luta acabou, mas os Captchas não {visibility='`r type`'}
 
 - Captchas praticamente __não são necessários__ nos dias de hoje
 - Ninguém venceu a luta; ela mudou de foco para __verificação ativa__
@@ -199,7 +207,7 @@ timevis::timevis(
 
 <!-- ---------------------------------------------- -->
 
-# Nova abordagem {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
+# Nova abordagem {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1" visibility="uncounted"}
 
 ## Objetivo {auto-animate=true}
 
@@ -215,16 +223,6 @@ Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*
 2.  Construir e disponibilizar um repositório de dados para realização de mais pesquisas no ramo.
 3.  Ajustar modelos e testar a eficácia do método.
 4.  Disponibilizar um pacote computacional aberto que possibilita a implementação de soluções para resolver Captchas presentes em serviços públicos.
-
-::: {.fragment}
-
-### Hipóteses
-
-1. A utilização do WAWL gera modelos que resolvem Captchas de textos em imagens sem a necessidade de criar grandes bases anotadas.
-
-2. É possível aliar a área de raspagem de dados com a área de modelagem estatística.
-
-:::
 
 ## Contribuições {.center .center-x}
 
@@ -309,7 +307,7 @@ Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*
 - __Depende de um raspador__, cujo tempo de desenvolvimento é __negligenciável__ devido à necessidade de construí-los na prática
 
 
-## Arquitetura da rede neural
+## Arquitetura da rede neural {visibility='`r type`'}
 
 ```{r}
 #| label: fig-diagrama-modelo-cnn
@@ -324,9 +322,10 @@ knitr::include_graphics("assets/img/diagrama-modelo-cnn.png")
 
 $$\mathcal L(g(\mathbf x), {\mathbf y}) = -\log\left[1 - \sum_{y \in \mathcal A} {g_y}(\mathbf x) I(y\notin {\mathbf y})\right]$$
 
-- Função indicadora para rótulos fora do conjunto observado
+- Quando a informação é __parcial__, a __perda é maior__ quando o modelo dá alta probabilidade para um __rótulo incorreto__.
+- Quando a informação é __completa__, utilizamos a função de __perda original__.
 
-## Exemplo
+## Exemplo {visibility='`r type`'}
 
 :::{.fragment}
 Rótulo incorreto com __alta__ probabilidade
@@ -352,7 +351,7 @@ $$\mathcal L(g(\mathbf x), \{1,\dots,10\}\setminus \{k\}) = -\log\left[1-{g_k}(\
 
 :::
 
-## Aprendizado fracamente supervisionado
+## Aprendizado fracamente supervisionado {visibility='`r type`'}
 
 Generalização do aprendizado estatístico: contempla aprendizado supervisionado, aprendizado semi-supervisionado e vários tipos de supervisão fraca (rótulos incorretos, rótulos incompletos, etc) e sem supervisão.
 
@@ -366,7 +365,7 @@ Generalização do aprendizado estatístico: contempla aprendizado supervisionad
 
 - __Rótulos complementares__: a lista de possíveis valores inclui todos os valores menos 1. No nosso caso, a tentativa errada que vem do oráculo.
 
-## Como demonstrar que funciona?
+## Como demonstrar que funciona? {visibility='`r type`'}
 
 - __Passo-a-passo__: escrever distribuição dos dados, reescrever função de risco, criar estimador e demonstrar convergência
 
@@ -378,7 +377,7 @@ $$|\mathcal R(\hat f) - \mathcal R(f^*)|$$
 
 é limitada e converge para zero quando tamanho da amostra vai para infinito. Geralmente, utiliza-se a *teoria de complexidade de Rademacher* na demonstração [@fengProvablyConsistentPartiallabel2020].
 
-## Situação atual
+## Situação atual {visibility='`r type`'}
 
 - Os trabalhos existentes demonstram convergência independentemente da função de perda (sob certas suposições), para algumas distribuições específicas dos dados rotulados parcialmente.
 
@@ -388,7 +387,7 @@ $$|\mathcal R(\hat f) - \mathcal R(f^*)|$$
 
 - Adicionalmente, o fato de observarmos rótulos complementares múltiplos tende a proporcionar resultados melhores, já que nesse caso temos mais informação.
 
-# Simulação {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
+# Simulação {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1" visibility="uncounted"}
 
 ## Lista de Captchas {.scrollable}
 
@@ -454,7 +453,7 @@ knitr::include_graphics("assets/img/cycle.png")
 
 - As bases e modelos ajustados estão disponíveis para quem tiver interesse em fazer novas pesquisas e utilizar os resultados em suas aplicações.
 
-## Simulação em 3 passos
+## Simulação em 3 passos  {visibility='`r type`'}
 
 :::{.columns}
 :::{.column width=33% .incremental}
@@ -462,8 +461,8 @@ knitr::include_graphics("assets/img/cycle.png")
 
 __Objetivo__: Obter modelos preditivos de Captchas com diferentes acurácias
 
-- Construção de 10 amostras de dados com subconjuntos das bases completas
-- Aplicação de 27 modelos com diferentes hiperparâmetros
+- Construção de amostras de dados com subconjuntos das bases completas
+- Aplicação modelos com diferentes hiperparâmetros
 - Seleção do melhor modelo para cada tamanho de amostra
 
 :::
@@ -475,9 +474,8 @@ __Objetivo__: Obter modelos preditivos de Captchas com diferentes acurácias
 __Objetivo__: Construir bases de dados utilizando o oráculo
 
 - Filtro de modelos com acurácia entre 5% e 50%
-- Definição do tamanho da base a ser obtida
 - Coleta de imagens com diferentes quantidades de tentativas (1, 5 e 10)
-- Construção de bases de teste com 1000 imagens para cada Captcha
+- Construção de bases de teste
 
 :::
 
@@ -488,22 +486,61 @@ __Objetivo__: Construir bases de dados utilizando o oráculo
 __Objetivo__: Ajustar modelo final para as 65 bases de treino disponíveis
 
 - Modificação da função de perda do modelo
-- Busca de hiperparâmetros e ajuste de 9 modelos para cada base de dados
-- Comparação de acurácias iniciais e finais através de gráficos de barras e dispersão
+- Busca de hiperparâmetros e ajuste de modelos para cada base de dados
+- Comparação de acurácias iniciais e finais
 
 :::
 
 :::
 
-## Experimentos adicionais
+## Simulação em 3 passos
 
-- Aplicação iterada do WAWL para verificar melhorias contínuas
+<br/><br/>
+
+:::{.columns}
+:::{.column width=33% .incremental}
+
+#### 1. Modelo Inicial
+
+Obter modelos preditivos de Captchas com diferentes acurácias
+
+:::
+
+:::{.column width=33% .incremental}
+
+#### 2. Dados
+
+Construir bases de dados utilizando o oráculo
+
+:::
+
+:::{.column width=33% .incremental}
+
+#### 3. Modelo Final
+
+Ajustar modelo final para as bases de treino construídas
+
+:::
+
+:::
+
+::: {.fragment}
+
+<hr/>
+
+<br/>
+
+### Experimentos adicionais
+
+- Aplicação iterada do WAWL para verificar melhorias
 - Aprendizado online: incorporação do download de dados dentro da construção do *minibatch*
-- Disponibilização das bases de dados para futuras pesquisas e testes de outras arquiteturas de redes neurais
 
-# Resultados {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
+:::
 
-## Resultado geral
+# Resultados {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1" visibility='uncounted'}
+
+
+## Resultado geral {visibility='`r type`'}
 
 ```{r}
 #| echo: false
@@ -532,7 +569,9 @@ ganho_absoluto <- doutorado::da_results_simulacao |>
 
 [^1]: Base de dados: [Repositório da tese](https://github.com/jtrecenti/doutorado). Contém: Captcha ajustado, observações do modelo inicial, tentativas do oráculo, etapa de simulação, caminho do modelo ajustado, acurácia obtida
 
-## Resultados por Captcha
+## Resultados do WAWL
+
+Ganho relativo maior que 3x; ganho absoluto de 33%.
 
 ```{r}
 #| label: fig-simulacao-captcha
@@ -623,7 +662,7 @@ O resultado sugere que o método WAWL pode ser aplicado iterativamente para apri
 
 ## Aprendizado online
 
-A partir do modelo inicial 11% de acurácia, após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87% na base de teste.  
+A partir do modelo inicial 11% de acurácia. 
 
 ```{r}
 #| label: fig-online-learning
@@ -656,7 +695,7 @@ doutorado::da_online |>
   )
 ```
 
-Como as épocas são relativamente curtas (apenas 80 observações), o ganho em acurácia é pequeno e apresenta variabilidade.
+Após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87% na base de teste.  
 
 :::{.notes}
 
@@ -669,7 +708,7 @@ Como as épocas são relativamente curtas (apenas 80 observações), o ganho em 
 
 :::
 
-## Conclusões sobre o Método WAWL
+## Conclusões sobre o Método WAWL {visibility='`r type`'}
 
 - Resultados expressivos e consistentes
 - Aproveita oportunidade de feedback oráculo múltiplo
@@ -685,9 +724,9 @@ Como as épocas são relativamente curtas (apenas 80 observações), o ganho em 
 - Atualmente, é uma revista conceito B1 no sistema Sucupira (CAPES).
 - No momento, [estão avaliando se o tema está dentro do escopo da revista](https://github.com/openjournals/joss-reviews/issues/5286).
 
-# Conclusões {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1"}
+# Conclusões {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1" visibility="uncounted"}
 
-## Principais avanços {.center .center-x}
+## Principais avanços {.center}
 
 :::{.columns}
 :::{.column width=30%}
@@ -721,7 +760,7 @@ Como as épocas são relativamente curtas (apenas 80 observações), o ganho em 
 :::
 :::
 
-## Principais contribuições {.center .center-x}
+## Principais contribuições {.center}
 
 ::: {.columns}
 
@@ -753,23 +792,19 @@ Como as épocas são relativamente curtas (apenas 80 observações), o ganho em 
 
 ## Próximos passos
 
-__Aprimoramentos__
+### Aprimoramentos
 
 - Resultados matemáticos mais robustos
 - Estudo mais completo da aplicação iterada
 - Estudo mais completo do aprendizado online
 
-
-::: {.fragment}
-
-__Extensões__
+### Extensões
 
 - Modelo geral de resolução de Captchas 
 - Integração com GPT-4?
 
-:::
 
-# Obrigado!
+# Obrigado!  {visibility='uncounted'}
 
 :::{.walle}
 ![](assets/img/walle.gif)
