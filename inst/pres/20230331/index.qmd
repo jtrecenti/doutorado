@@ -211,12 +211,12 @@ timevis::timevis(
 ## Objetivo {auto-animate=true}
 
 ::: {style="margin-top: 200px; font-size: 1.3em; color: royalblue;"}
-Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de __aprendizado profundo__ com __raspagem de dados__ e aproveitando os dados fornecidos pelo oráculo.
+Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de __aprendizado fracamente supervisionado__ com __raspagem de dados__.
 :::
 
 ## Objetivos específicos {auto-animate=true}
 
-Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de __aprendizado profundo__ com __raspagem de dados__ e aproveitando os dados fornecidos pelo oráculo.
+Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*) para resolver Captchas, misturando técnicas de __aprendizado fracamente supervisionado__ com __raspagem de dados__.
 
 1.  Descrever o método proposto e estudar suas características.
 2.  Construir e disponibilizar um repositório de dados para realização de mais pesquisas no ramo.
@@ -242,7 +242,7 @@ Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*
 
 - O WAWL traz bons resultados empíricos
 - Novos modelos disponíveis
-- Destravamos algumas pesquisas aplicada no Brasil
+- Facilitamos pesquisas aplicadas no Brasil
 
 
 :::
@@ -272,7 +272,7 @@ Desenvolver um método __inovador__, chamado WAWL (*Web Automatic Weak Learning*
 
 :::
 
-## O que é oráculo?
+## O que é oráculo? {visibility='`r type`'}
 
 ![](assets/img/esquema-oraculo.png){fig-align="center"}
 
@@ -317,13 +317,11 @@ knitr::include_graphics("assets/img/diagrama-modelo-cnn.png")
 ## Adaptação da função de perda
 
 - Função de perda adaptada para informação limitada do oráculo
-- Considera rótulos corretos e incorretos
 
 $$\mathcal L(g(\mathbf x), {\mathbf y}) = -\log\left[1 - \sum_{y \in \mathcal A} {g_y}(\mathbf x) I(y\notin {\mathbf y})\right]$$
 
-- Quando a informação é __parcial__, a __perda é maior__ quando o modelo dá alta probabilidade para um __rótulo incorreto__.
 - Quando a informação é __completa__, utilizamos a função de __perda original__.  
-- Como ler a função: "Não dê altas probabilidades para rótulos que sabemos que estão errados!"
+- Quando a informação é __parcial__, a __perda é maior__ quando o modelo dá alta probabilidade para um __rótulo incorreto__.
 
 ## Exemplo {visibility='`r type`'}
 
@@ -525,8 +523,6 @@ Ajustar modelo final para as bases de treino construídas
 
 :::
 
-::: {.fragment}
-
 <hr/>
 
 <br/>
@@ -536,7 +532,6 @@ Ajustar modelo final para as bases de treino construídas
 - Aplicação __iterada__ do WAWL para verificar melhorias
 - __Aprendizado online__: download de dados dentro do *minibatch*
 
-:::
 
 # Resultados {background-image="./assets/img/dados_tjmg.jpeg" background-size="200px" background-repeat="repeat" background-opacity="0.1" visibility='uncounted'}
 
@@ -761,7 +756,7 @@ Após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87%
 :::
 :::
 
-## Principais contribuições {.center}
+## Principais contribuições {visibility='`r type`'}
 
 ::: {.columns}
 
@@ -804,7 +799,7 @@ Após 100 épocas, o modelo baixou 6391 imagens e chegou em uma acurácia de 87%
 - Integração com GPT-4?
 
 
-# Obrigado! {visibility='uncounted'}
+# Obrigado!
 
 :::{.walle}
 ![](assets/img/walle.gif)
