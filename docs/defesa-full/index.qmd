@@ -430,7 +430,7 @@ plot(gen)
 
 ```{r}
 #| label: fig-fluxo-web-scraping
-#| fig-cap: "Ciclo da raspagem de dados. Fonte: [curso de Web Scraping da Curso-R](https://curso-r.github.io/main-web-scraping)."
+#| fig-cap: "Ciclo da raspagem de dados. Fonte: [curso de Web Scraping da Curso-R](https://curso-r.github.io/main-web-scraping)"
 #| out-width: 80%
 
 knitr::include_graphics("assets/img/cycle.png")
