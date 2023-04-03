@@ -48,7 +48,7 @@ Em seguida, obtém-se o rótulo do modelo. Isso pode ser feito manualmente ou at
 
 ```{r}
 #| label: fig-exemplo-acesso-trf5
-#| fig-cap: "Exemplo de Captcha baixado diretamente do TRF5."
+#| fig-cap: "Exemplo de Captcha baixado diretamente do TRF5"
 #| out-width: 20%
 #| echo: true
 library(captcha)

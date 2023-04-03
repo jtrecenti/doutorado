@@ -26,7 +26,7 @@ bibliography: references.bib
 
 <!-- Nesta seção, buscou-se demonstrar que o uso dos dados fornecidos pelo oráculo com adaptação da função de perda i) não piora o poder preditivo do modelo e ii) converge para o modelo preditivo ótimo. Para isso, é necessário retomar algumas definições para avançar. -->
 
-Neste capítulo, discute-se os resultados empíricos do método WAWL e descreve-se pacote computacional desenvolvido para trabalhar com Captchas. A @sec-result-sim mostra os resultados empíricos e a @sec-pacote-captcha detalha o pacote `{captcha}`. No final, a @sec-discussao apresenta uma discussão dos resultados obtidos.
+Neste capítulo, discute-se os resultados empíricos do método WAWL e descreve-se o pacote computacional desenvolvido para trabalhar com Captchas. A @sec-result-sim mostra os resultados empíricos e a @sec-pacote-captcha detalha o pacote `{captcha}`. No final, a @sec-discussao apresenta uma discussão dos resultados obtidos.
 
 ## Resultados empíricos {#sec-result-sim}
 
@@ -89,7 +89,7 @@ Na @fig-simulacao-geral-ntry-relativo, é possível notar que os ganhos em acur�
 #| label: fig-simulacao-geral-ntry-relativo
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: Ganho percentual ao utilizar a técnica do oráculo, dividido por quantidade de tentativas
+#| fig-cap: Ganho percentual ao utilizar a técnica do oráculo, para cada quantidade de tentativas
 #| out-width: 75%
 
 tab_stats_correta <- tab_stats  |> 
@@ -143,13 +143,13 @@ tab_stats_correta |>
   )
 ```
 
-A @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra a mesma informação, mas em valores com interpretação mais direta. O ganho médio absoluto em sites que permitem mais de um chute ficou em torno de 40%, enquanto o ganho com apenas um chute ficou um pouco acima de 25%. Importante notar também que o uso do oráculo só piorou a acurácia do model em casos que com apenas um chute, mostrando que a técnica é efetiva de forma consistente.
+A @fig-simulacao-geral-ntry-absoluto, com as os ganhos absolutos, mostra a mesma informação, mas em valores com interpretação mais direta. O ganho médio absoluto em sites que permitem mais de um chute ficou em torno de 40%, enquanto o ganho com apenas um chute ficou um pouco acima de 25%. Também é possível notar que a técnica é efetiva de forma consistente, já que resultou em pioras nas acurácias em poucos casos, sendo todos eles no cenário com apenas um chute.
 
 ```{r}
 #| label: fig-simulacao-geral-ntry-absoluto
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: "Ganhos absolutos ao utilizar a técnica do oráculo, dividido por quantidade de tentativas."
+#| fig-cap: "Ganhos absolutos ao utilizar a técnica do oráculo, para cada quantidade de tentativas"
 #| out-width: 75%
 
 tab_stats  |> 
@@ -237,7 +237,7 @@ A @fig-simulacao-geral-inicial-relativo mostra os ganhos relativos. É possível
 #| label: fig-simulacao-geral-inicial-relativo
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: "Ganho percentual ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
+#| fig-cap: "Ganho percentual ao utilizar a técnica do oráculo, para cada categoria de acurácia do modelo inicial"
 #| out-width: 75%
 
 tab_stats_inicial  |> 
@@ -295,7 +295,7 @@ A @fig-simulacao-geral-inicial-absoluto mostra os ganhos absolutos. O gráfico a
 #| label: fig-simulacao-geral-inicial-absoluto
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
+#| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, para cada categoria de acurácia do modelo inicial"
 #| out-width: 75%
 
 tab_stats_inicial  |> 
@@ -353,13 +353,13 @@ $$
 \text{ganho} = \frac{\text{wawl } - \text{ inicial}}{1\; - \text{ inicial}}.
 $$ 
 
-A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo do WAWL para modelos iniciais com mais de 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar o método é um pouco menor. É importante notar, no entanto, que as simulações consideram a aplicação do WAWL apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente. O menor efeito do método para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para um estado com acurácia maior, de onde seria possível aplicar a técnica novamente para obter resultados mais expressivos.
+A @fig-simulacao-geral-inicial-absoluto-ajustado mostra os ganhos ajustados. Pelo gráfico, é possível notar que existe um ganho expressivo do WAWL para modelos iniciais com mais de 10% de acurácia com relação a modelos iniciais com até 10% de acurácia. Ou seja, quando o modelo inicial é fraco, o ganho ao usar o método é um pouco menor. É importante notar, no entanto, que as simulações consideram a aplicação do WAWL apenas uma vez -- é possível baixar mais dados e atualizar o modelo indefinidamente, como mostrado mais adiante na @fig-aplicacao-iterada. O menor efeito do método para modelos iniciais fracos não significa, portanto, que a técnica não funciona para modelos iniciais fracos; pelo contrário: ela ajuda o modelo a sair do estado inicial e o leva para um estado com acurácia maior, de onde seria possível aplicar a técnica novamente para obter resultados mais expressivos.
 
 ```{r}
 #| label: fig-simulacao-geral-inicial-absoluto-ajustado
 #| fig-width: 5
 #| fig-height: 4
-#| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, dividido por acurácia do modelo inicial."
+#| fig-cap: "Ganho absoluto ao utilizar a técnica do oráculo, para cada categoria de acurácia do modelo inicial"
 #| out-width: 75%
 
 tab_stats_inicial  |> 
@@ -418,7 +418,7 @@ Na @fig-simulacao-captcha, são apresentados os resultados separados por Captcha
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: 100%
-#| fig-cap: "Resultados da simulação por captcha, quantidade de tentativas e modelo inicial."
+#| fig-cap: "Resultados da simulação por captcha, quantidade de tentativas e modelo inicial"
 
 doutorado::da_results_simulacao |>
   dplyr::select(-model) |>
@@ -625,7 +625,7 @@ A função `plot()` é um método de classe S3 do R básico. A função foi impl
 
 ```{r}
 #| label: fig-exemplo-plot
-#| fig-cap: "Exemplo de aplicação da função plot a um objeto `captcha`."
+#| fig-cap: "Exemplo de aplicação da função plot a um objeto `captcha`"
 #| echo: true
 #| out-width: 30%
 exemplo <- "assets/img/dados_tjmg.jpeg"
@@ -637,7 +637,7 @@ Um aspecto interessante da função `plot()` é que ela lida com uma lista de Ca
 
 ```{r}
 #| label: fig-exemplo-plot-multi
-#| fig-cap: "Exemplo de aplicação da função plot a um objeto `captcha` com várias imagens."
+#| fig-cap: "Exemplo de aplicação da função plot a um objeto `captcha` com várias imagens"
 #| echo: true
 #| out-width: 70%
 exemplos <- paste0("assets/img/", c(
@@ -661,7 +661,7 @@ op <- getOption("captcha.print.cols")
 #| echo: true
 #| label: fig-exemplo-plot-multi-2col
 #| out-width: 60%
-#| fig-cap: "Exemplo de aplicação da função plot a um objeto `captcha` com várias imagens, disponibilizadas em duas colunas."
+#| fig-cap: "Exemplo de aplicação da função plot a um objeto `captcha` com várias imagens, disponibilizadas em duas colunas"
 options(captcha.print.cols = 2)
 plot(captchas)
 ```
@@ -732,19 +732,24 @@ Para a tese, foram desenvolvidos modelos para vários Captchas diferentes. É po
 
 A @fig-diagrama-captcha-simples resume visualmente as funções apresentadas até o momento. As setas indicam a dependência das funções de objetos gerados por outras funções.
 
-```{mermaid}
-%%| label: fig-diagrama-captcha-simples
-%%| fig-cap: Diagrama das funções básicas do pacote `{captcha}`
-%%| out-width: 80%
-%%| fig-align: center
-flowchart LR
-  B("<b><span style='color:blue;'>captcha</span></b> <- <b>read_captcha</b>('path/to/file.png')")
-  B --> C("<b>plot</b>(<b><span style='color:blue;'>captcha</span></b>)")
-  B --> D("<b>captcha_annotate</b>(<b><span style='color:blue;'>captcha</span></b>)")
-  B --> F("<b>decrypt</b>(<b><span style='color:blue;'>captcha</span></b>, <b><span style='color:green;'>model</span></b>)")  
-  G("<b><span style='color:green;'>model</span></b> <- <b>captcha_load_model</b>('model_name')") --> F
-style B fill:#d3ddf1,stroke:#333,stroke-width:2px
+
+```{r}
+#| label: fig-diagrama-captcha-simples
+#| fig-cap: Diagrama das funções básicas do pacote `{captcha}`
+#| out-width: 80%
+#| fig-align: center
+
+# flowchart LR
+#   B("<b><span style='color:blue;'>captcha</span></b> <- <b>read_captcha</b>('path/to/file.png')")
+#   B --> C("<b>plot</b>(<b><span style='color:blue;'>captcha</span></b>)")
+#   B --> D("<b>captcha_annotate</b>(<b><span style='color:blue;'>captcha</span></b>)")
+#   B --> F("<b>decrypt</b>(<b><span style='color:blue;'>captcha</span></b>, <b><span style='color:green;'>model</span></b>)")  
+#   G("<b><span style='color:green;'>model</span></b> <- <b>captcha_load_model</b>('model_name')") --> F
+# style B fill:#d3ddf1,stroke:#333,stroke-width:2px
+
+knitr::include_graphics("assets/img/diagram.png")
 ```
+
 
 ### Modelagem {#sec-ap-modelagem}
 
@@ -797,7 +802,7 @@ A função também pode ser chamada criando-se um projeto dentro do próprio RSt
 
 ```{r}
 #| label: fig-exemplo-rstudio-template
-#| fig-cap: Exemplo de criação de um novo projeto de Captcha utilizando o RStudio.
+#| fig-cap: Exemplo de criação de um novo projeto de Captcha utilizando o RStudio
 knitr::include_graphics("assets/img/exemplo-rstudio-template.png")
 ```
 
@@ -1032,7 +1037,7 @@ O fato de a raspagem de dados ser relevante para o ajuste de um modelo estatíst
 1.  Raspagem de dados não faz parte dos currículos de Bacharelado em Estatística das principais universidades do país[^universidades]. Logo, pode-se argumentar que raspagem de dados não é uma área de interesse da estatística.
 2.  Raspagem de dados não é uma área de conhecimento bem definida, como álgebra ou análise de sobrevivência. A área é melhor desenvolvida através de aplicações práticas e utilização de ferramentas (como R ou python) do que através de aulas teóricas.
 
-[^universidades]: Sites de universidades buscados: USP Butantã (IME), UFSCar, UNESP, Unicamp, USP São Carlos (ICMC), UFBA, UFPR, UFRGS, UFPE, UFAM, UFRN, UFF, ENCE, UFRJ, UFMG, UnB e UFG.
+[^universidades]: Sites de universidades buscados: USP Butantã (IME), UFSCar, UNESP, Unicamp, USP São Carlos (ICMC), UFBA, UFPR, UFRGS, UFPE, UFAM, UFRN, UFF, ENCE, UFRJ, UFMG, UnB e UFG. A UFSCar possui uma disciplina com conteúdos de raspagem de dados, no entanto, o conteúdo nunca foi desenvolvido com os alunos na prática. Na UFPR, existem cursos de raspagem oferecidos de forma extracurricular.
 
 Os resultados levam, então, a um problema de equilíbrio entre pertinência e oportunidade. De um lado, a área de raspagem não se encaixa muito bem no currículo de estatística. Por outro lado, a área expande as possibilidades de atuação de uma profissional da estatística.
 

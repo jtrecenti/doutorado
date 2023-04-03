@@ -6,7 +6,7 @@ book:
   title: "Resolvendo Captchas"
   subtitle: "Usando raspagem de dados e aprendizado fracamente supervisionado"
   author: "Julio Trecenti"
-  date: "2022-10-30"
+  date: "2023-04-03"
   chapters:
     - index.qmd
     - introducao.qmd
