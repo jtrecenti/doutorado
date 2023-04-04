@@ -1,6 +1,6 @@
 Package: doutorado
 Title: Dados e Texto da Tese de Doutorado
-Version: 0.2.0
+Version: 1.0.0
 Authors@R: 
     c(person('Julio', 'Trecenti', 
              email = 'julio.trecenti@gmail.com', 
